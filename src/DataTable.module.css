@@ -13,6 +13,7 @@
 
 .dataTable tbody th {
   font-weight: normal;
+  white-space: nowrap;
 }
 
 .dataTable tbody td {
