@@ -1,31 +1,23 @@
-import React from 'react'
-import { DataQuery } from '@dhis2/app-runtime'
-import i18n from '@dhis2/d2-i18n'
-import classes from './App.module.css'
+import { useState } from "react";
+import { Button } from "@dhis2/ui";
+import i18n from "@dhis2/d2-i18n";
+import OrgUnits from "./OrgUnits";
+import classes from "./App.module.css";
 
-const query = {
-    me: {
-        resource: 'me',
-    },
-}
+const MyApp = () => {
+  const [startImport, setStartImport] = useState(false);
 
-const MyApp = () => (
+  return (
     <div className={classes.container}>
-        <DataQuery query={query}>
-            {({ error, loading, data }) => {
-                if (error) return <span>ERROR</span>
-                if (loading) return <span>...</span>
-                return (
-                    <>
-                        <h1>
-                            {i18n.t('Hello {{name}}', { name: data.me.name })}
-                        </h1>
-                        <h3>{i18n.t('Welcome to DHIS2!')}</h3>
-                    </>
-                )
-            }}
-        </DataQuery>
+      {startImport ? (
+        <OrgUnits />
+      ) : (
+        <Button primary onClick={() => setStartImport(true)}>
+          {i18n.t("Import temperature data")}
+        </Button>
+      )}
     </div>
-)
+  );
+};
 
-export default MyApp
+export default MyApp;

@@ -1,0 +1,20 @@
+.wrapper {
+  width: 90%;
+  height: 90%;
+}
+
+.dataTable {
+  font-size: 0.9rem;
+}
+
+.dataTable th {
+  text-align: left;
+}
+
+.dataTable tbody th {
+  font-weight: normal;
+}
+
+.dataTable tbody td {
+  text-align: right;
+}
