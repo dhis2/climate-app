@@ -20,10 +20,10 @@ const MyApp = () => {
           <Button primary onClick={() => setStartExtract(true)}>
             {i18n.t("Extract temperature data")}
           </Button>
+          <br></br>
           <Button onClick={() => setStartImport(true)}>
             {i18n.t("Import temperature data")}
           </Button>
-          x'
         </>
       )}
     </div>
