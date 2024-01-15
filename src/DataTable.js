@@ -1,10 +1,9 @@
 import classes from "./DataTable.module.css";
 
 const DataTable = ({ data, orgUnits }) => {
-  const dates = [...new Set(data.map((d) => d.date))];
-  console.log("data", data, orgUnits);
+  const periods = [...new Set(data.map((d) => d.period))];
 
-  console.log("dates", dates);
+  console.log("data", JSON.stringify(data));
 
   return (
     <div className={classes.wrapper}>
@@ -12,7 +11,7 @@ const DataTable = ({ data, orgUnits }) => {
         <thead>
           <tr>
             <th>Org Unit</th>
-            {dates.map((d) => (
+            {periods.map((d) => (
               <th key={d}>{d}</th>
             ))}
           </tr>
@@ -21,9 +20,9 @@ const DataTable = ({ data, orgUnits }) => {
           {orgUnits.map((ou) => (
             <tr key={ou.id}>
               <th>{ou.properties.name}</th>
-              {dates.map((d) => (
+              {periods.map((d) => (
                 <td key={d}>
-                  {data.find((v) => v.id === ou.id && v.date === d)?.value ??
+                  {data.find((v) => v.ou === ou.id && v.period === d)?.value ??
                     "-"}
                 </td>
               ))}

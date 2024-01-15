@@ -38,7 +38,12 @@ export const getEarthEngineData = (ee, datasetParams, features) => {
   } = datasetParams;
 
   const dataParser = valueParser
-    ? (data) => data.map((d) => ({ ...d, value: valueParser(d.value) }))
+    ? (data) =>
+        data.map((d) => ({
+          ou: d.id,
+          period: d.date,
+          value: valueParser(d.value),
+        }))
     : (data) => data;
 
   const collection = ee
