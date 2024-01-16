@@ -5,8 +5,35 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-01-08T15:55:45.525Z\n"
-"PO-Revision-Date: 2024-01-08T15:55:45.525Z\n"
+"POT-Creation-Date: 2024-01-16T17:33:58.150Z\n"
+"PO-Revision-Date: 2024-01-16T17:33:58.150Z\n"
 
-msgid "Import temperature data"
-msgstr "Import temperature data"
+msgid "Organisation unit levels"
+msgstr "Organisation unit levels"
+
+msgid "Organisation unit level(s) to import data to"
+msgstr "Organisation unit level(s) to import data to"
+
+msgid "Organisation units"
+msgstr "Organisation units"
+
+msgid "Organisation unit(s) to import data to"
+msgstr "Organisation unit(s) to import data to"
+
+msgid "Period"
+msgstr "Period"
+
+msgid "Daily values will be imported between start and end dates"
+msgstr "Daily values will be imported between start and end dates"
+
+msgid "Start date"
+msgstr "Start date"
+
+msgid "End date"
+msgstr "End date"
+
+msgid "The app could not retrieve required data."
+msgstr "The app could not retrieve required data."
+
+msgid "Network error"
+msgstr "Network error"

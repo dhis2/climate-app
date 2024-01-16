@@ -1,0 +1,10 @@
+.container {
+  padding-top: 20px;
+  font-size: 14px;
+}
+
+.loader {
+  display: inline-block;
+  margin-right: 10px;
+  vertical-align: bottom;
+}

@@ -1,3 +1,5 @@
+const SIZE_LIMIT = 5000;
+
 // Returns the linear scale in meters of the units of this projection
 export const getScale = (image) => image.select(0).projection().nominalScale();
 
@@ -21,21 +23,16 @@ export const getFeatureCollectionPropertiesArray = (data) =>
   }));
 
 export const cleanData = (data) =>
-  data.features.map((f) => ({
+  data.map((f) => ({
     id: f.id.substring(9),
     date: f.id.slice(0, 8),
     value: f.properties.value,
   }));
 
-export const getEarthEngineData = (ee, datasetParams, features) => {
-  const {
-    datasetId,
-    band,
-    reducer = "mean",
-    startDate,
-    endDate,
-    valueParser,
-  } = datasetParams;
+export const getEarthEngineData = (ee, datasetParams, period, features) => {
+  const { datasetId, band, reducer = "mean", valueParser } = datasetParams;
+  const { startDate, endDate } = period;
+  const endDatePlusOne = ee.Date(endDate).advance(1, "day");
 
   const dataParser = valueParser
     ? (data) =>
@@ -49,7 +46,7 @@ export const getEarthEngineData = (ee, datasetParams, features) => {
   const collection = ee
     .ImageCollection(datasetId)
     .select(band)
-    .filter(ee.Filter.date(startDate, endDate));
+    .filter(ee.Filter.date(startDate, endDatePlusOne));
 
   const eeScale = getScale(collection.first());
 
@@ -67,15 +64,32 @@ export const getEarthEngineData = (ee, datasetParams, features) => {
     )
     .flatten();
 
-  return getInfo(
-    ee.FeatureCollection(
-      reduced.map((feature) =>
-        ee.Feature(null, {
-          value: feature.get(reducer),
-        })
-      )
+  const valueCollection = ee.FeatureCollection(
+    reduced.map((feature) =>
+      ee.Feature(null, {
+        value: feature.get(reducer),
+      })
     )
-  )
-    .then(cleanData)
-    .then(dataParser);
+  );
+
+  return getInfo(valueCollection.size()).then((size) => {
+    if (size <= SIZE_LIMIT) {
+      return getInfo(valueCollection.toList(SIZE_LIMIT))
+        .then(cleanData)
+        .then(dataParser);
+    } else {
+      const chunks = Math.ceil(size / SIZE_LIMIT);
+
+      // console.log("Too many features, splitting into chunks", size, chunks);
+
+      return Promise.all(
+        Array.from({ length: chunks }, (_, chunk) =>
+          getInfo(valueCollection.toList(SIZE_LIMIT, chunk * SIZE_LIMIT))
+        )
+      )
+        .then((data) => [].concat(...data))
+        .then(cleanData)
+        .then(dataParser);
+    }
+  });
 };
