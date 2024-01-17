@@ -33,6 +33,24 @@ const datasets = [
     reducer: "min",
     valueParser: temperatureParser,
   },
+  {
+    id: "ECMWF/ERA5_LAND/DAILY_AGGR/total_precipitation_sum",
+    datasetId: "ECMWF/ERA5_LAND/DAILY_AGGR",
+    name: i18n.t("Precipitation (ERA5-Land)"),
+    description: i18n.t("Total precipitation in mm"),
+    band: "total_precipitation_sum",
+    reducer: "mean",
+    valueParser: (v) => Math.round(v * 1000 * 1000) / 1000, // meter to mm with 3 decimals
+  },
+  {
+    id: "UCSB-CHG/CHIRPS/DAILY/precipitation",
+    datasetId: "UCSB-CHG/CHIRPS/DAILY",
+    name: i18n.t("Precipitation (CHIRPS)"),
+    description: i18n.t("Total precipitation in mm"),
+    band: "precipitation",
+    reducer: "mean",
+    valueParser: (v) => Math.round(v * 1000) / 1000, // 3 decimals
+  },
 ];
 
 const Dataset = ({ selected, onChange }) => {

@@ -25,7 +25,7 @@ const Inputs = () => {
   return (
     <div className={classes.container}>
       <Dataset selected={dataset} onChange={setDataset} />
-      <Period period={defaultPeriod} onChange={setPeriod} />
+      <Period period={period} onChange={setPeriod} />
       <OrgUnitLevel selected={orgUnitLevel} onChange={setOrgUnitLevel} />
       <DataElement onChange={setDataElement} />
       <br />
