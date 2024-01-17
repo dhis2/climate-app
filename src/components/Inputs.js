@@ -9,8 +9,9 @@ import classes from "./styles/Inputs.module.css";
 
 // TODO: Make dynamic
 const defaultPeriod = {
-  startDate: "2023-12-01",
-  endDate: "2023-12-31",
+  startDate: "2023-07-01",
+  endDate: "2023-07-10",
+  // timeZone: "Africa/Addis_Ababa",
 };
 
 const Inputs = () => {

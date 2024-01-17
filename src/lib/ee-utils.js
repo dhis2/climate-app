@@ -30,9 +30,18 @@ export const cleanData = (data) =>
   }));
 
 export const getEarthEngineData = (ee, datasetParams, period, features) => {
-  const { datasetId, band, reducer = "mean", valueParser } = datasetParams;
-  const { startDate, endDate } = period;
+  const {
+    datasetId,
+    band,
+    reducer = "mean",
+    periodType,
+    periodReducer = reducer,
+    valueParser,
+  } = datasetParams;
+  const { startDate, endDate, timeZone = "UTC" } = period;
   const endDatePlusOne = ee.Date(endDate).advance(1, "day");
+  const timeZoneStart = ee.Date(startDate).format(null, timeZone);
+  const timeZoneEnd = endDatePlusOne.format(null, timeZone);
 
   const dataParser = valueParser
     ? (data) =>
@@ -46,7 +55,7 @@ export const getEarthEngineData = (ee, datasetParams, period, features) => {
   const collection = ee
     .ImageCollection(datasetId)
     .select(band)
-    .filter(ee.Filter.date(startDate, endDatePlusOne));
+    .filter(ee.Filter.date(timeZoneStart, timeZoneEnd));
 
   const eeScale = getScale(collection.first());
 
@@ -54,7 +63,41 @@ export const getEarthEngineData = (ee, datasetParams, period, features) => {
 
   const eeReducer = ee.Reducer[reducer]();
 
-  const reduced = collection
+  let dailyCollection;
+
+  if (periodType === "hourly") {
+    const days = ee
+      .Date(timeZoneEnd)
+      .difference(ee.Date(timeZoneStart), "days");
+
+    const daysList = ee.List.sequence(0, days.subtract(1));
+
+    dailyCollection = ee.ImageCollection.fromImages(
+      daysList.map((day) => {
+        const startUTC = ee.Date(startDate).advance(day, "days");
+
+        const start = startUTC.format(null, timeZone);
+
+        const end = ee
+          .Date(startDate)
+          .advance(ee.Number(day).add(1), "days")
+          .format(null, timeZone);
+
+        const filtered = collection.filter(ee.Filter.date(start, end));
+
+        return (
+          filtered[periodReducer]()
+            // .multiply(24)
+            .set("system:index", startUTC.format("YYYYMMdd"))
+            .set("system:time_start", start)
+            .set("system:time_end", end)
+            .set("count", filtered.size())
+        );
+      })
+    );
+  }
+
+  const reduced = (dailyCollection || collection)
     .map((image) =>
       image.reduceRegions({
         collection: featureCollection,
@@ -79,8 +122,6 @@ export const getEarthEngineData = (ee, datasetParams, period, features) => {
         .then(dataParser);
     } else {
       const chunks = Math.ceil(size / SIZE_LIMIT);
-
-      // console.log("Too many features, splitting into chunks", size, chunks);
 
       return Promise.all(
         Array.from({ length: chunks }, (_, chunk) =>
