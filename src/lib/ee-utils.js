@@ -45,12 +45,11 @@ export const getEarthEngineData = (ee, datasetParams, period, features) => {
 
   const dataParser = valueParser
     ? (data) =>
-        data.map((d) => ({
-          ou: d.id,
-          period: d.date,
-          value: valueParser(d.value),
+        data.map((f) => ({
+          ...f.properties,
+          value: valueParser(f.properties.value),
         }))
-    : (data) => data;
+    : (data) => data.map((f) => f.properties);
 
   const collection = ee
     .ImageCollection(datasetId)
@@ -75,51 +74,41 @@ export const getEarthEngineData = (ee, datasetParams, period, features) => {
     dailyCollection = ee.ImageCollection.fromImages(
       daysList.map((day) => {
         const startUTC = ee.Date(startDate).advance(day, "days");
-
-        const start = startUTC.format(null, timeZone);
-
-        const end = ee
-          .Date(startDate)
-          .advance(ee.Number(day).add(1), "days")
-          .format(null, timeZone);
-
+        const start = ee.Date(startUTC.format(null, timeZone));
+        const end = start.advance(1, "days");
         const filtered = collection.filter(ee.Filter.date(start, end));
 
-        return (
-          filtered[periodReducer]()
-            // .multiply(24)
-            .set("system:index", startUTC.format("YYYYMMdd"))
-            .set("system:time_start", start)
-            .set("system:time_end", end)
-            .set("count", filtered.size())
-        );
+        return filtered[periodReducer]()
+          .set("system:index", startUTC.format("YYYYMMdd"))
+          .set("system:time_start", start.millis())
+          .set("system:time_end", end.millis());
       })
     );
   }
 
   const reduced = (dailyCollection || collection)
     .map((image) =>
-      image.reduceRegions({
-        collection: featureCollection,
-        reducer: eeReducer,
-        scale: eeScale,
-      })
+      image
+        .reduceRegions({
+          collection: featureCollection,
+          reducer: eeReducer,
+          scale: eeScale,
+        })
+        .map((feature) =>
+          ee.Feature(null, {
+            ou: feature.get("id"),
+            period: image.date().format("YYYYMMdd"),
+            value: feature.get(reducer),
+          })
+        )
     )
     .flatten();
 
-  const valueCollection = ee.FeatureCollection(
-    reduced.map((feature) =>
-      ee.Feature(null, {
-        value: feature.get(reducer),
-      })
-    )
-  );
+  const valueCollection = ee.FeatureCollection(reduced);
 
   return getInfo(valueCollection.size()).then((size) => {
     if (size <= SIZE_LIMIT) {
-      return getInfo(valueCollection.toList(SIZE_LIMIT))
-        .then(cleanData)
-        .then(dataParser);
+      return getInfo(valueCollection.toList(SIZE_LIMIT)).then(dataParser);
     } else {
       const chunks = Math.ceil(size / SIZE_LIMIT);
 
@@ -129,7 +118,6 @@ export const getEarthEngineData = (ee, datasetParams, period, features) => {
         )
       )
         .then((data) => [].concat(...data))
-        .then(cleanData)
         .then(dataParser);
     }
   });
