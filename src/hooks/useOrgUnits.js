@@ -10,23 +10,31 @@ const ORG_UNITS_QUERY = {
   },
 };
 
+const parseOrgUnits = (data) =>
+  data.geojson.features.map(({ type, id, geometry }) => ({
+    type,
+    id,
+    properties: { id },
+    geometry,
+  }));
+
 const useOrgUnits = (level) => {
-  const [data, setData] = useState();
+  const [features, setFeatures] = useState();
   const [error, setError] = useState();
   const engine = useDataEngine();
 
   useEffect(() => {
     engine.query(ORG_UNITS_QUERY, {
       variables: { level },
-      onComplete: setData,
+      onComplete: (data) => setFeatures(parseOrgUnits(data)),
       onError: setError,
     });
   }, [engine]);
 
   return {
-    features: data?.geojson?.features,
+    features,
     error,
-    loading: !data && !error,
+    loading: !features && !error,
   };
 };
 
