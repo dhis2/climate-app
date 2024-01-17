@@ -2,11 +2,12 @@ import i18n from "@dhis2/d2-i18n";
 import { CircularLoader } from "@dhis2/ui";
 import useOrgUnits from "../hooks/useOrgUnits";
 import useEarthEngineData from "../hooks/useEarthEngineData";
+import ImportData from "./ImportData";
 import classes from "./styles/ExtractData.module.css";
 
 const oneDay = 1000 * 60 * 60 * 24;
 
-const ExtractData = ({ dataset, period, orgUnitLevel }) => {
+const ExtractData = ({ dataset, period, orgUnitLevel, dataElement }) => {
   const { features /* , error, loading */ } = useOrgUnits(orgUnitLevel);
   const data = useEarthEngineData(dataset, period, features);
 
@@ -45,9 +46,7 @@ const ExtractData = ({ dataset, period, orgUnitLevel }) => {
     );
   }
 
-  console.log("ExtractData", data);
-
-  return <div className={classes.container}>Data is extracted</div>;
+  return <ImportData data={data} dataElement={dataElement} />;
 };
 
 export default ExtractData;

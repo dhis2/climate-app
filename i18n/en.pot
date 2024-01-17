@@ -5,14 +5,41 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-01-16T17:33:58.150Z\n"
-"PO-Revision-Date: 2024-01-16T17:33:58.150Z\n"
+"POT-Creation-Date: 2024-01-17T11:10:02.775Z\n"
+"PO-Revision-Date: 2024-01-17T11:10:02.775Z\n"
+
+msgid "Temperature (ERA5-Land)"
+msgstr "Temperature (ERA5-Land)"
+
+msgid "Temperature in °C at 2m above the surface"
+msgstr "Temperature in °C at 2m above the surface"
+
+msgid "Max temperature (ERA5-Land)"
+msgstr "Max temperature (ERA5-Land)"
+
+msgid "Max temperature in °C at 2m above the surface"
+msgstr "Max temperature in °C at 2m above the surface"
+
+msgid "Min temperature (ERA5-Land)"
+msgstr "Min temperature (ERA5-Land)"
+
+msgid "Min temperature in °C at 2m above the surface"
+msgstr "Min temperature in °C at 2m above the surface"
+
+msgid "Data"
+msgstr "Data"
+
+msgid "Select data to import"
+msgstr "Select data to import"
+
+msgid "Loading org units"
+msgstr "Loading org units"
 
 msgid "Organisation unit levels"
 msgstr "Organisation unit levels"
 
-msgid "Organisation unit level(s) to import data to"
-msgstr "Organisation unit level(s) to import data to"
+msgid "Organisation unit level to import data to"
+msgstr "Organisation unit level to import data to"
 
 msgid "Organisation units"
 msgstr "Organisation units"
