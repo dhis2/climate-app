@@ -13,7 +13,7 @@ const getChart = (data) => {
 
   return {
     title: {
-      text: i18n.t("Daily precipitation"),
+      text: i18n.t("Daily precipitation - ERA5-Land"),
     },
     credits: {
       enabled: false,
