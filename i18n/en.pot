@@ -5,8 +5,17 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-01-17T11:10:02.775Z\n"
-"PO-Revision-Date: 2024-01-17T11:10:02.775Z\n"
+"POT-Creation-Date: 2024-01-22T13:59:08.482Z\n"
+"PO-Revision-Date: 2024-01-22T13:59:08.482Z\n"
+
+msgid "Data element"
+msgstr "Data element"
+
+msgid "No match found"
+msgstr "No match found"
+
+msgid "Data element to import data to"
+msgstr "Data element to import data to"
 
 msgid "Temperature (ERA5-Land)"
 msgstr "Temperature (ERA5-Land)"

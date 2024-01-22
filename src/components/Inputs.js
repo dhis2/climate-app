@@ -20,14 +20,19 @@ const Inputs = () => {
   const [dataElement, setDataElement] = useState();
   const [startExtract, setStartExtract] = useState(false);
 
-  const isValid = dataset && period.startDate && period.endDate && orgUnitLevel;
+  const isValid =
+    dataset &&
+    period.startDate &&
+    period.endDate &&
+    orgUnitLevel &&
+    dataElement;
 
   return (
     <div className={classes.container}>
       <Dataset selected={dataset} onChange={setDataset} />
       <Period period={defaultPeriod} onChange={setPeriod} />
       <OrgUnitLevel selected={orgUnitLevel} onChange={setOrgUnitLevel} />
-      <DataElement onChange={setDataElement} />
+      <DataElement selected={dataElement} onChange={setDataElement} />
       <br />
       <Button primary disabled={!isValid} onClick={() => setStartExtract(true)}>
         Start import
@@ -37,7 +42,7 @@ const Inputs = () => {
           dataset={dataset}
           period={period}
           orgUnitLevel={orgUnitLevel}
-          dateElement={dataElement}
+          dataElement={dataElement}
         />
       )}
     </div>

@@ -4,12 +4,13 @@ import useOrgUnits from "../hooks/useOrgUnits";
 import useEarthEngineData from "../hooks/useEarthEngineData";
 import ImportData from "./ImportData";
 import classes from "./styles/ExtractData.module.css";
+import data from "../data/sierra-leone-bo-level3.json";
 
 const oneDay = 1000 * 60 * 60 * 24;
 
 const ExtractData = ({ dataset, period, orgUnitLevel, dataElement }) => {
   const { features /* , error, loading */ } = useOrgUnits(orgUnitLevel);
-  const data = useEarthEngineData(dataset, period, features);
+  //const data = useEarthEngineData(dataset, period, features);
 
   if (!data) {
     if (!features) {
