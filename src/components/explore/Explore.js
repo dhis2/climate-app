@@ -602,7 +602,7 @@ const period = {
 // <TemperatureHourly orgUnit={orgUnit} period={period} />
 const Explore = () => {
   return (
-    <div style={{ width: "90%", marginTop: 500 }}>
+    <div style={{ width: "90%", marginTop: 10 }}>
       <Temperature orgUnit={orgUnit} period={period} />
       <PrecipitationEra5 orgUnit={orgUnit} period={period} />
       <PrecipitationChirps orgUnit={orgUnit} period={period} />

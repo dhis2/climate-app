@@ -5,41 +5,14 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-01-22T14:21:00.599Z\n"
-"PO-Revision-Date: 2024-01-22T14:21:00.599Z\n"
-
-msgid "Data"
-msgstr "Data"
-
-msgid "Select data to import"
-msgstr "Select data to import"
-
-msgid "Loading org units"
-msgstr "Loading org units"
-
-msgid "Organisation unit levels"
-msgstr "Organisation unit levels"
-
-msgid "Organisation unit level to import data to"
-msgstr "Organisation unit level to import data to"
+"POT-Creation-Date: 2024-01-22T16:15:26.443Z\n"
+"PO-Revision-Date: 2024-01-22T16:15:26.443Z\n"
 
 msgid "Organisation units"
 msgstr "Organisation units"
 
 msgid "Organisation unit(s) to import data to"
 msgstr "Organisation unit(s) to import data to"
-
-msgid "Period"
-msgstr "Period"
-
-msgid "Daily values will be imported between start and end dates"
-msgstr "Daily values will be imported between start and end dates"
-
-msgid "Start date"
-msgstr "Start date"
-
-msgid "End date"
-msgstr "End date"
 
 msgid "Daily precipitation - CHIRPS"
 msgstr "Daily precipitation - CHIRPS"
@@ -58,6 +31,33 @@ msgstr "Mean temperature"
 
 msgid "Temperature range"
 msgstr "Temperature range"
+
+msgid "Data"
+msgstr "Data"
+
+msgid "Select data to import"
+msgstr "Select data to import"
+
+msgid "Loading org units"
+msgstr "Loading org units"
+
+msgid "Organisation unit levels"
+msgstr "Organisation unit levels"
+
+msgid "Organisation unit level to import data to"
+msgstr "Organisation unit level to import data to"
+
+msgid "Period"
+msgstr "Period"
+
+msgid "Daily values will be imported between start and end dates"
+msgstr "Daily values will be imported between start and end dates"
+
+msgid "Start date"
+msgstr "Start date"
+
+msgid "End date"
+msgstr "End date"
 
 msgid "Temperature (ERA5-Land)"
 msgstr "Temperature (ERA5-Land)"
@@ -97,9 +97,3 @@ msgstr "Precipitation hourly (ERA5-Land)"
 
 msgid "Precipitation (CHIRPS)"
 msgstr "Precipitation (CHIRPS)"
-
-msgid "The app could not retrieve required data."
-msgstr "The app could not retrieve required data."
-
-msgid "Network error"
-msgstr "Network error"

@@ -1,0 +1,19 @@
+.container {
+  max-width: 800px;
+}
+
+.container h1 {
+  color: var(--colors-grey900);
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.container h2 {
+  font-size: 16px;
+  margin: 30px 0 8px;
+}
+
+.container p {
+  font-size: 14px;
+  margin: 6px 0 12px;
+}

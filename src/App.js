@@ -1,38 +1,32 @@
-import { useState } from "react";
-import { Button } from "@dhis2/ui";
-import i18n from "@dhis2/d2-i18n";
-import Inputs from "./components/import/Inputs";
-import Import from "./Import";
-import Explore from "./components/explore/Explore";
-import classes from "./App.module.css";
+import { createHashRouter, RouterProvider } from "react-router-dom";
+import Root from "./components/Root";
+import AboutPage from "./components/AboutPage";
+import ErrorPage from "./components/ErrorPage";
+import ImportPage from "./components/import/ImportPage";
+import ExplorePage from "./components/explore/ExplorePage";
 
-const MyApp = () => {
-  const [startImport, setStartImport] = useState(false);
-  const [startExplore, setStartExplore] = useState(false);
+const router = createHashRouter([
+  {
+    path: "/",
+    element: <Root />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/",
+        element: <AboutPage />,
+      },
+      {
+        path: "import",
+        element: <ImportPage />,
+      },
+      {
+        path: "explore/:orgUnitId?",
+        element: <ExplorePage />,
+      },
+    ],
+  },
+]);
 
-  return (
-    <div className={classes.container}>
-      {startImport ? (
-        <Import />
-      ) : startExplore ? (
-        <Explore />
-      ) : (
-        <>
-          <Button onClick={() => setStartImport(true)}>
-            {i18n.t("Test: Import temperature data to DHIS2")}
-          </Button>
-          <br />
-          <Button onClick={() => setStartExplore(true)}>
-            {i18n.t("Explore: Look at data for one org unit")}
-          </Button>
-          <br />
-          <br />
-          <br />
-          <Inputs />
-        </>
-      )}
-    </div>
-  );
-};
+const App = () => <RouterProvider router={router}></RouterProvider>;
 
-export default MyApp;
+export default App;

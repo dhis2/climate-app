@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "@dhis2/ui";
+import { Card, Button } from "@dhis2/ui";
 import Dataset from "./Dataset";
 import Period from "./Period";
 import OrgUnitLevel from "./OrgUnitLevel";
@@ -21,27 +21,38 @@ const Inputs = () => {
   const [dataElement, setDataElement] = useState();
   const [startExtract, setStartExtract] = useState(false);
 
-  const isValid = dataset && period.startDate && period.endDate && orgUnitLevel;
+  const isValid =
+    dataset &&
+    period.startDate &&
+    period.endDate &&
+    orgUnitLevel &&
+    dataElement;
 
   return (
-    <div className={classes.container}>
-      <Dataset selected={dataset} onChange={setDataset} />
-      <Period period={period} onChange={setPeriod} />
-      <OrgUnitLevel selected={orgUnitLevel} onChange={setOrgUnitLevel} />
-      <DataElement onChange={setDataElement} />
-      <br />
-      <Button primary disabled={!isValid} onClick={() => setStartExtract(true)}>
-        Start import
-      </Button>
-      {startExtract && (
-        <ExtractData
-          dataset={dataset}
-          period={period}
-          orgUnitLevel={orgUnitLevel}
-          dateElement={dataElement}
-        />
-      )}
-    </div>
+    <Card>
+      <div className={classes.container}>
+        <Dataset selected={dataset} onChange={setDataset} />
+        <Period period={period} onChange={setPeriod} />
+        <OrgUnitLevel selected={orgUnitLevel} onChange={setOrgUnitLevel} />
+        <DataElement selected={dataElement} onChange={setDataElement} />
+        <br />
+        <Button
+          primary
+          disabled={!isValid}
+          onClick={() => setStartExtract(true)}
+        >
+          Start import
+        </Button>
+        {startExtract && (
+          <ExtractData
+            dataset={dataset}
+            period={period}
+            orgUnitLevel={orgUnitLevel}
+            dataElement={dataElement}
+          />
+        )}
+      </div>
+    </Card>
   );
 };
 
