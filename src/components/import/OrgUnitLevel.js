@@ -1,6 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
 import { SingleSelectField, SingleSelectOption, Divider } from "@dhis2/ui";
-import useOrgUnitLevels from "../hooks/useOrgUnitLevels";
+import useOrgUnitLevels from "../../hooks/useOrgUnitLevels";
 
 const OrgUnitLevel = ({ selected, onChange }) => {
   const { levels /*, error, loading */ } = useOrgUnitLevels();

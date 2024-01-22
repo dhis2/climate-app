@@ -1,7 +1,7 @@
 import { OrgUnitDimension } from "@dhis2/analytics";
 import i18n from "@dhis2/d2-i18n";
 import { Divider } from "@dhis2/ui";
-import useOrgUnitRoots from "../hooks/useOrgUnitRoots";
+import useOrgUnitRoots from "../../hooks/useOrgUnitRoots";
 
 const OrgUnitSelect = ({ orgUnits, onChange }) => {
   const { roots /*, error, loading */ } = useOrgUnitRoots();

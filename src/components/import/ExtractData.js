@@ -1,7 +1,7 @@
 import i18n from "@dhis2/d2-i18n";
 import { CircularLoader } from "@dhis2/ui";
-import useOrgUnits from "../hooks/useOrgUnits";
-import useEarthEngineData from "../hooks/useEarthEngineData";
+import useOrgUnits from "../../hooks/useOrgUnits";
+import useEarthEngineData from "../../hooks/useEarthEngineData";
 import ImportData from "./ImportData";
 import classes from "./styles/ExtractData.module.css";
 

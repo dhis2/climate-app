@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import useEarthEngine from "./useEarthEngine";
-import { getEarthEngineData } from "../lib/ee-utils";
+import { getEarthEngineData } from "../util/ee-utils";
 
 const useEarthEngineData = (dataset, period, features) => {
   const [data, setData] = useState();

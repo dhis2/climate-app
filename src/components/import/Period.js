@@ -1,5 +1,5 @@
 import i18n from "@dhis2/d2-i18n";
-import DatePicker from "./shared/DatePicker";
+import DatePicker from "../shared/DatePicker";
 import classes from "./styles/Period.module.css";
 
 const Period = ({ period, onChange }) => {
@@ -16,13 +16,11 @@ const Period = ({ period, onChange }) => {
           label={i18n.t("Start date")}
           defaultVal={startDate}
           onBlur={(startDate) => onChange({ ...period, startDate })}
-          // className={className || styles.select}
         />
         <DatePicker
           label={i18n.t("End date")}
           defaultVal={endDate}
           onBlur={(endDate) => onChange({ ...period, endDate })}
-          // className={className || styles.select}
         />
       </div>
     </div>

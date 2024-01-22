@@ -29,6 +29,16 @@ export const cleanData = (data) =>
     value: f.properties.value,
   }));
 
+/*  
+export const convertPeriod = (date) =>
+  new Date(
+    `${date.slice(0, 4)}-${date.slice(4, 6)}-${date.slice(6, 8)}`
+  ).getTime();
+*/
+
+export const convertPeriod = (date) =>
+  `${date.slice(0, 4)}-${date.slice(4, 6)}-${date.slice(6, 8)}`;
+
 export const getEarthEngineData = (ee, datasetParams, period, features) => {
   const {
     datasetId,
@@ -43,13 +53,12 @@ export const getEarthEngineData = (ee, datasetParams, period, features) => {
   const timeZoneStart = ee.Date(startDate).format(null, timeZone);
   const timeZoneEnd = endDatePlusOne.format(null, timeZone);
 
-  const dataParser = valueParser
-    ? (data) =>
-        data.map((f) => ({
-          ...f.properties,
-          value: valueParser(f.properties.value),
-        }))
-    : (data) => data.map((f) => f.properties);
+  const dataParser = (data) =>
+    data.map((f) => ({
+      ...f.properties,
+      period: convertPeriod(f.properties.period),
+      value: valueParser ? valueParser(f.properties.value) : f.properties.value,
+    }));
 
   const collection = ee
     .ImageCollection(datasetId)

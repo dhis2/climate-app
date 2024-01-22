@@ -1,6 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
 import { SingleSelectField, SingleSelectOption } from "@dhis2/ui";
-import datasets from "../data/datasets";
+import datasets from "../../data/datasets";
 import classes from "./styles/Dataset.module.css";
 
 const Dataset = ({ selected, onChange }) => {

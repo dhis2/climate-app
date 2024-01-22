@@ -1,9 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
 
-const convertDate = (date) =>
-  new Date(
-    `${date.slice(0, 4)}-${date.slice(4, 6)}-${date.slice(6, 8)}`
-  ).getTime();
+const convertDate = (date) => new Date(date).getTime();
 
 const getChart = (meanData, minData, maxData) => {
   const series = meanData.map((d) => ({

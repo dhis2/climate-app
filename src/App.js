@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@dhis2/ui";
 import i18n from "@dhis2/d2-i18n";
-import Inputs from "./components/Inputs";
+import Inputs from "./components/import/Inputs";
 import Import from "./Import";
 import Explore from "./components/explore/Explore";
 import classes from "./App.module.css";
