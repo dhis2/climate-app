@@ -7,7 +7,7 @@ const useEarthEngineData = (dataset, period, features) => {
   const eePromise = useEarthEngine();
 
   useEffect(() => {
-    if (dataset && features) {
+    if (dataset && features?.length) {
       eePromise.then((ee) =>
         getEarthEngineData(ee, dataset, period, features).then(setData)
       );

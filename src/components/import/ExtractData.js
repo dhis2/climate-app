@@ -7,30 +7,41 @@ import classes from "./styles/ExtractData.module.css";
 
 const oneDay = 1000 * 60 * 60 * 24;
 
-const ExtractData = ({ dataset, period, orgUnitLevel, dataElement }) => {
+const ExtractData = ({
+  dataset,
+  period,
+  orgUnitLevel,
+  dataElement,
+  onImportComplete,
+}) => {
   const { features /* , error, loading */ } = useOrgUnits(orgUnitLevel);
   const data = useEarthEngineData(dataset, period, features);
 
-  if (!data) {
-    if (!features) {
-      return (
-        <div className={classes.container}>
-          <CircularLoader small className={classes.loader} />{" "}
-          {i18n.t("Loading org units")}
-        </div>
-      );
-    }
-
-    const orgUnits = features.length;
-    const startDate = new Date(period.startDate);
-    const endDate = new Date(period.endDate);
-
-    const days = Math.round(
-      (endDate.getTime() + oneDay - startDate.getTime()) / oneDay
+  if (!features) {
+    return (
+      <div className={classes.container}>
+        <CircularLoader small className={classes.loader} />{" "}
+        {i18n.t("Loading org units")}
+      </div>
     );
+  } else if (!features.length) {
+    return (
+      <div className={classes.container}>
+        {i18n.t("No org units with geometry found for this level")}
+      </div>
+    );
+  }
+  const orgUnits = features.length;
+  const startDate = new Date(period.startDate);
+  const endDate = new Date(period.endDate);
 
-    const count = days * orgUnits;
+  const days = Math.round(
+    (endDate.getTime() + oneDay - startDate.getTime()) / oneDay
+  );
 
+  const count = days * orgUnits;
+
+  if (!data) {
     return (
       <div className={classes.container}>
         <CircularLoader small className={classes.loader} />
@@ -46,7 +57,13 @@ const ExtractData = ({ dataset, period, orgUnitLevel, dataElement }) => {
     );
   }
 
-  return <ImportData data={data} dataElement={dataElement} />;
+  return (
+    <ImportData
+      data={data}
+      dataElement={dataElement}
+      onImportComplete={onImportComplete}
+    />
+  );
 };
 
 export default ExtractData;

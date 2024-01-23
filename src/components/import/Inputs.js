@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, Button } from "@dhis2/ui";
 import Dataset from "./Dataset";
 import Period from "./Period";
@@ -28,6 +28,10 @@ const Inputs = () => {
     orgUnitLevel &&
     dataElement;
 
+  useEffect(() => {
+    setStartExtract(false);
+  }, [dataset, period, orgUnitLevel, dataElement]);
+
   return (
     <Card>
       <div className={classes.container}>
@@ -38,7 +42,7 @@ const Inputs = () => {
         <br />
         <Button
           primary
-          disabled={!isValid}
+          disabled={!isValid || startExtract}
           onClick={() => setStartExtract(true)}
         >
           Start import

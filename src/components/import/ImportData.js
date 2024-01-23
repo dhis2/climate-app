@@ -7,7 +7,7 @@ const dataImportMutation = {
   data: (dataValues) => dataValues,
 };
 
-const ImportData = ({ data, dataElement }) => {
+const ImportData = ({ data, dataElement, onImportComplete }) => {
   const [isImported, setIsImported] = useState(false);
   const [mutate] = useDataMutation(dataImportMutation);
 
