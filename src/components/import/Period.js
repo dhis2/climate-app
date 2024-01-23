@@ -1,5 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
 import DatePicker from "../shared/DatePicker";
+import TimeZone from "./TimeZone";
 import classes from "./styles/Period.module.css";
 
 const Period = ({ period, onChange }) => {
@@ -22,6 +23,7 @@ const Period = ({ period, onChange }) => {
           defaultVal={endDate}
           onBlur={(endDate) => onChange({ ...period, endDate })}
         />
+        <TimeZone period={period} onChange={onChange} />
       </div>
     </div>
   );

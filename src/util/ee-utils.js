@@ -40,6 +40,10 @@ export const convertPeriod = (date) =>
   `${date.slice(0, 4)}-${date.slice(4, 6)}-${date.slice(6, 8)}`;
 
 export const getEarthEngineData = (ee, datasetParams, period, features) => {
+  const dataset = period.timeZone
+    ? { ...datasetParams, ...datasetParams.timeZone }
+    : datasetParams;
+
   const {
     datasetId,
     band,
@@ -47,7 +51,8 @@ export const getEarthEngineData = (ee, datasetParams, period, features) => {
     periodType,
     periodReducer = reducer,
     valueParser,
-  } = datasetParams;
+  } = dataset;
+
   const { startDate, endDate, timeZone = "UTC" } = period;
   const endDatePlusOne = ee.Date(endDate).advance(1, "day");
   const timeZoneStart = ee.Date(startDate).format(null, timeZone);

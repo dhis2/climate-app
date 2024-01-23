@@ -5,14 +5,14 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-01-22T16:15:26.443Z\n"
-"PO-Revision-Date: 2024-01-22T16:15:26.443Z\n"
+"POT-Creation-Date: 2024-01-23T16:28:50.169Z\n"
+"PO-Revision-Date: 2024-01-23T16:28:50.169Z\n"
 
-msgid "Organisation units"
-msgstr "Organisation units"
+msgid "About this app"
+msgstr "About this app"
 
-msgid "Organisation unit(s) to import data to"
-msgstr "Organisation unit(s) to import data to"
+msgid "Select an organisation unit"
+msgstr "Select an organisation unit"
 
 msgid "Daily precipitation - CHIRPS"
 msgstr "Daily precipitation - CHIRPS"
@@ -32,6 +32,15 @@ msgstr "Mean temperature"
 msgid "Temperature range"
 msgstr "Temperature range"
 
+msgid "Data element"
+msgstr "Data element"
+
+msgid "No match found"
+msgstr "No match found"
+
+msgid "Data element to import data to"
+msgstr "Data element to import data to"
+
 msgid "Data"
 msgstr "Data"
 
@@ -40,6 +49,12 @@ msgstr "Select data to import"
 
 msgid "Loading org units"
 msgstr "Loading org units"
+
+msgid "No org units with geometry found for this level"
+msgstr "No org units with geometry found for this level"
+
+msgid "Import weather and climate data"
+msgstr "Import weather and climate data"
 
 msgid "Organisation unit levels"
 msgstr "Organisation unit levels"

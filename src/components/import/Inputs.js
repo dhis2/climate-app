@@ -7,11 +7,13 @@ import DataElement from "./DataElement";
 import ExtractData from "./ExtractData";
 import classes from "./styles/Inputs.module.css";
 
-// TODO: Make dynamic
+const endDate = new Date();
+const currentYear = endDate.getFullYear();
+const startDate = new Date(endDate.setFullYear(currentYear - 1));
+
 const defaultPeriod = {
-  startDate: "2023-07-01",
-  endDate: "2023-07-10",
-  // timeZone: "Africa/Addis_Ababa",
+  startDate: startDate.toISOString().slice(0, 10),
+  endDate: endDate.toISOString().slice(0, 10),
 };
 
 const Inputs = () => {
