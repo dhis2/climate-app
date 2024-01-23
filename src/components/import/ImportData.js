@@ -1,3 +1,4 @@
+import i18n from "@dhis2/d2-i18n";
 import { useDataMutation } from "@dhis2/app-runtime";
 import { useState, useEffect } from "react";
 
@@ -12,17 +13,12 @@ const ImportData = ({ data, dataElement, onImportComplete }) => {
   const [mutate] = useDataMutation(dataImportMutation);
 
   useEffect(() => {
-    // const cocId = dataElement.categoryCombo.categoryOptionCombos[0].id;
-
-    // Is cocId needed?
     mutate({
       dataValues: data.map((obj) => ({
         value: obj.value,
         orgUnit: obj.ou,
         dataElement: dataElement.id,
         period: obj.period,
-        // categoryOptionCombo: cocId,
-        // attributeOptionCombo: cocId,
       })),
     }).then((response) => {
       if (response.httpStatus === "OK") {
@@ -36,7 +32,9 @@ const ImportData = ({ data, dataElement, onImportComplete }) => {
   return (
     <div>
       <br />
-      {isImported ? "Data is imported" : "Importing data to DHIS2"}
+      {isImported
+        ? i18n.t("Data is imported")
+        : i18n.t("Importing data to DHIS2")}
     </div>
   );
 };

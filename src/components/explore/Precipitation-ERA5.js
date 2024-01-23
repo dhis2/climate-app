@@ -1,3 +1,4 @@
+import i18n from "@dhis2/d2-i18n";
 import Chart from "./Chart";
 import useEarthEngineData from "../../hooks/useEarthEngineData";
 import datasets from "../../data/datasets";
@@ -11,7 +12,7 @@ const Precipitation = ({ orgUnit, period }) => {
   const values = useEarthEngineData(precipitation, period, orgUnit);
 
   if (!values) {
-    return <div>Loading...</div>;
+    return <div>{i18n.t("Loading")}...</div>;
   }
 
   return <Chart config={getPrecipitationChart(values)} />;

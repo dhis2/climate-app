@@ -1,3 +1,4 @@
+import i18n from "@dhis2/d2-i18n";
 import Chart from "./Chart";
 import useEarthEngineData from "../../hooks/useEarthEngineData";
 import datasets from "../../data/datasets";
@@ -21,7 +22,7 @@ const Temperature = ({ orgUnit, period }) => {
   const maxValues = useEarthEngineData(maxTemperature, period, orgUnit);
 
   if (!meanValues || !minValues || !maxValues) {
-    return <div>Loading...</div>;
+    return <div>{i18n.t("Loading")}...</div>;
   }
 
   return (
