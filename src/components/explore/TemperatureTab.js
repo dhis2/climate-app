@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import Chart from "./Chart";
 import getMonthlyConfig from "./charts/temperatureMonthly";
 import getDailyConfig from "./charts/temperatureDaily";
@@ -16,5 +17,12 @@ const TemperatureTab = ({
     )}
   </>
 );
+
+TemperatureTab.propTypes = {
+  periodType: PropTypes.string.isRequired,
+  monthlyData: PropTypes.array.isRequired,
+  dailyData: PropTypes.array.isRequired,
+  monthlyPeriod: PropTypes.object.isRequired,
+};
 
 export default TemperatureTab;

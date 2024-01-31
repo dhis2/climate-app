@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 import MonthSelect from "./MonthSelect";
 import Chart from "./Chart";
 import getChartConfig from "./charts/temperatureAnomaly";
@@ -17,6 +18,10 @@ const ClimateChangeTab = ({ monthlyData }) => {
       <Chart config={getChartConfig(monthlyData, month)} />
     </>
   );
+};
+
+ClimateChangeTab.propTypes = {
+  monthlyData: PropTypes.array.isRequired,
 };
 
 export default ClimateChangeTab;

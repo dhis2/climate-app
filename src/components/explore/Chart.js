@@ -1,7 +1,7 @@
+import PropTypes from "prop-types";
 import Highcharts from "highcharts";
 import exporting from "highcharts/highcharts-more";
 import highchartsMore from "highcharts/modules/exporting";
-import PropTypes from "prop-types";
 import React, { useRef, useEffect } from "react";
 
 exporting(Highcharts);

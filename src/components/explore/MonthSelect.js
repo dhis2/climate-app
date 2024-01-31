@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import i18n from "@dhis2/d2-i18n";
 import { SingleSelectField, SingleSelectOption } from "@dhis2/ui";
 
@@ -62,5 +63,10 @@ const MonthSelect = ({ selected, onChange }) => (
     ))}
   </SingleSelectField>
 );
+
+MonthSelect.propTypes = {
+  selected: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
 
 export default MonthSelect;

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { TabBar, Tab } from "@dhis2/ui";
 
 const tabs = [
@@ -15,5 +16,10 @@ const Tabs = ({ selected, onChange }) => (
     ))}
   </TabBar>
 );
+
+Tabs.propTypes = {
+  selected: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
 
 export default Tabs;

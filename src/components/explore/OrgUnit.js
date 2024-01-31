@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import i18n from "@dhis2/d2-i18n";
 import { IconLocation24, IconEmptyFrame24 } from "@dhis2/ui";
@@ -37,12 +37,7 @@ const dailyDataset = {
 
 const allMonthsPeriod = {
   startDate: "1970-01",
-  endDate: "2030-01", // TODO: use current date
-};
-
-const defaultMonthlyPeriod = {
-  startMonth: "2023-01",
-  endMonth: "2023-12",
+  endDate: new Date().toISOString().substring(0, 7), // Current month
 };
 
 const tabs = {
@@ -54,7 +49,7 @@ const tabs = {
 const OrgUnit = ({ orgUnit }) => {
   const [tab, setTab] = useState("temperature");
   const [dailyPeriod, setDailyPeriod] = useState(defaultPeriod);
-  const [monthlyPeriod, setMonthlyPeriod] = useState(defaultMonthlyPeriod);
+  const [monthlyPeriod, setMonthlyPeriod] = useState();
   const [periodType, setPeriodType] = useState("monthly");
 
   const monthlyData = useEarthEngineTimeSeries(
@@ -71,6 +66,16 @@ const OrgUnit = ({ orgUnit }) => {
 
   const Tab = tabs[tab];
 
+  useEffect(() => {
+    if (monthlyData && !monthlyPeriod) {
+      const last12months = monthlyData.slice(-12);
+      setMonthlyPeriod({
+        startMonth: last12months[0].id,
+        endMonth: last12months[11].id,
+      });
+    }
+  }, [monthlyPeriod, monthlyData]);
+
   return (
     <div className={classes.orgUnit}>
       <h1>
@@ -84,7 +89,7 @@ const OrgUnit = ({ orgUnit }) => {
 
       {orgUnit.geometry ? (
         <>
-          {monthlyData && dailyData ? (
+          {monthlyData && dailyData && monthlyPeriod ? (
             <>
               {tab !== "climatechange" && (
                 <PeriodTypeSelect type={periodType} onChange={setPeriodType} />
@@ -105,10 +110,12 @@ const OrgUnit = ({ orgUnit }) => {
                         onUpdate={setDailyPeriod}
                       />
                     ) : (
-                      <MonthlyPeriodSelect
-                        currentPeriod={monthlyPeriod}
-                        onUpdate={setMonthlyPeriod}
-                      />
+                      monthlyPeriod && (
+                        <MonthlyPeriodSelect
+                          currentPeriod={monthlyPeriod}
+                          onUpdate={setMonthlyPeriod}
+                        />
+                      )
                     )}
                   </>
                 )}
