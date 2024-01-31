@@ -1,0 +1,12 @@
+.orgUnit {
+  position: relative;
+}
+
+.orgUnit h1 svg {
+  margin-bottom: -3px;
+}
+
+.tabContent {
+  position: relative;
+  margin-top: 16px;
+}

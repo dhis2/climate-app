@@ -5,14 +5,23 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-01-23T16:28:50.169Z\n"
-"PO-Revision-Date: 2024-01-23T16:28:50.169Z\n"
+"POT-Creation-Date: 2024-01-31T10:17:41.076Z\n"
+"PO-Revision-Date: 2024-01-31T10:17:41.076Z\n"
 
 msgid "About this app"
 msgstr "About this app"
 
 msgid "Select an organisation unit"
 msgstr "Select an organisation unit"
+
+msgid "Start date"
+msgstr "Start date"
+
+msgid "End date"
+msgstr "End date"
+
+msgid "Loading"
+msgstr "Loading"
 
 msgid "Daily precipitation - CHIRPS"
 msgstr "Daily precipitation - CHIRPS"
@@ -53,6 +62,12 @@ msgstr "Loading org units"
 msgid "No org units with geometry found for this level"
 msgstr "No org units with geometry found for this level"
 
+msgid "Data is imported"
+msgstr "Data is imported"
+
+msgid "Importing data to DHIS2"
+msgstr "Importing data to DHIS2"
+
 msgid "Import weather and climate data"
 msgstr "Import weather and climate data"
 
@@ -68,11 +83,8 @@ msgstr "Period"
 msgid "Daily values will be imported between start and end dates"
 msgstr "Daily values will be imported between start and end dates"
 
-msgid "Start date"
-msgstr "Start date"
-
-msgid "End date"
-msgstr "End date"
+msgid "Time zone"
+msgstr "Time zone"
 
 msgid "Temperature (ERA5-Land)"
 msgstr "Temperature (ERA5-Land)"
@@ -80,17 +92,11 @@ msgstr "Temperature (ERA5-Land)"
 msgid "Temperature in °C at 2m above the surface"
 msgstr "Temperature in °C at 2m above the surface"
 
-msgid "Temperature hourly (ERA5-Land)"
-msgstr "Temperature hourly (ERA5-Land)"
-
 msgid "Max temperature (ERA5-Land)"
 msgstr "Max temperature (ERA5-Land)"
 
 msgid "Max temperature in °C at 2m above the surface"
 msgstr "Max temperature in °C at 2m above the surface"
-
-msgid "Max temperature hourly (ERA5-Land)"
-msgstr "Max temperature hourly (ERA5-Land)"
 
 msgid "Min temperature (ERA5-Land)"
 msgstr "Min temperature (ERA5-Land)"
@@ -98,17 +104,11 @@ msgstr "Min temperature (ERA5-Land)"
 msgid "Min temperature in °C at 2m above the surface"
 msgstr "Min temperature in °C at 2m above the surface"
 
-msgid "Min temperature hourly (ERA5-Land)"
-msgstr "Min temperature hourly (ERA5-Land)"
-
 msgid "Precipitation (ERA5-Land)"
 msgstr "Precipitation (ERA5-Land)"
 
 msgid "Total precipitation in mm"
 msgstr "Total precipitation in mm"
-
-msgid "Precipitation hourly (ERA5-Land)"
-msgstr "Precipitation hourly (ERA5-Land)"
 
 msgid "Precipitation (CHIRPS)"
 msgstr "Precipitation (CHIRPS)"

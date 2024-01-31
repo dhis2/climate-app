@@ -24,7 +24,6 @@ const useSystemInfo = () => {
   const engine = useDataEngine();
 
   useEffect(() => {
-    console.log("querying system info");
     engine.query(SYSTEM_QUERY, {
       onComplete: setSystem,
       onError: setError,

@@ -1,16 +1,15 @@
 import i18n from "@dhis2/d2-i18n";
 
-const convertDate = (date) => new Date(date).getTime();
-
 const getChart = (data) => {
   const series = data.map((d) => ({
-    x: convertDate(d.period),
-    y: d.value,
+    x: new Date(d.id).getTime(),
+    y: Math.round(d["total_precipitation_sum"] * 1000 * 10) / 10,
   }));
 
+  // https://www.highcharts.com/demo/highcharts/arearange-line
   return {
     title: {
-      text: i18n.t("Daily precipitation - ERA5-Land"),
+      text: i18n.t("Daily precipitation last year"),
     },
     credits: {
       enabled: false,
@@ -48,7 +47,7 @@ const getChart = (data) => {
       {
         data: series,
         name: i18n.t("Daily precipitation"),
-        color: "#2196f3", // blue500
+        color: "var(--colors-blue500)",
         zIndex: 1,
       },
     ],

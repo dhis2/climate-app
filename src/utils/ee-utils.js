@@ -29,13 +29,6 @@ export const cleanData = (data) =>
     value: f.properties.value,
   }));
 
-/*  
-export const convertPeriod = (date) =>
-  new Date(
-    `${date.slice(0, 4)}-${date.slice(4, 6)}-${date.slice(6, 8)}`
-  ).getTime();
-*/
-
 export const convertPeriod = (date) =>
   `${date.slice(0, 4)}-${date.slice(4, 6)}-${date.slice(6, 8)}`;
 
@@ -135,4 +128,60 @@ export const getEarthEngineData = (ee, datasetParams, period, features) => {
         .then(dataParser);
     }
   });
+};
+
+export const getTimeSeriesData = (ee, dataset, period, geometry) => {
+  const { datasetId, band, reducer = "mean", sharedInputs = false } = dataset;
+
+  let collection = ee.ImageCollection(datasetId);
+
+  const { startDate, endDate, timeZone = "UTC" } = period;
+  const endDatePlusOne = ee.Date(endDate).advance(1, "day");
+  const timeZoneStart = ee.Date(startDate).format(null, timeZone);
+  const timeZoneEnd = endDatePlusOne.format(null, timeZone);
+
+  collection = collection
+    .select(band)
+    .filter(ee.Filter.date(timeZoneStart, timeZoneEnd));
+
+  const eeScale = getScale(collection.first());
+
+  const { type, coordinates } = geometry;
+  const eeGeometry = ee.Geometry[type](coordinates);
+
+  let eeReducer;
+
+  if (Array.isArray(reducer)) {
+    // Combine multiple reducers
+    // sharedInputs = true means that all reducers are applied to all bands
+    // sharedInouts = false means one reducer for each band
+    eeReducer = reducer.reduce(
+      (r, t, i) =>
+        i === 0
+          ? r[t]().unweighted()
+          : r.combine({
+              reducer2: ee.Reducer[t]().unweighted(),
+              outputPrefix: sharedInputs ? "" : String(i),
+              sharedInputs,
+            }),
+      ee.Reducer
+    );
+
+    if (!sharedInputs && Array.isArray(band)) {
+      // Use band names as output names
+      eeReducer = eeReducer.setOutputs(band);
+    }
+  } else {
+    // Single reducer
+    eeReducer = ee.Reducer[reducer]();
+  }
+
+  // Retruns a time series array of objects
+  return getInfo(
+    ee.FeatureCollection(
+      collection.map((image) =>
+        ee.Feature(null, image.reduceRegion(eeReducer, eeGeometry, eeScale))
+      )
+    )
+  ).then(getFeatureCollectionPropertiesArray);
 };

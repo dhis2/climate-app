@@ -1,6 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
 import DatePicker from "../shared/DatePicker";
-import TimeZone from "./TimeZone";
+import TimeZone from "../shared/TimeZone";
 import classes from "./styles/Period.module.css";
 
 const Period = ({ period, onChange }) => {

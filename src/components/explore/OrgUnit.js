@@ -1,58 +1,116 @@
-import { useState, useEffect } from "react";
-import { TabBar, Tab } from "@dhis2/ui";
-import Temperature from "./Temperature";
-import PrecipitationEra5 from "./Precipitation-ERA5";
-import PrecipitationChirps from "./Precipitation-CHIRPS";
-import useOrgUnit from "../../hooks/useOrgUnit";
+import { useState } from "react";
+import PropTypes from "prop-types";
+import i18n from "@dhis2/d2-i18n";
+import { IconLocation24, IconEmptyFrame24 } from "@dhis2/ui";
+import PeriodTypeSelect from "./PeriodTypeSelect";
+import DailyPeriodSelect from "./DailyPeriodSelect";
+import Tabs from "./Tabs";
+import TemperatureTab from "./TemperatureTab";
+import PrecipitationTab from "./PrecipitationTab";
+import ClimateChangeTab from "./ClimateChangeTab";
+import DataSource from "./DataSource";
+import useEarthEngineTimeSeries from "../../hooks/useEarthEngineTimeSeries";
+import { defaultPeriod } from "../../utils/time";
+import classes from "./styles/OrgUnit.module.css";
 
-const period = {
-  startDate: "2023-01-01",
-  endDate: "2023-12-31",
-  // timeZone: "Africa/Addis_Ababa",
+const band = [
+  "temperature_2m",
+  "temperature_2m_min",
+  "temperature_2m_max",
+  "total_precipitation_sum",
+];
+
+const reducer = ["mean", "min", "max", "mean"];
+
+const monthlyDataset = {
+  datasetId: "ECMWF/ERA5_LAND/MONTHLY_AGGR",
+  band,
+  reducer,
 };
 
-const OrgUnit = ({ id, name }) => {
+const dailyDataset = {
+  datasetId: "ECMWF/ERA5_LAND/DAILY_AGGR",
+  band,
+  reducer,
+};
+
+const monthlyPeriod = {
+  startDate: "1970-01-01",
+  endDate: "2030-01-01", // TODO: use current date
+};
+
+const tabs = {
+  temperature: TemperatureTab,
+  precipitation: PrecipitationTab,
+  climatechange: ClimateChangeTab,
+};
+
+const OrgUnit = ({ orgUnit }) => {
   const [tab, setTab] = useState("temperature");
-  const { orgUnit, error, loading } = useOrgUnit(id);
+  const [dailyPeriod, setDailyPeriod] = useState(defaultPeriod);
+  const [periodType, setPeriodType] = useState("monthly");
+
+  const monthlyData = useEarthEngineTimeSeries(
+    monthlyDataset,
+    monthlyPeriod,
+    orgUnit?.geometry
+  );
+
+  const dailyData = useEarthEngineTimeSeries(
+    dailyDataset,
+    dailyPeriod,
+    orgUnit?.geometry
+  );
+
+  const Tab = tabs[tab];
 
   return (
-    <>
-      <h1>{name}</h1>
-      {orgUnit && (
+    <div className={classes.orgUnit}>
+      <h1>
+        {orgUnit.properties.name}{" "}
+        {orgUnit.geometry?.type === "Point" ? (
+          <IconLocation24 />
+        ) : (
+          <IconEmptyFrame24 />
+        )}
+      </h1>
+
+      {orgUnit.geometry ? (
         <>
-          {orgUnit[0].geometry ? (
+          {monthlyData && dailyData ? (
             <>
-              <TabBar fixed>
-                <Tab
-                  onClick={() => setTab("temperature")}
-                  selected={tab === "temperature"}
-                >
-                  Temperature
-                </Tab>
-                <Tab
-                  onClick={() => setTab("precipitation")}
-                  selected={tab === "precipitation"}
-                >
-                  Precipitation
-                </Tab>
-              </TabBar>
-              {tab === "temperature" && (
-                <Temperature orgUnit={orgUnit} period={period} />
+              {tab !== "climatechange" && (
+                <PeriodTypeSelect type={periodType} onChange={setPeriodType} />
               )}
-              {tab === "precipitation" && (
-                <>
-                  <PrecipitationEra5 orgUnit={orgUnit} period={period} />
-                  <PrecipitationChirps orgUnit={orgUnit} period={period} />
-                </>
-              )}
+              <Tabs selected={tab} onChange={setTab} />
+              <div className={classes.tabContent}>
+                <Tab
+                  periodType={periodType}
+                  monthlyData={monthlyData}
+                  dailyData={dailyData}
+                />
+                {periodType === "daily" && tab !== "climatechange" && (
+                  <DailyPeriodSelect
+                    currentPeriod={dailyPeriod}
+                    onUpdate={setDailyPeriod}
+                  />
+                )}
+                <DataSource />
+              </div>
             </>
           ) : (
-            <>No geometry</>
+            <div>{i18n.t("Loading data")}...</div>
           )}
         </>
+      ) : (
+        <>{i18n.t("No geometry")}</>
       )}
-    </>
+    </div>
   );
+};
+
+OrgUnit.propTypes = {
+  orgUnit: PropTypes.object.isRequired,
 };
 
 export default OrgUnit;

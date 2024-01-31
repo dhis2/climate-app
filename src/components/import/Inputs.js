@@ -5,16 +5,8 @@ import Period from "./Period";
 import OrgUnitLevel from "./OrgUnitLevel";
 import DataElement from "./DataElement";
 import ExtractData from "./ExtractData";
+import { defaultPeriod } from "../../utils/time";
 import classes from "./styles/Inputs.module.css";
-
-const endDate = new Date();
-const currentYear = endDate.getFullYear();
-const startDate = new Date(endDate.setFullYear(currentYear - 1));
-
-const defaultPeriod = {
-  startDate: startDate.toISOString().slice(0, 10),
-  endDate: endDate.toISOString().slice(0, 10),
-};
 
 const Inputs = () => {
   const [dataset, setDataset] = useState();

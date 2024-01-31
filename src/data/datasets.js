@@ -60,6 +60,7 @@ export default [
     },
     valueParser: (v) => Math.round(v * 1000 * 1000) / 1000, // meter to mm with 3 decimals
   },
+  /*
   {
     id: "UCSB-CHG/CHIRPS/DAILY/precipitation",
     datasetId: "UCSB-CHG/CHIRPS/DAILY",
@@ -69,4 +70,5 @@ export default [
     reducer: "mean",
     valueParser: (v) => Math.round(v * 1000) / 1000, // 3 decimals
   },
+  */
 ];

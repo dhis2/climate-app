@@ -1,6 +1,6 @@
 body {
   overflow: hidden; /* scrolling is handled by app-shell, this causes issues with "double" scroll */
-  background-color: var(--colors-grey050);
+  /*background-color: var(--colors-grey050); */
 }
 
 .container {
@@ -8,7 +8,6 @@ body {
   height: 100%;
   grid-gap: 0 var(--spacers-dp24);
   grid-template-columns: [sidebar] 280px [content] minmax(0, 1fr);
-  color: var(--colors-grey900);
 }
 
 .sidebar {
