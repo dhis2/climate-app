@@ -16,15 +16,19 @@ const getMonthNormal = (data, month) => {
   return Math.round(normal * 10) / 10;
 };
 
-const getChartConfig = (data) => {
-  const last12months = data.slice(-12);
+const getSelectedMonths = (data, { startMonth, endMonth }) => {
+  return data.filter((d) => d.id >= startMonth && d.id <= endMonth);
+};
 
-  const series = last12months.map((d) => ({
+const getChartConfig = (data, monthlyPeriod) => {
+  const months = getSelectedMonths(data, monthlyPeriod);
+
+  const series = months.map((d) => ({
     x: new Date(d.id).getTime(),
     y: Math.round(d["total_precipitation_sum"] * 1000 * 10) / 10,
   }));
 
-  const normals = last12months.map((d) => ({
+  const normals = months.map((d) => ({
     x: new Date(d.id).getTime(),
     y: getMonthNormal(data, d.id.substring(5, 7)),
   }));

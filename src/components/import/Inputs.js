@@ -27,7 +27,7 @@ const Inputs = () => {
   }, [dataset, period, orgUnitLevel, dataElement]);
 
   return (
-    <Card>
+    <Card className={classes.card}>
       <div className={classes.container}>
         <Dataset selected={dataset} onChange={setDataset} />
         <Period period={period} onChange={setPeriod} />

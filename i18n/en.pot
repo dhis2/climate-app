@@ -5,14 +5,11 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-01-31T10:17:41.076Z\n"
-"PO-Revision-Date: 2024-01-31T10:17:41.076Z\n"
+"POT-Creation-Date: 2024-01-31T15:53:18.279Z\n"
+"PO-Revision-Date: 2024-01-31T15:53:18.279Z\n"
 
 msgid "About this app"
 msgstr "About this app"
-
-msgid "Select an organisation unit"
-msgstr "Select an organisation unit"
 
 msgid "Start date"
 msgstr "Start date"
@@ -23,23 +20,89 @@ msgstr "End date"
 msgid "Loading"
 msgstr "Loading"
 
-msgid "Daily precipitation - CHIRPS"
-msgstr "Daily precipitation - CHIRPS"
+msgid "Select an organisation unit"
+msgstr "Select an organisation unit"
+
+msgid "January"
+msgstr "January"
+
+msgid "February"
+msgstr "February"
+
+msgid "March"
+msgstr "March"
+
+msgid "April"
+msgstr "April"
+
+msgid "May"
+msgstr "May"
+
+msgid "June"
+msgstr "June"
+
+msgid "July"
+msgstr "July"
+
+msgid "August"
+msgstr "August"
+
+msgid "September"
+msgstr "September"
+
+msgid "October"
+msgstr "October"
+
+msgid "November"
+msgstr "November"
+
+msgid "December"
+msgstr "December"
+
+msgid "Loading data"
+msgstr "Loading data"
+
+msgid "No geometry"
+msgstr "No geometry"
+
+msgid "Monthly"
+msgstr "Monthly"
+
+msgid "Daily"
+msgstr "Daily"
+
+msgid "Daily precipitation last year"
+msgstr "Daily precipitation last year"
 
 msgid "Daily precipitation"
 msgstr "Daily precipitation"
 
-msgid "Daily precipitation - ERA5-Land"
-msgstr "Daily precipitation - ERA5-Land"
+msgid "Precipitation last year"
+msgstr "Precipitation last year"
 
-msgid "Daily temperatures"
-msgstr "Daily temperatures"
+msgid "Monthly precipitation"
+msgstr "Monthly precipitation"
+
+msgid "Normal precipitation"
+msgstr "Normal precipitation"
+
+msgid "Temperature anomaly"
+msgstr "Temperature anomaly"
+
+msgid "Daily temperatures last year"
+msgstr "Daily temperatures last year"
 
 msgid "Mean temperature"
 msgstr "Mean temperature"
 
 msgid "Temperature range"
 msgstr "Temperature range"
+
+msgid "Monthly temperatures last year"
+msgstr "Monthly temperatures last year"
+
+msgid "Normal temperature"
+msgstr "Normal temperature"
 
 msgid "Data element"
 msgstr "Data element"

@@ -13,9 +13,17 @@ const Root = () => {
       <div className={styles.container}>
         <div className={styles.sidebar}>
           <Menu>
-            <MenuItem label="Home" value="Home" href={"/#/"} />
-            <MenuItem label="Import" value="Import" href={"/#/import"} />
-            <MenuItem label="Explore" value="Explore" href={"/#/explore"} />
+            <MenuItem label="Home" href={"/#/"} active={pathname === "/"} />
+            <MenuItem
+              label="Import data"
+              href={"/#/import"}
+              active={pathname.startsWith("/import")}
+            />
+            <MenuItem
+              label="Explore data"
+              href={"/#/explore"}
+              active={pathname.startsWith("/explore")}
+            />
           </Menu>
           {pathname.startsWith("/explore") && <OrgUnitTree />}
         </div>

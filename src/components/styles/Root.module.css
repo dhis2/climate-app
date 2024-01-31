@@ -12,7 +12,7 @@ body {
 
 .sidebar {
   grid-column: sidebar;
-  background-color: var(--colors-grey200);
+  /* background-color: var(--colors-grey200); */
   border-right: 1px solid var(--colors-grey400);
   height: 100%;
 }

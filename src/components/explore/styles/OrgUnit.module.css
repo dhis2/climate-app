@@ -10,3 +10,9 @@
   position: relative;
   margin-top: 16px;
 }
+
+.message {
+  color: #555;
+  font-size: 14px;
+  font-style: italic;
+}

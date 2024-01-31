@@ -4,6 +4,7 @@ import i18n from "@dhis2/d2-i18n";
 import { IconLocation24, IconEmptyFrame24 } from "@dhis2/ui";
 import PeriodTypeSelect from "./PeriodTypeSelect";
 import DailyPeriodSelect from "./DailyPeriodSelect";
+import MonthlyPeriodSelect from "./MonthlyPeriodSelect";
 import Tabs from "./Tabs";
 import TemperatureTab from "./TemperatureTab";
 import PrecipitationTab from "./PrecipitationTab";
@@ -34,9 +35,14 @@ const dailyDataset = {
   reducer,
 };
 
-const monthlyPeriod = {
-  startDate: "1970-01-01",
-  endDate: "2030-01-01", // TODO: use current date
+const allMonthsPeriod = {
+  startDate: "1970-01",
+  endDate: "2030-01", // TODO: use current date
+};
+
+const defaultMonthlyPeriod = {
+  startMonth: "2023-01",
+  endMonth: "2023-12",
 };
 
 const tabs = {
@@ -48,11 +54,12 @@ const tabs = {
 const OrgUnit = ({ orgUnit }) => {
   const [tab, setTab] = useState("temperature");
   const [dailyPeriod, setDailyPeriod] = useState(defaultPeriod);
+  const [monthlyPeriod, setMonthlyPeriod] = useState(defaultMonthlyPeriod);
   const [periodType, setPeriodType] = useState("monthly");
 
   const monthlyData = useEarthEngineTimeSeries(
     monthlyDataset,
-    monthlyPeriod,
+    allMonthsPeriod,
     orgUnit?.geometry
   );
 
@@ -88,22 +95,32 @@ const OrgUnit = ({ orgUnit }) => {
                   periodType={periodType}
                   monthlyData={monthlyData}
                   dailyData={dailyData}
+                  monthlyPeriod={monthlyPeriod}
                 />
-                {periodType === "daily" && tab !== "climatechange" && (
-                  <DailyPeriodSelect
-                    currentPeriod={dailyPeriod}
-                    onUpdate={setDailyPeriod}
-                  />
+                {tab !== "climatechange" && (
+                  <>
+                    {periodType === "daily" ? (
+                      <DailyPeriodSelect
+                        currentPeriod={dailyPeriod}
+                        onUpdate={setDailyPeriod}
+                      />
+                    ) : (
+                      <MonthlyPeriodSelect
+                        currentPeriod={monthlyPeriod}
+                        onUpdate={setMonthlyPeriod}
+                      />
+                    )}
+                  </>
                 )}
                 <DataSource />
               </div>
             </>
           ) : (
-            <div>{i18n.t("Loading data")}...</div>
+            <div className={classes.message}>{i18n.t("Loading data")}...</div>
           )}
         </>
       ) : (
-        <>{i18n.t("No geometry")}</>
+        <div className={classes.message}>{i18n.t("No geometry found")}</div>
       )}
     </div>
   );

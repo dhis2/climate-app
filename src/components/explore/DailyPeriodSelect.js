@@ -2,7 +2,6 @@ import { useState } from "react";
 import i18n from "@dhis2/d2-i18n";
 import { Button } from "@dhis2/ui";
 import DatePicker from "../shared/DatePicker";
-import TimeZone from "../shared/TimeZone";
 import classes from "./styles/Period.module.css";
 
 const DailyPeriodSelect = ({ currentPeriod, onUpdate }) => {
@@ -21,7 +20,6 @@ const DailyPeriodSelect = ({ currentPeriod, onUpdate }) => {
         defaultVal={endDate}
         onBlur={(endDate) => setPeriod({ ...period, endDate })}
       />
-      <TimeZone period={period} onChange={setPeriod} />
       <Button onClick={() => onUpdate(period)}>Update</Button>
     </div>
   );
