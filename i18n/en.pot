@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-01-31T15:53:18.279Z\n"
-"PO-Revision-Date: 2024-01-31T15:53:18.279Z\n"
+"POT-Creation-Date: 2024-02-06T19:27:51.297Z\n"
+"PO-Revision-Date: 2024-02-06T19:27:51.297Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -20,8 +20,11 @@ msgstr "End date"
 msgid "Loading"
 msgstr "Loading"
 
-msgid "Select an organisation unit"
-msgstr "Select an organisation unit"
+msgid "Explore weather and climate data"
+msgstr "Explore weather and climate data"
+
+msgid "Select an organisation unit in the left panel"
+msgstr "Select an organisation unit in the left panel"
 
 msgid "January"
 msgstr "January"
@@ -59,11 +62,17 @@ msgstr "November"
 msgid "December"
 msgstr "December"
 
+msgid "Start month"
+msgstr "Start month"
+
+msgid "End month"
+msgstr "End month"
+
 msgid "Loading data"
 msgstr "Loading data"
 
-msgid "No geometry"
-msgstr "No geometry"
+msgid "No geometry found"
+msgstr "No geometry found"
 
 msgid "Monthly"
 msgstr "Monthly"
@@ -88,6 +97,9 @@ msgstr "Normal precipitation"
 
 msgid "Temperature anomaly"
 msgstr "Temperature anomaly"
+
+msgid "Reference period: 1991-2020"
+msgstr "Reference period: 1991-2020"
 
 msgid "Daily temperatures last year"
 msgstr "Daily temperatures last year"

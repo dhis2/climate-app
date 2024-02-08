@@ -16,7 +16,9 @@ const getChartConfig = (data, month) => {
       text: i18n.t("Temperature anomaly"),
     },
     subtitle: {
-      text: i18n.t("Reference period: 1991-2020"),
+      text: i18n.t("Reference period: 1991-2020", {
+        nsSeparator: ";",
+      }),
     },
     credits: {
       enabled: false,
