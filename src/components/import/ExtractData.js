@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import i18n from "@dhis2/d2-i18n";
 import { CircularLoader } from "@dhis2/ui";
 import useOrgUnits from "../../hooks/useOrgUnits";
@@ -7,14 +8,7 @@ import classes from "./styles/ExtractData.module.css";
 
 const oneDay = 1000 * 60 * 60 * 24;
 
-const ExtractData = ({
-  dataset,
-  period,
-  orgUnits,
-  orgUnitLevel,
-  dataElement,
-  onImportComplete,
-}) => {
+const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
   const { parent, level } = orgUnits;
   const { features } = useOrgUnits(parent.id, level);
   const data = useEarthEngineData(dataset, period, features);
@@ -59,13 +53,14 @@ const ExtractData = ({
     );
   }
 
-  return (
-    <ImportData
-      data={data}
-      dataElement={dataElement}
-      onImportComplete={onImportComplete}
-    />
-  );
+  return <ImportData data={data} dataElement={dataElement} />;
+};
+
+ExtractData.propTypes = {
+  dataset: PropTypes.object.isRequired,
+  period: PropTypes.object.isRequired,
+  orgUnits: PropTypes.object.isRequired,
+  dataElement: PropTypes.object.isRequired,
 };
 
 export default ExtractData;

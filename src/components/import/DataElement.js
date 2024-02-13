@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import i18n from "@dhis2/d2-i18n";
 import { useDataQuery } from "@dhis2/app-runtime";
 import { SingleSelectField, SingleSelectOption } from "@dhis2/ui";
@@ -35,6 +36,11 @@ const DataElement = ({ selected, onChange }) => {
       </SingleSelectField>
     </div>
   );
+};
+
+DataElement.propTypes = {
+  selected: PropTypes.object,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default DataElement;

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import i18n from "@dhis2/d2-i18n";
 import { useEffect } from "react";
 import { SingleSelectField, SingleSelectOption } from "@dhis2/ui";
@@ -27,6 +28,11 @@ const OrgUnitLevel = ({ level, onChange }) => {
       </SingleSelectField>
     </div>
   ) : null;
+};
+
+OrgUnitLevel.propTypes = {
+  level: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default OrgUnitLevel;

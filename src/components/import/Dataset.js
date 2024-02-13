@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import i18n from "@dhis2/d2-i18n";
 import { SingleSelectField, SingleSelectOption } from "@dhis2/ui";
 import datasets from "../../data/datasets";
@@ -19,5 +20,10 @@ const Dataset = ({ selected, onChange }) => (
     {selected && <p>{selected.description}</p>}
   </div>
 );
+
+Dataset.propTypes = {
+  selected: PropTypes.object,
+  onChange: PropTypes.func.isRequired,
+};
 
 export default Dataset;

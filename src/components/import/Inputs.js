@@ -50,7 +50,6 @@ const Inputs = () => {
             <ExtractData
               dataset={dataset}
               period={period}
-              // orgUnitLevel={orgUnitLevel}
               orgUnits={orgUnits}
               dataElement={dataElement}
             />
