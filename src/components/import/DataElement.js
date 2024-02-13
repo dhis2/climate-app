@@ -20,7 +20,6 @@ const DataElement = ({ selected, onChange }) => {
   return (
     <div>
       <h2>{i18n.t("Data element")}</h2>
-
       <SingleSelectField
         filterable
         noMatchText={i18n.t("No match found")}

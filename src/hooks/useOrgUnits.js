@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 const ORG_UNITS_QUERY = {
   geojson: {
     resource: "organisationUnits.geojson",
-    params: ({ level }) => ({
+    params: ({ parent, level }) => ({
+      parent,
       level,
     }),
   },
@@ -18,18 +19,18 @@ const parseOrgUnits = (data) =>
     geometry,
   }));
 
-const useOrgUnits = (level) => {
+const useOrgUnits = (parent, level) => {
   const [features, setFeatures] = useState();
   const [error, setError] = useState();
   const engine = useDataEngine();
 
   useEffect(() => {
     engine.query(ORG_UNITS_QUERY, {
-      variables: { level },
+      variables: { parent, level },
       onComplete: (data) => setFeatures(parseOrgUnits(data)),
       onError: setError,
     });
-  }, [engine]);
+  }, [engine, parent, level]);
 
   return {
     features,

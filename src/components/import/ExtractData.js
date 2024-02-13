@@ -10,11 +10,13 @@ const oneDay = 1000 * 60 * 60 * 24;
 const ExtractData = ({
   dataset,
   period,
+  orgUnits,
   orgUnitLevel,
   dataElement,
   onImportComplete,
 }) => {
-  const { features /* , error, loading */ } = useOrgUnits(orgUnitLevel);
+  const { parent, level } = orgUnits;
+  const { features } = useOrgUnits(parent.id, level);
   const data = useEarthEngineData(dataset, period, features);
 
   if (!features) {
@@ -31,7 +33,7 @@ const ExtractData = ({
       </div>
     );
   }
-  const orgUnits = features.length;
+  const orgUnitsCount = features.length;
   const startDate = new Date(period.startDate);
   const endDate = new Date(period.endDate);
 
@@ -39,17 +41,17 @@ const ExtractData = ({
     (endDate.getTime() + oneDay - startDate.getTime()) / oneDay
   );
 
-  const count = days * orgUnits;
+  const count = days * orgUnitsCount;
 
   if (!data) {
     return (
       <div className={classes.container}>
         <CircularLoader small className={classes.loader} />
         {i18n.t(
-          "Extracting data for {{days}} days and {{orgUnits}} org units ({{count}} values)",
+          "Extracting data for {{days}} days and {{orgUnitsCount}} org units ({{count}} values)",
           {
             days,
-            orgUnits,
+            orgUnitsCount,
             count,
           }
         )}

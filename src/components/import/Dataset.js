@@ -1,10 +1,9 @@
 import i18n from "@dhis2/d2-i18n";
 import { SingleSelectField, SingleSelectOption } from "@dhis2/ui";
 import datasets from "../../data/datasets";
-import classes from "./styles/Dataset.module.css";
 
 const Dataset = ({ selected, onChange }) => (
-  <div className={classes.container}>
+  <div>
     <h2>{i18n.t("Data")}</h2>
     <SingleSelectField
       label={i18n.t("Select data to import")}
