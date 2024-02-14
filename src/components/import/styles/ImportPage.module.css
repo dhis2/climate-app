@@ -1,0 +1,35 @@
+.page {
+  margin-right: 24px;
+}
+
+.page h1 {
+  color: var(--colors-grey900);
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.page h2 {
+  font-size: 16px;
+  margin: 20px 0 8px;
+}
+
+.page p {
+  font-size: 14px;
+  margin: 6px 0 12px;
+}
+
+.card {
+  max-width: 600px;
+}
+
+.container {
+  padding: 0 20px 20px 20px;
+  margin-bottom: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+}
+
+.import {
+  margin: 20px 0;
+  min-height: 80px;
+}

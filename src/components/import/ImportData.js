@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import i18n from "@dhis2/d2-i18n";
 import { useDataMutation } from "@dhis2/app-runtime";
 import { useState, useEffect } from "react";
@@ -8,7 +9,7 @@ const dataImportMutation = {
   data: (dataValues) => dataValues,
 };
 
-const ImportData = ({ data, dataElement, onImportComplete }) => {
+const ImportData = ({ data, dataElement }) => {
   const [isImported, setIsImported] = useState(false);
   const [mutate] = useDataMutation(dataImportMutation);
 
@@ -37,6 +38,11 @@ const ImportData = ({ data, dataElement, onImportComplete }) => {
         : i18n.t("Importing data to DHIS2")}
     </div>
   );
+};
+
+ImportData.propTypes = {
+  data: PropTypes.object.isRequired,
+  dataElement: PropTypes.object.isRequired,
 };
 
 export default ImportData;

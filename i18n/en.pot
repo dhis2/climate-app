@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-02-06T19:27:51.297Z\n"
-"PO-Revision-Date: 2024-02-06T19:27:51.297Z\n"
+"POT-Creation-Date: 2024-02-13T15:55:21.238Z\n"
+"PO-Revision-Date: 2024-02-13T15:55:21.238Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -146,11 +146,17 @@ msgstr "Importing data to DHIS2"
 msgid "Import weather and climate data"
 msgstr "Import weather and climate data"
 
-msgid "Organisation unit levels"
-msgstr "Organisation unit levels"
+msgid "Organisation unit level"
+msgstr "Organisation unit level"
 
 msgid "Organisation unit level to import data to"
 msgstr "Organisation unit level to import data to"
+
+msgid "Parent organisation unit"
+msgstr "Parent organisation unit"
+
+msgid "Org unit parent needs to be above or equal to the org unit level"
+msgstr "Org unit parent needs to be above or equal to the org unit level"
 
 msgid "Period"
 msgstr "Period"

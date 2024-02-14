@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import i18n from "@dhis2/d2-i18n";
 import DatePicker from "../shared/DatePicker";
 import TimeZone from "../shared/TimeZone";
@@ -27,6 +28,11 @@ const Period = ({ period, onChange }) => {
       </div>
     </div>
   );
+};
+
+Period.propTypes = {
+  period: PropTypes.object,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default Period;
