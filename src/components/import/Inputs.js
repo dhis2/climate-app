@@ -6,7 +6,7 @@ import OrgUnits from "./OrgUnits";
 import DataElement from "./DataElement";
 import ExtractData from "./ExtractData";
 import { defaultPeriod } from "../../utils/time";
-import classes from "./styles/Inputs.module.css";
+import styles from "./styles/Inputs.module.css";
 
 const Inputs = () => {
   const [dataset, setDataset] = useState();
@@ -32,13 +32,13 @@ const Inputs = () => {
   }, [dataset, period, orgUnits, dataElement]);
 
   return (
-    <Card className={classes.card}>
-      <div className={classes.container}>
+    <Card className={styles.card}>
+      <div className={styles.container}>
         <Dataset selected={dataset} onChange={setDataset} />
         <Period period={period} onChange={setPeriod} />
         <OrgUnits selected={orgUnits} onChange={setOrgUnits} />
         <DataElement selected={dataElement} onChange={setDataElement} />
-        <div className={classes.import}>
+        <div className={styles.import}>
           <Button
             primary
             disabled={!isValid || startExtract}

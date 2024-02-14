@@ -5,11 +5,38 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-02-13T15:55:21.238Z\n"
-"PO-Revision-Date: 2024-02-13T15:55:21.238Z\n"
+"POT-Creation-Date: 2024-02-14T17:21:04.603Z\n"
+"PO-Revision-Date: 2024-02-14T17:21:04.603Z\n"
 
 msgid "About this app"
 msgstr "About this app"
+
+msgid "You need access to Google Earth Engine to use this app."
+msgstr "You need access to Google Earth Engine to use this app."
+
+msgid "Read how to get access here"
+msgstr "Read how to get access here"
+
+msgid ""
+"This app allows you to explore and import temperature and precipitation\n"
+"        data into data elements of your DHIS2 instance. Values are "
+"automatically\n"
+"        calculated for the organisation units you select. We import daily "
+"data that can \n"
+"        be aggregated to other periods in DHIS2."
+msgstr ""
+"This app allows you to explore and import temperature and precipitation\n"
+"        data into data elements of your DHIS2 instance. Values are "
+"automatically\n"
+"        calculated for the organisation units you select. We import daily "
+"data that can \n"
+"        be aggregated to other periods in DHIS2."
+
+msgid "How the data is calculated"
+msgstr "How the data is calculated"
+
+msgid "How to use the app"
+msgstr "How to use the app"
 
 msgid "Start date"
 msgstr "Start date"
@@ -190,6 +217,3 @@ msgstr "Precipitation (ERA5-Land)"
 
 msgid "Total precipitation in mm"
 msgstr "Total precipitation in mm"
-
-msgid "Precipitation (CHIRPS)"
-msgstr "Precipitation (CHIRPS)"

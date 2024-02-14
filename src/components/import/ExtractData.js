@@ -4,7 +4,7 @@ import { CircularLoader } from "@dhis2/ui";
 import useOrgUnits from "../../hooks/useOrgUnits";
 import useEarthEngineData from "../../hooks/useEarthEngineData";
 import ImportData from "./ImportData";
-import classes from "./styles/ExtractData.module.css";
+import styles from "./styles/ExtractData.module.css";
 
 const oneDay = 1000 * 60 * 60 * 24;
 
@@ -15,14 +15,14 @@ const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
 
   if (!features) {
     return (
-      <div className={classes.container}>
-        <CircularLoader small className={classes.loader} />{" "}
+      <div className={styles.container}>
+        <CircularLoader small className={styles.loader} />{" "}
         {i18n.t("Loading org units")}
       </div>
     );
   } else if (!features.length) {
     return (
-      <div className={classes.container}>
+      <div className={styles.container}>
         {i18n.t("No org units with geometry found for this level")}
       </div>
     );
@@ -39,8 +39,8 @@ const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
 
   if (!data) {
     return (
-      <div className={classes.container}>
-        <CircularLoader small className={classes.loader} />
+      <div className={styles.container}>
+        <CircularLoader small className={styles.loader} />
         {i18n.t(
           "Extracting data for {{days}} days and {{orgUnitsCount}} org units ({{count}} values)",
           {

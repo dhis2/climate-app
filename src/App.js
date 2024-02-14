@@ -1,9 +1,10 @@
 import { createHashRouter, RouterProvider } from "react-router-dom";
 import Root from "./components/Root";
 import AboutPage from "./components/AboutPage";
-import ErrorPage from "./components/ErrorPage";
-import ImportPage from "./components/import/ImportPage";
 import ExplorePage from "./components/explore/ExplorePage";
+import ImportPage from "./components/import/ImportPage";
+import MetadataPage from "./components/MetadataPage";
+import ErrorPage from "./components/ErrorPage";
 
 const router = createHashRouter([
   {
@@ -16,12 +17,16 @@ const router = createHashRouter([
         element: <AboutPage />,
       },
       {
+        path: "explore/:orgUnitId?",
+        element: <ExplorePage />,
+      },
+      {
         path: "import",
         element: <ImportPage />,
       },
       {
-        path: "explore/:orgUnitId?",
-        element: <ExplorePage />,
+        path: "metadata",
+        element: <MetadataPage />,
       },
     ],
   },

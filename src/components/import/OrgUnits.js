@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import i18n from "@dhis2/d2-i18n";
 import OrgUnitTree from "./OrgUnitTree";
 import OrgUnitLevel from "./OrgUnitLevel";
-import classes from "./styles/OrgUnits.module.css";
+import styles from "./styles/OrgUnits.module.css";
 
 const OrgUnits = ({ selected = {}, onChange }) => {
   const { parent, level } = selected;
@@ -17,7 +17,7 @@ const OrgUnits = ({ selected = {}, onChange }) => {
         onChange={(parent) => onChange({ parent, level })}
       />
       {parentIsBelowLevel === true && (
-        <div className={classes.warning}>
+        <div className={styles.warning}>
           {i18n.t(
             "Org unit parent needs to be above or equal to the org unit level"
           )}

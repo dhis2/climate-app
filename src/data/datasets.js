@@ -60,15 +60,4 @@ export default [
     },
     valueParser: (v) => Math.round(v * 1000 * 1000) / 1000, // meter to mm with 3 decimals
   },
-  /*
-  {
-    id: "UCSB-CHG/CHIRPS/DAILY/precipitation",
-    datasetId: "UCSB-CHG/CHIRPS/DAILY",
-    name: i18n.t("Precipitation (CHIRPS)"),
-    description: i18n.t("Total precipitation in mm"),
-    band: "precipitation",
-    reducer: "mean",
-    valueParser: (v) => Math.round(v * 1000) / 1000, // 3 decimals
-  },
-  */
 ];

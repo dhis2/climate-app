@@ -1,7 +1,7 @@
-import classes from "./styles/DataSource.module.css";
+import styles from "./styles/DataSource.module.css";
 
 const DataSource = () => (
-  <div className={classes.dataSource}>
+  <div className={styles.dataSource}>
     Data source:{" "}
     <a
       href="https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-land"

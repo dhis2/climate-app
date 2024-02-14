@@ -3,14 +3,14 @@ import PropTypes from "prop-types";
 import i18n from "@dhis2/d2-i18n";
 import { Button } from "@dhis2/ui";
 import DatePicker from "../shared/DatePicker";
-import classes from "./styles/Period.module.css";
+import styles from "./styles/Period.module.css";
 
 const DailyPeriodSelect = ({ currentPeriod, onUpdate }) => {
   const [period, setPeriod] = useState(currentPeriod);
   const { startDate, endDate } = period;
 
   return (
-    <div className={classes.pickers}>
+    <div className={styles.pickers}>
       <DatePicker
         label={i18n.t("Start date")}
         defaultVal={startDate}

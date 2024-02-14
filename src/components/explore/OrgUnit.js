@@ -12,7 +12,7 @@ import ClimateChangeTab from "./ClimateChangeTab";
 import DataSource from "./DataSource";
 import useEarthEngineTimeSeries from "../../hooks/useEarthEngineTimeSeries";
 import { defaultPeriod } from "../../utils/time";
-import classes from "./styles/OrgUnit.module.css";
+import styles from "./styles/OrgUnit.module.css";
 
 const band = [
   "temperature_2m",
@@ -77,7 +77,7 @@ const OrgUnit = ({ orgUnit }) => {
   }, [monthlyPeriod, monthlyData]);
 
   return (
-    <div className={classes.orgUnit}>
+    <div className={styles.orgUnit}>
       <h1>
         {orgUnit.properties.name}{" "}
         {orgUnit.geometry?.type === "Point" ? (
@@ -95,7 +95,7 @@ const OrgUnit = ({ orgUnit }) => {
                 <PeriodTypeSelect type={periodType} onChange={setPeriodType} />
               )}
               <Tabs selected={tab} onChange={setTab} />
-              <div className={classes.tabContent}>
+              <div className={styles.tabContent}>
                 <Tab
                   periodType={periodType}
                   monthlyData={monthlyData}
@@ -123,11 +123,11 @@ const OrgUnit = ({ orgUnit }) => {
               </div>
             </>
           ) : (
-            <div className={classes.message}>{i18n.t("Loading data")}...</div>
+            <div className={styles.message}>{i18n.t("Loading data")}...</div>
           )}
         </>
       ) : (
-        <div className={classes.message}>{i18n.t("No geometry found")}</div>
+        <div className={styles.message}>{i18n.t("No geometry found")}</div>
       )}
     </div>
   );

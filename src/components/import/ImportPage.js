@@ -7,7 +7,7 @@ import OrgUnits from "./OrgUnits";
 import DataElement from "./DataElement";
 import ExtractData from "./ExtractData";
 import { defaultPeriod } from "../../utils/time";
-import classes from "./styles/ImportPage.module.css";
+import styles from "./styles/ImportPage.module.css";
 
 const Page = () => {
   const [dataset, setDataset] = useState();
@@ -33,15 +33,15 @@ const Page = () => {
   }, [dataset, period, orgUnits, dataElement]);
 
   return (
-    <div className={classes.page}>
+    <div className={styles.page}>
       <h1>{i18n.t("Import weather and climate data")}</h1>
-      <Card className={classes.card}>
-        <div className={classes.container}>
+      <Card className={styles.card}>
+        <div className={styles.container}>
           <Dataset selected={dataset} onChange={setDataset} />
           <Period period={period} onChange={setPeriod} />
           <OrgUnits selected={orgUnits} onChange={setOrgUnits} />
           <DataElement selected={dataElement} onChange={setDataElement} />
-          <div className={classes.import}>
+          <div className={styles.import}>
             <Button
               primary
               disabled={!isValid || startExtract}
