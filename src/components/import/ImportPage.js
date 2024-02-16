@@ -37,10 +37,20 @@ const Page = () => {
       <h1>{i18n.t("Import weather and climate data")}</h1>
       <Card className={styles.card}>
         <div className={styles.container}>
-          <Dataset selected={dataset} onChange={setDataset} />
+          <Dataset
+            selected={dataset}
+            onChange={(dataset) => {
+              setDataset(dataset);
+              setDataElement(null);
+            }}
+          />
           <Period period={period} onChange={setPeriod} />
           <OrgUnits selected={orgUnits} onChange={setOrgUnits} />
-          <DataElement selected={dataElement} onChange={setDataElement} />
+          <DataElement
+            selected={dataElement}
+            dataset={dataset}
+            onChange={setDataElement}
+          />
           <div className={styles.import}>
             <Button
               primary

@@ -17,6 +17,7 @@ export default [
       periodReducer: "mean",
     },
     valueParser: temperatureParser,
+    dataElementCode: "ERA5_LAND_TEMPERATURE",
   },
   {
     id: "ECMWF/ERA5_LAND/DAILY_AGGR/temperature_2m_max",
@@ -31,6 +32,7 @@ export default [
       periodReducer: "max",
     },
     valueParser: temperatureParser,
+    dataElementCode: "ERA5_LAND_TEMPERATURE_MAX",
   },
   {
     id: "ECMWF/ERA5_LAND/DAILY_AGGR/temperature_2m_min",
@@ -45,6 +47,7 @@ export default [
       periodReducer: "min",
     },
     valueParser: temperatureParser,
+    dataElementCode: "ERA5_LAND_TEMPERATURE_MIN",
   },
   {
     id: "ECMWF/ERA5_LAND/DAILY_AGGR/total_precipitation_sum",
@@ -59,5 +62,6 @@ export default [
       periodReducer: "sum",
     },
     valueParser: (v) => Math.round(v * 1000 * 1000) / 1000, // meter to mm with 3 decimals
+    dataElementCode: "ERA5_LAND_PRECIPITATION",
   },
 ];
