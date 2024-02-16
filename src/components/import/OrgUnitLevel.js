@@ -5,7 +5,7 @@ import { SingleSelectField, SingleSelectOption } from "@dhis2/ui";
 import useOrgUnitLevels from "../../hooks/useOrgUnitLevels";
 
 const OrgUnitLevel = ({ level, onChange }) => {
-  const { levels } = useOrgUnitLevels();
+  const { levels, loading, error } = useOrgUnitLevels();
 
   // Set second level as default
   useEffect(() => {
@@ -20,6 +20,9 @@ const OrgUnitLevel = ({ level, onChange }) => {
       <SingleSelectField
         label={i18n.t("Organisation unit level to import data to")}
         selected={level}
+        loading={loading}
+        error={!!error}
+        validationText={error?.message}
         onChange={({ selected }) => onChange(selected)}
       >
         {levels.map((l, i) => (

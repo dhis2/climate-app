@@ -39,12 +39,12 @@ const DataElement = ({ selected, dataset, onChange }) => {
         noMatchText={i18n.t("No match found")}
         label={i18n.t("Data element to import data to")}
         selected={selected?.id}
-        onChange={({ selected }) =>
-          onChange(dataElements?.find((d) => d.id === selected))
-        }
         loading={loading}
         error={!!error}
         validationText={error?.message}
+        onChange={({ selected }) =>
+          onChange(dataElements?.find((d) => d.id === selected))
+        }
       >
         {dataElements?.map((d) => (
           <SingleSelectOption key={d.id} value={d.id} label={d.displayName} />

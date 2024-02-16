@@ -5,7 +5,7 @@ import { OrganisationUnitTree } from "@dhis2/ui";
 import useOrgUnitRoots from "../../hooks/useOrgUnitRoots";
 
 const OrgUnitTree = ({ orgUnit, onChange }) => {
-  const { roots } = useOrgUnitRoots();
+  const { roots, error } = useOrgUnitRoots();
 
   // Set for root node as default
   useEffect(() => {
@@ -26,6 +26,8 @@ const OrgUnitTree = ({ orgUnit, onChange }) => {
         initiallyExpanded={roots.map((r) => r.path)}
       />
     </div>
+  ) : error ? (
+    <div>{error.message}</div>
   ) : null;
 };
 
