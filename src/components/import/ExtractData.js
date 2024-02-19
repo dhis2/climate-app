@@ -10,7 +10,7 @@ const oneDay = 1000 * 60 * 60 * 24;
 
 const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
   const { parent, level } = orgUnits;
-  const { features } = useOrgUnits(parent.id, level);
+  const { features } = useOrgUnits(parent?.id, level);
   const data = useEarthEngineData(dataset, period, features);
 
   if (!features) {

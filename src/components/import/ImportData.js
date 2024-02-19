@@ -2,6 +2,8 @@ import PropTypes from "prop-types";
 import i18n from "@dhis2/d2-i18n";
 import { useDataMutation } from "@dhis2/app-runtime";
 import { useState, useEffect } from "react";
+import ImportResponse from "./ImportResponse";
+import styles from "./styles/ImportData.module.css";
 
 const dataImportMutation = {
   resource: "dataValueSets",
@@ -10,7 +12,7 @@ const dataImportMutation = {
 };
 
 const ImportData = ({ data, dataElement }) => {
-  const [isImported, setIsImported] = useState(false);
+  const [response, setResponse] = useState(false);
   const [mutate] = useDataMutation(dataImportMutation);
 
   useEffect(() => {
@@ -23,7 +25,7 @@ const ImportData = ({ data, dataElement }) => {
       })),
     }).then((response) => {
       if (response.httpStatus === "OK") {
-        setIsImported(true);
+        setResponse(response.response);
       } else {
         // TODO: Handle error
       }
@@ -31,17 +33,18 @@ const ImportData = ({ data, dataElement }) => {
   }, [mutate, data, dataElement]);
 
   return (
-    <div>
-      <br />
-      {isImported
-        ? i18n.t("Data is imported")
-        : i18n.t("Importing data to DHIS2")}
+    <div className={styles.container}>
+      {response ? (
+        <ImportResponse {...response} />
+      ) : (
+        i18n.t("Importing data to DHIS2")
+      )}
     </div>
   );
 };
 
 ImportData.propTypes = {
-  data: PropTypes.object.isRequired,
+  data: PropTypes.array.isRequired,
   dataElement: PropTypes.object.isRequired,
 };
 
