@@ -3,6 +3,7 @@ import i18n from "@dhis2/d2-i18n";
 import { useDataMutation } from "@dhis2/app-runtime";
 import { useState, useEffect } from "react";
 import ImportResponse from "./ImportResponse";
+import ImportError from "./ImportError";
 import styles from "./styles/ImportData.module.css";
 
 const dataImportMutation = {
@@ -13,7 +14,7 @@ const dataImportMutation = {
 
 const ImportData = ({ data, dataElement }) => {
   const [response, setResponse] = useState(false);
-  const [mutate] = useDataMutation(dataImportMutation);
+  const [mutate, { error }] = useDataMutation(dataImportMutation);
 
   useEffect(() => {
     mutate({
@@ -26,8 +27,6 @@ const ImportData = ({ data, dataElement }) => {
     }).then((response) => {
       if (response.httpStatus === "OK") {
         setResponse(response.response);
-      } else {
-        // TODO: Handle error
       }
     });
   }, [mutate, data, dataElement]);
@@ -36,6 +35,8 @@ const ImportData = ({ data, dataElement }) => {
     <div className={styles.container}>
       {response ? (
         <ImportResponse {...response} />
+      ) : error?.details ? (
+        <ImportError {...error.details} />
       ) : (
         i18n.t("Importing data to DHIS2")
       )}
