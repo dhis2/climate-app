@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-02-14T17:21:04.603Z\n"
-"PO-Revision-Date: 2024-02-14T17:21:04.603Z\n"
+"POT-Creation-Date: 2024-02-20T10:16:46.107Z\n"
+"PO-Revision-Date: 2024-02-20T10:16:46.107Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -164,14 +164,20 @@ msgstr "Loading org units"
 msgid "No org units with geometry found for this level"
 msgstr "No org units with geometry found for this level"
 
-msgid "Data is imported"
-msgstr "Data is imported"
-
 msgid "Importing data to DHIS2"
 msgstr "Importing data to DHIS2"
 
+msgid "Import failed"
+msgstr "Import failed"
+
+msgid "One or more conflicts encountered"
+msgstr "One or more conflicts encountered"
+
 msgid "Import weather and climate data"
 msgstr "Import weather and climate data"
+
+msgid "Data is imported"
+msgstr "Data is imported"
 
 msgid "Organisation unit level"
 msgstr "Organisation unit level"

@@ -59,14 +59,15 @@ const Page = () => {
             >
               Start import
             </Button>
-            {startExtract && (
-              <ExtractData
-                dataset={dataset}
-                period={period}
-                orgUnits={orgUnits}
-                dataElement={dataElement}
-              />
-            )}
+            {startExtract &&
+              isValid(
+                <ExtractData
+                  dataset={dataset}
+                  period={period}
+                  orgUnits={orgUnits}
+                  dataElement={dataElement}
+                />
+              )}
           </div>
         </div>
       </Card>

@@ -1,6 +1,7 @@
 .container {
+  font-weight: 14px;
+  color: red;
   line-height: 20px;
-  margin-bottom: 16px;
 }
 
 .title {

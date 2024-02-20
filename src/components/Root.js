@@ -15,13 +15,13 @@ const Root = () => {
           <Menu>
             <MenuItem label="Home" href={"/#/"} active={pathname === "/"} />
             <MenuItem
-              label="Explore data (ERA5-Land)"
+              label="Explore data"
               href={"/#/explore"}
               active={pathname.startsWith("/explore")}
             />
             {pathname.startsWith("/explore") && <OrgUnitTree />}
             <MenuItem
-              label="Import data (ERA5-Land)"
+              label="Import data"
               href={"/#/import"}
               active={pathname.startsWith("/import")}
             />

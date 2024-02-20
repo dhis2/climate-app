@@ -63,7 +63,7 @@ const AboutPage = () => {
       <p>
         You can either explore the data directly in this app, or through the
         DHIS2 analytics apps after importing. This will also allow you to
-        combine climate and health data in the same visualizations and
+        combine climate and health data in the same visualisations and
         dashboards.
       </p>
       <h2>{i18n.t("How the data is calculated")}</h2>
