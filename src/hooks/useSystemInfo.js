@@ -19,10 +19,10 @@ const SYSTEM_QUERY = {
 };
 
 const useSystemInfo = () => {
-  const { loading, error, data } = useDataQuery(SYSTEM_QUERY);
+  const { loading, error, data: system } = useDataQuery(SYSTEM_QUERY);
 
   return {
-    system: data,
+    system,
     error,
     loading,
   };
