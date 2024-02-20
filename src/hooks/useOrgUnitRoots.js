@@ -1,8 +1,7 @@
-import { useDataEngine, useDataQuery } from "@dhis2/app-runtime";
-import { useState, useEffect } from "react";
+import { useDataQuery } from "@dhis2/app-runtime";
 
 // Fetches the root org units associated with the current user with fallback to data capture org units
-const ORG_UNITS_QUERY = {
+const ORG_UNIT_ROOTS_QUERY = {
   roots: {
     resource: "organisationUnits",
     params: () => ({
@@ -13,26 +12,12 @@ const ORG_UNITS_QUERY = {
 };
 
 const useOrgUnitRoots = () => {
-  const { loading, error, data } = useDataQuery(ORG_UNITS_QUERY);
-
-  // const [data, setData] = useState();
-  // const [error, setError] = useState();
-  // const engine = useDataEngine();
-
-  /*
-  useEffect(() => {
-    console.log("useOrgUnitRoots");
-    engine.query(ORG_UNITS_QUERY, {
-      onComplete: setData,
-      onError: setError,
-    });
-  }, [engine]);
-  */
+  const { loading, error, data } = useDataQuery(ORG_UNIT_ROOTS_QUERY);
 
   return {
     roots: data?.roots?.organisationUnits,
     error,
-    loading: !data && !error,
+    loading,
   };
 };
 

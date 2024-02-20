@@ -1,5 +1,4 @@
-import { useDataEngine } from "@dhis2/app-runtime";
-import { useState, useEffect } from "react";
+import { useDataQuery } from "@dhis2/app-runtime";
 
 const ORG_UNIT_LEVELS_QUERY = {
   levels: {
@@ -13,21 +12,12 @@ const ORG_UNIT_LEVELS_QUERY = {
 };
 
 const useOrgUnitLevels = () => {
-  const [data, setData] = useState();
-  const [error, setError] = useState();
-  const engine = useDataEngine();
-
-  useEffect(() => {
-    engine.query(ORG_UNIT_LEVELS_QUERY, {
-      onComplete: setData,
-      onError: setError,
-    });
-  }, [engine]);
+  const { loading, error, data } = useDataQuery(ORG_UNIT_LEVELS_QUERY);
 
   return {
     levels: data?.levels?.organisationUnitLevels,
     error,
-    loading: !data && !error,
+    loading,
   };
 };
 
