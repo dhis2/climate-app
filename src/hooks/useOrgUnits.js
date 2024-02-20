@@ -1,5 +1,5 @@
-import { useDataEngine } from "@dhis2/app-runtime";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useDataQuery } from "@dhis2/app-runtime";
 
 const ORG_UNITS_QUERY = {
   geojson: {
@@ -21,21 +21,16 @@ const parseOrgUnits = (data) =>
 
 const useOrgUnits = (parent, level) => {
   const [features, setFeatures] = useState();
-  const [error, setError] = useState();
-  const engine = useDataEngine();
 
-  useEffect(() => {
-    engine.query(ORG_UNITS_QUERY, {
-      variables: { parent, level },
-      onComplete: (data) => setFeatures(parseOrgUnits(data)),
-      onError: setError,
-    });
-  }, [engine, parent, level]);
+  const { loading, error } = useDataQuery(ORG_UNITS_QUERY, {
+    variables: { parent, level },
+    onComplete: (data) => setFeatures(parseOrgUnits(data)),
+  });
 
   return {
     features,
     error,
-    loading: !features && !error,
+    loading,
   };
 };
 

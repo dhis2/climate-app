@@ -1,5 +1,5 @@
-import { useDataEngine } from "@dhis2/app-runtime";
 import { useState, useEffect } from "react";
+import { useDataQuery } from "@dhis2/app-runtime";
 
 // TODO: Check if user has necessary authorities
 const SYSTEM_QUERY = {
@@ -19,21 +19,12 @@ const SYSTEM_QUERY = {
 };
 
 const useSystemInfo = () => {
-  const [system, setSystem] = useState();
-  const [error, setError] = useState();
-  const engine = useDataEngine();
-
-  useEffect(() => {
-    engine.query(SYSTEM_QUERY, {
-      onComplete: setSystem,
-      onError: setError,
-    });
-  }, [engine]);
+  const { loading, error, data } = useDataQuery(SYSTEM_QUERY);
 
   return {
-    system,
+    system: data,
     error,
-    loading: !system && !error,
+    loading,
   };
 };
 
