@@ -1,4 +1,4 @@
-import { useDataEngine } from "@dhis2/app-runtime";
+import { useDataQuery } from "@dhis2/app-runtime";
 import { useState, useEffect } from "react";
 
 const ORG_UNIT_QUERY = {
@@ -10,26 +10,27 @@ const ORG_UNIT_QUERY = {
 
 const useOrgUnit = (id) => {
   const [orgUnit, setOrgUnit] = useState();
-  const engine = useDataEngine();
+
+  const { refetch } = useDataQuery(ORG_UNIT_QUERY, {
+    lazy: true,
+    variables: { id },
+    onComplete: ({ ou }) =>
+      setOrgUnit({
+        type: "Feature",
+        id: ou.id,
+        geometry: ou.geometry,
+        properties: {
+          name: ou.displayName,
+        },
+      }),
+  });
 
   useEffect(() => {
     if (id) {
       setOrgUnit();
-
-      engine.query(ORG_UNIT_QUERY, {
-        variables: { id },
-        onComplete: ({ ou }) =>
-          setOrgUnit({
-            type: "Feature",
-            id: ou.id,
-            geometry: ou.geometry,
-            properties: {
-              name: ou.displayName,
-            },
-          }),
-      });
+      refetch({ id });
     }
-  }, [engine, id]);
+  }, [refetch, id]);
 
   return orgUnit;
 };

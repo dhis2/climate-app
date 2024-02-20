@@ -7,9 +7,15 @@ const ImportResponse = ({ importCount }) => {
   return (
     <div className={styles.container}>
       <div className={styles.title}>{i18n.t("Data is imported")}</div>
-      <div>{i18n.t("Imported: {{imported}}", { imported })}</div>
-      <div>{i18n.t("Updated: {{updated}}", { updated })}</div>
-      <div>{i18n.t("Ignored: {{ignored}}", { ignored })}</div>
+      <div>
+        {i18n.t("Imported")}: {imported}
+      </div>
+      <div>
+        {i18n.t("Updated")}: {updated}
+      </div>
+      <div>
+        {i18n.t("Ignored")}: {ignored}
+      </div>
     </div>
   );
 };
