@@ -53,7 +53,7 @@ const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
     );
   }
 
-  return data ? <ImportData data={data} dataElement={dataElement} /> : null;
+  return <ImportData data={data} dataElement={dataElement} />;
 };
 
 ExtractData.propTypes = {
