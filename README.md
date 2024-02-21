@@ -43,5 +43,3 @@ This command will prompt you to enter a server URL as well as the username and p
 You must run `yarn build` before running `yarn deploy`.<br />
 
 See the section about [deploying](https://platform.dhis2.nu/#/scripts/deploy) for more information.
-
-## Learn More
