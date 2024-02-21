@@ -22,9 +22,9 @@ const ExplorePage = () => {
         <>
           <h1>{i18n.t("Explore weather and climate data")}</h1>
           <p>{i18n.t("Select an organisation unit in the left panel")}</p>
+          <img src="images/explore.png" alt="Explore data screenshots" />
         </>
       )}
-      <img src="/images/explore.png" alt="Explore data screenshots" />
     </div>
   );
 };

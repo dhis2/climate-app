@@ -13,21 +13,21 @@ const Root = () => {
       <div className={styles.container}>
         <div className={styles.sidebar}>
           <Menu>
-            <MenuItem label="Home" href={"/#/"} active={pathname === "/"} />
+            <MenuItem label="Home" href={"#/"} active={pathname === "/"} />
             <MenuItem
               label="Explore data"
-              href={"/#/explore"}
+              href={"#/explore"}
               active={pathname.startsWith("/explore")}
             />
             {pathname.startsWith("/explore") && <OrgUnitTree />}
             <MenuItem
               label="Import data"
-              href={"/#/import"}
+              href={"#/import"}
               active={pathname.startsWith("/import")}
             />
             <MenuItem
               label="Setup guide"
-              href={"/#/setup"}
+              href={"#/setup"}
               active={pathname.startsWith("/setup")}
             />
           </Menu>
