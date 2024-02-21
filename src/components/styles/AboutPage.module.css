@@ -23,8 +23,9 @@
 
 .container iframe {
   display: block;
-  width: 560px;
-  height: 315px;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
   margin: 20px auto;
   border: 0;
 }
