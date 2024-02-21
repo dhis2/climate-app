@@ -26,9 +26,9 @@ const Root = () => {
               active={pathname.startsWith("/import")}
             />
             <MenuItem
-              label="Import metadata"
-              href={"/#/metadata"}
-              active={pathname.startsWith("/metadata")}
+              label="Setup guide"
+              href={"/#/setup"}
+              active={pathname.startsWith("/setup")}
             />
           </Menu>
         </div>

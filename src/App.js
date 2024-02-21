@@ -3,7 +3,7 @@ import Root from "./components/Root";
 import AboutPage from "./components/AboutPage";
 import ExplorePage from "./components/explore/ExplorePage";
 import ImportPage from "./components/import/ImportPage";
-import MetadataPage from "./components/MetadataPage";
+import SetupPage from "./components/SetupPage";
 import ErrorPage from "./components/ErrorPage";
 
 const router = createHashRouter([
@@ -25,8 +25,8 @@ const router = createHashRouter([
         element: <ImportPage />,
       },
       {
-        path: "metadata",
-        element: <MetadataPage />,
+        path: "setup",
+        element: <SetupPage />,
       },
     ],
   },
