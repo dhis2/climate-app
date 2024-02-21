@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-02-20T16:39:41.543Z\n"
-"PO-Revision-Date: 2024-02-20T16:39:41.543Z\n"
+"POT-Creation-Date: 2024-02-21T16:39:39.287Z\n"
+"PO-Revision-Date: 2024-02-21T16:39:39.287Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -14,29 +14,222 @@ msgstr "About this app"
 msgid "You need access to Google Earth Engine to use this app."
 msgstr "You need access to Google Earth Engine to use this app."
 
-msgid "Read how to get access here"
-msgstr "Read how to get access here"
+msgid "How to get access?"
+msgstr "How to get access?"
 
 msgid ""
-"This app allows you to explore and import temperature and precipitation\n"
-"        data into data elements of your DHIS2 instance. Values are "
-"automatically\n"
-"        calculated for the organisation units you select. We import daily "
-"data that can \n"
-"        be aggregated to other periods in DHIS2."
+"This app allows you to explore and import temperature and precipitation "
+"data in DHIS2. The data source is “ERA5-Land“, which is considered the most "
+"accurate and complete global climate dataset available. The video below "
+"shows you how this dataset was created by combining weather observations "
+"with a weather model (climate reanalysis)."
 msgstr ""
-"This app allows you to explore and import temperature and precipitation\n"
-"        data into data elements of your DHIS2 instance. Values are "
-"automatically\n"
-"        calculated for the organisation units you select. We import daily "
-"data that can \n"
-"        be aggregated to other periods in DHIS2."
+"This app allows you to explore and import temperature and precipitation "
+"data in DHIS2. The data source is “ERA5-Land“, which is considered the most "
+"accurate and complete global climate dataset available. The video below "
+"shows you how this dataset was created by combining weather observations "
+"with a weather model (climate reanalysis)."
+
+msgid "Read about ERA5-Land on Copernicus Climate Data Store"
+msgstr "Read about ERA5-Land on Copernicus Climate Data Store"
+
+msgid ""
+"If you just want to look at weather and climate data for your organisation "
+"units, click on “Explore data”. No configuration is needed."
+msgstr ""
+"If you just want to look at weather and climate data for your organisation "
+"units, click on “Explore data”. No configuration is needed."
+
+msgid "Explore data"
+msgstr "Explore data"
+
+msgid ""
+"We recommend to import data into DHIS2 data elements. This will allow you "
+"to combine weather and climate data with your health data across all DHIS2 "
+"analytics apps. You need to configure your DHIS2 instance before you can "
+"import data. See our guide by clicking on “Setup guide”."
+msgstr ""
+"We recommend to import data into DHIS2 data elements. This will allow you "
+"to combine weather and climate data with your health data across all DHIS2 "
+"analytics apps. You need to configure your DHIS2 instance before you can "
+"import data. See our guide by clicking on “Setup guide”."
+
+msgid "Setup guide"
+msgstr "Setup guide"
+
+msgid ""
+"After the configuration is done, you can import temperature and "
+"precipitation data under “Import data”."
+msgstr ""
+"After the configuration is done, you can import temperature and "
+"precipitation data under “Import data”."
+
+msgid "Import data"
+msgstr "Import data"
 
 msgid "How the data is calculated"
 msgstr "How the data is calculated"
 
-msgid "How to use the app"
-msgstr "How to use the app"
+msgid "How to configure this app"
+msgstr "How to configure this app"
+
+msgid ""
+"Before you can import weather and climate data, you need to make som "
+"configurations in the Maintenance app."
+msgstr ""
+"Before you can import weather and climate data, you need to make som "
+"configurations in the Maintenance app."
+
+msgid ""
+"This app imports daily weather and climate data that can be aggregated to "
+"other period types in DHIS2. We don't recommend to aggregate this data "
+"across organisation unit levels, especially when going from facility level "
+"to higher levels defined by a geographic boundary. To make sure the values "
+"remain at its own level, assign all org unit levels as Aggregation levels "
+"for each data element below."
+msgstr ""
+"This app imports daily weather and climate data that can be aggregated to "
+"other period types in DHIS2. We don't recommend to aggregate this data "
+"across organisation unit levels, especially when going from facility level "
+"to higher levels defined by a geographic boundary. To make sure the values "
+"remain at its own level, assign all org unit levels as Aggregation levels "
+"for each data element below."
+
+msgid ""
+"Create a data element for the climate and weather data you want to import. "
+"We recommend to include the data source (ERA5-Land) in the name to "
+"distinguish it from data imported from local weather stations. If you use "
+"the same code specified below, we will preselect the data element in the "
+"import interface."
+msgstr ""
+"Create a data element for the climate and weather data you want to import. "
+"We recommend to include the data source (ERA5-Land) in the name to "
+"distinguish it from data imported from local weather stations. If you use "
+"the same code specified below, we will preselect the data element in the "
+"import interface."
+
+msgid "Data element"
+msgstr "Data element"
+
+msgid "Air temperature"
+msgstr "Air temperature"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "Air temperature (ERA5-Land)"
+msgstr "Air temperature (ERA5-Land)"
+
+msgid "Short name"
+msgstr "Short name"
+
+msgid "Code"
+msgstr "Code"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Average air temperature in °C at 2m above the surface"
+msgstr "Average air temperature in °C at 2m above the surface"
+
+msgid "Domain type"
+msgstr "Domain type"
+
+msgid "Aggregate"
+msgstr "Aggregate"
+
+msgid "Value type"
+msgstr "Value type"
+
+msgid "Number"
+msgstr "Number"
+
+msgid "Aggregation type"
+msgstr "Aggregation type"
+
+msgid "Average"
+msgstr "Average"
+
+msgid "Aggregation levels"
+msgstr "Aggregation levels"
+
+msgid "Assign all org unit levels"
+msgstr "Assign all org unit levels"
+
+msgid "Min air temperature"
+msgstr "Min air temperature"
+
+msgid "Min air temperature (ERA5-Land)"
+msgstr "Min air temperature (ERA5-Land)"
+
+msgid "Min air temperatur"
+msgstr "Min air temperatur"
+
+msgid "Minimum air temperature in °C at 2m above the surface"
+msgstr "Minimum air temperature in °C at 2m above the surface"
+
+msgid "Min"
+msgstr "Min"
+
+msgid "Max air temperature"
+msgstr "Max air temperature"
+
+msgid "Max air temperature (ERA5-Land)"
+msgstr "Max air temperature (ERA5-Land)"
+
+msgid "Maximum air temperature in °C at 2m above the surface"
+msgstr "Maximum air temperature in °C at 2m above the surface"
+
+msgid "Max"
+msgstr "Max"
+
+msgid "Precipitation"
+msgstr "Precipitation"
+
+msgid "Precipitation (ERA5-Land)"
+msgstr "Precipitation (ERA5-Land)"
+
+msgid "Total precipitation in mm"
+msgstr "Total precipitation in mm"
+
+msgid "Sum"
+msgstr "Sum"
+
+msgid "Data set"
+msgstr "Data set"
+
+msgid "Climate/Weather"
+msgstr "Climate/Weather"
+
+msgid "Period type"
+msgstr "Period type"
+
+msgid "Daily"
+msgstr "Daily"
+
+msgid "Data elements"
+msgstr "Data elements"
+
+msgid "Assign the above data elements"
+msgstr "Assign the above data elements"
+
+msgid "Organisation units"
+msgstr "Organisation units"
+
+msgid "Select all organisation units in your system"
+msgstr "Select all organisation units in your system"
+
+msgid "Data element group"
+msgstr "Data element group"
+
+msgid ""
+"You should now be able to import temperature and precipitation data with "
+"this app. Please reach out to us on climate@dhis2.org if you have any "
+"questions or need help with the setup."
+msgstr ""
+"You should now be able to import temperature and precipitation data with "
+"this app. Please reach out to us on climate@dhis2.org if you have any "
+"questions or need help with the setup."
 
 msgid "Start date"
 msgstr "Start date"
@@ -104,9 +297,6 @@ msgstr "No geometry found"
 msgid "Monthly"
 msgstr "Monthly"
 
-msgid "Daily"
-msgstr "Daily"
-
 msgid "Daily precipitation last year"
 msgstr "Daily precipitation last year"
 
@@ -142,9 +332,6 @@ msgstr "Monthly temperatures last year"
 
 msgid "Normal temperature"
 msgstr "Normal temperature"
-
-msgid "Data element"
-msgstr "Data element"
 
 msgid "No match found"
 msgstr "No match found"
@@ -226,9 +413,3 @@ msgstr "Min temperature (ERA5-Land)"
 
 msgid "Min temperature in °C at 2m above the surface"
 msgstr "Min temperature in °C at 2m above the surface"
-
-msgid "Precipitation (ERA5-Land)"
-msgstr "Precipitation (ERA5-Land)"
-
-msgid "Total precipitation in mm"
-msgstr "Total precipitation in mm"
