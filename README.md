@@ -1,3 +1,9 @@
+## DHIS2 Climate Data app 
+
+This app allows you to explore and import temperature and precipitation data in DHIS2. The data source is "ERA5-Land", which is considered the most accurate and complete global climate dataset available. 
+
+-----
+
 This project was bootstrapped with [DHIS2 Application Platform](https://github.com/dhis2/app-platform).
 
 ## Available Scripts
@@ -38,8 +44,3 @@ See the section about [deploying](https://platform.dhis2.nu/#/scripts/deploy) fo
 
 ## Learn More
 
-You can learn more about the platform in the [DHIS2 Application Platform Documentation](https://platform.dhis2.nu/).
-
-You can learn more about the runtime in the [DHIS2 Application Runtime Documentation](https://runtime.dhis2.nu/).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
