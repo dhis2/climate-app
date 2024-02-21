@@ -1,5 +1,6 @@
 .container {
   margin-right: 24px;
+  margin-bottom: 100px;
   max-width: 800px;
 }
 
@@ -22,8 +23,9 @@
 
 .container iframe {
   display: block;
-  width: 560px;
-  height: 315px;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
   margin: 20px auto;
   border: 0;
 }

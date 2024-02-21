@@ -17,32 +17,18 @@ const AboutPage = () => {
   return (
     <div className={styles.container}>
       <h1>{i18n.t("About this app")}</h1>
-      {hasToken === false && (
+      {hasToken !== false && (
         <p>
           {i18n.t("You need access to Google Earth Engine to use this app.")}{" "}
           <a href="https://docs.dhis2.org/en/topics/tutorials/google-earth-engine-sign-up.html">
-            {i18n.t("Read how to get access here")}
+            {i18n.t("How to get access?")}
           </a>
-          .
         </p>
       )}
       <p>
-        {i18n.t(`This app allows you to explore and import temperature and precipitation
-        data into data elements of your DHIS2 instance. Values are automatically
-        calculated for the organisation units you select. We import daily data that can 
-        be aggregated to other periods in DHIS2.`)}
-      </p>
-      <p>
-        The data source is{" "}
-        <a
-          href="https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-land"
-          target="_blank"
-        >
-          ERA5-Land from the Copernicus Climate Data Store
-        </a>
-        , which is considered the most accurate and complete global climate
-        dataset available. The video below explains how this dataset is created
-        and maintained.
+        {i18n.t(
+          "This app allows you to explore and import temperature and precipitation data in DHIS2. The data source is “ERA5-Land“, which is considered the most accurate and complete global climate dataset available. The video below shows you how this dataset was created by combining weather observations with a weather model (climate reanalysis)."
+        )}
       </p>
       <iframe
         src="https://www.youtube-nocookie.com/embed/FAGobvUGl24?si=nBJeVx1_BPM4X5vF&rel=0"
@@ -51,20 +37,41 @@ const AboutPage = () => {
         allowFullScreen
       ></iframe>
       <p>
-        There might be more detailed temperature and precipitation data
-        available for your country, but it might not be aligned with your
-        organisation units or health periods.
+        <a
+          href="https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-land"
+          target="_blank"
+        >
+          {i18n.t("Read about ERA5-Land on Copernicus Climate Data Store")}
+        </a>
       </p>
       <p>
-        We encourage you to use the best climate and weather data available data
-        for your country or region. This app can help you to get started and
-        look for connections between climate and health data.
+        {i18n.t(
+          "If you just want to look at weather and climate data for your organisation units, click on “Explore data”. No configuration is needed."
+        )}
       </p>
       <p>
-        You can either explore the data directly in this app, or through the
-        DHIS2 analytics apps after importing. This will also allow you to
-        combine climate and health data in the same visualisations and
-        dashboards.
+        <a href="/#/explore">{i18n.t("Explore data")}</a>
+      </p>
+      <p>
+        {i18n.t(
+          "We recommend to import data into DHIS2 data elements. This will allow you to combine weather and climate data with your health data across all DHIS2 analytics apps. You need to configure your DHIS2 instance before you can import data. See our guide by clicking on “Setup guide”."
+        )}
+      </p>
+      <p>
+        <a href="/#/setup">{i18n.t("Setup guide")}</a>
+      </p>
+      <p>
+        {i18n.t(
+          "After the configuration is done, you can import temperature and precipitation data under “Import data”."
+        )}
+      </p>
+      <p>
+        <a href="/#/import">{i18n.t("Import data")}</a>
+      </p>
+      <p>
+        After the data is imported, you should generate the analytics tables in
+        the Data Administration app. This will allow you to see the data in the
+        DHIS2 analytics apps.
       </p>
       <h2>{i18n.t("How the data is calculated")}</h2>
       <p>
@@ -73,7 +80,6 @@ const AboutPage = () => {
         facility we use the value where the facility is located. If you select a
         district we automatically aggregate the values within that district.
       </p>
-      <h2>{i18n.t("How to use the app")}</h2>
     </div>
   );
 };
