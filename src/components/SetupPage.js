@@ -7,17 +7,17 @@ const SetupPage = () => {
       <h1>{i18n.t("How to configure this app")}</h1>
       <p>
         {i18n.t(
-          "Before you can import weather and climate data, you need to make som configurations in the Maintenance app."
+          "Before you can import weather and climate data, you need to make some configurations in the Maintenance app."
         )}
       </p>
       <p>
         {i18n.t(
-          "This app imports daily weather and climate data that can be aggregated to other period types in DHIS2. We don't recommend to aggregate this data across organisation unit levels, especially when going from facility level to higher levels defined by a geographic boundary. To make sure the values remain at its own level, assign all org unit levels as Aggregation levels for each data element below."
+          "This app imports daily weather and climate data that can be aggregated to other period types in DHIS2. We don't recommend aggregating across organisation unit levels, especially when going from facility level to higher levels defined by a geographic boundary. To make sure the values remain at its own level, assign all org unit levels as Aggregation levels for each data element below."
         )}
       </p>
       <p>
         {i18n.t(
-          "Create a data element for the climate and weather data you want to import. We recommend to include the data source (ERA5-Land) in the name to distinguish it from data imported from local weather stations. If you use the same code specified below, we will preselect the data element in the import interface."
+          "Create DHIS2 data elements for the climate and weather data you want to import. We recommend including the data source (ERA5-Land) in the name to distinguish it from data imported from local weather stations. If you use the same code specified below, we will preselect the data element in the import interface."
         )}
       </p>
       <table>

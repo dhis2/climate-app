@@ -54,7 +54,7 @@ const AboutPage = () => {
       </p>
       <p>
         {i18n.t(
-          "We recommend to import data into DHIS2 data elements. This will allow you to combine weather and climate data with your health data across all DHIS2 analytics apps. You need to configure your DHIS2 instance before you can import data. See our guide by clicking on “Setup guide”."
+          "We recommend importing data into DHIS2 data elements. This will allow you to combine weather and climate data with your health data across all DHIS2 analytics apps. You need to configure your DHIS2 instance before you can import data. See our guide by clicking on “Setup guide”."
         )}
       </p>
       <p>
