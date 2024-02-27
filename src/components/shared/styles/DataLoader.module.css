@@ -1,0 +1,12 @@
+.container {
+  padding: 20px 0;
+  line-height: 20px;
+  font-style: italic;
+  color: #555;
+}
+
+.container > div:first-child {
+  display: inline-block;
+  margin-right: 10px;
+  vertical-align: bottom;
+}

@@ -16,3 +16,9 @@
   font-size: 14px;
   font-style: italic;
 }
+
+.loader {
+  display: inline-block;
+  margin-right: 10px;
+  vertical-align: middle;
+}

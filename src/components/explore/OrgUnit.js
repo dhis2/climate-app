@@ -9,6 +9,7 @@ import Tabs from "./Tabs";
 import TemperatureTab from "./TemperatureTab";
 import PrecipitationTab from "./PrecipitationTab";
 import ClimateChangeTab from "./ClimateChangeTab";
+import DataLoader from "../shared/DataLoader";
 import DataSource from "./DataSource";
 import useEarthEngineTimeSeries from "../../hooks/useEarthEngineTimeSeries";
 import { defaultPeriod } from "../../utils/time";
@@ -123,7 +124,7 @@ const OrgUnit = ({ orgUnit }) => {
               </div>
             </>
           ) : (
-            <div className={styles.message}>{i18n.t("Loading data")}...</div>
+            <DataLoader />
           )}
         </>
       ) : (

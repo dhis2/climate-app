@@ -1,5 +1,6 @@
-import i18n from "@dhis2/d2-i18n";
 import { useLocation } from "react-router-dom";
+import i18n from "@dhis2/d2-i18n";
+import DataLoader from "../shared/DataLoader";
 import OrgUnit from "./OrgUnit";
 import useOrgUnit from "../../hooks/useOrgUnit";
 import styles from "./styles/ExplorePage.module.css";
@@ -15,7 +16,7 @@ const ExplorePage = () => {
           {orgUnit ? (
             <OrgUnit {...state} orgUnit={orgUnit} />
           ) : (
-            <p>{i18n.t("Loading")}...</p>
+            <DataLoader label={i18n.t("Loading organisation unit")} />
           )}
         </>
       ) : (

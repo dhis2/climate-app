@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import i18n from "@dhis2/d2-i18n";
-import { CircularLoader } from "@dhis2/ui";
 import useOrgUnits from "../../hooks/useOrgUnits";
 import useEarthEngineData from "../../hooks/useEarthEngineData";
 import ImportData from "./ImportData";
+import DataLoader from "../shared/DataLoader";
 import styles from "./styles/ExtractData.module.css";
 
 const oneDay = 1000 * 60 * 60 * 24;
@@ -14,12 +14,7 @@ const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
   const data = useEarthEngineData(dataset, period, features);
 
   if (!features) {
-    return (
-      <div className={styles.container}>
-        <CircularLoader small className={styles.loader} />{" "}
-        {i18n.t("Loading org units")}
-      </div>
-    );
+    return <DataLoader label={i18n.t("Loading org units")} />;
   } else if (!features.length) {
     return (
       <div className={styles.container}>
@@ -39,9 +34,8 @@ const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
 
   if (!data) {
     return (
-      <div className={styles.container}>
-        <CircularLoader small className={styles.loader} />
-        {i18n.t(
+      <DataLoader
+        label={i18n.t(
           "Extracting data for {{days}} days and {{orgUnitsCount}} org units ({{count}} values)",
           {
             days,
@@ -49,7 +43,7 @@ const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
             count,
           }
         )}
-      </div>
+      />
     );
   }
 
