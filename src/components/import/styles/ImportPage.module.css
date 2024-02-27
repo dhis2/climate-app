@@ -19,10 +19,6 @@
   margin: 6px 0 12px;
 }
 
-.card {
-  max-width: 600px;
-}
-
 .container {
   padding: 0 20px 20px 20px;
   background-color: #fff;
@@ -32,4 +28,19 @@
 .import {
   margin: 20px 0;
   min-height: 80px;
+}
+
+.column {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  column-gap: 30px;
+}
+
+.card {
+  flex: 2 1 20em;
+}
+
+.instructions {
+  flex: 1 2 20em;
 }

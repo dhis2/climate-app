@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-02-22T13:58:46.912Z\n"
-"PO-Revision-Date: 2024-02-22T13:58:46.912Z\n"
+"POT-Creation-Date: 2024-02-27T12:15:04.846Z\n"
+"PO-Revision-Date: 2024-02-27T12:15:04.846Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -362,6 +362,9 @@ msgstr "One or more conflicts encountered"
 
 msgid "Import weather and climate data"
 msgstr "Import weather and climate data"
+
+msgid "Instructions"
+msgstr "Instructions"
 
 msgid "Data is imported"
 msgstr "Data is imported"
