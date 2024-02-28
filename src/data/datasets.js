@@ -13,6 +13,7 @@ export default [
     reducer: "mean",
     timeZone: {
       datasetId: "ECMWF/ERA5_LAND/HOURLY",
+      band: "temperature_2m",
       periodType: "hourly",
       periodReducer: "mean",
     },
@@ -28,6 +29,7 @@ export default [
     reducer: "max",
     timeZone: {
       datasetId: "ECMWF/ERA5_LAND/HOURLY",
+      band: "temperature_2m",
       periodType: "hourly",
       periodReducer: "max",
     },
@@ -43,6 +45,7 @@ export default [
     reducer: "min",
     timeZone: {
       datasetId: "ECMWF/ERA5_LAND/HOURLY",
+      band: "temperature_2m",
       periodType: "hourly",
       periodReducer: "min",
     },
@@ -58,6 +61,7 @@ export default [
     reducer: "mean",
     timeZone: {
       datasetId: "ECMWF/ERA5_LAND/HOURLY",
+      band: "total_precipitation",
       periodType: "hourly",
       periodReducer: "sum",
     },

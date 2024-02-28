@@ -48,10 +48,6 @@ const SetupPage = () => {
             <td>{i18n.t("Aggregate")}</td>
           </tr>
           <tr>
-            <th>{i18n.t("Value type")}</th>
-            <td>{i18n.t("Number")}</td>
-          </tr>
-          <tr>
             <th>{i18n.t("Aggregation type")}</th>
             <td>{i18n.t("Average")}</td>
           </tr>
@@ -89,10 +85,6 @@ const SetupPage = () => {
           <tr>
             <th>{i18n.t("Domain type")}</th>
             <td>{i18n.t("Aggregate")}</td>
-          </tr>
-          <tr>
-            <th>{i18n.t("Value type")}</th>
-            <td>{i18n.t("Number")}</td>
           </tr>
           <tr>
             <th>{i18n.t("Aggregation type")}</th>
@@ -134,10 +126,6 @@ const SetupPage = () => {
             <td>{i18n.t("Aggregate")}</td>
           </tr>
           <tr>
-            <th>{i18n.t("Value type")}</th>
-            <td>{i18n.t("Number")}</td>
-          </tr>
-          <tr>
             <th>{i18n.t("Aggregation type")}</th>
             <td>{i18n.t("Max")}</td>
           </tr>
@@ -173,10 +161,6 @@ const SetupPage = () => {
           <tr>
             <th>{i18n.t("Domain type")}</th>
             <td>{i18n.t("Aggregate")}</td>
-          </tr>
-          <tr>
-            <th>{i18n.t("Value type")}</th>
-            <td>{i18n.t("Number")}</td>
           </tr>
           <tr>
             <th>{i18n.t("Aggregation type")}</th>
