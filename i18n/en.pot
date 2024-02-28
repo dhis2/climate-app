@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-02-27T15:11:44.379Z\n"
-"PO-Revision-Date: 2024-02-27T15:11:44.379Z\n"
+"POT-Creation-Date: 2024-02-28T17:28:41.048Z\n"
+"PO-Revision-Date: 2024-02-28T17:28:41.048Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -35,13 +35,10 @@ msgstr "Read about ERA5-Land on Copernicus Climate Data Store"
 
 msgid ""
 "If you just want to look at weather and climate data for your organisation "
-"units, click on “Explore data”. No configuration is needed."
+"units, click on “Explore data” in the left menu. No configuration is needed."
 msgstr ""
 "If you just want to look at weather and climate data for your organisation "
-"units, click on “Explore data”. No configuration is needed."
-
-msgid "Explore data"
-msgstr "Explore data"
+"units, click on “Explore data” in the left menu. No configuration is needed."
 
 msgid ""
 "We recommend importing data into DHIS2 data elements. This will allow you "
@@ -54,18 +51,12 @@ msgstr ""
 "analytics apps. You need to configure your DHIS2 instance before you can "
 "import data. See our guide by clicking on “Setup guide”."
 
-msgid "Setup guide"
-msgstr "Setup guide"
-
 msgid ""
 "After the configuration is done, you can import temperature and "
 "precipitation data under “Import data”."
 msgstr ""
 "After the configuration is done, you can import temperature and "
 "precipitation data under “Import data”."
-
-msgid "Import data"
-msgstr "Import data"
 
 msgid "How the data is calculated"
 msgstr "How the data is calculated"
@@ -137,12 +128,6 @@ msgstr "Domain type"
 
 msgid "Aggregate"
 msgstr "Aggregate"
-
-msgid "Value type"
-msgstr "Value type"
-
-msgid "Number"
-msgstr "Number"
 
 msgid "Aggregation type"
 msgstr "Aggregation type"
