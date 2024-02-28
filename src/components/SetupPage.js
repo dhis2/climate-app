@@ -121,7 +121,7 @@ const SetupPage = () => {
           </tr>
           <tr>
             <th>{i18n.t("Code")}</th>
-            <td>ERA5_LAND_TEMPERATURE_MAX"</td>
+            <td>ERA5_LAND_TEMPERATURE_MAX</td>
           </tr>
           <tr>
             <th>{i18n.t("Description")}</th>
@@ -212,6 +212,10 @@ const SetupPage = () => {
             <td>{i18n.t("Climate/Weather")}</td>
           </tr>
           <tr>
+            <th>{i18n.t("Short name")}</th>
+            <td>{i18n.t("Climate/Weather")}</td>
+          </tr>
+          <tr>
             <th>{i18n.t("Period type")}</th>
             <td>{i18n.t("Daily")}</td>
           </tr>
@@ -241,6 +245,10 @@ const SetupPage = () => {
         <tbody>
           <tr>
             <th>{i18n.t("Name")}</th>
+            <td>{i18n.t("Climate/Weather")}</td>
+          </tr>
+          <tr>
+            <th>{i18n.t("Short name")}</th>
             <td>{i18n.t("Climate/Weather")}</td>
           </tr>
           <tr>
