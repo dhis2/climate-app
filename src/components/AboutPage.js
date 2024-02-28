@@ -46,11 +46,8 @@ const AboutPage = () => {
       </p>
       <p>
         {i18n.t(
-          "If you just want to look at weather and climate data for your organisation units, click on “Explore data”. No configuration is needed."
+          "If you just want to look at weather and climate data for your organisation units, click on “Explore data” in the left menu. No configuration is needed."
         )}
-      </p>
-      <p>
-        <a href="/#/explore">{i18n.t("Explore data")}</a>
       </p>
       <p>
         {i18n.t(
@@ -58,15 +55,9 @@ const AboutPage = () => {
         )}
       </p>
       <p>
-        <a href="/#/setup">{i18n.t("Setup guide")}</a>
-      </p>
-      <p>
         {i18n.t(
           "After the configuration is done, you can import temperature and precipitation data under “Import data”."
         )}
-      </p>
-      <p>
-        <a href="/#/import">{i18n.t("Import data")}</a>
       </p>
       <p>
         After the data is imported, you should generate the analytics tables in
