@@ -17,7 +17,7 @@ const AboutPage = () => {
   return (
     <div className={styles.container}>
       <h1>{i18n.t("About this app")}</h1>
-      {hasToken !== false && (
+      {hasToken !== true && (
         <p>
           {i18n.t("You need access to Google Earth Engine to use this app.")}{" "}
           <a href="https://docs.dhis2.org/en/topics/tutorials/google-earth-engine-sign-up.html">
