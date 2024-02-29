@@ -5,7 +5,7 @@ import { animation } from "./chartSettings";
 
 // https://climate.copernicus.eu/copernicus-september-2023-unprecedented-temperature-anomalies
 // https://developers.google.com/earth-engine/datasets/catalog/ECMWF_ERA5_LAND_MONTHLY_AGGR
-const getChartConfig = (data, month) => {
+const getChartConfig = (name, data, month) => {
   const monthData = data.filter((d) => d.id.substring(5, 7) === month);
   const normal = getMonthNormal(data, month);
   const years = monthData.map((d) => d.id.substring(0, 4));
@@ -15,7 +15,10 @@ const getChartConfig = (data, month) => {
 
   return {
     title: {
-      text: i18n.t("Temperature anomaly"),
+      text: i18n.t("{{name}}: Temperature anomaly", {
+        name,
+        nsSeparator: ";",
+      }),
     },
     subtitle: {
       text: i18n.t("Reference period: 1991-2020", {

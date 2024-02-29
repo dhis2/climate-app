@@ -2,7 +2,7 @@ import i18n from "@dhis2/d2-i18n";
 import { colors } from "@dhis2/ui"; // https://github.com/dhis2/ui/blob/master/constants/src/colors.js
 import { animation } from "./chartSettings";
 
-const getChart = (data) => {
+const getChart = (name, data) => {
   const series = data.map((d) => ({
     x: new Date(d.id).getTime(),
     y: Math.round(d["total_precipitation_sum"] * 1000 * 10) / 10,
@@ -11,7 +11,10 @@ const getChart = (data) => {
   // https://www.highcharts.com/demo/highcharts/arearange-line
   return {
     title: {
-      text: i18n.t("Daily precipitation last year"),
+      text: i18n.t("{{name}}: Daily precipitation", {
+        name,
+        nsSeparator: ";",
+      }),
     },
     credits: {
       enabled: false,

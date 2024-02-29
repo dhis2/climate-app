@@ -22,7 +22,7 @@ const getSelectedMonths = (data, { startMonth, endMonth }) => {
   return data.filter((d) => d.id >= startMonth && d.id <= endMonth);
 };
 
-const getChartConfig = (data, monthlyPeriod) => {
+const getChartConfig = (name, data, monthlyPeriod) => {
   const months = getSelectedMonths(data, monthlyPeriod);
 
   const series = months.map((d) => ({
@@ -44,7 +44,10 @@ const getChartConfig = (data, monthlyPeriod) => {
   // https://www.highcharts.com/demo/highcharts/arearange-line
   return {
     title: {
-      text: i18n.t("Monthly temperatures last year"),
+      text: i18n.t("{{name}}: Monthly temperatures", {
+        name,
+        nsSeparator: ";",
+      }),
     },
     subtitle: {
       text: "Normals from reference period: 1991-2020",

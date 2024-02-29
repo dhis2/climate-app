@@ -98,6 +98,7 @@ const OrgUnit = ({ orgUnit }) => {
               <Tabs selected={tab} onChange={setTab} />
               <div className={styles.tabContent}>
                 <Tab
+                  name={orgUnit.properties.name}
                   periodType={periodType}
                   monthlyData={monthlyData}
                   dailyData={dailyData}

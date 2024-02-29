@@ -4,6 +4,7 @@ import getMonthlyConfig from "./charts/precipitationMonthly";
 import getDailyConfig from "./charts/precipitationDaily";
 
 const PrecipitationTab = ({
+  name,
   periodType,
   monthlyData,
   dailyData,
@@ -11,14 +12,15 @@ const PrecipitationTab = ({
 }) => (
   <>
     {periodType === "monthly" ? (
-      <Chart config={getMonthlyConfig(monthlyData, monthlyPeriod)} />
+      <Chart config={getMonthlyConfig(name, monthlyData, monthlyPeriod)} />
     ) : (
-      <Chart config={getDailyConfig(dailyData)} />
+      <Chart config={getDailyConfig(name, dailyData)} />
     )}
   </>
 );
 
 PrecipitationTab.propTypes = {
+  name: PropTypes.string.isRequired,
   periodType: PropTypes.string.isRequired,
   monthlyData: PropTypes.array.isRequired,
   dailyData: PropTypes.array.isRequired,

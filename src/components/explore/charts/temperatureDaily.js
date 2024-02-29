@@ -2,7 +2,7 @@ import i18n from "@dhis2/d2-i18n";
 import { colors } from "@dhis2/ui"; // https://github.com/dhis2/ui/blob/master/constants/src/colors.js
 import { animation } from "./chartSettings";
 
-const getChart = (data) => {
+const getChart = (name, data) => {
   const series = data.map((d) => ({
     x: new Date(d.id).getTime(),
     y: Math.round((d["temperature_2m"] - 273.15) * 10) / 10,
@@ -18,7 +18,10 @@ const getChart = (data) => {
 
   return {
     title: {
-      text: i18n.t("Daily temperatures last year"),
+      text: i18n.t("{{name}}: Daily temperatures", {
+        name,
+        nsSeparator: ";",
+      }),
     },
     credits: {
       enabled: false,

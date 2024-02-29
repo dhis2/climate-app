@@ -22,7 +22,7 @@ const getSelectedMonths = (data, { startMonth, endMonth }) => {
   return data.filter((d) => d.id >= startMonth && d.id <= endMonth);
 };
 
-const getChartConfig = (data, monthlyPeriod) => {
+const getChartConfig = (name, data, monthlyPeriod) => {
   const months = getSelectedMonths(data, monthlyPeriod);
 
   const series = months.map((d) => ({
@@ -37,7 +37,10 @@ const getChartConfig = (data, monthlyPeriod) => {
 
   return {
     title: {
-      text: i18n.t("Precipitation last year"),
+      text: i18n.t("{{name}}: Monthly precipitation", {
+        name,
+        nsSeparator: ";",
+      }),
     },
     subtitle: {
       text: i18n.t("Normals from reference period: 1991-2020"),
