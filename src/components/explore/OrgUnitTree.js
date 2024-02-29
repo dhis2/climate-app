@@ -1,18 +1,22 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { OrganisationUnitTree } from "@dhis2/ui";
 import useOrgUnitRoots from "../../hooks/useOrgUnitRoots";
 import styles from "./styles/OrgUnitTree.module.css";
 
 const OrgUnitTree = () => {
-  const [orgUnit, setOrgUnit] = useState();
-  const { roots /*, error, loading */ } = useOrgUnitRoots();
+  const { state } = useLocation();
+  const [orgUnit, setOrgUnit] = useState(state);
+  const { roots } = useOrgUnitRoots();
   const navigate = useNavigate();
+
+  const initiallyExpanded = orgUnit?.path
+    ? [orgUnit.path.slice(0, -12)]
+    : roots?.map((r) => r.path);
 
   useEffect(() => {
     if (orgUnit) {
-      const { id, displayName } = orgUnit;
-      navigate(`/explore/${id}`, { state: { id, name: displayName } });
+      navigate(`/explore/${orgUnit.id}`, { state: orgUnit });
     }
   }, [orgUnit, navigate]);
 
@@ -23,7 +27,7 @@ const OrgUnitTree = () => {
         selected={orgUnit?.selected}
         onChange={setOrgUnit}
         singleSelection={true}
-        initiallyExpanded={roots.map((r) => r.path)}
+        initiallyExpanded={initiallyExpanded}
       />
     </div>
   ) : null;
