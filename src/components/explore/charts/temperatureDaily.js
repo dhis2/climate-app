@@ -1,4 +1,5 @@
 import i18n from "@dhis2/d2-i18n";
+import { colors } from "@dhis2/ui"; // https://github.com/dhis2/ui/blob/master/constants/src/colors.js
 
 const getChart = (data) => {
   const series = data.map((d) => ({
@@ -12,9 +13,8 @@ const getChart = (data) => {
     Math.round((d["temperature_2m_max"] - 273.15) * 10) / 10,
   ]);
 
-  // const minValue = Math.min(...minMax.map((d) => d[1]));
-
   // https://www.highcharts.com/demo/highcharts/arearange-line
+
   return {
     title: {
       text: i18n.t("Daily temperatures last year"),
@@ -50,16 +50,16 @@ const getChart = (data) => {
         type: "line",
         data: series,
         name: i18n.t("Mean temperature"),
-        color: "var(--colors-red800)",
-        negativeColor: "var(--colors-blue800)",
+        color: colors.red800,
+        negativeColor: colors.blue800,
         zIndex: 2,
       },
       {
         type: "arearange",
         name: i18n.t("Temperature range"),
         data: minMax,
-        color: "var(--colors-red200)",
-        negativeColor: "var(--colors-blue200)",
+        color: colors.red200,
+        negativeColor: colors.blue200,
         marker: {
           enabled: false,
         },

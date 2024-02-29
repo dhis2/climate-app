@@ -1,4 +1,5 @@
 import i18n from "@dhis2/d2-i18n";
+import { colors } from "@dhis2/ui"; // https://github.com/dhis2/ui/blob/master/constants/src/colors.js
 import { getMonthNormal } from "./temperatureMonthly";
 
 // https://climate.copernicus.eu/copernicus-september-2023-unprecedented-temperature-anomalies
@@ -21,9 +22,6 @@ const getChartConfig = (data, month) => {
       }),
     },
     credits: {
-      enabled: false,
-    },
-    exporting: {
       enabled: false,
     },
     tooltip: {
@@ -58,8 +56,8 @@ const getChartConfig = (data, month) => {
       {
         data: series,
         name: i18n.t("Temperature anomaly"),
-        color: "var(--colors-red500)",
-        negativeColor: "var(--colors-blue500)",
+        color: colors.red500,
+        negativeColor: colors.blue500,
       },
     ],
     legend: { enabled: false },

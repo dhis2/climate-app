@@ -1,9 +1,11 @@
 import PropTypes from "prop-types";
 import Highcharts from "highcharts";
+import accessibility from "highcharts/modules/accessibility";
 import exporting from "highcharts/highcharts-more";
 import highchartsMore from "highcharts/modules/exporting";
 import React, { useRef, useEffect } from "react";
 
+accessibility(Highcharts);
 exporting(Highcharts);
 highchartsMore(Highcharts);
 

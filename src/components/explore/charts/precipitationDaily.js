@@ -1,4 +1,5 @@
 import i18n from "@dhis2/d2-i18n";
+import { colors } from "@dhis2/ui"; // https://github.com/dhis2/ui/blob/master/constants/src/colors.js
 
 const getChart = (data) => {
   const series = data.map((d) => ({
@@ -47,7 +48,7 @@ const getChart = (data) => {
       {
         data: series,
         name: i18n.t("Daily precipitation"),
-        color: "var(--colors-blue500)",
+        color: colors.blue500,
         zIndex: 1,
       },
     ],

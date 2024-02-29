@@ -1,4 +1,5 @@
 import i18n from "@dhis2/d2-i18n";
+import { colors } from "@dhis2/ui"; // https://github.com/dhis2/ui/blob/master/constants/src/colors.js
 
 export const getMonthNormal = (data, month) => {
   const monthData = data.filter((d) => d.id.substring(5, 7) === month);
@@ -33,8 +34,6 @@ const getChartConfig = (data, monthlyPeriod) => {
     Math.round((d["temperature_2m_min"] - 273.15) * 10) / 10,
     Math.round((d["temperature_2m_max"] - 273.15) * 10) / 10,
   ]);
-
-  // const minValue = Math.min(...minMax.map((d) => d[1]));
 
   const normals = months.map((d) => ({
     x: new Date(d.id).getTime(),
@@ -79,16 +78,16 @@ const getChartConfig = (data, monthlyPeriod) => {
         type: "line",
         data: series,
         name: i18n.t("Mean temperature"),
-        color: "var(--colors-red800)",
-        negativeColor: "var(--colors-blue800)",
+        color: colors.red800,
+        negativeColor: colors.blue800,
         zIndex: 2,
       },
       {
         type: "arearange",
         name: i18n.t("Temperature range"),
         data: minMax,
-        color: "var(--colors-red200)",
-        negativeColor: "var(--colors-blue200)",
+        color: colors.red200,
+        negativeColor: colors.blue200,
         marker: {
           enabled: false,
         },
@@ -99,8 +98,8 @@ const getChartConfig = (data, monthlyPeriod) => {
         data: normals,
         name: i18n.t("Normal temperature"),
         dashStyle: "dash",
-        color: "var(--colors-red500)",
-        negativeColor: "var(--colors-blue500)",
+        color: colors.red500,
+        negativeColor: colors.blue500,
         marker: {
           enabled: false,
         },

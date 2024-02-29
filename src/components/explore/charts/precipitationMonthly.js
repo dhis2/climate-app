@@ -1,4 +1,5 @@
 import i18n from "@dhis2/d2-i18n";
+import { colors } from "@dhis2/ui"; // https://github.com/dhis2/ui/blob/master/constants/src/colors.js
 
 const getMonthNormal = (data, month) => {
   const monthData = data.filter((d) => d.id.substring(5, 7) === month);
@@ -76,13 +77,13 @@ const getChartConfig = (data, monthlyPeriod) => {
       {
         data: series,
         name: i18n.t("Monthly precipitation"),
-        color: "var(--colors-blue500)",
+        color: colors.blue500,
         zIndex: 1,
       },
       {
         data: normals,
         name: i18n.t("Normal precipitation"),
-        color: "var(--colors-grey400)",
+        color: colors.grey400,
         pointPlacement: -0.2,
         zIndex: 0,
       },
