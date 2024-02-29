@@ -1,5 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
 import { colors } from "@dhis2/ui"; // https://github.com/dhis2/ui/blob/master/constants/src/colors.js
+import { animation } from "./chartSettings";
 
 const getMonthNormal = (data, month) => {
   const monthData = data.filter((d) => d.id.substring(5, 7) === month);
@@ -39,7 +40,7 @@ const getChartConfig = (data, monthlyPeriod) => {
       text: i18n.t("Precipitation last year"),
     },
     subtitle: {
-      text: "Normals from reference period: 1991-2020",
+      text: i18n.t("Normals from reference period: 1991-2020"),
     },
     credits: {
       enabled: false,
@@ -57,6 +58,7 @@ const getChartConfig = (data, monthlyPeriod) => {
         grouping: false,
         groupPadding: 0,
         borderWidth: 0,
+        animation,
       },
     },
     xAxis: {

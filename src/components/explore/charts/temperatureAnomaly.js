@@ -1,6 +1,7 @@
 import i18n from "@dhis2/d2-i18n";
 import { colors } from "@dhis2/ui"; // https://github.com/dhis2/ui/blob/master/constants/src/colors.js
 import { getMonthNormal } from "./temperatureMonthly";
+import { animation } from "./chartSettings";
 
 // https://climate.copernicus.eu/copernicus-september-2023-unprecedented-temperature-anomalies
 // https://developers.google.com/earth-engine/datasets/catalog/ECMWF_ERA5_LAND_MONTHLY_AGGR
@@ -37,6 +38,9 @@ const getChartConfig = (data, month) => {
         pointWidth: 13,
         pointPadding: 0,
         borderWidth: 1,
+      },
+      series: {
+        animation,
       },
     },
     xAxis: {

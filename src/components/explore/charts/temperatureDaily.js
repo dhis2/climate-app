@@ -1,5 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
 import { colors } from "@dhis2/ui"; // https://github.com/dhis2/ui/blob/master/constants/src/colors.js
+import { animation } from "./chartSettings";
 
 const getChart = (data) => {
   const series = data.map((d) => ({
@@ -44,6 +45,11 @@ const getChart = (data) => {
     chart: {
       height: 480,
       zoomType: "x",
+    },
+    plotOptions: {
+      series: {
+        animation,
+      },
     },
     series: [
       {

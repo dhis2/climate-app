@@ -1,5 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
 import { colors } from "@dhis2/ui"; // https://github.com/dhis2/ui/blob/master/constants/src/colors.js
+import { animation } from "./chartSettings";
 
 export const getMonthNormal = (data, month) => {
   const monthData = data.filter((d) => d.id.substring(5, 7) === month);
@@ -72,6 +73,11 @@ const getChartConfig = (data, monthlyPeriod) => {
     },
     chart: {
       height: 480,
+    },
+    plotOptions: {
+      series: {
+        animation,
+      },
     },
     series: [
       {
