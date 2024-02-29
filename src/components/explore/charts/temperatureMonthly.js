@@ -1,26 +1,12 @@
 import i18n from "@dhis2/d2-i18n";
 import { colors } from "@dhis2/ui"; // https://github.com/dhis2/ui/blob/master/constants/src/colors.js
-import { animation } from "./chartSettings";
-
-export const getMonthNormal = (data, month) => {
-  const monthData = data.filter((d) => d.id.substring(5, 7) === month);
-
-  const normal =
-    monthData
-      .filter((d) => {
-        const year = d.id.substring(0, 4);
-        return year >= 1991 && year <= 2020;
-      })
-      .reduce((v, d) => v + d["temperature_2m"], 0) /
-      30 -
-    273.15;
-
-  return Math.round(normal * 10) / 10;
-};
-
-const getSelectedMonths = (data, { startMonth, endMonth }) => {
-  return data.filter((d) => d.id >= startMonth && d.id <= endMonth);
-};
+import {
+  animation,
+  credits,
+  getSelectedMonths,
+  getTemperatureMonthNormal,
+  getMonthlyPeriod,
+} from "../../../utils/chart";
 
 const getChartConfig = (name, data, monthlyPeriod) => {
   const months = getSelectedMonths(data, monthlyPeriod);
@@ -38,23 +24,22 @@ const getChartConfig = (name, data, monthlyPeriod) => {
 
   const normals = months.map((d) => ({
     x: new Date(d.id).getTime(),
-    y: getMonthNormal(data, d.id.substring(5, 7)),
+    y: getTemperatureMonthNormal(data, d.id.substring(5, 7)),
   }));
 
   // https://www.highcharts.com/demo/highcharts/arearange-line
   return {
     title: {
-      text: i18n.t("{{name}}: Monthly temperatures", {
+      text: i18n.t("{{name}}: Monthly temperatures {{period}}", {
         name,
+        period: getMonthlyPeriod(monthlyPeriod),
         nsSeparator: ";",
       }),
     },
     subtitle: {
       text: "Normals from reference period: 1991-2020",
     },
-    credits: {
-      enabled: false,
-    },
+    credits,
     tooltip: {
       crosshairs: true,
       shared: true,
@@ -76,6 +61,7 @@ const getChartConfig = (name, data, monthlyPeriod) => {
     },
     chart: {
       height: 480,
+      marginBottom: 60,
     },
     plotOptions: {
       series: {

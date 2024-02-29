@@ -1,26 +1,12 @@
 import i18n from "@dhis2/d2-i18n";
 import { colors } from "@dhis2/ui"; // https://github.com/dhis2/ui/blob/master/constants/src/colors.js
-import { animation } from "./chartSettings";
-
-const getMonthNormal = (data, month) => {
-  const monthData = data.filter((d) => d.id.substring(5, 7) === month);
-
-  const normal =
-    (monthData
-      .filter((d) => {
-        const year = d.id.substring(0, 4);
-        return year >= 1991 && year <= 2020;
-      })
-      .reduce((v, d) => v + d["total_precipitation_sum"], 0) /
-      30) *
-    1000;
-
-  return Math.round(normal * 10) / 10;
-};
-
-const getSelectedMonths = (data, { startMonth, endMonth }) => {
-  return data.filter((d) => d.id >= startMonth && d.id <= endMonth);
-};
+import {
+  animation,
+  credits,
+  getSelectedMonths,
+  getPrecipitationMonthNormal,
+  getMonthlyPeriod,
+} from "../../../utils/chart";
 
 const getChartConfig = (name, data, monthlyPeriod) => {
   const months = getSelectedMonths(data, monthlyPeriod);
@@ -32,22 +18,21 @@ const getChartConfig = (name, data, monthlyPeriod) => {
 
   const normals = months.map((d) => ({
     x: new Date(d.id).getTime(),
-    y: getMonthNormal(data, d.id.substring(5, 7)),
+    y: getPrecipitationMonthNormal(data, d.id.substring(5, 7)),
   }));
 
   return {
     title: {
-      text: i18n.t("{{name}}: Monthly precipitation", {
+      text: i18n.t("{{name}}: Monthly precipitation {{period}}", {
         name,
+        period: getMonthlyPeriod(monthlyPeriod),
         nsSeparator: ";",
       }),
     },
     subtitle: {
       text: i18n.t("Normals from reference period: 1991-2020"),
     },
-    credits: {
-      enabled: false,
-    },
+    credits,
     tooltip: {
       shared: true,
       valueSuffix: " mm",
@@ -55,6 +40,7 @@ const getChartConfig = (name, data, monthlyPeriod) => {
     chart: {
       type: "column",
       height: 480,
+      marginBottom: 60,
     },
     plotOptions: {
       series: {

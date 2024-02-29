@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import i18n from "@dhis2/d2-i18n";
 import { SingleSelectField, SingleSelectOption } from "@dhis2/ui";
 
-const months = [
+export const months = [
   {
     id: "01",
     name: i18n.t("January"),

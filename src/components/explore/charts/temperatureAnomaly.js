@@ -1,13 +1,18 @@
 import i18n from "@dhis2/d2-i18n";
 import { colors } from "@dhis2/ui"; // https://github.com/dhis2/ui/blob/master/constants/src/colors.js
-import { getMonthNormal } from "./temperatureMonthly";
-import { animation } from "./chartSettings";
+import {
+  animation,
+  credits,
+  getTemperatureMonthNormal,
+} from "../../../utils/chart";
+import { months } from "../MonthSelect";
 
 // https://climate.copernicus.eu/copernicus-september-2023-unprecedented-temperature-anomalies
 // https://developers.google.com/earth-engine/datasets/catalog/ECMWF_ERA5_LAND_MONTHLY_AGGR
 const getChartConfig = (name, data, month) => {
   const monthData = data.filter((d) => d.id.substring(5, 7) === month);
-  const normal = getMonthNormal(data, month);
+  const monthName = months.find((m) => m.id === month).name;
+  const normal = getTemperatureMonthNormal(data, month);
   const years = monthData.map((d) => d.id.substring(0, 4));
   const series = monthData.map(
     (d) => Math.round((d["temperature_2m"] - 273.15 - normal) * 10) / 10
@@ -15,8 +20,10 @@ const getChartConfig = (name, data, month) => {
 
   return {
     title: {
-      text: i18n.t("{{name}}: Temperature anomaly", {
+      text: i18n.t("{{name}}: {{month}} temperature anomaly {{years}}", {
         name,
+        month: monthName,
+        years: `${years[0]}-${years[years.length - 1]}`,
         nsSeparator: ";",
       }),
     },
@@ -25,9 +32,7 @@ const getChartConfig = (name, data, month) => {
         nsSeparator: ";",
       }),
     },
-    credits: {
-      enabled: false,
-    },
+    credits,
     tooltip: {
       shared: true,
       valueSuffix: "°C",
@@ -35,6 +40,7 @@ const getChartConfig = (name, data, month) => {
     chart: {
       type: "column",
       height: 480,
+      marginBottom: 60,
     },
     plotOptions: {
       column: {

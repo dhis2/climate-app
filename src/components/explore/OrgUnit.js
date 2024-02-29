@@ -10,7 +10,6 @@ import TemperatureTab from "./TemperatureTab";
 import PrecipitationTab from "./PrecipitationTab";
 import ClimateChangeTab from "./ClimateChangeTab";
 import DataLoader from "../shared/DataLoader";
-import DataSource from "./DataSource";
 import useEarthEngineTimeSeries from "../../hooks/useEarthEngineTimeSeries";
 import { defaultPeriod } from "../../utils/time";
 import styles from "./styles/OrgUnit.module.css";
@@ -121,7 +120,6 @@ const OrgUnit = ({ orgUnit }) => {
                     )}
                   </>
                 )}
-                <DataSource />
               </div>
             </>
           ) : (

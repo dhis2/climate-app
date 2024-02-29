@@ -1,6 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
 import { colors } from "@dhis2/ui"; // https://github.com/dhis2/ui/blob/master/constants/src/colors.js
-import { animation } from "./chartSettings";
+import { animation, credits, getDailyPeriod } from "../../../utils/chart";
 
 const getChart = (name, data) => {
   const series = data.map((d) => ({
@@ -15,17 +15,15 @@ const getChart = (name, data) => {
   ]);
 
   // https://www.highcharts.com/demo/highcharts/arearange-line
-
   return {
     title: {
-      text: i18n.t("{{name}}: Daily temperatures", {
+      text: i18n.t("{{name}}: Daily temperatures {{period}}", {
         name,
+        period: getDailyPeriod(data),
         nsSeparator: ";",
       }),
     },
-    credits: {
-      enabled: false,
-    },
+    credits,
     tooltip: {
       crosshairs: true,
       shared: true,
