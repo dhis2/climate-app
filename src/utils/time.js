@@ -19,3 +19,5 @@ export const defaultPeriod = {
   startDate: formatDate(startDate),
   endDate: formatDate(endDate),
 };
+
+export const defaultReferencePeriod = "1991-2020";

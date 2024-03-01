@@ -5,13 +5,14 @@ import { IconLocation24, IconEmptyFrame24 } from "@dhis2/ui";
 import PeriodTypeSelect from "./PeriodTypeSelect";
 import DailyPeriodSelect from "./DailyPeriodSelect";
 import MonthlyPeriodSelect from "./MonthlyPeriodSelect";
+import ReferencePeriodSelect from "./ReferencePeriodSelect";
 import Tabs from "./Tabs";
 import TemperatureTab from "./TemperatureTab";
 import PrecipitationTab from "./PrecipitationTab";
 import ClimateChangeTab from "./ClimateChangeTab";
 import DataLoader from "../shared/DataLoader";
 import useEarthEngineTimeSeries from "../../hooks/useEarthEngineTimeSeries";
-import { defaultPeriod } from "../../utils/time";
+import { defaultPeriod, defaultReferencePeriod } from "../../utils/time";
 import styles from "./styles/OrgUnit.module.css";
 
 const band = [
@@ -36,7 +37,7 @@ const dailyDataset = {
 };
 
 const allMonthsPeriod = {
-  startDate: "1970-01",
+  startDate: "1960-01",
   endDate: new Date().toISOString().substring(0, 7), // Current month
 };
 
@@ -50,6 +51,9 @@ const OrgUnit = ({ orgUnit }) => {
   const [tab, setTab] = useState("temperature");
   const [dailyPeriod, setDailyPeriod] = useState(defaultPeriod);
   const [monthlyPeriod, setMonthlyPeriod] = useState();
+  const [referencePeriod, setReferencePeriod] = useState(
+    defaultReferencePeriod
+  );
   const [periodType, setPeriodType] = useState("monthly");
 
   const monthlyData = useEarthEngineTimeSeries(
@@ -102,6 +106,7 @@ const OrgUnit = ({ orgUnit }) => {
                   monthlyData={monthlyData}
                   dailyData={dailyData}
                   monthlyPeriod={monthlyPeriod}
+                  referencePeriod={referencePeriod}
                 />
                 {tab !== "climatechange" && (
                   <>
@@ -119,6 +124,12 @@ const OrgUnit = ({ orgUnit }) => {
                       )
                     )}
                   </>
+                )}
+                {(tab === "climatechange" || periodType === "monthly") && (
+                  <ReferencePeriodSelect
+                    selected={referencePeriod}
+                    onChange={setReferencePeriod}
+                  />
                 )}
               </div>
             </>

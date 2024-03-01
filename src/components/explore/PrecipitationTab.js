@@ -9,10 +9,18 @@ const PrecipitationTab = ({
   monthlyData,
   dailyData,
   monthlyPeriod,
+  referencePeriod,
 }) => (
   <>
     {periodType === "monthly" ? (
-      <Chart config={getMonthlyConfig(name, monthlyData, monthlyPeriod)} />
+      <Chart
+        config={getMonthlyConfig(
+          name,
+          monthlyData,
+          monthlyPeriod,
+          referencePeriod
+        )}
+      />
     ) : (
       <Chart config={getDailyConfig(name, dailyData)} />
     )}
@@ -25,6 +33,7 @@ PrecipitationTab.propTypes = {
   monthlyData: PropTypes.array.isRequired,
   dailyData: PropTypes.array.isRequired,
   monthlyPeriod: PropTypes.object.isRequired,
+  referencePeriod: PropTypes.string.isRequired,
 };
 
 export default PrecipitationTab;

@@ -9,36 +9,58 @@ export const credits = {
   text: i18n.t("ERA5-Land / Copernicus Climate Change Service"),
 };
 
-export const getTemperatureMonthNormal = (data, month) => {
-  const monthData = data.filter((d) => d.id.substring(5, 7) === month);
+// Date fromat YYYY-MM
+const getYearFromId = (id) => id.substring(0, 4);
+const getMonthFromId = (id) => id.substring(5, 7);
+
+const filterMonthData = (data, month) =>
+  data.filter((d) => getMonthFromId(d.id) === month);
+
+const referencePeriodFilter =
+  ([startYear, endYear]) =>
+  (d) => {
+    const year = getYearFromId(d.id);
+    return year >= startYear && year <= endYear;
+  };
+
+const referencePeriodYearCount = ([startYear, endYear]) =>
+  endYear - startYear + 1;
+
+const periodBandReducer = (band) => (v, d) => v + d[band];
+
+const roundOneDecimal = (v) => Math.round(v * 10) / 10;
+
+const kelvinToCelsius = (k) => k - 273.15;
+
+const metersToMillimeters = (m) => roundOneDecimal(m * 1000);
+
+const referencePeriodYearRange = (referencePeriod) =>
+  referencePeriod.split("-").map(Number);
+
+export const getTemperatureMonthNormal = (data, month, referencePeriod) => {
+  const monthData = filterMonthData(data, month);
+  const referenceYearRange = referencePeriodYearRange(referencePeriod);
+  const referenceYearCount = referencePeriodYearCount(referenceYearRange);
+  const periodFilter = referencePeriodFilter(referenceYearRange);
+  const periodReducer = periodBandReducer("temperature_2m");
 
   const normal =
-    monthData
-      .filter((d) => {
-        const year = d.id.substring(0, 4);
-        return year >= 1991 && year <= 2020;
-      })
-      .reduce((v, d) => v + d["temperature_2m"], 0) /
-      30 -
-    273.15;
+    monthData.filter(periodFilter).reduce(periodReducer, 0) /
+    referenceYearCount;
 
-  return Math.round(normal * 10) / 10;
+  return roundOneDecimal(kelvinToCelsius(normal));
 };
 
-export const getPrecipitationMonthNormal = (data, month) => {
-  const monthData = data.filter((d) => d.id.substring(5, 7) === month);
+export const getPrecipitationMonthNormal = (data, month, referencePeriod) => {
+  const monthData = filterMonthData(data, month);
+  const referenceYearRange = referencePeriodYearRange(referencePeriod);
+  const referenceYearCount = referencePeriodYearCount(referenceYearRange);
+  const periodFilter = referencePeriodFilter(referenceYearRange);
+  const periodReducer = periodBandReducer("total_precipitation_sum");
 
-  const normal =
-    (monthData
-      .filter((d) => {
-        const year = d.id.substring(0, 4);
-        return year >= 1991 && year <= 2020;
-      })
-      .reduce((v, d) => v + d["total_precipitation_sum"], 0) /
-      30) *
-    1000;
-
-  return Math.round(normal * 10) / 10;
+  return metersToMillimeters(
+    monthData.filter(periodFilter).reduce(periodReducer, 0) / referenceYearCount
+  );
 };
 
 export const getSelectedMonths = (data, { startMonth, endMonth }) => {

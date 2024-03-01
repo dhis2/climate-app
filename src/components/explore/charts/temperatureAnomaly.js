@@ -9,10 +9,12 @@ import { months } from "../MonthSelect";
 
 // https://climate.copernicus.eu/copernicus-september-2023-unprecedented-temperature-anomalies
 // https://developers.google.com/earth-engine/datasets/catalog/ECMWF_ERA5_LAND_MONTHLY_AGGR
-const getChartConfig = (name, data, month) => {
-  const monthData = data.filter((d) => d.id.substring(5, 7) === month);
+const getChartConfig = (name, data, month, referencePeriod) => {
+  const monthData = data.filter(
+    (d) => d.id.substring(5, 7) === month && d.id.substring(0, 4) >= "1970"
+  );
   const monthName = months.find((m) => m.id === month).name;
-  const normal = getTemperatureMonthNormal(data, month);
+  const normal = getTemperatureMonthNormal(data, month, referencePeriod);
   const years = monthData.map((d) => d.id.substring(0, 4));
   const series = monthData.map(
     (d) => Math.round((d["temperature_2m"] - 273.15 - normal) * 10) / 10
@@ -28,7 +30,8 @@ const getChartConfig = (name, data, month) => {
       }),
     },
     subtitle: {
-      text: i18n.t("Reference period: 1991-2020", {
+      text: i18n.t("Reference period: {{period}}", {
+        period: referencePeriod,
         nsSeparator: ";",
       }),
     },

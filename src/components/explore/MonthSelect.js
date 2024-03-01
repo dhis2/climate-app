@@ -55,6 +55,7 @@ export const months = [
 
 const MonthSelect = ({ selected, onChange }) => (
   <SingleSelectField
+    label={i18n.t("Month")}
     selected={selected}
     onChange={({ selected }) => onChange(selected)}
   >

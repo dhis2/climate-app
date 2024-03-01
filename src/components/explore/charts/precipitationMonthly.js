@@ -8,7 +8,7 @@ import {
   getMonthlyPeriod,
 } from "../../../utils/chart";
 
-const getChartConfig = (name, data, monthlyPeriod) => {
+const getChartConfig = (name, data, monthlyPeriod, referencePeriod) => {
   const months = getSelectedMonths(data, monthlyPeriod);
 
   const series = months.map((d) => ({
@@ -18,7 +18,7 @@ const getChartConfig = (name, data, monthlyPeriod) => {
 
   const normals = months.map((d) => ({
     x: new Date(d.id).getTime(),
-    y: getPrecipitationMonthNormal(data, d.id.substring(5, 7)),
+    y: getPrecipitationMonthNormal(data, d.id.substring(5, 7), referencePeriod),
   }));
 
   return {
@@ -30,7 +30,10 @@ const getChartConfig = (name, data, monthlyPeriod) => {
       }),
     },
     subtitle: {
-      text: i18n.t("Normals from reference period: 1991-2020"),
+      text: i18n.t("Normals from reference period: {{period}}", {
+        period: referencePeriod,
+        nsSeparator: ";",
+      }),
     },
     credits,
     tooltip: {

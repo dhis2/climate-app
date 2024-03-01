@@ -75,6 +75,11 @@ const Page = () => {
           <h2>{i18n.t("Instructions")}</h2>
           <p>
             {i18n.t(
+              "Before you can import weather and climate data, you need to create the associated data elements in DHIS2. See our setup guide in the left menu."
+            )}
+          </p>
+          <p>
+            {i18n.t(
               "Data can be imported in batches. We recommend that you start with a few organisation units to make sure everything works as expected."
             )}
           </p>
