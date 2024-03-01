@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-02-29T10:50:52.067Z\n"
-"PO-Revision-Date: 2024-02-29T10:50:52.067Z\n"
+"POT-Creation-Date: 2024-02-29T16:10:10.372Z\n"
+"PO-Revision-Date: 2024-02-29T16:10:10.372Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -279,14 +279,14 @@ msgstr "No geometry found"
 msgid "Monthly"
 msgstr "Monthly"
 
-msgid "Daily precipitation last year"
-msgstr "Daily precipitation last year"
+msgid "{{name}}: Daily precipitation {{period}}"
+msgstr "{{name}}: Daily precipitation {{period}}"
 
 msgid "Daily precipitation"
 msgstr "Daily precipitation"
 
-msgid "Precipitation last year"
-msgstr "Precipitation last year"
+msgid "{{name}}: Monthly precipitation {{period}}"
+msgstr "{{name}}: Monthly precipitation {{period}}"
 
 msgid "Monthly precipitation"
 msgstr "Monthly precipitation"
@@ -294,20 +294,26 @@ msgstr "Monthly precipitation"
 msgid "Normal precipitation"
 msgstr "Normal precipitation"
 
-msgid "Temperature anomaly"
-msgstr "Temperature anomaly"
+msgid "{{name}}: {{month}} temperature anomaly {{years}}"
+msgstr "{{name}}: {{month}} temperature anomaly {{years}}"
 
 msgid "Reference period: 1991-2020"
 msgstr "Reference period: 1991-2020"
 
-msgid "Daily temperatures last year"
-msgstr "Daily temperatures last year"
+msgid "Temperature anomaly"
+msgstr "Temperature anomaly"
+
+msgid "{{name}}: Daily temperatures {{period}}"
+msgstr "{{name}}: Daily temperatures {{period}}"
 
 msgid "Mean temperature"
 msgstr "Mean temperature"
 
 msgid "Temperature range"
 msgstr "Temperature range"
+
+msgid "{{name}}: Monthly temperatures {{period}}"
+msgstr "{{name}}: Monthly temperatures {{period}}"
 
 msgid "Normal temperature"
 msgstr "Normal temperature"
@@ -462,3 +468,6 @@ msgstr "Min temperature (ERA5-Land)"
 
 msgid "Min temperature in °C at 2m above the surface"
 msgstr "Min temperature in °C at 2m above the surface"
+
+msgid "ERA5-Land / Copernicus Climate Change Service"
+msgstr "ERA5-Land / Copernicus Climate Change Service"
