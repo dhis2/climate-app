@@ -27,7 +27,12 @@ const AboutPage = () => {
       )}
       <p>
         {i18n.t(
-          "This app allows you to explore and import temperature and precipitation data in DHIS2. The data source is “ERA5-Land“, which is considered the most accurate and complete global climate dataset available. The video below shows you how this dataset was created by combining weather observations with a weather model (climate reanalysis)."
+          "This app is part of the ongoing “DHIS2 for Climate“ project. It will get frequent updates, so please make sure you have the latest version from the DHIS2 App Hub. The app is developed by the University of Oslo, but it is not a DHIS2 core app. Useful parts of this app might be incorporated into the DHIS2 core in the future, based on your feedback."
+        )}
+      </p>
+      <p>
+        {i18n.t(
+          "The app allows you to explore and import temperature and precipitation data in DHIS2. The data source is “ERA5-Land“, which is considered the most accurate and complete global climate dataset available. The video below shows you how this dataset was created by combining weather observations with a weather model (climate reanalysis)."
         )}
       </p>
       <iframe
