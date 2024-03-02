@@ -21,12 +21,13 @@ const Page = () => {
     orgUnits?.level &&
     orgUnits.parent.path.split("/").length - 1 <= Number(orgUnits.level);
 
-  const isValid =
+  const isValid = !!(
     dataset &&
     period.startDate &&
     period.endDate &&
     isValidOrgUnits &&
-    dataElement;
+    dataElement
+  );
 
   useEffect(() => {
     setStartExtract(false);
