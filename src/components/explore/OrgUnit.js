@@ -126,6 +126,13 @@ const OrgUnit = ({ orgUnit }) => {
                     onChange={setReferencePeriod}
                   />
                 )}
+                {tab === "climatechange" && (
+                  <div className={styles.description}>
+                    {i18n.t(
+                      "Temperature anomaly is the difference of a temperature from a reference value, calculated as the average temperature over a period of 30 years. Blue columns shows temperatures below than the average, while red columns are above."
+                    )}
+                  </div>
+                )}
               </div>
             </>
           ) : (
