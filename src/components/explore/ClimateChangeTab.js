@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import MonthSelect from "./MonthSelect";
 import Chart from "./Chart";
 import getChartConfig from "./charts/temperatureAnomaly";
-import styles from "./styles/TabContent.module.css";
+import styles from "./styles/ClimateChangeTab.module.css";
 
 const ClimateChangeTab = ({ name, monthlyData, referencePeriod }) => {
   const [month, setMonth] = useState(

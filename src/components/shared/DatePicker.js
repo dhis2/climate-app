@@ -1,13 +1,13 @@
 import cx from "classnames";
 import PropTypes from "prop-types";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useLayoutEffect } from "react";
 import styles from "./styles/DatePicker.module.css";
 
 // Fallback on browser native until full DatePicker support in @dhis2/ui
 const DatePicker = ({ label, name, defaultVal, onBlur, className }) => {
   const inputEl = useRef(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (inputEl.current && defaultVal) {
       inputEl.current.defaultValue = defaultVal.slice(0, 10);
     }
