@@ -45,6 +45,7 @@ const getChart = (name, data) => {
     },
     chart: {
       height: 480,
+      marginBottom: 75,
       zoomType: "x",
     },
     plotOptions: {

@@ -43,7 +43,7 @@ const getChartConfig = (name, data, monthlyPeriod, referencePeriod) => {
     chart: {
       type: "column",
       height: 480,
-      marginBottom: 60,
+      marginBottom: 75,
     },
     plotOptions: {
       series: {

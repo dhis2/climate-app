@@ -25,7 +25,7 @@ const getChart = (name, data) => {
       type: "column",
       height: 480,
       zoomType: "x",
-      marginBottom: 60,
+      marginBottom: 75,
     },
     plotOptions: {
       series: {
