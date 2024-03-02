@@ -17,12 +17,12 @@ const Period = ({ period, onChange }) => {
         <DatePicker
           label={i18n.t("Start date")}
           defaultVal={startDate}
-          onBlur={(startDate) => onChange({ ...period, startDate })}
+          onChange={(startDate) => onChange({ ...period, startDate })}
         />
         <DatePicker
           label={i18n.t("End date")}
           defaultVal={endDate}
-          onBlur={(endDate) => onChange({ ...period, endDate })}
+          onChange={(endDate) => onChange({ ...period, endDate })}
         />
         <TimeZone period={period} onChange={onChange} />
       </div>

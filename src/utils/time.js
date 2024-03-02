@@ -21,3 +21,18 @@ export const defaultPeriod = {
 };
 
 export const defaultReferencePeriod = "1991-2020";
+
+export const getNumberOfMonths = (startMonth, endMonth) => {
+  const startYear = parseInt(startMonth.substring(0, 4));
+  const start = parseInt(startMonth.substring(5, 7));
+  const endYear = parseInt(endMonth.substring(0, 4));
+  const end = parseInt(endMonth.substring(5, 7));
+  return (endYear - startYear) * 12 + (end - start) + 1;
+};
+
+export const getNumberOfDays = (startDate, endDate) => {
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+  const diff = end - start;
+  return diff / (1000 * 60 * 60 * 24) + 1;
+};

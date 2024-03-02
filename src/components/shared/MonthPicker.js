@@ -4,7 +4,7 @@ import React, { useRef, useLayoutEffect } from "react";
 import styles from "./styles/DatePicker.module.css";
 
 // Fallback on browser native until full DatePicker support in @dhis2/ui
-const MonthPicker = ({ label, name, defaultVal, onBlur, className }) => {
+const MonthPicker = ({ label, name, defaultVal, onChange, className }) => {
   const inputEl = useRef(null);
 
   useLayoutEffect(() => {
@@ -24,7 +24,7 @@ const MonthPicker = ({ label, name, defaultVal, onBlur, className }) => {
               ref={inputEl}
               type="month"
               name={name}
-              onBlur={(e) => onBlur(e.target.value)}
+              onChange={(e) => onChange(e.target.value)}
             />
           </div>
         </div>
@@ -35,7 +35,7 @@ const MonthPicker = ({ label, name, defaultVal, onBlur, className }) => {
 
 MonthPicker.propTypes = {
   label: PropTypes.string.isRequired,
-  onBlur: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
   className: PropTypes.string,
   defaultVal: PropTypes.string,
   name: PropTypes.string,
