@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import i18n from "@dhis2/d2-i18n";
-import { IconLocation24, IconEmptyFrame24 } from "@dhis2/ui";
+import OrgUnitType from "./OrgUnitType";
 import PeriodTypeSelect from "./PeriodTypeSelect";
 import DailyPeriodSelect from "./DailyPeriodSelect";
 import MonthlyPeriodSelect from "./MonthlyPeriodSelect";
@@ -83,12 +83,7 @@ const OrgUnit = ({ orgUnit }) => {
   return (
     <div className={styles.orgUnit}>
       <h1>
-        {orgUnit.properties.name}{" "}
-        {orgUnit.geometry?.type === "Point" ? (
-          <IconLocation24 />
-        ) : (
-          <IconEmptyFrame24 />
-        )}
+        {orgUnit.properties.name} <OrgUnitType type={orgUnit.geometry?.type} />
       </h1>
 
       {orgUnit.geometry ? (

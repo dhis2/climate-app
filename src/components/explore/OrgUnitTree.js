@@ -10,9 +10,10 @@ const OrgUnitTree = () => {
   const { roots } = useOrgUnitRoots();
   const navigate = useNavigate();
 
-  const initiallyExpanded = orgUnit?.path
-    ? [orgUnit.path.slice(0, -12)]
-    : roots?.map((r) => r.path);
+  const initiallyExpanded =
+    orgUnit?.path && orgUnit.path.length > 12
+      ? [orgUnit.path.slice(0, -12)]
+      : roots?.map((r) => r.path);
 
   useEffect(() => {
     if (orgUnit) {
