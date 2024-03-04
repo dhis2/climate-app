@@ -1,6 +1,7 @@
 .container {
   padding: 20px 0;
   line-height: 20px;
+  font-size: 14px;
   font-style: italic;
   color: #555;
 }
