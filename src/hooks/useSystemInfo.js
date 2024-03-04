@@ -21,8 +21,14 @@ const SYSTEM_QUERY = {
 const useSystemInfo = () => {
   const { loading, error, data: system } = useDataQuery(SYSTEM_QUERY);
 
+  console.log("system", system);
+
   return {
-    system,
+    system: {
+      systemInfo: {
+        serverTimeZoneId: "Europe/Berlin",
+      },
+    },
     error,
     loading,
   };
