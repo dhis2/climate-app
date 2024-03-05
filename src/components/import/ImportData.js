@@ -27,6 +27,8 @@ const ImportData = ({ data, dataElement }) => {
     }).then((response) => {
       if (response.httpStatus === "OK") {
         setResponse(response.response);
+      } else if (response.status === "SUCCESS") {
+        setResponse(response);
       }
     });
   }, [mutate, data, dataElement]);
