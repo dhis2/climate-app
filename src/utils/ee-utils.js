@@ -1,4 +1,6 @@
-const SIZE_LIMIT = 5000;
+import i18n from "@dhis2/d2-i18n";
+
+const VALUE_LIMIT = 5000;
 
 // Returns the linear scale in meters of the units of this projection
 export const getScale = (image) => image.select(0).projection().nominalScale();
@@ -32,103 +34,115 @@ export const cleanData = (data) =>
 export const convertPeriod = (date) =>
   `${date.slice(0, 4)}-${date.slice(4, 6)}-${date.slice(6, 8)}`;
 
-export const getEarthEngineData = (ee, datasetParams, period, features) => {
-  const dataset = period.timeZone
-    ? { ...datasetParams, ...datasetParams.timeZone }
-    : datasetParams;
+export const getEarthEngineData = (ee, datasetParams, period, features) =>
+  new Promise(async (resolve, reject) => {
+    const dataset = period.timeZone
+      ? { ...datasetParams, ...datasetParams.timeZone }
+      : datasetParams;
 
-  const {
-    datasetId,
-    band,
-    reducer = "mean",
-    periodType,
-    periodReducer = reducer,
-    valueParser,
-  } = dataset;
+    const {
+      datasetId,
+      band,
+      reducer = "mean",
+      periodType,
+      periodReducer = reducer,
+      valueParser,
+    } = dataset;
 
-  const { startDate, endDate, timeZone = "UTC" } = period;
-  const endDatePlusOne = ee.Date(endDate).advance(1, "day");
-  const timeZoneStart = ee.Date(startDate).format(null, timeZone);
-  const timeZoneEnd = endDatePlusOne.format(null, timeZone);
+    const { startDate, endDate, timeZone = "UTC" } = period;
+    const endDatePlusOne = ee.Date(endDate).advance(1, "day");
+    const timeZoneStart = ee.Date(startDate).format(null, timeZone);
+    const timeZoneEnd = endDatePlusOne.format(null, timeZone);
 
-  const dataParser = (data) =>
-    data.map((f) => ({
-      ...f.properties,
-      period: convertPeriod(f.properties.period),
-      value: valueParser ? valueParser(f.properties.value) : f.properties.value,
-    }));
+    const dataParser = (data) =>
+      data.map((f) => ({
+        ...f.properties,
+        period: convertPeriod(f.properties.period),
+        value: valueParser
+          ? valueParser(f.properties.value)
+          : f.properties.value,
+      }));
 
-  const collection = ee
-    .ImageCollection(datasetId)
-    .select(band)
-    .filter(ee.Filter.date(timeZoneStart, timeZoneEnd));
+    const collection = ee
+      .ImageCollection(datasetId)
+      .select(band)
+      .filter(ee.Filter.date(timeZoneStart, timeZoneEnd));
 
-  const eeScale = getScale(collection.first());
+    const imageCount = await getInfo(collection.size());
 
-  const featureCollection = ee.FeatureCollection(features);
+    if (imageCount === 0) {
+      return reject(new Error(i18n.t("No data found for the selected period")));
+    }
 
-  const eeReducer = ee.Reducer[reducer]();
+    const eeScale = getScale(collection.first());
 
-  let dailyCollection;
+    const featureCollection = ee.FeatureCollection(features);
 
-  if (periodType === "hourly") {
-    const days = ee
-      .Date(timeZoneEnd)
-      .difference(ee.Date(timeZoneStart), "days");
+    const eeReducer = ee.Reducer[reducer]();
 
-    const daysList = ee.List.sequence(0, days.subtract(1));
+    let dailyCollection;
 
-    dailyCollection = ee.ImageCollection.fromImages(
-      daysList.map((day) => {
-        const startUTC = ee.Date(startDate).advance(day, "days");
-        const start = ee.Date(startUTC.format(null, timeZone));
-        const end = start.advance(1, "days");
-        const filtered = collection.filter(ee.Filter.date(start, end));
+    if (periodType === "hourly") {
+      const days = ee
+        .Date(timeZoneEnd)
+        .difference(ee.Date(timeZoneStart), "days");
 
-        return filtered[periodReducer]()
-          .set("system:index", startUTC.format("YYYYMMdd"))
-          .set("system:time_start", start.millis())
-          .set("system:time_end", end.millis());
-      })
-    );
-  }
+      const daysList = ee.List.sequence(0, days.subtract(1));
 
-  const reduced = (dailyCollection || collection)
-    .map((image) =>
-      image
-        .reduceRegions({
-          collection: featureCollection,
-          reducer: eeReducer,
-          scale: eeScale,
+      dailyCollection = ee.ImageCollection.fromImages(
+        daysList.map((day) => {
+          const startUTC = ee.Date(startDate).advance(day, "days");
+          const start = ee.Date(startUTC.format(null, timeZone));
+          const end = start.advance(1, "days");
+          const filtered = collection.filter(ee.Filter.date(start, end));
+
+          return filtered[periodReducer]()
+            .set("system:index", startUTC.format("YYYYMMdd"))
+            .set("system:time_start", start.millis())
+            .set("system:time_end", end.millis());
         })
-        .map((feature) =>
-          ee.Feature(null, {
-            ou: feature.get("id"),
-            period: image.date().format("YYYYMMdd"),
-            value: feature.get(reducer),
+      ).filter(ee.Filter.listContains("system:band_names", band)); // Remove empty images
+    }
+
+    const reduced = (dailyCollection || collection)
+      .map((image) =>
+        image
+          .reduceRegions({
+            collection: featureCollection,
+            reducer: eeReducer,
+            scale: eeScale,
           })
-        )
-    )
-    .flatten();
+          .map((feature) =>
+            ee.Feature(null, {
+              ou: feature.get("id"),
+              period: image.date().format("YYYYMMdd"),
+              value: feature.get(reducer),
+            })
+          )
+      )
+      .flatten();
 
-  const valueCollection = ee.FeatureCollection(reduced);
+    const valueCollection = ee.FeatureCollection(reduced);
 
-  return getInfo(valueCollection.size()).then((size) => {
-    if (size <= SIZE_LIMIT) {
-      return getInfo(valueCollection.toList(SIZE_LIMIT)).then(dataParser);
+    const valueCount = await getInfo(valueCollection.size());
+
+    if (valueCount <= VALUE_LIMIT) {
+      getInfo(valueCollection.toList(VALUE_LIMIT))
+        .then(dataParser)
+        .then(resolve);
     } else {
-      const chunks = Math.ceil(size / SIZE_LIMIT);
+      const chunks = Math.ceil(valueCount / VALUE_LIMIT);
 
-      return Promise.all(
+      Promise.all(
         Array.from({ length: chunks }, (_, chunk) =>
-          getInfo(valueCollection.toList(SIZE_LIMIT, chunk * SIZE_LIMIT))
+          getInfo(valueCollection.toList(VALUE_LIMIT, chunk * VALUE_LIMIT))
         )
       )
         .then((data) => [].concat(...data))
-        .then(dataParser);
+        .then(dataParser)
+        .then(resolve);
     }
   });
-};
 
 export const getTimeSeriesData = (ee, dataset, period, geometry) => {
   const { datasetId, band, reducer = "mean", sharedInputs = false } = dataset;

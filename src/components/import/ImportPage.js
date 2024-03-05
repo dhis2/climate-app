@@ -25,6 +25,7 @@ const Page = () => {
     dataset &&
     period.startDate &&
     period.endDate &&
+    new Date(period.startDate) <= new Date(period.endDate) &&
     isValidOrgUnits &&
     dataElement
   );
