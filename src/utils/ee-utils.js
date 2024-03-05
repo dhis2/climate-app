@@ -127,7 +127,7 @@ export const getEarthEngineData = (ee, datasetParams, period, features) =>
     const valueCount = await getInfo(valueCollection.size());
 
     if (valueCount <= VALUE_LIMIT) {
-      return getInfo(valueCollection.toList(VALUE_LIMIT))
+      getInfo(valueCollection.toList(VALUE_LIMIT))
         .then(dataParser)
         .then(resolve);
     } else {
