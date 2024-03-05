@@ -4,6 +4,7 @@ import useOrgUnits from "../../hooks/useOrgUnits";
 import useEarthEngineData from "../../hooks/useEarthEngineData";
 import ImportData from "./ImportData";
 import DataLoader from "../shared/DataLoader";
+import ErrorMessage from "../shared/ErrorMessage";
 import styles from "./styles/ExtractData.module.css";
 
 const oneDay = 1000 * 60 * 60 * 24;
@@ -11,7 +12,11 @@ const oneDay = 1000 * 60 * 60 * 24;
 const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
   const { parent, level } = orgUnits;
   const { features } = useOrgUnits(parent.id, level);
-  const data = useEarthEngineData(dataset, period, features);
+  const { data, error, loading } = useEarthEngineData(
+    dataset,
+    period,
+    features
+  );
 
   if (!features) {
     return <DataLoader label={i18n.t("Loading org units")} />;
@@ -32,7 +37,7 @@ const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
 
   const count = days * orgUnitsCount;
 
-  if (!data) {
+  if (loading) {
     return (
       <DataLoader
         label={i18n.t(
@@ -47,7 +52,11 @@ const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
     );
   }
 
-  return <ImportData data={data} dataElement={dataElement} />;
+  return error ? (
+    <ErrorMessage error={error} />
+  ) : (
+    <ImportData data={data} dataElement={dataElement} />
+  );
 };
 
 ExtractData.propTypes = {
