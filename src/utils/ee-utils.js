@@ -29,9 +29,6 @@ export const cleanData = (data) =>
     value: f.properties.value,
   }));
 
-export const convertPeriod = (date) =>
-  `${date.slice(0, 4)}-${date.slice(4, 6)}-${date.slice(6, 8)}`;
-
 export const getEarthEngineData = (ee, datasetParams, period, features) => {
   const dataset = period.timeZone
     ? { ...datasetParams, ...datasetParams.timeZone }
@@ -54,7 +51,7 @@ export const getEarthEngineData = (ee, datasetParams, period, features) => {
   const dataParser = (data) =>
     data.map((f) => ({
       ...f.properties,
-      period: convertPeriod(f.properties.period),
+      period: f.properties.period,
       value: valueParser ? valueParser(f.properties.value) : f.properties.value,
     }));
 
