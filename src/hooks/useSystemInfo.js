@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { useDataQuery } from "@dhis2/app-runtime";
 
 // TODO: Check if user has necessary authorities
