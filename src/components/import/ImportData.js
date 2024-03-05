@@ -25,9 +25,12 @@ const ImportData = ({ data, dataElement }) => {
         period: obj.period,
       })),
     }).then((response) => {
+      // support for 2.38 +
       if (response.httpStatus === "OK") {
         setResponse(response.response);
-      } else if (response.status === "SUCCESS") {
+      }
+      //support for 2.37
+      else if (response.status === "SUCCESS") {
         setResponse(response);
       }
     });
