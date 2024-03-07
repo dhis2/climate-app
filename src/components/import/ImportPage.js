@@ -22,8 +22,6 @@ const Page = () => {
   const daysCount = getNumberOfDaysFromPeriod(period);
   const valueCount = orgUnitCount * daysCount;
 
-  console.log("valueCount", valueCount);
-
   const isValidOrgUnits =
     orgUnits?.parent &&
     orgUnits?.level &&
