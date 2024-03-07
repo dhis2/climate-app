@@ -36,3 +36,6 @@ export const getNumberOfDays = (startDate, endDate) => {
   const diff = end - start;
   return diff / (1000 * 60 * 60 * 24) + 1;
 };
+
+export const getNumberOfDaysFromPeriod = (period) =>
+  getNumberOfDays(period.startDate, period.endDate);

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDataQuery } from "@dhis2/app-runtime";
 
-const ORG_UNITS_QUERY = {
+export const ORG_UNITS_QUERY = {
   geojson: {
     resource: "organisationUnits.geojson",
     params: ({ parent, level }) => ({

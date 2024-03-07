@@ -44,3 +44,9 @@
 .instructions {
   flex: 1 2 20em;
 }
+
+.warning {
+  color: red;
+  font-size: 14px;
+  margin-top: 6px;
+}
