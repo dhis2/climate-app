@@ -6,8 +6,11 @@ import Period from "./Period";
 import OrgUnits from "./OrgUnits";
 import DataElement from "./DataElement";
 import ExtractData from "./ExtractData";
-import { defaultPeriod } from "../../utils/time";
+import useOrgUnitCount from "../../hooks/useOrgUnitCount";
+import { defaultPeriod, getNumberOfDaysFromPeriod } from "../../utils/time";
 import styles from "./styles/ImportPage.module.css";
+
+const maxValues = 50000;
 
 const Page = () => {
   const [dataset, setDataset] = useState();
@@ -15,6 +18,11 @@ const Page = () => {
   const [orgUnits, setOrgUnits] = useState();
   const [dataElement, setDataElement] = useState();
   const [startExtract, setStartExtract] = useState(false);
+  const orgUnitCount = useOrgUnitCount(orgUnits?.parent?.id, orgUnits?.level);
+  const daysCount = getNumberOfDaysFromPeriod(period);
+  const valueCount = orgUnitCount * daysCount;
+
+  console.log("valueCount", valueCount);
 
   const isValidOrgUnits =
     orgUnits?.parent &&
@@ -27,7 +35,8 @@ const Page = () => {
     period.endDate &&
     new Date(period.startDate) <= new Date(period.endDate) &&
     isValidOrgUnits &&
-    dataElement
+    dataElement &&
+    valueCount <= maxValues
   );
 
   useEffect(() => {
@@ -49,6 +58,19 @@ const Page = () => {
             />
             <Period period={period} onChange={setPeriod} />
             <OrgUnits selected={orgUnits} onChange={setOrgUnits} />
+            {valueCount > maxValues && (
+              <div className={styles.warning}>
+                {i18n.t(
+                  "You can maximum import {{maxValues}} values in a single import, but you are trying to import {{valueCount}} values for {{orgUnitCount}} organisation units over {{daysCount}} days. Please select a smaller period or fewer organisation units. You can always import more data later.",
+                  {
+                    maxValues,
+                    valueCount,
+                    orgUnitCount,
+                    daysCount,
+                  }
+                )}
+              </div>
+            )}
             <DataElement
               selected={dataElement}
               dataset={dataset}
