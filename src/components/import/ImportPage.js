@@ -59,7 +59,7 @@ const Page = () => {
             {valueCount > maxValues && (
               <div className={styles.warning}>
                 {i18n.t(
-                  "You can maximum import {{maxValues}} values in a single import, but you are trying to import {{valueCount}} values for {{orgUnitCount}} organisation units over {{daysCount}} days. Please select a smaller period or fewer organisation units. You can always import more data later.",
+                  "You can maximum import {{maxValues}} data values in a single import, but you are trying to import {{valueCount}} values for {{orgUnitCount}} organisation units over {{daysCount}} days. Please select a smaller period or fewer organisation units. You can always import more data later.",
                   {
                     maxValues,
                     valueCount,
