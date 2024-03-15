@@ -9,6 +9,7 @@ import ReferencePeriodSelect from "./ReferencePeriodSelect";
 import Tabs from "./Tabs";
 import TemperatureTab from "./TemperatureTab";
 import PrecipitationTab from "./PrecipitationTab";
+import HumidityTab from "./HumidityTab";
 import ClimateChangeTab from "./ClimateChangeTab";
 import DataLoader from "../shared/DataLoader";
 import useEarthEngineTimeSeries from "../../hooks/useEarthEngineTimeSeries";
@@ -19,10 +20,11 @@ const band = [
   "temperature_2m",
   "temperature_2m_min",
   "temperature_2m_max",
+  "dewpoint_temperature_2m",
   "total_precipitation_sum",
 ];
 
-const reducer = ["mean", "min", "max", "mean"];
+const reducer = ["mean", "min", "max", "mean", "mean"];
 
 const monthlyDataset = {
   datasetId: "ECMWF/ERA5_LAND/MONTHLY_AGGR",
@@ -44,6 +46,7 @@ const allMonthsPeriod = {
 const tabs = {
   temperature: TemperatureTab,
   precipitation: PrecipitationTab,
+  humidity: HumidityTab,
   climatechange: ClimateChangeTab,
 };
 
