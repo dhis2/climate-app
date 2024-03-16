@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-03-07T14:48:54.883Z\n"
-"PO-Revision-Date: 2024-03-07T14:48:54.883Z\n"
+"POT-Creation-Date: 2024-03-16T17:14:16.765Z\n"
+"PO-Revision-Date: 2024-03-16T17:14:16.765Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -327,17 +327,29 @@ msgstr "1961 - 1990"
 msgid "Reference period"
 msgstr "Reference period"
 
-msgid "{{name}}: Daily precipitation {{period}}"
-msgstr "{{name}}: Daily precipitation {{period}}"
+msgid "{{name}}: Daily relative humidity {{period}}"
+msgstr "{{name}}: Daily relative humidity {{period}}"
 
 msgid "Daily precipitation"
 msgstr "Daily precipitation"
 
-msgid "{{name}}: Monthly precipitation {{period}}"
-msgstr "{{name}}: Monthly precipitation {{period}}"
+msgid "{{name}}: Humidity {{period}}"
+msgstr "{{name}}: Humidity {{period}}"
 
 msgid "Normals from reference period: {{period}}"
 msgstr "Normals from reference period: {{period}}"
+
+msgid "Mean dewpoint temperature"
+msgstr "Mean dewpoint temperature"
+
+msgid "Mean temperature"
+msgstr "Mean temperature"
+
+msgid "{{name}}: Daily precipitation {{period}}"
+msgstr "{{name}}: Daily precipitation {{period}}"
+
+msgid "{{name}}: Monthly precipitation {{period}}"
+msgstr "{{name}}: Monthly precipitation {{period}}"
 
 msgid "Monthly precipitation"
 msgstr "Monthly precipitation"
@@ -356,9 +368,6 @@ msgstr "Temperature anomaly"
 
 msgid "{{name}}: Daily temperatures {{period}}"
 msgstr "{{name}}: Daily temperatures {{period}}"
-
-msgid "Mean temperature"
-msgstr "Mean temperature"
 
 msgid "Temperature range"
 msgstr "Temperature range"

@@ -1,4 +1,5 @@
 import i18n from "@dhis2/d2-i18n";
+import { getRelativeHumidity } from "./calc";
 
 export const animation = {
   duration: 300,
@@ -59,6 +60,24 @@ export const getPrecipitationMonthNormal = (data, month, referencePeriod) => {
   const periodReducer = periodBandReducer("total_precipitation_sum");
 
   return metersToMillimeters(
+    monthData.filter(periodFilter).reduce(periodReducer, 0) / referenceYearCount
+  );
+};
+
+export const getHumidityMonthNormal = (data, month, referencePeriod) => {
+  const monthData = filterMonthData(data, month);
+  const referenceYearRange = referencePeriodYearRange(referencePeriod);
+  const referenceYearCount = referencePeriodYearCount(referenceYearRange);
+  const periodFilter = referencePeriodFilter(referenceYearRange);
+
+  const periodReducer = (v, d) =>
+    v +
+    getRelativeHumidity(
+      kelvinToCelsius(d["temperature_2m"]),
+      kelvinToCelsius(d["dewpoint_temperature_2m"])
+    );
+
+  return roundOneDecimal(
     monthData.filter(periodFilter).reduce(periodReducer, 0) / referenceYearCount
   );
 };

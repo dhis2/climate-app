@@ -5,41 +5,47 @@ import {
   credits,
   getSelectedMonths,
   getMonthlyPeriod,
+  getHumidityMonthNormal,
 } from "../../../utils/chart";
+import {
+  getRelativeHumidity,
+  kelvinToCelsius,
+  roundOneDecimal,
+  getTimeFromId,
+} from "../../../utils/calc";
 
 const getChartConfig = (name, data, monthlyPeriod, referencePeriod) => {
   const months = getSelectedMonths(data, monthlyPeriod);
 
   const dewpoint = months.map((d) => ({
-    x: new Date(d.id).getTime(),
-    y: Math.round((d["dewpoint_temperature_2m"] - 273.15) * 10) / 10,
+    x: getTimeFromId(d.id),
+    y: roundOneDecimal(kelvinToCelsius(d["dewpoint_temperature_2m"])),
   }));
 
   const temperature = months.map((d) => ({
-    x: new Date(d.id).getTime(),
-    y: Math.round((d["temperature_2m"] - 273.15) * 10) / 10,
+    x: getTimeFromId(d.id),
+    y: roundOneDecimal(kelvinToCelsius(d["temperature_2m"])),
   }));
 
-  // https://stackoverflow.com/questions/25576311/javascript-using-same-variable-in-calculation
-  const humidity = months.map((d) => {
-    const temp = d["temperature_2m"] - 273.15;
-    const dew = d["dewpoint_temperature_2m"] - 273.15;
+  const humidity = months.map((d) => ({
+    x: getTimeFromId(d.id),
+    y: roundOneDecimal(
+      getRelativeHumidity(
+        kelvinToCelsius(d["temperature_2m"]),
+        kelvinToCelsius(d["dewpoint_temperature_2m"])
+      )
+    ),
+  }));
 
-    return {
-      x: new Date(d.id).getTime(),
-      y:
-        Math.round(
-          ((100 * ((17.625 * dew) / (243.04 + dew))) /
-            ((17.625 * temp) / (243.04 + temp))) *
-            10
-        ) / 10,
-    };
-  });
+  const normals = months.map((d) => ({
+    x: getTimeFromId(d.id),
+    y: getHumidityMonthNormal(data, d.id.substring(5, 7), referencePeriod),
+  }));
 
   // https://www.highcharts.com/demo/highcharts/arearange-line
   return {
     title: {
-      text: i18n.t("{{name}}: Humidity {{period}}", {
+      text: i18n.t("{{name}}: Relative humidity {{period}}", {
         name,
         period: getMonthlyPeriod(monthlyPeriod),
         nsSeparator: ";",
@@ -66,15 +72,19 @@ const getChartConfig = (name, data, monthlyPeriod, referencePeriod) => {
     },
     yAxis: [
       {
-        title: "Temperature",
+        title: {
+          text: "Relative humidity",
+        },
         labels: {
-          format: "{value}°C",
+          format: "{value}%",
         },
       },
       {
-        title: "Relative humidity",
+        title: {
+          text: "Temperature",
+        },
         labels: {
-          format: "{value}%",
+          format: "{value}°C",
         },
         opposite: true,
       },
@@ -92,16 +102,25 @@ const getChartConfig = (name, data, monthlyPeriod, referencePeriod) => {
       {
         name: "Relative humidity",
         type: "column",
-        yAxis: 1,
         data: humidity,
         tooltip: {
           valueSuffix: "%",
         },
+        zIndex: 1,
+      },
+      {
+        name: i18n.t("Normal humidity"),
+        type: "column",
+        data: normals,
+        color: colors.grey400,
+        pointPlacement: -0.12,
+        zIndex: 0,
       },
       {
         type: "line",
         data: dewpoint,
-        name: i18n.t("Mean dewpoint temperature"),
+        yAxis: 1,
+        name: i18n.t("Dewpoint temperature"),
         color: colors.red800,
         negativeColor: colors.blue800,
         zIndex: 2,
@@ -109,9 +128,11 @@ const getChartConfig = (name, data, monthlyPeriod, referencePeriod) => {
       {
         type: "line",
         data: temperature,
-        name: i18n.t("Mean temperature"),
-        color: colors.red300,
-        negativeColor: colors.blue300,
+        yAxis: 1,
+        name: i18n.t("Temperature"),
+        dashStyle: "shortdot",
+        color: colors.red800,
+        negativeColor: colors.blue800,
         zIndex: 2,
       },
     ],
