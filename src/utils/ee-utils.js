@@ -31,7 +31,7 @@ export const cleanData = (data) =>
     value: f.properties.value,
   }));
 
-export const getEarthEngineData = (ee, datasetParams, period, features) =>
+export const getEarthEngineValues = (ee, datasetParams, period, features) =>
   new Promise(async (resolve, reject) => {
     const dataset = period.timeZone
       ? { ...datasetParams, ...datasetParams.timeZone }
@@ -140,6 +140,26 @@ export const getEarthEngineData = (ee, datasetParams, period, features) =>
         .then(resolve);
     }
   });
+
+export const getEarthEngineData = (ee, datasetParams, period, features) => {
+  if (datasetParams.bands) {
+    // Multiple bands (used for relative humidity)
+    const { bandsParser = (v) => v } = datasetParams;
+
+    return Promise.all(
+      datasetParams.bands.map((band) =>
+        getEarthEngineValues(
+          ee,
+          { ...datasetParams, ...band },
+          period,
+          features
+        )
+      )
+    ).then(bandsParser);
+  } else {
+    return getEarthEngineValues(ee, datasetParams, period, features);
+  }
+};
 
 export const getTimeSeriesData = (ee, dataset, period, geometry) => {
   const { datasetId, band, reducer = "mean", sharedInputs = false } = dataset;

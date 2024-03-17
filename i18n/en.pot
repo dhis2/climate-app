@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-03-07T14:48:54.883Z\n"
-"PO-Revision-Date: 2024-03-07T14:48:54.883Z\n"
+"POT-Creation-Date: 2024-03-17T15:29:54.235Z\n"
+"PO-Revision-Date: 2024-03-17T15:29:54.235Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -193,6 +193,34 @@ msgstr "Total precipitation in mm"
 msgid "Sum"
 msgstr "Sum"
 
+msgid "Dewpoint temperature"
+msgstr "Dewpoint temperature"
+
+msgid "Dewpoint temperature (ERA5-Land)"
+msgstr "Dewpoint temperature (ERA5-Land)"
+
+msgid ""
+"Temperature in °C at 2m above the surface to which the air would have to be "
+"cooled for saturation to occur."
+msgstr ""
+"Temperature in °C at 2m above the surface to which the air would have to be "
+"cooled for saturation to occur."
+
+msgid "Relative humidity"
+msgstr "Relative humidity"
+
+msgid "Relative humidity (ERA5-Land)"
+msgstr "Relative humidity (ERA5-Land)"
+
+msgid ""
+"Percentage of water vapor in the air compared to the total amount of vapor "
+"that can exist in the air at its current temperature. Caluclated using air "
+"temperature and dewpoint temperature at 2m above surface."
+msgstr ""
+"Percentage of water vapor in the air compared to the total amount of vapor "
+"that can exist in the air at its current temperature. Caluclated using air "
+"temperature and dewpoint temperature at 2m above surface."
+
 msgid "Data set"
 msgstr "Data set"
 
@@ -327,6 +355,18 @@ msgstr "1961 - 1990"
 msgid "Reference period"
 msgstr "Reference period"
 
+msgid "{{name}}: Daily relative humidity {{period}}"
+msgstr "{{name}}: Daily relative humidity {{period}}"
+
+msgid "{{name}}: Relative humidity {{period}}"
+msgstr "{{name}}: Relative humidity {{period}}"
+
+msgid "Normals from reference period: {{period}}"
+msgstr "Normals from reference period: {{period}}"
+
+msgid "Normal humidity"
+msgstr "Normal humidity"
+
 msgid "{{name}}: Daily precipitation {{period}}"
 msgstr "{{name}}: Daily precipitation {{period}}"
 
@@ -335,9 +375,6 @@ msgstr "Daily precipitation"
 
 msgid "{{name}}: Monthly precipitation {{period}}"
 msgstr "{{name}}: Monthly precipitation {{period}}"
-
-msgid "Normals from reference period: {{period}}"
-msgstr "Normals from reference period: {{period}}"
 
 msgid "Monthly precipitation"
 msgstr "Monthly precipitation"

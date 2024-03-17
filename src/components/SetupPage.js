@@ -174,6 +174,88 @@ const SetupPage = () => {
           </tr>
         </tbody>
       </table>
+      <table>
+        <caption>
+          {i18n.t("Data element")}: "{i18n.t("Dewpoint temperature")}"
+        </caption>
+        <tbody>
+          <tr>
+            <th>{i18n.t("Name")}</th>
+            <td>{i18n.t("Dewpoint temperature (ERA5-Land)")}</td>
+          </tr>
+          <tr>
+            <th>{i18n.t("Short name")}</th>
+            <td>{i18n.t("Dewpoint temperature")}</td>
+          </tr>
+          <tr>
+            <th>{i18n.t("Code")}</th>
+            <td>ERA5_LAND_DEWPOINT_TEMPERATURE</td>
+          </tr>
+          <tr>
+            <th>{i18n.t("Description")}</th>
+            <td>
+              {i18n.t(
+                "Temperature in °C at 2m above the surface to which the air would have to be cooled for saturation to occur."
+              )}
+            </td>
+          </tr>
+          <tr>
+            <th>{i18n.t("Domain type")}</th>
+            <td>{i18n.t("Aggregate")}</td>
+          </tr>
+          <tr>
+            <th>{i18n.t("Aggregation type")}</th>
+            <td>{i18n.t("Average")}</td>
+          </tr>
+          <tr>
+            <th>{i18n.t("Aggregation levels")}</th>
+            <td>
+              <em>{i18n.t("Assign all org unit levels")}</em>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table>
+        <caption>
+          {i18n.t("Data element")}: "{i18n.t("Relative humidity")}"
+        </caption>
+        <tbody>
+          <tr>
+            <th>{i18n.t("Name")}</th>
+            <td>{i18n.t("Relative humidity (ERA5-Land)")}</td>
+          </tr>
+          <tr>
+            <th>{i18n.t("Short name")}</th>
+            <td>{i18n.t("Relative humidity")}</td>
+          </tr>
+          <tr>
+            <th>{i18n.t("Code")}</th>
+            <td>ERA5_LAND_RELATIVE_HUMIDITY</td>
+          </tr>
+          <tr>
+            <th>{i18n.t("Description")}</th>
+            <td>
+              {i18n.t(
+                "Percentage of water vapor in the air compared to the total amount of vapor that can exist in the air at its current temperature. Caluclated using air temperature and dewpoint temperature at 2m above surface."
+              )}
+            </td>
+          </tr>
+          <tr>
+            <th>{i18n.t("Domain type")}</th>
+            <td>{i18n.t("Aggregate")}</td>
+          </tr>
+          <tr>
+            <th>{i18n.t("Aggregation type")}</th>
+            <td>{i18n.t("Average")}</td>
+          </tr>
+          <tr>
+            <th>{i18n.t("Aggregation levels")}</th>
+            <td>
+              <em>{i18n.t("Assign all org unit levels")}</em>
+            </td>
+          </tr>
+        </tbody>
+      </table>
       <p>
         Since these data elements are collected daily, we recommend they are
         assigned to a daily data set. Assigning to a data set helps to maintain

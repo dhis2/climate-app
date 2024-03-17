@@ -4,6 +4,7 @@ import { TabBar, Tab } from "@dhis2/ui";
 const tabs = [
   { id: "temperature", label: "Temperature" },
   { id: "precipitation", label: "Precipitation" },
+  { id: "humidity", label: "Humidity" },
   { id: "climatechange", label: "Climate change" },
 ];
 

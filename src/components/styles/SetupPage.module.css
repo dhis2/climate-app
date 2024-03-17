@@ -28,14 +28,17 @@
 }
 
 .container caption {
+  text-align: left;
   font-size: 15px;
   font-weight: 500;
+  margin-left: 9px;
   margin-bottom: 8px;
 }
 
 .container th {
   font-weight: 500;
   text-align: left;
+  min-width: 150px;
 }
 
 .container th,
