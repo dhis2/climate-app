@@ -1,5 +1,5 @@
 import i18n from "@dhis2/d2-i18n";
-import { colors } from "@dhis2/ui"; // https://github.com/dhis2/ui/blob/master/constants/src/colors.js
+import { colors } from "@dhis2/ui";
 import {
   animation,
   credits,
@@ -42,7 +42,6 @@ const getChartConfig = (name, data, monthlyPeriod, referencePeriod) => {
     y: getHumidityMonthNormal(data, d.id.substring(5, 7), referencePeriod),
   }));
 
-  // https://www.highcharts.com/demo/highcharts/arearange-line
   return {
     title: {
       text: i18n.t("{{name}}: Relative humidity {{period}}", {

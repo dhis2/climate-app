@@ -143,8 +143,9 @@ export const getEarthEngineValues = (ee, datasetParams, period, features) =>
 
 export const getEarthEngineData = (ee, datasetParams, period, features) => {
   if (datasetParams.bands) {
-    // Mutliple bands (used for relative humidity)
+    // Multiple bands (used for relative humidity)
     const { bandsParser = (v) => v } = datasetParams;
+
     return Promise.all(
       datasetParams.bands.map((band) =>
         getEarthEngineValues(
