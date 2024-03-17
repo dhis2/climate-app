@@ -107,7 +107,7 @@ export default [
     datasetId: "ECMWF/ERA5_LAND/DAILY_AGGR",
     name: i18n.t("Relative humidity (ERA5-Land)"),
     description: i18n.t(
-      "Percentage of water vapor in the air compared to the total amount of vapor that can exist in the air at its current temperature. Caluclated using air temperature and dewpoint temperature at 2m above surface."
+      "Percentage of water vapor in the air compared to the total amount of vapor that can exist in the air at its current temperature. Calculated using air temperature and dewpoint temperature at 2m above surface."
     ),
     bands: [
       {
