@@ -60,6 +60,7 @@ const getChart = (name, data) => {
         name: i18n.t("Mean temperature"),
         color: colors.red800,
         negativeColor: colors.blue800,
+        lineWidth: 1.5,
         zIndex: 2,
       },
       {

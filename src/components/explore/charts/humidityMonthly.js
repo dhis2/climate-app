@@ -58,10 +58,21 @@ const getChartConfig = (name, data, monthlyPeriod, referencePeriod) => {
       }),
     },
     credits,
+    chart: {
+      height: 480,
+      marginBottom: 75,
+    },
     tooltip: {
       crosshairs: true,
       shared: true,
       valueSuffix: "°C",
+    },
+    plotOptions: {
+      series: {
+        groupPadding: 0,
+        borderWidth: 0,
+        animation,
+      },
     },
     xAxis: {
       type: "datetime",
@@ -89,20 +100,12 @@ const getChartConfig = (name, data, monthlyPeriod, referencePeriod) => {
         opposite: true,
       },
     ],
-    chart: {
-      height: 480,
-      marginBottom: 75,
-    },
-    plotOptions: {
-      series: {
-        animation,
-      },
-    },
     series: [
       {
         name: "Relative humidity",
         type: "column",
         data: humidity,
+        color: colors.blue500,
         tooltip: {
           valueSuffix: "%",
         },
@@ -112,8 +115,8 @@ const getChartConfig = (name, data, monthlyPeriod, referencePeriod) => {
         name: i18n.t("Normal humidity"),
         type: "column",
         data: normals,
-        color: colors.grey400,
-        pointPlacement: -0.12,
+        color: colors.blue200,
+        pointPlacement: -0.1,
         zIndex: 0,
       },
       {
@@ -121,18 +124,16 @@ const getChartConfig = (name, data, monthlyPeriod, referencePeriod) => {
         data: dewpoint,
         yAxis: 1,
         name: i18n.t("Dewpoint temperature"),
-        color: colors.red800,
-        negativeColor: colors.blue800,
+        color: colors.grey900,
         zIndex: 2,
       },
       {
         type: "line",
         data: temperature,
         yAxis: 1,
-        name: i18n.t("Temperature"),
+        name: i18n.t("Air temperature"),
         dashStyle: "shortdot",
-        color: colors.red800,
-        negativeColor: colors.blue800,
+        color: colors.grey900,
         zIndex: 2,
       },
     ],
