@@ -111,7 +111,7 @@ const getChartConfig = (name, data, monthlyPeriod, referencePeriod) => {
         zIndex: 1,
       },
       {
-        name: i18n.t("Normal humidity"),
+        name: i18n.t("Normal relative humidity"),
         type: "column",
         data: normals,
         color: colors.blue200,
