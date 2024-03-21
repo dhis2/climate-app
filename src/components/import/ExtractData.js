@@ -55,7 +55,7 @@ const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
   return error ? (
     <ErrorMessage error={error} />
   ) : (
-    <ImportData data={data} dataElement={dataElement} />
+    <ImportData data={data} dataElement={dataElement} features={features} />
   );
 };
 

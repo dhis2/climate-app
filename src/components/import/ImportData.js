@@ -4,6 +4,7 @@ import { useDataMutation } from "@dhis2/app-runtime";
 import { useState, useEffect } from "react";
 import ImportResponse from "./ImportResponse";
 import ImportError from "./ImportError";
+import NoOrgUnitData from "./NoOrgUnitData";
 import styles from "./styles/ImportData.module.css";
 
 const dataImportMutation = {
@@ -12,18 +13,20 @@ const dataImportMutation = {
   data: (dataValues) => dataValues,
 };
 
-const ImportData = ({ data, dataElement }) => {
+const ImportData = ({ data, dataElement, features }) => {
   const [response, setResponse] = useState(false);
   const [mutate, { error }] = useDataMutation(dataImportMutation);
 
   useEffect(() => {
     mutate({
-      dataValues: data.map((obj) => ({
-        value: obj.value,
-        orgUnit: obj.ou,
-        dataElement: dataElement.id,
-        period: obj.period,
-      })),
+      dataValues: data
+        .filter((d) => !isNaN(d.value))
+        .map((obj) => ({
+          value: obj.value,
+          orgUnit: obj.ou,
+          dataElement: dataElement.id,
+          period: obj.period,
+        })),
     }).then((response) => {
       // support for 2.38 +
       if (response.httpStatus === "OK") {
@@ -45,6 +48,7 @@ const ImportData = ({ data, dataElement }) => {
       ) : (
         i18n.t("Importing data to DHIS2")
       )}
+      <NoOrgUnitData data={data} features={features} />
     </div>
   );
 };
@@ -52,6 +56,7 @@ const ImportData = ({ data, dataElement }) => {
 ImportData.propTypes = {
   data: PropTypes.array.isRequired,
   dataElement: PropTypes.object.isRequired,
+  features: PropTypes.array.isRequired,
 };
 
 export default ImportData;

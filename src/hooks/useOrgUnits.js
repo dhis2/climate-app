@@ -12,10 +12,10 @@ export const ORG_UNITS_QUERY = {
 };
 
 const parseOrgUnits = (data) =>
-  data.geojson.features.map(({ type, id, geometry }) => ({
+  data.geojson.features.map(({ type, id, geometry, properties }) => ({
     type,
     id,
-    properties: { id },
+    properties: { id, name: properties.name },
     geometry,
   }));
 
