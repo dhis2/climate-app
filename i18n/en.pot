@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-03-17T17:53:11.919Z\n"
-"PO-Revision-Date: 2024-03-17T17:53:11.919Z\n"
+"POT-Creation-Date: 2024-03-21T16:05:07.280Z\n"
+"PO-Revision-Date: 2024-03-21T16:05:07.280Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -541,6 +541,16 @@ msgstr "Updated"
 
 msgid "Ignored"
 msgstr "Ignored"
+
+msgid "No data for the following org units"
+msgstr "No data for the following org units"
+
+msgid ""
+"ERA5-Land has limited data for costal areas. Values for other org units "
+"will be imported."
+msgstr ""
+"ERA5-Land has limited data for costal areas. Values for other org units "
+"will be imported."
 
 msgid "Organisation unit level to import data to"
 msgstr "Organisation unit level to import data to"
