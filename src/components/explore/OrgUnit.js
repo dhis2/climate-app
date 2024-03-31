@@ -7,6 +7,7 @@ import DailyPeriodSelect from "./DailyPeriodSelect";
 import MonthlyPeriodSelect from "./MonthlyPeriodSelect";
 import ReferencePeriodSelect from "./ReferencePeriodSelect";
 import Tabs from "./Tabs";
+import ForecastTab from "./forecast/ForecastTab";
 import TemperatureTab from "./TemperatureTab";
 import PrecipitationTab from "./PrecipitationTab";
 import HumidityTab from "./HumidityTab";
@@ -44,6 +45,7 @@ const allMonthsPeriod = {
 };
 
 const tabs = {
+  forecast10days: ForecastTab,
   temperature: TemperatureTab,
   precipitation: PrecipitationTab,
   humidity: HumidityTab,
@@ -51,13 +53,17 @@ const tabs = {
 };
 
 const OrgUnit = ({ orgUnit }) => {
-  const [tab, setTab] = useState("temperature");
+  const isPoint = orgUnit.geometry?.type === "Point";
+  const [tab, setTab] = useState(isPoint ? "forecast10days" : "temperature");
   const [dailyPeriod, setDailyPeriod] = useState(defaultPeriod);
   const [monthlyPeriod, setMonthlyPeriod] = useState();
   const [referencePeriod, setReferencePeriod] = useState(
     defaultReferencePeriod
   );
   const [periodType, setPeriodType] = useState("monthly");
+
+  const hasMonthlyAndDailyData =
+    tab !== "forecast10days" && tab !== "climatechange";
 
   const monthlyData = useEarthEngineTimeSeries(
     monthlyDataset,
@@ -93,20 +99,21 @@ const OrgUnit = ({ orgUnit }) => {
         <>
           {monthlyData && dailyData && monthlyPeriod ? (
             <>
-              {tab !== "climatechange" && (
+              {hasMonthlyAndDailyData && (
                 <PeriodTypeSelect type={periodType} onChange={setPeriodType} />
               )}
-              <Tabs selected={tab} onChange={setTab} />
+              <Tabs selected={tab} isPoint={isPoint} onChange={setTab} />
               <div className={styles.tabContent}>
                 <Tab
                   name={orgUnit.properties.name}
+                  geometry={orgUnit.geometry}
                   periodType={periodType}
                   monthlyData={monthlyData}
                   dailyData={dailyData}
                   monthlyPeriod={monthlyPeriod}
                   referencePeriod={referencePeriod}
                 />
-                {tab !== "climatechange" && (
+                {hasMonthlyAndDailyData && (
                   <>
                     {periodType === "daily" ? (
                       <DailyPeriodSelect
@@ -123,7 +130,8 @@ const OrgUnit = ({ orgUnit }) => {
                     )}
                   </>
                 )}
-                {(tab === "climatechange" || periodType === "monthly") && (
+                {(tab === "climatechange" ||
+                  (periodType === "monthly" && tab !== "forecast10days")) && (
                   <ReferencePeriodSelect
                     selected={referencePeriod}
                     onChange={setReferencePeriod}

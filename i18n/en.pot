@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-03-21T16:05:07.280Z\n"
-"PO-Revision-Date: 2024-03-21T16:05:07.280Z\n"
+"POT-Creation-Date: 2024-03-31T15:52:52.275Z\n"
+"PO-Revision-Date: 2024-03-31T15:52:52.275Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -405,6 +405,153 @@ msgstr "{{name}}: Monthly temperatures {{period}}"
 
 msgid "Normal temperature"
 msgstr "Normal temperature"
+
+msgid "{{precip}} mm"
+msgstr "{{precip}} mm"
+
+msgid "Night"
+msgstr "Night"
+
+msgid "Morning"
+msgstr "Morning"
+
+msgid "Afternoon"
+msgstr "Afternoon"
+
+msgid "Evening"
+msgstr "Evening"
+
+msgid "Max/min temp."
+msgstr "Max/min temp."
+
+msgid "Precip."
+msgstr "Precip."
+
+msgid "Wind"
+msgstr "Wind"
+
+msgid "Clear sky"
+msgstr "Clear sky"
+
+msgid "Fair"
+msgstr "Fair"
+
+msgid "Partly cloudy"
+msgstr "Partly cloudy"
+
+msgid "Cloudy"
+msgstr "Cloudy"
+
+msgid "Light rain showers"
+msgstr "Light rain showers"
+
+msgid "Rain showers"
+msgstr "Rain showers"
+
+msgid "Heavy rain showers"
+msgstr "Heavy rain showers"
+
+msgid "Light rain showers and thunder"
+msgstr "Light rain showers and thunder"
+
+msgid "Rain showers and thunder"
+msgstr "Rain showers and thunder"
+
+msgid "Heavy rain showers and thunder"
+msgstr "Heavy rain showers and thunder"
+
+msgid "Light sleet showers"
+msgstr "Light sleet showers"
+
+msgid "Sleet showers"
+msgstr "Sleet showers"
+
+msgid "Heavy sleet showers"
+msgstr "Heavy sleet showers"
+
+msgid "Light sleet showers and thunder"
+msgstr "Light sleet showers and thunder"
+
+msgid "Sleet showers and thunder"
+msgstr "Sleet showers and thunder"
+
+msgid "Heavy sleet showers and thunder"
+msgstr "Heavy sleet showers and thunder"
+
+msgid "Light snow showers"
+msgstr "Light snow showers"
+
+msgid "Snow showers"
+msgstr "Snow showers"
+
+msgid "Heavy show showers"
+msgstr "Heavy show showers"
+
+msgid "Light snow showers and thunder"
+msgstr "Light snow showers and thunder"
+
+msgid "Snow showers and thunder"
+msgstr "Snow showers and thunder"
+
+msgid "Heavy snow showers and thunder"
+msgstr "Heavy snow showers and thunder"
+
+msgid "Light rain"
+msgstr "Light rain"
+
+msgid "Rain"
+msgstr "Rain"
+
+msgid "Heavy rain"
+msgstr "Heavy rain"
+
+msgid "Light rain and thunder"
+msgstr "Light rain and thunder"
+
+msgid "Rain and thunder"
+msgstr "Rain and thunder"
+
+msgid "Heavy rain and thunder"
+msgstr "Heavy rain and thunder"
+
+msgid "Light sleet"
+msgstr "Light sleet"
+
+msgid "Sleet"
+msgstr "Sleet"
+
+msgid "Heavy sleet"
+msgstr "Heavy sleet"
+
+msgid "Light sleet and thunder"
+msgstr "Light sleet and thunder"
+
+msgid "Sleet and thunder"
+msgstr "Sleet and thunder"
+
+msgid "Heavy sleet and thunder"
+msgstr "Heavy sleet and thunder"
+
+msgid "Light snow"
+msgstr "Light snow"
+
+msgid "Snow"
+msgstr "Snow"
+
+msgid "Heavy snow"
+msgstr "Heavy snow"
+
+msgid "Light snow and thunder"
+msgstr "Light snow and thunder"
+
+msgid "Snow and thunder"
+msgstr "Snow and thunder"
+
+msgid "Heavy snow and thunder"
+msgstr "Heavy snow and thunder"
+
+msgid "Fog"
+msgstr "Fog"
 
 msgid "No match found"
 msgstr "No match found"

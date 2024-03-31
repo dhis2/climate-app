@@ -1,0 +1,43 @@
+.table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 14px;
+}
+
+.table thead {
+  font-size: 13px;
+  color: #777;
+  text-align: center;
+}
+
+.table thead td {
+  padding-bottom: 4px;
+}
+
+.table tr {
+  margin-top: 10px;
+  border-bottom: 1pt solid #ccc;
+}
+.table td {
+  padding-top: 3px;
+  padding-bottom: 0px;
+}
+
+.table td.right {
+  text-align: right;
+}
+
+.table thead td:last-child {
+  padding-right: 10px;
+}
+
+.source {
+  color: #333;
+  font-size: 12px;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+.source a {
+  color: #333;
+}
