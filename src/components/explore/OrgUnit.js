@@ -62,9 +62,6 @@ const OrgUnit = ({ orgUnit }) => {
   );
   const [periodType, setPeriodType] = useState("monthly");
 
-  const hasMonthlyAndDailyData =
-    tab !== "forecast10days" && tab !== "climatechange";
-
   const monthlyData = useEarthEngineTimeSeries(
     monthlyDataset,
     allMonthsPeriod,
@@ -76,6 +73,11 @@ const OrgUnit = ({ orgUnit }) => {
     dailyPeriod,
     orgUnit?.geometry
   );
+
+  const dataIsLoaded = monthlyData && dailyData && monthlyPeriod;
+
+  const hasMonthlyAndDailyData =
+    dataIsLoaded && tab !== "forecast10days" && tab !== "climatechange";
 
   const Tab = tabs[tab];
 
@@ -94,61 +96,55 @@ const OrgUnit = ({ orgUnit }) => {
       <h1>
         {orgUnit.properties.name} <OrgUnitType type={orgUnit.geometry?.type} />
       </h1>
-
       {orgUnit.geometry ? (
         <>
-          {monthlyData && dailyData && monthlyPeriod ? (
-            <>
-              {hasMonthlyAndDailyData && (
-                <PeriodTypeSelect type={periodType} onChange={setPeriodType} />
-              )}
-              <Tabs selected={tab} isPoint={isPoint} onChange={setTab} />
-              <div className={styles.tabContent}>
-                <Tab
-                  name={orgUnit.properties.name}
-                  geometry={orgUnit.geometry}
-                  periodType={periodType}
-                  monthlyData={monthlyData}
-                  dailyData={dailyData}
-                  monthlyPeriod={monthlyPeriod}
-                  referencePeriod={referencePeriod}
-                />
-                {hasMonthlyAndDailyData && (
-                  <>
-                    {periodType === "daily" ? (
-                      <DailyPeriodSelect
-                        currentPeriod={dailyPeriod}
-                        onUpdate={setDailyPeriod}
-                      />
-                    ) : (
-                      monthlyPeriod && (
-                        <MonthlyPeriodSelect
-                          currentPeriod={monthlyPeriod}
-                          onUpdate={setMonthlyPeriod}
-                        />
-                      )
-                    )}
-                  </>
-                )}
-                {(tab === "climatechange" ||
-                  (periodType === "monthly" && tab !== "forecast10days")) && (
-                  <ReferencePeriodSelect
-                    selected={referencePeriod}
-                    onChange={setReferencePeriod}
+          {hasMonthlyAndDailyData && (
+            <PeriodTypeSelect type={periodType} onChange={setPeriodType} />
+          )}
+          <Tabs selected={tab} isPoint={isPoint} onChange={setTab} />
+          <div className={styles.tabContent}>
+            <Tab
+              name={orgUnit.properties.name}
+              geometry={orgUnit.geometry}
+              periodType={periodType}
+              monthlyData={monthlyData}
+              dailyData={dailyData}
+              monthlyPeriod={monthlyPeriod}
+              referencePeriod={referencePeriod}
+            />
+            {hasMonthlyAndDailyData && (
+              <>
+                {periodType === "daily" ? (
+                  <DailyPeriodSelect
+                    currentPeriod={dailyPeriod}
+                    onUpdate={setDailyPeriod}
                   />
+                ) : (
+                  monthlyPeriod && (
+                    <MonthlyPeriodSelect
+                      currentPeriod={monthlyPeriod}
+                      onUpdate={setMonthlyPeriod}
+                    />
+                  )
                 )}
-                {tab === "climatechange" && (
-                  <div className={styles.description}>
-                    {i18n.t(
-                      "Temperature anomaly is the difference of a temperature from a reference value, calculated as the average temperature over a period of 30 years. Blue columns shows temperatures below the average, while red columns are above."
-                    )}
-                  </div>
+              </>
+            )}
+            {dataIsLoaded &&
+              (tab === "climatechange" ||
+                (periodType === "monthly" && tab !== "forecast10days")) && (
+                <ReferencePeriodSelect
+                  selected={referencePeriod}
+                  onChange={setReferencePeriod}
+                />
+              )}
+            {tab === "climatechange" && dataIsLoaded && (
+              <div className={styles.description}>
+                {i18n.t(
+                  "Temperature anomaly is the difference of a temperature from a reference value, calculated as the average temperature over a period of 30 years. Blue columns shows temperatures below the average, while red columns are above."
                 )}
               </div>
-            </>
-          ) : (
-            <DataLoader />
-          )}
+            )}
+          </div>
         </>
       ) : (
         <div className={styles.message}>{i18n.t("No geometry found")}</div>

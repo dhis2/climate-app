@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import i18n from "@dhis2/d2-i18n";
 import PropTypes from "prop-types";
+import DataLoader from "../../shared/DataLoader";
 import DayForecast from "./DayForecast.js";
 import styles from "./styles/ForecastTab.module.css";
 
@@ -23,7 +24,7 @@ const ForecastTab = ({ geometry }) => {
   }, [lng, lat]);
 
   if (!data) {
-    return <div className={styles.loading}>Loading...</div>;
+    return <DataLoader height={400} />;
   }
 
   const timeZone = "Etc/UTC";
