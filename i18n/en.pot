@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-03-31T15:52:52.275Z\n"
-"PO-Revision-Date: 2024-03-31T15:52:52.275Z\n"
+"POT-Creation-Date: 2024-04-03T12:35:35.005Z\n"
+"PO-Revision-Date: 2024-04-03T12:35:35.005Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -430,6 +430,9 @@ msgstr "Precip."
 msgid "Wind"
 msgstr "Wind"
 
+msgid "Time zone"
+msgstr "Time zone"
+
 msgid "Clear sky"
 msgstr "Clear sky"
 
@@ -710,9 +713,6 @@ msgstr "Daily values will be imported between start and end dates"
 
 msgid "Loading data"
 msgstr "Loading data"
-
-msgid "Time zone"
-msgstr "Time zone"
 
 msgid "Temperature (ERA5-Land)"
 msgstr "Temperature (ERA5-Land)"

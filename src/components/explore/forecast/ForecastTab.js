@@ -3,13 +3,24 @@ import i18n from "@dhis2/d2-i18n";
 import PropTypes from "prop-types";
 import DataLoader from "../../shared/DataLoader";
 import DayForecast from "./DayForecast.js";
+import TimeZone from "./TimeZone.js";
+// import useSystemInfo from "../../../hooks/useSystemInfo";
 import styles from "./styles/ForecastTab.module.css";
 
 const convertTimezone = (date, timeZone = "Etc/UTC") =>
   new Date(date).toLocaleString("sv-SE", { timeZone }); // "sv-SE" follows ISO format
 
+const browserTimeZone =
+  Intl.DateTimeFormat().resolvedOptions().timeZone || "Etc/UTC";
+
 const ForecastTab = ({ geometry }) => {
   const [data, setData] = useState();
+  const [timeZone, setTimeZone] = useState(browserTimeZone);
+  // const { system } = useSystemInfo();
+
+  // const serverTimeZone = system?.systemInfo?.serverTimeZoneId;
+
+  // console.log(serverTimeZone, Intl.DateTimeFormat().resolvedOptions().timeZone);
 
   const [lng, lat] = geometry.coordinates;
   // const [lng, lat] = [167.905556, -44.648056]; // Milford Sound, New Zealand 'Pacific/Auckland'
@@ -27,7 +38,7 @@ const ForecastTab = ({ geometry }) => {
     return <DataLoader height={400} />;
   }
 
-  const timeZone = "Etc/UTC";
+  // const timeZone = "Etc/UTC";
   // const timeZone = "Pacific/Auckland";
 
   const timeseries = data.properties.timeseries.map(({ time, data }) => ({
@@ -82,6 +93,11 @@ const ForecastTab = ({ geometry }) => {
           ECMWF HRES
         </a>
       </div>
+      <TimeZone
+        value={timeZone}
+        browserTimeZone={browserTimeZone}
+        onChange={setTimeZone}
+      />
     </>
   );
 };
