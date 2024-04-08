@@ -85,7 +85,7 @@ export const getEarthEngineValues = (ee, datasetParams, period, features) =>
       );
 
       if (minArea < scale * scale) {
-        eeScale = Math.sqrt(minArea);
+        eeScale = Math.sqrt(minArea) / 2;
       }
     }
 
