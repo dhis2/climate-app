@@ -177,7 +177,7 @@ export const getEarthEngineData = (ee, datasetParams, period, features) => {
   }
 };
 
-export const getTimeSeriesData = (ee, dataset, period, geometry) => {
+export const getTimeSeriesData = async (ee, dataset, period, geometry) => {
   const { datasetId, band, reducer = "mean", sharedInputs = false } = dataset;
 
   let collection = ee.ImageCollection(datasetId);
@@ -191,9 +191,20 @@ export const getTimeSeriesData = (ee, dataset, period, geometry) => {
     .select(band)
     .filter(ee.Filter.date(timeZoneStart, timeZoneEnd));
 
-  const eeScale = getScale(collection.first());
+  let eeScale = getScale(collection.first());
 
   const { type, coordinates } = geometry;
+
+  if (type.includes("Polygon")) {
+    // unweighted reducer may fail if the features are smaller than the pixel area
+    const scale = await getInfo(eeScale);
+    const orgUnitArea = area(geometry);
+
+    if (orgUnitArea < scale * scale) {
+      eeScale = Math.sqrt(orgUnitArea) / 2;
+    }
+  }
+
   const eeGeometry = ee.Geometry[type](coordinates);
 
   let eeReducer;
