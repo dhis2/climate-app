@@ -79,13 +79,12 @@ export const getEarthEngineValues = (ee, datasetParams, period, features) =>
       // https://stackoverflow.com/questions/59774022/reduce-regions-some-features-dont-contains-centroid-of-pixel-in-consecuence-ex
 
       const scale = await getInfo(eeScale);
-      const pixelArea = scale * scale;
 
       const minArea = Math.min(
         ...features.filter((f) => f.geometry.type.includes("Polygon")).map(area)
       );
 
-      if (minArea < pixelArea) {
+      if (minArea < scale * scale) {
         eeScale = Math.sqrt(minArea);
       }
     }
