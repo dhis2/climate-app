@@ -22,14 +22,16 @@ const OrgUnitTree = () => {
   }, [orgUnit, navigate]);
 
   return roots ? (
-    <div className={styles.orgUnitTree}>
-      <OrganisationUnitTree
-        roots={roots.map((r) => r.id)}
-        selected={orgUnit?.selected}
-        onChange={setOrgUnit}
-        singleSelection={true}
-        initiallyExpanded={initiallyExpanded}
-      />
+    <div className={styles.container}>
+      <div className={styles.orgUnitTree}>
+        <OrganisationUnitTree
+          roots={roots.map((r) => r.id)}
+          selected={orgUnit?.selected}
+          onChange={setOrgUnit}
+          singleSelection={true}
+          initiallyExpanded={initiallyExpanded}
+        />
+      </div>
     </div>
   ) : null;
 };
