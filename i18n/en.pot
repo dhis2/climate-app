@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-04-03T12:35:35.005Z\n"
-"PO-Revision-Date: 2024-04-03T12:35:35.005Z\n"
+"POT-Creation-Date: 2024-04-08T13:57:11.637Z\n"
+"PO-Revision-Date: 2024-04-08T13:57:11.637Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -710,6 +710,15 @@ msgstr "Org unit parent needs to be above or equal to the org unit level"
 
 msgid "Daily values will be imported between start and end dates"
 msgstr "Daily values will be imported between start and end dates"
+
+msgid "App settings"
+msgstr "App settings"
+
+msgid "Default start page for users"
+msgstr "Default start page for users"
+
+msgid "Time zone where your org units are located"
+msgstr "Time zone where your org units are located"
 
 msgid "Loading data"
 msgstr "Loading data"
