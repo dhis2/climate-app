@@ -3,28 +3,19 @@ import i18n from "@dhis2/d2-i18n";
 import PropTypes from "prop-types";
 import DataLoader from "../../shared/DataLoader";
 import DayForecast from "./DayForecast.js";
-import TimeZone from "./TimeZone.js";
-// import useSystemInfo from "../../../hooks/useSystemInfo";
+import useAppSettings from "../../../hooks/useAppSettings";
 import styles from "./styles/ForecastTab.module.css";
 
-const convertTimezone = (date, timeZone = "Etc/UTC") =>
+const convertTimezone = (date, timeZone) =>
   new Date(date).toLocaleString("sv-SE", { timeZone }); // "sv-SE" follows ISO format
 
-const browserTimeZone =
-  Intl.DateTimeFormat().resolvedOptions().timeZone || "Etc/UTC";
+const browserTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
 const ForecastTab = ({ geometry }) => {
   const [data, setData] = useState();
-  const [timeZone, setTimeZone] = useState(browserTimeZone);
-  // const { system } = useSystemInfo();
-
-  // const serverTimeZone = system?.systemInfo?.serverTimeZoneId;
-
-  // console.log(serverTimeZone, Intl.DateTimeFormat().resolvedOptions().timeZone);
+  const { settings, loading } = useAppSettings();
 
   const [lng, lat] = geometry.coordinates;
-  // const [lng, lat] = [167.905556, -44.648056]; // Milford Sound, New Zealand 'Pacific/Auckland'
-  // const [lng, lat] = [168.133333, -46.9]; // Oban, New Zealand 'Pacific/Auckland'
 
   useEffect(() => {
     fetch(
@@ -34,12 +25,11 @@ const ForecastTab = ({ geometry }) => {
       .then(setData);
   }, [lng, lat]);
 
-  if (!data) {
+  if (!data || loading) {
     return <DataLoader height={400} />;
   }
 
-  // const timeZone = "Etc/UTC";
-  // const timeZone = "Pacific/Auckland";
+  const timeZone = settings?.timeZone || browserTimeZone || "Etc/UTC";
 
   const timeseries = data.properties.timeseries.map(({ time, data }) => ({
     time: convertTimezone(time, timeZone),
@@ -93,11 +83,22 @@ const ForecastTab = ({ geometry }) => {
           ECMWF HRES
         </a>
       </div>
-      <TimeZone
-        value={timeZone}
-        browserTimeZone={browserTimeZone}
-        onChange={setTimeZone}
-      />
+      <div className={styles.timeZone}>
+        {settings.timeZone
+          ? i18n.t(
+              'The forecast is using the "{{- timeZone}}" time zone. You can change the time zone for your org units under "Settings".',
+              { timeZone }
+            )
+          : browserTimeZone
+          ? i18n.t(
+              'The forecast is using the time zone of your browser ({{- timeZone}}). You can set the time zone for your org units under "Settings".',
+              { timeZone }
+            )
+          : i18n.t(
+              'The forecast is using the default "{{- timeZone}}" time zone. You can set the time zone for your org units under "Settings".',
+              { timeZone }
+            )}
+      </div>
     </>
   );
 };
