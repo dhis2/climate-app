@@ -1,15 +1,19 @@
 import i18n from "@dhis2/d2-i18n";
 import StartPageSelect from "./StartPageSelect";
 import TimeZoneSelect from "./TimeZoneSelect";
+import useAppSettings from "../../hooks/useAppSettings";
 import styles from "./styles/SettingsPage.module.css";
 
 const SettingsPage = () => {
+  const { settings, changeSetting } = useAppSettings();
+  const { startPage, timeZone } = settings;
+
   return (
     <div className={styles.container}>
       <h1>{i18n.t("App settings")}</h1>
       <p>{i18n.t("Changes made below will apply to all users of this app.")}</p>
-      <StartPageSelect />
-      <TimeZoneSelect />
+      <StartPageSelect startPage={startPage} onChange={changeSetting} />
+      <TimeZoneSelect timeZone={timeZone} onChange={changeSetting} />
     </div>
   );
 };

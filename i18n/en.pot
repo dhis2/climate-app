@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-04-08T13:57:11.637Z\n"
-"PO-Revision-Date: 2024-04-08T13:57:11.637Z\n"
+"POT-Creation-Date: 2024-04-09T12:59:59.789Z\n"
+"PO-Revision-Date: 2024-04-09T12:59:59.789Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -713,6 +713,9 @@ msgstr "Daily values will be imported between start and end dates"
 
 msgid "App settings"
 msgstr "App settings"
+
+msgid "Changes made below will apply to all users of this app."
+msgstr "Changes made below will apply to all users of this app."
 
 msgid "Default start page for users"
 msgstr "Default start page for users"
