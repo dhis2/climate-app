@@ -11,7 +11,8 @@ const OrgUntType = ({ type }) => (
     }
     placement="right"
   >
-    {type === "Point" ? <IconLocation24 /> : <IconEmptyFrame24 />}
+    {type === "Point" && <IconLocation24 />}
+    {(type === "Polygon" || type === "MultiPolygon") && <IconEmptyFrame24 />}
   </Tooltip>
 );
 

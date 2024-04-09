@@ -1,4 +1,5 @@
 import i18n from "@dhis2/d2-i18n";
+import area from "@turf/area";
 
 const VALUE_LIMIT = 5000;
 
@@ -71,7 +72,22 @@ export const getEarthEngineValues = (ee, datasetParams, period, features) =>
       return reject(new Error(i18n.t("No data found for the selected period")));
     }
 
-    const eeScale = getScale(collection.first());
+    let eeScale = getScale(collection.first());
+
+    if (reducer === "min" || reducer === "max") {
+      // ReduceRegions with min/max reducer may fail if the features are smaller than the pixel area
+      // https://stackoverflow.com/questions/59774022/reduce-regions-some-features-dont-contains-centroid-of-pixel-in-consecuence-ex
+
+      const scale = await getInfo(eeScale);
+
+      const minArea = Math.min(
+        ...features.filter((f) => f.geometry.type.includes("Polygon")).map(area)
+      );
+
+      if (minArea < scale * scale) {
+        eeScale = Math.sqrt(minArea) / 2;
+      }
+    }
 
     const featureCollection = ee.FeatureCollection(features);
 
@@ -161,7 +177,7 @@ export const getEarthEngineData = (ee, datasetParams, period, features) => {
   }
 };
 
-export const getTimeSeriesData = (ee, dataset, period, geometry) => {
+export const getTimeSeriesData = async (ee, dataset, period, geometry) => {
   const { datasetId, band, reducer = "mean", sharedInputs = false } = dataset;
 
   let collection = ee.ImageCollection(datasetId);
@@ -175,9 +191,20 @@ export const getTimeSeriesData = (ee, dataset, period, geometry) => {
     .select(band)
     .filter(ee.Filter.date(timeZoneStart, timeZoneEnd));
 
-  const eeScale = getScale(collection.first());
+  let eeScale = getScale(collection.first());
 
   const { type, coordinates } = geometry;
+
+  if (type.includes("Polygon")) {
+    // unweighted reducer may fail if the features are smaller than the pixel area
+    const scale = await getInfo(eeScale);
+    const orgUnitArea = area(geometry);
+
+    if (orgUnitArea < scale * scale) {
+      eeScale = Math.sqrt(orgUnitArea) / 2;
+    }
+  }
+
   const eeGeometry = ee.Geometry[type](coordinates);
 
   let eeReducer;
