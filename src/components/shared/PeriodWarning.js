@@ -2,10 +2,10 @@ import i18n from "@dhis2/d2-i18n";
 import styles from "./styles/PeriodWarning.module.css";
 
 const islimitedData = (period) => {
-  const startYear = parseInt(
-    (period.startDate || period.startMonth).substring(0, 4)
-  );
-  const endYear = parseInt((period.endDate || period.endMonth).substring(0, 4));
+  const startYear = new Date(
+    period.startDate || period.startMonth
+  ).getFullYear();
+  const endYear = new Date(period.endDate || period.endMonth).getFullYear();
 
   return startYear >= 2024 || endYear >= 2024;
 };
