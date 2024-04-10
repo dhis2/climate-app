@@ -2,13 +2,14 @@ import PropTypes from "prop-types";
 import i18n from "@dhis2/d2-i18n";
 import DatePicker from "../shared/DatePicker";
 import TimeZone from "../shared/TimeZone";
+import PeriodWarning from "../shared/PeriodWarning";
 import styles from "./styles/Period.module.css";
 
 const Period = ({ period, onChange }) => {
   const { startDate, endDate } = period;
 
   return (
-    <div>
+    <div className={styles.container}>
       <h2>{i18n.t("Period")}</h2>
       <p>
         {i18n.t("Daily values will be imported between start and end dates")}
@@ -26,6 +27,7 @@ const Period = ({ period, onChange }) => {
         />
         <TimeZone period={period} onChange={onChange} />
       </div>
+      <PeriodWarning period={period} />
     </div>
   );
 };
