@@ -6,7 +6,7 @@
   color: #555;
 }
 
-.container > div:first-child {
+.loader > div:first-child {
   display: inline-block;
   margin-right: 10px;
   vertical-align: bottom;

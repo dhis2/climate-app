@@ -4,6 +4,7 @@ import AboutPage from "./components/AboutPage";
 import ExplorePage from "./components/explore/ExplorePage";
 import ImportPage from "./components/import/ImportPage";
 import SetupPage from "./components/SetupPage";
+import SettingsPage from "./components/settings/SettingsPage";
 import ErrorPage from "./components/ErrorPage";
 
 const router = createHashRouter([
@@ -27,6 +28,10 @@ const router = createHashRouter([
       {
         path: "setup",
         element: <SetupPage />,
+      },
+      {
+        path: "settings",
+        element: <SettingsPage />,
       },
     ],
   },
