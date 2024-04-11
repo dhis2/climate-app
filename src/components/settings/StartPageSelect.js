@@ -5,7 +5,6 @@ import { appPages } from "../Root";
 
 const StartPageSelect = ({ startPage, onChange }) => (
   <SingleSelectField
-    filterable
     label={i18n.t("Default start page for users")}
     selected={startPage || appPages[0].path}
     onChange={({ selected }) => onChange("startPage", selected)}

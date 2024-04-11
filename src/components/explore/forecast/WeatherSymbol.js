@@ -187,7 +187,7 @@ const WeatherSymbol = ({ code }) => {
 
   return (
     <td className={styles.symbol}>
-      <img src={`/images/weather/${src}.png`} title={text} />
+      <img src={`images/weather/${src}.png`} title={text} />
     </td>
   );
 };
