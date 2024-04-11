@@ -56,6 +56,7 @@ const ForecastTab = ({ geometry }) => {
             <td>{i18n.t("Evening")}</td>
             <td className={styles.right}>{i18n.t("Max/min temp.")}</td>
             <td className={styles.right}>{i18n.t("Precip.")}</td>
+            <td className={styles.right}>{i18n.t("Rel. humidity")}</td>
             <td className={styles.right}>{i18n.t("Wind")}</td>
           </tr>
         </thead>

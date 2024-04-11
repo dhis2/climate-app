@@ -31,6 +31,10 @@
   padding-right: 10px;
 }
 
+.table tbody td {
+  white-space: nowrap;
+}
+
 .source {
   color: #333;
   font-size: 12px;

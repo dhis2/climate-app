@@ -41,6 +41,13 @@ const DayForecast = ({ date, series }) => {
     }, 0)
   );
 
+  const relHumidity = series.map(
+    (s) => s.data.instant.details.relative_humidity
+  );
+  const avgHumidity = Math.round(
+    relHumidity.reduce((a, b) => a + b) / relHumidity.length
+  );
+
   const wind = series.map((s) => s.data.instant.details.wind_speed);
   const maxWind = Math.round(Math.max(...wind));
 
@@ -55,6 +62,7 @@ const DayForecast = ({ date, series }) => {
       <td className={styles.precip}>
         {precip ? i18n.t("{{precip}} mm", { precip }) : null}
       </td>
+      <td className={styles.precip}>{avgHumidity}%</td>
       <td className={styles.wind}>{maxWind} m/s</td>
     </tr>
   );
