@@ -7,6 +7,7 @@ import DailyPeriodSelect from "./DailyPeriodSelect";
 import MonthlyPeriodSelect from "./MonthlyPeriodSelect";
 import ReferencePeriodSelect from "./ReferencePeriodSelect";
 import Tabs from "./Tabs";
+import ForecastTab from "./forecast/ForecastTab";
 import TemperatureTab from "./TemperatureTab";
 import PrecipitationTab from "./PrecipitationTab";
 import HumidityTab from "./HumidityTab";
@@ -44,6 +45,7 @@ const allMonthsPeriod = {
 };
 
 const tabs = {
+  forecast10days: ForecastTab,
   temperature: TemperatureTab,
   precipitation: PrecipitationTab,
   humidity: HumidityTab,
@@ -51,7 +53,8 @@ const tabs = {
 };
 
 const OrgUnit = ({ orgUnit }) => {
-  const [tab, setTab] = useState("temperature");
+  const isPoint = orgUnit.geometry?.type === "Point";
+  const [tab, setTab] = useState(isPoint ? "forecast10days" : "temperature");
   const [dailyPeriod, setDailyPeriod] = useState(defaultPeriod);
   const [monthlyPeriod, setMonthlyPeriod] = useState();
   const [referencePeriod, setReferencePeriod] = useState(
@@ -71,6 +74,11 @@ const OrgUnit = ({ orgUnit }) => {
     orgUnit?.geometry
   );
 
+  const dataIsLoaded = monthlyData && dailyData && monthlyPeriod;
+
+  const hasMonthlyAndDailyData =
+    dataIsLoaded && tab !== "forecast10days" && tab !== "climatechange";
+
   const Tab = tabs[tab];
 
   useEffect(() => {
@@ -88,59 +96,55 @@ const OrgUnit = ({ orgUnit }) => {
       <h1>
         {orgUnit.properties.name} <OrgUnitType type={orgUnit.geometry?.type} />
       </h1>
-
       {orgUnit.geometry ? (
         <>
-          {monthlyData && dailyData && monthlyPeriod ? (
-            <>
-              {tab !== "climatechange" && (
-                <PeriodTypeSelect type={periodType} onChange={setPeriodType} />
-              )}
-              <Tabs selected={tab} onChange={setTab} />
-              <div className={styles.tabContent}>
-                <Tab
-                  name={orgUnit.properties.name}
-                  periodType={periodType}
-                  monthlyData={monthlyData}
-                  dailyData={dailyData}
-                  monthlyPeriod={monthlyPeriod}
-                  referencePeriod={referencePeriod}
-                />
-                {tab !== "climatechange" && (
-                  <>
-                    {periodType === "daily" ? (
-                      <DailyPeriodSelect
-                        currentPeriod={dailyPeriod}
-                        onUpdate={setDailyPeriod}
-                      />
-                    ) : (
-                      monthlyPeriod && (
-                        <MonthlyPeriodSelect
-                          currentPeriod={monthlyPeriod}
-                          onUpdate={setMonthlyPeriod}
-                        />
-                      )
-                    )}
-                  </>
-                )}
-                {(tab === "climatechange" || periodType === "monthly") && (
-                  <ReferencePeriodSelect
-                    selected={referencePeriod}
-                    onChange={setReferencePeriod}
+          {hasMonthlyAndDailyData && (
+            <PeriodTypeSelect type={periodType} onChange={setPeriodType} />
+          )}
+          <Tabs selected={tab} isPoint={isPoint} onChange={setTab} />
+          <div className={styles.tabContent}>
+            <Tab
+              name={orgUnit.properties.name}
+              geometry={orgUnit.geometry}
+              periodType={periodType}
+              monthlyData={monthlyData}
+              dailyData={dailyData}
+              monthlyPeriod={monthlyPeriod}
+              referencePeriod={referencePeriod}
+            />
+            {hasMonthlyAndDailyData && (
+              <>
+                {periodType === "daily" ? (
+                  <DailyPeriodSelect
+                    currentPeriod={dailyPeriod}
+                    onUpdate={setDailyPeriod}
                   />
+                ) : (
+                  monthlyPeriod && (
+                    <MonthlyPeriodSelect
+                      currentPeriod={monthlyPeriod}
+                      onUpdate={setMonthlyPeriod}
+                    />
+                  )
                 )}
-                {tab === "climatechange" && (
-                  <div className={styles.description}>
-                    {i18n.t(
-                      "Temperature anomaly is the difference of a temperature from a reference value, calculated as the average temperature over a period of 30 years. Blue columns shows temperatures below the average, while red columns are above."
-                    )}
-                  </div>
+              </>
+            )}
+            {dataIsLoaded &&
+              (tab === "climatechange" ||
+                (periodType === "monthly" && tab !== "forecast10days")) && (
+                <ReferencePeriodSelect
+                  selected={referencePeriod}
+                  onChange={setReferencePeriod}
+                />
+              )}
+            {tab === "climatechange" && dataIsLoaded && (
+              <div className={styles.description}>
+                {i18n.t(
+                  "Temperature anomaly is the difference of a temperature from a reference value, calculated as the average temperature over a period of 30 years. Blue columns shows temperatures below the average, while red columns are above."
                 )}
               </div>
-            </>
-          ) : (
-            <DataLoader />
-          )}
+            )}
+          </div>
         </>
       ) : (
         <div className={styles.message}>{i18n.t("No geometry found")}</div>

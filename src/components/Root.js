@@ -1,10 +1,28 @@
+import { Fragment, useEffect } from "react";
 import { CssVariables, CssReset, Menu, MenuItem } from "@dhis2/ui";
-import { Outlet, useResolvedPath } from "react-router-dom";
+import { Outlet, useResolvedPath, useNavigate } from "react-router-dom";
 import styles from "./styles/Root.module.css";
 import OrgUnitTree from "./explore/OrgUnitTree";
+import useAppSettings from "../hooks/useAppSettings";
+
+export const appPages = [
+  { path: "/", name: "Home" },
+  { path: "/explore", name: "Explore data" },
+  { path: "/import", name: "Import data" },
+  { path: "/setup", name: "Setup guide" },
+  { path: "/settings", name: "Settings" },
+];
 
 const Root = () => {
+  const { settings } = useAppSettings();
   const { pathname } = useResolvedPath();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (pathname === "/" && settings.startPage) {
+      navigate(settings.startPage);
+    }
+  }, [settings]);
 
   return (
     <>
@@ -13,23 +31,21 @@ const Root = () => {
       <div className={styles.container}>
         <div className={styles.sidebar}>
           <Menu>
-            <MenuItem label="Home" href={"#/"} active={pathname === "/"} />
-            <MenuItem
-              label="Explore data"
-              href={"#/explore"}
-              active={pathname.startsWith("/explore")}
-            />
-            {pathname.startsWith("/explore") && <OrgUnitTree />}
-            <MenuItem
-              label="Import data"
-              href={"#/import"}
-              active={pathname.startsWith("/import")}
-            />
-            <MenuItem
-              label="Setup guide"
-              href={"#/setup"}
-              active={pathname.startsWith("/setup")}
-            />
+            {appPages.map(({ path, name }) => (
+              <Fragment key={path}>
+                <MenuItem
+                  label={name}
+                  href={`#${path}`}
+                  active={
+                    pathname === path ||
+                    (path !== "/" && pathname.startsWith(path))
+                  }
+                />
+                {path === "/explore" && pathname.startsWith("/explore") && (
+                  <OrgUnitTree />
+                )}
+              </Fragment>
+            ))}
           </Menu>
         </div>
         <main className={styles.content}>

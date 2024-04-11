@@ -1,0 +1,16 @@
+.container {
+  font-size: 14px;
+  margin-right: 24px;
+  margin-bottom: 100px;
+  max-width: 400px;
+}
+
+.container h1 {
+  color: var(--colors-grey900);
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.container > div {
+  padding: 8px 0;
+}
