@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-04-09T15:49:20.957Z\n"
-"PO-Revision-Date: 2024-04-09T15:49:20.957Z\n"
+"POT-Creation-Date: 2024-04-11T09:22:18.947Z\n"
+"PO-Revision-Date: 2024-04-11T09:22:18.947Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -427,6 +427,9 @@ msgstr "Max/min temp."
 msgid "Precip."
 msgstr "Precip."
 
+msgid "Rel. humidity"
+msgstr "Rel. humidity"
+
 msgid "Wind"
 msgstr "Wind"
 
@@ -743,6 +746,18 @@ msgstr "Time zone where your org units are located"
 
 msgid "Loading data"
 msgstr "Loading data"
+
+msgid ""
+"For a temporary period there is limited data available for 2024. This is "
+"due to modernization work impacting the Copernicus Climate Data Store (CDS) "
+"where the data originates."
+msgstr ""
+"For a temporary period there is limited data available for 2024. This is "
+"due to modernization work impacting the Copernicus Climate Data Store (CDS) "
+"where the data originates."
+
+msgid "Read more on the CDS user forum"
+msgstr "Read more on the CDS user forum"
 
 msgid "Time zone"
 msgstr "Time zone"
