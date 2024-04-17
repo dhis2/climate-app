@@ -87,7 +87,7 @@ export const getSelectedMonths = (data, { startMonth, endMonth }) => {
 };
 
 const getYearPeriod = (startYear, endYear) =>
-  `${startYear}${endYear !== startYear ? `-${endYear}` : ""}`;
+  `${startYear}${endYear !== startYear ? ` ${endYear}` : ""}`;
 
 export const getMonthlyPeriod = (period) => {
   const { startMonth, endMonth } = period;

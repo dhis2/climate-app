@@ -4,7 +4,6 @@ import { Outlet, useResolvedPath, useNavigate } from "react-router-dom";
 import styles from "./styles/Root.module.css";
 import OrgUnitTree from "./explore/OrgUnitTree";
 import useAppSettings from "../hooks/useAppSettings";
-import useEarthEngineLastTime from "../hooks/useEarthEngineLastTime";
 
 export const appPages = [
   { path: "/", name: "Home" },
@@ -15,12 +14,9 @@ export const appPages = [
 ];
 
 const Root = () => {
-  const { data } = useEarthEngineLastTime("ECMWF/ERA5_LAND/DAILY_AGGR");
   const { settings } = useAppSettings();
   const { pathname } = useResolvedPath();
   const navigate = useNavigate();
-
-  console.log("time", data);
 
   useEffect(() => {
     if (pathname === "/" && settings.startPage) {
