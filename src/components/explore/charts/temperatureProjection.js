@@ -8,7 +8,7 @@ const getChartConfig = (name, data) => {
     y: d.value,
   }));
 
-  console.log("series", series, data);
+  // console.log("series", series, data);
 
   // https://www.highcharts.com/demo/highcharts/arearange-line
   return {
@@ -60,12 +60,15 @@ const getChartConfig = (name, data) => {
     },
     series: [
       {
-        type: "spline",
+        type: "line",
         data: series,
         name: i18n.t("Mean temperature"),
         color: colors.red800,
         negativeColor: colors.blue800,
-        zIndex: 2,
+        // zIndex: 2,
+        marker: {
+          enabled: false,
+        },
       },
     ],
   };
