@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-04-11T09:22:18.947Z\n"
-"PO-Revision-Date: 2024-04-11T09:22:18.947Z\n"
+"POT-Creation-Date: 2024-04-14T18:13:42.593Z\n"
+"PO-Revision-Date: 2024-04-14T18:13:42.593Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -779,6 +779,9 @@ msgstr "Min temperature (ERA5-Land)"
 
 msgid "Min temperature in °C at 2m above the surface"
 msgstr "Min temperature in °C at 2m above the surface"
+
+msgid "Temperature anomaly (ERA5-Land)"
+msgstr "Temperature anomaly (ERA5-Land)"
 
 msgid "ERA5-Land / Copernicus Climate Change Service"
 msgstr "ERA5-Land / Copernicus Climate Change Service"

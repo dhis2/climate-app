@@ -69,6 +69,22 @@ export default [
     dataElementCode: "ERA5_LAND_TEMPERATURE_MIN",
   },
   {
+    id: "ECMWF/ERA5_LAND/DAILY_AGGR/temperature_2m_anomaly",
+    datasetId: "ECMWF/ERA5_LAND/DAILY_AGGR",
+    name: i18n.t("Temperature anomaly (ERA5-Land)"),
+    description: i18n.t("Min temperature in °C at 2m above the surface"),
+    band: "temperature_2m",
+    reducer: "mean",
+    timeZone: {
+      datasetId: "ECMWF/ERA5_LAND/HOURLY",
+      band: "temperature_2m",
+      periodType: "hourly",
+      periodReducer: "mean",
+    },
+    valueParser: temperatureParser,
+    dataElementCode: "ERA5_LAND_TEMPERATURE_ANOMALY",
+  },
+  {
     id: "ECMWF/ERA5_LAND/DAILY_AGGR/total_precipitation_sum",
     datasetId: "ECMWF/ERA5_LAND/DAILY_AGGR",
     name: i18n.t("Precipitation (ERA5-Land)"),
