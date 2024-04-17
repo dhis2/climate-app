@@ -7,6 +7,7 @@ const tabs = [
   { id: "precipitation", label: "Precipitation" },
   { id: "humidity", label: "Humidity" },
   { id: "climatechange", label: "Climate change" },
+  { id: "projections", label: "Climate projections" },
 ];
 
 const Tabs = ({ selected, isPoint, onChange }) => (
