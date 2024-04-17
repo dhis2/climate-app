@@ -243,3 +243,12 @@ export const getTimeSeriesData = async (ee, dataset, period, geometry) => {
     )
   ).then(getFeatureCollectionPropertiesArray);
 };
+
+export const getLastStartTime = (ee, datasetId) =>
+  getInfo(
+    ee
+      .ImageCollection(datasetId)
+      .limit(1, "system:time_start", false)
+      .first()
+      .date()
+  );
