@@ -10,10 +10,10 @@ export const formatDate = (date) => {
   return `${year}-${month}-${day}`; // xxxx-xx-xx
 };
 
-const currentYear = new Date().getFullYear();
-const lastYear = currentYear - 1;
-const endDate = new Date(`${lastYear}-12-31`);
-const startDate = new Date(endDate.getFullYear(), endDate.getMonth() - 11, 1); // 12 months back
+const endDate = new Date();
+const startDate = new Date(
+  new Date(endDate).setFullYear(endDate.getFullYear() - 1)
+);
 
 export const defaultPeriod = {
   startDate: formatDate(startDate),
