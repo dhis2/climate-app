@@ -12,6 +12,7 @@ import TemperatureTab from "./TemperatureTab";
 import PrecipitationTab from "./PrecipitationTab";
 import HumidityTab from "./HumidityTab";
 import ClimateChangeTab from "./ClimateChangeTab";
+import ProjectionsTab from "./ProjectionsTab";
 import useEarthEngineTimeSeries from "../../hooks/useEarthEngineTimeSeries";
 import { defaultPeriod, defaultReferencePeriod } from "../../utils/time";
 import styles from "./styles/OrgUnit.module.css";
@@ -49,11 +50,13 @@ const tabs = {
   precipitation: PrecipitationTab,
   humidity: HumidityTab,
   climatechange: ClimateChangeTab,
+  projections: ProjectionsTab,
 };
 
 const OrgUnit = ({ orgUnit }) => {
   const isPoint = orgUnit.geometry?.type === "Point";
-  const [tab, setTab] = useState(isPoint ? "forecast10days" : "temperature");
+  // const [tab, setTab] = useState(isPoint ? "forecast10days" : "temperature");
+  const [tab, setTab] = useState("projections");
   const [dailyPeriod, setDailyPeriod] = useState(defaultPeriod);
   const [monthlyPeriod, setMonthlyPeriod] = useState();
   const [referencePeriod, setReferencePeriod] = useState(
@@ -61,6 +64,7 @@ const OrgUnit = ({ orgUnit }) => {
   );
   const [periodType, setPeriodType] = useState("monthly");
 
+  /*
   const monthlyData = useEarthEngineTimeSeries(
     monthlyDataset,
     allMonthsPeriod,
@@ -72,6 +76,9 @@ const OrgUnit = ({ orgUnit }) => {
     dailyPeriod,
     orgUnit?.geometry
   );
+  */
+  let monthlyData;
+  let dailyData;
 
   const dataIsLoaded = monthlyData && dailyData && monthlyPeriod;
 

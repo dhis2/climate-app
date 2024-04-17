@@ -243,3 +243,47 @@ export const getTimeSeriesData = async (ee, dataset, period, geometry) => {
     )
   ).then(getFeatureCollectionPropertiesArray);
 };
+
+export const getClimateProjections = async (ee, dataset, period, geometry) => {
+  const { datasetId, band, model, scenario, valueParser } = dataset;
+  const { startYear, endYear } = period;
+  const { type, coordinates } = geometry;
+
+  const years = ee.List.sequence(startYear, endYear);
+  const eeGeometry = ee.Geometry[type](coordinates);
+  const eeReducer = ee.Reducer.mean();
+
+  const collection = ee
+    .ImageCollection(datasetId)
+    .filter(ee.Filter.eq("model", model))
+    .filter(ee.Filter.eq("scenario", scenario))
+    .select(band);
+
+  const eeScale = getScale(collection.first());
+
+  const byYear = ee.ImageCollection.fromImages(
+    years.map((year) =>
+      collection
+        .filter(ee.Filter.calendarRange(year, year, "year"))
+        .mean()
+        .set("system:index", ee.Number(year).format("%.0f"))
+        .set("system:time_start", ee.Date.fromYMD(year, 1, 1).millis())
+        .set("system:time_end", ee.Date.fromYMD(year, 12, 31).millis())
+    )
+  );
+
+  return getInfo(
+    ee.FeatureCollection(
+      byYear.map((image) =>
+        ee.Feature(null, image.reduceRegion(eeReducer, eeGeometry, eeScale))
+      )
+    )
+  )
+    .then(getFeatureCollectionPropertiesArray)
+    .then((data) =>
+      data.map((f) => ({
+        year: parseInt(f.id),
+        value: valueParser(f[band]),
+      }))
+    );
+};

@@ -105,7 +105,6 @@ const ForecastTab = ({ geometry }) => {
 };
 
 ForecastTab.propTypes = {
-  name: PropTypes.string.isRequired,
   geometry: PropTypes.object.isRequired,
 };
 

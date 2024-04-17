@@ -6,7 +6,7 @@ import {
 } from "../utils/calc";
 
 // kelvin to celsius with one decimal
-const temperatureParser = (v) => roundOneDecimal(kelvinToCelsius(v));
+export const temperatureParser = (v) => roundOneDecimal(kelvinToCelsius(v));
 
 const relativeHumidityParser = ([dewData, tempData]) =>
   tempData.map((temp, i) => ({
