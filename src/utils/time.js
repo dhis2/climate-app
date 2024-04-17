@@ -10,7 +10,11 @@ export const formatDate = (date) => {
   return `${year}-${month}-${day}`; // xxxx-xx-xx
 };
 
+const lagTime = 10; // 10 days for ERA5-Land
+
 const endDate = new Date();
+endDate.setDate(endDate.getDate() - lagTime);
+
 const startDate = new Date(
   new Date(endDate).setFullYear(endDate.getFullYear() - 1)
 ); // 1 year ago
