@@ -13,7 +13,7 @@ export const formatDate = (date) => {
 const endDate = new Date();
 const startDate = new Date(
   new Date(endDate).setFullYear(endDate.getFullYear() - 1)
-);
+); // 1 year ago
 
 export const defaultPeriod = {
   startDate: formatDate(startDate),
