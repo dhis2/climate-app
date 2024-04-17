@@ -10,10 +10,14 @@ export const formatDate = (date) => {
   return `${year}-${month}-${day}`; // xxxx-xx-xx
 };
 
-const currentYear = new Date().getFullYear();
-const lastYear = currentYear - 1;
-const endDate = new Date(`${lastYear}-12-31`);
-const startDate = new Date(endDate.getFullYear(), endDate.getMonth() - 11, 1); // 12 months back
+const lagTime = 10; // 10 days for ERA5-Land
+const endDate = new Date();
+
+endDate.setDate(endDate.getDate() - lagTime);
+endDate.setDate(0); // Last day of the previous month
+
+// First day 12 months back
+const startDate = new Date(endDate.getFullYear(), endDate.getMonth() - 11, 1);
 
 export const defaultPeriod = {
   startDate: formatDate(startDate),

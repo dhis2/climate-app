@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import i18n from "@dhis2/d2-i18n";
 import { Button } from "@dhis2/ui";
 import DatePicker from "../shared/DatePicker";
-import PeriodWarning from "../shared/PeriodWarning";
 import { getNumberOfDays } from "../../utils/time";
 import styles from "./styles/Period.module.css";
 
@@ -36,7 +35,6 @@ const DailyPeriodSelect = ({ currentPeriod, onUpdate }) => {
           {i18n.t("Maximum {{maxDays}} days allowed", { maxDays })}
         </div>
       )}
-      <PeriodWarning period={period} />
     </div>
   );
 };

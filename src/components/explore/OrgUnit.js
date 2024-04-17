@@ -12,7 +12,6 @@ import TemperatureTab from "./TemperatureTab";
 import PrecipitationTab from "./PrecipitationTab";
 import HumidityTab from "./HumidityTab";
 import ClimateChangeTab from "./ClimateChangeTab";
-import DataLoader from "../shared/DataLoader";
 import useEarthEngineTimeSeries from "../../hooks/useEarthEngineTimeSeries";
 import { defaultPeriod, defaultReferencePeriod } from "../../utils/time";
 import styles from "./styles/OrgUnit.module.css";
