@@ -1,5 +1,5 @@
 import i18n from "@dhis2/d2-i18n";
-import { colors } from "@dhis2/ui"; // https://github.com/dhis2/ui/blob/master/constants/src/colors.js
+import { colors } from "@dhis2/ui";
 import { animation, credits, getDailyPeriod } from "../../../utils/chart";
 import { metersToMillimeters } from "../../../utils/calc";
 
