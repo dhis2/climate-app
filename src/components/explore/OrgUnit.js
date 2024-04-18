@@ -180,7 +180,9 @@ const OrgUnit = ({ orgUnit }) => {
             )}
             {dataIsLoaded &&
               (tab === "climatechange" ||
-                (periodType === "monthly" && tab !== "forecast10days")) && (
+                (periodType === "monthly" &&
+                  tab !== "forecast10days" &&
+                  tab !== "heat")) && (
                 <ReferencePeriodSelect
                   selected={referencePeriod}
                   onChange={setReferencePeriod}
