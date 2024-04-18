@@ -11,7 +11,7 @@ import ForecastTab from "./forecast/ForecastTab";
 import TemperatureTab from "./TemperatureTab";
 import PrecipitationTab from "./PrecipitationTab";
 import HumidityTab from "./HumidityTab";
-import ThermalComfortTab from "./ThermalComfortTab";
+import HeatTab from "./HeatTab";
 import ClimateChangeTab from "./ClimateChangeTab";
 import useEarthEngineTimeSeries from "../../hooks/useEarthEngineTimeSeries";
 import { defaultPeriod, defaultReferencePeriod } from "../../utils/time";
@@ -49,7 +49,7 @@ const tabs = {
   temperature: TemperatureTab,
   precipitation: PrecipitationTab,
   humidity: HumidityTab,
-  thermal: ThermalComfortTab,
+  heat: HeatTab,
   climatechange: ClimateChangeTab,
 };
 
@@ -97,7 +97,7 @@ const addis = {
 
 // const OrgUnit = ({ orgUnit }) => {
 const OrgUnit = () => {
-  const orgUnit = finse;
+  const orgUnit = lilongwe;
 
   const isPoint = orgUnit.geometry?.type === "Point";
   const [tab, setTab] = useState(isPoint ? "forecast10days" : "temperature");

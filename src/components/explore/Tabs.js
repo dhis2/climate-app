@@ -6,7 +6,7 @@ const tabs = [
   { id: "temperature", label: "Temperature" },
   { id: "precipitation", label: "Precipitation" },
   { id: "humidity", label: "Humidity" },
-  { id: "thermal", label: "Thermal comfort" },
+  { id: "heat", label: "Heat" },
   { id: "climatechange", label: "Climate change" },
 ];
 

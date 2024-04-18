@@ -1,11 +1,16 @@
 import i18n from "@dhis2/d2-i18n";
 import { colors } from "@dhis2/ui"; // https://github.com/dhis2/ui/blob/master/constants/src/colors.js
-import { animation, credits, getDailyPeriod } from "../../../utils/chart";
+import {
+  animation,
+  heatCredits,
+  strokePattern,
+  getDailyPeriod,
+} from "../../../utils/chart";
 import { toCelcius } from "../../../utils/calc";
 
 const opacity = 0.4;
 
-export const legend = [
+const legend = [
   {
     color: `rgba(10,48,107,${opacity})`,
     from: -100,
@@ -43,7 +48,7 @@ export const legend = [
     label: "No thermal<br>stress",
   },
   {
-    color: `rgba(255,140,0,${opacity})`,
+    color: `rgba(255,140,0,${opacity - 0.1})`,
     from: 26,
     to: 32,
     label: "Moderate<br>heat stress",
@@ -63,9 +68,52 @@ export const legend = [
   {
     color: `rgba(139,1,2,${opacity})`,
     from: 46,
-    to: 50,
+    to: 100,
     label: "Extreme<br>heat stress",
   },
+];
+
+export const getPlotBands = (minMax) => {
+  const minValue = Math.floor(Math.min(...minMax.map((d) => d[1])));
+  const maxValue = Math.ceil(Math.max(...minMax.map((d) => d[2])));
+
+  const plotBands = legend.filter(
+    (l) => l.to >= minValue && l.from <= maxValue
+  );
+  const firstBand = plotBands[0];
+  const lastBand = plotBands[plotBands.length - 1];
+
+  if (firstBand.to === -40) {
+    firstBand.from = minValue >= -45 ? -45 : minValue;
+  }
+
+  if (lastBand.from === 46) {
+    lastBand.to = maxValue <= 50 ? 50 : maxValue;
+  }
+
+  return plotBands.map((l) => ({
+    ...l,
+    label: {
+      text: l.label,
+      align: "right",
+      verticalAlign: "middle",
+      textAlign: "left",
+      y: -4,
+    },
+  }));
+};
+
+export const getPlotLines = (plotBands) =>
+  plotBands.map((l) => ({
+    value: l.from,
+    width: 1,
+    color: "rgba(0,0,0,0.1)",
+    zIndex: 1,
+  }));
+
+export const getThickPositons = (plotBands) => [
+  ...plotBands.map((b) => b.from),
+  plotBands[plotBands.length - 1].to,
 ];
 
 const getChart = (name, data) => {
@@ -80,16 +128,10 @@ const getChart = (name, data) => {
     toCelcius(d["utci_max"]),
   ]);
 
-  const firstValue = series[0].y;
-  const minValue = Math.ceil(Math.min(...minMax.map((d) => d[1])));
-  const maxValue = Math.floor(Math.max(...minMax.map((d) => d[2])));
+  const plotBands = getPlotBands(minMax);
+  const plotLines = getPlotLines(plotBands);
+  const tickPositions = getThickPositons(plotBands);
 
-  const plotBands = legend.filter(
-    (l) => l.to >= minValue && l.from <= maxValue
-  );
-  const lastBand = plotBands[plotBands.length - 1];
-
-  // https://www.highcharts.com/demo/highcharts/arearange-line
   return {
     title: {
       text: i18n.t("{{name}}: Thermal comfort {{period}}", {
@@ -98,7 +140,7 @@ const getChart = (name, data) => {
         nsSeparator: ";",
       }),
     },
-    credits,
+    credits: heatCredits,
     tooltip: {
       crosshairs: true,
       shared: true,
@@ -112,29 +154,14 @@ const getChart = (name, data) => {
       },
     },
     yAxis: {
-      // min: minValue > 0 ? 0 : undefined,
       title: false,
-      tickPositions: [...plotBands.map((b) => b.from), lastBand.to],
+      tickPositions,
       labels: {
         format: "{value}°C",
       },
       gridLineWidth: 0,
-      plotBands: plotBands.map((l) => ({
-        ...l,
-        label: {
-          text: l.label,
-          align: "right",
-          verticalAlign: "middle",
-          textAlign: "left",
-          y: -4,
-        },
-      })),
-      plotLines: legend.map((l) => ({
-        value: l.from,
-        width: 1,
-        color: "rgba(0,0,0,0.1)",
-        zIndex: 1,
-      })),
+      plotBands,
+      plotLines,
     },
     chart: {
       height: 480,
@@ -163,14 +190,7 @@ const getChart = (name, data) => {
         type: "arearange",
         name: i18n.t("Felt temperature range"),
         data: minMax,
-        color: {
-          pattern: {
-            color: "rgba(0,0,0,.15)",
-            path: "M -5 15 L 15 -5M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2",
-            width: 4,
-            height: 4,
-          },
-        },
+        color: strokePattern,
         marker: {
           enabled: false,
         },

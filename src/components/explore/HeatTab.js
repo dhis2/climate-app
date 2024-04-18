@@ -21,7 +21,7 @@ const dataset = {
   ],
 };
 
-const ThermalComfortTab = ({
+const HeatTab = ({
   name,
   periodType,
   monthlyPeriod,
@@ -54,10 +54,10 @@ const ThermalComfortTab = ({
   );
 };
 
-ThermalComfortTab.propTypes = {
+HeatTab.propTypes = {
   name: PropTypes.string.isRequired,
   geometry: PropTypes.object.isRequired,
   dailyPeriod: PropTypes.object,
 };
 
-export default ThermalComfortTab;
+export default HeatTab;

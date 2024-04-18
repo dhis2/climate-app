@@ -1,13 +1,18 @@
 import i18n from "@dhis2/d2-i18n";
-import { colors } from "@dhis2/ui"; // https://github.com/dhis2/ui/blob/master/constants/src/colors.js
+import { colors } from "@dhis2/ui";
 import {
   animation,
-  credits,
+  heatCredits,
+  strokePattern,
   getSelectedMonths,
-  getMonthlyPeriod, // TODO
+  getMonthlyPeriod,
 } from "../../../utils/chart";
 import { toCelcius } from "../../../utils/calc";
-import { legend } from "./thermalComfortDaily";
+import {
+  getPlotBands,
+  getPlotLines,
+  getThickPositons,
+} from "./thermalComfortDaily";
 
 const getChart = (name, data, monthlyPeriod, era5Data) => {
   const months = getSelectedMonths(era5Data, monthlyPeriod);
@@ -28,25 +33,19 @@ const getChart = (name, data, monthlyPeriod, era5Data) => {
     toCelcius(d["utci_max"]),
   ]);
 
-  const firstValue = series[0].y;
-  const minValue = Math.ceil(Math.min(...minMax.map((d) => d[1])));
-  const maxValue = Math.floor(Math.max(...minMax.map((d) => d[2])));
+  const plotBands = getPlotBands(minMax);
+  const plotLines = getPlotLines(plotBands);
+  const tickPositions = getThickPositons(plotBands);
 
-  const plotBands = legend.filter(
-    (l) => l.to >= minValue && l.from <= maxValue
-  );
-  const lastBand = plotBands[plotBands.length - 1];
-
-  // https://www.highcharts.com/demo/highcharts/arearange-line
   return {
     title: {
       text: i18n.t("{{name}}: Thermal comfort {{period}}", {
         name,
-        period: "", // getMonthlyPeriod(data), TODO
+        period: getMonthlyPeriod(monthlyPeriod),
         nsSeparator: ";",
       }),
     },
-    credits,
+    credits: heatCredits,
     tooltip: {
       crosshairs: true,
       shared: true,
@@ -60,29 +59,14 @@ const getChart = (name, data, monthlyPeriod, era5Data) => {
       },
     },
     yAxis: {
-      // min: minValue > 0 ? 0 : undefined,
-      // min: 10, // TODO
       title: false,
-      tickPositions: [...plotBands.map((b) => b.from), lastBand.to],
+      tickPositions,
       labels: {
         format: "{value}°C",
       },
       gridLineWidth: 0,
-      plotBands: plotBands.map((l) => ({
-        ...l,
-        label: {
-          text: l.label,
-          align: "right",
-          verticalAlign: "middle",
-          textAlign: "left",
-        },
-      })),
-      plotLines: legend.map((l) => ({
-        value: l.from,
-        width: 1,
-        color: "rgba(0,0,0,0.1)",
-        zIndex: 1,
-      })),
+      plotBands,
+      plotLines,
     },
     chart: {
       height: 480,
@@ -111,16 +95,7 @@ const getChart = (name, data, monthlyPeriod, era5Data) => {
         type: "arearange",
         name: i18n.t("Felt temperature range"),
         data: minMax,
-        // color: colors.red200,
-        // negativeColor: colors.blue200,
-        color: {
-          pattern: {
-            color: "rgba(0,0,0,.15)",
-            path: "M -5 15 L 15 -5M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2",
-            width: 4,
-            height: 4,
-          },
-        },
+        color: strokePattern,
         marker: {
           enabled: false,
         },
