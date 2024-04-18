@@ -239,12 +239,15 @@ export const getTimeSeriesData = async (ee, dataset, period, geometry) => {
         const startDate = ee.Date(date);
         const endDate = startDate.advance(1, "month");
 
-        return collection
-          .filter(ee.Filter.date(startDate, endDate))
-          .reduce(eeReducer)
-          .set("system:index", startDate.format("YYYYMM"))
-          .set("system:time_start", startDate.millis())
-          .set("system:time_end", endDate.millis());
+        return (
+          collection
+            .filter(ee.Filter.date(startDate, endDate))
+            //.reduce(eeReducer)
+            .mean() // Use mean to avoid extremes on monthly chart
+            .set("system:index", startDate.format("YYYYMM"))
+            .set("system:time_start", startDate.millis())
+            .set("system:time_end", endDate.millis())
+        );
       })
     );
 
