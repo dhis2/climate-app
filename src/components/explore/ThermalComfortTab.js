@@ -25,24 +25,32 @@ const ThermalComfortTab = ({
   name,
   periodType,
   monthlyPeriod,
+  monthlyData,
   dailyPeriod,
   geometry,
 }) => {
-  const dailyData = useEarthEngineTimeSeries(dataset, dailyPeriod, geometry);
-  const monthlyData = useEarthEngineTimeSeries(
+  const dailyThermal = useEarthEngineTimeSeries(dataset, dailyPeriod, geometry);
+  const monthlyThermal = useEarthEngineTimeSeries(
     dataset,
     monthlyPeriod,
     geometry
   );
 
-  if (!monthlyData || !dailyData) {
+  if (!monthlyThermal || !dailyThermal) {
     return <DataLoader height={400} />;
   }
 
   return periodType === "monthly" ? (
-    <Chart config={getMonthlyConfig(name, monthlyData)} />
+    <Chart
+      config={getMonthlyConfig(
+        name,
+        monthlyThermal,
+        monthlyPeriod,
+        monthlyData
+      )}
+    />
   ) : (
-    <Chart config={getDailyConfig(name, dailyData)} />
+    <Chart config={getDailyConfig(name, dailyThermal)} />
   );
 };
 

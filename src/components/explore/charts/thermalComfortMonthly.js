@@ -1,34 +1,48 @@
 import i18n from "@dhis2/d2-i18n";
 import { colors } from "@dhis2/ui"; // https://github.com/dhis2/ui/blob/master/constants/src/colors.js
-import { animation, credits, getDailyPeriod } from "../../../utils/chart";
+import {
+  animation,
+  credits,
+  getSelectedMonths,
+  getMonthlyPeriod, // TODO
+} from "../../../utils/chart";
+import { toCelcius } from "../../../utils/calc";
 import { legend } from "./thermalComfortDaily";
 
-// Get optimal band label position to avoid overlapping
-const getBandLabelPosition = ({ from, to }, value) =>
-  value >= from && value <= to && value - from > to - value ? "bottom" : "top";
+const getChart = (name, data, monthlyPeriod, era5Data) => {
+  const months = getSelectedMonths(era5Data, monthlyPeriod);
 
-const getChart = (name, data) => {
   const series = data.map((d) => ({
     x: new Date(d.id).getTime(),
-    y: Math.round((d["utci_mean"] - 273.15) * 10) / 10,
+    y: toCelcius(d["utci_mean"]),
+  }));
+
+  const temperatures = months.map((d) => ({
+    x: new Date(d.id).getTime(),
+    y: toCelcius(d["temperature_2m"]),
   }));
 
   const minMax = data.map((d) => [
     new Date(d.id).getTime(),
-    Math.round((d["utci_min"] - 273.15) * 10) / 10,
-    Math.round((d["utci_max"] - 273.15) * 10) / 10,
+    toCelcius(d["utci_min"]),
+    toCelcius(d["utci_max"]),
   ]);
 
   const firstValue = series[0].y;
   const minValue = Math.ceil(Math.min(...minMax.map((d) => d[1])));
   const maxValue = Math.floor(Math.max(...minMax.map((d) => d[2])));
 
+  const plotBands = legend.filter(
+    (l) => l.to >= minValue && l.from <= maxValue
+  );
+  const lastBand = plotBands[plotBands.length - 1];
+
   // https://www.highcharts.com/demo/highcharts/arearange-line
   return {
     title: {
       text: i18n.t("{{name}}: Thermal comfort {{period}}", {
         name,
-        period: getDailyPeriod(data),
+        period: "", // getMonthlyPeriod(data), TODO
         nsSeparator: ";",
       }),
     },
@@ -49,38 +63,31 @@ const getChart = (name, data) => {
       // min: minValue > 0 ? 0 : undefined,
       // min: 10, // TODO
       title: false,
+      tickPositions: [...plotBands.map((b) => b.from), lastBand.to],
       labels: {
         format: "{value}°C",
       },
       gridLineWidth: 0,
-      plotBands: legend
-        .filter((l) => l.to >= minValue && l.from <= maxValue)
-        .map((l) => {
-          const verticalAlign = getBandLabelPosition(l, firstValue);
-          return {
-            ...l,
-            label: {
-              text: l.label,
-              verticalAlign,
-              y: verticalAlign === "bottom" ? -13 : 20,
-            },
-          };
-        }),
+      plotBands: plotBands.map((l) => ({
+        ...l,
+        label: {
+          text: l.label,
+          align: "right",
+          verticalAlign: "middle",
+          textAlign: "left",
+        },
+      })),
       plotLines: legend.map((l) => ({
         value: l.from,
         width: 1,
-        // color: "#FFFFFF",
-      })) /*[
-        {
-          color: "#FF0000",
-          width: 2,
-          value: 5.5,
-        },
-      ]*/,
+        color: "rgba(0,0,0,0.1)",
+        zIndex: 1,
+      })),
     },
     chart: {
       height: 480,
       marginBottom: 75,
+      marginRight: 100,
       zoomType: "x",
     },
     plotOptions: {
@@ -94,7 +101,7 @@ const getChart = (name, data) => {
         data: series,
         name: i18n.t("Average felt temperature"),
         color: colors.red900,
-        lineWidth: 1,
+        lineWidth: 2,
         zIndex: 2,
         marker: {
           enabled: false,
@@ -118,6 +125,18 @@ const getChart = (name, data) => {
           enabled: false,
         },
         zIndex: 0,
+      },
+      {
+        type: "line",
+        data: temperatures,
+        name: i18n.t("Average temperature"),
+        color: colors.red900,
+        lineWidth: 1,
+        dashStyle: "dash",
+        zIndex: 2,
+        marker: {
+          enabled: false,
+        },
       },
     ],
   };

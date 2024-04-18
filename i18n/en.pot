@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-04-18T11:28:19.973Z\n"
-"PO-Revision-Date: 2024-04-18T11:28:19.973Z\n"
+"POT-Creation-Date: 2024-04-18T14:39:30.913Z\n"
+"PO-Revision-Date: 2024-04-18T14:39:30.913Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -408,6 +408,15 @@ msgstr "Normal temperature"
 
 msgid "{{name}}: Thermal comfort {{period}}"
 msgstr "{{name}}: Thermal comfort {{period}}"
+
+msgid "Average felt temperature"
+msgstr "Average felt temperature"
+
+msgid "Felt temperature range"
+msgstr "Felt temperature range"
+
+msgid "Average temperature"
+msgstr "Average temperature"
 
 msgid "{{precip}} mm"
 msgstr "{{precip}} mm"

@@ -7,19 +7,20 @@ import {
   getTemperatureMonthNormal,
   getMonthlyPeriod,
 } from "../../../utils/chart";
+import { toCelcius } from "../../../utils/calc";
 
 const getChartConfig = (name, data, monthlyPeriod, referencePeriod) => {
   const months = getSelectedMonths(data, monthlyPeriod);
 
   const series = months.map((d) => ({
     x: new Date(d.id).getTime(),
-    y: Math.round((d["temperature_2m"] - 273.15) * 10) / 10,
+    y: toCelcius(d["temperature_2m"]),
   }));
 
   const minMax = months.map((d) => [
     new Date(d.id).getTime(),
-    Math.round((d["temperature_2m_min"] - 273.15) * 10) / 10,
-    Math.round((d["temperature_2m_max"] - 273.15) * 10) / 10,
+    toCelcius(d["temperature_2m_min"]),
+    toCelcius(d["temperature_2m_max"]),
   ]);
 
   const normals = months.map((d) => ({
@@ -56,7 +57,6 @@ const getChartConfig = (name, data, monthlyPeriod, referencePeriod) => {
       },
     },
     yAxis: {
-      // min: minValue > 0 ? 0 : undefined,
       title: false,
       labels: {
         format: "{value}°C",

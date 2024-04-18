@@ -5,6 +5,7 @@ import {
   credits,
   getTemperatureMonthNormal,
 } from "../../../utils/chart";
+import { toCelcius } from "../../../utils/calc";
 import { months } from "../MonthSelect";
 
 // https://climate.copernicus.eu/copernicus-september-2023-unprecedented-temperature-anomalies
@@ -16,9 +17,7 @@ const getChartConfig = (name, data, month, referencePeriod) => {
   const monthName = months.find((m) => m.id === month).name;
   const normal = getTemperatureMonthNormal(data, month, referencePeriod);
   const years = monthData.map((d) => d.id.substring(0, 4));
-  const series = monthData.map(
-    (d) => Math.round((d["temperature_2m"] - 273.15 - normal) * 10) / 10
-  );
+  const series = monthData.map((d) => toCelcius(d["temperature_2m"]));
 
   return {
     title: {
