@@ -7,12 +7,12 @@ const dataset = {
   datasetId: "NASA/GDDP-CMIP6",
   band: "tas",
   model: "ACCESS-CM2",
-  scenario: "ssp245", // "ssp245"
+  scenario: "ssp245", // ssp585
   valueParser: temperatureParser,
 };
 
 const period = {
-  startYear: 2020,
+  startYear: 2025,
   endYear: 2100,
 };
 

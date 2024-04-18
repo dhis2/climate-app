@@ -244,23 +244,48 @@ export const getTimeSeriesData = async (ee, dataset, period, geometry) => {
   ).then(getFeatureCollectionPropertiesArray);
 };
 
+const models = [
+  "ACCESS-CM2",
+  "ACCESS-ESM1-5",
+  "BCC-CSM2-MR",
+  "CESM2",
+  "CESM2-WACCM",
+  "CMCC-CM2-SR5",
+  "CMCC-ESM2",
+  "CNRM-CM6-1",
+  "CNRM-ESM2-1",
+  "CanESM5",
+];
+
 export const getClimateProjections = async (ee, dataset, period, geometry) => {
   const { datasetId, band, model, scenario, valueParser } = dataset;
   const { startYear, endYear } = period;
   const { type, coordinates } = geometry;
 
-  const years = ee.List.sequence(startYear, endYear);
+  const years = ee.List.sequence(startYear, endYear, 1);
   const eeGeometry = ee.Geometry[type](coordinates);
+
   const eeReducer = ee.Reducer.mean();
+
+  /*
+  const eeReducer = ee.Reducer.mean().combine({
+    reducer2: ee.Reducer.minMax(),
+    sharedInputs: true,
+  });
+  */
 
   const collection = ee
     .ImageCollection(datasetId)
-    .filter(ee.Filter.eq("model", model))
+    // .filter(ee.Filter.eq("model", model))
     .filter(ee.Filter.eq("scenario", scenario))
     .select(band);
 
+  const modelList = ee.List(models);
+
   const eeScale = getScale(collection.first());
 
+  // https://gis.stackexchange.com/questions/468177/cmip6-timeseries-values-of-0-using-ee-reducer-mean
+  /*
   const byYear = ee.ImageCollection.fromImages(
     years.map((year) =>
       collection
@@ -271,18 +296,63 @@ export const getClimateProjections = async (ee, dataset, period, geometry) => {
         .set("system:time_end", ee.Date.fromYMD(year, 12, 31).millis())
     )
   );
+  */
+
+  const byModel = ee.ImageCollection(
+    ee
+      .FeatureCollection(
+        modelList.map((model) => {
+          const modelCollection = collection.filter(
+            ee.Filter.eq("model", model)
+          );
+
+          return ee.ImageCollection.fromImages(
+            years.map((year) =>
+              modelCollection
+                .filter(ee.Filter.calendarRange(year, year, "year"))
+                .mean()
+                /*
+              .set(
+                "system:index",
+                ee.String(model).cat("_").cat(ee.Number(year).format("%.0f"))
+              )
+              */
+                .set("system:time_start", ee.Date.fromYMD(year, 1, 1).millis())
+                .set("system:time_end", ee.Date.fromYMD(year, 12, 31).millis())
+                .set("model", model)
+                .set("year", year)
+            )
+          );
+        })
+      )
+      .flatten()
+  );
+
+  // getInfo(byModel).then((data) => console.log("###", data));
 
   return getInfo(
     ee.FeatureCollection(
-      byYear.map((image) =>
-        ee.Feature(null, image.reduceRegion(eeReducer, eeGeometry, eeScale))
+      byModel.map((image) =>
+        ee
+          .Feature(
+            null,
+            image.reduceRegion({
+              reducer: eeReducer,
+              geometry: eeGeometry,
+              scale: eeScale,
+              bestEffort: true,
+            })
+          )
+          .set("year", image.get("year"))
+          .set("model", image.get("model"))
       )
     )
   )
     .then(getFeatureCollectionPropertiesArray)
     .then((data) =>
       data.map((f) => ({
-        year: parseInt(f.id),
+        year: parseInt(f.year),
+        model: f.model,
         value: valueParser(f[band]),
       }))
     );

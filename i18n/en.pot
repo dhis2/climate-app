@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-04-11T09:22:18.947Z\n"
-"PO-Revision-Date: 2024-04-11T09:22:18.947Z\n"
+"POT-Creation-Date: 2024-04-17T17:07:25.179Z\n"
+"PO-Revision-Date: 2024-04-17T17:07:25.179Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -405,6 +405,12 @@ msgstr "{{name}}: Monthly temperatures {{period}}"
 
 msgid "Normal temperature"
 msgstr "Normal temperature"
+
+msgid "{{name}}: Yearly mean temperatures {{period}}"
+msgstr "{{name}}: Yearly mean temperatures {{period}}"
+
+msgid "Temperature trend"
+msgstr "Temperature trend"
 
 msgid "{{precip}} mm"
 msgstr "{{precip}} mm"
