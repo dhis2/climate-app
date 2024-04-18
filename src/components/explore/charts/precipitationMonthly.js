@@ -7,13 +7,14 @@ import {
   getPrecipitationMonthNormal,
   getMonthlyPeriod,
 } from "../../../utils/chart";
+import { metersToMillimeters } from "../../../utils/calc";
 
 const getChartConfig = (name, data, monthlyPeriod, referencePeriod) => {
   const months = getSelectedMonths(data, monthlyPeriod);
 
   const series = months.map((d) => ({
     x: new Date(d.id).getTime(),
-    y: Math.round(d["total_precipitation_sum"] * 1000 * 10) / 10,
+    y: metersToMillimeters(d["total_precipitation_sum"]),
   }));
 
   const normals = months.map((d) => ({
