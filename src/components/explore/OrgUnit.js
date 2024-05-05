@@ -51,15 +51,6 @@ const tabs = {
   climatechange: ClimateChangeTab,
 };
 
-/*
-const addis = {
-  type: "Feature",
-  id: "DiszpKrYNg8",
-  geometry: { type: "Point", coordinates: [38.74, 9.03] },
-  properties: { name: "Addis Ababa" },
-};
-*/
-
 const OrgUnit = ({ orgUnit }) => {
   const isPoint = orgUnit.geometry?.type === "Point";
   const [tab, setTab] = useState(isPoint ? "forecast10days" : "temperature");

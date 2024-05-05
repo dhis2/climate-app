@@ -1,28 +1,40 @@
-import { useState, useEffect } from "react";
+import { useMemo } from "react";
 import { useLocation } from "react-router-dom";
+import i18n from "@dhis2/d2-i18n";
 import OrgUnit from "../explore/OrgUnit";
 import { findLocation } from "../../data/locations";
-import i18n from "@dhis2/d2-i18n";
+import styles from "../explore/styles/ExplorePage.module.css";
 
 const CheckPage = () => {
   const { state } = useLocation();
+  const locationId = state?.id;
 
-  if (!state) {
-    return <div>{i18n.t("Select a location in the left panel")}</div>;
-  }
+  const orgUnit = useMemo(() => {
+    if (!locationId) {
+      return null;
+    }
+    const location = findLocation(locationId);
 
-  const location = findLocation(state.id);
+    return {
+      ...location,
+      properties: {
+        name: location.displayName,
+      },
+    };
+  }, [locationId]);
 
-  const orgUnit = {
-    ...location,
-    properties: {
-      name: location.displayName,
-    },
-  };
-
-  console.log("orgUnit", orgUnit);
-
-  return <OrgUnit {...state} orgUnit={orgUnit} />;
+  return (
+    <div className={styles.container}>
+      {orgUnit ? (
+        <OrgUnit {...state} orgUnit={orgUnit} />
+      ) : (
+        <div className={styles.introduction}>
+          <h1>{i18n.t("Check weather and climate data")}</h1>
+          <p>{i18n.t("Select a location in the left panel")}</p>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default CheckPage;
