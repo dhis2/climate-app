@@ -8,11 +8,11 @@ import CheckOrgUnitTree from "./check/OrgUnitTree";
 import useAppSettings from "../hooks/useAppSettings";
 
 export const appPages = [
-  { path: "/", name: "Home" },
-  { path: "/explore", name: "Explore data" },
-  { path: "/import", name: "Import data" },
-  { path: "/setup", name: "Setup guide" },
-  { path: "/settings", name: "Settings" },
+  { path: "/", name: i18n.t("Home") },
+  { path: "/explore", name: i18n.t("Explore data") },
+  { path: "/import", name: i18n.t("Import data") },
+  { path: "/setup", name: i18n.t("Setup guide") },
+  { path: "/settings", name: i18n.t("Settings") },
 ];
 
 const Root = () => {
