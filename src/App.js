@@ -6,6 +6,7 @@ import ImportPage from "./components/import/ImportPage";
 import SetupPage from "./components/SetupPage";
 import SettingsPage from "./components/settings/SettingsPage";
 import ErrorPage from "./components/ErrorPage";
+import CheckPage from "./components/check/CheckPage";
 
 const router = createHashRouter([
   {
@@ -20,6 +21,10 @@ const router = createHashRouter([
       {
         path: "explore/:orgUnitId?",
         element: <ExplorePage />,
+      },
+      {
+        path: "check/:placeId?",
+        element: <CheckPage />,
       },
       {
         path: "import",

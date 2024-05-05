@@ -52,41 +52,6 @@ const tabs = {
 };
 
 /*
-const finse = {
-  type: "Feature",
-  id: "DiszpKrYNg8",
-  geometry: { type: "Point", coordinates: [7.502289, 60.602791] },
-  properties: { name: "Finse, Norway" },
-};
-
-const alanya = {
-  type: "Feature",
-  id: "DiszpKrYNg8",
-  geometry: { type: "Point", coordinates: [32, 36.55] },
-  properties: { name: "Alanya" },
-};
-
-const kathmandu = {
-  type: "Feature",
-  id: "DiszpKrYNg8",
-  geometry: { type: "Point", coordinates: [85.32, 27.71] },
-  properties: { name: "Kathmandu" },
-};
-
-const vientiane = {
-  type: "Feature",
-  id: "DiszpKrYNg8",
-  geometry: { type: "Point", coordinates: [102.63, 17.98] },
-  properties: { name: "Vientiane" },
-};
-
-const lilongwe = {
-  type: "Feature",
-  id: "DiszpKrYNg8",
-  geometry: { type: "Point", coordinates: [33.783333, -13.983333] },
-  properties: { name: "Lilongwe" },
-};
-
 const addis = {
   type: "Feature",
   id: "DiszpKrYNg8",
@@ -96,9 +61,6 @@ const addis = {
 */
 
 const OrgUnit = ({ orgUnit }) => {
-  // const OrgUnit = () => {
-  // const orgUnit = finse;
-
   const isPoint = orgUnit.geometry?.type === "Point";
   const [tab, setTab] = useState(isPoint ? "forecast10days" : "temperature");
   const [dailyPeriod, setDailyPeriod] = useState(defaultPeriod);
