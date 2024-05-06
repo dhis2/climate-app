@@ -256,6 +256,117 @@ const SetupPage = () => {
           </tr>
         </tbody>
       </table>
+      <table>
+        <caption>
+          {i18n.t("Data element")}: "{i18n.t("Heat stress")}"
+        </caption>
+        <tbody>
+          <tr>
+            <th>{i18n.t("Name")}</th>
+            <td>{i18n.t("Heat stress (ERA5-HEAT)")}</td>
+          </tr>
+          <tr>
+            <th>{i18n.t("Short name")}</th>
+            <td>{i18n.t("Heat stress")}</td>
+          </tr>
+          <tr>
+            <th>{i18n.t("Code")}</th>
+            <td>ERA5_HEAT_UTCI</td>
+          </tr>
+          <tr>
+            <th>{i18n.t("Description")}</th>
+            <td>{i18n.t("The universal thermal climate index (UTCI)")}</td>
+          </tr>
+          <tr>
+            <th>{i18n.t("Domain type")}</th>
+            <td>{i18n.t("Aggregate")}</td>
+          </tr>
+          <tr>
+            <th>{i18n.t("Aggregation type")}</th>
+            <td>{i18n.t("Average")}</td>
+          </tr>
+          <tr>
+            <th>{i18n.t("Aggregation levels")}</th>
+            <td>
+              <em>{i18n.t("Assign all org unit levels")}</em>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table>
+        <caption>
+          {i18n.t("Data element")}: "{i18n.t("Min heat stress")}"
+        </caption>
+        <tbody>
+          <tr>
+            <th>{i18n.t("Name")}</th>
+            <td>{i18n.t("Min heat stress (ERA5-HEAT)")}</td>
+          </tr>
+          <tr>
+            <th>{i18n.t("Short name")}</th>
+            <td>{i18n.t("Min heat stress")}</td>
+          </tr>
+          <tr>
+            <th>{i18n.t("Code")}</th>
+            <td>ERA5_HEAT_UTCI_MIN</td>
+          </tr>
+          <tr>
+            <th>{i18n.t("Description")}</th>
+            <td>{i18n.t("The universal thermal climate index (UTCI)")}</td>
+          </tr>
+          <tr>
+            <th>{i18n.t("Domain type")}</th>
+            <td>{i18n.t("Aggregate")}</td>
+          </tr>
+          <tr>
+            <th>{i18n.t("Aggregation type")}</th>
+            <td>{i18n.t("Min")}</td>
+          </tr>
+          <tr>
+            <th>{i18n.t("Aggregation levels")}</th>
+            <td>
+              <em>{i18n.t("Assign all org unit levels")}</em>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table>
+        <caption>
+          {i18n.t("Data element")}: "{i18n.t("Max heat stress")}"
+        </caption>
+        <tbody>
+          <tr>
+            <th>{i18n.t("Name")}</th>
+            <td>{i18n.t("Max heat stress (ERA5-HEAT)")}</td>
+          </tr>
+          <tr>
+            <th>{i18n.t("Short name")}</th>
+            <td>{i18n.t("Max heat stress")}</td>
+          </tr>
+          <tr>
+            <th>{i18n.t("Code")}</th>
+            <td>ERA5_HEAT_UTCI_MAX</td>
+          </tr>
+          <tr>
+            <th>{i18n.t("Description")}</th>
+            <td>{i18n.t("The universal thermal climate index (UTCI)")}</td>
+          </tr>
+          <tr>
+            <th>{i18n.t("Domain type")}</th>
+            <td>{i18n.t("Aggregate")}</td>
+          </tr>
+          <tr>
+            <th>{i18n.t("Aggregation type")}</th>
+            <td>{i18n.t("Max")}</td>
+          </tr>
+          <tr>
+            <th>{i18n.t("Aggregation levels")}</th>
+            <td>
+              <em>{i18n.t("Assign all org unit levels")}</em>
+            </td>
+          </tr>
+        </tbody>
+      </table>
       <p>
         Since these data elements are collected daily, we recommend they are
         assigned to a daily data set. Assigning to a data set helps to maintain
@@ -325,9 +436,36 @@ const SetupPage = () => {
           </tr>
         </tbody>
       </table>
+      <table>
+        <caption>
+          {i18n.t("Legend")}: "{i18n.t("Heat/cold stress")}"
+        </caption>
+        <thead>
+          <tr>
+            <th>{i18n.t("Name")}</th>
+            <th>{i18n.t("Start value")}</th>
+            <th>{i18n.t("End value")}</th>
+            <th>{i18n.t("Color")}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{i18n.t("Extreme cold stress")}</td>
+            <td>-60</td>
+            <td>-40</td>
+            <td>#0A306B</td>
+          </tr>
+          <tr>
+            <td>{i18n.t("Very strong cold stress")}</td>
+            <td>-40</td>
+            <td>-27</td>
+            <td>#0A529C</td>
+          </tr>
+        </tbody>
+      </table>
       <p>
         {i18n.t(
-          "You should now be able to import temperature and precipitation data with this app. Please reach out to us on climate-app@dhis2.org if you have any questions or need help with the setup."
+          "You should now be able to import climate data with this app. Please reach out to us on climate-app@dhis2.org if you have any questions or need help with the setup."
         )}
       </p>
     </div>

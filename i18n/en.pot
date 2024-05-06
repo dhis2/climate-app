@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-05-05T21:53:37.488Z\n"
-"PO-Revision-Date: 2024-05-05T21:53:37.488Z\n"
+"POT-Creation-Date: 2024-05-05T22:01:56.581Z\n"
+"PO-Revision-Date: 2024-05-05T22:01:56.581Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -73,6 +73,21 @@ msgstr ""
 
 msgid "How the data is calculated"
 msgstr "How the data is calculated"
+
+msgid "Home"
+msgstr "Home"
+
+msgid "Explore data"
+msgstr "Explore data"
+
+msgid "Import data"
+msgstr "Import data"
+
+msgid "Setup guide"
+msgstr "Setup guide"
+
+msgid "Settings"
+msgstr "Settings"
 
 msgid "Check data"
 msgstr "Check data"
@@ -259,6 +274,9 @@ msgstr ""
 "You should now be able to import temperature and precipitation data with "
 "this app. Please reach out to us on climate-app@dhis2.org if you have any "
 "questions or need help with the setup."
+
+msgid "Check weather and climate data"
+msgstr "Check weather and climate data"
 
 msgid "Select a location in the left panel"
 msgstr "Select a location in the left panel"
