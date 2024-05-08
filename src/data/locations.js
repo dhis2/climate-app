@@ -7,6 +7,20 @@ export const locations = {
   displayName: "World",
   children: [
     {
+      id: "cambodia",
+      path: "/world/cambodia",
+      displayName: "Cambodia",
+      children: [
+        {
+          id: "phnompenh",
+          path: "/world/cambodia/phnompenh",
+          displayName: "Phnom Penh",
+          children: [],
+          geometry: { type: "Point", coordinates: [104.921111, 11.569444] },
+        },
+      ],
+    },
+    {
       id: "ethiopia",
       path: "/world/ethiopia",
       displayName: "Ethiopia",
@@ -45,6 +59,20 @@ export const locations = {
           displayName: "Lilongwe",
           children: [],
           geometry: { type: "Point", coordinates: [33.783333, -13.983333] },
+        },
+      ],
+    },
+    {
+      id: "myanmar",
+      path: "/world/myanmar",
+      displayName: "Myanmar",
+      children: [
+        {
+          id: "Chauk",
+          path: "/world/myanmar/chauk",
+          displayName: "Chauk",
+          children: [],
+          geometry: { type: "Point", coordinates: [94.816667, 20.883333] },
         },
       ],
     },

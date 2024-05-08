@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-05-05T22:01:56.581Z\n"
-"PO-Revision-Date: 2024-05-05T22:01:56.581Z\n"
+"POT-Creation-Date: 2024-05-06T20:46:39.577Z\n"
+"PO-Revision-Date: 2024-05-06T20:46:39.577Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -239,6 +239,27 @@ msgstr ""
 "that can exist in the air at its current temperature. Calculated using air "
 "temperature and dewpoint temperature at 2m above surface."
 
+msgid "Heat stress"
+msgstr "Heat stress"
+
+msgid "Heat stress (ERA5-HEAT)"
+msgstr "Heat stress (ERA5-HEAT)"
+
+msgid "The universal thermal climate index (UTCI)"
+msgstr "The universal thermal climate index (UTCI)"
+
+msgid "Min heat stress"
+msgstr "Min heat stress"
+
+msgid "Min heat stress (ERA5-HEAT)"
+msgstr "Min heat stress (ERA5-HEAT)"
+
+msgid "Max heat stress"
+msgstr "Max heat stress"
+
+msgid "Max heat stress (ERA5-HEAT)"
+msgstr "Max heat stress (ERA5-HEAT)"
+
 msgid "Data set"
 msgstr "Data set"
 
@@ -266,14 +287,35 @@ msgstr "Select all organisation units in your system"
 msgid "Data element group"
 msgstr "Data element group"
 
+msgid "Legend"
+msgstr "Legend"
+
+msgid "Heat/cold stress"
+msgstr "Heat/cold stress"
+
+msgid "Start value"
+msgstr "Start value"
+
+msgid "End value"
+msgstr "End value"
+
+msgid "Color"
+msgstr "Color"
+
+msgid "Extreme cold stress"
+msgstr "Extreme cold stress"
+
+msgid "Very strong cold stress"
+msgstr "Very strong cold stress"
+
 msgid ""
-"You should now be able to import temperature and precipitation data with "
-"this app. Please reach out to us on climate-app@dhis2.org if you have any "
-"questions or need help with the setup."
+"You should now be able to import climate data with this app. Please reach "
+"out to us on climate-app@dhis2.org if you have any questions or need help "
+"with the setup."
 msgstr ""
-"You should now be able to import temperature and precipitation data with "
-"this app. Please reach out to us on climate-app@dhis2.org if you have any "
-"questions or need help with the setup."
+"You should now be able to import climate data with this app. Please reach "
+"out to us on climate-app@dhis2.org if you have any questions or need help "
+"with the setup."
 
 msgid "Check weather and climate data"
 msgstr "Check weather and climate data"
@@ -815,6 +857,15 @@ msgstr "Min temperature (ERA5-Land)"
 
 msgid "Min temperature in °C at 2m above the surface"
 msgstr "Min temperature in °C at 2m above the surface"
+
+msgid "Average felt temperature in °C"
+msgstr "Average felt temperature in °C"
+
+msgid "Max felt temperature in °C"
+msgstr "Max felt temperature in °C"
+
+msgid "Min felt temperature in °C"
+msgstr "Min felt temperature in °C"
 
 msgid "ERA5-Land / Copernicus Climate Change Service / Google Earth Engine"
 msgstr "ERA5-Land / Copernicus Climate Change Service / Google Earth Engine"
