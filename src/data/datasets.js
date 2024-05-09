@@ -19,6 +19,16 @@ const relativeHumidityParser = ([dewData, tempData]) =>
     ),
   }));
 
+// TODO: Request missing data on GEE?
+export const heatMissingDataIndex = [
+  "20231111",
+  "20231114",
+  "20231212",
+  "20240104",
+  "20240110",
+  "20240111",
+];
+
 export default [
   {
     id: "ECMWF/ERA5_LAND/DAILY_AGGR/temperature_2m",
@@ -141,6 +151,7 @@ export default [
     description: i18n.t("Average felt temperature in °C"),
     band: "utci_mean",
     reducer: "mean",
+    skipIndex: heatMissingDataIndex,
     valueParser: temperatureParser,
     dataElementCode: "ERA5_HEAT_UTCI",
   },
@@ -151,6 +162,7 @@ export default [
     description: i18n.t("Max felt temperature in °C"),
     band: "utci_max",
     reducer: "max",
+    skipIndex: heatMissingDataIndex,
     valueParser: temperatureParser,
     dataElementCode: "ERA5_HEAT_UTCI_MAX",
   },
@@ -161,6 +173,7 @@ export default [
     description: i18n.t("Min felt temperature in °C"),
     band: "utci_min",
     reducer: "min",
+    skipIndex: heatMissingDataIndex,
     valueParser: temperatureParser,
     dataElementCode: "ERA5_HEAT_UTCI_MIN",
   },
