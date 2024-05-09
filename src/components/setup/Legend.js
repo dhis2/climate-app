@@ -11,7 +11,7 @@ const Legend = ({ name, items }) => (
         <th>{i18n.t("Name")}</th>
         <th>{i18n.t("Start value")}</th>
         <th>{i18n.t("End value")}</th>
-        <th>{i18n.t("Color")}</th>
+        <th colSpan="2">{i18n.t("Color")}</th>
       </tr>
     </thead>
     <tbody>
@@ -20,14 +20,13 @@ const Legend = ({ name, items }) => (
           <td>{name}</td>
           <td>{from}</td>
           <td>{to}</td>
+          <td>{hexColor}</td>
           <td
             style={{
               backgroundColor: hexColor,
-              color: textColor,
+              width: 50,
             }}
-          >
-            {hexColor}
-          </td>
+          ></td>
         </tr>
       ))}
     </tbody>
