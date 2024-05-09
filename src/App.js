@@ -3,7 +3,7 @@ import Root from "./components/Root";
 import AboutPage from "./components/AboutPage";
 import ExplorePage from "./components/explore/ExplorePage";
 import ImportPage from "./components/import/ImportPage";
-import SetupPage from "./components/SetupPage";
+import SetupPage from "./components/setup/SetupPage";
 import SettingsPage from "./components/settings/SettingsPage";
 import ErrorPage from "./components/ErrorPage";
 import CheckPage from "./components/check/CheckPage";

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-05-06T20:46:39.577Z\n"
-"PO-Revision-Date: 2024-05-06T20:46:39.577Z\n"
+"POT-Creation-Date: 2024-05-09T14:35:25.533Z\n"
+"PO-Revision-Date: 2024-05-09T14:35:25.533Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -91,231 +91,6 @@ msgstr "Settings"
 
 msgid "Check data"
 msgstr "Check data"
-
-msgid "How to configure this app"
-msgstr "How to configure this app"
-
-msgid ""
-"Before you can import weather and climate data, you need to make some "
-"configurations in the Maintenance app."
-msgstr ""
-"Before you can import weather and climate data, you need to make some "
-"configurations in the Maintenance app."
-
-msgid ""
-"This app imports daily weather and climate data that can be aggregated to "
-"other period types in DHIS2. We don't recommend aggregating across "
-"organisation unit levels, especially when going from facility level to "
-"higher levels defined by a geographic boundary. To make sure the values "
-"remain at its own level, assign all org unit levels as Aggregation levels "
-"for each data element below."
-msgstr ""
-"This app imports daily weather and climate data that can be aggregated to "
-"other period types in DHIS2. We don't recommend aggregating across "
-"organisation unit levels, especially when going from facility level to "
-"higher levels defined by a geographic boundary. To make sure the values "
-"remain at its own level, assign all org unit levels as Aggregation levels "
-"for each data element below."
-
-msgid ""
-"Create DHIS2 data elements for the climate and weather data you want to "
-"import. We recommend including the data source (ERA5-Land) in the name to "
-"distinguish it from data imported from local weather stations. If you use "
-"the same code specified below, we will preselect the data element in the "
-"import interface."
-msgstr ""
-"Create DHIS2 data elements for the climate and weather data you want to "
-"import. We recommend including the data source (ERA5-Land) in the name to "
-"distinguish it from data imported from local weather stations. If you use "
-"the same code specified below, we will preselect the data element in the "
-"import interface."
-
-msgid "Data element"
-msgstr "Data element"
-
-msgid "Air temperature"
-msgstr "Air temperature"
-
-msgid "Name"
-msgstr "Name"
-
-msgid "Air temperature (ERA5-Land)"
-msgstr "Air temperature (ERA5-Land)"
-
-msgid "Short name"
-msgstr "Short name"
-
-msgid "Code"
-msgstr "Code"
-
-msgid "Description"
-msgstr "Description"
-
-msgid "Average air temperature in °C at 2m above the surface"
-msgstr "Average air temperature in °C at 2m above the surface"
-
-msgid "Domain type"
-msgstr "Domain type"
-
-msgid "Aggregate"
-msgstr "Aggregate"
-
-msgid "Aggregation type"
-msgstr "Aggregation type"
-
-msgid "Average"
-msgstr "Average"
-
-msgid "Aggregation levels"
-msgstr "Aggregation levels"
-
-msgid "Assign all org unit levels"
-msgstr "Assign all org unit levels"
-
-msgid "Min air temperature"
-msgstr "Min air temperature"
-
-msgid "Min air temperature (ERA5-Land)"
-msgstr "Min air temperature (ERA5-Land)"
-
-msgid "Min air temperatur"
-msgstr "Min air temperatur"
-
-msgid "Minimum air temperature in °C at 2m above the surface"
-msgstr "Minimum air temperature in °C at 2m above the surface"
-
-msgid "Min"
-msgstr "Min"
-
-msgid "Max air temperature"
-msgstr "Max air temperature"
-
-msgid "Max air temperature (ERA5-Land)"
-msgstr "Max air temperature (ERA5-Land)"
-
-msgid "Maximum air temperature in °C at 2m above the surface"
-msgstr "Maximum air temperature in °C at 2m above the surface"
-
-msgid "Max"
-msgstr "Max"
-
-msgid "Precipitation"
-msgstr "Precipitation"
-
-msgid "Precipitation (ERA5-Land)"
-msgstr "Precipitation (ERA5-Land)"
-
-msgid "Total precipitation in mm"
-msgstr "Total precipitation in mm"
-
-msgid "Sum"
-msgstr "Sum"
-
-msgid "Dewpoint temperature"
-msgstr "Dewpoint temperature"
-
-msgid "Dewpoint temperature (ERA5-Land)"
-msgstr "Dewpoint temperature (ERA5-Land)"
-
-msgid ""
-"Temperature in °C at 2m above the surface to which the air would have to be "
-"cooled for saturation to occur."
-msgstr ""
-"Temperature in °C at 2m above the surface to which the air would have to be "
-"cooled for saturation to occur."
-
-msgid "Relative humidity"
-msgstr "Relative humidity"
-
-msgid "Relative humidity (ERA5-Land)"
-msgstr "Relative humidity (ERA5-Land)"
-
-msgid ""
-"Percentage of water vapor in the air compared to the total amount of vapor "
-"that can exist in the air at its current temperature. Calculated using air "
-"temperature and dewpoint temperature at 2m above surface."
-msgstr ""
-"Percentage of water vapor in the air compared to the total amount of vapor "
-"that can exist in the air at its current temperature. Calculated using air "
-"temperature and dewpoint temperature at 2m above surface."
-
-msgid "Heat stress"
-msgstr "Heat stress"
-
-msgid "Heat stress (ERA5-HEAT)"
-msgstr "Heat stress (ERA5-HEAT)"
-
-msgid "The universal thermal climate index (UTCI)"
-msgstr "The universal thermal climate index (UTCI)"
-
-msgid "Min heat stress"
-msgstr "Min heat stress"
-
-msgid "Min heat stress (ERA5-HEAT)"
-msgstr "Min heat stress (ERA5-HEAT)"
-
-msgid "Max heat stress"
-msgstr "Max heat stress"
-
-msgid "Max heat stress (ERA5-HEAT)"
-msgstr "Max heat stress (ERA5-HEAT)"
-
-msgid "Data set"
-msgstr "Data set"
-
-msgid "Climate/Weather"
-msgstr "Climate/Weather"
-
-msgid "Period type"
-msgstr "Period type"
-
-msgid "Daily"
-msgstr "Daily"
-
-msgid "Data elements"
-msgstr "Data elements"
-
-msgid "Assign the above data elements"
-msgstr "Assign the above data elements"
-
-msgid "Organisation units"
-msgstr "Organisation units"
-
-msgid "Select all organisation units in your system"
-msgstr "Select all organisation units in your system"
-
-msgid "Data element group"
-msgstr "Data element group"
-
-msgid "Legend"
-msgstr "Legend"
-
-msgid "Heat/cold stress"
-msgstr "Heat/cold stress"
-
-msgid "Start value"
-msgstr "Start value"
-
-msgid "End value"
-msgstr "End value"
-
-msgid "Color"
-msgstr "Color"
-
-msgid "Extreme cold stress"
-msgstr "Extreme cold stress"
-
-msgid "Very strong cold stress"
-msgstr "Very strong cold stress"
-
-msgid ""
-"You should now be able to import climate data with this app. Please reach "
-"out to us on climate-app@dhis2.org if you have any questions or need help "
-"with the setup."
-msgstr ""
-"You should now be able to import climate data with this app. Please reach "
-"out to us on climate-app@dhis2.org if you have any questions or need help "
-"with the setup."
 
 msgid "Check weather and climate data"
 msgstr "Check weather and climate data"
@@ -412,6 +187,9 @@ msgstr "Data for an area"
 msgid "Monthly"
 msgstr "Monthly"
 
+msgid "Daily"
+msgstr "Daily"
+
 msgid "1991 - 2020"
 msgstr "1991 - 2020"
 
@@ -424,6 +202,9 @@ msgstr "Reference period"
 msgid "{{name}}: Daily relative humidity {{period}}"
 msgstr "{{name}}: Daily relative humidity {{period}}"
 
+msgid "Relative humidity"
+msgstr "Relative humidity"
+
 msgid "{{name}}: Relative humidity {{period}}"
 msgstr "{{name}}: Relative humidity {{period}}"
 
@@ -432,6 +213,12 @@ msgstr "Normals from reference period: {{period}}"
 
 msgid "Normal relative humidity"
 msgstr "Normal relative humidity"
+
+msgid "Dewpoint temperature"
+msgstr "Dewpoint temperature"
+
+msgid "Air temperature"
+msgstr "Air temperature"
 
 msgid "{{name}}: Daily precipitation {{period}}"
 msgstr "{{name}}: Daily precipitation {{period}}"
@@ -655,6 +442,9 @@ msgstr "Heavy snow and thunder"
 msgid "Fog"
 msgstr "Fog"
 
+msgid "Data element"
+msgstr "Data element"
+
 msgid "No match found"
 msgstr "No match found"
 
@@ -822,6 +612,116 @@ msgstr "Default start page for users"
 msgid "Time zone where your org units are located"
 msgstr "Time zone where your org units are located"
 
+msgid "Name"
+msgstr "Name"
+
+msgid "Short name"
+msgstr "Short name"
+
+msgid "Code"
+msgstr "Code"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Domain type"
+msgstr "Domain type"
+
+msgid "Aggregate"
+msgstr "Aggregate"
+
+msgid "Aggregation type"
+msgstr "Aggregation type"
+
+msgid "Aggregation levels"
+msgstr "Aggregation levels"
+
+msgid "Assign all org unit levels"
+msgstr "Assign all org unit levels"
+
+msgid "Legend"
+msgstr "Legend"
+
+msgid "Start value"
+msgstr "Start value"
+
+msgid "End value"
+msgstr "End value"
+
+msgid "Color"
+msgstr "Color"
+
+msgid "How to configure this app"
+msgstr "How to configure this app"
+
+msgid ""
+"Before you can import weather and climate data, you need to make some "
+"configurations in the Maintenance app."
+msgstr ""
+"Before you can import weather and climate data, you need to make some "
+"configurations in the Maintenance app."
+
+msgid ""
+"This app imports daily weather and climate data that can be aggregated to "
+"other period types in DHIS2. We don't recommend aggregating across "
+"organisation unit levels, especially when going from facility level to "
+"higher levels defined by a geographic boundary. To make sure the values "
+"remain at its own level, assign all org unit levels as Aggregation levels "
+"for each data element below."
+msgstr ""
+"This app imports daily weather and climate data that can be aggregated to "
+"other period types in DHIS2. We don't recommend aggregating across "
+"organisation unit levels, especially when going from facility level to "
+"higher levels defined by a geographic boundary. To make sure the values "
+"remain at its own level, assign all org unit levels as Aggregation levels "
+"for each data element below."
+
+msgid ""
+"Create DHIS2 data elements for the climate and weather data you want to "
+"import. We recommend including the data source (ERA5-Land) in the name to "
+"distinguish it from data imported from local weather stations. If you use "
+"the same code specified below, we will preselect the data element in the "
+"import interface."
+msgstr ""
+"Create DHIS2 data elements for the climate and weather data you want to "
+"import. We recommend including the data source (ERA5-Land) in the name to "
+"distinguish it from data imported from local weather stations. If you use "
+"the same code specified below, we will preselect the data element in the "
+"import interface."
+
+msgid "Data set"
+msgstr "Data set"
+
+msgid "Climate/Weather"
+msgstr "Climate/Weather"
+
+msgid "Period type"
+msgstr "Period type"
+
+msgid "Data elements"
+msgstr "Data elements"
+
+msgid "Assign the above data elements"
+msgstr "Assign the above data elements"
+
+msgid "Organisation units"
+msgstr "Organisation units"
+
+msgid "Select all organisation units in your system"
+msgstr "Select all organisation units in your system"
+
+msgid "Data element group"
+msgstr "Data element group"
+
+msgid ""
+"You should now be able to import climate data with this app. Please reach "
+"out to us on climate-app@dhis2.org if you have any questions or need help "
+"with the setup."
+msgstr ""
+"You should now be able to import climate data with this app. Please reach "
+"out to us on climate-app@dhis2.org if you have any questions or need help "
+"with the setup."
+
 msgid "Loading data"
 msgstr "Loading data"
 
@@ -840,32 +740,165 @@ msgstr "Read more on the CDS user forum"
 msgid "Time zone"
 msgstr "Time zone"
 
-msgid "Temperature (ERA5-Land)"
-msgstr "Temperature (ERA5-Land)"
+msgid "Air temperature (ERA5-Land)"
+msgstr "Air temperature (ERA5-Land)"
 
-msgid "Temperature in °C at 2m above the surface"
-msgstr "Temperature in °C at 2m above the surface"
+msgid "Average air temperature in °C at 2 m above the surface"
+msgstr "Average air temperature in °C at 2 m above the surface"
 
-msgid "Max temperature (ERA5-Land)"
-msgstr "Max temperature (ERA5-Land)"
-
-msgid "Max temperature in °C at 2m above the surface"
-msgstr "Max temperature in °C at 2m above the surface"
+msgid "Average"
+msgstr "Average"
 
 msgid "Min temperature (ERA5-Land)"
 msgstr "Min temperature (ERA5-Land)"
 
-msgid "Min temperature in °C at 2m above the surface"
-msgstr "Min temperature in °C at 2m above the surface"
+msgid "Min air temperature"
+msgstr "Min air temperature"
+
+msgid "Minimum air temperature in °C at 2 m above the surface"
+msgstr "Minimum air temperature in °C at 2 m above the surface"
+
+msgid "Min"
+msgstr "Min"
+
+msgid "Max air temperature (ERA5-Land)"
+msgstr "Max air temperature (ERA5-Land)"
+
+msgid "Max air temperature"
+msgstr "Max air temperature"
+
+msgid "Maximum air temperature in °C at 2 m above the surface"
+msgstr "Maximum air temperature in °C at 2 m above the surface"
+
+msgid "Max"
+msgstr "Max"
+
+msgid "Precipitation (ERA5-Land)"
+msgstr "Precipitation (ERA5-Land)"
+
+msgid "Precipitation"
+msgstr "Precipitation"
+
+msgid "Total precipitation in mm"
+msgstr "Total precipitation in mm"
+
+msgid "Sum"
+msgstr "Sum"
+
+msgid "Dewpoint temperature (ERA5-Land)"
+msgstr "Dewpoint temperature (ERA5-Land)"
+
+msgid ""
+"Temperature in °C at 2 m above the surface to which the air would have to "
+"be cooled for saturation to occur."
+msgstr ""
+"Temperature in °C at 2 m above the surface to which the air would have to "
+"be cooled for saturation to occur."
+
+msgid "Relative humidity (ERA5-Land)"
+msgstr "Relative humidity (ERA5-Land)"
+
+msgid ""
+"Percentage of water vapor in the air compared to the total amount of vapor "
+"that can exist in the air at its current temperature. Calculated using air "
+"temperature and dewpoint temperature at 2 m above surface."
+msgstr ""
+"Percentage of water vapor in the air compared to the total amount of vapor "
+"that can exist in the air at its current temperature. Calculated using air "
+"temperature and dewpoint temperature at 2 m above surface."
+
+msgid "Heat stress (ERA5-HEAT)"
+msgstr "Heat stress (ERA5-HEAT)"
+
+msgid "Heat stress"
+msgstr "Heat stress"
 
 msgid "Average felt temperature in °C"
 msgstr "Average felt temperature in °C"
 
-msgid "Max felt temperature in °C"
-msgstr "Max felt temperature in °C"
+msgid "Min heat stress (ERA5-HEAT)"
+msgstr "Min heat stress (ERA5-HEAT)"
 
-msgid "Min felt temperature in °C"
-msgstr "Min felt temperature in °C"
+msgid "Min heat stress"
+msgstr "Min heat stress"
+
+msgid "Minimum felt temperature in °C"
+msgstr "Minimum felt temperature in °C"
+
+msgid "Max heat stress (ERA5-HEAT)"
+msgstr "Max heat stress (ERA5-HEAT)"
+
+msgid "Max heat stress"
+msgstr "Max heat stress"
+
+msgid "Maximum felt temperature in °C"
+msgstr "Maximum felt temperature in °C"
+
+msgid "Mean"
+msgstr "Mean"
+
+msgid "Heat/cold stress"
+msgstr "Heat/cold stress"
+
+msgid "Extreme cold stress"
+msgstr "Extreme cold stress"
+
+msgid "Extreme<br>cold stress"
+msgstr "Extreme<br>cold stress"
+
+msgid "Very strong cold stress"
+msgstr "Very strong cold stress"
+
+msgid "Very strong<br>cold stress"
+msgstr "Very strong<br>cold stress"
+
+msgid "Strong cold stress"
+msgstr "Strong cold stress"
+
+msgid "Strong<br>cold stress"
+msgstr "Strong<br>cold stress"
+
+msgid "Moderate cold stress"
+msgstr "Moderate cold stress"
+
+msgid "Moderate<br>cold stress"
+msgstr "Moderate<br>cold stress"
+
+msgid "Slight cold stress"
+msgstr "Slight cold stress"
+
+msgid "Slight<br>cold stress"
+msgstr "Slight<br>cold stress"
+
+msgid "No thermal stress"
+msgstr "No thermal stress"
+
+msgid "No thermal<br>stress"
+msgstr "No thermal<br>stress"
+
+msgid "Moderate heat stress"
+msgstr "Moderate heat stress"
+
+msgid "Moderate<br>heat stress"
+msgstr "Moderate<br>heat stress"
+
+msgid "Strong heat stress"
+msgstr "Strong heat stress"
+
+msgid "Strong<br>heat stress"
+msgstr "Strong<br>heat stress"
+
+msgid "Very strong heat stress"
+msgstr "Very strong heat stress"
+
+msgid "Very strong<br>heat stress"
+msgstr "Very strong<br>heat stress"
+
+msgid "Extreme heat stress"
+msgstr "Extreme heat stress"
+
+msgid "Extreme<br>heat stress"
+msgstr "Extreme<br>heat stress"
 
 msgid "ERA5-Land / Copernicus Climate Change Service / Google Earth Engine"
 msgstr "ERA5-Land / Copernicus Climate Change Service / Google Earth Engine"

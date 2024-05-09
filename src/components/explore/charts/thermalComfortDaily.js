@@ -1,5 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
 import { colors } from "@dhis2/ui";
+import legend from "../../../data/heat-stress-legend";
 import {
   animation,
   heatCredits,
@@ -8,76 +9,11 @@ import {
 } from "../../../utils/chart";
 import { toCelcius } from "../../../utils/calc";
 
-const opacity = 0.4;
-
-const legend = [
-  {
-    color: `rgba(10,48,107,${opacity})`,
-    from: -100,
-    to: -40,
-    label: "Extreme<br>cold stress",
-  },
-  {
-    color: `rgba(10,82,156,${opacity})`,
-    from: -40,
-    to: -27,
-    label: "Very strong<br>cold stress",
-  },
-  {
-    color: `rgba(35,112,181,${opacity})`,
-    from: -27,
-    to: -13,
-    label: "Strong<br>cold stress",
-  },
-  {
-    color: `rgba(65,146,197,${opacity})`,
-    from: -13,
-    to: 0,
-    label: "Moderate<br>cold stress",
-  },
-  {
-    color: `rgba(158,203,224,${opacity})`,
-    from: 0,
-    to: 9,
-    label: "Slight<br>cold stress",
-  },
-  {
-    color: `rgba(216,240,162,${opacity})`,
-    from: 9,
-    to: 26,
-    label: "No thermal<br>stress",
-  },
-  {
-    color: `rgba(255,140,0,${opacity - 0.1})`,
-    from: 26,
-    to: 32,
-    label: "Moderate<br>heat stress",
-  },
-  {
-    color: `rgba(255,70,2,${opacity})`,
-    from: 32,
-    to: 38,
-    label: "Strong<br>heat stress",
-  },
-  {
-    color: `rgba(206,1,2,${opacity})`,
-    from: 38,
-    to: 46,
-    label: "Very strong<br>heat stress",
-  },
-  {
-    color: `rgba(139,1,2,${opacity})`,
-    from: 46,
-    to: 100,
-    label: "Extreme<br>heat stress",
-  },
-];
-
 export const getPlotBands = (minMax) => {
   const minValue = Math.floor(Math.min(...minMax.map((d) => d[1])));
   const maxValue = Math.ceil(Math.max(...minMax.map((d) => d[2])));
 
-  const plotBands = legend.filter(
+  const plotBands = legend.items.filter(
     (l) => l.to >= minValue && l.from <= maxValue
   );
   const firstBand = plotBands[0];
