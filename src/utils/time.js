@@ -1,3 +1,9 @@
+import {
+  getNowInCalendar,
+  convertFromIso8601,
+  convertToIso8601,
+} from "@dhis2/multi-calendar-dates";
+
 /**
  * Formats a date string, timestamp or date array into format used by DHIS2 and <input> date
  * @param {Date} date
@@ -43,3 +49,59 @@ export const getNumberOfDays = (startDate, endDate) => {
 
 export const getNumberOfDaysFromPeriod = (period) =>
   getNumberOfDays(period.startDate, period.endDate);
+
+const padWithZeroes = (number, count = 2) =>
+  String(number).padStart(count, "0");
+
+export const formatYyyyMmDD = (date) => {
+  const year = date.eraYear ?? date.year;
+  const month = padWithZeroes(date.month);
+  const dayString = padWithZeroes(date.day);
+
+  return `${year}-${month}-${dayString}`;
+};
+
+export const getCalendarDate = (calendar, period = { days: 0 }) => {
+  const now = getNowInCalendar(calendar).add(period);
+  return formatYyyyMmDD(now);
+};
+
+export const toIso = (dateString, calendar) => {
+  const _date = dateString.split("-");
+
+  const params = {
+    year: _date[0],
+    month: padWithZeroes(_date[1]),
+    day: padWithZeroes(_date[2]),
+  };
+
+  const date = convertToIso8601(params, calendar);
+
+  const year = date.eraYear ?? date.year;
+  const month = padWithZeroes(date.month);
+  const day = padWithZeroes(date.day);
+
+  return `${year}-${month}-${day}`;
+};
+
+export const fromIso = (dateString, calendar) => {
+  const _date = dateString.split("-");
+
+  const params = {
+    year: _date[0],
+    month: padWithZeroes(_date[1]),
+    day: padWithZeroes(_date[2]),
+  };
+
+  const date = convertFromIso8601(params, calendar);
+
+  const year = date.eraYear ?? date.year;
+  const month = padWithZeroes(date.month);
+  const day = padWithZeroes(date.day);
+
+  return `${year}-${month}-${day}`;
+};
+
+export const extractYear = (dateString) => {
+  return parseInt(dateString.substring(0, 4));
+};

@@ -1,5 +1,7 @@
 import i18n from "@dhis2/d2-i18n";
 import area from "@turf/area";
+import { generateFixedPeriods } from "@dhis2/multi-calendar-dates";
+import { fromIso, toIso, extractYear } from "./time";
 
 const VALUE_LIMIT = 5000;
 
@@ -52,10 +54,38 @@ export const getEarthEngineValues = (ee, datasetParams, period, features) =>
     const timeZoneStart = ee.Date(startDate).format(null, timeZone);
     const timeZoneEnd = endDatePlusOne.format(null, timeZone);
 
+    const startYear = extractYear(fromIso(period.startDate, period.calendar));
+    const endYear = extractYear(fromIso(period.endDate, period.calendar));
+
+    let mappedPeriods = new Map();
+
+    let periods = generateFixedPeriods({
+      year: startYear,
+      calendar: period.calendar,
+      locale: "en",
+      periodType: "DAILY",
+    });
+
+    if (startYear != endYear) {
+      const endPeriods = generateFixedPeriods({
+        year: endYear,
+        calendar: period.calendar,
+        locale: "en",
+        periodType: "DAILY",
+      });
+
+      periods.push(...endPeriods);
+    }
+
+    periods.reduce((map, p) => {
+      map.set(toIso(p.startDate, period.calendar), p.iso);
+      return map;
+    }, mappedPeriods);
+
     const dataParser = (data) =>
       data.map((f) => ({
         ...f.properties,
-        period: f.properties.period,
+        period: mappedPeriods.get(f.properties.period),
         value: valueParser
           ? valueParser(f.properties.value)
           : f.properties.value,
@@ -128,7 +158,7 @@ export const getEarthEngineValues = (ee, datasetParams, period, features) =>
           .map((feature) =>
             ee.Feature(null, {
               ou: feature.get("id"),
-              period: image.date().format("YYYYMMdd"),
+              period: image.date().format("YYYY-MM-dd"),
               value: feature.get(reducer),
             })
           )

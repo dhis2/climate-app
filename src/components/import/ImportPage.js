@@ -7,12 +7,22 @@ import OrgUnits from "./OrgUnits";
 import DataElement from "./DataElement";
 import ExtractData from "./ExtractData";
 import useOrgUnitCount from "../../hooks/useOrgUnitCount";
-import { defaultPeriod, getNumberOfDaysFromPeriod } from "../../utils/time";
+import { getNumberOfDaysFromPeriod } from "../../utils/time";
+import { getCalendarDate, toIso } from "../../utils/time";
+import { useConfig } from "@dhis2/app-runtime";
 import styles from "./styles/ImportPage.module.css";
 
 const maxValues = 50000;
 
 const Page = () => {
+  const { systemInfo = {} } = useConfig();
+  const { calendar = "gregory" } = systemInfo;
+
+  const defaultPeriod = {
+    startDate: getCalendarDate(calendar, { months: -7 }),
+    endDate: getCalendarDate(calendar, { months: -1 }),
+  };
+
   const [dataset, setDataset] = useState();
   const [period, setPeriod] = useState(defaultPeriod);
   const [orgUnits, setOrgUnits] = useState();
@@ -27,11 +37,18 @@ const Page = () => {
     orgUnits?.level &&
     orgUnits.parent.path.split("/").length - 1 <= Number(orgUnits.level);
 
+  const isoPeriod = {
+    startDate: toIso(period.startDate, calendar),
+    endDate: toIso(period.endDate, calendar),
+    timeZone: period.timeZone,
+    calendar: calendar,
+  };
+
   const isValid = !!(
     dataset &&
-    period.startDate &&
-    period.endDate &&
-    new Date(period.startDate) <= new Date(period.endDate) &&
+    isoPeriod.startDate &&
+    isoPeriod.endDate &&
+    new Date(isoPeriod.startDate) <= new Date(isoPeriod.endDate) &&
     isValidOrgUnits &&
     dataElement &&
     valueCount <= maxValues
@@ -54,7 +71,7 @@ const Page = () => {
                 setDataElement(null);
               }}
             />
-            <Period period={period} onChange={setPeriod} />
+            <Period calendar={calendar} period={period} onChange={setPeriod} />
             <OrgUnits selected={orgUnits} onChange={setOrgUnits} />
             {valueCount > maxValues && (
               <div className={styles.warning}>
@@ -85,7 +102,7 @@ const Page = () => {
               {startExtract && isValid && (
                 <ExtractData
                   dataset={dataset}
-                  period={period}
+                  period={isoPeriod}
                   orgUnits={orgUnits}
                   dataElement={dataElement}
                 />
