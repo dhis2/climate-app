@@ -5,6 +5,10 @@ import {
   generateFixedPeriods,
 } from "@dhis2/multi-calendar-dates";
 
+export const HOURLY = "HOURLY";
+export const DAILY = "DAILY";
+export const MONTHLY = "MONTHLY";
+
 export const defaultReferencePeriod = "1991-2020";
 
 const padWithZeroes = (number, count = 2) =>

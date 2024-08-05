@@ -3,6 +3,7 @@ import Chart from "./Chart";
 import DataLoader from "../shared/DataLoader";
 import getMonthlyConfig from "./charts/humidityMonthly";
 import getDailyConfig from "./charts/humidityDaily";
+import { MONTHLY } from "../../utils/time";
 
 const HumidityTab = ({
   name,
@@ -18,7 +19,7 @@ const HumidityTab = ({
 
   return (
     <>
-      {periodType === "monthly" ? (
+      {periodType === MONTHLY ? (
         <Chart
           config={getMonthlyConfig(
             name,

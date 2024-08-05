@@ -1,6 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
 import area from "@turf/area";
-import { getMappedPeriods } from "./time";
+import { HOURLY, getMappedPeriods } from "./time";
 
 const VALUE_LIMIT = 5000;
 
@@ -97,7 +97,7 @@ export const getEarthEngineValues = (ee, datasetParams, period, features) =>
 
     let dailyCollection;
 
-    if (periodType === "hourly") {
+    if (periodType === HOURLY) {
       const days = ee
         .Date(timeZoneEnd)
         .difference(ee.Date(timeZoneStart), "days");

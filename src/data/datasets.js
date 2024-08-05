@@ -4,6 +4,7 @@ import {
   getRelativeHumidity,
   roundOneDecimal,
 } from "../utils/calc";
+import { HOURLY } from "../utils/time";
 
 // kelvin to celsius with one decimal
 const temperatureParser = (v) => roundOneDecimal(kelvinToCelsius(v));
@@ -30,7 +31,7 @@ export default [
     timeZone: {
       datasetId: "ECMWF/ERA5_LAND/HOURLY",
       band: "temperature_2m",
-      periodType: "hourly",
+      periodType: HOURLY,
       periodReducer: "mean",
     },
     valueParser: temperatureParser,
@@ -46,7 +47,7 @@ export default [
     timeZone: {
       datasetId: "ECMWF/ERA5_LAND/HOURLY",
       band: "temperature_2m",
-      periodType: "hourly",
+      periodType: HOURLY,
       periodReducer: "max",
     },
     valueParser: temperatureParser,
@@ -62,7 +63,7 @@ export default [
     timeZone: {
       datasetId: "ECMWF/ERA5_LAND/HOURLY",
       band: "temperature_2m",
-      periodType: "hourly",
+      periodType: HOURLY,
       periodReducer: "min",
     },
     valueParser: temperatureParser,
@@ -78,7 +79,7 @@ export default [
     timeZone: {
       datasetId: "ECMWF/ERA5_LAND/HOURLY",
       band: "total_precipitation",
-      periodType: "hourly",
+      periodType: HOURLY,
       periodReducer: "sum",
     },
     valueParser: (v) => Math.round(v * 1000 * 1000) / 1000, // meter to mm with 3 decimals
@@ -96,7 +97,7 @@ export default [
     timeZone: {
       datasetId: "ECMWF/ERA5_LAND/HOURLY",
       band: "dewpoint_temperature_2m",
-      periodType: "hourly",
+      periodType: HOURLY,
       periodReducer: "mean",
     },
     valueParser: temperatureParser,
@@ -116,7 +117,7 @@ export default [
         timeZone: {
           datasetId: "ECMWF/ERA5_LAND/HOURLY",
           band: "dewpoint_temperature_2m",
-          periodType: "hourly",
+          periodType: HOURLY,
           periodReducer: "mean",
         },
       },
@@ -126,7 +127,7 @@ export default [
         timeZone: {
           datasetId: "ECMWF/ERA5_LAND/HOURLY",
           band: "temperature_2m",
-          periodType: "hourly",
+          periodType: HOURLY,
           periodReducer: "mean",
         },
       },
