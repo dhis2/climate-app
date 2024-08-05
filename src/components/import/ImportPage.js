@@ -8,7 +8,11 @@ import DataElement from "./DataElement";
 import ExtractData from "./ExtractData";
 import useOrgUnitCount from "../../hooks/useOrgUnitCount";
 import { getNumberOfDaysFromPeriod } from "../../utils/time";
-import { getCalendarDate, toIso } from "../../utils/time";
+import {
+  getCalendarDate,
+  getStandardPeriod,
+  isValidPeriod,
+} from "../../utils/time";
 import { useConfig } from "@dhis2/app-runtime";
 import styles from "./styles/ImportPage.module.css";
 
@@ -27,6 +31,7 @@ const Page = () => {
   const [period, setPeriod] = useState(defaultPeriod);
   const [orgUnits, setOrgUnits] = useState();
   const [dataElement, setDataElement] = useState();
+  const standardPeriod = getStandardPeriod(period, calendar); // ISO 8601 used by GEE
   const [startExtract, setStartExtract] = useState(false);
   const orgUnitCount = useOrgUnitCount(orgUnits?.parent?.id, orgUnits?.level);
   const daysCount = getNumberOfDaysFromPeriod(period);
@@ -37,22 +42,8 @@ const Page = () => {
     orgUnits?.level &&
     orgUnits.parent.path.split("/").length - 1 <= Number(orgUnits.level);
 
-  const isoPeriod = {
-    startDate: toIso(period.startDate, calendar),
-    endDate: toIso(period.endDate, calendar),
-    timeZone: period.timeZone,
-    calendar: calendar,
-  };
-
-  const isValid = !!(
-    dataset &&
-    isoPeriod.startDate &&
-    isoPeriod.endDate &&
-    new Date(isoPeriod.startDate) <= new Date(isoPeriod.endDate) &&
-    isValidOrgUnits &&
-    dataElement &&
-    valueCount <= maxValues
-  );
+  const isValid = !!(dataset && isValidPeriod(standardPeriod),
+  isValidOrgUnits && dataElement && valueCount <= maxValues);
 
   useEffect(() => {
     setStartExtract(false);
@@ -102,7 +93,7 @@ const Page = () => {
               {startExtract && isValid && (
                 <ExtractData
                   dataset={dataset}
-                  period={isoPeriod}
+                  period={standardPeriod}
                   orgUnits={orgUnits}
                   dataElement={dataElement}
                 />

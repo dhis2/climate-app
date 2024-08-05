@@ -2,7 +2,13 @@ import {
   getNowInCalendar,
   convertFromIso8601,
   convertToIso8601,
+  generateFixedPeriods,
 } from "@dhis2/multi-calendar-dates";
+
+export const defaultReferencePeriod = "1991-2020";
+
+const padWithZeroes = (number, count = 2) =>
+  String(number).padStart(count, "0");
 
 /**
  * Formats a date string, timestamp or date array into format used by DHIS2 and <input> date
@@ -11,8 +17,8 @@ import {
  */
 export const formatDate = (date) => {
   const year = date.getFullYear();
-  const month = ("0" + (date.getMonth() + 1)).slice(-2);
-  const day = ("0" + date.getDate()).slice(-2);
+  const month = padWithZeroes(date.getMonth() + 1);
+  const day = padWithZeroes(date.getDate());
   return `${year}-${month}-${day}`; // xxxx-xx-xx
 };
 
@@ -29,8 +35,6 @@ export const defaultPeriod = {
   startDate: formatDate(startDate),
   endDate: formatDate(endDate),
 };
-
-export const defaultReferencePeriod = "1991-2020";
 
 export const getNumberOfMonths = (startMonth, endMonth) => {
   const startYear = parseInt(startMonth.substring(0, 4));
@@ -50,9 +54,6 @@ export const getNumberOfDays = (startDate, endDate) => {
 export const getNumberOfDaysFromPeriod = (period) =>
   getNumberOfDays(period.startDate, period.endDate);
 
-const padWithZeroes = (number, count = 2) =>
-  String(number).padStart(count, "0");
-
 export const formatYyyyMmDD = (date) => {
   const year = date.eraYear ?? date.year;
   const month = padWithZeroes(date.month);
@@ -66,7 +67,8 @@ export const getCalendarDate = (calendar, period = { days: 0 }) => {
   return formatYyyyMmDD(now);
 };
 
-export const toIso = (dateString, calendar) => {
+// Translate to gregorian date (ISO 8601) from DHIS2 date
+export const toStandardDate = (dateString, calendar) => {
   const _date = dateString.split("-");
 
   const params = {
@@ -84,7 +86,8 @@ export const toIso = (dateString, calendar) => {
   return `${year}-${month}-${day}`;
 };
 
-export const fromIso = (dateString, calendar) => {
+// Translate from gregorian date (ISO 8601) to DHIS2 date
+export const fromStandardDate = (dateString, calendar) => {
   const _date = dateString.split("-");
 
   const params = {
@@ -102,6 +105,59 @@ export const fromIso = (dateString, calendar) => {
   return `${year}-${month}-${day}`;
 };
 
+export const getStandardPeriod = (
+  { startDate, endDate, timeZone },
+  calendar
+) => ({
+  startDate: toStandardDate(startDate, calendar),
+  endDate: toStandardDate(endDate, calendar),
+  timeZone,
+  calendar,
+});
+
 export const extractYear = (dateString) => {
   return parseInt(dateString.substring(0, 4));
 };
+
+// Create mapping between ISO 8601 date (gregorian) and DHIS2 date
+export const getMappedPeriods = (period, periodType = "DAILY") => {
+  const startYear = extractYear(
+    fromStandardDate(period.startDate, period.calendar)
+  );
+  const endYear = extractYear(
+    fromStandardDate(period.endDate, period.calendar)
+  );
+
+  let mappedPeriods = new Map();
+
+  let periods = generateFixedPeriods({
+    year: startYear,
+    calendar: period.calendar,
+    locale: "en",
+    periodType,
+  });
+
+  if (startYear != endYear) {
+    const endPeriods = generateFixedPeriods({
+      year: endYear,
+      calendar: period.calendar,
+      locale: "en",
+      periodType,
+    });
+
+    periods.push(...endPeriods);
+  }
+
+  periods.reduce((map, p) => {
+    map.set(toStandardDate(p.startDate, period.calendar), p.iso);
+    return map;
+  }, mappedPeriods);
+
+  return mappedPeriods;
+};
+
+export const isValidPeriod = (period) =>
+  period &&
+  period.startDate &&
+  period.endDate &&
+  new Date(period.startDate) <= new Date(perid.endDate);
