@@ -35,6 +35,20 @@ export const locations = {
       ],
     },
     {
+      id: "india",
+      path: "/world/india",
+      displayName: "India",
+      children: [
+        {
+          id: "delhi",
+          path: "/world/india/delhi",
+          displayName: "Delhi",
+          children: [],
+          geometry: { type: "Point", coordinates: [77.23, 28.61] },
+        },
+      ],
+    },
+    {
       id: "laos",
       path: "/world/laos",
       displayName: "Laos",
