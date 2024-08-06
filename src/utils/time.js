@@ -64,10 +64,9 @@ export const getCalendarDate = (calendar, period = { days: 0 }) => {
  * @param {String} calendar Calendar used
  * @returns {Object} Default import data period with calendar date strings
  */
-export const getDefaultImportPeriod = (calendar, timeZone) => ({
+export const getDefaultImportPeriod = (calendar) => ({
   startDate: getCalendarDate(calendar, { months: -7 }),
   endDate: getCalendarDate(calendar, { months: -1 }),
-  timeZone,
   calendar,
 });
 
@@ -181,15 +180,9 @@ export const fromStandardDate = (dateString, calendar) => {
  * @param {String} calendar Calendar used
  * @returns {Object} Standard period object
  */
-export const getStandardPeriod = ({
-  startDate,
-  endDate,
-  timeZone,
-  calendar,
-}) => ({
+export const getStandardPeriod = ({ startDate, endDate, calendar }) => ({
   startDate: toStandardDate(startDate, calendar),
   endDate: toStandardDate(endDate, calendar),
-  timeZone,
   calendar, // Include original calendar to allow conversion back to DHIS2 date
 });
 

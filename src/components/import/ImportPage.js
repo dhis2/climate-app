@@ -20,12 +20,9 @@ const maxValues = 50000;
 
 const ImportPage = () => {
   const { systemInfo = {} } = useConfig();
-  const { calendar = "gregory", serverTimeZoneId } = systemInfo;
-  const timeZone = serverTimeZoneId || "Etc/UTC";
+  const { calendar = "gregory" } = systemInfo;
   const [dataset, setDataset] = useState();
-  const [period, setPeriod] = useState(
-    getDefaultImportPeriod(calendar, timeZone)
-  );
+  const [period, setPeriod] = useState(getDefaultImportPeriod(calendar));
   const [orgUnits, setOrgUnits] = useState();
   const [dataElement, setDataElement] = useState();
   const standardPeriod = getStandardPeriod(period); // ISO 8601 used by GEE

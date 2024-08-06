@@ -5,7 +5,7 @@ import TimeZone from "../shared/TimeZone";
 import styles from "./styles/Period.module.css";
 
 const Period = ({ period, onChange }) => {
-  const { calendar, startDate, endDate, timeZone } = period;
+  const { calendar, startDate, endDate } = period;
 
   const onStartDateChange = (selectedDate) =>
     onChange({ ...period, startDate: selectedDate?.calendarDateString });
@@ -24,14 +24,12 @@ const Period = ({ period, onChange }) => {
           onDateSelect={onStartDateChange}
           date={startDate}
           calendar={calendar}
-          timeZone={timeZone}
           label={i18n.t("Start date")}
         />
         <CalendarInput
           onDateSelect={onEndDateChange}
           date={endDate}
           calendar={calendar}
-          timeZone={timeZone}
           label={i18n.t("End date")}
         />
         <TimeZone period={period} onChange={onChange} />
