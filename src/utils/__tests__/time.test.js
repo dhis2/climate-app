@@ -15,6 +15,8 @@ import {
   toStandardDate,
 } from "../time";
 
+const timestamp = 1722902400000; // 2024-08-06
+
 const gregoryCalendar = "gregory";
 const nepaliCalendar = "nepali";
 const ethiopicCalendar = "ethiopic";
@@ -25,17 +27,15 @@ const gregoryDate = {
   day: 6,
 };
 
+const gregoryDateString = "2024-08-06";
 const gregoryStartDate = "2023-08-01";
 const gregoryEndDate = "2024-07-31";
 
 const gregoryPeriod = {
   startDate: gregoryStartDate,
   endDate: gregoryEndDate,
-  timeZone: "UTC",
+  calendar: gregoryCalendar,
 };
-
-const gregoryDateString = "2024-08-06";
-const timestamp = 1722902400000; // 2024-08-06
 
 const nepaliDate = {
   year: 2081,
@@ -44,6 +44,14 @@ const nepaliDate = {
 };
 
 const nepaliDateString = "2081-04-22";
+const nepaliStartDate = "2080-09-01";
+const nepaliEndDate = "2081-03-31";
+
+const nepaliPeriod = {
+  startDate: nepaliStartDate,
+  endDate: nepaliEndDate,
+  calendar: nepaliCalendar,
+};
 
 const ethiopicDate = {
   year: 2016,
@@ -52,6 +60,14 @@ const ethiopicDate = {
 };
 
 const ethiopicDateString = "2016-11-30";
+const ethiopicStartDate = "2016-04-01";
+const ethiopicEndDate = "2016-10-30";
+
+const ethiopicPeriod = {
+  startDate: ethiopicStartDate,
+  endDate: ethiopicEndDate,
+  calendar: ethiopicCalendar,
+};
 
 const oneDayInMs = 1000 * 60 * 60 * 24;
 const now = new Date();
@@ -167,14 +183,23 @@ describe("time utils", () => {
   });
 
   it("it should get the standard period from a calendar period", () => {
-    expect(getStandardPeriod(gregoryPeriod, gregoryCalendar)).toEqual({
+    expect(getStandardPeriod(gregoryPeriod)).toEqual({
       startDate: gregoryStartDate,
       endDate: gregoryEndDate,
-      timeZone: "UTC",
       calendar: gregoryCalendar,
     });
 
-    // TODO: Add tests for other calendars
+    expect(getStandardPeriod(nepaliPeriod)).toEqual({
+      startDate: toStandardDate(nepaliStartDate, nepaliCalendar),
+      endDate: toStandardDate(nepaliEndDate, nepaliCalendar),
+      calendar: nepaliCalendar,
+    });
+
+    expect(getStandardPeriod(ethiopicPeriod)).toEqual({
+      startDate: toStandardDate(ethiopicStartDate, ethiopicCalendar),
+      endDate: toStandardDate(ethiopicEndDate, ethiopicCalendar),
+      calendar: ethiopicCalendar,
+    });
   });
 
   // TODO: Add tests getMappedPeriods
