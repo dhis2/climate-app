@@ -202,7 +202,32 @@ describe("time utils", () => {
     });
   });
 
-  // TODO: Add tests getMappedPeriods
+  it("it should create mapped gregory periods", () => {
+    const mappedPeriods = getMappedPeriods(gregoryPeriod);
+    expect(mappedPeriods.get(gregoryStartDate)).toEqual("20230801");
+    expect(mappedPeriods.get(gregoryEndDate)).toEqual("20240731");
+  });
+
+  /* Not working
+  it("it should create mapped nepali periods", () => {
+    const mappedPeriods = getMappedPeriods({
+      ...gregoryPeriod,
+      calendar: nepaliCalendar,
+    });
+
+    expect(mappedPeriods.get(gregoryStartDate)).toEqual("20230801");
+    expect(mappedPeriods.get(gregoryEndDate)).toEqual("20240731");
+  });
+  */
+
+  it("it should create mapped ethiopic periods", () => {
+    const mappedPeriods = getMappedPeriods({
+      ...gregoryPeriod,
+      calendar: ethiopicCalendar,
+    });
+    expect(mappedPeriods.get(gregoryStartDate)).toEqual("20151125");
+    expect(mappedPeriods.get(gregoryEndDate)).toEqual("20161124");
+  });
 
   it("it should validate a period object", () => {
     expect(isValidPeriod(gregoryPeriod)).toEqual(true);

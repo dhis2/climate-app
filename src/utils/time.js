@@ -187,7 +187,7 @@ export const getStandardPeriod = ({ startDate, endDate, calendar }) => ({
 });
 
 /**
- * Returns a map of standard dates and DHIS2 calendar dates for a period
+ * Creates a map of standard dates and DHIS2 calendar date ids
  * @param {Object} period Standard period object
  * @param {String} periodType Period type
  * @param {String} locale Locale used for calendar
@@ -201,28 +201,17 @@ export const getMappedPeriods = (period, periodType = DAILY, locale = "en") => {
 
   const mappedPeriods = new Map();
 
-  const periods = generateFixedPeriods({
-    year: startYear,
-    calendar: period.calendar,
-    locale,
-    periodType,
-  });
-
-  if (startYear != endYear) {
-    const endPeriods = generateFixedPeriods({
-      year: endYear,
-      calendar: period.calendar,
+  for (let year = startYear; year <= endYear; year++) {
+    generateFixedPeriods({
+      year,
+      calendar,
       locale,
       periodType,
-    });
-
-    periods.push(...endPeriods);
+    }).reduce(
+      (map, p) => map.set(toStandardDate(p.startDate, calendar), p.id),
+      mappedPeriods
+    );
   }
-
-  periods.reduce((map, p) => {
-    map.set(toStandardDate(p.startDate, period.calendar), p.iso);
-    return map;
-  }, mappedPeriods);
 
   return mappedPeriods;
 };
