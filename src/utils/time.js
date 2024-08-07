@@ -201,17 +201,6 @@ export const getMappedPeriods = (period, periodType = DAILY, locale = "en") => {
 
   const mappedPeriods = new Map();
 
-  // For testing start
-  const result = generateFixedPeriods({
-    year: 2078,
-    calendar: "nepali",
-    locale: "en",
-    periodType: "SIXMONTHLY",
-  });
-
-  console.log(result);
-  // For testing end
-
   for (let year = startYear; year <= endYear; year++) {
     generateFixedPeriods({
       year,

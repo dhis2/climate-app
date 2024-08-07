@@ -2012,6 +2012,14 @@
     "@js-temporal/polyfill" "^0.4.2"
     classnames "^2.3.2"
 
+"@dhis2/multi-calendar-dates@1.0.0-alpha.27":
+  version "1.0.0-alpha.27"
+  resolved "https://registry.yarnpkg.com/@dhis2/multi-calendar-dates/-/multi-calendar-dates-1.0.0-alpha.27.tgz#01bacfba4fdcfd8125fc3493041352ec136f6233"
+  integrity sha512-gaWQ2BclRL6U36FcmGKfl26qS7B2Q+4EGuz5ckYOHblgbkiyh5rZ3JQ5uOvdKIWoPcsOhBri+ZuGc8T9/MTNeQ==
+  dependencies:
+    "@js-temporal/polyfill" "0.4.3"
+    classnames "^2.3.2"
+
 "@dhis2/multi-calendar-dates@1.2.3", "@dhis2/multi-calendar-dates@^1.2.3":
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/@dhis2/multi-calendar-dates/-/multi-calendar-dates-1.2.3.tgz#ef36bc80b34eaaa7f7cefa51b443528c019ff2d2"

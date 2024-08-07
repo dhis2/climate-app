@@ -208,17 +208,15 @@ describe("time utils", () => {
     expect(mappedPeriods.get(gregoryEndDate)).toEqual("20240731");
   });
 
-  /* Not working
   it("it should create mapped nepali periods", () => {
     const mappedPeriods = getMappedPeriods({
       ...gregoryPeriod,
       calendar: nepaliCalendar,
     });
 
-    expect(mappedPeriods.get(gregoryStartDate)).toEqual("20230801");
-    expect(mappedPeriods.get(gregoryEndDate)).toEqual("20240731");
+    expect(mappedPeriods.get(gregoryStartDate)).toEqual("20800416");
+    expect(mappedPeriods.get(gregoryEndDate)).toEqual("20810416");
   });
-  */
 
   it("it should create mapped ethiopic periods", () => {
     const mappedPeriods = getMappedPeriods({
