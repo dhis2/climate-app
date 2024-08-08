@@ -1,16 +1,18 @@
 import { Fragment, useEffect } from "react";
 import { CssVariables, CssReset, Menu, MenuItem } from "@dhis2/ui";
 import { Outlet, useResolvedPath, useNavigate } from "react-router-dom";
+import i18n from "@dhis2/d2-i18n";
 import styles from "./styles/Root.module.css";
 import OrgUnitTree from "./explore/OrgUnitTree";
+import CheckOrgUnitTree from "./check/OrgUnitTree";
 import useAppSettings from "../hooks/useAppSettings";
 
 export const appPages = [
-  { path: "/", name: "Home" },
-  { path: "/explore", name: "Explore data" },
-  { path: "/import", name: "Import data" },
-  { path: "/setup", name: "Setup guide" },
-  { path: "/settings", name: "Settings" },
+  { path: "/", name: i18n.t("Home") },
+  { path: "/explore", name: i18n.t("Explore data") },
+  { path: "/import", name: i18n.t("Import data") },
+  { path: "/setup", name: i18n.t("Setup guide") },
+  { path: "/settings", name: i18n.t("Settings") },
 ];
 
 const Root = () => {
@@ -46,6 +48,12 @@ const Root = () => {
                 )}
               </Fragment>
             ))}
+            {pathname.startsWith("/check") && (
+              <>
+                <MenuItem label={i18n.t("Check data")} active={true} />
+                <CheckOrgUnitTree />
+              </>
+            )}
           </Menu>
         </div>
         <main className={styles.content}>
