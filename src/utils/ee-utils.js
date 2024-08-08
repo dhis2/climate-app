@@ -186,7 +186,7 @@ export const getTimeSeriesData = async (ee, dataset, period, geometry) => {
     periodType = "daily",
   } = dataset;
 
-  const collection = ee.ImageCollection(datasetId).select(band);
+  let collection = ee.ImageCollection(datasetId).select(band);
 
   let eeReducer;
 
