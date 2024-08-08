@@ -7,21 +7,6 @@ import {
   roundOneDecimal,
 } from "./calc";
 
-export const animation = {
-  duration: 300,
-};
-
-export const credits = {
-  href: "https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-land",
-  text: i18n.t(
-    "ERA5-Land / Copernicus Climate Change Service / Google Earth Engine"
-  ),
-};
-
-// Date fromat YYYY-MM
-const getYearFromId = (id) => id.substring(0, 4);
-const getMonthFromId = (id) => id.substring(5, 7);
-
 const filterMonthData = (data, month) =>
   data.filter((d) => getMonthFromId(d.id) === month);
 
@@ -39,6 +24,17 @@ const periodBandReducer = (band) => (v, d) => v + d[band];
 
 const referencePeriodYearRange = (referencePeriod) =>
   referencePeriod.split("-").map(Number);
+
+const getYearPeriod = (startYear, endYear) =>
+  `${startYear}${endYear !== startYear ? `-${endYear}` : ""}`;
+
+export const animation = {
+  duration: 300,
+};
+
+// Date fromat YYYY-MM
+export const getYearFromId = (id) => id.substring(0, 4);
+export const getMonthFromId = (id) => id.substring(5, 7);
 
 export const getTemperatureMonthNormal = (data, month, referencePeriod) => {
   const monthData = filterMonthData(data, month);
@@ -84,12 +80,8 @@ export const getHumidityMonthNormal = (data, month, referencePeriod) => {
   );
 };
 
-export const getSelectedMonths = (data, { startMonth, endMonth }) => {
-  return data.filter((d) => d.id >= startMonth && d.id <= endMonth);
-};
-
-const getYearPeriod = (startYear, endYear) =>
-  `${startYear}${endYear !== startYear ? `-${endYear}` : ""}`;
+export const getSelectedMonths = (data, { startMonth, endMonth }) =>
+  data.filter((d) => d.id >= startMonth && d.id <= endMonth);
 
 export const getMonthlyPeriod = (period) => {
   const { startMonth, endMonth } = period;
@@ -102,4 +94,11 @@ export const getDailyPeriod = (data) => {
   const firstYear = data[0].id.substring(0, 4);
   const lastYear = data[data.length - 1].id.substring(0, 4);
   return getYearPeriod(firstYear, lastYear);
+};
+
+export const credits = {
+  href: "https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-land",
+  text: i18n.t(
+    "ERA5-Land / Copernicus Climate Change Service / Google Earth Engine"
+  ),
 };

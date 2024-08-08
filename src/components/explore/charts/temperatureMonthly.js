@@ -28,6 +28,8 @@ const getChartConfig = (name, data, monthlyPeriod, referencePeriod) => {
     y: getTemperatureMonthNormal(data, d.id.substring(5, 7), referencePeriod),
   }));
 
+  console.log("monthlyPeriod", monthlyPeriod);
+
   return {
     title: {
       text: i18n.t("{{name}}: Monthly temperatures {{period}}", {
