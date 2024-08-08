@@ -178,34 +178,15 @@ export const getEarthEngineData = (ee, datasetParams, period, features) => {
 };
 
 export const getTimeSeriesData = async (ee, dataset, period, geometry) => {
-  const { datasetId, band, reducer = "mean", sharedInputs = false } = dataset;
+  const {
+    datasetId,
+    band,
+    reducer = "mean",
+    sharedInputs = false,
+    periodType = "daily",
+  } = dataset;
 
-  let collection = ee.ImageCollection(datasetId);
-
-  const { startDate, endDate, timeZone = "UTC" } = period;
-  const endDatePlusOne = ee.Date(endDate).advance(1, "day");
-  const timeZoneStart = ee.Date(startDate).format(null, timeZone);
-  const timeZoneEnd = endDatePlusOne.format(null, timeZone);
-
-  collection = collection
-    .select(band)
-    .filter(ee.Filter.date(timeZoneStart, timeZoneEnd));
-
-  let eeScale = getScale(collection.first());
-
-  const { type, coordinates } = geometry;
-
-  if (type.includes("Polygon")) {
-    // unweighted reducer may fail if the features are smaller than the pixel area
-    const scale = await getInfo(eeScale);
-    const orgUnitArea = area(geometry);
-
-    if (orgUnitArea < scale * scale) {
-      eeScale = Math.sqrt(orgUnitArea) / 2;
-    }
-  }
-
-  const eeGeometry = ee.Geometry[type](coordinates);
+  const collection = ee.ImageCollection(datasetId).select(band);
 
   let eeReducer;
 
@@ -234,11 +215,66 @@ export const getTimeSeriesData = async (ee, dataset, period, geometry) => {
     eeReducer = ee.Reducer[reducer]();
   }
 
-  // Retruns a time series array of objects
+  if (periodType == "daily" && period.startMonth) {
+    const startMonth = ee.Date(period.startMonth);
+    const endMonth = ee.Date(period.endMonth).advance(1, "month"); // Include last month
+
+    collection = collection.filter(ee.Filter.date(startMonth, endMonth));
+
+    const monthCount = endMonth.difference(startMonth, "month").round();
+    const months = ee.List.sequence(0, monthCount.subtract(1));
+    const dates = months.map((month) => startMonth.advance(month, "month"));
+
+    const byMonth = ee.ImageCollection.fromImages(
+      dates.map((date) => {
+        const startDate = ee.Date(date);
+        const endDate = startDate.advance(1, "month");
+
+        return (
+          collection
+            .filter(ee.Filter.date(startDate, endDate))
+            //.reduce(eeReducer)
+            .mean() // Use mean to avoid extremes on monthly chart
+            .set("system:index", startDate.format("YYYYMM"))
+            .set("system:time_start", startDate.millis())
+            .set("system:time_end", endDate.millis())
+        );
+      })
+    );
+
+    collection = byMonth;
+  } else {
+    const { startDate, endDate, timeZone = "UTC" } = period;
+    const endDatePlusOne = ee.Date(endDate).advance(1, "day");
+    const timeZoneStart = ee.Date(startDate).format(null, timeZone);
+    const timeZoneEnd = endDatePlusOne.format(null, timeZone);
+
+    collection = collection.filter(ee.Filter.date(timeZoneStart, timeZoneEnd));
+  }
+
+  let eeScale = getScale(collection.first());
+
+  const { type, coordinates } = geometry;
+
+  if (type.includes("Polygon")) {
+    // unweighted reducer may fail if the features are smaller than the pixel area
+    const scale = await getInfo(eeScale);
+    const orgUnitArea = area(geometry);
+
+    if (orgUnitArea < scale * scale) {
+      eeScale = Math.sqrt(orgUnitArea) / 2;
+    }
+  }
+
+  const eeGeometry = ee.Geometry[type](coordinates);
+
+  // Returns a time series array of objects
   return getInfo(
     ee.FeatureCollection(
       collection.map((image) =>
-        ee.Feature(null, image.reduceRegion(eeReducer, eeGeometry, eeScale))
+        ee
+          .Feature(null, image.reduceRegion(eeReducer, eeGeometry, eeScale))
+          .set("system:index", image.get("system:index"))
       )
     )
   ).then(getFeatureCollectionPropertiesArray);
