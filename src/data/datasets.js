@@ -19,16 +19,6 @@ const relativeHumidityParser = ([dewData, tempData]) =>
     ),
   }));
 
-// TODO: Request missing data on GEE?
-export const heatMissingDataIndex = [
-  "20231111",
-  "20231114",
-  "20231212",
-  "20240104",
-  "20240110",
-  "20240111",
-];
-
 export default [
   {
     id: "ECMWF/ERA5_LAND/DAILY_AGGR/temperature_2m",
@@ -161,44 +151,5 @@ export default [
     bandsParser: relativeHumidityParser,
     aggregationType: i18n.t("Average"),
     dataElementCode: "ERA5_LAND_RELATIVE_HUMIDITY",
-  },
-  {
-    id: "projects/climate-engine-pro/assets/ce-era5-heat/utci_mean",
-    datasetId: "projects/climate-engine-pro/assets/ce-era5-heat",
-    name: i18n.t("Heat stress (ERA5-HEAT)"),
-    shortName: i18n.t("Heat stress"),
-    description: i18n.t("Average felt temperature in °C"),
-    band: "utci_mean",
-    reducer: "mean",
-    skipIndex: heatMissingDataIndex,
-    valueParser: temperatureParser,
-    aggregationType: i18n.t("Average"),
-    dataElementCode: "ERA5_HEAT_UTCI",
-  },
-  {
-    id: "projects/climate-engine-pro/assets/ce-era5-heat/utci_min",
-    datasetId: "projects/climate-engine-pro/assets/ce-era5-heat",
-    name: i18n.t("Min heat stress (ERA5-HEAT)"),
-    shortName: i18n.t("Min heat stress"),
-    description: i18n.t("Minimum felt temperature in °C"),
-    band: "utci_min",
-    reducer: "min",
-    skipIndex: heatMissingDataIndex,
-    valueParser: temperatureParser,
-    aggregationType: i18n.t("Min"),
-    dataElementCode: "ERA5_HEAT_UTCI_MIN",
-  },
-  {
-    id: "projects/climate-engine-pro/assets/ce-era5-heat/utci_max",
-    datasetId: "projects/climate-engine-pro/assets/ce-era5-heat",
-    name: i18n.t("Max heat stress (ERA5-HEAT)"),
-    shortName: i18n.t("Max heat stress"),
-    description: i18n.t("Maximum felt temperature in °C"),
-    band: "utci_max",
-    reducer: "max",
-    skipIndex: heatMissingDataIndex,
-    valueParser: temperatureParser,
-    aggregationType: i18n.t("Mean"),
-    dataElementCode: "ERA5_HEAT_UTCI_MAX",
   },
 ];

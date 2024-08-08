@@ -32,18 +32,6 @@ export const cleanData = (data) =>
     value: f.properties.value,
   }));
 
-// Used for ERA5-HEAT that has some missing data
-// TODO: Request missing data on GEE?
-const skipSystemIndex = (ee, collection, skipIndex) => {
-  if (Array.isArray(skipIndex)) {
-    skipIndex.forEach((index) => {
-      collection = collection.filter(ee.Filter.neq("system:index", index));
-    });
-  }
-
-  return collection;
-};
-
 export const getEarthEngineValues = (ee, datasetParams, period, features) =>
   new Promise(async (resolve, reject) => {
     const dataset = period.timeZone
@@ -56,7 +44,6 @@ export const getEarthEngineValues = (ee, datasetParams, period, features) =>
       reducer = "mean",
       periodType,
       periodReducer = reducer,
-      skipIndex,
       valueParser,
     } = dataset;
 
@@ -74,12 +61,10 @@ export const getEarthEngineValues = (ee, datasetParams, period, features) =>
           : f.properties.value,
       }));
 
-    let collection = ee
+    const collection = ee
       .ImageCollection(datasetId)
       .select(band)
       .filter(ee.Filter.date(timeZoneStart, timeZoneEnd));
-
-    collection = skipSystemIndex(ee, collection, skipIndex);
 
     const imageCount = await getInfo(collection.size());
 
@@ -199,12 +184,9 @@ export const getTimeSeriesData = async (ee, dataset, period, geometry) => {
     reducer = "mean",
     sharedInputs = false,
     periodType = "daily",
-    skipIndex,
   } = dataset;
 
-  let collection = ee.ImageCollection(datasetId).select(band);
-
-  collection = skipSystemIndex(ee, collection, skipIndex);
+  const collection = ee.ImageCollection(datasetId).select(band);
 
   let eeReducer;
 

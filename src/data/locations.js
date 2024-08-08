@@ -1,6 +1,5 @@
 // Locations used to check data
 
-// https://www.washingtonpost.com/weather/2024/04/30/southeast-asia-heat-india-thailand-philippines/
 export const locations = {
   id: "world",
   path: "/world",

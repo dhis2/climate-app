@@ -11,7 +11,6 @@ import ForecastTab from "./forecast/ForecastTab";
 import TemperatureTab from "./TemperatureTab";
 import PrecipitationTab from "./PrecipitationTab";
 import HumidityTab from "./HumidityTab";
-import HeatTab from "./HeatTab";
 import ClimateChangeTab from "./ClimateChangeTab";
 import useEarthEngineTimeSeries from "../../hooks/useEarthEngineTimeSeries";
 import { defaultPeriod, defaultReferencePeriod } from "../../utils/time";
@@ -47,7 +46,6 @@ const tabs = {
   temperature: TemperatureTab,
   precipitation: PrecipitationTab,
   humidity: HumidityTab,
-  heat: HeatTab,
   climatechange: ClimateChangeTab,
 };
 
@@ -131,9 +129,7 @@ const OrgUnit = ({ orgUnit }) => {
             )}
             {dataIsLoaded &&
               (tab === "climatechange" ||
-                (periodType === "monthly" &&
-                  tab !== "forecast10days" &&
-                  tab !== "heat")) && (
+                (periodType === "monthly" && tab !== "forecast10days")) && (
                 <ReferencePeriodSelect
                   selected={referencePeriod}
                   onChange={setReferencePeriod}

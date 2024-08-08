@@ -2,7 +2,6 @@ import i18n from "@dhis2/d2-i18n";
 import DataElement from "./DataElement";
 import Legend from "./Legend";
 import datasets from "../../data/datasets";
-import heatStressLegend from "../../data/heat-stress-legend";
 import styles from "./styles/SetupPage.module.css";
 
 const SetupPage = () => {
@@ -96,7 +95,6 @@ const SetupPage = () => {
           </tr>
         </tbody>
       </table>
-      <Legend {...heatStressLegend} />
       <p>
         {i18n.t(
           "You should now be able to import climate data with this app. Please reach out to us on climate-app@dhis2.org if you have any questions or need help with the setup."
