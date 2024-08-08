@@ -27,7 +27,6 @@ const band = [
 const monthlyDataset = {
   datasetId: "ECMWF/ERA5_LAND/MONTHLY_AGGR",
   band,
-  reducer: "mean",
 };
 
 const dailyDataset = {
