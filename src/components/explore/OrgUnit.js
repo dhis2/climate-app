@@ -24,18 +24,15 @@ const band = [
   "total_precipitation_sum",
 ];
 
-const reducer = ["mean", "min", "max", "mean", "mean"];
-
 const monthlyDataset = {
   datasetId: "ECMWF/ERA5_LAND/MONTHLY_AGGR",
   band,
-  reducer,
 };
 
 const dailyDataset = {
   datasetId: "ECMWF/ERA5_LAND/DAILY_AGGR",
   band,
-  reducer,
+  reducer: ["mean", "min", "max", "mean", "mean"],
 };
 
 const allMonthsPeriod = {
@@ -109,6 +106,7 @@ const OrgUnit = ({ orgUnit }) => {
               monthlyData={monthlyData}
               dailyData={dailyData}
               monthlyPeriod={monthlyPeriod}
+              dailyPeriod={dailyPeriod}
               referencePeriod={referencePeriod}
             />
             {hasMonthlyAndDailyData && (

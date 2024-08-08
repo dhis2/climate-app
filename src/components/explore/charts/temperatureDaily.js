@@ -1,20 +1,20 @@
 import i18n from "@dhis2/d2-i18n";
-import { colors } from "@dhis2/ui"; // https://github.com/dhis2/ui/blob/master/constants/src/colors.js
+import { colors } from "@dhis2/ui";
 import { animation, credits, getDailyPeriod } from "../../../utils/chart";
+import { toCelcius } from "../../../utils/calc";
 
 const getChart = (name, data) => {
   const series = data.map((d) => ({
     x: new Date(d.id).getTime(),
-    y: Math.round((d["temperature_2m"] - 273.15) * 10) / 10,
+    y: toCelcius(d["temperature_2m"]),
   }));
 
   const minMax = data.map((d) => [
     new Date(d.id).getTime(),
-    Math.round((d["temperature_2m_min"] - 273.15) * 10) / 10,
-    Math.round((d["temperature_2m_max"] - 273.15) * 10) / 10,
+    toCelcius(d["temperature_2m_min"]),
+    toCelcius(d["temperature_2m_max"]),
   ]);
 
-  // https://www.highcharts.com/demo/highcharts/arearange-line
   return {
     title: {
       text: i18n.t("{{name}}: Daily temperatures {{period}}", {
@@ -37,7 +37,6 @@ const getChart = (name, data) => {
       },
     },
     yAxis: {
-      // min: minValue > 0 ? 0 : undefined,
       title: false,
       labels: {
         format: "{value}°C",

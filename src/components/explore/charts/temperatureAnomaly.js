@@ -1,10 +1,11 @@
 import i18n from "@dhis2/d2-i18n";
-import { colors } from "@dhis2/ui"; // https://github.com/dhis2/ui/blob/master/constants/src/colors.js
+import { colors } from "@dhis2/ui";
 import {
   animation,
   credits,
   getTemperatureMonthNormal,
 } from "../../../utils/chart";
+import { roundOneDecimal, kelvinToCelsius } from "../../../utils/calc";
 import { months } from "../MonthSelect";
 
 // https://climate.copernicus.eu/copernicus-september-2023-unprecedented-temperature-anomalies
@@ -16,8 +17,8 @@ const getChartConfig = (name, data, month, referencePeriod) => {
   const monthName = months.find((m) => m.id === month).name;
   const normal = getTemperatureMonthNormal(data, month, referencePeriod);
   const years = monthData.map((d) => d.id.substring(0, 4));
-  const series = monthData.map(
-    (d) => Math.round((d["temperature_2m"] - 273.15 - normal) * 10) / 10
+  const series = monthData.map((d) =>
+    roundOneDecimal(kelvinToCelsius(d["temperature_2m"]) - normal)
   );
 
   return {
