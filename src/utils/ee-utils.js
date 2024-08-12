@@ -204,6 +204,7 @@ export const getTimeSeriesData = async (ee, dataset, period, geometry) => {
 
   let collection = ee.ImageCollection(datasetId).select(band);
 
+  // Remove missing images in collection
   collection = skipSystemIndex(ee, collection, skipIndex);
 
   let eeReducer;

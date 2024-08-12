@@ -28,7 +28,6 @@ const getChartConfig = (name, data, monthlyPeriod, referencePeriod) => {
     y: getTemperatureMonthNormal(data, d.id.substring(5, 7), referencePeriod),
   }));
 
-  // https://www.highcharts.com/demo/highcharts/arearange-line
   return {
     title: {
       text: i18n.t("{{name}}: Monthly temperatures {{period}}", {

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-05-09T14:35:25.533Z\n"
-"PO-Revision-Date: 2024-05-09T14:35:25.533Z\n"
+"POT-Creation-Date: 2024-08-08T14:31:27.197Z\n"
+"PO-Revision-Date: 2024-08-08T14:31:27.197Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -754,6 +754,58 @@ msgstr "Min temperature (ERA5-Land)"
 
 msgid "Min air temperature"
 msgstr "Min air temperature"
+
+msgid "Minimum air temperature in °C at 2 m above the surface"
+msgstr "Minimum air temperature in °C at 2 m above the surface"
+
+msgid "Min"
+msgstr "Min"
+
+msgid "Max air temperature (ERA5-Land)"
+msgstr "Max air temperature (ERA5-Land)"
+
+msgid "Max air temperature"
+msgstr "Max air temperature"
+
+msgid "Maximum air temperature in °C at 2 m above the surface"
+msgstr "Maximum air temperature in °C at 2 m above the surface"
+
+msgid "Max"
+msgstr "Max"
+
+msgid "Precipitation (ERA5-Land)"
+msgstr "Precipitation (ERA5-Land)"
+
+msgid "Precipitation"
+msgstr "Precipitation"
+
+msgid "Total precipitation in mm"
+msgstr "Total precipitation in mm"
+
+msgid "Sum"
+msgstr "Sum"
+
+msgid "Dewpoint temperature (ERA5-Land)"
+msgstr "Dewpoint temperature (ERA5-Land)"
+
+msgid ""
+"Temperature in °C at 2 m above the surface to which the air would have to "
+"be cooled for saturation to occur."
+msgstr ""
+"Temperature in °C at 2 m above the surface to which the air would have to "
+"be cooled for saturation to occur."
+
+msgid "Relative humidity (ERA5-Land)"
+msgstr "Relative humidity (ERA5-Land)"
+
+msgid ""
+"Percentage of water vapor in the air compared to the total amount of vapor "
+"that can exist in the air at its current temperature. Calculated using air "
+"temperature and dewpoint temperature at 2 m above surface."
+msgstr ""
+"Percentage of water vapor in the air compared to the total amount of vapor "
+"that can exist in the air at its current temperature. Calculated using air "
+"temperature and dewpoint temperature at 2 m above surface."
 
 msgid "Minimum air temperature in °C at 2 m above the surface"
 msgstr "Minimum air temperature in °C at 2 m above the surface"
