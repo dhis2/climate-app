@@ -1,5 +1,6 @@
 const config = {
     type: "app",
+    pluginType: "dashboard",
     title: "Climate Data",
     entryPoints: {
         app: "./src/App.js",
