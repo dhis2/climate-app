@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-08-08T13:54:24.767Z\n"
-"PO-Revision-Date: 2024-08-08T13:54:24.768Z\n"
+"POT-Creation-Date: 2024-08-08T14:31:27.197Z\n"
+"PO-Revision-Date: 2024-08-08T14:31:27.197Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -600,6 +600,45 @@ msgstr "Default start page for users"
 msgid "Time zone where your org units are located"
 msgstr "Time zone where your org units are located"
 
+msgid "Name"
+msgstr "Name"
+
+msgid "Short name"
+msgstr "Short name"
+
+msgid "Code"
+msgstr "Code"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Domain type"
+msgstr "Domain type"
+
+msgid "Aggregate"
+msgstr "Aggregate"
+
+msgid "Aggregation type"
+msgstr "Aggregation type"
+
+msgid "Aggregation levels"
+msgstr "Aggregation levels"
+
+msgid "Assign all org unit levels"
+msgstr "Assign all org unit levels"
+
+msgid "Legend"
+msgstr "Legend"
+
+msgid "Start value"
+msgstr "Start value"
+
+msgid "End value"
+msgstr "End value"
+
+msgid "Color"
+msgstr "Color"
+
 msgid "How to configure this app"
 msgstr "How to configure this app"
 
@@ -638,103 +677,6 @@ msgstr ""
 "the same code specified below, we will preselect the data element in the "
 "import interface."
 
-msgid "Name"
-msgstr "Name"
-
-msgid "Air temperature (ERA5-Land)"
-msgstr "Air temperature (ERA5-Land)"
-
-msgid "Short name"
-msgstr "Short name"
-
-msgid "Code"
-msgstr "Code"
-
-msgid "Description"
-msgstr "Description"
-
-msgid "Average air temperature in °C at 2m above the surface"
-msgstr "Average air temperature in °C at 2m above the surface"
-
-msgid "Domain type"
-msgstr "Domain type"
-
-msgid "Aggregate"
-msgstr "Aggregate"
-
-msgid "Aggregation type"
-msgstr "Aggregation type"
-
-msgid "Average"
-msgstr "Average"
-
-msgid "Aggregation levels"
-msgstr "Aggregation levels"
-
-msgid "Assign all org unit levels"
-msgstr "Assign all org unit levels"
-
-msgid "Min air temperature"
-msgstr "Min air temperature"
-
-msgid "Min air temperature (ERA5-Land)"
-msgstr "Min air temperature (ERA5-Land)"
-
-msgid "Min air temperatur"
-msgstr "Min air temperatur"
-
-msgid "Minimum air temperature in °C at 2m above the surface"
-msgstr "Minimum air temperature in °C at 2m above the surface"
-
-msgid "Min"
-msgstr "Min"
-
-msgid "Max air temperature"
-msgstr "Max air temperature"
-
-msgid "Max air temperature (ERA5-Land)"
-msgstr "Max air temperature (ERA5-Land)"
-
-msgid "Maximum air temperature in °C at 2m above the surface"
-msgstr "Maximum air temperature in °C at 2m above the surface"
-
-msgid "Max"
-msgstr "Max"
-
-msgid "Precipitation"
-msgstr "Precipitation"
-
-msgid "Precipitation (ERA5-Land)"
-msgstr "Precipitation (ERA5-Land)"
-
-msgid "Total precipitation in mm"
-msgstr "Total precipitation in mm"
-
-msgid "Sum"
-msgstr "Sum"
-
-msgid "Dewpoint temperature (ERA5-Land)"
-msgstr "Dewpoint temperature (ERA5-Land)"
-
-msgid ""
-"Temperature in °C at 2m above the surface to which the air would have to be "
-"cooled for saturation to occur."
-msgstr ""
-"Temperature in °C at 2m above the surface to which the air would have to be "
-"cooled for saturation to occur."
-
-msgid "Relative humidity (ERA5-Land)"
-msgstr "Relative humidity (ERA5-Land)"
-
-msgid ""
-"Percentage of water vapor in the air compared to the total amount of vapor "
-"that can exist in the air at its current temperature. Calculated using air "
-"temperature and dewpoint temperature at 2m above surface."
-msgstr ""
-"Percentage of water vapor in the air compared to the total amount of vapor "
-"that can exist in the air at its current temperature. Calculated using air "
-"temperature and dewpoint temperature at 2m above surface."
-
 msgid "Data set"
 msgstr "Data set"
 
@@ -760,13 +702,13 @@ msgid "Data element group"
 msgstr "Data element group"
 
 msgid ""
-"You should now be able to import temperature and precipitation data with "
-"this app. Please reach out to us on climate-app@dhis2.org if you have any "
-"questions or need help with the setup."
+"You should now be able to import climate data with this app. Please reach "
+"out to us on climate-app@dhis2.org if you have any questions or need help "
+"with the setup."
 msgstr ""
-"You should now be able to import temperature and precipitation data with "
-"this app. Please reach out to us on climate-app@dhis2.org if you have any "
-"questions or need help with the setup."
+"You should now be able to import climate data with this app. Please reach "
+"out to us on climate-app@dhis2.org if you have any questions or need help "
+"with the setup."
 
 msgid "Loading data"
 msgstr "Loading data"
@@ -786,23 +728,72 @@ msgstr "Read more on the CDS user forum"
 msgid "Time zone"
 msgstr "Time zone"
 
-msgid "Temperature (ERA5-Land)"
-msgstr "Temperature (ERA5-Land)"
+msgid "Air temperature (ERA5-Land)"
+msgstr "Air temperature (ERA5-Land)"
 
-msgid "Temperature in °C at 2m above the surface"
-msgstr "Temperature in °C at 2m above the surface"
+msgid "Average air temperature in °C at 2 m above the surface"
+msgstr "Average air temperature in °C at 2 m above the surface"
 
-msgid "Max temperature (ERA5-Land)"
-msgstr "Max temperature (ERA5-Land)"
-
-msgid "Max temperature in °C at 2m above the surface"
-msgstr "Max temperature in °C at 2m above the surface"
+msgid "Average"
+msgstr "Average"
 
 msgid "Min temperature (ERA5-Land)"
 msgstr "Min temperature (ERA5-Land)"
 
-msgid "Min temperature in °C at 2m above the surface"
-msgstr "Min temperature in °C at 2m above the surface"
+msgid "Min air temperature"
+msgstr "Min air temperature"
+
+msgid "Minimum air temperature in °C at 2 m above the surface"
+msgstr "Minimum air temperature in °C at 2 m above the surface"
+
+msgid "Min"
+msgstr "Min"
+
+msgid "Max air temperature (ERA5-Land)"
+msgstr "Max air temperature (ERA5-Land)"
+
+msgid "Max air temperature"
+msgstr "Max air temperature"
+
+msgid "Maximum air temperature in °C at 2 m above the surface"
+msgstr "Maximum air temperature in °C at 2 m above the surface"
+
+msgid "Max"
+msgstr "Max"
+
+msgid "Precipitation (ERA5-Land)"
+msgstr "Precipitation (ERA5-Land)"
+
+msgid "Precipitation"
+msgstr "Precipitation"
+
+msgid "Total precipitation in mm"
+msgstr "Total precipitation in mm"
+
+msgid "Sum"
+msgstr "Sum"
+
+msgid "Dewpoint temperature (ERA5-Land)"
+msgstr "Dewpoint temperature (ERA5-Land)"
+
+msgid ""
+"Temperature in °C at 2 m above the surface to which the air would have to "
+"be cooled for saturation to occur."
+msgstr ""
+"Temperature in °C at 2 m above the surface to which the air would have to "
+"be cooled for saturation to occur."
+
+msgid "Relative humidity (ERA5-Land)"
+msgstr "Relative humidity (ERA5-Land)"
+
+msgid ""
+"Percentage of water vapor in the air compared to the total amount of vapor "
+"that can exist in the air at its current temperature. Calculated using air "
+"temperature and dewpoint temperature at 2 m above surface."
+msgstr ""
+"Percentage of water vapor in the air compared to the total amount of vapor "
+"that can exist in the air at its current temperature. Calculated using air "
+"temperature and dewpoint temperature at 2 m above surface."
 
 msgid "ERA5-Land / Copernicus Climate Change Service"
 msgstr "ERA5-Land / Copernicus Climate Change Service"
