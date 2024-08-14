@@ -28,11 +28,11 @@ const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
     );
   }
   const orgUnitsCount = features.length;
-  const startDate = new Date(period.startDate);
-  const endDate = new Date(period.endDate);
+  const startTime = new Date(period.startTime);
+  const endTime = new Date(period.endTime);
 
   const days = Math.round(
-    (endDate.getTime() + oneDay - startDate.getTime()) / oneDay
+    (endTime.getTime() + oneDay - startTime.getTime()) / oneDay
   );
 
   const count = days * orgUnitsCount;

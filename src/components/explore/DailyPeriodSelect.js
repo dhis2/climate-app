@@ -10,21 +10,21 @@ const maxDays = 1000;
 
 const DailyPeriodSelect = ({ currentPeriod, onUpdate }) => {
   const [period, setPeriod] = useState(currentPeriod);
-  const { startDate, endDate } = period;
-  const days = getNumberOfDays(startDate, endDate);
+  const { startTime, endTime } = period;
+  const days = getNumberOfDays(startTime, endTime);
 
   return (
     <div className={styles.container}>
       <div className={styles.pickers}>
         <DatePicker
           label={i18n.t("Start date")}
-          defaultVal={startDate}
-          onChange={(startDate) => setPeriod({ ...period, startDate })}
+          defaultVal={startTime}
+          onChange={(startTime) => setPeriod({ ...period, startTime })}
         />
         <DatePicker
           label={i18n.t("End date")}
-          defaultVal={endDate}
-          onChange={(endDate) => setPeriod({ ...period, endDate })}
+          defaultVal={endTime}
+          onChange={(endTime) => setPeriod({ ...period, endTime })}
         />
         <Button disabled={days > maxDays} onClick={() => onUpdate(period)}>
           Update

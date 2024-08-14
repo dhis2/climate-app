@@ -47,10 +47,10 @@ export const getEarthEngineValues = (ee, datasetParams, period, features) =>
       valueParser,
     } = dataset;
 
-    const { startDate, endDate, timeZone = "UTC" } = period;
-    const endDatePlusOne = ee.Date(endDate).advance(1, "day");
-    const timeZoneStart = ee.Date(startDate).format(null, timeZone);
-    const timeZoneEnd = endDatePlusOne.format(null, timeZone);
+    const { startTime, endTime, timeZone = "UTC" } = period;
+    const endTimePlusOne = ee.Date(endTime).advance(1, "day");
+    const timeZoneStart = ee.Date(startTime).format(null, timeZone);
+    const timeZoneEnd = endTimePlusOne.format(null, timeZone);
 
     const dataParser = (data) =>
       data.map((f) => ({
@@ -104,7 +104,7 @@ export const getEarthEngineValues = (ee, datasetParams, period, features) =>
 
       dailyCollection = ee.ImageCollection.fromImages(
         daysList.map((day) => {
-          const startUTC = ee.Date(startDate).advance(day, "days");
+          const startUTC = ee.Date(startTime).advance(day, "days");
           const start = ee.Date(startUTC.format(null, timeZone));
           const end = start.advance(1, "days");
           const filtered = collection.filter(ee.Filter.date(start, end));
@@ -209,10 +209,10 @@ export const getTimeSeriesData = async (ee, dataset, period, geometry) => {
     eeReducer = ee.Reducer[reducer]();
   }
 
-  const { startDate, endDate, timeZone = "UTC" } = period;
-  const endDatePlusOne = ee.Date(endDate).advance(1, "day");
-  const timeZoneStart = ee.Date(startDate).format(null, timeZone);
-  const timeZoneEnd = endDatePlusOne.format(null, timeZone);
+  const { startTime, endTime, timeZone = "UTC" } = period;
+  const endTimePlusOne = ee.Date(endTime).advance(1, "day");
+  const timeZoneStart = ee.Date(startTime).format(null, timeZone);
+  const timeZoneEnd = endTimePlusOne.format(null, timeZone);
 
   collection = collection.filter(ee.Filter.date(timeZoneStart, timeZoneEnd));
 
