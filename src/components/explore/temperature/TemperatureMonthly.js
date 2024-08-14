@@ -18,12 +18,8 @@ const dataset = {
   band: ["temperature_2m", "temperature_2m_min", "temperature_2m_max"],
 };
 
-const testPeriod = { startDate: "2023-08", endDate: "2024-07" };
-
 const TemperatureMonthly = ({ orgUnit, period, referencePeriod }) => {
-  const data = useEarthEngineTimeSeries(dataset, testPeriod, orgUnit.geometry);
-
-  console.log("period", period);
+  const data = useEarthEngineTimeSeries(dataset, period, orgUnit.geometry);
 
   const normals = useEarthEngineClimateNormals(
     datasetId,

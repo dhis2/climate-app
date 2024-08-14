@@ -245,14 +245,14 @@ export const getTimeSeriesData = async (ee, dataset, period, geometry) => {
 };
 
 export const getClimateNormals = (ee, datasetId, band, period, geometry) => {
-  const [startYear, endYear] = period.split("-").map(Number);
+  const { startTime, endTime } = period;
   const { type, coordinates } = geometry;
   const eeGeometry = ee.Geometry[type](coordinates);
 
   const collection = ee
     .ImageCollection(datasetId)
     .select(band)
-    .filterDate(`${startYear}-01-01`, `${endYear + 1}-01-01`);
+    .filterDate(`${startTime}-01-01`, `${endTime + 1}-01-01`);
 
   const byMonth = ee.ImageCollection.fromImages(
     ee.List.sequence(1, 12).map((month) =>

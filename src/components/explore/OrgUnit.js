@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import i18n from "@dhis2/d2-i18n";
 import OrgUnitType from "./OrgUnitType";
@@ -14,13 +14,10 @@ import TemperatureTab from "./temperature/TemperatureTab";
 import PrecipitationTab from "./PrecipitationTab";
 import HumidityTab from "./HumidityTab";
 import ClimateChangeTab from "./ClimateChangeTab";
-import {
-  defaultDailyPeriod,
-  defaultMonthlyPeriod,
-  defaultReferencePeriod,
-} from "../../utils/time";
+import { defaultDailyPeriod, defaultMonthlyPeriod } from "../../utils/time";
 import styles from "./styles/OrgUnit.module.css";
 
+/*
 const band = [
   "temperature_2m",
   "temperature_2m_min",
@@ -44,6 +41,7 @@ const allMonthsPeriod = {
   startTime: "1960-01",
   endTime: new Date().toISOString().substring(0, 7), // Current month
 };
+*/
 
 const tabs = {
   forecast10days: ForecastTab,
@@ -63,62 +61,10 @@ const OrgUnit = ({ orgUnit }) => {
   );
   const [periodType, setPeriodType] = useState("monthly");
 
-  /*
-  const monthlyData = useEarthEngineTimeSeries(
-    monthlyDataset,
-    allMonthsPeriod,
-    orgUnit?.geometry
-  );
-
-  const dailyData = useEarthEngineTimeSeries(
-    dailyDataset,
-    dailyPeriod,
-    orgUnit?.geometry
-  );
-  */
-
-  /*
-  const normals = useEarthEngineClimateNormals(
-    {
-      datasetId: "ECMWF/ERA5_LAND/MONTHLY",
-      band: "temperature_2m",
-    },
-    {
-      id: "1991-2020",
-      startYear: 1991,
-      endYear: 2020,
-    },
-    orgUnit
-  );
-
-  console.log("normals", normals);
-  */
-
-  /*
-  const dataIsLoaded = monthlyData && dailyData && monthlyPeriod;
-
-  const hasMonthlyAndDailyData =
-    dataIsLoaded && tab !== "forecast10days" && tab !== "climatechange";
-  */
-
   const Tab = tabs[tab];
-
-  /*
-  useEffect(() => {
-    if (monthlyData && !monthlyPeriod) {
-      const last12months = monthlyData.slice(-12);
-      setMonthlyPeriod({
-        startTime: last12months[0].id,
-        endTime: last12months[11].id,
-      });
-    }
-  }, [monthlyPeriod, monthlyData]);
-  */
 
   const hasMonthlyAndDailyData =
     tab !== "forecast10days" && tab !== "climatechange";
-
-  const dataIsLoaded = false;
 
   return (
     <div className={styles.orgUnit}>
@@ -137,8 +83,6 @@ const OrgUnit = ({ orgUnit }) => {
               orgUnit={orgUnit}
               geometry={orgUnit.geometry}
               periodType={periodType}
-              // monthlyData={monthlyData}
-              // dailyData={dailyData}
               monthlyPeriod={monthlyPeriod}
               dailyPeriod={dailyPeriod}
               referencePeriod={referencePeriod}
@@ -167,7 +111,7 @@ const OrgUnit = ({ orgUnit }) => {
                 onChange={setReferencePeriod}
               />
             )}
-            {tab === "climatechange" && dataIsLoaded && (
+            {tab === "climatechange" && (
               <div className={styles.description}>
                 {i18n.t(
                   "Temperature anomaly is the difference of a temperature from a reference value, calculated as the average temperature over a period of 30 years. Blue columns shows temperatures below the average, while red columns are above."

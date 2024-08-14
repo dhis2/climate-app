@@ -20,14 +20,14 @@ endTime.setDate(0); // Last day of the previous month
 const startTime = new Date(endTime.getFullYear(), endTime.getMonth() - 11, 1);
 
 export const defaultDailyPeriod = {
-  startDate: formatDate(startDate),
-  endDate: formatDate(endDate),
+  startTime: formatDate(startTime),
+  endTime: formatDate(endTime),
 };
 
 // TODO: Make this dynamic
 export const defaultMonthlyPeriod = {
-  startMonth: "2023-08",
-  endMonth: "2024-07",
+  startTime: "2023-08",
+  endTime: "2024-07",
 };
 
 export const getNumberOfMonths = (startTime, endTime) => {

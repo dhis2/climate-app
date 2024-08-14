@@ -40,7 +40,7 @@ const getChartConfig = (name, data, normals, referencePeriod) => {
     },
     subtitle: {
       text: i18n.t("Normals from reference period: {{period}}", {
-        period: referencePeriod,
+        period: referencePeriod.id,
         nsSeparator: ";",
       }),
     },

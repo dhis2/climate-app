@@ -16,8 +16,6 @@ const TemperatureTab = ({
     return <DataLoader height={400} />;
   }
 
-  console.log("TemperatureTab", periodType);
-
   return (
     <>
       {periodType === "monthly" ? (
