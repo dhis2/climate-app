@@ -83,8 +83,18 @@ export const getHumidityMonthNormal = (data, month, referencePeriod) => {
 export const getSelectedMonths = (data, { startMonth, endMonth }) =>
   data.filter((d) => d.id >= startMonth && d.id <= endMonth);
 
+/*
 export const getMonthlyPeriod = (period) => {
   const { startMonth, endMonth } = period;
+  const startYear = startMonth.substring(0, 4);
+  const endYear = endMonth.substring(0, 4);
+  return getYearPeriod(startYear, endYear);
+};
+*/
+
+export const getMonthlyPeriod = (data) => {
+  const startMonth = data[0].id;
+  const endMonth = data[data.length - 1].id;
   const startYear = startMonth.substring(0, 4);
   const endYear = endMonth.substring(0, 4);
   return getYearPeriod(startYear, endYear);

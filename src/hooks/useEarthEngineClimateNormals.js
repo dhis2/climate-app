@@ -2,20 +2,20 @@ import { useState, useEffect } from "react";
 import useEarthEngine from "./useEarthEngine";
 import { getClimateNormals } from "../utils/ee-utils";
 
-const useEarthEngineClimateNormals = (dataset, period, orgUnit) => {
+const useEarthEngineClimateNormals = (datasetId, band, period, feature) => {
   const [data, setData] = useState();
   const eePromise = useEarthEngine();
 
-  const geometry = orgUnit?.geometry;
+  const geometry = feature?.geometry;
 
   useEffect(() => {
-    if (dataset && period && geometry) {
+    if (datasetId && band && period && geometry) {
       setData();
       eePromise.then((ee) => {
-        getClimateNormals(ee, dataset, period, geometry).then(setData);
+        getClimateNormals(ee, datasetId, band, period, geometry).then(setData);
       });
     }
-  }, [eePromise, dataset, period, geometry]);
+  }, [eePromise, datasetId, band, period, geometry]);
 
   return data;
 };

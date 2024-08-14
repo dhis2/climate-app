@@ -5,53 +5,53 @@ import getMonthlyConfig from "../charts/temperatureMonthly";
 import useEarthEngineTimeSeries from "../../../hooks/useEarthEngineTimeSeries";
 import useEarthEngineClimateNormals from "../../../hooks/useEarthEngineClimateNormals";
 
+const datasetId = "ECMWF/ERA5_LAND/MONTHLY_AGGR";
+const dataBands = [
+  "temperature_2m",
+  "temperature_2m_min",
+  "temperature_2m_max",
+];
+const normalBand = "temperature_2m";
+
 const dataset = {
-  datasetId: "ECMWF/ERA5_LAND/MONTHLY",
-  band: "temperature_2m",
+  datasetId: "ECMWF/ERA5_LAND/MONTHLY_AGGR",
+  band: ["temperature_2m", "temperature_2m_min", "temperature_2m_max"],
 };
 
-const testPeriod = { startDate: "2023-01", endDate: "2024-08" };
+const testPeriod = { startDate: "2023-08", endDate: "2024-07" };
 
 const TemperatureMonthly = ({ orgUnit, period, referencePeriod }) => {
   const data = useEarthEngineTimeSeries(dataset, testPeriod, orgUnit.geometry);
 
-  /*
+  console.log("period", period);
+
   const normals = useEarthEngineClimateNormals(
-    dataset,
+    datasetId,
+    normalBand,
     referencePeriod,
     orgUnit
   );
-  */
 
-  /*
-  if (!monthlyPeriod || !monthlyData || !dailyData) {
+  if (!data || !normals) {
     return <DataLoader height={400} />;
   }
-    */
 
-  console.log("TemperatureMonthly", orgUnit, period, referencePeriod, data);
-
-  return <DataLoader height={400} />;
-
-  /*
   return (
     <Chart
       config={getMonthlyConfig(
-        name,
-        monthlyData,
-        monthlyPeriod,
+        orgUnit.properties.name,
+        data,
+        normals,
         referencePeriod
       )}
     />
   );
-  */
 };
 
 TemperatureMonthly.propTypes = {
   orgUnit: PropTypes.object.isRequired,
-  periodType: PropTypes.string.isRequired,
+  period: PropTypes.object.isRequired,
   referencePeriod: PropTypes.object.isRequired,
-  monthlyPeriod: PropTypes.object.isRequired,
 };
 
 export default TemperatureMonthly;
