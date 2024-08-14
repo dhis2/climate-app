@@ -8,13 +8,17 @@ import MonthlyPeriodSelect from "./MonthlyPeriodSelect";
 import ReferencePeriodSelect from "./ReferencePeriodSelect";
 import Tabs from "./Tabs";
 import ForecastTab from "./forecast/ForecastTab";
-import TemperatureTab from "./TemperatureTab";
+import TemperatureTab from "./temperature/TemperatureTab";
 import PrecipitationTab from "./PrecipitationTab";
 import HumidityTab from "./HumidityTab";
 import ClimateChangeTab from "./ClimateChangeTab";
-import useEarthEngineTimeSeries from "../../hooks/useEarthEngineTimeSeries";
-import useEarthEngineClimateNormals from "../../hooks/useEarthEngineClimateNormals";
-import { defaultPeriod, defaultReferencePeriod } from "../../utils/time";
+// import useEarthEngineTimeSeries from "../../hooks/useEarthEngineTimeSeries";
+// import useEarthEngineClimateNormals from "../../hooks/useEarthEngineClimateNormals";
+import {
+  defaultDailyPeriod,
+  defaultMonthlyPeriod,
+  defaultReferencePeriod,
+} from "../../utils/time";
 import styles from "./styles/OrgUnit.module.css";
 
 const band = [
@@ -52,13 +56,14 @@ const tabs = {
 const OrgUnit = ({ orgUnit }) => {
   const isPoint = orgUnit.geometry?.type === "Point";
   const [tab, setTab] = useState(isPoint ? "forecast10days" : "temperature");
-  const [dailyPeriod, setDailyPeriod] = useState(defaultPeriod);
-  const [monthlyPeriod, setMonthlyPeriod] = useState();
+  const [dailyPeriod, setDailyPeriod] = useState(defaultDailyPeriod);
+  const [monthlyPeriod, setMonthlyPeriod] = useState(defaultMonthlyPeriod);
   const [referencePeriod, setReferencePeriod] = useState(
     defaultReferencePeriod
   );
   const [periodType, setPeriodType] = useState("monthly");
 
+  /*
   const monthlyData = useEarthEngineTimeSeries(
     monthlyDataset,
     allMonthsPeriod,
@@ -70,6 +75,7 @@ const OrgUnit = ({ orgUnit }) => {
     dailyPeriod,
     orgUnit?.geometry
   );
+  */
 
   /*
   const normals = useEarthEngineClimateNormals(
@@ -88,13 +94,16 @@ const OrgUnit = ({ orgUnit }) => {
   console.log("normals", normals);
   */
 
+  /*
   const dataIsLoaded = monthlyData && dailyData && monthlyPeriod;
 
   const hasMonthlyAndDailyData =
     dataIsLoaded && tab !== "forecast10days" && tab !== "climatechange";
+  */
 
   const Tab = tabs[tab];
 
+  /*
   useEffect(() => {
     if (monthlyData && !monthlyPeriod) {
       const last12months = monthlyData.slice(-12);
@@ -104,6 +113,12 @@ const OrgUnit = ({ orgUnit }) => {
       });
     }
   }, [monthlyPeriod, monthlyData]);
+  */
+
+  const hasMonthlyAndDailyData =
+    tab !== "forecast10days" && tab !== "climatechange";
+
+  const dataIsLoaded = false;
 
   return (
     <div className={styles.orgUnit}>
@@ -119,10 +134,11 @@ const OrgUnit = ({ orgUnit }) => {
           <div className={styles.tabContent}>
             <Tab
               name={orgUnit.properties.name}
+              orgUnit={orgUnit}
               geometry={orgUnit.geometry}
               periodType={periodType}
-              monthlyData={monthlyData}
-              dailyData={dailyData}
+              // monthlyData={monthlyData}
+              // dailyData={dailyData}
               monthlyPeriod={monthlyPeriod}
               dailyPeriod={dailyPeriod}
               referencePeriod={referencePeriod}
@@ -144,14 +160,13 @@ const OrgUnit = ({ orgUnit }) => {
                 )}
               </>
             )}
-            {dataIsLoaded &&
-              (tab === "climatechange" ||
-                (periodType === "monthly" && tab !== "forecast10days")) && (
-                <ReferencePeriodSelect
-                  selected={referencePeriod}
-                  onChange={setReferencePeriod}
-                />
-              )}
+            {(tab === "climatechange" ||
+              (periodType === "monthly" && tab !== "forecast10days")) && (
+              <ReferencePeriodSelect
+                selected={referencePeriod}
+                onChange={setReferencePeriod}
+              />
+            )}
             {tab === "climatechange" && dataIsLoaded && (
               <div className={styles.description}>
                 {i18n.t(

@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
-import Chart from "./Chart";
-import DataLoader from "../shared/DataLoader";
-import getMonthlyConfig from "./charts/temperatureMonthly";
-import getDailyConfig from "./charts/temperatureDaily";
+import Chart from "../Chart";
+import DataLoader from "../../shared/DataLoader";
+import getMonthlyConfig from "../charts/temperatureMonthly";
+import getDailyConfig from "../charts/temperatureDaily";
 
 const TemperatureTab = ({
   name,
@@ -15,6 +15,8 @@ const TemperatureTab = ({
   if (!monthlyPeriod || !monthlyData || !dailyData) {
     return <DataLoader height={400} />;
   }
+
+  console.log("TemperatureTab", periodType);
 
   return (
     <>

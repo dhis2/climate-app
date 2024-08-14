@@ -180,7 +180,11 @@ export const getEarthEngineData = (ee, datasetParams, period, features) => {
 export const getTimeSeriesData = async (ee, dataset, period, geometry) => {
   const { datasetId, band, reducer = "mean", sharedInputs = false } = dataset;
 
+  console.log("getTimeSeriesData", datasetId, band, period, geometry);
+
   let collection = ee.ImageCollection(datasetId).select(band);
+
+  getInfo(collection.size()).then(console.log);
 
   let eeReducer;
 
@@ -216,10 +220,13 @@ export const getTimeSeriesData = async (ee, dataset, period, geometry) => {
 
   collection = collection.filter(ee.Filter.date(timeZoneStart, timeZoneEnd));
 
+  getInfo(collection.size()).then(console.log);
+
   let eeScale = getScale(collection.first());
 
   const { type, coordinates } = geometry;
 
+  /*
   if (type.includes("Polygon")) {
     // unweighted reducer may fail if the features are smaller than the pixel area
     const scale = await getInfo(eeScale);
@@ -229,6 +236,7 @@ export const getTimeSeriesData = async (ee, dataset, period, geometry) => {
       eeScale = Math.sqrt(orgUnitArea) / 2;
     }
   }
+  */
 
   const eeGeometry = ee.Geometry[type](coordinates);
 
@@ -246,7 +254,7 @@ export const getTimeSeriesData = async (ee, dataset, period, geometry) => {
 
 export const getClimateNormals = (ee, datasetParams, period, geometry) => {
   const { datasetId, band } = datasetParams;
-  const { startYear, endYear } = period;
+  const [startYear, endYear] = period.split("-").map(Number);
   const { type, coordinates } = geometry;
   const eeGeometry = ee.Geometry[type](coordinates);
 

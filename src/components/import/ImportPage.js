@@ -7,14 +7,17 @@ import OrgUnits from "./OrgUnits";
 import DataElement from "./DataElement";
 import ExtractData from "./ExtractData";
 import useOrgUnitCount from "../../hooks/useOrgUnitCount";
-import { defaultPeriod, getNumberOfDaysFromPeriod } from "../../utils/time";
+import {
+  defaultDailyPeriod,
+  getNumberOfDaysFromPeriod,
+} from "../../utils/time";
 import styles from "./styles/ImportPage.module.css";
 
 const maxValues = 50000;
 
 const Page = () => {
   const [dataset, setDataset] = useState();
-  const [period, setPeriod] = useState(defaultPeriod);
+  const [period, setPeriod] = useState(defaultDailyPeriod);
   const [orgUnits, setOrgUnits] = useState();
   const [dataElement, setDataElement] = useState();
   const [startExtract, setStartExtract] = useState(false);

@@ -19,9 +19,15 @@ endDate.setDate(0); // Last day of the previous month
 // First day 12 months back
 const startDate = new Date(endDate.getFullYear(), endDate.getMonth() - 11, 1);
 
-export const defaultPeriod = {
+export const defaultDailyPeriod = {
   startDate: formatDate(startDate),
   endDate: formatDate(endDate),
+};
+
+// TODO: Make this dynamic
+export const defaultMonthlyPeriod = {
+  startMonth: "2023-08",
+  endMonth: "2024-07",
 };
 
 export const defaultReferencePeriod = "1991-2020";
