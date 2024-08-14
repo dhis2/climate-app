@@ -243,3 +243,38 @@ export const getTimeSeriesData = async (ee, dataset, period, geometry) => {
     )
   ).then(getFeatureCollectionPropertiesArray);
 };
+
+export const getClimateNormals = (ee, datasetParams, period, geometry) => {
+  const { datasetId, band } = datasetParams;
+  const { startYear, endYear } = period;
+  const { type, coordinates } = geometry;
+  const eeGeometry = ee.Geometry[type](coordinates);
+
+  const collection = ee
+    .ImageCollection(datasetId)
+    .select(band)
+    .filterDate(`${startYear}-01-01`, `${endYear + 1}-01-01`);
+
+  const byMonth = ee.ImageCollection.fromImages(
+    ee.List.sequence(1, 12).map((month) =>
+      collection
+        .filter(ee.Filter.calendarRange(month, null, "month"))
+        .mean()
+        .set("system:index", ee.Number(month).format("%02d"))
+    )
+  );
+
+  const eeScale = getScale(collection.first());
+
+  const eeReducer = ee.Reducer.mean();
+
+  const data = ee.FeatureCollection(
+    byMonth.map((image) =>
+      ee
+        .Feature(null, image.reduceRegion(eeReducer, eeGeometry, eeScale))
+        .set("system:index", image.get("system:index"))
+    )
+  );
+
+  return getInfo(data).then(getFeatureCollectionPropertiesArray);
+};

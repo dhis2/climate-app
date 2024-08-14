@@ -13,6 +13,7 @@ import PrecipitationTab from "./PrecipitationTab";
 import HumidityTab from "./HumidityTab";
 import ClimateChangeTab from "./ClimateChangeTab";
 import useEarthEngineTimeSeries from "../../hooks/useEarthEngineTimeSeries";
+import useEarthEngineClimateNormals from "../../hooks/useEarthEngineClimateNormals";
 import { defaultPeriod, defaultReferencePeriod } from "../../utils/time";
 import styles from "./styles/OrgUnit.module.css";
 
@@ -69,6 +70,23 @@ const OrgUnit = ({ orgUnit }) => {
     dailyPeriod,
     orgUnit?.geometry
   );
+
+  /*
+  const normals = useEarthEngineClimateNormals(
+    {
+      datasetId: "ECMWF/ERA5_LAND/MONTHLY",
+      band: "temperature_2m",
+    },
+    {
+      id: "1991-2020",
+      startYear: 1991,
+      endYear: 2020,
+    },
+    orgUnit
+  );
+
+  console.log("normals", normals);
+  */
 
   const dataIsLoaded = monthlyData && dailyData && monthlyPeriod;
 
