@@ -21,11 +21,11 @@ export const referencePeriods = [
 
 export const defaultReferencePeriod = referencePeriods[0];
 
-const ReferencePeriod = ({ periodId, onChange }) => (
+const ReferencePeriod = ({ selected, onChange }) => (
   <div className={styles.referencePeriod}>
     <SingleSelectField
       label={i18n.t("Reference period")}
-      selected={periodId}
+      selected={selected}
       onChange={({ selected }) =>
         onChange(referencePeriods.find((p) => p.id === selected))
       }
@@ -39,8 +39,8 @@ const ReferencePeriod = ({ periodId, onChange }) => (
 );
 
 ReferencePeriod.propTypes = {
+  selected: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  periodId: PropTypes.string.isRequired,
 };
 
 export default ReferencePeriod;

@@ -132,7 +132,7 @@ const OrgUnit = ({ orgUnit }) => {
               (tab === "climatechange" ||
                 (periodType === "monthly" && tab !== "forecast10days")) && (
                 <ReferencePeriodSelect
-                  periodId={referencePeriod?.id}
+                  selected={referencePeriod.id}
                   onChange={setReferencePeriod}
                 />
               )}
