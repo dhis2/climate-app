@@ -5,8 +5,13 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
+<<<<<<< HEAD
 "POT-Creation-Date: 2024-08-14T15:52:08.949Z\n"
 "PO-Revision-Date: 2024-08-14T15:52:08.949Z\n"
+=======
+"POT-Creation-Date: 2024-08-14T15:54:15.022Z\n"
+"PO-Revision-Date: 2024-08-14T15:54:15.022Z\n"
+>>>>>>> main
 
 msgid "About this app"
 msgstr "About this app"
