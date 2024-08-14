@@ -36,8 +36,8 @@ const dailyDataset = {
 };
 
 const allMonthsPeriod = {
-  startDate: "1960-01",
-  endDate: new Date().toISOString().substring(0, 7), // Current month
+  startTime: "1960-01",
+  endTime: new Date().toISOString().substring(0, 7), // Current month
 };
 
 const tabs = {
@@ -81,8 +81,8 @@ const OrgUnit = ({ orgUnit }) => {
     if (monthlyData && !monthlyPeriod) {
       const last12months = monthlyData.slice(-12);
       setMonthlyPeriod({
-        startMonth: last12months[0].id,
-        endMonth: last12months[11].id,
+        startTime: last12months[0].id,
+        endTime: last12months[11].id,
       });
     }
   }, [monthlyPeriod, monthlyData]);

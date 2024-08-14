@@ -29,9 +29,9 @@ const Page = () => {
 
   const isValid = !!(
     dataset &&
-    period.startDate &&
-    period.endDate &&
-    new Date(period.startDate) <= new Date(period.endDate) &&
+    period.startTime &&
+    period.endTime &&
+    new Date(period.startTime) <= new Date(period.endTime) &&
     isValidOrgUnits &&
     dataElement &&
     valueCount <= maxValues

@@ -10,16 +10,16 @@ const maxDays = 1000;
 
 const DailyPeriodSelect = ({ currentPeriod, onUpdate }) => {
   const [period, setPeriod] = useState(currentPeriod);
-  const { startDate, endDate } = period;
-  const days = getNumberOfDays(startDate, endDate);
+  const { startTime, endDate } = period;
+  const days = getNumberOfDays(startTime, endDate);
 
   return (
     <div className={styles.container}>
       <div className={styles.pickers}>
         <DatePicker
           label={i18n.t("Start date")}
-          defaultVal={startDate}
-          onChange={(startDate) => setPeriod({ ...period, startDate })}
+          defaultVal={startTime}
+          onChange={(startTime) => setPeriod({ ...period, startTime })}
         />
         <DatePicker
           label={i18n.t("End date")}
