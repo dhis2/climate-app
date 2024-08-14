@@ -5,7 +5,9 @@ import OrgUnitType from "./OrgUnitType";
 import PeriodTypeSelect from "./PeriodTypeSelect";
 import DailyPeriodSelect from "./DailyPeriodSelect";
 import MonthlyPeriodSelect from "./MonthlyPeriodSelect";
-import ReferencePeriodSelect from "./ReferencePeriodSelect";
+import ReferencePeriodSelect, {
+  defaultReferencePeriod,
+} from "./ReferencePeriodSelect";
 import Tabs from "./Tabs";
 import ForecastTab from "./forecast/ForecastTab";
 import TemperatureTab from "./TemperatureTab";
@@ -13,7 +15,7 @@ import PrecipitationTab from "./PrecipitationTab";
 import HumidityTab from "./HumidityTab";
 import ClimateChangeTab from "./ClimateChangeTab";
 import useEarthEngineTimeSeries from "../../hooks/useEarthEngineTimeSeries";
-import { defaultPeriod, defaultReferencePeriod } from "../../utils/time";
+import { defaultPeriod } from "../../utils/time";
 import styles from "./styles/OrgUnit.module.css";
 
 const band = [
@@ -130,7 +132,7 @@ const OrgUnit = ({ orgUnit }) => {
               (tab === "climatechange" ||
                 (periodType === "monthly" && tab !== "forecast10days")) && (
                 <ReferencePeriodSelect
-                  selected={referencePeriod}
+                  periodId={referencePeriod?.id}
                   onChange={setReferencePeriod}
                 />
               )}

@@ -24,8 +24,6 @@ export const defaultPeriod = {
   endTime: formatDate(endTime),
 };
 
-export const defaultReferencePeriod = "1991-2020";
-
 export const getNumberOfMonths = (startTime, endTime) => {
   const startYear = parseInt(startTime.substring(0, 4));
   const start = parseInt(startTime.substring(5, 7));

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import PropTypes from "prop-types";
 import i18n from "@dhis2/d2-i18n";
 import { SingleSelectField, SingleSelectOption } from "@dhis2/ui";
@@ -7,23 +8,27 @@ export const referencePeriods = [
   {
     id: "1991-2020",
     name: i18n.t("1991 - 2020"),
-    startYear: 1991,
-    endYear: 2020,
+    startTime: 1991,
+    endTime: 2020,
   },
   {
     id: "1961-1990",
     name: i18n.t("1961 - 1990"),
-    startYear: 1961,
-    endYear: 1990,
+    startTime: 1961,
+    endTime: 1990,
   },
 ];
 
-const ReferencePeriod = ({ selected, onChange }) => (
+export const defaultReferencePeriod = referencePeriods[0];
+
+const ReferencePeriod = ({ periodId, onChange }) => (
   <div className={styles.referencePeriod}>
     <SingleSelectField
       label={i18n.t("Reference period")}
-      selected={selected}
-      onChange={({ selected }) => onChange(selected)}
+      selected={periodId}
+      onChange={({ selected }) =>
+        onChange(referencePeriods.find((p) => p.id === selected))
+      }
     >
       {referencePeriods.map((p) => (
         <SingleSelectOption key={p.id} value={p.id} label={p.name} />
@@ -34,8 +39,8 @@ const ReferencePeriod = ({ selected, onChange }) => (
 );
 
 ReferencePeriod.propTypes = {
-  selected: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  periodId: PropTypes.string.isRequired,
 };
 
 export default ReferencePeriod;
