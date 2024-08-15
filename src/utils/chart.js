@@ -46,17 +46,6 @@ export const getTemperatureMonthNormal = (data, month, referencePeriod) => {
   return toCelcius(normal);
 };
 
-export const getPrecipitationMonthNormal = (data, month, referencePeriod) => {
-  const monthData = filterMonthData(data, month);
-  const referenceYearCount = referencePeriodYearCount(referencePeriod);
-  const periodFilter = referencePeriodFilter(referencePeriod);
-  const periodReducer = periodBandReducer("total_precipitation_sum");
-
-  return metersToMillimeters(
-    monthData.filter(periodFilter).reduce(periodReducer, 0) / referenceYearCount
-  );
-};
-
 export const getHumidityMonthNormal = (data, month, referencePeriod) => {
   const monthData = filterMonthData(data, month);
   const referenceYearCount = referencePeriodYearCount(referencePeriod);

@@ -12,20 +12,36 @@ const getPeridFromId = (id) => {
 const parseIds = (data) =>
   data.map((d) => ({ ...d, id: getPeridFromId(d.id) }));
 
-const useEarthEngineTimeSeries = (dataset, period, geometry) => {
+// TODO: Reuse this function
+const getKey = ({ datasetId, band }, { startTime, endTime }, { id }) =>
+  `${id}-${datasetId}-${band.join("-")}-${startTime}-${endTime}`;
+
+const cache = {};
+
+const useEarthEngineTimeSeries = (dataset, period, feature) => {
   const [data, setData] = useState();
   const eePromise = useEarthEngine();
 
   useEffect(() => {
-    if (dataset && period && geometry) {
+    if (dataset && period && feature) {
+      const key = getKey(dataset, period, feature);
+
+      if (cache[key]) {
+        setData(cache[key]);
+        return;
+      }
+
       setData();
       eePromise.then((ee) =>
-        getTimeSeriesData(ee, dataset, period, geometry)
+        getTimeSeriesData(ee, dataset, period, feature.geometry)
           .then(parseIds)
-          .then(setData)
+          .then((data) => {
+            cache[key] = data;
+            setData(data);
+          })
       );
     }
-  }, [eePromise, dataset, period, geometry]);
+  }, [eePromise, dataset, period, feature]);
 
   return data;
 };

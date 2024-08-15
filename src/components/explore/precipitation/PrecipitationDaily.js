@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
-import Chart from "./Chart";
-import DataLoader from "../shared/DataLoader";
-import getMonthlyConfig from "./charts/precipitationMonthly";
-import getDailyConfig from "./charts/precipitationDaily";
+import Chart from "../Chart";
+import DataLoader from "../../shared/DataLoader";
+import getMonthlyConfig from "../charts/temperatureMonthly";
+import getDailyConfig from "../charts/temperatureDaily";
 
-const PrecipitationTab = ({
+const TemperatureTab = ({
   name,
   periodType,
   monthlyData,
@@ -34,7 +34,7 @@ const PrecipitationTab = ({
   );
 };
 
-PrecipitationTab.propTypes = {
+TemperatureTab.propTypes = {
   name: PropTypes.string.isRequired,
   periodType: PropTypes.string.isRequired,
   referencePeriod: PropTypes.string.isRequired,
@@ -43,4 +43,4 @@ PrecipitationTab.propTypes = {
   dailyData: PropTypes.array,
 };
 
-export default PrecipitationTab;
+export default TemperatureTab;

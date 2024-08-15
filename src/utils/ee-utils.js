@@ -244,7 +244,8 @@ export const getTimeSeriesData = async (ee, dataset, period, geometry) => {
   ).then(getFeatureCollectionPropertiesArray);
 };
 
-export const getClimateNormals = (ee, datasetId, band, period, geometry) => {
+export const getClimateNormals = (ee, dataset, period, geometry) => {
+  const { datasetId, band } = dataset;
   const { startTime, endTime } = period;
   const { type, coordinates } = geometry;
   const eeGeometry = ee.Geometry[type](coordinates);

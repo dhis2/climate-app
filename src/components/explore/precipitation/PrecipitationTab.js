@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
-import TemperatureMonthly from "./TemperatureMonthly";
-import TemperatureDaily from "./TemperatureDaily";
+import PrecipitationMonthly from "./PrecipitationMonthly";
+import PrecipitationDaily from "./PrecipitationDaily";
 
-const TemperatureTab = ({
+const PrecipitatioTab = ({
   orgUnit,
   periodType,
   dailyPeriod,
@@ -11,18 +11,18 @@ const TemperatureTab = ({
 }) => (
   <>
     {periodType === "monthly" ? (
-      <TemperatureMonthly
+      <PrecipitationMonthly
         orgUnit={orgUnit}
         period={monthlyPeriod}
         referencePeriod={referencePeriod}
       />
     ) : (
-      <TemperatureDaily orgUnit={orgUnit} period={dailyPeriod} />
+      <PrecipitationDaily orgUnit={orgUnit} period={dailyPeriod} />
     )}
   </>
 );
 
-TemperatureTab.propTypes = {
+PrecipitatioTab.propTypes = {
   orgUnit: PropTypes.object.isRequired,
   periodType: PropTypes.string.isRequired,
   dailyPeriod: PropTypes.object.isRequired,
@@ -30,4 +30,4 @@ TemperatureTab.propTypes = {
   referencePeriod: PropTypes.object.isRequired,
 };
 
-export default TemperatureTab;
+export default PrecipitatioTab;

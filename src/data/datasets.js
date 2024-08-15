@@ -153,3 +153,31 @@ export default [
     dataElementCode: "ERA5_LAND_RELATIVE_HUMIDITY",
   },
 ];
+
+const era5band = [
+  "temperature_2m",
+  "temperature_2m_min",
+  "temperature_2m_max",
+  "dewpoint_temperature_2m",
+  "total_precipitation_sum",
+];
+
+export const era5Daily = {
+  datasetId: "ECMWF/ERA5_LAND/DAILY_AGGR",
+  band: era5band,
+  reducer: ["mean", "min", "max", "mean", "mean"],
+};
+
+export const era5Monthly = {
+  datasetId: "ECMWF/ERA5_LAND/MONTHLY_AGGR",
+  band: era5band,
+};
+
+export const era5MonthlyNormals = {
+  datasetId: "ECMWF/ERA5_LAND/MONTHLY_AGGR",
+  band: [
+    "temperature_2m",
+    "dewpoint_temperature_2m",
+    "total_precipitation_sum",
+  ],
+};

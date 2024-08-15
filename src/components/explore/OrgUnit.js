@@ -11,37 +11,11 @@ import ReferencePeriodSelect, {
 import Tabs from "./Tabs";
 import ForecastTab from "./forecast/ForecastTab";
 import TemperatureTab from "./temperature/TemperatureTab";
-import PrecipitationTab from "./PrecipitationTab";
+import PrecipitationTab from "./precipitation/PrecipitationTab";
 import HumidityTab from "./HumidityTab";
 import ClimateChangeTab from "./ClimateChangeTab";
 import { defaultDailyPeriod, defaultMonthlyPeriod } from "../../utils/time";
 import styles from "./styles/OrgUnit.module.css";
-
-/*
-const band = [
-  "temperature_2m",
-  "temperature_2m_min",
-  "temperature_2m_max",
-  "dewpoint_temperature_2m",
-  "total_precipitation_sum",
-];
-
-const monthlyDataset = {
-  datasetId: "ECMWF/ERA5_LAND/MONTHLY_AGGR",
-  band,
-};
-
-const dailyDataset = {
-  datasetId: "ECMWF/ERA5_LAND/DAILY_AGGR",
-  band,
-  reducer: ["mean", "min", "max", "mean", "mean"],
-};
-
-const allMonthsPeriod = {
-  startTime: "1960-01",
-  endTime: new Date().toISOString().substring(0, 7), // Current month
-};
-*/
 
 const tabs = {
   forecast10days: ForecastTab,
