@@ -1,62 +1,55 @@
 import i18n from "@dhis2/d2-i18n";
-import { getRelativeHumidity } from "./calc";
-
-export const animation = {
-  duration: 300,
-};
-
-export const credits = {
-  href: "https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-land",
-  text: i18n.t("ERA5-Land / Copernicus Climate Change Service"),
-};
-
-// Date fromat YYYY-MM
-const getYearFromId = (id) => id.substring(0, 4);
-const getMonthFromId = (id) => id.substring(5, 7);
+import {
+  toCelcius,
+  kelvinToCelsius,
+  metersToMillimeters,
+  getRelativeHumidity,
+  roundOneDecimal,
+} from "./calc";
 
 const filterMonthData = (data, month) =>
   data.filter((d) => getMonthFromId(d.id) === month);
 
 const referencePeriodFilter =
-  ([startYear, endYear]) =>
+  ({ startTime, endTime }) =>
   (d) => {
     const year = getYearFromId(d.id);
-    return year >= startYear && year <= endYear;
+    return year >= startTime && year <= endTime;
   };
 
-const referencePeriodYearCount = ([startYear, endYear]) =>
-  endYear - startYear + 1;
+const referencePeriodYearCount = ({ startTime, endTime }) =>
+  endTime - startTime + 1;
 
 const periodBandReducer = (band) => (v, d) => v + d[band];
 
-const roundOneDecimal = (v) => Math.round(v * 10) / 10;
+const getYearPeriod = (startYear, endYear) =>
+  `${startYear}${endYear !== startYear ? `-${endYear}` : ""}`;
 
-const kelvinToCelsius = (k) => k - 273.15;
+export const animation = {
+  duration: 300,
+};
 
-const metersToMillimeters = (m) => roundOneDecimal(m * 1000);
-
-const referencePeriodYearRange = (referencePeriod) =>
-  referencePeriod.split("-").map(Number);
+// Date fromat YYYY-MM
+export const getYearFromId = (id) => id.substring(0, 4);
+export const getMonthFromId = (id) => id.substring(5, 7);
 
 export const getTemperatureMonthNormal = (data, month, referencePeriod) => {
   const monthData = filterMonthData(data, month);
-  const referenceYearRange = referencePeriodYearRange(referencePeriod);
-  const referenceYearCount = referencePeriodYearCount(referenceYearRange);
-  const periodFilter = referencePeriodFilter(referenceYearRange);
+  const referenceYearCount = referencePeriodYearCount(referencePeriod);
+  const periodFilter = referencePeriodFilter(referencePeriod);
   const periodReducer = periodBandReducer("temperature_2m");
 
   const normal =
     monthData.filter(periodFilter).reduce(periodReducer, 0) /
     referenceYearCount;
 
-  return roundOneDecimal(kelvinToCelsius(normal));
+  return toCelcius(normal);
 };
 
 export const getPrecipitationMonthNormal = (data, month, referencePeriod) => {
   const monthData = filterMonthData(data, month);
-  const referenceYearRange = referencePeriodYearRange(referencePeriod);
-  const referenceYearCount = referencePeriodYearCount(referenceYearRange);
-  const periodFilter = referencePeriodFilter(referenceYearRange);
+  const referenceYearCount = referencePeriodYearCount(referencePeriod);
+  const periodFilter = referencePeriodFilter(referencePeriod);
   const periodReducer = periodBandReducer("total_precipitation_sum");
 
   return metersToMillimeters(
@@ -66,9 +59,8 @@ export const getPrecipitationMonthNormal = (data, month, referencePeriod) => {
 
 export const getHumidityMonthNormal = (data, month, referencePeriod) => {
   const monthData = filterMonthData(data, month);
-  const referenceYearRange = referencePeriodYearRange(referencePeriod);
-  const referenceYearCount = referencePeriodYearCount(referenceYearRange);
-  const periodFilter = referencePeriodFilter(referenceYearRange);
+  const referenceYearCount = referencePeriodYearCount(referencePeriod);
+  const periodFilter = referencePeriodFilter(referencePeriod);
 
   const periodReducer = (v, d) =>
     v +
@@ -82,17 +74,12 @@ export const getHumidityMonthNormal = (data, month, referencePeriod) => {
   );
 };
 
-export const getSelectedMonths = (data, { startMonth, endMonth }) => {
-  return data.filter((d) => d.id >= startMonth && d.id <= endMonth);
-};
+export const getSelectedMonths = (data, { startTime, endTime }) =>
+  data.filter((d) => d.id >= startTime && d.id <= endTime);
 
-const getYearPeriod = (startYear, endYear) =>
-  `${startYear}${endYear !== startYear ? `-${endYear}` : ""}`;
-
-export const getMonthlyPeriod = (period) => {
-  const { startMonth, endMonth } = period;
-  const startYear = startMonth.substring(0, 4);
-  const endYear = endMonth.substring(0, 4);
+export const getMonthlyPeriod = ({ startTime, endTime }) => {
+  const startYear = startTime.substring(0, 4);
+  const endYear = endTime.substring(0, 4);
   return getYearPeriod(startYear, endYear);
 };
 
@@ -100,4 +87,11 @@ export const getDailyPeriod = (data) => {
   const firstYear = data[0].id.substring(0, 4);
   const lastYear = data[data.length - 1].id.substring(0, 4);
   return getYearPeriod(firstYear, lastYear);
+};
+
+export const credits = {
+  href: "https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-land",
+  text: i18n.t(
+    "ERA5-Land / Copernicus Climate Change Service / Google Earth Engine"
+  ),
 };

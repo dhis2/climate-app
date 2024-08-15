@@ -46,9 +46,9 @@ const Page = () => {
 
   const isValid = !!(
     dataset &&
-    isoPeriod.startDate &&
-    isoPeriod.endDate &&
-    new Date(isoPeriod.startDate) <= new Date(isoPeriod.endDate) &&
+    isoPeriod.startTime &&
+    isoPeriod.endTime &&
+    new Date(isoPeriod.startTime) <= new Date(isoPeriod.endTime) &&
     isValidOrgUnits &&
     dataElement &&
     valueCount <= maxValues

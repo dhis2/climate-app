@@ -5,15 +5,7 @@ import TimeZone from "../shared/TimeZone";
 import styles from "./styles/Period.module.css";
 
 const Period = ({ calendar, period, onChange }) => {
-  const handleStartDateChange = (selectedDate) => {
-    period.startDate = selectedDate?.calendarDateString;
-    onChange({ ...period, selectedDate });
-  };
-
-  const handleEndDateChange = (selectedDate) => {
-    period.endDate = selectedDate?.calendarDateString;
-    onChange({ ...period, selectedDate });
-  };
+  const { startTime, endTime } = period;
 
   return (
     <div className={styles.container}>
@@ -23,17 +15,22 @@ const Period = ({ calendar, period, onChange }) => {
       </p>
       <div className={styles.pickers}>
         <CalendarInput
-          onDateSelect={handleStartDateChange}
+          label={i18n.t("Start date")}
           date={period.startDate}
           calendar={calendar}
-          label={i18n.t("Start date")}
+          defaultVal={startTime}
+          onDateSelect={({ calendarDateString }) =>
+            onChange({ ...period, startTime: calendarDateString })
+          }
         />
-
         <CalendarInput
-          onDateSelect={handleEndDateChange}
+          label={i18n.t("End date")}
           date={period.endDate}
           calendar={calendar}
-          label={i18n.t("End date")}
+          defaultVal={endTime}
+          onDateSelect={({ calendarDateString }) =>
+            onChange({ ...period, endTime: calendarDateString })
+          }
         />
         <TimeZone period={period} onChange={onChange} />
       </div>

@@ -1,5 +1,5 @@
 import i18n from "@dhis2/d2-i18n";
-import { colors } from "@dhis2/ui"; // https://github.com/dhis2/ui/blob/master/constants/src/colors.js
+import { colors } from "@dhis2/ui";
 import {
   animation,
   credits,
@@ -7,19 +7,20 @@ import {
   getTemperatureMonthNormal,
   getMonthlyPeriod,
 } from "../../../utils/chart";
+import { toCelcius } from "../../../utils/calc";
 
 const getChartConfig = (name, data, monthlyPeriod, referencePeriod) => {
   const months = getSelectedMonths(data, monthlyPeriod);
 
   const series = months.map((d) => ({
     x: new Date(d.id).getTime(),
-    y: Math.round((d["temperature_2m"] - 273.15) * 10) / 10,
+    y: toCelcius(d["temperature_2m"]),
   }));
 
   const minMax = months.map((d) => [
     new Date(d.id).getTime(),
-    Math.round((d["temperature_2m_min"] - 273.15) * 10) / 10,
-    Math.round((d["temperature_2m_max"] - 273.15) * 10) / 10,
+    toCelcius(d["temperature_2m_min"]),
+    toCelcius(d["temperature_2m_max"]),
   ]);
 
   const normals = months.map((d) => ({
@@ -27,7 +28,6 @@ const getChartConfig = (name, data, monthlyPeriod, referencePeriod) => {
     y: getTemperatureMonthNormal(data, d.id.substring(5, 7), referencePeriod),
   }));
 
-  // https://www.highcharts.com/demo/highcharts/arearange-line
   return {
     title: {
       text: i18n.t("{{name}}: Monthly temperatures {{period}}", {
@@ -56,7 +56,6 @@ const getChartConfig = (name, data, monthlyPeriod, referencePeriod) => {
       },
     },
     yAxis: {
-      // min: minValue > 0 ? 0 : undefined,
       title: false,
       labels: {
         format: "{value}°C",
