@@ -49,13 +49,13 @@ export const getEarthEngineValues = (ee, datasetParams, period, features) =>
       valueParser,
     } = dataset;
 
-    const { startTime, endTime, timeZone = "UTC" } = period;
+    const { startTime, endTime, timeZone = "UTC", calendar } = period;
     const endTimePlusOne = ee.Date(endTime).advance(1, "day");
     const timeZoneStart = ee.Date(startTime).format(null, timeZone);
     const timeZoneEnd = endTimePlusOne.format(null, timeZone);
 
-    const startYear = extractYear(fromIso(period.startDate, period.calendar));
-    const endYear = extractYear(fromIso(period.endDate, period.calendar));
+    const startYear = extractYear(fromIso(period.startTime, calendar));
+    const endYear = extractYear(fromIso(period.endTime, calendar));
 
     let mappedPeriods = new Map();
 
@@ -78,7 +78,7 @@ export const getEarthEngineValues = (ee, datasetParams, period, features) =>
     }
 
     periods.reduce((map, p) => {
-      map.set(toIso(p.startDate, period.calendar), p.iso);
+      map.set(toIso(p.startTime, calendar), p.iso);
       return map;
     }, mappedPeriods);
 

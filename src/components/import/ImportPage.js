@@ -19,8 +19,8 @@ const Page = () => {
   const { calendar = "gregory" } = systemInfo;
 
   const defaultPeriod = {
-    startDate: getCalendarDate(calendar, { months: -7 }),
-    endDate: getCalendarDate(calendar, { months: -1 }),
+    startTime: getCalendarDate(calendar, { months: -7 }),
+    endTime: getCalendarDate(calendar, { months: -1 }),
   };
 
   const [dataset, setDataset] = useState();
@@ -38,8 +38,8 @@ const Page = () => {
     orgUnits.parent.path.split("/").length - 1 <= Number(orgUnits.level);
 
   const isoPeriod = {
-    startDate: toIso(period.startDate, calendar),
-    endDate: toIso(period.endDate, calendar),
+    startTime: toIso(period.startTime, calendar),
+    endTime: toIso(period.endTime, calendar),
     timeZone: period.timeZone,
     calendar: calendar,
   };

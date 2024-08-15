@@ -16,7 +16,7 @@ const Period = ({ calendar, period, onChange }) => {
       <div className={styles.pickers}>
         <CalendarInput
           label={i18n.t("Start date")}
-          date={period.startDate}
+          date={startTime}
           calendar={calendar}
           defaultVal={startTime}
           onDateSelect={({ calendarDateString }) =>
@@ -25,7 +25,7 @@ const Period = ({ calendar, period, onChange }) => {
         />
         <CalendarInput
           label={i18n.t("End date")}
-          date={period.endDate}
+          date={period.endTime}
           calendar={calendar}
           defaultVal={endTime}
           onDateSelect={({ calendarDateString }) =>
