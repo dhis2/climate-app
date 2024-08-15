@@ -1,7 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
 import area from "@turf/area";
-import { generateFixedPeriods } from "@dhis2/multi-calendar-dates";
-import { fromIso, toIso, extractYear } from "./time";
+import { HOURLY, getMappedPeriods } from "./time";
 
 const VALUE_LIMIT = 5000;
 
@@ -53,29 +52,7 @@ export const getEarthEngineValues = (ee, datasetParams, period, features) =>
     const endTimePlusOne = ee.Date(endTime).advance(1, "day");
     const timeZoneStart = ee.Date(startTime).format(null, timeZone);
     const timeZoneEnd = endTimePlusOne.format(null, timeZone);
-
-    const startYear = extractYear(fromIso(period.startTime, calendar));
-    const endYear = extractYear(fromIso(period.endTime, calendar));
-
-    let mappedPeriods = new Map();
-
-    let periods = generateFixedPeriods({
-      year: startYear,
-      calendar: period.calendar,
-      locale: "en",
-      periodType: "DAILY",
-    });
-
-    if (startYear != endYear) {
-      const endPeriods = generateFixedPeriods({
-        year: endYear,
-        calendar: period.calendar,
-        locale: "en",
-        periodType: "DAILY",
-      });
-
-      periods.push(...endPeriods);
-    }
+    const mappedPeriods = getMappedPeriods(period);
 
     periods.reduce((map, p) => {
       map.set(toIso(p.startTime, calendar), p.iso);
@@ -125,7 +102,7 @@ export const getEarthEngineValues = (ee, datasetParams, period, features) =>
 
     let dailyCollection;
 
-    if (periodType === "hourly") {
+    if (periodType === HOURLY) {
       const days = ee
         .Date(timeZoneEnd)
         .difference(ee.Date(timeZoneStart), "days");

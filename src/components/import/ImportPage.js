@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import i18n from "@dhis2/d2-i18n";
+import { useConfig } from "@dhis2/app-runtime";
 import { Card, Button } from "@dhis2/ui";
 import Dataset from "./Dataset";
 import Period from "./Period";
@@ -8,25 +9,23 @@ import DataElement from "./DataElement";
 import ExtractData from "./ExtractData";
 import useOrgUnitCount from "../../hooks/useOrgUnitCount";
 import { getNumberOfDaysFromPeriod } from "../../utils/time";
-import { getCalendarDate, toIso } from "../../utils/time";
-import { useConfig } from "@dhis2/app-runtime";
+import {
+  getDefaultImportPeriod,
+  getStandardPeriod,
+  isValidPeriod,
+} from "../../utils/time";
 import styles from "./styles/ImportPage.module.css";
 
 const maxValues = 50000;
 
-const Page = () => {
+const ImportPage = () => {
   const { systemInfo = {} } = useConfig();
   const { calendar = "gregory" } = systemInfo;
-
-  const defaultPeriod = {
-    startTime: getCalendarDate(calendar, { months: -7 }),
-    endTime: getCalendarDate(calendar, { months: -1 }),
-  };
-
   const [dataset, setDataset] = useState();
-  const [period, setPeriod] = useState(defaultPeriod);
+  const [period, setPeriod] = useState(getDefaultImportPeriod(calendar));
   const [orgUnits, setOrgUnits] = useState();
   const [dataElement, setDataElement] = useState();
+  const standardPeriod = getStandardPeriod(period); // ISO 8601 used by GEE
   const [startExtract, setStartExtract] = useState(false);
   const orgUnitCount = useOrgUnitCount(orgUnits?.parent?.id, orgUnits?.level);
   const daysCount = getNumberOfDaysFromPeriod(period);
@@ -37,18 +36,9 @@ const Page = () => {
     orgUnits?.level &&
     orgUnits.parent.path.split("/").length - 1 <= Number(orgUnits.level);
 
-  const isoPeriod = {
-    startTime: toIso(period.startTime, calendar),
-    endTime: toIso(period.endTime, calendar),
-    timeZone: period.timeZone,
-    calendar: calendar,
-  };
-
   const isValid = !!(
     dataset &&
-    isoPeriod.startTime &&
-    isoPeriod.endTime &&
-    new Date(isoPeriod.startTime) <= new Date(isoPeriod.endTime) &&
+    isValidPeriod(standardPeriod) &&
     isValidOrgUnits &&
     dataElement &&
     valueCount <= maxValues
@@ -102,7 +92,7 @@ const Page = () => {
               {startExtract && isValid && (
                 <ExtractData
                   dataset={dataset}
-                  period={isoPeriod}
+                  period={standardPeriod}
                   orgUnits={orgUnits}
                   dataElement={dataElement}
                 />
@@ -164,4 +154,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default ImportPage;

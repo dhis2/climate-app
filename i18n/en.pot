@@ -452,6 +452,7 @@ msgid "No org units with geometry found for this level"
 msgstr "No org units with geometry found for this level"
 
 msgid ""
+<<<<<<< HEAD
 "Extracting data for {{days}} days and {{orgUnitsCount}} org units "
 "({{count}} values)"
 msgid_plural ""
@@ -463,6 +464,13 @@ msgstr[0] ""
 msgstr[1] ""
 "Extracting data for {{days}} days and {{orgUnitsCount}} org units "
 "({{count}} values)"
+=======
+"Extracting data for {{daysCount}} days and {{orgUnitsCount}} org units "
+"({{valueCount}} values)"
+msgstr ""
+"Extracting data for {{daysCount}} days and {{orgUnitsCount}} org units "
+"({{valueCount}} values)"
+>>>>>>> 8273eaafaa7dab38611870298215ccb2b6ed411a
 
 msgid "Importing data to DHIS2"
 msgstr "Importing data to DHIS2"
