@@ -3,6 +3,7 @@ import Chart from "./Chart";
 import DataLoader from "../shared/DataLoader";
 import getMonthlyConfig from "./charts/precipitationMonthly";
 import getDailyConfig from "./charts/precipitationDaily";
+import { MONTHLY } from "../../utils/time";
 
 const PrecipitationTab = ({
   name,
@@ -18,7 +19,7 @@ const PrecipitationTab = ({
 
   return (
     <>
-      {periodType === "monthly" ? (
+      {periodType === MONTHLY ? (
         <Chart
           config={getMonthlyConfig(
             name,

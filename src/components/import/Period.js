@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
 import i18n from "@dhis2/d2-i18n";
-import DatePicker from "../shared/DatePicker";
+import { CalendarInput } from "@dhis2/ui";
 import TimeZone from "../shared/TimeZone";
 import styles from "./styles/Period.module.css";
 
-const Period = ({ period, onChange }) => {
+const Period = ({ calendar, period, onChange }) => {
   const { startTime, endTime } = period;
 
   return (
@@ -14,15 +14,23 @@ const Period = ({ period, onChange }) => {
         {i18n.t("Daily values will be imported between start and end dates")}
       </p>
       <div className={styles.pickers}>
-        <DatePicker
+        <CalendarInput
           label={i18n.t("Start date")}
+          date={startTime}
+          calendar={calendar}
           defaultVal={startTime}
-          onBlur={(startTime) => onChange({ ...period, startTime })}
+          onDateSelect={({ calendarDateString }) =>
+            onChange({ ...period, startTime: calendarDateString })
+          }
         />
-        <DatePicker
+        <CalendarInput
           label={i18n.t("End date")}
+          date={endTime}
+          calendar={calendar}
           defaultVal={endTime}
-          onBlur={(endTime) => onChange({ ...period, endTime })}
+          onDateSelect={({ calendarDateString }) =>
+            onChange({ ...period, endTime: calendarDateString })
+          }
         />
         <TimeZone period={period} onChange={onChange} />
       </div>
