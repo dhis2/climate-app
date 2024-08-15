@@ -15,6 +15,7 @@ import PrecipitationTab from "./precipitation/PrecipitationTab";
 import HumidityTab from "./HumidityTab";
 import ClimateChangeTab from "./ClimateChangeTab";
 import { defaultDailyPeriod, defaultMonthlyPeriod } from "../../utils/time";
+import { DAILY, MONTHLY, getDefaultExplorePeriod } from "../../utils/time";
 import styles from "./styles/OrgUnit.module.css";
 
 const tabs = {
@@ -28,12 +29,12 @@ const tabs = {
 const OrgUnit = ({ orgUnit }) => {
   const isPoint = orgUnit.geometry?.type === "Point";
   const [tab, setTab] = useState(isPoint ? "forecast10days" : "temperature");
-  const [dailyPeriod, setDailyPeriod] = useState(defaultDailyPeriod);
+  const [dailyPeriod, setDailyPeriod] = useState(getDefaultExplorePeriod());
   const [monthlyPeriod, setMonthlyPeriod] = useState(defaultMonthlyPeriod);
   const [referencePeriod, setReferencePeriod] = useState(
     defaultReferencePeriod
   );
-  const [periodType, setPeriodType] = useState("monthly");
+  const [periodType, setPeriodType] = useState(MONTHLY);
 
   const Tab = tabs[tab];
 
@@ -63,7 +64,7 @@ const OrgUnit = ({ orgUnit }) => {
             />
             {hasMonthlyAndDailyData && (
               <>
-                {periodType === "daily" ? (
+                {periodType === DAILY ? (
                   <DailyPeriodSelect
                     currentPeriod={dailyPeriod}
                     onUpdate={setDailyPeriod}

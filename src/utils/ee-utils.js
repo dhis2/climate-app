@@ -1,5 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
 import area from "@turf/area";
+import { HOURLY, getMappedPeriods } from "./time";
 
 const VALUE_LIMIT = 5000;
 
@@ -47,15 +48,21 @@ export const getEarthEngineValues = (ee, datasetParams, period, features) =>
       valueParser,
     } = dataset;
 
-    const { startTime, endTime, timeZone = "UTC" } = period;
+    const { startTime, endTime, timeZone = "UTC", calendar } = period;
     const endTimePlusOne = ee.Date(endTime).advance(1, "day");
     const timeZoneStart = ee.Date(startTime).format(null, timeZone);
     const timeZoneEnd = endTimePlusOne.format(null, timeZone);
+    const mappedPeriods = getMappedPeriods(period);
+
+    periods.reduce((map, p) => {
+      map.set(toIso(p.startTime, calendar), p.iso);
+      return map;
+    }, mappedPeriods);
 
     const dataParser = (data) =>
       data.map((f) => ({
         ...f.properties,
-        period: f.properties.period,
+        period: mappedPeriods.get(f.properties.period),
         value: valueParser
           ? valueParser(f.properties.value)
           : f.properties.value,
@@ -95,7 +102,7 @@ export const getEarthEngineValues = (ee, datasetParams, period, features) =>
 
     let dailyCollection;
 
-    if (periodType === "hourly") {
+    if (periodType === HOURLY) {
       const days = ee
         .Date(timeZoneEnd)
         .difference(ee.Date(timeZoneStart), "days");
@@ -128,7 +135,7 @@ export const getEarthEngineValues = (ee, datasetParams, period, features) =>
           .map((feature) =>
             ee.Feature(null, {
               ou: feature.get("id"),
-              period: image.date().format("YYYYMMdd"),
+              period: image.date().format("YYYY-MM-dd"),
               value: feature.get(reducer),
             })
           )

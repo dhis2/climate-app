@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import i18n from "@dhis2/d2-i18n";
+import { useConfig } from "@dhis2/app-runtime";
 import { Card, Button } from "@dhis2/ui";
 import Dataset from "./Dataset";
 import Period from "./Period";
@@ -8,18 +9,23 @@ import DataElement from "./DataElement";
 import ExtractData from "./ExtractData";
 import useOrgUnitCount from "../../hooks/useOrgUnitCount";
 import {
-  defaultDailyPeriod,
+  getDefaultImportPeriod,
+  getStandardPeriod,
   getNumberOfDaysFromPeriod,
+  isValidPeriod,
 } from "../../utils/time";
 import styles from "./styles/ImportPage.module.css";
 
 const maxValues = 50000;
 
-const Page = () => {
+const ImportPage = () => {
+  const { systemInfo = {} } = useConfig();
+  const { calendar = "gregory" } = systemInfo;
   const [dataset, setDataset] = useState();
-  const [period, setPeriod] = useState(defaultDailyPeriod);
+  const [period, setPeriod] = useState(getDefaultImportPeriod(calendar));
   const [orgUnits, setOrgUnits] = useState();
   const [dataElement, setDataElement] = useState();
+  const standardPeriod = getStandardPeriod(period); // ISO 8601 used by GEE
   const [startExtract, setStartExtract] = useState(false);
   const orgUnitCount = useOrgUnitCount(orgUnits?.parent?.id, orgUnits?.level);
   const daysCount = getNumberOfDaysFromPeriod(period);
@@ -32,9 +38,7 @@ const Page = () => {
 
   const isValid = !!(
     dataset &&
-    period.startTime &&
-    period.endTime &&
-    new Date(period.startTime) <= new Date(period.endTime) &&
+    isValidPeriod(standardPeriod) &&
     isValidOrgUnits &&
     dataElement &&
     valueCount <= maxValues
@@ -57,7 +61,7 @@ const Page = () => {
                 setDataElement(null);
               }}
             />
-            <Period period={period} onChange={setPeriod} />
+            <Period calendar={calendar} period={period} onChange={setPeriod} />
             <OrgUnits selected={orgUnits} onChange={setOrgUnits} />
             {valueCount > maxValues && (
               <div className={styles.warning}>
@@ -88,7 +92,7 @@ const Page = () => {
               {startExtract && isValid && (
                 <ExtractData
                   dataset={dataset}
-                  period={period}
+                  period={standardPeriod}
                   orgUnits={orgUnits}
                   dataElement={dataElement}
                 />
@@ -150,4 +154,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default ImportPage;

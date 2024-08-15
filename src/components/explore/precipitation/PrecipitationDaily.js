@@ -3,8 +3,9 @@ import Chart from "../Chart";
 import DataLoader from "../../shared/DataLoader";
 import getMonthlyConfig from "../charts/temperatureMonthly";
 import getDailyConfig from "../charts/temperatureDaily";
+import { MONTHLY } from "../../utils/time";
 
-const TemperatureTab = ({
+const PrecipitationDaily = ({
   name,
   periodType,
   monthlyData,
@@ -18,7 +19,7 @@ const TemperatureTab = ({
 
   return (
     <>
-      {periodType === "monthly" ? (
+      {periodType === MONTHLY ? (
         <Chart
           config={getMonthlyConfig(
             name,
@@ -34,7 +35,7 @@ const TemperatureTab = ({
   );
 };
 
-TemperatureTab.propTypes = {
+PrecipitationDaily.propTypes = {
   name: PropTypes.string.isRequired,
   periodType: PropTypes.string.isRequired,
   referencePeriod: PropTypes.string.isRequired,
@@ -43,4 +44,4 @@ TemperatureTab.propTypes = {
   dailyData: PropTypes.array,
 };
 
-export default TemperatureTab;
+export default PrecipitationDaily;
