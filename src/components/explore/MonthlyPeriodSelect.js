@@ -10,21 +10,21 @@ const maxMonths = 60;
 
 const MonthlyPeriodSelect = ({ currentPeriod, onUpdate }) => {
   const [period, setPeriod] = useState(currentPeriod);
-  const { startMonth, endMonth } = period;
-  const months = getNumberOfMonths(startMonth, endMonth);
+  const { startTime, endTime } = period;
+  const months = getNumberOfMonths(startTime, endTime);
 
   return (
     <div className={styles.container}>
       <div className={styles.pickers}>
         <MonthPicker
           label={i18n.t("Start month")}
-          defaultVal={startMonth}
-          onChange={(startMonth) => setPeriod({ ...period, startMonth })}
+          defaultVal={startTime}
+          onChange={(startTime) => setPeriod({ ...period, startTime })}
         />
         <MonthPicker
           label={i18n.t("End month")}
-          defaultVal={endMonth}
-          onChange={(endMonth) => setPeriod({ ...period, endMonth })}
+          defaultVal={endTime}
+          onChange={(endTime) => setPeriod({ ...period, endTime })}
         />
         <Button disabled={months > maxMonths} onClick={() => onUpdate(period)}>
           Update

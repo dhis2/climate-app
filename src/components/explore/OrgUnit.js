@@ -5,7 +5,9 @@ import OrgUnitType from "./OrgUnitType";
 import PeriodTypeSelect from "./PeriodTypeSelect";
 import DailyPeriodSelect from "./DailyPeriodSelect";
 import MonthlyPeriodSelect from "./MonthlyPeriodSelect";
-import ReferencePeriodSelect from "./ReferencePeriodSelect";
+import ReferencePeriodSelect, {
+  defaultReferencePeriod,
+} from "./ReferencePeriodSelect";
 import Tabs from "./Tabs";
 import ForecastTab from "./forecast/ForecastTab";
 import TemperatureTab from "./TemperatureTab";
@@ -13,7 +15,7 @@ import PrecipitationTab from "./PrecipitationTab";
 import HumidityTab from "./HumidityTab";
 import ClimateChangeTab from "./ClimateChangeTab";
 import useEarthEngineTimeSeries from "../../hooks/useEarthEngineTimeSeries";
-import { defaultPeriod, defaultReferencePeriod } from "../../utils/time";
+import { defaultPeriod } from "../../utils/time";
 import styles from "./styles/OrgUnit.module.css";
 
 const band = [
@@ -36,8 +38,8 @@ const dailyDataset = {
 };
 
 const allMonthsPeriod = {
-  startDate: "1960-01",
-  endDate: new Date().toISOString().substring(0, 7), // Current month
+  startTime: "1960-01",
+  endTime: new Date().toISOString().substring(0, 7), // Current month
 };
 
 const tabs = {
@@ -81,8 +83,8 @@ const OrgUnit = ({ orgUnit }) => {
     if (monthlyData && !monthlyPeriod) {
       const last12months = monthlyData.slice(-12);
       setMonthlyPeriod({
-        startMonth: last12months[0].id,
-        endMonth: last12months[11].id,
+        startTime: last12months[0].id,
+        endTime: last12months[11].id,
       });
     }
   }, [monthlyPeriod, monthlyData]);
@@ -130,7 +132,7 @@ const OrgUnit = ({ orgUnit }) => {
               (tab === "climatechange" ||
                 (periodType === "monthly" && tab !== "forecast10days")) && (
                 <ReferencePeriodSelect
-                  selected={referencePeriod}
+                  selected={referencePeriod.id}
                   onChange={setReferencePeriod}
                 />
               )}

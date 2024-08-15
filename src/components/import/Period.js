@@ -5,7 +5,7 @@ import TimeZone from "../shared/TimeZone";
 import styles from "./styles/Period.module.css";
 
 const Period = ({ period, onChange }) => {
-  const { startDate, endDate } = period;
+  const { startTime, endTime } = period;
 
   return (
     <div className={styles.container}>
@@ -16,13 +16,13 @@ const Period = ({ period, onChange }) => {
       <div className={styles.pickers}>
         <DatePicker
           label={i18n.t("Start date")}
-          defaultVal={startDate}
-          onBlur={(startDate) => onChange({ ...period, startDate })}
+          defaultVal={startTime}
+          onBlur={(startTime) => onChange({ ...period, startTime })}
         />
         <DatePicker
           label={i18n.t("End date")}
-          defaultVal={endDate}
-          onBlur={(endDate) => onChange({ ...period, endDate })}
+          defaultVal={endTime}
+          onBlur={(endTime) => onChange({ ...period, endTime })}
         />
         <TimeZone period={period} onChange={onChange} />
       </div>
