@@ -5,8 +5,8 @@ import {
   credits,
   getMonthlyPeriod,
   getMonthFromId,
-} from "../../../utils/chart";
-import { metersToMillimeters } from "../../../utils/calc";
+} from "../../../../utils/chart";
+import { metersToMillimeters } from "../../../../utils/calc";
 
 const band = "total_precipitation_sum";
 

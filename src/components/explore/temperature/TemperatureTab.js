@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import TemperatureMonthly from "./TemperatureMonthly";
 import TemperatureDaily from "./TemperatureDaily";
+import { MONTHLY } from "../../../utils/time";
 
 const TemperatureTab = ({
   orgUnit,
@@ -10,7 +11,7 @@ const TemperatureTab = ({
   referencePeriod,
 }) => (
   <>
-    {periodType === "monthly" ? (
+    {periodType === MONTHLY ? (
       <TemperatureMonthly
         orgUnit={orgUnit}
         period={monthlyPeriod}

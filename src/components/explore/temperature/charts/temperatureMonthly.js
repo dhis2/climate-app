@@ -5,8 +5,8 @@ import {
   credits,
   getMonthlyPeriod,
   getMonthFromId,
-} from "../../../utils/chart";
-import { toCelcius } from "../../../utils/calc";
+} from "../../../../utils/chart";
+import { toCelcius } from "../../../../utils/calc";
 
 const getChartConfig = (name, data, normals, referencePeriod) => {
   const series = data.map((d) => ({

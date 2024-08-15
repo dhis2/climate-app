@@ -1,47 +1,23 @@
 import PropTypes from "prop-types";
 import Chart from "../Chart";
 import DataLoader from "../../shared/DataLoader";
-import getMonthlyConfig from "../charts/temperatureMonthly";
-import getDailyConfig from "../charts/temperatureDaily";
-import { MONTHLY } from "../../utils/time";
+import getDailyConfig from "./charts/precipitationDaily";
+import useEarthEngineTimeSeries from "../../../hooks/useEarthEngineTimeSeries";
+import { era5Daily } from "../../../data/datasets";
 
-const PrecipitationDaily = ({
-  name,
-  periodType,
-  monthlyData,
-  dailyData,
-  monthlyPeriod,
-  referencePeriod,
-}) => {
-  if (!monthlyPeriod || !monthlyData || !dailyData) {
+const PrecipitationDaily = ({ orgUnit, period }) => {
+  const data = useEarthEngineTimeSeries(era5Daily, period, orgUnit);
+
+  if (!data) {
     return <DataLoader height={400} />;
   }
 
-  return (
-    <>
-      {periodType === MONTHLY ? (
-        <Chart
-          config={getMonthlyConfig(
-            name,
-            monthlyData,
-            monthlyPeriod,
-            referencePeriod
-          )}
-        />
-      ) : (
-        <Chart config={getDailyConfig(name, dailyData)} />
-      )}
-    </>
-  );
+  return <Chart config={getDailyConfig(orgUnit.properties.name, data)} />;
 };
 
 PrecipitationDaily.propTypes = {
-  name: PropTypes.string.isRequired,
-  periodType: PropTypes.string.isRequired,
-  referencePeriod: PropTypes.string.isRequired,
-  monthlyPeriod: PropTypes.object,
-  monthlyData: PropTypes.array,
-  dailyData: PropTypes.array,
+  orgUnit: PropTypes.object.isRequired,
+  period: PropTypes.object.isRequired,
 };
 
 export default PrecipitationDaily;
