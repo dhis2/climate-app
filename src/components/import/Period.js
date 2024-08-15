@@ -25,7 +25,7 @@ const Period = ({ calendar, period, onChange }) => {
         />
         <CalendarInput
           label={i18n.t("End date")}
-          date={period.endTime}
+          date={endTime}
           calendar={calendar}
           defaultVal={endTime}
           onDateSelect={({ calendarDateString }) =>

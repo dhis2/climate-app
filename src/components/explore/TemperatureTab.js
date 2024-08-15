@@ -3,6 +3,7 @@ import Chart from "./Chart";
 import DataLoader from "../shared/DataLoader";
 import getMonthlyConfig from "./charts/temperatureMonthly";
 import getDailyConfig from "./charts/temperatureDaily";
+import { MONTHLY } from "../../utils/time";
 
 const TemperatureTab = ({
   name,
@@ -18,7 +19,7 @@ const TemperatureTab = ({
 
   return (
     <>
-      {periodType === "monthly" ? (
+      {periodType === MONTHLY ? (
         <Chart
           config={getMonthlyConfig(
             name,

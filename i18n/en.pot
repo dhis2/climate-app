@@ -451,6 +451,13 @@ msgstr "Loading org units"
 msgid "No org units with geometry found for this level"
 msgstr "No org units with geometry found for this level"
 
+msgid ""
+"Extracting data for {{daysCount}} days and {{orgUnitsCount}} org units "
+"({{valueCount}} values)"
+msgstr ""
+"Extracting data for {{daysCount}} days and {{orgUnitsCount}} org units "
+"({{valueCount}} values)"
+
 msgid "Importing data to DHIS2"
 msgstr "Importing data to DHIS2"
 
