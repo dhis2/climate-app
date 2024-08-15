@@ -6,16 +6,16 @@ import {
   getMonthlyPeriod,
   getMonthFromId,
 } from "../../../../utils/chart";
-import { toCelcius } from "../../../../utils/calc";
+import { getTimeFromId, toCelcius } from "../../../../utils/calc";
 
 const getChartConfig = (name, data, normals, referencePeriod) => {
   const series = data.map((d) => ({
-    x: new Date(d.id).getTime(),
+    x: getTimeFromId(d.id),
     y: toCelcius(d["temperature_2m"]),
   }));
 
   const minMax = data.map((d) => [
-    new Date(d.id).getTime(),
+    getTimeFromId(d.id),
     toCelcius(d["temperature_2m_min"]),
     toCelcius(d["temperature_2m_max"]),
   ]);
@@ -25,7 +25,7 @@ const getChartConfig = (name, data, normals, referencePeriod) => {
     const normal = normals.find((n) => n.id === month);
 
     return {
-      x: new Date(d.id).getTime(),
+      x: getTimeFromId(d.id),
       y: toCelcius(normal["temperature_2m"]),
     };
   });

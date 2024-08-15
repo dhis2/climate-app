@@ -3,31 +3,30 @@ import { colors } from "@dhis2/ui";
 import {
   animation,
   credits,
+  getMonthFromId,
   getSelectedMonths,
   getMonthlyPeriod,
   getHumidityMonthNormal,
-} from "../../../utils/chart";
+} from "../../../../utils/chart";
 import {
   getRelativeHumidity,
   kelvinToCelsius,
   roundOneDecimal,
   getTimeFromId,
-} from "../../../utils/calc";
+} from "../../../../utils/calc";
 
-const getChartConfig = (name, data, monthlyPeriod, referencePeriod) => {
-  const months = getSelectedMonths(data, monthlyPeriod);
-
-  const dewpoint = months.map((d) => ({
+const getChartConfig = (name, data, normals, referencePeriod) => {
+  const dewpoint = data.map((d) => ({
     x: getTimeFromId(d.id),
     y: roundOneDecimal(kelvinToCelsius(d["dewpoint_temperature_2m"])),
   }));
 
-  const temperature = months.map((d) => ({
+  const temperature = data.map((d) => ({
     x: getTimeFromId(d.id),
     y: roundOneDecimal(kelvinToCelsius(d["temperature_2m"])),
   }));
 
-  const humidity = months.map((d) => ({
+  const humidity = data.map((d) => ({
     x: getTimeFromId(d.id),
     y: roundOneDecimal(
       getRelativeHumidity(
@@ -37,16 +36,26 @@ const getChartConfig = (name, data, monthlyPeriod, referencePeriod) => {
     ),
   }));
 
-  const normals = months.map((d) => ({
-    x: getTimeFromId(d.id),
-    y: getHumidityMonthNormal(data, d.id.substring(5, 7), referencePeriod),
-  }));
+  const monthMormals = data.map((d) => {
+    const month = getMonthFromId(d.id);
+    const normal = normals.find((n) => n.id === month);
+
+    return {
+      x: getTimeFromId(d.id),
+      y: roundOneDecimal(
+        getRelativeHumidity(
+          kelvinToCelsius(normal["temperature_2m"]),
+          kelvinToCelsius(normal["dewpoint_temperature_2m"])
+        )
+      ),
+    };
+  });
 
   return {
     title: {
       text: i18n.t("{{name}}: Relative humidity {{period}}", {
         name,
-        period: getMonthlyPeriod(monthlyPeriod),
+        // period: getMonthlyPeriod(monthlyPeriod),
         nsSeparator: ";",
       }),
     },
@@ -113,7 +122,7 @@ const getChartConfig = (name, data, monthlyPeriod, referencePeriod) => {
       {
         name: i18n.t("Normal relative humidity"),
         type: "column",
-        data: normals,
+        data: monthMormals,
         color: colors.blue200,
         pointPlacement: -0.1,
         zIndex: 0,

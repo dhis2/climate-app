@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-08-15T11:52:19.808Z\n"
-"PO-Revision-Date: 2024-08-15T11:52:19.808Z\n"
+"POT-Creation-Date: 2024-08-15T12:16:45.156Z\n"
+"PO-Revision-Date: 2024-08-15T12:16:45.156Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -193,27 +193,6 @@ msgstr "Daily"
 msgid "Reference period"
 msgstr "Reference period"
 
-msgid "{{name}}: Daily relative humidity {{period}}"
-msgstr "{{name}}: Daily relative humidity {{period}}"
-
-msgid "Relative humidity"
-msgstr "Relative humidity"
-
-msgid "{{name}}: Relative humidity {{period}}"
-msgstr "{{name}}: Relative humidity {{period}}"
-
-msgid "Normals from reference period: {{period}}"
-msgstr "Normals from reference period: {{period}}"
-
-msgid "Normal relative humidity"
-msgstr "Normal relative humidity"
-
-msgid "Dewpoint temperature"
-msgstr "Dewpoint temperature"
-
-msgid "Air temperature"
-msgstr "Air temperature"
-
 msgid "{{name}}: {{month}} temperature anomaly {{years}}"
 msgstr "{{name}}: {{month}} temperature anomaly {{years}}"
 
@@ -393,6 +372,27 @@ msgstr "Heavy snow and thunder"
 
 msgid "Fog"
 msgstr "Fog"
+
+msgid "{{name}}: Daily relative humidity {{period}}"
+msgstr "{{name}}: Daily relative humidity {{period}}"
+
+msgid "Relative humidity"
+msgstr "Relative humidity"
+
+msgid "{{name}}: Relative humidity {{period}}"
+msgstr "{{name}}: Relative humidity {{period}}"
+
+msgid "Normals from reference period: {{period}}"
+msgstr "Normals from reference period: {{period}}"
+
+msgid "Normal relative humidity"
+msgstr "Normal relative humidity"
+
+msgid "Dewpoint temperature"
+msgstr "Dewpoint temperature"
+
+msgid "Air temperature"
+msgstr "Air temperature"
 
 msgid "{{name}}: Daily precipitation {{period}}"
 msgstr "{{name}}: Daily precipitation {{period}}"

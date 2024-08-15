@@ -6,13 +6,13 @@ import {
   getMonthlyPeriod,
   getMonthFromId,
 } from "../../../../utils/chart";
-import { metersToMillimeters } from "../../../../utils/calc";
+import { getTimeFromId, metersToMillimeters } from "../../../../utils/calc";
 
 const band = "total_precipitation_sum";
 
 const getChartConfig = (name, data, normals, referencePeriod) => {
   const series = data.map((d) => ({
-    x: new Date(d.id).getTime(),
+    x: getTimeFromId(d.id),
     y: metersToMillimeters(d[band]),
   }));
 
@@ -21,7 +21,7 @@ const getChartConfig = (name, data, normals, referencePeriod) => {
     const normal = normals.find((n) => n.id === month);
 
     return {
-      x: new Date(d.id).getTime(),
+      x: getTimeFromId(d.id),
       y: metersToMillimeters(normal[band]),
     };
   });

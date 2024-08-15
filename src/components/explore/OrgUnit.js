@@ -12,9 +12,9 @@ import Tabs from "./Tabs";
 import ForecastTab from "./forecast/ForecastTab";
 import TemperatureTab from "./temperature/TemperatureTab";
 import PrecipitationTab from "./precipitation/PrecipitationTab";
-import HumidityTab from "./HumidityTab";
+import HumidityTab from "./humidity/HumidityTab";
 import ClimateChangeTab from "./ClimateChangeTab";
-import { defaultDailyPeriod, defaultMonthlyPeriod } from "../../utils/time";
+import { defaultMonthlyPeriod } from "../../utils/time";
 import { DAILY, MONTHLY, getDefaultExplorePeriod } from "../../utils/time";
 import styles from "./styles/OrgUnit.module.css";
 
