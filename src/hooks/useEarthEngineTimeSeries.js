@@ -23,30 +23,50 @@ const getKey = ({ datasetId, band }, { startTime, endTime }, { id }, filter) =>
     "-"
   )}-${startTime}-${endTime}${getKeyFromFilter(filter)}`;
 
-const cache = {};
+const cachedPromise = {};
 
 const useEarthEngineTimeSeries = (dataset, period, feature, filter) => {
   const [data, setData] = useState();
   const eePromise = useEarthEngine();
 
   useEffect(() => {
+    let canceled = false;
+
     if (dataset && period && feature) {
       const key = getKey(dataset, period, feature, filter);
 
-      if (cache[key]) {
-        setData(cache[key]);
-        return;
+      if (cachedPromise[key]) {
+        cachedPromise[key].then((data) => {
+          if (!canceled) {
+            setData(data);
+          }
+        });
+
+        return () => {
+          canceled = true;
+        };
       }
 
       setData();
-      eePromise.then((ee) =>
-        getTimeSeriesData(ee, dataset, period, feature.geometry, filter)
-          .then(parseIds)
-          .then((data) => {
-            cache[key] = data;
+      eePromise.then((ee) => {
+        cachedPromise[key] = getTimeSeriesData(
+          ee,
+          dataset,
+          period,
+          feature.geometry,
+          filter
+        ).then(parseIds);
+
+        cachedPromise[key].then((data) => {
+          if (!canceled) {
             setData(data);
-          })
-      );
+          }
+        });
+      });
+
+      return () => {
+        canceled = true;
+      };
     }
   }, [eePromise, dataset, period, feature, filter]);
 
