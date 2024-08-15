@@ -15,12 +15,7 @@ import PrecipitationTab from "./PrecipitationTab";
 import HumidityTab from "./HumidityTab";
 import ClimateChangeTab from "./ClimateChangeTab";
 import useEarthEngineTimeSeries from "../../hooks/useEarthEngineTimeSeries";
-import {
-  DAILY,
-  MONTHLY,
-  defaultReferencePeriod,
-  getDefaultExplorePeriod,
-} from "../../utils/time";
+import { DAILY, MONTHLY, getDefaultExplorePeriod } from "../../utils/time";
 import styles from "./styles/OrgUnit.module.css";
 
 const band = [
