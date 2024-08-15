@@ -32,8 +32,8 @@ const gregoryStartDate = "2023-08-01";
 const gregoryEndDate = "2024-07-31";
 
 const gregoryPeriod = {
-  startDate: gregoryStartDate,
-  endDate: gregoryEndDate,
+  startTime: gregoryStartDate,
+  endTime: gregoryEndDate,
   calendar: gregoryCalendar,
 };
 
@@ -48,8 +48,8 @@ const nepaliStartDate = "2080-09-01";
 const nepaliEndDate = "2081-03-31";
 
 const nepaliPeriod = {
-  startDate: nepaliStartDate,
-  endDate: nepaliEndDate,
+  startTime: nepaliStartDate,
+  endTime: nepaliEndDate,
   calendar: nepaliCalendar,
 };
 
@@ -64,8 +64,8 @@ const ethiopicStartDate = "2016-04-01";
 const ethiopicEndDate = "2016-10-30";
 
 const ethiopicPeriod = {
-  startDate: ethiopicStartDate,
-  endDate: ethiopicEndDate,
+  startTime: ethiopicStartDate,
+  endTime: ethiopicEndDate,
   calendar: ethiopicCalendar,
 };
 
@@ -184,26 +184,27 @@ describe("time utils", () => {
 
   it("it should get the standard period from a calendar period", () => {
     expect(getStandardPeriod(gregoryPeriod)).toEqual({
-      startDate: gregoryStartDate,
-      endDate: gregoryEndDate,
+      startTime: gregoryStartDate,
+      endTime: gregoryEndDate,
       calendar: gregoryCalendar,
     });
 
     expect(getStandardPeriod(nepaliPeriod)).toEqual({
-      startDate: toStandardDate(nepaliStartDate, nepaliCalendar),
-      endDate: toStandardDate(nepaliEndDate, nepaliCalendar),
+      startTime: toStandardDate(nepaliStartDate, nepaliCalendar),
+      endTime: toStandardDate(nepaliEndDate, nepaliCalendar),
       calendar: nepaliCalendar,
     });
 
     expect(getStandardPeriod(ethiopicPeriod)).toEqual({
-      startDate: toStandardDate(ethiopicStartDate, ethiopicCalendar),
-      endDate: toStandardDate(ethiopicEndDate, ethiopicCalendar),
+      startTime: toStandardDate(ethiopicStartDate, ethiopicCalendar),
+      endTime: toStandardDate(ethiopicEndDate, ethiopicCalendar),
       calendar: ethiopicCalendar,
     });
   });
 
   it("it should create mapped gregory periods", () => {
     const mappedPeriods = getMappedPeriods(gregoryPeriod);
+
     expect(mappedPeriods.get(gregoryStartDate)).toEqual("20230801");
     expect(mappedPeriods.get(gregoryEndDate)).toEqual("20240731");
   });

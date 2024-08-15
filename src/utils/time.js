@@ -216,7 +216,7 @@ export const getMappedPeriods = (period, periodType = DAILY, locale = "en") => {
       locale,
       periodType,
     }).reduce(
-      (map, p) => map.set(toStandardDate(p.startTime, calendar), p.id),
+      (map, p) => map.set(toStandardDate(p.startDate, calendar), p.id),
       mappedPeriods
     );
   }
