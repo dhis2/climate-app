@@ -48,11 +48,16 @@ export const getEarthEngineValues = (ee, datasetParams, period, features) =>
       valueParser,
     } = dataset;
 
-    const { startDate, endDate, timeZone = "UTC" } = period;
-    const endDatePlusOne = ee.Date(endDate).advance(1, "day");
-    const timeZoneStart = ee.Date(startDate).format(null, timeZone);
-    const timeZoneEnd = endDatePlusOne.format(null, timeZone);
+    const { startTime, endTime, timeZone = "UTC", calendar } = period;
+    const endTimePlusOne = ee.Date(endTime).advance(1, "day");
+    const timeZoneStart = ee.Date(startTime).format(null, timeZone);
+    const timeZoneEnd = endTimePlusOne.format(null, timeZone);
     const mappedPeriods = getMappedPeriods(period);
+
+    periods.reduce((map, p) => {
+      map.set(toIso(p.startTime, calendar), p.iso);
+      return map;
+    }, mappedPeriods);
 
     const dataParser = (data) =>
       data.map((f) => ({
@@ -106,7 +111,7 @@ export const getEarthEngineValues = (ee, datasetParams, period, features) =>
 
       dailyCollection = ee.ImageCollection.fromImages(
         daysList.map((day) => {
-          const startUTC = ee.Date(startDate).advance(day, "days");
+          const startUTC = ee.Date(startTime).advance(day, "days");
           const start = ee.Date(startUTC.format(null, timeZone));
           const end = start.advance(1, "days");
           const filtered = collection.filter(ee.Filter.date(start, end));
@@ -182,32 +187,7 @@ export const getEarthEngineData = (ee, datasetParams, period, features) => {
 export const getTimeSeriesData = async (ee, dataset, period, geometry) => {
   const { datasetId, band, reducer = "mean", sharedInputs = false } = dataset;
 
-  let collection = ee.ImageCollection(datasetId);
-
-  const { startDate, endDate, timeZone = "UTC" } = period;
-  const endDatePlusOne = ee.Date(endDate).advance(1, "day");
-  const timeZoneStart = ee.Date(startDate).format(null, timeZone);
-  const timeZoneEnd = endDatePlusOne.format(null, timeZone);
-
-  collection = collection
-    .select(band)
-    .filter(ee.Filter.date(timeZoneStart, timeZoneEnd));
-
-  let eeScale = getScale(collection.first());
-
-  const { type, coordinates } = geometry;
-
-  if (type.includes("Polygon")) {
-    // unweighted reducer may fail if the features are smaller than the pixel area
-    const scale = await getInfo(eeScale);
-    const orgUnitArea = area(geometry);
-
-    if (orgUnitArea < scale * scale) {
-      eeScale = Math.sqrt(orgUnitArea) / 2;
-    }
-  }
-
-  const eeGeometry = ee.Geometry[type](coordinates);
+  let collection = ee.ImageCollection(datasetId).select(band);
 
   let eeReducer;
 
@@ -236,11 +216,36 @@ export const getTimeSeriesData = async (ee, dataset, period, geometry) => {
     eeReducer = ee.Reducer[reducer]();
   }
 
-  // Retruns a time series array of objects
+  const { startTime, endTime, timeZone = "UTC" } = period;
+  const endTimePlusOne = ee.Date(endTime).advance(1, "day");
+  const timeZoneStart = ee.Date(startTime).format(null, timeZone);
+  const timeZoneEnd = endTimePlusOne.format(null, timeZone);
+
+  collection = collection.filter(ee.Filter.date(timeZoneStart, timeZoneEnd));
+
+  let eeScale = getScale(collection.first());
+
+  const { type, coordinates } = geometry;
+
+  if (type.includes("Polygon")) {
+    // unweighted reducer may fail if the features are smaller than the pixel area
+    const scale = await getInfo(eeScale);
+    const orgUnitArea = area(geometry);
+
+    if (orgUnitArea < scale * scale) {
+      eeScale = Math.sqrt(orgUnitArea) / 2;
+    }
+  }
+
+  const eeGeometry = ee.Geometry[type](coordinates);
+
+  // Returns a time series array of objects
   return getInfo(
     ee.FeatureCollection(
       collection.map((image) =>
-        ee.Feature(null, image.reduceRegion(eeReducer, eeGeometry, eeScale))
+        ee
+          .Feature(null, image.reduceRegion(eeReducer, eeGeometry, eeScale))
+          .set("system:index", image.get("system:index"))
       )
     )
   ).then(getFeatureCollectionPropertiesArray);

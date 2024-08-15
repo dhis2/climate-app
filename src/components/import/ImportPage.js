@@ -36,8 +36,13 @@ const ImportPage = () => {
     orgUnits?.level &&
     orgUnits.parent.path.split("/").length - 1 <= Number(orgUnits.level);
 
-  const isValid = !!(dataset && isValidPeriod(standardPeriod),
-  isValidOrgUnits && dataElement && valueCount <= maxValues);
+  const isValid = !!(
+    dataset &&
+    isValidPeriod(standardPeriod) &&
+    isValidOrgUnits &&
+    dataElement &&
+    valueCount <= maxValues
+  );
 
   useEffect(() => {
     setStartExtract(false);

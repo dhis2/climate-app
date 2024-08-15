@@ -65,8 +65,8 @@ export const getCalendarDate = (calendar, period = { days: 0 }) => {
  * @returns {Object} Default import data period with calendar date strings
  */
 export const getDefaultImportPeriod = (calendar) => ({
-  startDate: getCalendarDate(calendar, { months: -7 }),
-  endDate: getCalendarDate(calendar, { months: -1 }),
+  startTime: getCalendarDate(calendar, { months: -7 }),
+  endTime: getCalendarDate(calendar, { months: -1 }),
   calendar,
 });
 
@@ -76,17 +76,17 @@ export const getDefaultImportPeriod = (calendar) => ({
  */
 export const getDefaultExplorePeriod = () => {
   const lagTime = 10; // 10 days for ERA5-Land
-  const endDate = new Date();
+  const endTime = new Date();
 
-  endDate.setDate(endDate.getDate() - lagTime);
-  endDate.setDate(0); // Last day of the previous month
+  endTime.setDate(endTime.getDate() - lagTime);
+  endTime.setDate(0); // Last day of the previous month
 
   // First day 12 months back
-  const startDate = new Date(endDate.getFullYear(), endDate.getMonth() - 11, 1);
+  const startTime = new Date(endTime.getFullYear(), endTime.getMonth() - 11, 1);
 
   return {
-    startDate: formatStandardDate(startDate),
-    endDate: formatStandardDate(endDate),
+    startTime: formatStandardDate(startTime),
+    endTime: formatStandardDate(endTime),
   };
 };
 
@@ -107,13 +107,50 @@ export const getNumberOfMonths = (startMonth, endMonth) => {
 
 /**
  * Returns number of days between start and end date (inclusive)
- * @param {String} startDate Start date in format YYYY-MM-DD
- * @param {String} endDate End date in format YYYY-MM-DD
+ * @param {String} startTime Start date in format YYYY-MM-DD
+ * @param {String} endTime End date in format YYYY-MM-DD
  * @returns {Number} Number of days between start and end date
  */
-export const getNumberOfDays = (startDate, endDate) => {
-  const start = new Date(startDate);
-  const end = new Date(endDate);
+export const getNumberOfDays = (startTime, endTime) => {
+  const start = new Date(startTime);
+  const end = new Date(endTime);
+/**
+ * Formats a date string, timestamp or date array into format used by DHIS2 and <input> date
+ * @param {Date} date
+ * @returns {String}
+ */
+export const formatDate = (date) => {
+  const year = date.getFullYear();
+  const month = ("0" + (date.getMonth() + 1)).slice(-2);
+  const day = ("0" + date.getDate()).slice(-2);
+  return `${year}-${month}-${day}`; // xxxx-xx-xx
+};
+
+const lagTime = 10; // 10 days for ERA5-Land
+const endTime = new Date();
+
+endTime.setDate(endTime.getDate() - lagTime);
+endTime.setDate(0); // Last day of the previous month
+
+// First day 12 months back
+const startTime = new Date(endTime.getFullYear(), endTime.getMonth() - 11, 1);
+
+export const defaultPeriod = {
+  startTime: formatDate(startTime),
+  endTime: formatDate(endTime),
+};
+
+export const getNumberOfMonths = (startTime, endTime) => {
+  const startYear = parseInt(startTime.substring(0, 4));
+  const start = parseInt(startTime.substring(5, 7));
+  const endYear = parseInt(endTime.substring(0, 4));
+  const end = parseInt(endTime.substring(5, 7));
+  return (endYear - startYear) * 12 + (end - start) + 1;
+};
+
+export const getNumberOfDays = (startTime, endTime) => {
+  const start = new Date(startTime);
+  const end = new Date(endTime);
   const diff = end - start;
 
   return diff / oneDayInMs + 1;
@@ -121,11 +158,11 @@ export const getNumberOfDays = (startDate, endDate) => {
 
 /**
  * Returns number of days in a period object
- * @param {Object} period Period object with startDate and endDate
+ * @param {Object} period Period object with startTime and endTime
  * @returns {Number} Number of days in period
  */
 export const getNumberOfDaysFromPeriod = (period) =>
-  getNumberOfDays(period.startDate, period.endDate);
+  getNumberOfDays(period.startTime, period.endTime);
 
 /**
  * Translates a date string to a date object
@@ -180,9 +217,9 @@ export const fromStandardDate = (dateString, calendar) => {
  * @param {String} calendar Calendar used
  * @returns {Object} Standard period object
  */
-export const getStandardPeriod = ({ startDate, endDate, calendar }) => ({
-  startDate: toStandardDate(startDate, calendar),
-  endDate: toStandardDate(endDate, calendar),
+export const getStandardPeriod = ({ startTime, endTime, calendar }) => ({
+  startTime: toStandardDate(startTime, calendar),
+  endTime: toStandardDate(endTime, calendar),
   calendar, // Include original calendar to allow conversion back to DHIS2 date
 });
 
@@ -194,10 +231,10 @@ export const getStandardPeriod = ({ startDate, endDate, calendar }) => ({
  * @returns {Map} Map with standard date as key and DHIS2 calendar date as value
  */
 export const getMappedPeriods = (period, periodType = DAILY, locale = "en") => {
-  const { startDate, endDate, calendar } = period;
+  const { startTime, endTime, calendar } = period;
 
-  const startYear = extractYear(fromStandardDate(startDate, calendar));
-  const endYear = extractYear(fromStandardDate(endDate, calendar));
+  const startYear = extractYear(fromStandardDate(startTime, calendar));
+  const endYear = extractYear(fromStandardDate(endTime, calendar));
 
   const mappedPeriods = new Map();
 
@@ -208,7 +245,7 @@ export const getMappedPeriods = (period, periodType = DAILY, locale = "en") => {
       locale,
       periodType,
     }).reduce(
-      (map, p) => map.set(toStandardDate(p.startDate, calendar), p.id),
+      (map, p) => map.set(toStandardDate(p.startTime, calendar), p.id),
       mappedPeriods
     );
   }
@@ -218,13 +255,13 @@ export const getMappedPeriods = (period, periodType = DAILY, locale = "en") => {
 
 /**
  * Checks if a period is valid
- * @param {Object} period Period object with startDate and endDate
+ * @param {Object} period Period object with startTime and endTime
  * @returns {Boolean} True if period is valid
  */
 export const isValidPeriod = (period) =>
   Boolean(
     period &&
-      period.startDate &&
-      period.endDate &&
-      new Date(period.startDate) <= new Date(period.endDate)
+      period.startTime &&
+      period.endTime &&
+      new Date(period.startTime) <= new Date(period.endTime)
   );

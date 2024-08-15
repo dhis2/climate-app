@@ -4,14 +4,8 @@ import { CalendarInput } from "@dhis2/ui";
 import TimeZone from "../shared/TimeZone";
 import styles from "./styles/Period.module.css";
 
-const Period = ({ period, onChange }) => {
-  const { calendar, startDate, endDate } = period;
-
-  const onStartDateChange = (selectedDate) =>
-    onChange({ ...period, startDate: selectedDate?.calendarDateString });
-
-  const onEndDateChange = (selectedDate) =>
-    onChange({ ...period, endDate: selectedDate?.calendarDateString });
+const Period = ({ calendar, period, onChange }) => {
+  const { startTime, endTime } = period;
 
   return (
     <div className={styles.container}>
@@ -21,16 +15,22 @@ const Period = ({ period, onChange }) => {
       </p>
       <div className={styles.pickers}>
         <CalendarInput
-          onDateSelect={onStartDateChange}
-          date={startDate}
-          calendar={calendar}
           label={i18n.t("Start date")}
+          date={startTime}
+          calendar={calendar}
+          defaultVal={startTime}
+          onDateSelect={({ calendarDateString }) =>
+            onChange({ ...period, startTime: calendarDateString })
+          }
         />
         <CalendarInput
-          onDateSelect={onEndDateChange}
-          date={endDate}
-          calendar={calendar}
           label={i18n.t("End date")}
+          date={endTime}
+          calendar={calendar}
+          defaultVal={endTime}
+          onDateSelect={({ calendarDateString }) =>
+            onChange({ ...period, endTime: calendarDateString })
+          }
         />
         <TimeZone period={period} onChange={onChange} />
       </div>
