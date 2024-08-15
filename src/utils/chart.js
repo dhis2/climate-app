@@ -1,4 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
+
+/*
 import {
   toCelcius,
   kelvinToCelsius,
@@ -6,6 +8,7 @@ import {
   getRelativeHumidity,
   roundOneDecimal,
 } from "./calc";
+ */
 
 const filterMonthData = (data, month) =>
   data.filter((d) => getMonthFromId(d.id) === month);
@@ -33,6 +36,7 @@ export const animation = {
 export const getYearFromId = (id) => id.substring(0, 4);
 export const getMonthFromId = (id) => id.substring(5, 7);
 
+/*
 export const getTemperatureMonthNormal = (data, month, referencePeriod) => {
   const monthData = filterMonthData(data, month);
   const referenceYearCount = referencePeriodYearCount(referencePeriod);
@@ -45,7 +49,9 @@ export const getTemperatureMonthNormal = (data, month, referencePeriod) => {
 
   return toCelcius(normal);
 };
+*/
 
+/*
 export const getHumidityMonthNormal = (data, month, referencePeriod) => {
   const monthData = filterMonthData(data, month);
   const referenceYearCount = referencePeriodYearCount(referencePeriod);
@@ -62,6 +68,7 @@ export const getHumidityMonthNormal = (data, month, referencePeriod) => {
     monthData.filter(periodFilter).reduce(periodReducer, 0) / referenceYearCount
   );
 };
+*/
 
 export const getSelectedMonths = (data, { startTime, endTime }) =>
   data.filter((d) => d.id >= startTime && d.id <= endTime);

@@ -12,19 +12,26 @@ const getPeridFromId = (id) => {
 const parseIds = (data) =>
   data.map((d) => ({ ...d, id: getPeridFromId(d.id) }));
 
+const getKeyFromFilter = (filter) =>
+  filter
+    ? `-${filter.map((f) => `${f.type}-${f.arguments.join("-")}`).join("-")}`
+    : "";
+
 // TODO: Reuse this function
-const getKey = ({ datasetId, band }, { startTime, endTime }, { id }) =>
-  `${id}-${datasetId}-${band.join("-")}-${startTime}-${endTime}`;
+const getKey = ({ datasetId, band }, { startTime, endTime }, { id }, filter) =>
+  `${id}-${datasetId}-${band.join(
+    "-"
+  )}-${startTime}-${endTime}${getKeyFromFilter(filter)}`;
 
 const cache = {};
 
-const useEarthEngineTimeSeries = (dataset, period, feature) => {
+const useEarthEngineTimeSeries = (dataset, period, feature, filter) => {
   const [data, setData] = useState();
   const eePromise = useEarthEngine();
 
   useEffect(() => {
     if (dataset && period && feature) {
-      const key = getKey(dataset, period, feature);
+      const key = getKey(dataset, period, feature, filter);
 
       if (cache[key]) {
         setData(cache[key]);
@@ -33,7 +40,7 @@ const useEarthEngineTimeSeries = (dataset, period, feature) => {
 
       setData();
       eePromise.then((ee) =>
-        getTimeSeriesData(ee, dataset, period, feature.geometry)
+        getTimeSeriesData(ee, dataset, period, feature.geometry, filter)
           .then(parseIds)
           .then((data) => {
             cache[key] = data;
@@ -41,7 +48,7 @@ const useEarthEngineTimeSeries = (dataset, period, feature) => {
           })
       );
     }
-  }, [eePromise, dataset, period, feature]);
+  }, [eePromise, dataset, period, feature, filter]);
 
   return data;
 };

@@ -184,10 +184,26 @@ export const getEarthEngineData = (ee, datasetParams, period, features) => {
   }
 };
 
-export const getTimeSeriesData = async (ee, dataset, period, geometry) => {
+export const getTimeSeriesData = async (
+  ee,
+  dataset,
+  period,
+  geometry,
+  filter
+) => {
   const { datasetId, band, reducer = "mean", sharedInputs = false } = dataset;
 
   let collection = ee.ImageCollection(datasetId).select(band);
+
+  if (Array.isArray(filter)) {
+    filter.forEach((f) => {
+      if (ee.Filter[f.type]) {
+        collection = collection.filter(
+          ee.Filter[f.type].apply(this, f.arguments)
+        );
+      }
+    });
+  }
 
   let eeReducer;
 

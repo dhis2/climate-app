@@ -13,7 +13,7 @@ import ForecastTab from "./forecast/ForecastTab";
 import TemperatureTab from "./temperature/TemperatureTab";
 import PrecipitationTab from "./precipitation/PrecipitationTab";
 import HumidityTab from "./humidity/HumidityTab";
-import ClimateChangeTab from "./ClimateChangeTab";
+import ClimateChangeTab from "./climateChange/ClimateChangeTab";
 import { defaultMonthlyPeriod } from "../../utils/time";
 import { DAILY, MONTHLY, getDefaultExplorePeriod } from "../../utils/time";
 import styles from "./styles/OrgUnit.module.css";

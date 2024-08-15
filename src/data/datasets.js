@@ -182,3 +182,8 @@ export const era5MonthlyNormals = {
     "total_precipitation_sum",
   ],
 };
+
+export const era5MonthlyTemperatures = {
+  datasetId: "ECMWF/ERA5_LAND/MONTHLY_AGGR",
+  band: ["temperature_2m"],
+};
