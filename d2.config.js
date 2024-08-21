@@ -4,7 +4,7 @@ const config = {
   title: "Climate app",
   entryPoints: {
     app: "./src/App.js",
-    plugin: "./src/DashboardPlugin.js",
+    plugin: "./src/plugin/DashboardPlugin.js",
   },
 };
 
