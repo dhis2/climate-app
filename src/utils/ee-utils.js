@@ -184,10 +184,26 @@ export const getEarthEngineData = (ee, datasetParams, period, features) => {
   }
 };
 
-export const getTimeSeriesData = async (ee, dataset, period, geometry) => {
+export const getTimeSeriesData = async (
+  ee,
+  dataset,
+  period,
+  geometry,
+  filter
+) => {
   const { datasetId, band, reducer = "mean", sharedInputs = false } = dataset;
 
   let collection = ee.ImageCollection(datasetId).select(band);
+
+  if (Array.isArray(filter)) {
+    filter.forEach((f) => {
+      if (ee.Filter[f.type]) {
+        collection = collection.filter(
+          ee.Filter[f.type].apply(this, f.arguments)
+        );
+      }
+    });
+  }
 
   let eeReducer;
 
@@ -249,4 +265,56 @@ export const getTimeSeriesData = async (ee, dataset, period, geometry) => {
       )
     )
   ).then(getFeatureCollectionPropertiesArray);
+};
+
+export const getClimateNormals = (ee, dataset, period, geometry) => {
+  const { datasetId, band } = dataset;
+  const { startTime, endTime } = period;
+  const { type, coordinates } = geometry;
+  const eeGeometry = ee.Geometry[type](coordinates);
+
+  const collection = ee
+    .ImageCollection(datasetId)
+    .select(band)
+    .filterDate(`${startTime}-01-01`, `${endTime + 1}-01-01`);
+
+  const byMonth = ee.ImageCollection.fromImages(
+    ee.List.sequence(1, 12).map((month) =>
+      collection
+        .filter(ee.Filter.calendarRange(month, null, "month"))
+        .mean()
+        .set("system:index", ee.Number(month).format("%02d"))
+    )
+  );
+
+  const eeScale = getScale(collection.first());
+
+  const eeReducer = ee.Reducer.mean();
+
+  const data = ee.FeatureCollection(
+    byMonth.map((image) =>
+      ee
+        .Feature(null, image.reduceRegion(eeReducer, eeGeometry, eeScale))
+        .set("system:index", image.get("system:index"))
+    )
+  );
+
+  return getInfo(data).then(getFeatureCollectionPropertiesArray);
+};
+
+const getKeyFromFilter = (filter) =>
+  filter
+    ? `-${filter.map((f) => `${f.type}-${f.arguments.join("-")}`).join("-")}`
+    : "";
+
+export const getCacheKey = (dataset, period, feature, filter) => {
+  const { datasetId, band } = dataset;
+  const { startTime, endTime } = period;
+  const { id } = feature;
+  const bandkey = Array.isArray(band) ? band.join("-") : band;
+  const filterKey = getKeyFromFilter(filter);
+
+  return `${id}-${datasetId}-${bandkey}-${startTime}-${endTime}${getKeyFromFilter(
+    filter
+  )}`;
 };

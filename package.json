@@ -19,7 +19,7 @@
     "@dhis2/multi-calendar-dates": "1.0.0-alpha.27",
     "@turf/area": "^6.5.0",
     "highcharts": "^10.3.3",
-    "react-router-dom": "^6.26.0"
+    "react-router-dom": "^6.26.1"
   },
   "resolutions": {
     "@dhis2/cli-app-scripts/**/@dhis2/multi-calendar-dates": "1.2.3",

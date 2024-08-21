@@ -3,42 +3,44 @@ import { colors } from "@dhis2/ui";
 import {
   animation,
   credits,
-  getSelectedMonths,
-  getTemperatureMonthNormal,
   getMonthlyPeriod,
-} from "../../../utils/chart";
-import { toCelcius } from "../../../utils/calc";
+  getMonthFromId,
+} from "../../../../utils/chart";
+import { getTimeFromId, toCelcius } from "../../../../utils/calc";
 
-const getChartConfig = (name, data, monthlyPeriod, referencePeriod) => {
-  const months = getSelectedMonths(data, monthlyPeriod);
-
-  const series = months.map((d) => ({
-    x: new Date(d.id).getTime(),
+const getChartConfig = (name, data, normals, referencePeriod) => {
+  const series = data.map((d) => ({
+    x: getTimeFromId(d.id),
     y: toCelcius(d["temperature_2m"]),
   }));
 
-  const minMax = months.map((d) => [
-    new Date(d.id).getTime(),
+  const minMax = data.map((d) => [
+    getTimeFromId(d.id),
     toCelcius(d["temperature_2m_min"]),
     toCelcius(d["temperature_2m_max"]),
   ]);
 
-  const normals = months.map((d) => ({
-    x: new Date(d.id).getTime(),
-    y: getTemperatureMonthNormal(data, d.id.substring(5, 7), referencePeriod),
-  }));
+  const monthMormals = data.map((d) => {
+    const month = getMonthFromId(d.id);
+    const normal = normals.find((n) => n.id === month);
+
+    return {
+      x: getTimeFromId(d.id),
+      y: toCelcius(normal["temperature_2m"]),
+    };
+  });
 
   return {
     title: {
       text: i18n.t("{{name}}: Monthly temperatures {{period}}", {
         name,
-        period: getMonthlyPeriod(monthlyPeriod),
+        period: getMonthlyPeriod(data),
         nsSeparator: ";",
       }),
     },
     subtitle: {
       text: i18n.t("Normals from reference period: {{period}}", {
-        period: referencePeriod,
+        period: referencePeriod.id,
         nsSeparator: ";",
       }),
     },
@@ -92,7 +94,7 @@ const getChartConfig = (name, data, monthlyPeriod, referencePeriod) => {
       },
       {
         type: "spline",
-        data: normals,
+        data: monthMormals,
         name: i18n.t("Normal temperature"),
         dashStyle: "dash",
         color: colors.red500,

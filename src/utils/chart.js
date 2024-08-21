@@ -1,11 +1,4 @@
 import i18n from "@dhis2/d2-i18n";
-import {
-  toCelcius,
-  kelvinToCelsius,
-  metersToMillimeters,
-  getRelativeHumidity,
-  roundOneDecimal,
-} from "./calc";
 
 const filterMonthData = (data, month) =>
   data.filter((d) => getMonthFromId(d.id) === month);
@@ -33,53 +26,14 @@ export const animation = {
 export const getYearFromId = (id) => id.substring(0, 4);
 export const getMonthFromId = (id) => id.substring(5, 7);
 
-export const getTemperatureMonthNormal = (data, month, referencePeriod) => {
-  const monthData = filterMonthData(data, month);
-  const referenceYearCount = referencePeriodYearCount(referencePeriod);
-  const periodFilter = referencePeriodFilter(referencePeriod);
-  const periodReducer = periodBandReducer("temperature_2m");
-
-  const normal =
-    monthData.filter(periodFilter).reduce(periodReducer, 0) /
-    referenceYearCount;
-
-  return toCelcius(normal);
-};
-
-export const getPrecipitationMonthNormal = (data, month, referencePeriod) => {
-  const monthData = filterMonthData(data, month);
-  const referenceYearCount = referencePeriodYearCount(referencePeriod);
-  const periodFilter = referencePeriodFilter(referencePeriod);
-  const periodReducer = periodBandReducer("total_precipitation_sum");
-
-  return metersToMillimeters(
-    monthData.filter(periodFilter).reduce(periodReducer, 0) / referenceYearCount
-  );
-};
-
-export const getHumidityMonthNormal = (data, month, referencePeriod) => {
-  const monthData = filterMonthData(data, month);
-  const referenceYearCount = referencePeriodYearCount(referencePeriod);
-  const periodFilter = referencePeriodFilter(referencePeriod);
-
-  const periodReducer = (v, d) =>
-    v +
-    getRelativeHumidity(
-      kelvinToCelsius(d["temperature_2m"]),
-      kelvinToCelsius(d["dewpoint_temperature_2m"])
-    );
-
-  return roundOneDecimal(
-    monthData.filter(periodFilter).reduce(periodReducer, 0) / referenceYearCount
-  );
-};
-
 export const getSelectedMonths = (data, { startTime, endTime }) =>
   data.filter((d) => d.id >= startTime && d.id <= endTime);
 
-export const getMonthlyPeriod = ({ startTime, endTime }) => {
-  const startYear = startTime.substring(0, 4);
-  const endYear = endTime.substring(0, 4);
+export const getMonthlyPeriod = (data) => {
+  const startMonth = data[0].id;
+  const endMonth = data[data.length - 1].id;
+  const startYear = startMonth.substring(0, 4);
+  const endYear = endMonth.substring(0, 4);
   return getYearPeriod(startYear, endYear);
 };
 
