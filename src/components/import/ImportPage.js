@@ -8,10 +8,10 @@ import OrgUnits from "./OrgUnits";
 import DataElement from "./DataElement";
 import ExtractData from "./ExtractData";
 import useOrgUnitCount from "../../hooks/useOrgUnitCount";
-import { getNumberOfDaysFromPeriod } from "../../utils/time";
 import {
   getDefaultImportPeriod,
   getStandardPeriod,
+  getNumberOfDaysFromPeriod,
   isValidPeriod,
 } from "../../utils/time";
 import styles from "./styles/ImportPage.module.css";

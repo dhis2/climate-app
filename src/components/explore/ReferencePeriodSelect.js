@@ -7,13 +7,13 @@ import styles from "./styles/ReferencePeriod.module.css";
 export const referencePeriods = [
   {
     id: "1991-2020",
-    name: i18n.t("1991 - 2020"),
+    name: "1991 - 2020",
     startTime: 1991,
     endTime: 2020,
   },
   {
     id: "1961-1990",
-    name: i18n.t("1961 - 1990"),
+    name: "1961 - 1990",
     startTime: 1961,
     endTime: 1990,
   },

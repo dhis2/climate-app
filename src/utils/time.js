@@ -58,6 +58,50 @@ export const getCalendarDate = (calendar, period = { days: 0 }) => {
 };
 
 /**
+ * Returns the current year
+ * @returns {Number} Current year
+ */
+export const getCurrentYear = () => new Date().getFullYear();
+
+/**
+ * Returns the current month
+ * @returns {String} Current month
+ */
+export const getCurrentMonth = () => padWithZeroes(new Date().getMonth() + 1);
+
+/**
+ * Returns the last month
+ * @param {Number} lagTime Delay in days (10 days for ERA5-Land)
+ * @returns {String} Last month
+ */
+export const getLastMonth = (lagTime = 10) => {
+  const currentMonth = getCurrentMonth();
+  const currentDay = new Date().getDate();
+
+  // The delay is to ensure that the previous month is fully available
+  if (currentDay > lagTime) {
+    return padWithZeroes(currentMonth === 1 ? 12 : currentMonth - 1);
+  }
+
+  return padWithZeroes(currentMonth === 1 ? 11 : currentMonth - 2);
+};
+
+// Returns the default monthly period (12 months back)
+export const getDefaultMonthlyPeriod = (lagTime) => {
+  const endYear = getCurrentYear();
+  const endMonth = getLastMonth(lagTime);
+  const endTime = new Date(endYear, endMonth, 0);
+  const startTime = new Date(endYear, endTime.getMonth() - 11, 1);
+  const startYear = startTime.getFullYear();
+  const startMonth = startTime.getMonth() + 1;
+
+  return {
+    startTime: `${startYear}-${padWithZeroes(startMonth)}`,
+    endTime: `${endYear}-${padWithZeroes(endMonth)}`,
+  };
+};
+
+/**
  * Returns the default import data period
  * @param {String} calendar Calendar used
  * @returns {Object} Default import data period with calendar date strings
@@ -70,10 +114,10 @@ export const getDefaultImportPeriod = (calendar) => ({
 
 /**
  * Returns the default explore data period (12 months back)
+ * @param {Number} lagTime Delay in days (10 days for ERA5-Land)
  * @returns {Object} Default explore data period with standard date strings
  */
-export const getDefaultExplorePeriod = () => {
-  const lagTime = 10; // 10 days for ERA5-Land
+export const getDefaultExplorePeriod = (lagTime = 10) => {
   const endTime = new Date();
 
   endTime.setDate(endTime.getDate() - lagTime);
