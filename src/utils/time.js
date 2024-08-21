@@ -11,12 +11,6 @@ export const MONTHLY = "MONTHLY";
 
 const oneDayInMs = 1000 * 60 * 60 * 24;
 
-// TODO: Make dynamic
-export const defaultMonthlyPeriod = {
-  startTime: "2023-08",
-  endTime: "2024-07",
-};
-
 /**
  * Pads a number with zeroes to the left
  * @param {Number} number Number to pad
@@ -77,19 +71,34 @@ export const getCurrentMonth = () => padWithZeroes(new Date().getMonth() + 1);
 
 /**
  * Returns the last month
- * @param {Number} delay Delay in days
+ * @param {Number} lagTime Delay in days (10 days for ERA5-Land)
  * @returns {String} Last month
  */
-export const getLastMonth = (delay = 5) => {
+export const getLastMonth = (lagTime = 10) => {
   const currentMonth = getCurrentMonth();
   const currentDay = new Date().getDate();
 
   // The delay is to ensure that the previous month is fully available
-  if (currentDay > delay) {
+  if (currentDay > lagTime) {
     return padWithZeroes(currentMonth === 1 ? 12 : currentMonth - 1);
   }
 
   return padWithZeroes(currentMonth === 1 ? 11 : currentMonth - 2);
+};
+
+// Returns the default monthly period (12 months back)
+export const getDefaultMonthlyPeriod = (lagTime) => {
+  const endYear = getCurrentYear();
+  const endMonth = getLastMonth(lagTime);
+  const endTime = new Date(endYear, endMonth, 0);
+  const startTime = new Date(endYear, endTime.getMonth() - 11, 1);
+  const startYear = startTime.getFullYear();
+  const startMonth = startTime.getMonth() + 1;
+
+  return {
+    startTime: `${startYear}-${padWithZeroes(startMonth)}`,
+    endTime: `${endYear}-${padWithZeroes(endMonth)}`,
+  };
 };
 
 /**
@@ -105,10 +114,10 @@ export const getDefaultImportPeriod = (calendar) => ({
 
 /**
  * Returns the default explore data period (12 months back)
+ * @param {Number} lagTime Delay in days (10 days for ERA5-Land)
  * @returns {Object} Default explore data period with standard date strings
  */
-export const getDefaultExplorePeriod = () => {
-  const lagTime = 10; // 10 days for ERA5-Land
+export const getDefaultExplorePeriod = (lagTime = 10) => {
   const endTime = new Date();
 
   endTime.setDate(endTime.getDate() - lagTime);
