@@ -1,10 +1,6 @@
 import { useState, useEffect } from "react";
 import useEarthEngine from "./useEarthEngine";
-import { getClimateNormals } from "../utils/ee-utils";
-
-// TODO: Reuse this function
-const getKey = ({ datasetId, band }, { startTime, endTime }, { id }) =>
-  `${id}-${datasetId}-${band.join("-")}-${startTime}-${endTime}`;
+import { getClimateNormals, getCacheKey } from "../utils/ee-utils";
 
 const cachedPromise = {};
 
@@ -16,7 +12,7 @@ const useEarthEngineClimateNormals = (dataset, period, feature) => {
     let canceled = false;
 
     if (dataset && period && feature) {
-      const key = getKey(dataset, period, feature);
+      const key = getCacheKey(dataset, period, feature);
 
       if (cachedPromise[key]) {
         cachedPromise[key].then((data) => {

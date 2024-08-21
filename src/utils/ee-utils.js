@@ -301,3 +301,20 @@ export const getClimateNormals = (ee, dataset, period, geometry) => {
 
   return getInfo(data).then(getFeatureCollectionPropertiesArray);
 };
+
+const getKeyFromFilter = (filter) =>
+  filter
+    ? `-${filter.map((f) => `${f.type}-${f.arguments.join("-")}`).join("-")}`
+    : "";
+
+export const getCacheKey = (dataset, period, feature, filter) => {
+  const { datasetId, band } = dataset;
+  const { startTime, endTime } = period;
+  const { id } = feature;
+  const bandkey = Array.isArray(band) ? band.join("-") : band;
+  const filterKey = getKeyFromFilter(filter);
+
+  return `${id}-${datasetId}-${bandkey}-${startTime}-${endTime}${getKeyFromFilter(
+    filter
+  )}`;
+};
