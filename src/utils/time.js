@@ -171,45 +171,11 @@ export const formatDate = (date) => {
   return `${year}-${month}-${day}`; // xxxx-xx-xx
 };
 
-<<<<<<< HEAD
-const lagTime = 0; // 10; // 10 days for ERA5-Land
-const endDate = new Date();
-
-endDate.setDate(endDate.getDate() - lagTime);
-endDate.setDate(0); // Last day of the previous month
-
-// First day 12 months back
-const startDate = new Date(endDate.getFullYear(), endDate.getMonth() - 11, 1);
-
-export const defaultPeriod = {
-  startDate: formatDate(startDate),
-  endDate: formatDate(endDate),
-};
-
-export const defaultReferencePeriod = "1991-2020";
-
-export const getNumberOfMonths = (startMonth, endMonth) => {
-  const startYear = parseInt(startMonth.substring(0, 4));
-  const start = parseInt(startMonth.substring(5, 7));
-  const endYear = parseInt(endMonth.substring(0, 4));
-  const end = parseInt(endMonth.substring(5, 7));
-  return (endYear - startYear) * 12 + (end - start) + 1;
-};
-
-export const getNumberOfDays = (startDate, endDate) => {
-  const start = new Date(startDate);
-  const end = new Date(endDate);
-  const diff = end - start;
-  return diff / (1000 * 60 * 60 * 24) + 1;
-};
-
-=======
 /**
  * Returns number of days in a period object
  * @param {Object} period Period object with startTime and endTime
  * @returns {Number} Number of days in period
  */
->>>>>>> main
 export const getNumberOfDaysFromPeriod = (period) =>
   getNumberOfDays(period.startTime, period.endTime);
 

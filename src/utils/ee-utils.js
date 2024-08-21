@@ -33,18 +33,6 @@ export const cleanData = (data) =>
     value: f.properties.value,
   }));
 
-// Used for ERA5-HEAT that has some missing data
-// TODO: Request missing data on GEE?
-const skipSystemIndex = (ee, collection, skipIndex) => {
-  if (Array.isArray(skipIndex)) {
-    skipIndex.forEach((index) => {
-      collection = collection.filter(ee.Filter.neq("system:index", index));
-    });
-  }
-
-  return collection;
-};
-
 export const getEarthEngineValues = (ee, datasetParams, period, features) =>
   new Promise(async (resolve, reject) => {
     const dataset = period.timeZone
@@ -57,7 +45,6 @@ export const getEarthEngineValues = (ee, datasetParams, period, features) =>
       reducer = "mean",
       periodType,
       periodReducer = reducer,
-      skipIndex,
       valueParser,
     } = dataset;
 
@@ -81,12 +68,10 @@ export const getEarthEngineValues = (ee, datasetParams, period, features) =>
           : f.properties.value,
       }));
 
-    let collection = ee
+    const collection = ee
       .ImageCollection(datasetId)
       .select(band)
       .filter(ee.Filter.date(timeZoneStart, timeZoneEnd));
-
-    collection = skipSystemIndex(ee, collection, skipIndex);
 
     const imageCount = await getInfo(collection.size());
 
@@ -199,22 +184,6 @@ export const getEarthEngineData = (ee, datasetParams, period, features) => {
   }
 };
 
-<<<<<<< HEAD
-export const getTimeSeriesData = async (ee, dataset, period, geometry) => {
-  const {
-    datasetId,
-    band,
-    reducer = "mean",
-    sharedInputs = false,
-    periodType = "daily",
-    skipIndex,
-  } = dataset;
-
-  let collection = ee.ImageCollection(datasetId).select(band);
-
-  // Remove missing images in collection
-  collection = skipSystemIndex(ee, collection, skipIndex);
-=======
 export const getTimeSeriesData = async (
   ee,
   dataset,
@@ -235,7 +204,6 @@ export const getTimeSeriesData = async (
       }
     });
   }
->>>>>>> main
 
   let eeReducer;
 
@@ -264,46 +232,12 @@ export const getTimeSeriesData = async (
     eeReducer = ee.Reducer[reducer]();
   }
 
-  if (periodType == "daily" && period.startMonth) {
-    const startMonth = ee.Date(period.startMonth);
-    const endMonth = ee.Date(period.endMonth).advance(1, "month"); // Include last month
   const { startTime, endTime, timeZone = "UTC" } = period;
   const endTimePlusOne = ee.Date(endTime).advance(1, "day");
   const timeZoneStart = ee.Date(startTime).format(null, timeZone);
   const timeZoneEnd = endTimePlusOne.format(null, timeZone);
 
-    collection = collection.filter(ee.Filter.date(startMonth, endMonth));
-
-    const monthCount = endMonth.difference(startMonth, "month").round();
-    const months = ee.List.sequence(0, monthCount.subtract(1));
-    const dates = months.map((month) => startMonth.advance(month, "month"));
-
-    const byMonth = ee.ImageCollection.fromImages(
-      dates.map((date) => {
-        const startDate = ee.Date(date);
-        const endDate = startDate.advance(1, "month");
-
-        return (
-          collection
-            .filter(ee.Filter.date(startDate, endDate))
-            //.reduce(eeReducer)
-            .mean() // Use mean to avoid extremes on monthly chart
-            .set("system:index", startDate.format("YYYYMM"))
-            .set("system:time_start", startDate.millis())
-            .set("system:time_end", endDate.millis())
-        );
-      })
-    );
-
-    collection = byMonth;
-  } else {
-    const { startDate, endDate, timeZone = "UTC" } = period;
-    const endDatePlusOne = ee.Date(endDate).advance(1, "day");
-    const timeZoneStart = ee.Date(startDate).format(null, timeZone);
-    const timeZoneEnd = endDatePlusOne.format(null, timeZone);
-
-    collection = collection.filter(ee.Filter.date(timeZoneStart, timeZoneEnd));
-  }
+  collection = collection.filter(ee.Filter.date(timeZoneStart, timeZoneEnd));
 
   let eeScale = getScale(collection.first());
 

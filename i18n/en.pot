@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-08-15T12:16:45.156Z\n"
-"PO-Revision-Date: 2024-08-15T12:16:45.156Z\n"
+"POT-Creation-Date: 2024-08-21T16:16:28.345Z\n"
+"PO-Revision-Date: 2024-08-21T16:16:28.345Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -202,33 +202,6 @@ msgstr "Reference period: {{period}}"
 msgid "Temperature anomaly"
 msgstr "Temperature anomaly"
 
-msgid "{{name}}: Daily temperatures {{period}}"
-msgstr "{{name}}: Daily temperatures {{period}}"
-
-msgid "Mean temperature"
-msgstr "Mean temperature"
-
-msgid "Temperature range"
-msgstr "Temperature range"
-
-msgid "{{name}}: Monthly temperatures {{period}}"
-msgstr "{{name}}: Monthly temperatures {{period}}"
-
-msgid "Normal temperature"
-msgstr "Normal temperature"
-
-msgid "{{name}}: Thermal comfort {{period}}"
-msgstr "{{name}}: Thermal comfort {{period}}"
-
-msgid "Average felt temperature"
-msgstr "Average felt temperature"
-
-msgid "Felt temperature range"
-msgstr "Felt temperature range"
-
-msgid "Average temperature"
-msgstr "Average temperature"
-
 msgid "{{precip}} mm"
 msgstr "{{precip}} mm"
 
@@ -399,6 +372,18 @@ msgstr "Heavy snow and thunder"
 
 msgid "Fog"
 msgstr "Fog"
+
+msgid "{{name}}: Thermal comfort {{period}}"
+msgstr "{{name}}: Thermal comfort {{period}}"
+
+msgid "Average felt temperature"
+msgstr "Average felt temperature"
+
+msgid "Felt temperature range"
+msgstr "Felt temperature range"
+
+msgid "Average temperature"
+msgstr "Average temperature"
 
 msgid "{{name}}: Daily relative humidity {{period}}"
 msgstr "{{name}}: Daily relative humidity {{period}}"
@@ -770,58 +755,6 @@ msgstr "Min temperature (ERA5-Land)"
 
 msgid "Min air temperature"
 msgstr "Min air temperature"
-
-msgid "Minimum air temperature in °C at 2 m above the surface"
-msgstr "Minimum air temperature in °C at 2 m above the surface"
-
-msgid "Min"
-msgstr "Min"
-
-msgid "Max air temperature (ERA5-Land)"
-msgstr "Max air temperature (ERA5-Land)"
-
-msgid "Max air temperature"
-msgstr "Max air temperature"
-
-msgid "Maximum air temperature in °C at 2 m above the surface"
-msgstr "Maximum air temperature in °C at 2 m above the surface"
-
-msgid "Max"
-msgstr "Max"
-
-msgid "Precipitation (ERA5-Land)"
-msgstr "Precipitation (ERA5-Land)"
-
-msgid "Precipitation"
-msgstr "Precipitation"
-
-msgid "Total precipitation in mm"
-msgstr "Total precipitation in mm"
-
-msgid "Sum"
-msgstr "Sum"
-
-msgid "Dewpoint temperature (ERA5-Land)"
-msgstr "Dewpoint temperature (ERA5-Land)"
-
-msgid ""
-"Temperature in °C at 2 m above the surface to which the air would have to "
-"be cooled for saturation to occur."
-msgstr ""
-"Temperature in °C at 2 m above the surface to which the air would have to "
-"be cooled for saturation to occur."
-
-msgid "Relative humidity (ERA5-Land)"
-msgstr "Relative humidity (ERA5-Land)"
-
-msgid ""
-"Percentage of water vapor in the air compared to the total amount of vapor "
-"that can exist in the air at its current temperature. Calculated using air "
-"temperature and dewpoint temperature at 2 m above surface."
-msgstr ""
-"Percentage of water vapor in the air compared to the total amount of vapor "
-"that can exist in the air at its current temperature. Calculated using air "
-"temperature and dewpoint temperature at 2 m above surface."
 
 msgid "Minimum air temperature in °C at 2 m above the surface"
 msgstr "Minimum air temperature in °C at 2 m above the surface"
