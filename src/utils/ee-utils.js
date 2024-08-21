@@ -204,15 +204,14 @@ export const getTimeSeriesData = async (
   dataset,
   period,
   geometry,
-  filter,
-  aggPeriod
+  filter
 ) => {
   const {
     datasetId,
     band,
     reducer = "mean",
     sharedInputs = false,
-    periodType = DAILY,
+    aggregationPeriod,
     skipIndex,
   } = dataset;
 
@@ -260,7 +259,7 @@ export const getTimeSeriesData = async (
 
   const { startTime, endTime, timeZone = "UTC" } = period;
 
-  if (aggPeriod === MONTHLY) {
+  if (aggregationPeriod === MONTHLY) {
     const startMonth = ee.Date(startTime);
     const endMonth = ee.Date(endTime).advance(1, "month"); // Include last month
 

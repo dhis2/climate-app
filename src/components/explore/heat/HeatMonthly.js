@@ -6,14 +6,13 @@ import useEarthEngineTimeSeries from "../../../hooks/useEarthEngineTimeSeries";
 import { heatDataset } from "./HeatDaily";
 import { MONTHLY } from "../../../utils/time";
 
+const dataset = {
+  ...heatDataset,
+  aggregationPeriod: MONTHLY,
+};
+
 const HeatMonthly = ({ orgUnit, period }) => {
-  const data = useEarthEngineTimeSeries(
-    heatDataset,
-    period,
-    orgUnit,
-    null,
-    MONTHLY
-  );
+  const data = useEarthEngineTimeSeries(dataset, period, orgUnit);
 
   if (!data) {
     return <DataLoader />;
