@@ -4,9 +4,7 @@ import {
   animation,
   credits,
   getMonthFromId,
-  getSelectedMonths,
   getMonthlyPeriod,
-  getHumidityMonthNormal,
 } from "../../../../utils/chart";
 import {
   getRelativeHumidity,
@@ -55,13 +53,13 @@ const getChartConfig = (name, data, normals, referencePeriod) => {
     title: {
       text: i18n.t("{{name}}: Relative humidity {{period}}", {
         name,
-        // period: getMonthlyPeriod(monthlyPeriod),
+        period: getMonthlyPeriod(data),
         nsSeparator: ";",
       }),
     },
     subtitle: {
       text: i18n.t("Normals from reference period: {{period}}", {
-        period: referencePeriod,
+        period: referencePeriod.id,
         nsSeparator: ";",
       }),
     },
