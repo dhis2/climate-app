@@ -1,43 +1,30 @@
 import PropTypes from "prop-types";
-// import Chart from "../Chart";
-// import DataLoader from "../../shared/DataLoader";
-// import getMonthlyConfig from "./charts/temperatureMonthly";
-// import useEarthEngineTimeSeries from "../../../hooks/useEarthEngineTimeSeries";
-// import useEarthEngineClimateNormals from "../../../hooks/useEarthEngineClimateNormals";
-// import { era5Monthly, era5MonthlyNormals } from "../../../data/datasets";
+import Chart from "../Chart";
+import DataLoader from "../../shared/DataLoader";
+import getMonthlyConfig from "./charts/thermalComfortMonthly";
+import useEarthEngineTimeSeries from "../../../hooks/useEarthEngineTimeSeries";
+import { heatDataset } from "./HeatDaily";
+import { MONTHLY } from "../../../utils/time";
 
-const HeatMonthly = ({ orgUnit, period, referencePeriod }) => {
-  return null;
-  /*
-  const data = useEarthEngineTimeSeries(era5Monthly, period, orgUnit);
-
-  const normals = useEarthEngineClimateNormals(
-    era5MonthlyNormals,
-    referencePeriod,
-    orgUnit
+const HeatMonthly = ({ orgUnit, period }) => {
+  const data = useEarthEngineTimeSeries(
+    heatDataset,
+    period,
+    orgUnit,
+    null,
+    MONTHLY
   );
 
-  if (!data || !normals) {
+  if (!data) {
     return <DataLoader />;
   }
 
-  return (
-    <Chart
-      config={getMonthlyConfig(
-        orgUnit.properties.name,
-        data,
-        normals,
-        referencePeriod
-      )}
-    />
-  );
-  */
+  return <Chart config={getMonthlyConfig(orgUnit.properties.name, data)} />;
 };
 
 HeatMonthly.propTypes = {
   orgUnit: PropTypes.object.isRequired,
   period: PropTypes.object.isRequired,
-  referencePeriod: PropTypes.object.isRequired,
 };
 
 export default HeatMonthly;

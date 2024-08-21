@@ -4,25 +4,22 @@ import {
   animation,
   heatCredits,
   strokePattern,
-  getSelectedMonths,
   getMonthlyPeriod,
-} from "../../../utils/chart";
-import { toCelcius } from "../../../utils/calc";
+} from "../../../../utils/chart";
+import { toCelcius } from "../../../../utils/calc";
 import {
   getPlotBands,
   getPlotLines,
   getThickPositons,
 } from "./thermalComfortDaily";
 
-const getChart = (name, data, monthlyPeriod, era5Data) => {
-  const months = getSelectedMonths(era5Data, monthlyPeriod);
-
+const getChart = (name, data) => {
   const series = data.map((d) => ({
     x: new Date(d.id).getTime(),
     y: toCelcius(d["utci_mean"]),
   }));
 
-  const temperatures = months.map((d) => ({
+  const temperatures = data.map((d) => ({
     x: new Date(d.id).getTime(),
     y: toCelcius(d["temperature_2m"]),
   }));
@@ -41,7 +38,7 @@ const getChart = (name, data, monthlyPeriod, era5Data) => {
     title: {
       text: i18n.t("{{name}}: Thermal comfort {{period}}", {
         name,
-        period: getMonthlyPeriod(monthlyPeriod),
+        period: getMonthlyPeriod(data),
         nsSeparator: ";",
       }),
     },

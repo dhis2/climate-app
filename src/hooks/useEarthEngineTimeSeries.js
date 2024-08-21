@@ -14,7 +14,13 @@ const parseIds = (data) =>
 
 const cachedPromise = {};
 
-const useEarthEngineTimeSeries = (dataset, period, feature, filter) => {
+const useEarthEngineTimeSeries = (
+  dataset,
+  period,
+  feature,
+  filter,
+  aggPeriod
+) => {
   const [data, setData] = useState();
   const eePromise = useEarthEngine();
 
@@ -43,7 +49,8 @@ const useEarthEngineTimeSeries = (dataset, period, feature, filter) => {
           dataset,
           period,
           feature.geometry,
-          filter
+          filter,
+          aggPeriod
         ).then(parseIds);
 
         cachedPromise[key].then((data) => {
@@ -57,7 +64,7 @@ const useEarthEngineTimeSeries = (dataset, period, feature, filter) => {
         canceled = true;
       };
     }
-  }, [eePromise, dataset, period, feature, filter]);
+  }, [eePromise, dataset, period, feature, filter, aggPeriod]);
 
   return data;
 };

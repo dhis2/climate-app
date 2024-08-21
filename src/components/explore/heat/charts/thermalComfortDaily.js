@@ -1,13 +1,13 @@
 import i18n from "@dhis2/d2-i18n";
 import { colors } from "@dhis2/ui";
-import legend from "../../../data/heat-stress-legend";
+import legend from "../../../../data/heat-stress-legend";
 import {
   animation,
   heatCredits,
   strokePattern,
   getDailyPeriod,
-} from "../../../utils/chart";
-import { toCelcius } from "../../../utils/calc";
+} from "../../../../utils/chart";
+import { toCelcius } from "../../../../utils/calc";
 
 export const getPlotBands = (minMax) => {
   const minValue = Math.floor(Math.min(...minMax.map((d) => d[1])));
