@@ -16,7 +16,7 @@ const HumidityMonthly = ({ orgUnit, period, referencePeriod }) => {
   );
 
   if (!data || !normals) {
-    return <DataLoader height={400} />;
+    return <DataLoader />;
   }
 
   return (

@@ -9,7 +9,7 @@ const HumidityDaily = ({ orgUnit, period }) => {
   const data = useEarthEngineTimeSeries(era5Daily, period, orgUnit);
 
   if (!data) {
-    return <DataLoader height={400} />;
+    return <DataLoader />;
   }
 
   return <Chart config={getDailyConfig(orgUnit.properties.name, data)} />;

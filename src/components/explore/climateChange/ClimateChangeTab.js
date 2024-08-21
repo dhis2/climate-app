@@ -10,16 +10,14 @@ import {
   era5MonthlyTemperatures,
   era5MonthlyNormals,
 } from "../../../data/datasets";
+import { getCurrentYear, getLastMonth } from "../../../utils/time";
 import styles from "./styles/ClimateChangeTab.module.css";
 
-// TODO: Make this dynamic
-const period = { startTime: "1970-01", endTime: "2024-08" };
+// Fetch all years from 1970 to the current year
+const period = { startTime: "1970-01", endTime: `${getCurrentYear()}-12` };
 
 const ClimateChangeTab = ({ orgUnit, referencePeriod }) => {
-  const [month, setMonth] = useState(
-    // monthlyData.slice(-1)[0].id.substring(5, 7) // Last month available
-    "01"
-  );
+  const [month, setMonth] = useState(getLastMonth());
 
   const filters = useMemo(
     () => [
@@ -45,7 +43,7 @@ const ClimateChangeTab = ({ orgUnit, referencePeriod }) => {
   );
 
   if (!data || !normals) {
-    return <DataLoader height={400} />;
+    return <DataLoader />;
   }
 
   return (

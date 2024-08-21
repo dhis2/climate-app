@@ -64,6 +64,35 @@ export const getCalendarDate = (calendar, period = { days: 0 }) => {
 };
 
 /**
+ * Returns the current year
+ * @returns {Number} Current year
+ */
+export const getCurrentYear = () => new Date().getFullYear();
+
+/**
+ * Returns the current month
+ * @returns {String} Current month
+ */
+export const getCurrentMonth = () => padWithZeroes(new Date().getMonth() + 1);
+
+/**
+ * Returns the last month
+ * @param {Number} delay Delay in days
+ * @returns {String} Last month
+ */
+export const getLastMonth = (delay = 5) => {
+  const currentMonth = getCurrentMonth();
+  const currentDay = new Date().getDate();
+
+  // The delay is to ensure that the previous month is fully available
+  if (currentDay > delay) {
+    return padWithZeroes(currentMonth === 1 ? 12 : currentMonth - 1);
+  }
+
+  return padWithZeroes(currentMonth === 1 ? 11 : currentMonth - 2);
+};
+
+/**
  * Returns the default import data period
  * @param {String} calendar Calendar used
  * @returns {Object} Default import data period with calendar date strings

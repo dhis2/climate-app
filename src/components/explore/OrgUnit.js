@@ -56,7 +56,6 @@ const OrgUnit = ({ orgUnit }) => {
             <Tab
               name={orgUnit.properties.name}
               orgUnit={orgUnit}
-              geometry={orgUnit.geometry}
               periodType={periodType}
               monthlyPeriod={monthlyPeriod}
               dailyPeriod={dailyPeriod}
