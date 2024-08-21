@@ -57,6 +57,7 @@ const ImportPage = () => {
             <Dataset
               selected={dataset}
               onChange={(dataset) => {
+                console.log(`dataset : ${JSON.stringify(dataset)}`)
                 setDataset(dataset);
                 setDataElement(null);
               }}
