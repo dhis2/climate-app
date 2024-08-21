@@ -4,6 +4,7 @@ import {
   getRelativeHumidity,
   roundOneDecimal,
 } from "../utils/calc";
+import { HOURLY } from "../utils/time";
 
 // kelvin to celsius with one decimal
 const temperatureParser = (v) => roundOneDecimal(kelvinToCelsius(v));
@@ -43,7 +44,7 @@ export default [
     timeZone: {
       datasetId: "ECMWF/ERA5_LAND/HOURLY",
       band: "temperature_2m",
-      periodType: "hourly",
+      periodType: HOURLY,
       periodReducer: "mean",
     },
     valueParser: temperatureParser,
@@ -63,7 +64,7 @@ export default [
     timeZone: {
       datasetId: "ECMWF/ERA5_LAND/HOURLY",
       band: "temperature_2m",
-      periodType: "hourly",
+      periodType: HOURLY,
       periodReducer: "min",
     },
     valueParser: temperatureParser,
@@ -101,7 +102,7 @@ export default [
     timeZone: {
       datasetId: "ECMWF/ERA5_LAND/HOURLY",
       band: "total_precipitation",
-      periodType: "hourly",
+      periodType: HOURLY,
       periodReducer: "sum",
     },
     valueParser: (v) => Math.round(v * 1000 * 1000) / 1000, // meter to mm with 3 decimals
@@ -121,7 +122,7 @@ export default [
     timeZone: {
       datasetId: "ECMWF/ERA5_LAND/HOURLY",
       band: "dewpoint_temperature_2m",
-      periodType: "hourly",
+      periodType: HOURLY,
       periodReducer: "mean",
     },
     valueParser: temperatureParser,
@@ -143,7 +144,7 @@ export default [
         timeZone: {
           datasetId: "ECMWF/ERA5_LAND/HOURLY",
           band: "dewpoint_temperature_2m",
-          periodType: "hourly",
+          periodType: HOURLY,
           periodReducer: "mean",
         },
       },
@@ -153,7 +154,7 @@ export default [
         timeZone: {
           datasetId: "ECMWF/ERA5_LAND/HOURLY",
           band: "temperature_2m",
-          periodType: "hourly",
+          periodType: HOURLY,
           periodReducer: "mean",
         },
       },
@@ -202,3 +203,36 @@ export default [
     dataElementCode: "ERA5_HEAT_UTCI_MAX",
   },
 ];
+
+const era5band = [
+  "temperature_2m",
+  "temperature_2m_min",
+  "temperature_2m_max",
+  "dewpoint_temperature_2m",
+  "total_precipitation_sum",
+];
+
+export const era5Daily = {
+  datasetId: "ECMWF/ERA5_LAND/DAILY_AGGR",
+  band: era5band,
+  reducer: ["mean", "min", "max", "mean", "mean"],
+};
+
+export const era5Monthly = {
+  datasetId: "ECMWF/ERA5_LAND/MONTHLY_AGGR",
+  band: era5band,
+};
+
+export const era5MonthlyNormals = {
+  datasetId: "ECMWF/ERA5_LAND/MONTHLY_AGGR",
+  band: [
+    "temperature_2m",
+    "dewpoint_temperature_2m",
+    "total_precipitation_sum",
+  ],
+};
+
+export const era5MonthlyTemperatures = {
+  datasetId: "ECMWF/ERA5_LAND/MONTHLY_AGGR",
+  band: ["temperature_2m"],
+};

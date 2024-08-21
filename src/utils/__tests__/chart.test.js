@@ -76,7 +76,7 @@ const monthlyData = [
   },
 ];
 
-const monthlyperiod = { startMonth: "2023-12", endMonth: "2024-01" };
+const monthlyperiod = { startTime: "2023-12", endTime: "2024-01" };
 
 describe("chart utils", () => {
   it("it should get year from id", () => {
@@ -97,10 +97,12 @@ describe("chart utils", () => {
   });
 
   it("it should get monthly period", () => {
-    expect(getMonthlyPeriod(monthlyperiod)).toEqual("2023-2024");
+    expect(getMonthlyPeriod(monthlyData)).toEqual("2023-2024");
     expect(
-      getMonthlyPeriod({ startMonth: "2024-01", endMonth: "2024-04" })
-    ).toEqual("2024");
+      getMonthlyPeriod(
+        monthlyData.filter((d) => getYearFromId(d.id) === "2023")
+      )
+    ).toEqual("2023");
   });
 
   it("it should select monthly data for period", () => {

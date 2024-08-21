@@ -1,20 +1,10 @@
 import { useState, useEffect } from "react";
 import useEarthEngine from "./useEarthEngine";
-import { getTimeSeriesData, getCacheKey } from "../utils/ee-utils";
-
-const getPeriodFromId = (id) => {
-  const year = id.slice(0, 4);
-  const month = id.slice(4, 6);
-  const day = id.slice(6, 8);
-  return `${year}-${month}${day ? `-${day}` : ""}`;
-};
-
-const parseIds = (data) =>
-  data.map((d) => ({ ...d, id: getPeriodFromId(d.id) }));
+import { getClimateNormals, getCacheKey } from "../utils/ee-utils";
 
 const cachedPromise = {};
 
-const useEarthEngineTimeSeries = (dataset, period, feature, filter) => {
+const useEarthEngineClimateNormals = (dataset, period, feature) => {
   const [data, setData] = useState();
   const eePromise = useEarthEngine();
 
@@ -22,7 +12,7 @@ const useEarthEngineTimeSeries = (dataset, period, feature, filter) => {
     let canceled = false;
 
     if (dataset && period && feature) {
-      const key = getCacheKey(dataset, period, feature, filter);
+      const key = getCacheKey(dataset, period, feature);
 
       if (cachedPromise[key]) {
         cachedPromise[key].then((data) => {
@@ -38,13 +28,12 @@ const useEarthEngineTimeSeries = (dataset, period, feature, filter) => {
 
       setData();
       eePromise.then((ee) => {
-        cachedPromise[key] = getTimeSeriesData(
+        cachedPromise[key] = getClimateNormals(
           ee,
           dataset,
           period,
-          feature.geometry,
-          filter
-        ).then(parseIds);
+          feature.geometry
+        );
 
         cachedPromise[key].then((data) => {
           if (!canceled) {
@@ -57,9 +46,9 @@ const useEarthEngineTimeSeries = (dataset, period, feature, filter) => {
         canceled = true;
       };
     }
-  }, [eePromise, dataset, period, feature, filter]);
+  }, [eePromise, dataset, period, feature]);
 
   return data;
 };
 
-export default useEarthEngineTimeSeries;
+export default useEarthEngineClimateNormals;

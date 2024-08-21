@@ -11,11 +11,11 @@ const convertTimezone = (date, timeZone) =>
 
 const browserTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-const ForecastTab = ({ geometry }) => {
+const ForecastTab = ({ orgUnit }) => {
   const [data, setData] = useState();
   const { settings, loading } = useAppSettings();
 
-  const [lng, lat] = geometry.coordinates;
+  const [lng, lat] = orgUnit.geometry.coordinates;
 
   useEffect(() => {
     fetch(
@@ -26,7 +26,7 @@ const ForecastTab = ({ geometry }) => {
   }, [lng, lat]);
 
   if (!data || loading) {
-    return <DataLoader height={400} />;
+    return <DataLoader />;
   }
 
   const timeZone = settings?.timeZone || browserTimeZone || "Etc/UTC";
@@ -106,7 +106,7 @@ const ForecastTab = ({ geometry }) => {
 
 ForecastTab.propTypes = {
   name: PropTypes.string.isRequired,
-  geometry: PropTypes.object.isRequired,
+  orgUnit: PropTypes.object.isRequired,
 };
 
 export default ForecastTab;

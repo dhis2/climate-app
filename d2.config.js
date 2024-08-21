@@ -1,6 +1,6 @@
 const config = {
   type: "app",
-  title: "Climate Data",
+  title: "Climate app",
   entryPoints: {
     app: "./src/App.js",
   },

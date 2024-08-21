@@ -5,9 +5,8 @@ import useEarthEngineData from "../../hooks/useEarthEngineData";
 import ImportData from "./ImportData";
 import DataLoader from "../shared/DataLoader";
 import ErrorMessage from "../shared/ErrorMessage";
+import { getNumberOfDaysFromPeriod } from "../../utils/time";
 import styles from "./styles/ExtractData.module.css";
-
-const oneDay = 1000 * 60 * 60 * 24;
 
 const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
   const { parent, level } = orgUnits;
@@ -19,7 +18,7 @@ const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
   );
 
   if (!features) {
-    return <DataLoader label={i18n.t("Loading org units")} />;
+    return <DataLoader label={i18n.t("Loading org units")} height={100} />;
   } else if (!features.length) {
     return (
       <div className={styles.container}>
@@ -28,24 +27,18 @@ const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
     );
   }
   const orgUnitsCount = features.length;
-  const startDate = new Date(period.startDate);
-  const endDate = new Date(period.endDate);
-
-  const days = Math.round(
-    (endDate.getTime() + oneDay - startDate.getTime()) / oneDay
-  );
-
-  const count = days * orgUnitsCount;
+  const daysCount = getNumberOfDaysFromPeriod(period);
+  const valueCount = daysCount * orgUnitsCount;
 
   if (loading) {
     return (
       <DataLoader
         label={i18n.t(
-          "Extracting data for {{days}} days and {{orgUnitsCount}} org units ({{count}} values)",
+          "Extracting data for {{daysCount}} days and {{orgUnitsCount}} org units ({{valueCount}} values)",
           {
-            days,
+            daysCount,
             orgUnitsCount,
-            count,
+            valueCount,
           }
         )}
       />

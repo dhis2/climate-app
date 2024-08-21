@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-08-08T14:31:27.197Z\n"
-"PO-Revision-Date: 2024-08-08T14:31:27.197Z\n"
+"POT-Creation-Date: 2024-08-15T12:16:45.156Z\n"
+"PO-Revision-Date: 2024-08-15T12:16:45.156Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -190,50 +190,8 @@ msgstr "Monthly"
 msgid "Daily"
 msgstr "Daily"
 
-msgid "1991 - 2020"
-msgstr "1991 - 2020"
-
-msgid "1961 - 1990"
-msgstr "1961 - 1990"
-
 msgid "Reference period"
 msgstr "Reference period"
-
-msgid "{{name}}: Daily relative humidity {{period}}"
-msgstr "{{name}}: Daily relative humidity {{period}}"
-
-msgid "Relative humidity"
-msgstr "Relative humidity"
-
-msgid "{{name}}: Relative humidity {{period}}"
-msgstr "{{name}}: Relative humidity {{period}}"
-
-msgid "Normals from reference period: {{period}}"
-msgstr "Normals from reference period: {{period}}"
-
-msgid "Normal relative humidity"
-msgstr "Normal relative humidity"
-
-msgid "Dewpoint temperature"
-msgstr "Dewpoint temperature"
-
-msgid "Air temperature"
-msgstr "Air temperature"
-
-msgid "{{name}}: Daily precipitation {{period}}"
-msgstr "{{name}}: Daily precipitation {{period}}"
-
-msgid "Daily precipitation"
-msgstr "Daily precipitation"
-
-msgid "{{name}}: Monthly precipitation {{period}}"
-msgstr "{{name}}: Monthly precipitation {{period}}"
-
-msgid "Monthly precipitation"
-msgstr "Monthly precipitation"
-
-msgid "Normal precipitation"
-msgstr "Normal precipitation"
 
 msgid "{{name}}: {{month}} temperature anomaly {{years}}"
 msgstr "{{name}}: {{month}} temperature anomaly {{years}}"
@@ -442,6 +400,57 @@ msgstr "Heavy snow and thunder"
 msgid "Fog"
 msgstr "Fog"
 
+msgid "{{name}}: Daily relative humidity {{period}}"
+msgstr "{{name}}: Daily relative humidity {{period}}"
+
+msgid "Relative humidity"
+msgstr "Relative humidity"
+
+msgid "{{name}}: Relative humidity {{period}}"
+msgstr "{{name}}: Relative humidity {{period}}"
+
+msgid "Normals from reference period: {{period}}"
+msgstr "Normals from reference period: {{period}}"
+
+msgid "Normal relative humidity"
+msgstr "Normal relative humidity"
+
+msgid "Dewpoint temperature"
+msgstr "Dewpoint temperature"
+
+msgid "Air temperature"
+msgstr "Air temperature"
+
+msgid "{{name}}: Daily precipitation {{period}}"
+msgstr "{{name}}: Daily precipitation {{period}}"
+
+msgid "Daily precipitation"
+msgstr "Daily precipitation"
+
+msgid "{{name}}: Monthly precipitation {{period}}"
+msgstr "{{name}}: Monthly precipitation {{period}}"
+
+msgid "Monthly precipitation"
+msgstr "Monthly precipitation"
+
+msgid "Normal precipitation"
+msgstr "Normal precipitation"
+
+msgid "{{name}}: Daily temperatures {{period}}"
+msgstr "{{name}}: Daily temperatures {{period}}"
+
+msgid "Mean temperature"
+msgstr "Mean temperature"
+
+msgid "Temperature range"
+msgstr "Temperature range"
+
+msgid "{{name}}: Monthly temperatures {{period}}"
+msgstr "{{name}}: Monthly temperatures {{period}}"
+
+msgid "Normal temperature"
+msgstr "Normal temperature"
+
 msgid "Data element"
 msgstr "Data element"
 
@@ -462,6 +471,13 @@ msgstr "Loading org units"
 
 msgid "No org units with geometry found for this level"
 msgstr "No org units with geometry found for this level"
+
+msgid ""
+"Extracting data for {{daysCount}} days and {{orgUnitsCount}} org units "
+"({{valueCount}} values)"
+msgstr ""
+"Extracting data for {{daysCount}} days and {{orgUnitsCount}} org units "
+"({{valueCount}} values)"
 
 msgid "Importing data to DHIS2"
 msgstr "Importing data to DHIS2"
