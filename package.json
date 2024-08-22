@@ -1,6 +1,6 @@
 {
   "name": "climate-data",
-  "version": "999.99.0-dashboard-plugin.6",
+  "version": "999.99.0-dashboard-plugin.7",
   "description": "Explore and import weather and climate data in DHIS2.",
   "license": "BSD-3-Clause",
   "private": true,
