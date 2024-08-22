@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
-import HeatDaily from "./HeatDaily";
-import HeatMonthly from "./HeatMonthly";
+import HumidityMonthly from "./HumidityMonthly";
+import HumidityDaily from "./HumidityDaily";
 import { MONTHLY } from "../../../utils/time";
 
-const HeatTab = ({
+const Humidity = ({
   orgUnit,
   periodType,
   dailyPeriod,
@@ -12,18 +12,18 @@ const HeatTab = ({
 }) => (
   <>
     {periodType === MONTHLY ? (
-      <HeatMonthly
+      <HumidityMonthly
         orgUnit={orgUnit}
         period={monthlyPeriod}
         referencePeriod={referencePeriod}
       />
     ) : (
-      <HeatDaily orgUnit={orgUnit} period={dailyPeriod} />
+      <HumidityDaily orgUnit={orgUnit} period={dailyPeriod} />
     )}
   </>
 );
 
-HeatTab.propTypes = {
+Humidity.propTypes = {
   orgUnit: PropTypes.object.isRequired,
   periodType: PropTypes.string.isRequired,
   dailyPeriod: PropTypes.object.isRequired,
@@ -31,4 +31,4 @@ HeatTab.propTypes = {
   referencePeriod: PropTypes.object.isRequired,
 };
 
-export default HeatTab;
+export default Humidity;
