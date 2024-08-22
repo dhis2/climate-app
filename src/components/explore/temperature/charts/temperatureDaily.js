@@ -3,7 +3,7 @@ import { colors } from "@dhis2/ui";
 import { animation, credits, getDailyPeriod } from "../../../../utils/chart";
 import { toCelcius } from "../../../../utils/calc";
 
-const getChart = (name, data) => {
+const getChart = (name, data, isPlugin) => {
   const series = data.map((d) => ({
     x: new Date(d.id).getTime(),
     y: toCelcius(d["temperature_2m"]),
@@ -17,11 +17,13 @@ const getChart = (name, data) => {
 
   return {
     title: {
-      text: i18n.t("{{name}}: Daily temperatures {{period}}", {
-        name,
-        period: getDailyPeriod(data),
-        nsSeparator: ";",
-      }),
+      text: !isPlugin
+        ? i18n.t("{{name}}: Daily temperatures {{period}}", {
+            name,
+            period: getDailyPeriod(data),
+            nsSeparator: ";",
+          })
+        : "",
     },
     credits,
     tooltip: {
@@ -74,6 +76,9 @@ const getChart = (name, data) => {
         zIndex: 0,
       },
     ],
+    exporting: {
+      enabled: !isPlugin,
+    },
   };
 };
 

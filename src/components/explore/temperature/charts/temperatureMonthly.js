@@ -8,7 +8,13 @@ import {
 } from "../../../../utils/chart";
 import { getTimeFromId, toCelcius } from "../../../../utils/calc";
 
-const getChartConfig = (name, data, normals, referencePeriod) => {
+const getChartConfig = (
+  name,
+  data,
+  normals,
+  referencePeriod,
+  isPlugin = false
+) => {
   const series = data.map((d) => ({
     x: getTimeFromId(d.id),
     y: toCelcius(d["temperature_2m"]),
@@ -32,17 +38,21 @@ const getChartConfig = (name, data, normals, referencePeriod) => {
 
   return {
     title: {
-      text: i18n.t("{{name}}: Monthly temperatures {{period}}", {
-        name,
-        period: getMonthlyPeriod(data),
-        nsSeparator: ";",
-      }),
+      text: !isPlugin
+        ? i18n.t("{{name}}: Monthly temperatures {{period}}", {
+            name,
+            period: getMonthlyPeriod(data),
+            nsSeparator: ";",
+          })
+        : "",
     },
     subtitle: {
       text: i18n.t("Normals from reference period: {{period}}", {
         period: referencePeriod.id,
         nsSeparator: ";",
       }),
+      floating: false,
+      verticalAlign: "top",
     },
     credits,
     tooltip: {
@@ -105,6 +115,9 @@ const getChartConfig = (name, data, normals, referencePeriod) => {
         zIndex: 1,
       },
     ],
+    exporting: {
+      enabled: !isPlugin,
+    },
   };
 };
 

@@ -9,12 +9,17 @@ accessibility(Highcharts);
 exporting(Highcharts);
 highchartsMore(Highcharts);
 
-const Chart = ({ config }) => {
+const Chart = ({ config, isPlugin }) => {
   const chartRef = useRef();
 
   useLayoutEffect(() => {
+    // TODO: Find better way to set chart height to fit plugin container
+    if (isPlugin) {
+      config.chart.height = chartRef.current.parentElement.offsetHeight - 32;
+    }
+
     Highcharts.chart(chartRef.current, config);
-  }, [config, chartRef]);
+  }, [config, chartRef, isPlugin]);
 
   return <div ref={chartRef} />;
 };
