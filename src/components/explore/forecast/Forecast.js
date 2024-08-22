@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import i18n from "@dhis2/d2-i18n";
 import PropTypes from "prop-types";
-import DataLoader from "../../shared/DataLoader";
+import DataLoader from "../../shared/DataLoader.js";
 import DayForecast from "./DayForecast.js";
-import useAppSettings from "../../../hooks/useAppSettings";
+import useAppSettings from "../../../hooks/useAppSettings.js";
 import styles from "./styles/ForecastTab.module.css";
 
 const convertTimezone = (date, timeZone) =>
@@ -11,7 +11,7 @@ const convertTimezone = (date, timeZone) =>
 
 const browserTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-const ForecastTab = ({ orgUnit }) => {
+const Forecast = ({ orgUnit }) => {
   const [data, setData] = useState();
   const { settings, loading } = useAppSettings();
 
@@ -104,9 +104,9 @@ const ForecastTab = ({ orgUnit }) => {
   );
 };
 
-ForecastTab.propTypes = {
+Forecast.propTypes = {
   name: PropTypes.string.isRequired,
   orgUnit: PropTypes.object.isRequired,
 };
 
-export default ForecastTab;
+export default Forecast;
