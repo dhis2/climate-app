@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
-import HumidityMonthly from "./HumidityMonthly";
-import HumidityDaily from "./HumidityDaily";
+import PrecipitationMonthly from "./PrecipitationMonthly";
+import PrecipitationDaily from "./PrecipitationDaily";
 import { MONTHLY } from "../../../utils/time";
 
-const HumidityTab = ({
+const Precipitation = ({
   orgUnit,
   periodType,
   dailyPeriod,
@@ -12,18 +12,18 @@ const HumidityTab = ({
 }) => (
   <>
     {periodType === MONTHLY ? (
-      <HumidityMonthly
+      <PrecipitationMonthly
         orgUnit={orgUnit}
         period={monthlyPeriod}
         referencePeriod={referencePeriod}
       />
     ) : (
-      <HumidityDaily orgUnit={orgUnit} period={dailyPeriod} />
+      <PrecipitationDaily orgUnit={orgUnit} period={dailyPeriod} />
     )}
   </>
 );
 
-HumidityTab.propTypes = {
+Precipitation.propTypes = {
   orgUnit: PropTypes.object.isRequired,
   periodType: PropTypes.string.isRequired,
   dailyPeriod: PropTypes.object.isRequired,
@@ -31,4 +31,4 @@ HumidityTab.propTypes = {
   referencePeriod: PropTypes.object.isRequired,
 };
 
-export default HumidityTab;
+export default Precipitation;
