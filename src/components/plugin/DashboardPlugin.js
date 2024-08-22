@@ -8,6 +8,8 @@ const DashboardPlugin = (props) => {
   // TODO: can props be passed directly to DashboardPluginWrapper?
   useEffect(() => setPropsFromParent(props), [props]);
 
+  console.log("propsFromParent", propsFromParent);
+
   return (
     <DashboardPluginWrapper {...propsFromParent}>
       {(props) => <Plugin {...props} />}
