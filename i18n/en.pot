@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-08-21T16:16:28.345Z\n"
-"PO-Revision-Date: 2024-08-21T16:16:28.345Z\n"
+"POT-Creation-Date: 2024-08-22T12:15:53.468Z\n"
+"PO-Revision-Date: 2024-08-22T12:15:53.468Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -192,6 +192,24 @@ msgstr "Daily"
 
 msgid "Reference period"
 msgstr "Reference period"
+
+msgid "10 days forecast"
+msgstr "10 days forecast"
+
+msgid "Temperature"
+msgstr "Temperature"
+
+msgid "Precipitation"
+msgstr "Precipitation"
+
+msgid "Humidity"
+msgstr "Humidity"
+
+msgid "Heat"
+msgstr "Heat"
+
+msgid "Climate change"
+msgstr "Climate change"
 
 msgid "{{name}}: {{month}} temperature anomaly {{years}}"
 msgstr "{{name}}: {{month}} temperature anomaly {{years}}"
@@ -776,9 +794,6 @@ msgstr "Max"
 
 msgid "Precipitation (ERA5-Land)"
 msgstr "Precipitation (ERA5-Land)"
-
-msgid "Precipitation"
-msgstr "Precipitation"
 
 msgid "Total precipitation in mm"
 msgstr "Total precipitation in mm"
