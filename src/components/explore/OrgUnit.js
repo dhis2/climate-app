@@ -9,21 +9,21 @@ import ReferencePeriodSelect, {
   defaultReferencePeriod,
 } from "./ReferencePeriodSelect";
 import Tabs from "./Tabs";
-import ForecastTab from "./forecast/ForecastTab";
-import TemperatureTab from "./temperature/TemperatureTab";
-import PrecipitationTab from "./precipitation/PrecipitationTab";
-import HumidityTab from "./humidity/HumidityTab";
-import ClimateChangeTab from "./climateChange/ClimateChangeTab";
+import Forecast from "./forecast/Forecast";
+import Temperature from "./temperature/Temperature";
+import Precipitation from "./precipitation/Precipitation";
+import Humidity from "./humidity/Humidity";
+import ClimateChange from "./climateChange/ClimateChange";
 import { getDefaultMonthlyPeriod } from "../../utils/time";
 import { DAILY, MONTHLY, getDefaultExplorePeriod } from "../../utils/time";
 import styles from "./styles/OrgUnit.module.css";
 
 const tabs = {
-  forecast10days: ForecastTab,
-  temperature: TemperatureTab,
-  precipitation: PrecipitationTab,
-  humidity: HumidityTab,
-  climatechange: ClimateChangeTab,
+  forecast10days: Forecast,
+  temperature: Temperature,
+  precipitation: Precipitation,
+  humidity: Humidity,
+  climatechange: ClimateChange,
 };
 
 const OrgUnit = ({ orgUnit }) => {

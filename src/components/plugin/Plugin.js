@@ -1,4 +1,4 @@
-import ForecastTab from "../explore/forecast/ForecastTab";
+import Forecast from "../explore/forecast/Forecast";
 import styles from "./styles/Plugin.module.css";
 
 const orgUnit = {
@@ -23,7 +23,7 @@ const Plugin = (props) => {
       <div className={styles.title}>
         {orgUnit.properties.name}: 10 days weather forecast
       </div>
-      <ForecastTab orgUnit={orgUnit} isPlugin={true} />
+      <Forecast orgUnit={orgUnit} isPlugin={true} />
     </div>
   );
 };

@@ -16,7 +16,7 @@ import styles from "./styles/ClimateChangeTab.module.css";
 // Fetch all years from 1970 to the current year
 const period = { startTime: "1970-01", endTime: `${getCurrentYear()}-12` };
 
-const ClimateChangeTab = ({ orgUnit, referencePeriod }) => {
+const ClimateChange = ({ orgUnit, referencePeriod }) => {
   const [month, setMonth] = useState(getLastMonth());
 
   const filters = useMemo(
@@ -64,10 +64,10 @@ const ClimateChangeTab = ({ orgUnit, referencePeriod }) => {
   );
 };
 
-ClimateChangeTab.propTypes = {
+ClimateChange.propTypes = {
   orgUnit: PropTypes.object.isRequired,
   monthlyPeriod: PropTypes.object.isRequired,
   referencePeriod: PropTypes.object.isRequired,
 };
 
-export default ClimateChangeTab;
+export default ClimateChange;
