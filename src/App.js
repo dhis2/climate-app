@@ -7,6 +7,7 @@ import SetupPage from "./components/setup/SetupPage";
 import SettingsPage from "./components/settings/SettingsPage";
 import ErrorPage from "./components/ErrorPage";
 import CheckPage from "./components/check/CheckPage";
+import PluginPage from "./components/plugin/PluginPage";
 
 const router = createHashRouter([
   {
@@ -37,6 +38,10 @@ const router = createHashRouter([
       {
         path: "settings",
         element: <SettingsPage />,
+      },
+      {
+        path: "plugin",
+        element: <PluginPage />,
       },
     ],
   },

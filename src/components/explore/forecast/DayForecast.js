@@ -13,7 +13,7 @@ const sixHours = [
   { start: "18", end: "24" },
 ];
 
-const DayForecast = ({ date, series }) => {
+const DayForecast = ({ date, series, isPlugin }) => {
   const day = new Date(date).toDateString().slice(0, -5);
   const temp = series.map((s) => s.data.instant.details.air_temperature);
   const minTemp = Math.round(Math.min(...temp));
@@ -62,7 +62,7 @@ const DayForecast = ({ date, series }) => {
       <td className={styles.precip}>
         {precip ? i18n.t("{{precip}} mm", { precip }) : null}
       </td>
-      <td className={styles.precip}>{avgHumidity}%</td>
+      {!isPlugin && <td className={styles.precip}>{avgHumidity}%</td>}
       <td className={styles.wind}>{maxWind} m/s</td>
     </tr>
   );

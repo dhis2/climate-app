@@ -11,7 +11,7 @@ const convertTimezone = (date, timeZone) =>
 
 const browserTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-const ForecastTab = ({ orgUnit }) => {
+const ForecastTab = ({ orgUnit, isPlugin }) => {
   const [data, setData] = useState();
   const { settings, loading } = useAppSettings();
 
@@ -56,7 +56,9 @@ const ForecastTab = ({ orgUnit }) => {
             <td>{i18n.t("Evening")}</td>
             <td className={styles.right}>{i18n.t("Max/min temp.")}</td>
             <td className={styles.right}>{i18n.t("Precip.")}</td>
-            <td className={styles.right}>{i18n.t("Rel. humidity")}</td>
+            {!isPlugin && (
+              <td className={styles.right}>{i18n.t("Rel. humidity")}</td>
+            )}
             <td className={styles.right}>{i18n.t("Wind")}</td>
           </tr>
         </thead>
@@ -66,6 +68,7 @@ const ForecastTab = ({ orgUnit }) => {
               key={date}
               date={date}
               series={timeseries.filter((t) => t.time.startsWith(date))}
+              isPlugin={isPlugin}
             />
           ))}
         </tbody>
@@ -84,29 +87,31 @@ const ForecastTab = ({ orgUnit }) => {
           ECMWF HRES
         </a>
       </div>
-      <div className={styles.timeZone}>
-        {settings.timeZone
-          ? i18n.t(
-              'The forecast is using the "{{- timeZone}}" time zone. You can change the time zone for your org units under "Settings".',
-              { timeZone }
-            )
-          : browserTimeZone
-          ? i18n.t(
-              'The forecast is using the time zone of your browser ({{- timeZone}}). You can set the time zone for your org units under "Settings".',
-              { timeZone }
-            )
-          : i18n.t(
-              'The forecast is using the default "{{- timeZone}}" time zone. You can set the time zone for your org units under "Settings".',
-              { timeZone }
-            )}
-      </div>
+      {!isPlugin && (
+        <div className={styles.timeZone}>
+          {settings.timeZone
+            ? i18n.t(
+                'The forecast is using the "{{- timeZone}}" time zone. You can change the time zone for your org units under "Settings".',
+                { timeZone }
+              )
+            : browserTimeZone
+            ? i18n.t(
+                'The forecast is using the time zone of your browser ({{- timeZone}}). You can set the time zone for your org units under "Settings".',
+                { timeZone }
+              )
+            : i18n.t(
+                'The forecast is using the default "{{- timeZone}}" time zone. You can set the time zone for your org units under "Settings".',
+                { timeZone }
+              )}
+        </div>
+      )}
     </>
   );
 };
 
 ForecastTab.propTypes = {
-  name: PropTypes.string.isRequired,
   orgUnit: PropTypes.object.isRequired,
+  idPlugin: PropTypes.bool,
 };
 
 export default ForecastTab;

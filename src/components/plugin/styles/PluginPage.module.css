@@ -1,0 +1,10 @@
+.plugin {
+  box-shadow: 0 0 3px 0 #999;
+  border-radius: 3px;
+  padding: 4px;
+  background-color: #fff;
+  box-sizing: content-box;
+  width: 500px;
+  height: 500px;
+  overflow: hidden !important;
+}
