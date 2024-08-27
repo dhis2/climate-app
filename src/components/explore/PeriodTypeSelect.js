@@ -30,3 +30,37 @@ PeriodTypeSelect.propTypes = {
 };
 
 export default PeriodTypeSelect;
+
+/*
+import i18n from "@dhis2/d2-i18n";
+import { SegmentedControl } from "@dhis2/ui";
+import styles from "./styles/PeriodTypeSelect.module.css";
+import explorePeriodStore from "../../utils/explorePeriodStore";
+import { DAILY, MONTHLY } from "../../utils/time";
+
+const PeriodTypeSelect = () => {
+  const { periodType, setPeriodType } = explorePeriodStore();
+
+  return (
+    <div className={styles.periodTypeButtons}>
+      <SegmentedControl
+        ariaLabel="Monthly or daily"
+        onChange={({ value }) => setPeriodType(value)}
+        options={[
+          {
+            label: i18n.t("Monthly"),
+            value: MONTHLY,
+          },
+          {
+            label: i18n.t("Daily"),
+            value: DAILY,
+          },
+        ]}
+        selected={periodType}
+      />
+    </div>
+  );
+};
+
+export default PeriodTypeSelect;
+*/

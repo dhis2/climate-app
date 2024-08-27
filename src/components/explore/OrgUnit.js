@@ -15,7 +15,7 @@ import Precipitation from "./precipitation/Precipitation";
 import Humidity from "./humidity/Humidity";
 import ClimateChange from "./climateChange/ClimateChange";
 import { getDefaultMonthlyPeriod } from "../../utils/time";
-import { DAILY, MONTHLY, getDefaultExplorePeriod } from "../../utils/time";
+import { DAILY, MONTHLY /*, getDefaultExplorePeriod*/ } from "../../utils/time";
 import styles from "./styles/OrgUnit.module.css";
 
 const tabs = {
@@ -31,9 +31,8 @@ const OrgUnit = ({ orgUnit }) => {
   const [tab, setTab] = useState(isPoint ? "forecast10days" : "temperature");
   const [dailyPeriod, setDailyPeriod] = useState(getDefaultExplorePeriod());
   const [monthlyPeriod, setMonthlyPeriod] = useState(getDefaultMonthlyPeriod());
-  const [referencePeriod, setReferencePeriod] = useState(
-    defaultReferencePeriod
-  );
+  const [referencePeriod, setReferencePeriod] = useState();
+  /*defaultReferencePeriod*/
   const [periodType, setPeriodType] = useState(MONTHLY);
 
   const Tab = tabs[tab];

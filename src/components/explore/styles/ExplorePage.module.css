@@ -1,6 +1,7 @@
 .container {
   margin-right: 24px;
   max-width: 800px;
+  position: relative;
 }
 
 .container h1 {
