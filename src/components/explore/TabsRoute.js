@@ -78,8 +78,6 @@ const Tabs = () => {
     }
   }, [periodType, params, monthlyPeriod, setMonthlyPeriod]);
 
-  console.log("#", styles.tabContent);
-
   return (
     <>
       <TabBar fixed>
