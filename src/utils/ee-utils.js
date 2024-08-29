@@ -54,10 +54,10 @@ export const getEarthEngineValues = (ee, datasetParams, period, features) =>
     const timeZoneEnd = endTimePlusOne.format(null, timeZone);
     const mappedPeriods = getMappedPeriods(period);
 
-    periods.reduce((map, p) => {
-      map.set(toIso(p.startTime, calendar), p.iso);
-      return map;
-    }, mappedPeriods);
+    // periods?.reduce((map, p) => {
+    //   map.set(toIso(p.startTime, calendar), p.iso);
+    //   return map;
+    // }, mappedPeriods);
 
     const dataParser = (data) =>
       data.map((f) => ({
