@@ -9,6 +9,7 @@ const useEarthEngineData = (dataset, period, features) => {
   const eePromise = useEarthEngine();
 
   useEffect(() => {
+    console.log(period)
     if (dataset && features?.length) {
       setLoading(true);
       setData();
