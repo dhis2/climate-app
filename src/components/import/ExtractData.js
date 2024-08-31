@@ -16,7 +16,7 @@ const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
     period,
     features
   );
-
+  
   if (!features) {
     return <DataLoader label={i18n.t("Loading org units")} />;
   } else if (!features.length) {
