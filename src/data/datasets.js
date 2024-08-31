@@ -153,31 +153,34 @@ export default [
     aggregationType: i18n.t("Average"),
     dataElementCode: "ERA5_LAND_RELATIVE_HUMIDITY",
   },
-  {
-    id: "Local Min Tempreture",
-    datasetId: "Local_Data",
-    name: i18n.t("Local Min Tempreture (Land)"),
-    shortName: i18n.t("Air temperature"),
-    description: i18n.t(
-      "Average local  max observed air temperature in °C"
-    ),
-    aggregationType: i18n.t("Min"),
-    dataElementCode: "LOCAL_TEMPERATURE_MAX",
-  },
-  {
-    id: "Local Max Tempreture",
-    datasetId: "Local_Data",
-    name: i18n.t("Local Max Tempreture (Land)"),
-    shortName: i18n.t("Air temperature"),
-    description: i18n.t(
-      "Average local min observed air temperature in °C"
-    ),
-    aggregationType: i18n.t("Min"),
-    dataElementCode: "LOCAL_TEMPERATURE_MIN",
-    },
+  // {
+  //   id: "Local Min Tempreture",
+  //   datasetId: "Local_Data",
+  //   tag : 'min temp',
+  //   name: i18n.t("Local Min Tempreture (Land)"),
+  //   shortName: i18n.t("Air temperature"),
+  //   description: i18n.t(
+  //     "Average local  max observed air temperature in °C"
+  //   ),
+  //   aggregationType: i18n.t("Min"),
+  //   dataElementCode: "LOCAL_TEMPERATURE_MAX",
+  // },
+  // {
+  //   id: "Local Max Tempreture",
+  //   datasetId: "Local_Data",
+  //   tag : 'max temp',
+  //   name: i18n.t("Local Max Tempreture (Land)"),
+  //   shortName: i18n.t("Air temperature"),
+  //   description: i18n.t(
+  //     "Average local min observed air temperature in °C"
+  //   ),
+  //   aggregationType: i18n.t("Min"),
+  //   dataElementCode: "LOCAL_TEMPERATURE_MIN",
+  //   },
   {
     id: "Local Precipitation",
     datasetId: "Local_Data",
+    tag : 'Rainfall',
     name: i18n.t("Local Precipitation "),
     shortName: i18n.t("Precipitation"),
     description: i18n.t(
