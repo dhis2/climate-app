@@ -13,9 +13,9 @@ const NoOrgUnitData = ({ data, features }) => {
     <div className={styles.noData}>
       {i18n.t("No data for the following org units")}: {orgUnits.join(", ")}
       <br />
-      {i18n.t(
+      {/* {i18n.t(
         "ERA5-Land has limited data for costal areas. Values for other org units will be imported."
-      )}
+      )} */}
     </div>
   ) : null;
 };
