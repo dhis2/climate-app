@@ -1,30 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import i18n from "@dhis2/d2-i18n";
 import { Button } from "@dhis2/ui";
-import { useParams } from "react-router-dom";
 import DatePicker from "../shared/DatePicker";
 import { getNumberOfDays } from "../../utils/time";
-import explorePeriodStore from "../../utils/explorePeriodStore";
+import exploreStore from "../../utils/exploreStore";
 import styles from "./styles/Period.module.css";
 
 const maxDays = 1000;
 
 const DailyPeriodSelect = () => {
-  const { dailyPeriod, setDailyPeriod } = explorePeriodStore();
+  const { dailyPeriod, setDailyPeriod } = exploreStore();
   const [period, setPeriod] = useState(dailyPeriod);
-  const params = useParams();
 
   const { startTime, endTime } = period;
   const days = getNumberOfDays(startTime, endTime);
-
-  useEffect(() => {
-    const { startTime, endTime } = params;
-
-    if (startTime !== period.startTime || endTime !== period.endTime) {
-      setDailyPeriod({ startTime, endTime });
-      setPeriod({ startTime, endTime });
-    }
-  }, [params, period]);
 
   return (
     <div className={styles.container}>

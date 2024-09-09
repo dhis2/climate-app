@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-08-15T12:16:45.156Z\n"
-"PO-Revision-Date: 2024-08-15T12:16:45.156Z\n"
+"POT-Creation-Date: 2024-08-29T13:06:47.295Z\n"
+"PO-Revision-Date: 2024-08-29T13:06:47.295Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -164,6 +164,15 @@ msgstr "End month"
 msgid "Maximum {{maxMonths}} months allowed"
 msgstr "Maximum {{maxMonths}} months allowed"
 
+msgid "No geometry found"
+msgstr "No geometry found"
+
+msgid "Data for a location"
+msgstr "Data for a location"
+
+msgid "Data for an area"
+msgstr "Data for an area"
+
 msgid ""
 "Temperature anomaly is the difference of a temperature from a reference "
 "value, calculated as the average temperature over a period of 30 years. "
@@ -174,15 +183,6 @@ msgstr ""
 "value, calculated as the average temperature over a period of 30 years. "
 "Blue columns shows temperatures below the average, while red columns are "
 "above."
-
-msgid "No geometry found"
-msgstr "No geometry found"
-
-msgid "Data for a location"
-msgstr "Data for a location"
-
-msgid "Data for an area"
-msgstr "Data for an area"
 
 msgid "Monthly"
 msgstr "Monthly"

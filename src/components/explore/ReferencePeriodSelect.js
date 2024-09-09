@@ -1,6 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
 import { SingleSelectField, SingleSelectOption } from "@dhis2/ui";
-import explorePeriodStore from "../../utils/explorePeriodStore";
+import exploreStore from "../../utils/exploreStore";
 import styles from "./styles/ReferencePeriod.module.css";
 
 const referencePeriods = [
@@ -22,7 +22,7 @@ export const defaultReferencePeriod = referencePeriods[0];
 
 // const ReferencePeriod = ({ selected, onChange }) => (
 const ReferencePeriod = () => {
-  const { referencePeriod, setReferencePeriod } = explorePeriodStore();
+  const { referencePeriod, setReferencePeriod } = exploreStore();
 
   return (
     <div className={styles.referencePeriod}>

@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import i18n from "@dhis2/d2-i18n";
-import OrgUnit from "../explore/OrgUnit";
+// import OrgUnit from "../explore/OrgUnit";
 import { findLocation } from "../../data/locations";
 import styles from "../explore/styles/ExplorePage.module.css";
 
@@ -23,6 +23,9 @@ const CheckPage = () => {
     };
   }, [locationId]);
 
+  return null;
+
+  /* TODO
   return (
     <div className={styles.container}>
       {orgUnit ? (
@@ -35,6 +38,7 @@ const CheckPage = () => {
       )}
     </div>
   );
+  */
 };
 
 export default CheckPage;

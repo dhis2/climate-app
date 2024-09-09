@@ -1,13 +1,18 @@
-import PropTypes from "prop-types";
+import { useOutletContext } from "react-router-dom";
 import Chart from "../Chart";
 import DataLoader from "../../shared/DataLoader";
 import getMonthlyConfig from "./charts/precipitationMonthly";
 import useEarthEngineTimeSeries from "../../../hooks/useEarthEngineTimeSeries";
 import useEarthEngineClimateNormals from "../../../hooks/useEarthEngineClimateNormals";
+import exploreStore from "../../../utils/exploreStore";
 import { era5Monthly, era5MonthlyNormals } from "../../../data/datasets";
 
-const PrecipitationMonthly = ({ orgUnit, period, referencePeriod }) => {
-  const data = useEarthEngineTimeSeries(era5Monthly, period, orgUnit);
+const PrecipitationMonthly = () => {
+  const orgUnit = useOutletContext();
+  const monthlyPeriod = exploreStore((state) => state.monthlyPeriod);
+  const referencePeriod = exploreStore((state) => state.referencePeriod);
+
+  const data = useEarthEngineTimeSeries(era5Monthly, monthlyPeriod, orgUnit);
 
   const normals = useEarthEngineClimateNormals(
     era5MonthlyNormals,
@@ -29,12 +34,6 @@ const PrecipitationMonthly = ({ orgUnit, period, referencePeriod }) => {
       )}
     />
   );
-};
-
-PrecipitationMonthly.propTypes = {
-  orgUnit: PropTypes.object.isRequired,
-  period: PropTypes.object.isRequired,
-  referencePeriod: PropTypes.object.isRequired,
 };
 
 export default PrecipitationMonthly;

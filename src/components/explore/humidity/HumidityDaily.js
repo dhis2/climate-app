@@ -1,11 +1,15 @@
-import PropTypes from "prop-types";
+import { useOutletContext } from "react-router-dom";
 import Chart from "../Chart";
 import DataLoader from "../../shared/DataLoader";
 import getDailyConfig from "./charts/humidityDaily";
 import useEarthEngineTimeSeries from "../../../hooks/useEarthEngineTimeSeries";
+import exploreStore from "../../../utils/exploreStore";
 import { era5Daily } from "../../../data/datasets";
 
-const HumidityDaily = ({ orgUnit, period }) => {
+const HumidityDaily = () => {
+  const orgUnit = useOutletContext();
+  const period = exploreStore((state) => state.dailyPeriod);
+
   const data = useEarthEngineTimeSeries(era5Daily, period, orgUnit);
 
   if (!data) {
@@ -13,11 +17,6 @@ const HumidityDaily = ({ orgUnit, period }) => {
   }
 
   return <Chart config={getDailyConfig(orgUnit.properties.name, data)} />;
-};
-
-HumidityDaily.propTypes = {
-  orgUnit: PropTypes.object.isRequired,
-  period: PropTypes.object.isRequired,
 };
 
 export default HumidityDaily;

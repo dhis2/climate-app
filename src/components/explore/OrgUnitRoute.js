@@ -7,6 +7,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import OrgUnitType from "./OrgUnitType";
+import exploreStore from "../../utils/exploreStore";
 import styles from "./styles/OrgUnit.module.css";
 
 const ORG_UNIT_QUERY = {
@@ -32,24 +33,28 @@ export const orgUnitLoader =
         },
       }));
 
-// TODO: Add period contexts
 const OrgUnitRoute = () => {
   const orgUnit = useLoaderData();
   const { pathname } = useLocation();
+  const { tab, setTab } = exploreStore();
   const navigate = useNavigate();
 
-  // Set default tab based on geometry type
-  useEffect(() => {
-    const tab = pathname.split("/")[3]; // TODO: Better way to get tab?
+  const uriTab = pathname.split("/")[3]; // TODO: Better way to get tab?
 
-    if (!tab) {
-      navigate(
-        `/explore/${orgUnit.id}/${
-          orgUnit.geometry?.type === "Point" ? "forecast10days" : "temperature"
-        }`
-      );
+  // Set default type based on org unit geometry type
+  useEffect(() => {
+    if (!uriTab) {
+      if (tab) {
+        navigate(`/explore/${orgUnit.id}/${tab}`);
+      } else {
+        setTab(
+          orgUnit.geometry.type === "Point" ? "forecast10days" : "temperature"
+        );
+      }
+    } else if (uriTab !== tab) {
+      // setTab(uriTab);
     }
-  }, [orgUnit, pathname, navigate]);
+  }, [orgUnit, tab, uriTab, setTab, navigate]);
 
   return (
     <div className={styles.container}>
