@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-08-29T13:06:47.295Z\n"
-"PO-Revision-Date: 2024-08-29T13:06:47.295Z\n"
+"POT-Creation-Date: 2024-09-09T12:39:34.363Z\n"
+"PO-Revision-Date: 2024-09-09T12:39:34.363Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -107,9 +107,6 @@ msgstr "End date"
 msgid "Maximum {{maxDays}} days allowed"
 msgstr "Maximum {{maxDays}} days allowed"
 
-msgid "Loading organisation unit"
-msgstr "Loading organisation unit"
-
 msgid "Explore weather and climate data"
 msgstr "Explore weather and climate data"
 
@@ -172,17 +169,6 @@ msgstr "Data for a location"
 
 msgid "Data for an area"
 msgstr "Data for an area"
-
-msgid ""
-"Temperature anomaly is the difference of a temperature from a reference "
-"value, calculated as the average temperature over a period of 30 years. "
-"Blue columns shows temperatures below the average, while red columns are "
-"above."
-msgstr ""
-"Temperature anomaly is the difference of a temperature from a reference "
-"value, calculated as the average temperature over a period of 30 years. "
-"Blue columns shows temperatures below the average, while red columns are "
-"above."
 
 msgid "Monthly"
 msgstr "Monthly"

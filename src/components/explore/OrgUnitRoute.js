@@ -51,8 +51,6 @@ const OrgUnitRoute = () => {
           orgUnit.geometry.type === "Point" ? "forecast10days" : "temperature"
         );
       }
-    } else if (uriTab !== tab) {
-      // setTab(uriTab);
     }
   }, [orgUnit, tab, uriTab, setTab, navigate]);
 

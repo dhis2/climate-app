@@ -3,7 +3,7 @@ import { SingleSelectField, SingleSelectOption } from "@dhis2/ui";
 import exploreStore from "../../utils/exploreStore";
 import styles from "./styles/ReferencePeriod.module.css";
 
-const referencePeriods = [
+export const referencePeriods = [
   {
     id: "1991-2020",
     name: "1991 - 2020",
