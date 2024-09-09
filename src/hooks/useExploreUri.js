@@ -11,7 +11,7 @@ export const hasMonthlyAndDailyData = [
 ];
 
 // Returns syncronized (uri/store) explore params
-const useExploreParams = (orgUnitId) => {
+const useExploreUri = (orgUnitId) => {
   const [isPop, setIsPop] = useState(false);
   const navigationType = useNavigationType();
   const { pathname } = useLocation();
@@ -48,7 +48,6 @@ const useExploreParams = (orgUnitId) => {
         }
       }
 
-      // console.log("uri", uri);
       return uri;
     }
 
@@ -94,4 +93,4 @@ const useExploreParams = (orgUnitId) => {
   return uri;
 };
 
-export default useExploreParams;
+export default useExploreUri;

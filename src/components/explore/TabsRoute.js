@@ -11,9 +11,9 @@ import MonthlyPeriodSelect from "./MonthlyPeriodSelect";
 import DailyPeriodSelect from "./DailyPeriodSelect";
 import ReferencePeriod from "./ReferencePeriodSelect";
 import exploreStore from "../../utils/exploreStore";
-import useExploreParams, {
+import useExploreUri, {
   hasMonthlyAndDailyData,
-} from "../../hooks/useExploreParams";
+} from "../../hooks/useExploreUri";
 import { MONTHLY } from "../../utils/time";
 import styles from "./styles/OrgUnit.module.css";
 
@@ -49,7 +49,7 @@ const Tabs = () => {
 
   const { tab, setTab, periodType } = exploreStore();
 
-  const uri = useExploreParams(orgUnit.id);
+  const uri = useExploreUri(orgUnit.id);
   const isPoint = orgUnit.geometry.type === "Point";
   const hasPeriodType = hasMonthlyAndDailyData.includes(tab);
 
