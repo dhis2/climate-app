@@ -1,5 +1,10 @@
 import { useState, useMemo, useEffect } from "react";
-import { useNavigationType, useLocation, useParams } from "react-router-dom";
+import {
+  useNavigationType,
+  useLocation,
+  useParams,
+  useOutletContext,
+} from "react-router-dom";
 import exploreStore from "../utils/exploreStore";
 import { referencePeriods } from "../components/explore/ReferencePeriodSelect";
 import { MONTHLY } from "../utils/time";
@@ -11,11 +16,12 @@ export const hasMonthlyAndDailyData = [
 ];
 
 // Returns syncronized (uri/store) explore params
-const useExploreUri = (orgUnitId) => {
+const useExploreUri = () => {
   const [isPop, setIsPop] = useState(false);
   const navigationType = useNavigationType();
   const { pathname } = useLocation();
   const params = useParams();
+  const orgUnit = useOutletContext();
   const store = exploreStore();
 
   const uri = useMemo(() => {
@@ -33,7 +39,7 @@ const useExploreUri = (orgUnitId) => {
         return null;
       }
 
-      const baseUri = `/explore/${orgUnitId}/${tab}`;
+      const baseUri = `/explore/${orgUnit.id}/${tab}`;
       let uri;
 
       if (tab === "forecast10days") {
@@ -52,7 +58,7 @@ const useExploreUri = (orgUnitId) => {
     }
 
     return null;
-  }, [store, orgUnitId, isPop]);
+  }, [store, orgUnit, isPop]);
 
   useEffect(() => {
     setIsPop(navigationType === "POP");

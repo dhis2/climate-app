@@ -49,7 +49,7 @@ const Tabs = () => {
 
   const { tab, setTab, periodType } = exploreStore();
 
-  const uri = useExploreUri(orgUnit.id);
+  const uri = useExploreUri();
   const isPoint = orgUnit.geometry.type === "Point";
   const hasPeriodType = hasMonthlyAndDailyData.includes(tab);
 

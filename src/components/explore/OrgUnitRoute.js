@@ -33,6 +33,9 @@ export const orgUnitLoader =
         },
       }));
 
+const tabIsValid = (tab, orgUnit) =>
+  tab === "forecast10days" && orgUnit.geometry.type !== "Point" ? false : true;
+
 const OrgUnitRoute = () => {
   const orgUnit = useLoaderData();
   const { pathname } = useLocation();
@@ -44,7 +47,7 @@ const OrgUnitRoute = () => {
   // Set default type based on org unit geometry type
   useEffect(() => {
     if (!uriTab) {
-      if (tab) {
+      if (tab && tabIsValid(tab, orgUnit)) {
         navigate(`/explore/${orgUnit.id}/${tab}`);
       } else {
         setTab(
