@@ -36,7 +36,7 @@ export const orgUnitLoader =
 const tabIsValid = (tab, orgUnit) =>
   tab === "forecast10days" && orgUnit.geometry.type !== "Point" ? false : true;
 
-const OrgUnitRoute = () => {
+const OrgUnit = () => {
   const orgUnit = useLoaderData();
   const { pathname } = useLocation();
   const { tab, setTab } = exploreStore();
@@ -74,4 +74,4 @@ const OrgUnitRoute = () => {
   );
 };
 
-export default OrgUnitRoute;
+export default OrgUnit;

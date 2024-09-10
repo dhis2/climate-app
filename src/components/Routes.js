@@ -3,8 +3,8 @@ import { useDataEngine } from "@dhis2/app-runtime";
 import Root from "./Root";
 import AboutPage from "./AboutPage";
 import ExplorePage from "./explore/ExplorePage";
-import OrgUnitRoute, { orgUnitLoader } from "./explore/OrgUnitRoute";
-import TabsRoute from "./explore/TabsRoute";
+import OrgUnit, { orgUnitLoader } from "./explore/OrgUnit";
+import Tabs from "./explore/Tabs";
 import Forecast from "./explore/forecast/Forecast";
 import TemperatureMonthly from "./explore/temperature/TemperatureMonthly";
 import TemperatureDaily from "./explore/temperature/TemperatureDaily";
@@ -45,12 +45,12 @@ const Routes = () => {
             },
             {
               path: ":orgUnitId",
-              element: <OrgUnitRoute />,
+              element: <OrgUnit />,
               loader: orgUnitLoader(engine),
               children: [
                 {
                   path: "forecast10days",
-                  element: <TabsRoute />,
+                  element: <Tabs />,
                   children: [
                     {
                       index: true,
@@ -60,7 +60,7 @@ const Routes = () => {
                 },
                 {
                   path: "temperature",
-                  element: <TabsRoute />,
+                  element: <Tabs />,
                   children: [
                     {
                       path: monthlyPath,
@@ -74,7 +74,7 @@ const Routes = () => {
                 },
                 {
                   path: "precipitation",
-                  element: <TabsRoute />,
+                  element: <Tabs />,
                   children: [
                     {
                       path: monthlyPath,
@@ -88,7 +88,7 @@ const Routes = () => {
                 },
                 {
                   path: "humidity",
-                  element: <TabsRoute />,
+                  element: <Tabs />,
                   children: [
                     {
                       path: monthlyPath,
@@ -102,7 +102,7 @@ const Routes = () => {
                 },
                 {
                   path: "climatechange",
-                  element: <TabsRoute />,
+                  element: <Tabs />,
                   children: [
                     {
                       path: ":month/:referencePeriodId",
