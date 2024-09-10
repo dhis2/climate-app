@@ -47,6 +47,8 @@ const OrgUnitTree = () => {
       ? [path.slice(0, -1).join("/")]
       : roots?.map((r) => r.path);
 
+  const selected = orgUnit?.path ? [orgUnit.path] : [];
+
   const onChange = (orgUnit) => navigate(`/check/${orgUnit.id}`);
 
   return (
@@ -55,7 +57,7 @@ const OrgUnitTree = () => {
         <CustomDataProvider data={customData}>
           <OrganisationUnitTree
             roots={roots.map((r) => r.id)}
-            selected={[orgUnit?.path]}
+            selected={selected}
             onChange={onChange}
             singleSelection={true}
             initiallyExpanded={initiallyExpanded}

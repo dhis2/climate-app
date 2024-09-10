@@ -15,6 +15,8 @@ const OrgUnitTree = () => {
       ? [path.slice(0, -1).join("/")]
       : roots?.map((r) => r.path);
 
+  const selected = orgUnit?.path ? [orgUnit.path] : [];
+
   const onChange = (orgUnit) => navigate(`/explore/${orgUnit.id}`);
 
   return roots ? (
@@ -22,7 +24,7 @@ const OrgUnitTree = () => {
       <div className={styles.orgUnitTree}>
         <OrganisationUnitTree
           roots={roots.map((r) => r.id)}
-          selected={[orgUnit?.path]}
+          selected={selected}
           onChange={onChange}
           singleSelection={true}
           initiallyExpanded={initiallyExpanded}
