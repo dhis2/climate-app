@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { useOutletContext } from "react-router-dom";
+import i18n from "@dhis2/d2-i18n";
 import MonthSelect from "../MonthSelect";
 import ReferencePeriod from "../ReferencePeriodSelect";
 import Chart from "../Chart";
@@ -65,6 +66,11 @@ const ClimateChange = () => {
         <MonthSelect />
       </div>
       <ReferencePeriod />
+      <div className={styles.description}>
+        {i18n.t(
+          "Temperature anomaly is the difference of a temperature from a reference value, calculated as the average temperature over a period of 30 years. Blue columns shows temperatures below the average, while red columns are above."
+        )}
+      </div>
     </>
   );
 };
