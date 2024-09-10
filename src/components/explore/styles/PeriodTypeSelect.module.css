@@ -1,6 +1,6 @@
 .periodTypeButtons {
   position: absolute;
-  top: 110px;
+  top: -6px;
   left: 10px;
   z-index: 1000;
 }

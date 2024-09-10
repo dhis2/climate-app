@@ -1,7 +1,10 @@
-import PropTypes from "prop-types";
+import { useOutletContext } from "react-router-dom";
 import Chart from "../Chart";
+import PeriodTypeSelect from "../PeriodTypeSelect";
+import DailyPeriodSelect from "../DailyPeriodSelect";
 import DataLoader from "../../shared/DataLoader";
 import getDailyConfig from "./charts/thermalComfortDaily";
+import exploreStore from "../../../utils/exploreStore";
 import useEarthEngineTimeSeries from "../../../hooks/useEarthEngineTimeSeries";
 import { heatMissingDataIndex } from "../../../data/datasets";
 
@@ -13,19 +16,23 @@ export const heatDataset = {
   skipIndex: heatMissingDataIndex,
 };
 
-const HeatDaily = ({ orgUnit, period }) => {
+const HeatDaily = () => {
+  const orgUnit = useOutletContext();
+  const period = exploreStore((state) => state.dailyPeriod);
+
   const data = useEarthEngineTimeSeries(heatDataset, period, orgUnit);
 
-  if (!data) {
-    return <DataLoader />;
-  }
-
-  return <Chart config={getDailyConfig(orgUnit.properties.name, data)} />;
-};
-
-HeatDaily.propTypes = {
-  orgUnit: PropTypes.object.isRequired,
-  period: PropTypes.object.isRequired,
+  return (
+    <>
+      <PeriodTypeSelect />
+      {data ? (
+        <Chart config={getDailyConfig(orgUnit.properties.name, data)} />
+      ) : (
+        <DataLoader />
+      )}
+      <DailyPeriodSelect />
+    </>
+  );
 };
 
 export default HeatDaily;

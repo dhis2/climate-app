@@ -1,4 +1,4 @@
-## DHIS2 Climate Data app
+## DHIS2 Climate app
 
 This app allows you to explore and import temperature and precipitation data in DHIS2. The data source is "ERA5-Land", which is considered the most accurate and complete global climate dataset available.
 

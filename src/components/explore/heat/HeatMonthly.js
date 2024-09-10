@@ -1,8 +1,11 @@
-import PropTypes from "prop-types";
+import { useOutletContext } from "react-router-dom";
 import Chart from "../Chart";
+import PeriodTypeSelect from "../PeriodTypeSelect";
+import MonthlyPeriodSelect from "../MonthlyPeriodSelect";
 import DataLoader from "../../shared/DataLoader";
 import getMonthlyConfig from "./charts/thermalComfortMonthly";
 import useEarthEngineTimeSeries from "../../../hooks/useEarthEngineTimeSeries";
+import exploreStore from "../../../utils/exploreStore";
 import { heatDataset } from "./HeatDaily";
 import { MONTHLY } from "../../../utils/time";
 
@@ -11,19 +14,23 @@ const dataset = {
   aggregationPeriod: MONTHLY,
 };
 
-const HeatMonthly = ({ orgUnit, period }) => {
+const HeatMonthly = () => {
+  const orgUnit = useOutletContext();
+  const period = exploreStore((state) => state.monthlyPeriod);
+
   const data = useEarthEngineTimeSeries(dataset, period, orgUnit);
 
-  if (!data) {
-    return <DataLoader />;
-  }
-
-  return <Chart config={getMonthlyConfig(orgUnit.properties.name, data)} />;
-};
-
-HeatMonthly.propTypes = {
-  orgUnit: PropTypes.object.isRequired,
-  period: PropTypes.object.isRequired,
+  return (
+    <>
+      <PeriodTypeSelect />
+      {data ? (
+        <Chart config={getMonthlyConfig(orgUnit.properties.name, data)} />
+      ) : (
+        <DataLoader />
+      )}
+      <MonthlyPeriodSelect />
+    </>
+  );
 };
 
 export default HeatMonthly;

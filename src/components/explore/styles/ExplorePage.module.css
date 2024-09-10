@@ -1,6 +1,7 @@
 .container {
   margin-right: 24px;
   max-width: 800px;
+  position: relative;
 }
 
 .container h1 {
@@ -19,6 +20,6 @@
   margin: 6px 0 12px;
 }
 
-.introduction img {
+.container img {
   width: 100%;
 }

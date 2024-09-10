@@ -1,16 +1,18 @@
 import { useState } from "react";
-import PropTypes from "prop-types";
 import i18n from "@dhis2/d2-i18n";
 import { Button } from "@dhis2/ui";
 import MonthPicker from "../shared/MonthPicker";
 import { getNumberOfMonths } from "../../utils/time";
+import exploreStore from "../../utils/exploreStore";
 import styles from "./styles/Period.module.css";
 
 const maxMonths = 60;
 
-const MonthlyPeriodSelect = ({ currentPeriod, onUpdate }) => {
-  const [period, setPeriod] = useState(currentPeriod);
-  const { startTime, endTime } = period;
+const MonthlyPeriodSelect = () => {
+  const { monthlyPeriod, setMonthlyPeriod } = exploreStore();
+  const [period, setPeriod] = useState(monthlyPeriod);
+
+  const { startTime, endTime } = monthlyPeriod;
   const months = getNumberOfMonths(startTime, endTime);
 
   return (
@@ -26,7 +28,10 @@ const MonthlyPeriodSelect = ({ currentPeriod, onUpdate }) => {
           defaultVal={endTime}
           onChange={(endTime) => setPeriod({ ...period, endTime })}
         />
-        <Button disabled={months > maxMonths} onClick={() => onUpdate(period)}>
+        <Button
+          disabled={months > maxMonths}
+          onClick={() => setMonthlyPeriod(period)}
+        >
           Update
         </Button>
       </div>
@@ -37,11 +42,6 @@ const MonthlyPeriodSelect = ({ currentPeriod, onUpdate }) => {
       )}
     </div>
   );
-};
-
-MonthlyPeriodSelect.propTypes = {
-  currentPeriod: PropTypes.object.isRequired,
-  onUpdate: PropTypes.func.isRequired,
 };
 
 export default MonthlyPeriodSelect;
