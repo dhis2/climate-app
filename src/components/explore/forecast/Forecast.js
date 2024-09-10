@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
-import i18n from "@dhis2/d2-i18n";
 import PropTypes from "prop-types";
+import { useState, useEffect } from "react";
+import { useOutletContext } from "react-router-dom";
+import i18n from "@dhis2/d2-i18n";
 import DataLoader from "../../shared/DataLoader.js";
 import DayForecast from "./DayForecast.js";
 import useAppSettings from "../../../hooks/useAppSettings.js";
@@ -11,7 +12,8 @@ const convertTimezone = (date, timeZone) =>
 
 const browserTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-const Forecast = ({ orgUnit, isPlugin }) => {
+const Forecast = ({ isPlugin }) => {
+  const orgUnit = useOutletContext();
   const [data, setData] = useState();
   const { settings, loading } = useAppSettings();
 
@@ -110,8 +112,7 @@ const Forecast = ({ orgUnit, isPlugin }) => {
 };
 
 Forecast.propTypes = {
-  orgUnit: PropTypes.object.isRequired,
-  idPlugin: PropTypes.bool,
+  isPlugin: PropTypes.bool,
 };
 
 export default Forecast;

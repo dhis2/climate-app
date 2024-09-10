@@ -4,3 +4,10 @@
   margin-top: 10px;
   margin-right: 20px;
 }
+
+.description {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  line-height: 18px;
+}

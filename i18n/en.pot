@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-08-15T12:16:45.156Z\n"
-"PO-Revision-Date: 2024-08-15T12:16:45.156Z\n"
+"POT-Creation-Date: 2024-09-10T15:22:43.232Z\n"
+"PO-Revision-Date: 2024-09-10T15:22:43.232Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -107,9 +107,6 @@ msgstr "End date"
 msgid "Maximum {{maxDays}} days allowed"
 msgstr "Maximum {{maxDays}} days allowed"
 
-msgid "Loading organisation unit"
-msgstr "Loading organisation unit"
-
 msgid "Explore weather and climate data"
 msgstr "Explore weather and climate data"
 
@@ -164,17 +161,6 @@ msgstr "End month"
 msgid "Maximum {{maxMonths}} months allowed"
 msgstr "Maximum {{maxMonths}} months allowed"
 
-msgid ""
-"Temperature anomaly is the difference of a temperature from a reference "
-"value, calculated as the average temperature over a period of 30 years. "
-"Blue columns shows temperatures below the average, while red columns are "
-"above."
-msgstr ""
-"Temperature anomaly is the difference of a temperature from a reference "
-"value, calculated as the average temperature over a period of 30 years. "
-"Blue columns shows temperatures below the average, while red columns are "
-"above."
-
 msgid "No geometry found"
 msgstr "No geometry found"
 
@@ -192,6 +178,35 @@ msgstr "Daily"
 
 msgid "Reference period"
 msgstr "Reference period"
+
+msgid "10 days forecast"
+msgstr "10 days forecast"
+
+msgid "Temperature"
+msgstr "Temperature"
+
+msgid "Precipitation"
+msgstr "Precipitation"
+
+msgid "Humidity"
+msgstr "Humidity"
+
+msgid "Heat"
+msgstr "Heat"
+
+msgid "Climate change"
+msgstr "Climate change"
+
+msgid ""
+"Temperature anomaly is the difference of a temperature from a reference "
+"value, calculated as the average temperature over a period of 30 years. "
+"Blue columns shows temperatures below the average, while red columns are "
+"above."
+msgstr ""
+"Temperature anomaly is the difference of a temperature from a reference "
+"value, calculated as the average temperature over a period of 30 years. "
+"Blue columns shows temperatures below the average, while red columns are "
+"above."
 
 msgid "{{name}}: {{month}} temperature anomaly {{years}}"
 msgstr "{{name}}: {{month}} temperature anomaly {{years}}"
@@ -372,6 +387,18 @@ msgstr "Heavy snow and thunder"
 
 msgid "Fog"
 msgstr "Fog"
+
+msgid "{{name}}: Thermal comfort {{period}}"
+msgstr "{{name}}: Thermal comfort {{period}}"
+
+msgid "Average felt temperature"
+msgstr "Average felt temperature"
+
+msgid "Felt temperature range"
+msgstr "Felt temperature range"
+
+msgid "Average temperature"
+msgstr "Average temperature"
 
 msgid "{{name}}: Daily relative humidity {{period}}"
 msgstr "{{name}}: Daily relative humidity {{period}}"
@@ -765,9 +792,6 @@ msgstr "Max"
 msgid "Precipitation (ERA5-Land)"
 msgstr "Precipitation (ERA5-Land)"
 
-msgid "Precipitation"
-msgstr "Precipitation"
-
 msgid "Total precipitation in mm"
 msgstr "Total precipitation in mm"
 
@@ -796,8 +820,104 @@ msgstr ""
 "that can exist in the air at its current temperature. Calculated using air "
 "temperature and dewpoint temperature at 2 m above surface."
 
+msgid "Heat stress (ERA5-HEAT)"
+msgstr "Heat stress (ERA5-HEAT)"
+
+msgid "Heat stress"
+msgstr "Heat stress"
+
+msgid "Average felt temperature in °C"
+msgstr "Average felt temperature in °C"
+
+msgid "Min heat stress (ERA5-HEAT)"
+msgstr "Min heat stress (ERA5-HEAT)"
+
+msgid "Min heat stress"
+msgstr "Min heat stress"
+
+msgid "Minimum felt temperature in °C"
+msgstr "Minimum felt temperature in °C"
+
+msgid "Max heat stress (ERA5-HEAT)"
+msgstr "Max heat stress (ERA5-HEAT)"
+
+msgid "Max heat stress"
+msgstr "Max heat stress"
+
+msgid "Maximum felt temperature in °C"
+msgstr "Maximum felt temperature in °C"
+
+msgid "Mean"
+msgstr "Mean"
+
+msgid "Heat/cold stress"
+msgstr "Heat/cold stress"
+
+msgid "Extreme cold stress"
+msgstr "Extreme cold stress"
+
+msgid "Extreme<br>cold stress"
+msgstr "Extreme<br>cold stress"
+
+msgid "Very strong cold stress"
+msgstr "Very strong cold stress"
+
+msgid "Very strong<br>cold stress"
+msgstr "Very strong<br>cold stress"
+
+msgid "Strong cold stress"
+msgstr "Strong cold stress"
+
+msgid "Strong<br>cold stress"
+msgstr "Strong<br>cold stress"
+
+msgid "Moderate cold stress"
+msgstr "Moderate cold stress"
+
+msgid "Moderate<br>cold stress"
+msgstr "Moderate<br>cold stress"
+
+msgid "Slight cold stress"
+msgstr "Slight cold stress"
+
+msgid "Slight<br>cold stress"
+msgstr "Slight<br>cold stress"
+
+msgid "No thermal stress"
+msgstr "No thermal stress"
+
+msgid "No thermal<br>stress"
+msgstr "No thermal<br>stress"
+
+msgid "Moderate heat stress"
+msgstr "Moderate heat stress"
+
+msgid "Moderate<br>heat stress"
+msgstr "Moderate<br>heat stress"
+
+msgid "Strong heat stress"
+msgstr "Strong heat stress"
+
+msgid "Strong<br>heat stress"
+msgstr "Strong<br>heat stress"
+
+msgid "Very strong heat stress"
+msgstr "Very strong heat stress"
+
+msgid "Very strong<br>heat stress"
+msgstr "Very strong<br>heat stress"
+
+msgid "Extreme heat stress"
+msgstr "Extreme heat stress"
+
+msgid "Extreme<br>heat stress"
+msgstr "Extreme<br>heat stress"
+
 msgid "ERA5-Land / Copernicus Climate Change Service / Google Earth Engine"
 msgstr "ERA5-Land / Copernicus Climate Change Service / Google Earth Engine"
+
+msgid "ERA5-HEAT / Copernicus Climate Change Service / Google Earth Engine"
+msgstr "ERA5-HEAT / Copernicus Climate Change Service / Google Earth Engine"
 
 msgid "No data found for the selected period"
 msgstr "No data found for the selected period"

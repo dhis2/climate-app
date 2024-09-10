@@ -1,108 +1,63 @@
-import { useState } from "react";
-import PropTypes from "prop-types";
+import { useEffect } from "react";
 import i18n from "@dhis2/d2-i18n";
+import {
+  Outlet,
+  useLoaderData,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import OrgUnitType from "./OrgUnitType";
-import PeriodTypeSelect from "./PeriodTypeSelect";
-import DailyPeriodSelect from "./DailyPeriodSelect";
-import MonthlyPeriodSelect from "./MonthlyPeriodSelect";
-import ReferencePeriodSelect, {
-  defaultReferencePeriod,
-} from "./ReferencePeriodSelect";
-import Tabs from "./Tabs";
-import Forecast from "./forecast/Forecast";
-import Temperature from "./temperature/Temperature";
-import Precipitation from "./precipitation/Precipitation";
-import Humidity from "./humidity/Humidity";
-import ClimateChange from "./climateChange/ClimateChange";
-import { getDefaultMonthlyPeriod } from "../../utils/time";
-import { DAILY, MONTHLY, getDefaultExplorePeriod } from "../../utils/time";
+import exploreStore from "../../utils/exploreStore";
 import styles from "./styles/OrgUnit.module.css";
 
-const tabs = {
-  forecast10days: Forecast,
-  temperature: Temperature,
-  precipitation: Precipitation,
-  humidity: Humidity,
-  climatechange: ClimateChange,
-};
+const tabIsValid = (tab, orgUnit) =>
+  tab === "forecast10days" && orgUnit.geometry.type !== "Point" ? false : true;
 
-const OrgUnit = ({ orgUnit }) => {
-  const isPoint = orgUnit.geometry?.type === "Point";
-  const [tab, setTab] = useState(isPoint ? "forecast10days" : "temperature");
-  const [dailyPeriod, setDailyPeriod] = useState(getDefaultExplorePeriod());
-  const [monthlyPeriod, setMonthlyPeriod] = useState(getDefaultMonthlyPeriod());
-  const [referencePeriod, setReferencePeriod] = useState(
-    defaultReferencePeriod
-  );
-  const [periodType, setPeriodType] = useState(MONTHLY);
+const OrgUnit = () => {
+  const { pathname } = useLocation();
+  const orgUnit = useLoaderData();
+  const { tab, setTab, setOrgUnit } = exploreStore();
+  const navigate = useNavigate();
+  const path = pathname.split("/");
 
-  const Tab = tabs[tab];
+  const section = path[1];
+  const uriTab = path[3];
 
-  const hasMonthlyAndDailyData =
-    tab !== "forecast10days" && tab !== "climatechange";
+  useEffect(() => {
+    setOrgUnit(orgUnit);
+    return () => {
+      setOrgUnit(null);
+    };
+  }, [orgUnit, setOrgUnit]);
+
+  // Set default type based on org unit geometry type
+  useEffect(() => {
+    if (!uriTab && orgUnit.geometry) {
+      if (tab && tabIsValid(tab, orgUnit)) {
+        navigate(`/${section}/${orgUnit.id}/${tab}`);
+      } else {
+        setTab(
+          orgUnit.geometry.type === "Point" ? "forecast10days" : "temperature"
+        );
+      }
+    }
+  }, [orgUnit, section, tab, uriTab, setTab, navigate]);
 
   return (
-    <div className={styles.orgUnit}>
-      <h1>
-        {orgUnit.properties.name} <OrgUnitType type={orgUnit.geometry?.type} />
-      </h1>
-      {orgUnit.geometry ? (
-        <>
-          {hasMonthlyAndDailyData && (
-            <PeriodTypeSelect type={periodType} onChange={setPeriodType} />
-          )}
-          <Tabs selected={tab} isPoint={isPoint} onChange={setTab} />
-          <div className={styles.tabContent}>
-            <Tab
-              name={orgUnit.properties.name}
-              orgUnit={orgUnit}
-              periodType={periodType}
-              monthlyPeriod={monthlyPeriod}
-              dailyPeriod={dailyPeriod}
-              referencePeriod={referencePeriod}
-            />
-            {hasMonthlyAndDailyData && (
-              <>
-                {periodType === DAILY ? (
-                  <DailyPeriodSelect
-                    currentPeriod={dailyPeriod}
-                    onUpdate={setDailyPeriod}
-                  />
-                ) : (
-                  monthlyPeriod && (
-                    <MonthlyPeriodSelect
-                      currentPeriod={monthlyPeriod}
-                      onUpdate={setMonthlyPeriod}
-                    />
-                  )
-                )}
-              </>
-            )}
-            {(tab === "climatechange" ||
-              (periodType === "monthly" && tab !== "forecast10days")) && (
-              <ReferencePeriodSelect
-                selected={referencePeriod.id}
-                onChange={setReferencePeriod}
-              />
-            )}
-            {tab === "climatechange" && (
-              <div className={styles.description}>
-                {i18n.t(
-                  "Temperature anomaly is the difference of a temperature from a reference value, calculated as the average temperature over a period of 30 years. Blue columns shows temperatures below the average, while red columns are above."
-                )}
-              </div>
-            )}
-          </div>
-        </>
-      ) : (
-        <div className={styles.message}>{i18n.t("No geometry found")}</div>
-      )}
+    <div className={styles.container}>
+      <div className={styles.orgUnit}>
+        <h1>
+          {orgUnit.properties.name}{" "}
+          <OrgUnitType type={orgUnit?.geometry?.type} />
+        </h1>
+        {orgUnit.geometry ? (
+          <Outlet context={orgUnit} />
+        ) : (
+          <div className={styles.message}>{i18n.t("No geometry found")}</div>
+        )}
+      </div>
     </div>
   );
-};
-
-OrgUnit.propTypes = {
-  orgUnit: PropTypes.object.isRequired,
 };
 
 export default OrgUnit;

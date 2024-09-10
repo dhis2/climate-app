@@ -43,9 +43,25 @@ export const getDailyPeriod = (data) => {
   return getYearPeriod(firstYear, lastYear);
 };
 
+export const strokePattern = {
+  pattern: {
+    color: "rgba(0,0,0,.2)",
+    path: "M -5 15 L 15 -5M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2",
+    width: 4,
+    height: 4,
+  },
+};
+
 export const credits = {
   href: "https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-land",
   text: i18n.t(
     "ERA5-Land / Copernicus Climate Change Service / Google Earth Engine"
+  ),
+};
+
+export const heatCredits = {
+  href: "https://cds.climate.copernicus.eu/cdsapp#!/dataset/derived-utci-historical",
+  text: i18n.t(
+    "ERA5-HEAT / Copernicus Climate Change Service / Google Earth Engine"
   ),
 };

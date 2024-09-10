@@ -1,13 +1,21 @@
-import PropTypes from "prop-types";
+import { useOutletContext } from "react-router-dom";
 import Chart from "../Chart";
+import PeriodTypeSelect from "../PeriodTypeSelect";
+import MonthlyPeriodSelect from "../MonthlyPeriodSelect";
+import ReferencePeriod from "../ReferencePeriodSelect";
 import DataLoader from "../../shared/DataLoader";
 import getMonthlyConfig from "./charts/precipitationMonthly";
 import useEarthEngineTimeSeries from "../../../hooks/useEarthEngineTimeSeries";
 import useEarthEngineClimateNormals from "../../../hooks/useEarthEngineClimateNormals";
+import exploreStore from "../../../utils/exploreStore";
 import { era5Monthly, era5MonthlyNormals } from "../../../data/datasets";
 
-const PrecipitationMonthly = ({ orgUnit, period, referencePeriod }) => {
-  const data = useEarthEngineTimeSeries(era5Monthly, period, orgUnit);
+const PrecipitationMonthly = () => {
+  const orgUnit = useOutletContext();
+  const monthlyPeriod = exploreStore((state) => state.monthlyPeriod);
+  const referencePeriod = exploreStore((state) => state.referencePeriod);
+
+  const data = useEarthEngineTimeSeries(era5Monthly, monthlyPeriod, orgUnit);
 
   const normals = useEarthEngineClimateNormals(
     era5MonthlyNormals,
@@ -15,26 +23,25 @@ const PrecipitationMonthly = ({ orgUnit, period, referencePeriod }) => {
     orgUnit
   );
 
-  if (!data || !normals) {
-    return <DataLoader />;
-  }
-
   return (
-    <Chart
-      config={getMonthlyConfig(
-        orgUnit.properties.name,
-        data,
-        normals,
-        referencePeriod
+    <>
+      <PeriodTypeSelect />
+      {data && normals ? (
+        <Chart
+          config={getMonthlyConfig(
+            orgUnit.properties.name,
+            data,
+            normals,
+            referencePeriod
+          )}
+        />
+      ) : (
+        <DataLoader />
       )}
-    />
+      <MonthlyPeriodSelect />
+      <ReferencePeriod />
+    </>
   );
-};
-
-PrecipitationMonthly.propTypes = {
-  orgUnit: PropTypes.object.isRequired,
-  period: PropTypes.object.isRequired,
-  referencePeriod: PropTypes.object.isRequired,
 };
 
 export default PrecipitationMonthly;
