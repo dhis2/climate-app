@@ -5,6 +5,7 @@ import useOrgUnitRoots from "../../hooks/useOrgUnitRoots";
 import styles from "./styles/OrgUnitTree.module.css";
 
 const OrgUnitTree = () => {
+  const test = useLocation();
   const { state } = useLocation();
   const [orgUnit, setOrgUnit] = useState(state);
   const { roots } = useOrgUnitRoots();
@@ -20,6 +21,8 @@ const OrgUnitTree = () => {
       navigate(`/explore/${orgUnit.id}`, { state: orgUnit });
     }
   }, [orgUnit, navigate]);
+
+  console.log("test", test);
 
   return roots ? (
     <div className={styles.container}>
