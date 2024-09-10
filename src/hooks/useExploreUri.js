@@ -20,6 +20,10 @@ const useExploreUri = () => {
   const orgUnit = useOutletContext();
   const store = exploreStore();
 
+  const path = pathname.split("/");
+  const section = path[1];
+  const tab = path[3];
+
   const uri = useMemo(() => {
     if (!isPop) {
       const {
@@ -35,7 +39,7 @@ const useExploreUri = () => {
         return null;
       }
 
-      const baseUri = `/explore/${orgUnit.id}/${tab}`;
+      const baseUri = `/${section}/${orgUnit.id}/${tab}`;
       let uri;
 
       if (tab === "forecast10days") {
@@ -54,16 +58,13 @@ const useExploreUri = () => {
     }
 
     return null;
-  }, [store, orgUnit, isPop]);
+  }, [store, section, orgUnit, isPop]);
 
   useEffect(() => {
     setIsPop(navigationType === "POP");
   }, [navigationType]);
 
   useEffect(() => {
-    // TODO: Better way to get tab and periodType?
-    const tab = pathname.split("/")[3];
-
     if (isPop) {
       store.setTab(tab);
 
@@ -92,7 +93,7 @@ const useExploreUri = () => {
     return () => {
       setIsPop(false);
     };
-  }, [store, isPop, pathname, params]);
+  }, [store, isPop, tab, params]);
 
   return uri;
 };

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { CustomDataProvider } from "@dhis2/app-runtime";
 import { OrganisationUnitTree } from "@dhis2/ui";
 import { locations, findLocation } from "../../data/locations";
@@ -37,7 +37,8 @@ const customData = {
 
 const OrgUnitTree = () => {
   const { state } = useLocation();
-  const [orgUnit, setOrgUnit] = useState(state);
+  const { placeId } = useParams();
+  const [orgUnit, setOrgUnit] = useState(state || findLocation(placeId));
   const navigate = useNavigate();
 
   const roots = [locations];
@@ -46,6 +47,8 @@ const OrgUnitTree = () => {
     orgUnit?.path && orgUnit.path.length > 12
       ? [orgUnit.path.slice(0, -12)]
       : roots.map((r) => r.path);
+
+  console.log("initiallyExpanded", placeId, state, orgUnit);
 
   useEffect(() => {
     if (orgUnit) {

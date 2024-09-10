@@ -14,25 +14,31 @@ const tabIsValid = (tab, orgUnit) =>
   tab === "forecast10days" && orgUnit.geometry.type !== "Point" ? false : true;
 
 const OrgUnit = () => {
-  const orgUnit = useLoaderData();
   const { pathname } = useLocation();
-  const { tab, setTab } = exploreStore();
+  const orgUnit = useLoaderData();
+  const { tab, setTab, setOrgUnit } = exploreStore();
   const navigate = useNavigate();
+  const path = pathname.split("/");
 
-  const uriTab = pathname.split("/")[3]; // TODO: Better way to get tab?
+  const section = path[1];
+  const uriTab = path[3];
+
+  useEffect(() => {
+    setOrgUnit(orgUnit);
+  }, [orgUnit, setOrgUnit]);
 
   // Set default type based on org unit geometry type
   useEffect(() => {
     if (!uriTab) {
       if (tab && tabIsValid(tab, orgUnit)) {
-        navigate(`/explore/${orgUnit.id}/${tab}`);
+        navigate(`/${section}/${orgUnit.id}/${tab}`);
       } else {
         setTab(
           orgUnit.geometry.type === "Point" ? "forecast10days" : "temperature"
         );
       }
     }
-  }, [orgUnit, tab, uriTab, setTab, navigate]);
+  }, [orgUnit, section, tab, uriTab, setTab, navigate]);
 
   return (
     <div className={styles.container}>

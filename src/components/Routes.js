@@ -19,9 +19,76 @@ import SettingsPage from "./settings/SettingsPage";
 import ErrorPage from "./ErrorPage";
 import CheckPage from "./check/CheckPage";
 import orgUnitLoader from "../utils/orgUnitLoader";
+import checkPlaceLoader from "../utils/checkPlaceLoader";
 
 const monthlyPath = "monthly/:startTime/:endTime/:referencePeriodId";
 const dailyPath = "daily/:startTime/:endTime";
+
+// Shared routes for explore and check sections
+const tabRoutes = [
+  {
+    path: "forecast10days",
+    element: <Tabs />,
+    children: [
+      {
+        index: true,
+        element: <Forecast />,
+      },
+    ],
+  },
+  {
+    path: "temperature",
+    element: <Tabs />,
+    children: [
+      {
+        path: monthlyPath,
+        element: <TemperatureMonthly />,
+      },
+      {
+        path: dailyPath,
+        element: <TemperatureDaily />,
+      },
+    ],
+  },
+  {
+    path: "precipitation",
+    element: <Tabs />,
+    children: [
+      {
+        path: monthlyPath,
+        element: <PrecipitationMonthly />,
+      },
+      {
+        path: dailyPath,
+        element: <PrecipitationDaily />,
+      },
+    ],
+  },
+  {
+    path: "humidity",
+    element: <Tabs />,
+    children: [
+      {
+        path: monthlyPath,
+        element: <HumidityMonthly />,
+      },
+      {
+        path: dailyPath,
+        element: <HumidityDaily />,
+      },
+    ],
+  },
+  {
+    path: "climatechange",
+    element: <Tabs />,
+    children: [
+      {
+        path: ":month/:referencePeriodId",
+        element: <ClimateChange />,
+      },
+    ],
+  },
+];
 
 const Routes = () => {
   const engine = useDataEngine();
@@ -47,76 +114,24 @@ const Routes = () => {
               path: ":orgUnitId",
               element: <OrgUnit />,
               loader: orgUnitLoader(engine),
-              children: [
-                {
-                  path: "forecast10days",
-                  element: <Tabs />,
-                  children: [
-                    {
-                      index: true,
-                      element: <Forecast />,
-                    },
-                  ],
-                },
-                {
-                  path: "temperature",
-                  element: <Tabs />,
-                  children: [
-                    {
-                      path: monthlyPath,
-                      element: <TemperatureMonthly />,
-                    },
-                    {
-                      path: dailyPath,
-                      element: <TemperatureDaily />,
-                    },
-                  ],
-                },
-                {
-                  path: "precipitation",
-                  element: <Tabs />,
-                  children: [
-                    {
-                      path: monthlyPath,
-                      element: <PrecipitationMonthly />,
-                    },
-                    {
-                      path: dailyPath,
-                      element: <PrecipitationDaily />,
-                    },
-                  ],
-                },
-                {
-                  path: "humidity",
-                  element: <Tabs />,
-                  children: [
-                    {
-                      path: monthlyPath,
-                      element: <HumidityMonthly />,
-                    },
-                    {
-                      path: dailyPath,
-                      element: <HumidityDaily />,
-                    },
-                  ],
-                },
-                {
-                  path: "climatechange",
-                  element: <Tabs />,
-                  children: [
-                    {
-                      path: ":month/:referencePeriodId",
-                      element: <ClimateChange />,
-                    },
-                  ],
-                },
-              ],
+              children: tabRoutes,
             },
           ],
         },
         {
-          path: "check/:placeId?",
-          element: <CheckPage />,
+          path: "check",
+          children: [
+            {
+              index: true,
+              element: <CheckPage />,
+            },
+            {
+              path: ":placeId",
+              element: <OrgUnit />,
+              loader: checkPlaceLoader,
+              children: tabRoutes,
+            },
+          ],
         },
         {
           path: "import",
