@@ -29,7 +29,7 @@ const OrgUnit = () => {
 
   // Set default type based on org unit geometry type
   useEffect(() => {
-    if (!uriTab) {
+    if (!uriTab && orgUnit.geometry) {
       if (tab && tabIsValid(tab, orgUnit)) {
         navigate(`/${section}/${orgUnit.id}/${tab}`);
       } else {
@@ -45,7 +45,7 @@ const OrgUnit = () => {
       <div className={styles.orgUnit}>
         <h1>
           {orgUnit.properties.name}{" "}
-          <OrgUnitType type={orgUnit.geometry?.type} />
+          <OrgUnitType type={orgUnit?.geometry?.type} />
         </h1>
         {orgUnit.geometry ? (
           <Outlet context={orgUnit} />

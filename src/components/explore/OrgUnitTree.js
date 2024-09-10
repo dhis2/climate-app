@@ -8,10 +8,10 @@ const OrgUnitTree = () => {
   const { orgUnit } = exploreStore();
   const { roots } = useOrgUnitRoots();
   const navigate = useNavigate();
-  const path = orgUnit?.path.split("/").slice(1);
+  const path = orgUnit?.path.split("/");
 
   const initiallyExpanded =
-    path?.length > 1
+    path?.length > 2
       ? [path.slice(0, -1).join("/")]
       : roots?.map((r) => r.path);
 
