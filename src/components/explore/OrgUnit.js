@@ -25,6 +25,9 @@ const OrgUnit = () => {
 
   useEffect(() => {
     setOrgUnit(orgUnit);
+    return () => {
+      setOrgUnit(null);
+    };
   }, [orgUnit, setOrgUnit]);
 
   // Set default type based on org unit geometry type
