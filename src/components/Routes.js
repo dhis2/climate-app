@@ -3,7 +3,7 @@ import { useDataEngine } from "@dhis2/app-runtime";
 import Root from "./Root";
 import AboutPage from "./AboutPage";
 import ExplorePage from "./explore/ExplorePage";
-import OrgUnit, { orgUnitLoader } from "./explore/OrgUnit";
+import OrgUnit from "./explore/OrgUnit";
 import Tabs from "./explore/Tabs";
 import Forecast from "./explore/forecast/Forecast";
 import TemperatureMonthly from "./explore/temperature/TemperatureMonthly";
@@ -18,6 +18,7 @@ import SetupPage from "./setup/SetupPage";
 import SettingsPage from "./settings/SettingsPage";
 import ErrorPage from "./ErrorPage";
 import CheckPage from "./check/CheckPage";
+import orgUnitLoader from "../utils/orgUnitLoader";
 
 const monthlyPath = "monthly/:startTime/:endTime/:referencePeriodId";
 const dailyPath = "daily/:startTime/:endTime";
@@ -25,7 +26,6 @@ const dailyPath = "daily/:startTime/:endTime";
 const Routes = () => {
   const engine = useDataEngine();
 
-  // https://tkdodo.eu/blog/react-query-meets-react-router
   const router = createHashRouter([
     {
       path: "/",

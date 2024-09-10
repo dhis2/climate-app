@@ -1,5 +1,8 @@
 import { useOutletContext } from "react-router-dom";
 import Chart from "../Chart";
+import PeriodTypeSelect from "../PeriodTypeSelect";
+import MonthlyPeriodSelect from "../MonthlyPeriodSelect";
+import ReferencePeriod from "../ReferencePeriodSelect";
 import DataLoader from "../../shared/DataLoader";
 import getMonthlyConfig from "./charts/precipitationMonthly";
 import useEarthEngineTimeSeries from "../../../hooks/useEarthEngineTimeSeries";
@@ -20,19 +23,24 @@ const PrecipitationMonthly = () => {
     orgUnit
   );
 
-  if (!data || !normals) {
-    return <DataLoader />;
-  }
-
   return (
-    <Chart
-      config={getMonthlyConfig(
-        orgUnit.properties.name,
-        data,
-        normals,
-        referencePeriod
+    <>
+      <PeriodTypeSelect />
+      {data && normals ? (
+        <Chart
+          config={getMonthlyConfig(
+            orgUnit.properties.name,
+            data,
+            normals,
+            referencePeriod
+          )}
+        />
+      ) : (
+        <DataLoader />
       )}
-    />
+      <MonthlyPeriodSelect />
+      <ReferencePeriod />
+    </>
   );
 };
 

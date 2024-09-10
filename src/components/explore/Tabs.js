@@ -6,15 +6,8 @@ import {
   useLocation,
   useNavigate,
 } from "react-router-dom";
-import PeriodTypeSelect from "./PeriodTypeSelect";
-import MonthlyPeriodSelect from "./MonthlyPeriodSelect";
-import DailyPeriodSelect from "./DailyPeriodSelect";
-import ReferencePeriod from "./ReferencePeriodSelect";
 import exploreStore from "../../utils/exploreStore";
-import useExploreUri, {
-  hasMonthlyAndDailyData,
-} from "../../hooks/useExploreUri";
-import { MONTHLY } from "../../utils/time";
+import useExploreUri from "../../hooks/useExploreUri";
 import styles from "./styles/OrgUnit.module.css";
 
 const tabs = [
@@ -30,11 +23,10 @@ const Tabs = () => {
   const orgUnit = useOutletContext();
   const navigate = useNavigate();
 
-  const { tab, setTab, periodType } = exploreStore();
+  const { tab, setTab } = exploreStore();
 
   const uri = useExploreUri();
   const isPoint = orgUnit.geometry.type === "Point";
-  const hasPeriodType = hasMonthlyAndDailyData.includes(tab);
 
   useEffect(() => {
     if (uri && uri !== pathname) {
@@ -54,20 +46,7 @@ const Tabs = () => {
           ))}
       </TabBar>
       <div className={styles.tabContent}>
-        {hasPeriodType && <PeriodTypeSelect />}
         <Outlet context={orgUnit} />
-        {hasPeriodType && (
-          <>
-            {periodType === MONTHLY ? (
-              <>
-                <MonthlyPeriodSelect />
-                <ReferencePeriod />
-              </>
-            ) : (
-              <DailyPeriodSelect />
-            )}
-          </>
-        )}
       </div>
     </>
   );

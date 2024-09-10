@@ -1,5 +1,7 @@
 import { useOutletContext, useParams } from "react-router-dom";
 import Chart from "../Chart";
+import PeriodTypeSelect from "../PeriodTypeSelect";
+import DailyPeriodSelect from "../DailyPeriodSelect";
 import DataLoader from "../../shared/DataLoader";
 import getDailyConfig from "./charts/precipitationDaily";
 import useEarthEngineTimeSeries from "../../../hooks/useEarthEngineTimeSeries";
@@ -12,11 +14,17 @@ const PrecipitationDaily = () => {
 
   const data = useEarthEngineTimeSeries(era5Daily, period, orgUnit);
 
-  if (!data) {
-    return <DataLoader />;
-  }
-
-  return <Chart config={getDailyConfig(orgUnit.properties.name, data)} />;
+  return (
+    <>
+      <PeriodTypeSelect />
+      {data ? (
+        <Chart config={getDailyConfig(orgUnit.properties.name, data)} />
+      ) : (
+        <DataLoader />
+      )}
+      <DailyPeriodSelect />
+    </>
+  );
 };
 
 export default PrecipitationDaily;

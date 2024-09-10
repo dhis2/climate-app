@@ -10,29 +10,6 @@ import OrgUnitType from "./OrgUnitType";
 import exploreStore from "../../utils/exploreStore";
 import styles from "./styles/OrgUnit.module.css";
 
-const ORG_UNIT_QUERY = {
-  ou: {
-    resource: "organisationUnits",
-    id: ({ id }) => id,
-  },
-};
-
-export const orgUnitLoader =
-  (engine) =>
-  async ({ params }) =>
-    engine
-      .query(ORG_UNIT_QUERY, {
-        variables: { id: params.orgUnitId },
-      })
-      .then(({ ou }) => ({
-        type: "Feature",
-        id: ou.id,
-        geometry: ou.geometry,
-        properties: {
-          name: ou.displayName,
-        },
-      }));
-
 const tabIsValid = (tab, orgUnit) =>
   tab === "forecast10days" && orgUnit.geometry.type !== "Point" ? false : true;
 

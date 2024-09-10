@@ -9,11 +9,7 @@ import exploreStore from "../utils/exploreStore";
 import { referencePeriods } from "../components/explore/ReferencePeriodSelect";
 import { MONTHLY } from "../utils/time";
 
-export const hasMonthlyAndDailyData = [
-  "temperature",
-  "precipitation",
-  "humidity",
-];
+const hasMonthlyAndDailyData = ["temperature", "precipitation", "humidity"];
 
 // Returns syncronized (uri/store) explore params
 const useExploreUri = () => {
@@ -71,17 +67,19 @@ const useExploreUri = () => {
     if (isPop) {
       store.setTab(tab);
 
-      const periodType = pathname.split("/")[4]?.toUpperCase() || MONTHLY;
-      store.setPeriodType(periodType);
-
       const { month, startTime, endTime, referencePeriodId } = params;
 
       if (tab === "climatechange") {
         store.setMonth(month);
-      } else if (periodType === MONTHLY) {
-        store.setMonthlyPeriod({ startTime, endTime });
-      } else if (periodType === "DAILY") {
-        store.setDailyPeriod({ startTime, endTime });
+      } else if (hasMonthlyAndDailyData.includes(tab)) {
+        const periodType = pathname.split("/")[4]?.toUpperCase() || MONTHLY;
+        store.setPeriodType(periodType);
+
+        if (periodType === MONTHLY) {
+          store.setMonthlyPeriod({ startTime, endTime });
+        } else if (periodType === "DAILY") {
+          store.setDailyPeriod({ startTime, endTime });
+        }
       }
 
       if (referencePeriodId) {
