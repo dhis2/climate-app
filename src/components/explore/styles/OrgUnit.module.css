@@ -1,3 +1,25 @@
+.container {
+  margin-right: 24px;
+  max-width: 800px;
+  position: relative;
+}
+
+.container h1 {
+  color: var(--colors-grey900);
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.container h2 {
+  font-size: 16px;
+  margin: 20px 0 8px;
+}
+
+.container p {
+  font-size: 14px;
+  margin: 6px 0 12px;
+}
+
 .orgUnit {
   position: relative;
 }
@@ -6,26 +28,8 @@
   margin-bottom: -3px;
 }
 
-.tabContent {
-  position: relative;
-  margin-top: 24px;
-}
-
 .message {
   color: #555;
   font-size: 14px;
   font-style: italic;
-}
-
-.loader {
-  display: inline-block;
-  margin-right: 10px;
-  vertical-align: middle;
-}
-
-.description {
-  margin-top: 10px;
-  margin-bottom: 20px;
-  font-size: 14px;
-  line-height: 18px;
 }
