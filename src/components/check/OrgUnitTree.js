@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
-import { useLocation, useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { CustomDataProvider } from "@dhis2/app-runtime";
 import { OrganisationUnitTree } from "@dhis2/ui";
+import exploreStore from "../../utils/exploreStore";
 import { locations, findLocation } from "../../data/locations";
 import styles from "../explore/styles/OrgUnitTree.module.css";
 
@@ -36,25 +36,18 @@ const customData = {
 };
 
 const OrgUnitTree = () => {
-  const { state } = useLocation();
-  const { placeId } = useParams();
-  const [orgUnit, setOrgUnit] = useState(state || findLocation(placeId));
+  const { orgUnit } = exploreStore();
   const navigate = useNavigate();
 
   const roots = [locations];
+  const path = orgUnit?.path.split("/").slice(1);
 
   const initiallyExpanded =
-    orgUnit?.path && orgUnit.path.length > 12
-      ? [orgUnit.path.slice(0, -12)]
-      : roots.map((r) => r.path);
+    path?.length > 1
+      ? [path.slice(0, -1).join("/")]
+      : roots?.map((r) => r.path);
 
-  console.log("initiallyExpanded", placeId, state, orgUnit);
-
-  useEffect(() => {
-    if (orgUnit) {
-      navigate(`/check/${orgUnit.id}`, { state: orgUnit });
-    }
-  }, [orgUnit, navigate]);
+  const onChange = (orgUnit) => navigate(`/check/${orgUnit.id}`);
 
   return (
     <div className={styles.container}>
@@ -62,8 +55,8 @@ const OrgUnitTree = () => {
         <CustomDataProvider data={customData}>
           <OrganisationUnitTree
             roots={roots.map((r) => r.id)}
-            selected={orgUnit?.selected}
-            onChange={setOrgUnit}
+            selected={[orgUnit?.path]}
+            onChange={onChange}
             singleSelection={true}
             initiallyExpanded={initiallyExpanded}
           />

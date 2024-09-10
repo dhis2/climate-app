@@ -20,6 +20,7 @@ const orgUnitLoader =
         properties: {
           name: ou.displayName,
         },
+        path: ou.path,
       }));
 
 export default orgUnitLoader;
