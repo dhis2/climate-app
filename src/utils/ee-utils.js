@@ -1,6 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
 import area from "@turf/area";
-import { HOURLY, DAILY, MONTHLY, getMappedPeriods } from "./time";
+import { HOURLY, MONTHLY, getMappedPeriods } from "./time";
 
 const VALUE_LIMIT = 5000;
 
@@ -33,18 +33,6 @@ export const cleanData = (data) =>
     value: f.properties.value,
   }));
 
-// Used for ERA5-HEAT that has some missing data
-// TODO: Request missing data on GEE?
-const skipSystemIndex = (ee, collection, skipIndex) => {
-  if (Array.isArray(skipIndex)) {
-    skipIndex.forEach((index) => {
-      collection = collection.filter(ee.Filter.neq("system:index", index));
-    });
-  }
-
-  return collection;
-};
-
 export const getEarthEngineValues = (ee, datasetParams, period, features) =>
   new Promise(async (resolve, reject) => {
     const dataset = period.timeZone
@@ -57,7 +45,6 @@ export const getEarthEngineValues = (ee, datasetParams, period, features) =>
       reducer = "mean",
       periodType,
       periodReducer = reducer,
-      skipIndex,
       valueParser,
     } = dataset;
 
@@ -81,12 +68,10 @@ export const getEarthEngineValues = (ee, datasetParams, period, features) =>
           : f.properties.value,
       }));
 
-    let collection = ee
+    const collection = ee
       .ImageCollection(datasetId)
       .select(band)
       .filter(ee.Filter.date(timeZoneStart, timeZoneEnd));
-
-    collection = skipSystemIndex(ee, collection, skipIndex);
 
     const imageCount = await getInfo(collection.size());
 
@@ -212,13 +197,9 @@ export const getTimeSeriesData = async (
     reducer = "mean",
     sharedInputs = false,
     aggregationPeriod,
-    skipIndex,
   } = dataset;
 
   let collection = ee.ImageCollection(datasetId).select(band);
-
-  // Remove missing images in collection
-  collection = skipSystemIndex(ee, collection, skipIndex);
 
   if (Array.isArray(filter)) {
     filter.forEach((f) => {
@@ -274,15 +255,12 @@ export const getTimeSeriesData = async (
         const startDate = ee.Date(date);
         const endDate = startDate.advance(1, "month");
 
-        return (
-          collection
-            .filter(ee.Filter.date(startDate, endDate))
-            //.reduce(eeReducer)
-            .mean() // Use mean to avoid extremes on monthly chart
-            .set("system:index", startDate.format("YYYYMM"))
-            .set("system:time_start", startDate.millis())
-            .set("system:time_end", endDate.millis())
-        );
+        return collection
+          .filter(ee.Filter.date(startDate, endDate))
+          .mean() // Use mean to avoid extremes on monthly chart
+          .set("system:index", startDate.format("YYYYMM"))
+          .set("system:time_start", startDate.millis())
+          .set("system:time_end", endDate.millis());
       })
     );
 
