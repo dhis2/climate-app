@@ -20,7 +20,6 @@ export const referencePeriods = [
 
 export const defaultReferencePeriod = referencePeriods[0];
 
-// const ReferencePeriod = ({ selected, onChange }) => (
 const ReferencePeriod = () => {
   const { referencePeriod, setReferencePeriod } = exploreStore();
 

@@ -20,10 +20,6 @@
   margin: 6px 0 12px;
 }
 
-.introduction img {
-  width: 100%;
-}
-
 .orgUnit {
   position: relative;
 }
@@ -32,26 +28,8 @@
   margin-bottom: -3px;
 }
 
-.tabContent {
-  position: relative;
-  margin-top: 24px;
-}
-
 .message {
   color: #555;
   font-size: 14px;
   font-style: italic;
-}
-
-.loader {
-  display: inline-block;
-  margin-right: 10px;
-  vertical-align: middle;
-}
-
-.description {
-  margin-top: 10px;
-  margin-bottom: 20px;
-  font-size: 14px;
-  line-height: 18px;
 }

@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import { useParams, useNavigationType } from "react-router-dom";
 import i18n from "@dhis2/d2-i18n";
 import { SingleSelectField, SingleSelectOption } from "@dhis2/ui";
 import exploreStore from "../../utils/exploreStore";
@@ -56,16 +54,7 @@ export const months = [
 ];
 
 const MonthSelect = () => {
-  const navigationType = useNavigationType();
-  const params = useParams();
   const { month, setMonth } = exploreStore();
-
-  useEffect(() => {
-    if (navigationType === "POP" && month !== params.month) {
-      // console.log("setMonth", params.month);
-      // setMonth(params.month);
-    }
-  }, [navigationType, params, month, setMonth]);
 
   return (
     <SingleSelectField

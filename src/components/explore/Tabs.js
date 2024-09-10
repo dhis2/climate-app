@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import exploreStore from "../../utils/exploreStore";
 import useExploreUri from "../../hooks/useExploreUri";
-import styles from "./styles/OrgUnit.module.css";
+import styles from "./styles/Tabs.module.css";
 
 const tabs = [
   { id: "forecast10days", label: "10 days forecast", pointOnly: true },
@@ -26,6 +26,7 @@ const Tabs = () => {
   const { tab, setTab } = exploreStore();
 
   const uri = useExploreUri();
+
   const isPoint = orgUnit.geometry.type === "Point";
 
   useEffect(() => {
