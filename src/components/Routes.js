@@ -85,7 +85,7 @@ const tabRoutes = [
     element: <Tabs />,
     children: [
       {
-        path: monthlyPath,
+        path: "monthly/:startTime/:endTime",
         element: <HeatMonthly />,
       },
       {
