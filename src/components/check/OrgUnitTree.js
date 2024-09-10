@@ -43,9 +43,7 @@ const OrgUnitTree = () => {
   const path = orgUnit?.path.split("/");
 
   const initiallyExpanded =
-    path?.length > 2
-      ? [path.slice(0, -1).join("/")]
-      : roots?.map((r) => r.path);
+    path?.length > 2 ? [path.slice(0, -1).join("/")] : roots.map((r) => r.path);
 
   const selected = orgUnit?.path ? [orgUnit.path] : [];
 

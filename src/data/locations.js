@@ -16,7 +16,6 @@ export const locations = {
           displayName: "Phnom Penh",
           children: [],
           geometry: { type: "Point", coordinates: [104.921111, 11.569444] },
-          properties: { name: "Phnom Penh" },
         },
       ],
     },
