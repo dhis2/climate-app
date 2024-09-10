@@ -1,13 +1,15 @@
 import PropTypes from "prop-types";
 import Highcharts from "highcharts";
 import accessibility from "highcharts/modules/accessibility";
-import exporting from "highcharts/highcharts-more";
-import highchartsMore from "highcharts/modules/exporting";
+import highchartsMore from "highcharts/highcharts-more";
+import exporting from "highcharts/modules/exporting";
+import patternFill from "highcharts/modules/pattern-fill";
 import React, { useRef, useLayoutEffect } from "react";
 
 accessibility(Highcharts);
 exporting(Highcharts);
 highchartsMore(Highcharts);
+patternFill(Highcharts);
 
 const Chart = ({ config }) => {
   const chartRef = useRef();

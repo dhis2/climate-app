@@ -9,7 +9,12 @@ import exploreStore from "../utils/exploreStore";
 import { referencePeriods } from "../components/explore/ReferencePeriodSelect";
 import { MONTHLY } from "../utils/time";
 
-const hasMonthlyAndDailyData = ["temperature", "precipitation", "humidity"];
+const hasMonthlyAndDailyData = [
+  "temperature",
+  "precipitation",
+  "humidity",
+  "heat",
+];
 
 // Returns syncronized (uri/store) explore params
 const useExploreUri = () => {
@@ -48,7 +53,9 @@ const useExploreUri = () => {
         uri = `${baseUri}/${month}/${referencePeriod.id}`;
       } else if (hasMonthlyAndDailyData.includes(tab)) {
         if (periodType === MONTHLY && monthlyPeriod && referencePeriod) {
-          uri = `${baseUri}/monthly/${monthlyPeriod.startTime}/${monthlyPeriod.endTime}/${referencePeriod.id}`;
+          uri = `${baseUri}/monthly/${monthlyPeriod.startTime}/${
+            monthlyPeriod.endTime
+          }${tab !== "heat" ? `/${referencePeriod.id}` : ""}`;
         } else if (dailyPeriod) {
           uri = `${baseUri}/daily/${dailyPeriod.startTime}/${dailyPeriod.endTime}`;
         }

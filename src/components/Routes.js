@@ -12,6 +12,8 @@ import PrecipitationMonthly from "./explore/precipitation/PrecipitationMonthly";
 import PrecipitationDaily from "./explore/precipitation/PrecipitationDaily";
 import HumidityMonthly from "./explore/humidity/HumidityMonthly";
 import HumidityDaily from "./explore/humidity/HumidityDaily";
+import HeatMonthly from "./explore/heat/HeatMonthly";
+import HeatDaily from "./explore/heat/HeatDaily";
 import ClimateChange from "./explore/climateChange/ClimateChange";
 import ImportPage from "./import/ImportPage";
 import SetupPage from "./setup/SetupPage";
@@ -75,6 +77,20 @@ const tabRoutes = [
       {
         path: dailyPath,
         element: <HumidityDaily />,
+      },
+    ],
+  },
+  {
+    path: "heat",
+    element: <Tabs />,
+    children: [
+      {
+        path: "monthly/:startTime/:endTime",
+        element: <HeatMonthly />,
+      },
+      {
+        path: dailyPath,
+        element: <HeatDaily />,
       },
     ],
   },

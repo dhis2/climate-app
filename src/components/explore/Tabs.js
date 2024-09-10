@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import i18n from "@dhis2/d2-i18n";
 import { TabBar, Tab } from "@dhis2/ui";
 import {
   Outlet,
@@ -11,11 +12,12 @@ import useExploreUri from "../../hooks/useExploreUri";
 import styles from "./styles/Tabs.module.css";
 
 const tabs = [
-  { id: "forecast10days", label: "10 days forecast", pointOnly: true },
-  { id: "temperature", label: "Temperature" },
-  { id: "precipitation", label: "Precipitation" },
-  { id: "humidity", label: "Humidity" },
-  { id: "climatechange", label: "Climate change" },
+  { id: "forecast10days", label: i18n.t("10 days forecast"), pointOnly: true },
+  { id: "temperature", label: i18n.t("Temperature") },
+  { id: "precipitation", label: i18n.t("Precipitation") },
+  { id: "humidity", label: i18n.t("Humidity") },
+  { id: "heat", label: i18n.t("Heat") },
+  { id: "climatechange", label: i18n.t("Climate change") },
 ];
 
 const Tabs = () => {

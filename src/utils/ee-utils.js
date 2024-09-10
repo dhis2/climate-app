@@ -1,6 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
 import area from "@turf/area";
-import { HOURLY, getMappedPeriods } from "./time";
+import { HOURLY, MONTHLY, getMappedPeriods } from "./time";
 
 const VALUE_LIMIT = 5000;
 
@@ -191,7 +191,13 @@ export const getTimeSeriesData = async (
   geometry,
   filter
 ) => {
-  const { datasetId, band, reducer = "mean", sharedInputs = false } = dataset;
+  const {
+    datasetId,
+    band,
+    reducer = "mean",
+    sharedInputs = false,
+    aggregationPeriod,
+  } = dataset;
 
   let collection = ee.ImageCollection(datasetId).select(band);
 
@@ -233,11 +239,39 @@ export const getTimeSeriesData = async (
   }
 
   const { startTime, endTime, timeZone = "UTC" } = period;
-  const endTimePlusOne = ee.Date(endTime).advance(1, "day");
-  const timeZoneStart = ee.Date(startTime).format(null, timeZone);
-  const timeZoneEnd = endTimePlusOne.format(null, timeZone);
 
-  collection = collection.filter(ee.Filter.date(timeZoneStart, timeZoneEnd));
+  if (aggregationPeriod === MONTHLY) {
+    const startMonth = ee.Date(startTime);
+    const endMonth = ee.Date(endTime).advance(1, "month"); // Include last month
+
+    collection = collection.filter(ee.Filter.date(startMonth, endMonth));
+
+    const monthCount = endMonth.difference(startMonth, "month").round();
+    const months = ee.List.sequence(0, monthCount.subtract(1));
+    const dates = months.map((month) => startMonth.advance(month, "month"));
+
+    const byMonth = ee.ImageCollection.fromImages(
+      dates.map((date) => {
+        const startDate = ee.Date(date);
+        const endDate = startDate.advance(1, "month");
+
+        return collection
+          .filter(ee.Filter.date(startDate, endDate))
+          .mean() // Use mean to avoid extremes on monthly chart
+          .set("system:index", startDate.format("YYYYMM"))
+          .set("system:time_start", startDate.millis())
+          .set("system:time_end", endDate.millis());
+      })
+    );
+
+    collection = byMonth;
+  } else {
+    const endTimePlusOne = ee.Date(endTime).advance(1, "day");
+    const timeZoneStart = ee.Date(startTime).format(null, timeZone);
+    const timeZoneEnd = endTimePlusOne.format(null, timeZone);
+
+    collection = collection.filter(ee.Filter.date(timeZoneStart, timeZoneEnd));
+  }
 
   let eeScale = getScale(collection.first());
 
