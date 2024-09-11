@@ -5,7 +5,6 @@ import getMonthlyConfig from "../charts/temperatureMonthly";
 import useEarthEngineTimeSeries from "../../../../hooks/useEarthEngineTimeSeries";
 import useEarthEngineClimateNormals from "../../../../hooks/useEarthEngineClimateNormals";
 import { era5Monthly, era5MonthlyNormals } from "../../../../data/datasets";
-import { referencePeriods } from "../../ReferencePeriodSelect";
 
 const TemperatureMonthly = ({ orgUnit, period, referencePeriod }) => {
   const data = useEarthEngineTimeSeries(era5Monthly, period, orgUnit);
@@ -37,7 +36,7 @@ const TemperatureMonthly = ({ orgUnit, period, referencePeriod }) => {
 TemperatureMonthly.propTypes = {
   orgUnit: PropTypes.object.isRequired,
   period: PropTypes.object.isRequired,
-  referencePeriod: PropTypes.oneOf(referencePeriods).isRequired,
+  referencePeriod: PropTypes.object.isRequired,
 };
 
 export default TemperatureMonthly;

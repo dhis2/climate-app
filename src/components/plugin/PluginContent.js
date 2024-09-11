@@ -22,7 +22,7 @@ const PluginContent = (props) => {
 
   return (
     <div className={styles.content}>
-      {setDashboardItemDetails && <div className={styles.title}>{title}</div>}
+      {!setDashboardItemDetails && <div className={styles.title}>{title}</div>}
       <Display {...props} />
     </div>
   );
