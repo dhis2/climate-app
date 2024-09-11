@@ -41,6 +41,7 @@ const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
             valueCount,
           }
         )}
+        height={100}
       />
     );
   }

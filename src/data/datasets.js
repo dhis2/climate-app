@@ -42,26 +42,6 @@ export default [
     dataElementCode: "ERA5_LAND_TEMPERATURE",
   },
   {
-    id: "ECMWF/ERA5_LAND/DAILY_AGGR/temperature_2m_min",
-    datasetId: "ECMWF/ERA5_LAND/DAILY_AGGR",
-    name: i18n.t("Min temperature (ERA5-Land)"),
-    shortName: i18n.t("Min air temperature"),
-    description: i18n.t(
-      "Minimum air temperature in °C at 2 m above the surface"
-    ),
-    band: "temperature_2m_min",
-    reducer: "min",
-    timeZone: {
-      datasetId: "ECMWF/ERA5_LAND/HOURLY",
-      band: "temperature_2m",
-      periodType: HOURLY,
-      periodReducer: "min",
-    },
-    valueParser: temperatureParser,
-    aggregationType: i18n.t("Min"),
-    dataElementCode: "ERA5_LAND_TEMPERATURE_MIN",
-  },
-  {
     id: "ECMWF/ERA5_LAND/DAILY_AGGR/temperature_2m_max",
     datasetId: "ECMWF/ERA5_LAND/DAILY_AGGR",
     name: i18n.t("Max air temperature (ERA5-Land)"),
@@ -80,6 +60,26 @@ export default [
     valueParser: temperatureParser,
     aggregationType: i18n.t("Max"),
     dataElementCode: "ERA5_LAND_TEMPERATURE_MAX",
+  },
+  {
+    id: "ECMWF/ERA5_LAND/DAILY_AGGR/temperature_2m_min",
+    datasetId: "ECMWF/ERA5_LAND/DAILY_AGGR",
+    name: i18n.t("Min temperature (ERA5-Land)"),
+    shortName: i18n.t("Min air temperature"),
+    description: i18n.t(
+      "Minimum air temperature in °C at 2 m above the surface"
+    ),
+    band: "temperature_2m_min",
+    reducer: "min",
+    timeZone: {
+      datasetId: "ECMWF/ERA5_LAND/HOURLY",
+      band: "temperature_2m",
+      periodType: HOURLY,
+      periodReducer: "min",
+    },
+    valueParser: temperatureParser,
+    aggregationType: i18n.t("Min"),
+    dataElementCode: "ERA5_LAND_TEMPERATURE_MIN",
   },
   {
     id: "ECMWF/ERA5_LAND/DAILY_AGGR/total_precipitation_sum",
@@ -166,6 +166,18 @@ export default [
     dataElementCode: "ERA5_HEAT_UTCI",
   },
   {
+    id: "projects/climate-engine-pro/assets/ce-era5-heat/utci_max",
+    datasetId: "projects/climate-engine-pro/assets/ce-era5-heat",
+    name: i18n.t("Max heat stress (ERA5-HEAT)"),
+    shortName: i18n.t("Max heat stress"),
+    description: i18n.t("Maximum felt temperature in °C"),
+    band: "utci_max",
+    reducer: "max",
+    valueParser: temperatureParser,
+    aggregationType: i18n.t("Max"),
+    dataElementCode: "ERA5_HEAT_UTCI_MAX",
+  },
+  {
     id: "projects/climate-engine-pro/assets/ce-era5-heat/utci_min",
     datasetId: "projects/climate-engine-pro/assets/ce-era5-heat",
     name: i18n.t("Min heat stress (ERA5-HEAT)"),
@@ -176,18 +188,6 @@ export default [
     valueParser: temperatureParser,
     aggregationType: i18n.t("Min"),
     dataElementCode: "ERA5_HEAT_UTCI_MIN",
-  },
-  {
-    id: "projects/climate-engine-pro/assets/ce-era5-heat/utci_max",
-    datasetId: "projects/climate-engine-pro/assets/ce-era5-heat",
-    name: i18n.t("Max heat stress (ERA5-HEAT)"),
-    shortName: i18n.t("Max heat stress"),
-    description: i18n.t("Maximum felt temperature in °C"),
-    band: "utci_max",
-    reducer: "max",
-    valueParser: temperatureParser,
-    aggregationType: i18n.t("Mean"),
-    dataElementCode: "ERA5_HEAT_UTCI_MAX",
   },
 ];
 
