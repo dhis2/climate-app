@@ -1,6 +1,6 @@
 import Forecast from "../explore/forecast/Forecast";
 import TemperatureMonthly from "../explore/temperature/plugin/TemperatureMonthly";
-import TemperatureDaily from "../explore/temperature/TemperatureDaily";
+import TemperatureDaily from "../explore/temperature/plugin/TemperatureDaily";
 import styles from "./styles/PluginContent.module.css";
 
 const displays = {
@@ -10,7 +10,7 @@ const displays = {
 };
 
 const PluginContent = (props) => {
-  const { display, title } = props;
+  const { display, title, setDashboardItemDetails } = props;
 
   const Display = displays[display];
 
@@ -18,9 +18,11 @@ const PluginContent = (props) => {
     return <div>Display not found (this should not happen)</div>;
   }
 
+  console.log("PluginContent props", props);
+
   return (
     <div className={styles.content}>
-      <div className={styles.title}>{title}</div>
+      {setDashboardItemDetails && <div className={styles.title}>{title}</div>}
       <Display {...props} />
     </div>
   );
