@@ -27,6 +27,14 @@ const pluginItems = [
     display: "temperature/daily",
     period: { startTime: "2023-08-01", endTime: "2024-07-12" },
   },
+  {
+    id: "DiszpKrYNg8/heat/daily",
+    url: "#/explore/DiszpKrYNg8/heat/daily/2023-09-01/2024-08-31",
+    title: "Ngelehun CHC: Daily Temperatures 2023-2024",
+    orgUnitId: "DiszpKrYNg8",
+    display: "heat/daily",
+    period: { startTime: "2023-09-01", endTime: "2024-08-31" },
+  },
 ];
 
 // TODO: Keep in data store
@@ -50,9 +58,7 @@ const Plugin = (props) => {
   }
   */
 
-  console.log("Plugin props", props);
-
-  const pluginItem = pluginItems[2];
+  const pluginItem = pluginItems[3];
 
   if (props.setDashboardItemDetails) {
     props.setDashboardItemDetails({

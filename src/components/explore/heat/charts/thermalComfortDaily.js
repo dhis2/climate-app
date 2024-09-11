@@ -52,7 +52,7 @@ export const getThickPositons = (plotBands) => [
   plotBands[plotBands.length - 1].to,
 ];
 
-const getChart = (name, data) => {
+const getChart = (name, data, isPlugin) => {
   const series = data.map((d) => ({
     x: new Date(d.id).getTime(),
     y: toCelcius(d["utci_mean"]),
@@ -69,13 +69,15 @@ const getChart = (name, data) => {
   const tickPositions = getThickPositons(plotBands);
 
   return {
-    title: {
-      text: i18n.t("{{name}}: Thermal comfort {{period}}", {
-        name,
-        period: getDailyPeriod(data),
-        nsSeparator: ";",
-      }),
-    },
+    title: !isPlugin
+      ? {
+          text: i18n.t("{{name}}: Thermal comfort {{period}}", {
+            name,
+            period: getDailyPeriod(data),
+            nsSeparator: ";",
+          }),
+        }
+      : "",
     credits: heatCredits,
     tooltip: {
       crosshairs: true,
@@ -133,6 +135,9 @@ const getChart = (name, data) => {
         zIndex: 0,
       },
     ],
+    exporting: {
+      enabled: !isPlugin,
+    },
   };
 };
 
