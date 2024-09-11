@@ -1,5 +1,4 @@
 import { useMemo } from "react";
-import { useOutletContext } from "react-router-dom";
 import i18n from "@dhis2/d2-i18n";
 import MonthSelect from "../MonthSelect";
 import ReferencePeriod from "../ReferencePeriodSelect";
@@ -20,7 +19,7 @@ import styles from "./styles/ClimateChangeTab.module.css";
 const period = { startTime: "1970-01", endTime: `${getCurrentYear()}-12` };
 
 const ClimateChange = () => {
-  const orgUnit = useOutletContext();
+  const orgUnit = exploreStore((state) => state.orgUnit);
   const month = exploreStore((state) => state.month);
   const referencePeriod = exploreStore((state) => state.referencePeriod);
 

@@ -1,4 +1,3 @@
-import { useOutletContext } from "react-router-dom";
 import Chart from "../Chart";
 import PeriodTypeSelect from "../PeriodTypeSelect";
 import MonthlyPeriodSelect from "../MonthlyPeriodSelect";
@@ -11,7 +10,7 @@ import exploreStore from "../../../utils/exploreStore";
 import { era5Monthly, era5MonthlyNormals } from "../../../data/datasets";
 
 const PrecipitationMonthly = () => {
-  const orgUnit = useOutletContext();
+  const orgUnit = exploreStore((state) => state.orgUnit);
   const monthlyPeriod = exploreStore((state) => state.monthlyPeriod);
   const referencePeriod = exploreStore((state) => state.referencePeriod);
 

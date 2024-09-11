@@ -1,4 +1,3 @@
-import { useOutletContext } from "react-router-dom";
 import Chart from "../Chart";
 import PeriodTypeSelect from "../PeriodTypeSelect";
 import DailyPeriodSelect from "../DailyPeriodSelect";
@@ -9,7 +8,7 @@ import exploreStore from "../../../utils/exploreStore";
 import { era5Daily } from "../../../data/datasets";
 
 const HumidityDaily = () => {
-  const orgUnit = useOutletContext();
+  const orgUnit = exploreStore((state) => state.orgUnit);
   const period = exploreStore((state) => state.dailyPeriod);
 
   const data = useEarthEngineTimeSeries(era5Daily, period, orgUnit);

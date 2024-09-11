@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
-import { useOutletContext } from "react-router-dom";
 import i18n from "@dhis2/d2-i18n";
 import DataLoader from "../../shared/DataLoader.js";
 import DayForecast from "./DayForecast.js";
 import useAppSettings from "../../../hooks/useAppSettings.js";
+import exploreStore from "../../../utils/exploreStore";
 import styles from "./styles/ForecastTab.module.css";
 
 const convertTimezone = (date, timeZone) =>
@@ -13,7 +13,7 @@ const convertTimezone = (date, timeZone) =>
 const browserTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
 const Forecast = ({ isPlugin }) => {
-  const orgUnit = useOutletContext();
+  const orgUnit = exploreStore((state) => state.orgUnit);
   const [data, setData] = useState();
   const { settings, loading } = useAppSettings();
 

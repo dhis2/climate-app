@@ -1,4 +1,3 @@
-import { useOutletContext } from "react-router-dom";
 import Chart from "../Chart";
 import PeriodTypeSelect from "../PeriodTypeSelect";
 import MonthlyPeriodSelect from "../MonthlyPeriodSelect";
@@ -15,7 +14,7 @@ const dataset = {
 };
 
 const HeatMonthly = () => {
-  const orgUnit = useOutletContext();
+  const orgUnit = exploreStore((state) => state.orgUnit);
   const period = exploreStore((state) => state.monthlyPeriod);
 
   const data = useEarthEngineTimeSeries(dataset, period, orgUnit);

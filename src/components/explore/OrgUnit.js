@@ -51,7 +51,7 @@ const OrgUnit = () => {
           <OrgUnitType type={orgUnit?.geometry?.type} />
         </h1>
         {orgUnit.geometry ? (
-          <Outlet context={orgUnit} />
+          <Outlet />
         ) : (
           <div className={styles.message}>{i18n.t("No geometry found")}</div>
         )}
