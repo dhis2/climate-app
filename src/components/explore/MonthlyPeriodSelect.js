@@ -12,7 +12,7 @@ const MonthlyPeriodSelect = () => {
   const { monthlyPeriod, setMonthlyPeriod } = exploreStore();
   const [period, setPeriod] = useState(monthlyPeriod);
 
-  const { startTime, endTime } = monthlyPeriod;
+  const { startTime, endTime } = period;
   const months = getNumberOfMonths(startTime, endTime);
 
   return (
