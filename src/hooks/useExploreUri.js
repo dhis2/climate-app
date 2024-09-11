@@ -1,10 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
-import {
-  useNavigationType,
-  useLocation,
-  useParams,
-  useOutletContext,
-} from "react-router-dom";
+import { useNavigationType, useLocation, useParams } from "react-router-dom";
 import exploreStore from "../utils/exploreStore";
 import { referencePeriods } from "../components/explore/ReferencePeriodSelect";
 import { MONTHLY } from "../utils/time";
@@ -22,7 +17,6 @@ const useExploreUri = () => {
   const navigationType = useNavigationType();
   const { pathname } = useLocation();
   const params = useParams();
-  const orgUnit = useOutletContext();
   const store = exploreStore();
 
   const path = pathname.split("/");
@@ -32,6 +26,7 @@ const useExploreUri = () => {
   const uri = useMemo(() => {
     if (!isPop) {
       const {
+        orgUnit,
         tab,
         periodType,
         monthlyPeriod,
@@ -40,7 +35,7 @@ const useExploreUri = () => {
         month,
       } = store;
 
-      if (!tab) {
+      if (!orgUnit || !tab) {
         return null;
       }
 
@@ -65,7 +60,7 @@ const useExploreUri = () => {
     }
 
     return null;
-  }, [store, section, orgUnit, isPop]);
+  }, [store, section, isPop]);
 
   useEffect(() => {
     setIsPop(navigationType === "POP");

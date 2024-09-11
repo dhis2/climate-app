@@ -1,12 +1,7 @@
 import { useEffect } from "react";
 import i18n from "@dhis2/d2-i18n";
 import { TabBar, Tab } from "@dhis2/ui";
-import {
-  Outlet,
-  useOutletContext,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import exploreStore from "../../utils/exploreStore";
 import useExploreUri from "../../hooks/useExploreUri";
 import styles from "./styles/Tabs.module.css";
@@ -22,20 +17,21 @@ const tabs = [
 
 const Tabs = () => {
   const { pathname } = useLocation();
-  const orgUnit = useOutletContext();
+  const { orgUnit, tab, setTab } = exploreStore();
+  const uri = useExploreUri();
   const navigate = useNavigate();
 
-  const { tab, setTab } = exploreStore();
-
-  const uri = useExploreUri();
-
-  const isPoint = orgUnit.geometry.type === "Point";
+  const isPoint = orgUnit?.geometry.type === "Point";
 
   useEffect(() => {
     if (uri && uri !== pathname) {
       navigate(uri);
     }
   }, [pathname, uri, navigate]);
+
+  if (!orgUnit) {
+    return null;
+  }
 
   return (
     <>
@@ -49,7 +45,7 @@ const Tabs = () => {
           ))}
       </TabBar>
       <div className={styles.tabContent}>
-        <Outlet context={orgUnit} />
+        <Outlet />
       </div>
     </>
   );
