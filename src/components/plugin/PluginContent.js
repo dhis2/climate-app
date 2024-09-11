@@ -1,5 +1,5 @@
 import Forecast from "../explore/forecast/Forecast";
-import TemperatureMonthly from "../explore/temperature/TemperatureMonthly";
+import TemperatureMonthly from "../explore/temperature/plugin/TemperatureMonthly";
 import TemperatureDaily from "../explore/temperature/TemperatureDaily";
 import styles from "./styles/PluginContent.module.css";
 
@@ -21,7 +21,7 @@ const PluginContent = (props) => {
   return (
     <div className={styles.content}>
       <div className={styles.title}>{title}</div>
-      <Display {...props} isPlugin={true} />
+      <Display {...props} />
     </div>
   );
 };

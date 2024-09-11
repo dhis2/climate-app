@@ -47,4 +47,8 @@ const TemperatureMonthly = ({ isPlugin }) => {
   );
 };
 
+TemperatureMonthly.propTypes = {
+  isPlugin: PropTypes.bool,
+};
+
 export default TemperatureMonthly;
