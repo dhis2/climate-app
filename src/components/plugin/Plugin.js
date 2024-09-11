@@ -52,7 +52,7 @@ const Plugin = (props) => {
 
   console.log("Plugin props", props);
 
-  const pluginItem = pluginItems[1];
+  const pluginItem = pluginItems[2];
 
   if (props.setDashboardItemDetails) {
     props.setDashboardItemDetails({

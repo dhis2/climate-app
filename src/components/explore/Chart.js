@@ -51,7 +51,8 @@ const Chart = ({ config, isPlugin }) => {
   return (
     <div
       style={{
-        height: `calc(100% - ${isPlugin ? titleHeight : 0}px)`,
+        // height: `calc(100% - ${isPlugin ? titleHeight : 0}px)`,
+        height: "100%",
         width: "100%",
       }}
       ref={mountAndObserveContainerRef}
