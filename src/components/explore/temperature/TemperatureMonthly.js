@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { useOutletContext } from "react-router-dom";
 import Chart from "../Chart";
 import PeriodTypeSelect from "../PeriodTypeSelect";
@@ -11,7 +10,7 @@ import useEarthEngineClimateNormals from "../../../hooks/useEarthEngineClimateNo
 import exploreStore from "../../../utils/exploreStore";
 import { era5Monthly, era5MonthlyNormals } from "../../../data/datasets";
 
-const TemperatureMonthly = ({ isPlugin }) => {
+const TemperatureMonthly = () => {
   const orgUnit = useOutletContext();
   const period = exploreStore((state) => state.monthlyPeriod);
   const referencePeriod = exploreStore((state) => state.referencePeriod);
@@ -33,10 +32,8 @@ const TemperatureMonthly = ({ isPlugin }) => {
             orgUnit.properties.name,
             data,
             normals,
-            referencePeriod,
-            isPlugin
+            referencePeriod
           )}
-          isPlugin={isPlugin}
         />
       ) : (
         <DataLoader />
@@ -45,10 +42,6 @@ const TemperatureMonthly = ({ isPlugin }) => {
       <ReferencePeriod />
     </>
   );
-};
-
-TemperatureMonthly.propTypes = {
-  isPlugin: PropTypes.bool,
 };
 
 export default TemperatureMonthly;
