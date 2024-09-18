@@ -11,7 +11,7 @@ const Resolution = ({ resolution, isImport = false }) => (
       {isImport ? (
         <>
           {i18n.t(
-            "Please note: You can import data for the lowest levels in your org unit hierarchy, but it won't improve the resolution of the data."
+            "You can import data for the lowest levels in your org unit hierarchy, but it won't improve the resolution of the data."
           )}{" "}
         </>
       ) : null}
