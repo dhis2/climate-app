@@ -3,6 +3,7 @@ import PeriodTypeSelect from "../PeriodTypeSelect";
 import MonthlyPeriodSelect from "../MonthlyPeriodSelect";
 import DataLoader from "../../shared/DataLoader";
 import Resolution from "../../shared/Resolution";
+import HeatDescription from "./HeatDescription";
 import getMonthlyConfig from "./charts/thermalComfortMonthly";
 import useEarthEngineTimeSeries from "../../../hooks/useEarthEngineTimeSeries";
 import exploreStore from "../../../utils/exploreStore";
@@ -23,6 +24,7 @@ const HeatMonthly = () => {
         <DataLoader />
       )}
       <MonthlyPeriodSelect />
+      <HeatDescription />
       <Resolution resolution={era5HeatMonthly.resolution} />
     </>
   );
