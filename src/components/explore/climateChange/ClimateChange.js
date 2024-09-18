@@ -4,6 +4,7 @@ import MonthSelect from "../MonthSelect";
 import ReferencePeriod from "../ReferencePeriodSelect";
 import Chart from "../Chart";
 import DataLoader from "../../shared/DataLoader";
+import Resolution from "../../shared/Resolution";
 import getChartConfig from "./charts/temperatureAnomaly";
 import useEarthEngineTimeSeries from "../../../hooks/useEarthEngineTimeSeries";
 import useEarthEngineClimateNormals from "../../../hooks/useEarthEngineClimateNormals";
@@ -70,6 +71,7 @@ const ClimateChange = () => {
           "Temperature anomaly is the difference of a temperature from a reference value, calculated as the average temperature over a period of 30 years. Blue columns shows temperatures below the average, while red columns are above."
         )}
       </div>
+      <Resolution resolution={era5MonthlyTemperatures.resolution} />
     </>
   );
 };

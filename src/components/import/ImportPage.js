@@ -5,7 +5,7 @@ import { Card, Button } from "@dhis2/ui";
 import Dataset from "./Dataset";
 import Period from "./Period";
 import OrgUnits from "./OrgUnits";
-import Resolution from "./Resolution";
+import Resolution from "../shared/Resolution";
 import DataElement from "./DataElement";
 import ExtractData from "./ExtractData";
 import useOrgUnitCount from "../../hooks/useOrgUnitCount";
@@ -77,7 +77,9 @@ const ImportPage = () => {
                 )}
               </div>
             )}
-            {dataset && <Resolution resolution={dataset.resolution} />}
+            {dataset && (
+              <Resolution resolution={dataset.resolution} isImport={true} />
+            )}
             <DataElement
               selected={dataElement}
               dataset={dataset}

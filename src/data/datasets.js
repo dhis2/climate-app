@@ -231,11 +231,13 @@ export const era5MonthlyNormals = {
     "dewpoint_temperature_2m",
     "total_precipitation_sum",
   ],
+  resolution: era5LandResolution,
 };
 
 export const era5MonthlyTemperatures = {
   datasetId: "ECMWF/ERA5_LAND/MONTHLY_AGGR",
   band: ["temperature_2m"],
+  resolution: era5LandResolution,
 };
 
 export const era5HeatDaily = {
@@ -243,6 +245,7 @@ export const era5HeatDaily = {
   band: ["utci_mean", "utci_min", "utci_max"],
   reducer: ["mean", "min", "max"],
   periodType: "daily",
+  resolution: era5Resolution,
 };
 
 export const era5HeatMonthly = {

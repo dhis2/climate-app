@@ -72,9 +72,11 @@ const AboutPage = () => {
       <h2>{i18n.t("How the data is calculated")}</h2>
       <p>
         The data is calculated for your organsation units on Google Earth
-        Engine. The resolution of the data is about 9 km. If you select a health
+        Engine. Pleace check the resolution of the data. If you select a health
         facility we use the value where the facility is located. If you select a
-        district we automatically aggregate the values within that district.
+        district we automatically aggregate the values within that district. If
+        two org units are close to each other (within the resolution), they will
+        have the same data values.
       </p>
     </div>
   );
