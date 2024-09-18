@@ -5,6 +5,7 @@ import { Card, Button } from "@dhis2/ui";
 import Dataset from "./Dataset";
 import Period from "./Period";
 import OrgUnits from "./OrgUnits";
+import Resolution from "./Resolution";
 import DataElement from "./DataElement";
 import ExtractData from "./ExtractData";
 import useOrgUnitCount from "../../hooks/useOrgUnitCount";
@@ -76,6 +77,7 @@ const ImportPage = () => {
                 )}
               </div>
             )}
+            {dataset && <Resolution resolution={dataset.resolution} />}
             <DataElement
               selected={dataElement}
               dataset={dataset}
@@ -114,9 +116,7 @@ const ImportPage = () => {
           </p>
           <p>
             <strong>{i18n.t("Data")}</strong>:{" "}
-            {i18n.t(
-              "Select the ERA5-Land variable you would like to import. So far we only support temperature (average, min, max) and precipitation."
-            )}
+            {i18n.t("Select the variable you would like to import.")}
           </p>
           <p>
             <strong>{i18n.t("Period")}</strong>:{" "}

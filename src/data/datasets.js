@@ -4,7 +4,7 @@ import {
   getRelativeHumidity,
   roundOneDecimal,
 } from "../utils/calc";
-import { HOURLY } from "../utils/time";
+import { HOURLY, MONTHLY } from "../utils/time";
 
 // kelvin to celsius with one decimal
 const temperatureParser = (v) => roundOneDecimal(kelvinToCelsius(v));
@@ -20,6 +20,9 @@ const relativeHumidityParser = ([dewData, tempData]) =>
     ),
   }));
 
+export const era5Resolution = i18n.t("Approximately 31 km (0.25°)");
+export const era5LandResolution = i18n.t("Approximately 9 km (0.1°)");
+
 export default [
   {
     id: "ECMWF/ERA5_LAND/DAILY_AGGR/temperature_2m",
@@ -29,6 +32,7 @@ export default [
     description: i18n.t(
       "Average air temperature in °C at 2 m above the surface"
     ),
+    resolution: era5LandResolution,
     band: "temperature_2m",
     reducer: "mean",
     timeZone: {
@@ -49,6 +53,7 @@ export default [
     description: i18n.t(
       "Maximum air temperature in °C at 2 m above the surface"
     ),
+    resolution: era5LandResolution,
     band: "temperature_2m_max",
     reducer: "max",
     timeZone: {
@@ -69,6 +74,7 @@ export default [
     description: i18n.t(
       "Minimum air temperature in °C at 2 m above the surface"
     ),
+    resolution: era5LandResolution,
     band: "temperature_2m_min",
     reducer: "min",
     timeZone: {
@@ -87,6 +93,7 @@ export default [
     name: i18n.t("Precipitation (ERA5-Land)"),
     shortName: i18n.t("Precipitation"),
     description: i18n.t("Total precipitation in mm"),
+    resolution: era5LandResolution,
     band: "total_precipitation_sum",
     reducer: "mean",
     timeZone: {
@@ -107,6 +114,7 @@ export default [
     description: i18n.t(
       "Temperature in °C at 2 m above the surface to which the air would have to be cooled for saturation to occur."
     ),
+    resolution: era5LandResolution,
     band: "dewpoint_temperature_2m",
     reducer: "mean",
     timeZone: {
@@ -127,6 +135,7 @@ export default [
     description: i18n.t(
       "Percentage of water vapor in the air compared to the total amount of vapor that can exist in the air at its current temperature. Calculated using air temperature and dewpoint temperature at 2 m above surface."
     ),
+    resolution: era5LandResolution,
     bands: [
       {
         band: "dewpoint_temperature_2m",
@@ -159,6 +168,7 @@ export default [
     name: i18n.t("Heat stress (ERA5-HEAT)"),
     shortName: i18n.t("Heat stress"),
     description: i18n.t("Average felt temperature in °C"),
+    resolution: era5Resolution,
     band: "utci_mean",
     reducer: "mean",
     valueParser: temperatureParser,
@@ -171,6 +181,7 @@ export default [
     name: i18n.t("Max heat stress (ERA5-HEAT)"),
     shortName: i18n.t("Max heat stress"),
     description: i18n.t("Maximum felt temperature in °C"),
+    resolution: era5Resolution,
     band: "utci_max",
     reducer: "max",
     valueParser: temperatureParser,
@@ -183,6 +194,7 @@ export default [
     name: i18n.t("Min heat stress (ERA5-HEAT)"),
     shortName: i18n.t("Min heat stress"),
     description: i18n.t("Minimum felt temperature in °C"),
+    resolution: era5Resolution,
     band: "utci_min",
     reducer: "min",
     valueParser: temperatureParser,
@@ -203,11 +215,13 @@ export const era5Daily = {
   datasetId: "ECMWF/ERA5_LAND/DAILY_AGGR",
   band: era5band,
   reducer: ["mean", "min", "max", "mean", "mean"],
+  resolution: era5LandResolution,
 };
 
 export const era5Monthly = {
   datasetId: "ECMWF/ERA5_LAND/MONTHLY_AGGR",
   band: era5band,
+  resolution: era5LandResolution,
 };
 
 export const era5MonthlyNormals = {
@@ -222,4 +236,16 @@ export const era5MonthlyNormals = {
 export const era5MonthlyTemperatures = {
   datasetId: "ECMWF/ERA5_LAND/MONTHLY_AGGR",
   band: ["temperature_2m"],
+};
+
+export const era5HeatDaily = {
+  datasetId: "projects/climate-engine-pro/assets/ce-era5-heat",
+  band: ["utci_mean", "utci_min", "utci_max"],
+  reducer: ["mean", "min", "max"],
+  periodType: "daily",
+};
+
+export const era5HeatMonthly = {
+  ...era5HeatDaily,
+  aggregationPeriod: MONTHLY,
 };

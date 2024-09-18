@@ -5,19 +5,13 @@ import DataLoader from "../../shared/DataLoader";
 import getMonthlyConfig from "./charts/thermalComfortMonthly";
 import useEarthEngineTimeSeries from "../../../hooks/useEarthEngineTimeSeries";
 import exploreStore from "../../../utils/exploreStore";
-import { heatDataset } from "./HeatDaily";
-import { MONTHLY } from "../../../utils/time";
-
-const dataset = {
-  ...heatDataset,
-  aggregationPeriod: MONTHLY,
-};
+import { era5HeatMonthly } from "../../../data/datasets";
 
 const HeatMonthly = () => {
   const orgUnit = exploreStore((state) => state.orgUnit);
   const period = exploreStore((state) => state.monthlyPeriod);
 
-  const data = useEarthEngineTimeSeries(dataset, period, orgUnit);
+  const data = useEarthEngineTimeSeries(era5HeatMonthly, period, orgUnit);
 
   return (
     <>
