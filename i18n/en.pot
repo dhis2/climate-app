@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-09-10T15:22:43.232Z\n"
-"PO-Revision-Date: 2024-09-10T15:22:43.232Z\n"
+"POT-Creation-Date: 2024-09-11T17:29:27.798Z\n"
+"PO-Revision-Date: 2024-09-11T17:29:27.798Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -765,18 +765,6 @@ msgstr "Average air temperature in °C at 2 m above the surface"
 msgid "Average"
 msgstr "Average"
 
-msgid "Min temperature (ERA5-Land)"
-msgstr "Min temperature (ERA5-Land)"
-
-msgid "Min air temperature"
-msgstr "Min air temperature"
-
-msgid "Minimum air temperature in °C at 2 m above the surface"
-msgstr "Minimum air temperature in °C at 2 m above the surface"
-
-msgid "Min"
-msgstr "Min"
-
 msgid "Max air temperature (ERA5-Land)"
 msgstr "Max air temperature (ERA5-Land)"
 
@@ -788,6 +776,18 @@ msgstr "Maximum air temperature in °C at 2 m above the surface"
 
 msgid "Max"
 msgstr "Max"
+
+msgid "Min temperature (ERA5-Land)"
+msgstr "Min temperature (ERA5-Land)"
+
+msgid "Min air temperature"
+msgstr "Min air temperature"
+
+msgid "Minimum air temperature in °C at 2 m above the surface"
+msgstr "Minimum air temperature in °C at 2 m above the surface"
+
+msgid "Min"
+msgstr "Min"
 
 msgid "Precipitation (ERA5-Land)"
 msgstr "Precipitation (ERA5-Land)"
@@ -829,15 +829,6 @@ msgstr "Heat stress"
 msgid "Average felt temperature in °C"
 msgstr "Average felt temperature in °C"
 
-msgid "Min heat stress (ERA5-HEAT)"
-msgstr "Min heat stress (ERA5-HEAT)"
-
-msgid "Min heat stress"
-msgstr "Min heat stress"
-
-msgid "Minimum felt temperature in °C"
-msgstr "Minimum felt temperature in °C"
-
 msgid "Max heat stress (ERA5-HEAT)"
 msgstr "Max heat stress (ERA5-HEAT)"
 
@@ -847,8 +838,14 @@ msgstr "Max heat stress"
 msgid "Maximum felt temperature in °C"
 msgstr "Maximum felt temperature in °C"
 
-msgid "Mean"
-msgstr "Mean"
+msgid "Min heat stress (ERA5-HEAT)"
+msgstr "Min heat stress (ERA5-HEAT)"
+
+msgid "Min heat stress"
+msgstr "Min heat stress"
+
+msgid "Minimum felt temperature in °C"
+msgstr "Minimum felt temperature in °C"
 
 msgid "Heat/cold stress"
 msgstr "Heat/cold stress"
