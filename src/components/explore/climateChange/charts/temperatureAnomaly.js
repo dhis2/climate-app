@@ -14,7 +14,7 @@ const getChartConfig = (name, data, normals, month, referencePeriod) => {
 
   return {
     title: {
-      text: i18n.t("{{name}}: {{month}} temperature anomaly {{years}}", {
+      text: i18n.t("{{name}}: {{month}} temperature difference {{years}}", {
         name,
         month: monthName,
         years: `${years[0]}-${years[years.length - 1]}`,
