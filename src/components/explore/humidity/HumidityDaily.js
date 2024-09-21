@@ -3,6 +3,7 @@ import PeriodTypeSelect from "../PeriodTypeSelect";
 import DailyPeriodSelect from "../DailyPeriodSelect";
 import DataLoader from "../../shared/DataLoader";
 import Resolution from "../../shared/Resolution";
+import HumidityDescription from "./HumidityDescription";
 import getDailyConfig from "./charts/humidityDaily";
 import useEarthEngineTimeSeries from "../../../hooks/useEarthEngineTimeSeries";
 import exploreStore from "../../../utils/exploreStore";
@@ -23,6 +24,7 @@ const HumidityDaily = () => {
         <DataLoader />
       )}
       <DailyPeriodSelect />
+      <HumidityDescription />
       <Resolution resolution={era5Daily.resolution} />
     </>
   );

@@ -4,6 +4,7 @@ import MonthlyPeriodSelect from "../MonthlyPeriodSelect";
 import ReferencePeriod from "../ReferencePeriodSelect";
 import DataLoader from "../../shared/DataLoader";
 import Resolution from "../../shared/Resolution";
+import HumidityDescription from "./HumidityDescription";
 import getMonthlyConfig from "./charts/humidityMonthly";
 import useEarthEngineTimeSeries from "../../../hooks/useEarthEngineTimeSeries";
 import useEarthEngineClimateNormals from "../../../hooks/useEarthEngineClimateNormals";
@@ -40,6 +41,7 @@ const HumidityMonthly = () => {
       )}
       <MonthlyPeriodSelect />
       <ReferencePeriod />
+      <HumidityDescription />
       <Resolution resolution={era5Monthly.resolution} />
     </>
   );
