@@ -162,10 +162,10 @@ export const locations = {
                 {
                   id: "yyas",
                   path: "/world/nepal/gandaki/tanahu/yyas",
-                  displayName: "Vyas (Tanahu)",
+                  displayName: "Bandipur (Tanahu)",
                   geometry: {
                     type: "Point",
-                    coordinates: [84.268056, 27.976389],
+                    coordinates: [84.416667, 27.933333],
                   },
                   children: [],
                 },
