@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-09-21T10:56:27.165Z\n"
-"PO-Revision-Date: 2024-09-21T10:56:27.165Z\n"
+"POT-Creation-Date: 2024-09-21T21:20:37.273Z\n"
+"PO-Revision-Date: 2024-09-21T21:20:37.273Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -196,6 +196,15 @@ msgstr "Heat"
 
 msgid "Climate change"
 msgstr "Climate change"
+
+msgid "Air quality"
+msgstr "Air quality"
+
+msgid "{{name}}: Particle pollution {{period}}"
+msgstr "{{name}}: Particle pollution {{period}}"
+
+msgid "Particulate matter d < 2.5 um (PM2.5)"
+msgstr "Particulate matter d < 2.5 um (PM2.5)"
 
 msgid ""
 "Temperature anomaly is the difference of a temperature from a reference "
@@ -792,6 +801,9 @@ msgstr "Approximately 31 km (0.25°)"
 
 msgid "Approximately 9 km (0.1°)"
 msgstr "Approximately 9 km (0.1°)"
+
+msgid "Approximately 40 km"
+msgstr "Approximately 40 km"
 
 msgid "Air temperature (ERA5-Land)"
 msgstr "Air temperature (ERA5-Land)"
