@@ -5,13 +5,15 @@ import DataLoader from "../../shared/DataLoader";
 import Resolution from "../../shared/Resolution";
 import HeatDescription from "./HeatDescription";
 import getDailyConfig from "./charts/thermalComfortDaily";
-import exploreStore from "../../../utils/exploreStore";
 import useEarthEngineTimeSeries from "../../../hooks/useEarthEngineTimeSeries";
+import exploreStore from "../../../store/exploreStore";
+import useAppSettings from "../../../hooks/useAppSettings";
 import { era5HeatDaily } from "../../../data/datasets";
 
 const HeatDaily = () => {
   const orgUnit = exploreStore((state) => state.orgUnit);
   const period = exploreStore((state) => state.dailyPeriod);
+  const { settings } = useAppSettings();
 
   const data = useEarthEngineTimeSeries(era5HeatDaily, period, orgUnit);
 
@@ -19,7 +21,9 @@ const HeatDaily = () => {
     <>
       <PeriodTypeSelect />
       {data ? (
-        <Chart config={getDailyConfig(orgUnit.properties.name, data)} />
+        <Chart
+          config={getDailyConfig(orgUnit.properties.name, data, settings)}
+        />
       ) : (
         <DataLoader />
       )}

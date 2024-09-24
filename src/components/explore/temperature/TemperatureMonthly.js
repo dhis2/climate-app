@@ -7,13 +7,15 @@ import Resolution from "../../shared/Resolution";
 import getMonthlyConfig from "./charts/temperatureMonthly";
 import useEarthEngineTimeSeries from "../../../hooks/useEarthEngineTimeSeries";
 import useEarthEngineClimateNormals from "../../../hooks/useEarthEngineClimateNormals";
-import exploreStore from "../../../utils/exploreStore";
+import exploreStore from "../../../store/exploreStore";
+import useAppSettings from "../../../hooks/useAppSettings";
 import { era5Monthly, era5MonthlyNormals } from "../../../data/datasets";
 
 const TemperatureMonthly = () => {
   const orgUnit = exploreStore((state) => state.orgUnit);
   const period = exploreStore((state) => state.monthlyPeriod);
   const referencePeriod = exploreStore((state) => state.referencePeriod);
+  const { settings } = useAppSettings();
 
   const data = useEarthEngineTimeSeries(era5Monthly, period, orgUnit);
 
@@ -32,7 +34,8 @@ const TemperatureMonthly = () => {
             orgUnit.properties.name,
             data,
             normals,
-            referencePeriod
+            referencePeriod,
+            settings
           )}
         />
       ) : (

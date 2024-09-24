@@ -8,7 +8,9 @@ import {
 } from "../../../../utils/chart";
 import { getTimeFromId, toCelcius } from "../../../../utils/calc";
 
-const getChartConfig = (name, data, normals, referencePeriod) => {
+const getChartConfig = (name, data, normals, referencePeriod, settings) => {
+  const { tempMin, tempMax } = settings;
+
   const series = data.map((d) => ({
     x: getTimeFromId(d.id),
     y: toCelcius(d["temperature_2m"]),
@@ -62,6 +64,8 @@ const getChartConfig = (name, data, normals, referencePeriod) => {
       labels: {
         format: "{value}°C",
       },
+      min: tempMin,
+      max: tempMax,
     },
     chart: {
       height: 480,

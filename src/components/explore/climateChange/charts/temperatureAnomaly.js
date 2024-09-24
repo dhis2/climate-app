@@ -6,11 +6,19 @@ import { months } from "../../MonthSelect";
 
 const band = "temperature_2m";
 
-const getChartConfig = (name, data, normals, month, referencePeriod) => {
+const getChartConfig = (
+  name,
+  data,
+  normals,
+  month,
+  referencePeriod,
+  settings
+) => {
   const normal = normals.find((n) => n.id === month)[band];
   const years = data.map((d) => d.id.substring(0, 4));
   const monthName = months.find((m) => m.id === month).name;
   const series = data.map((d) => roundOneDecimal(d[band] - normal));
+  const { tempChange } = settings;
 
   return {
     title: {
@@ -55,6 +63,8 @@ const getChartConfig = (name, data, normals, month, referencePeriod) => {
       },
     },
     yAxis: {
+      max: tempChange,
+      min: tempChange !== undefined ? -tempChange : undefined,
       title: false,
       labels: {
         format: "{value}°C",

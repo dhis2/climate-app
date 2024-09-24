@@ -3,7 +3,9 @@ import { colors } from "@dhis2/ui";
 import { animation, credits, getDailyPeriod } from "../../../../utils/chart";
 import { metersToMillimeters } from "../../../../utils/calc";
 
-const getChart = (name, data) => {
+const getChart = (name, data, settings) => {
+  const { precipDailyMax } = settings;
+
   const series = data.map((d) => ({
     x: new Date(d.id).getTime(),
     y: metersToMillimeters(d["total_precipitation_sum"]),
@@ -44,6 +46,7 @@ const getChart = (name, data) => {
     },
     yAxis: {
       min: 0,
+      max: precipDailyMax,
       title: false,
       labels: {
         format: "{value} mm",
