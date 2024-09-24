@@ -9,9 +9,18 @@ import {
 } from "../../../../utils/chart";
 import { toCelcius } from "../../../../utils/calc";
 
-export const getPlotBands = (minMax) => {
-  const minValue = Math.floor(Math.min(...minMax.map((d) => d[1])));
-  const maxValue = Math.ceil(Math.max(...minMax.map((d) => d[2])));
+export const getPlotBands = (minMax, settings) => {
+  const { heatMin, heatMax } = settings;
+
+  const minValue =
+    heatMin !== undefined
+      ? heatMin
+      : Math.floor(Math.min(...minMax.map((d) => d[1])));
+
+  const maxValue =
+    heatMax !== undefined
+      ? heatMax
+      : Math.ceil(Math.max(...minMax.map((d) => d[2])));
 
   const plotBands = legend.items.filter(
     (l) => l.to >= minValue && l.from <= maxValue
@@ -52,7 +61,7 @@ export const getThickPositons = (plotBands) => [
   plotBands[plotBands.length - 1].to,
 ];
 
-const getChart = (name, data) => {
+const getChart = (name, data, settings) => {
   const series = data.map((d) => ({
     x: new Date(d.id).getTime(),
     y: toCelcius(d["utci_mean"]),
@@ -64,7 +73,7 @@ const getChart = (name, data) => {
     toCelcius(d["utci_max"]),
   ]);
 
-  const plotBands = getPlotBands(minMax);
+  const plotBands = getPlotBands(minMax, settings);
   const plotLines = getPlotLines(plotBands);
   const tickPositions = getThickPositons(plotBands);
 

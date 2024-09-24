@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
 import i18n from "@dhis2/d2-i18n";
 
-const Legend = ({ name, items }) => (
+const Legend = ({ name, description, items }) => (
   <table>
     <caption>
-      {i18n.t("Legend")}: "{name}"
+      {i18n.t("Legend")}: "{name}"{description && <p>{description}</p>}
     </caption>
     <thead>
       <tr>

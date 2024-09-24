@@ -8,7 +8,7 @@ import HumidityDescription from "./HumidityDescription";
 import getMonthlyConfig from "./charts/humidityMonthly";
 import useEarthEngineTimeSeries from "../../../hooks/useEarthEngineTimeSeries";
 import useEarthEngineClimateNormals from "../../../hooks/useEarthEngineClimateNormals";
-import exploreStore from "../../../utils/exploreStore";
+import exploreStore from "../../../store/exploreStore";
 import { era5Monthly, era5MonthlyNormals } from "../../../data/datasets";
 
 const HumidityMonthly = () => {

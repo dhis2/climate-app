@@ -3,7 +3,7 @@ import i18n from "@dhis2/d2-i18n";
 import DataLoader from "../../shared/DataLoader.js";
 import DayForecast from "./DayForecast.js";
 import useAppSettings from "../../../hooks/useAppSettings.js";
-import exploreStore from "../../../utils/exploreStore";
+import exploreStore from "../../../store/exploreStore";
 import styles from "./styles/ForecastTab.module.css";
 
 const convertTimezone = (date, timeZone) =>

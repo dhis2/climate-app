@@ -6,7 +6,7 @@ import Resolution from "../../shared/Resolution";
 import HumidityDescription from "./HumidityDescription";
 import getDailyConfig from "./charts/humidityDaily";
 import useEarthEngineTimeSeries from "../../../hooks/useEarthEngineTimeSeries";
-import exploreStore from "../../../utils/exploreStore";
+import exploreStore from "../../../store/exploreStore";
 import { era5Daily } from "../../../data/datasets";
 
 const HumidityDaily = () => {

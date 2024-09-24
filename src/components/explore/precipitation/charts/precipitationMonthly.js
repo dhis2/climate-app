@@ -10,7 +10,9 @@ import { getTimeFromId, metersToMillimeters } from "../../../../utils/calc";
 
 const band = "total_precipitation_sum";
 
-const getChartConfig = (name, data, normals, referencePeriod) => {
+const getChartConfig = (name, data, normals, referencePeriod, settings) => {
+  const { precipMonthlyMax } = settings;
+
   const series = data.map((d) => ({
     x: getTimeFromId(d.id),
     y: metersToMillimeters(d[band]),
@@ -66,6 +68,7 @@ const getChartConfig = (name, data, normals, referencePeriod) => {
     },
     yAxis: {
       min: 0,
+      max: precipMonthlyMax,
       title: false,
       labels: {
         format: "{value} mm",

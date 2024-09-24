@@ -7,7 +7,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import OrgUnitType from "./OrgUnitType";
-import exploreStore from "../../utils/exploreStore";
+import exploreStore from "../../store/exploreStore";
 import styles from "./styles/OrgUnit.module.css";
 
 const tabIsValid = (tab, orgUnit) =>
