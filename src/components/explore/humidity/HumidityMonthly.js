@@ -3,10 +3,12 @@ import PeriodTypeSelect from "../PeriodTypeSelect";
 import MonthlyPeriodSelect from "../MonthlyPeriodSelect";
 import ReferencePeriod from "../ReferencePeriodSelect";
 import DataLoader from "../../shared/DataLoader";
+import Resolution from "../../shared/Resolution";
+import HumidityDescription from "./HumidityDescription";
 import getMonthlyConfig from "./charts/humidityMonthly";
 import useEarthEngineTimeSeries from "../../../hooks/useEarthEngineTimeSeries";
 import useEarthEngineClimateNormals from "../../../hooks/useEarthEngineClimateNormals";
-import exploreStore from "../../../utils/exploreStore";
+import exploreStore from "../../../store/exploreStore";
 import { era5Monthly, era5MonthlyNormals } from "../../../data/datasets";
 
 const HumidityMonthly = () => {
@@ -39,6 +41,8 @@ const HumidityMonthly = () => {
       )}
       <MonthlyPeriodSelect />
       <ReferencePeriod />
+      <HumidityDescription />
+      <Resolution resolution={era5Monthly.resolution} />
     </>
   );
 };

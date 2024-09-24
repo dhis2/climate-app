@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { CustomDataProvider } from "@dhis2/app-runtime";
 import { OrganisationUnitTree } from "@dhis2/ui";
-import exploreStore from "../../utils/exploreStore";
+import exploreStore from "../../store/exploreStore";
 import { locations, findLocation } from "../../data/locations";
 import styles from "../explore/styles/OrgUnitTree.module.css";
 

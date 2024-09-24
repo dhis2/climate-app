@@ -11,6 +11,12 @@
   font-weight: 500;
 }
 
+.container h2 {
+  color: var(--colors-grey900);
+  font-size: 18px;
+  font-weight: 500;
+}
+
 .container > div {
   padding: 8px 0;
 }

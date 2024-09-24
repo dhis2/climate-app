@@ -32,7 +32,7 @@ const AboutPage = () => {
       </p>
       <p>
         {i18n.t(
-          "The app allows you to explore and import temperature and precipitation data in DHIS2. The data source is “ERA5-Land“, which is considered the most accurate and complete global climate dataset available. The video below shows you how this dataset was created by combining weather observations with a weather model (climate reanalysis)."
+          "The app allows you to explore and import temperature and precipitation data in DHIS2. The data source is ERA5, which is considered the most accurate and complete global climate dataset available. The video below shows you how this dataset was created by combining weather observations with a weather model (climate reanalysis)."
         )}
       </p>
       <iframe
@@ -72,9 +72,11 @@ const AboutPage = () => {
       <h2>{i18n.t("How the data is calculated")}</h2>
       <p>
         The data is calculated for your organsation units on Google Earth
-        Engine. The resolution of the data is about 9 km. If you select a health
+        Engine. Pleace check the resolution of the data. If you select a health
         facility we use the value where the facility is located. If you select a
-        district we automatically aggregate the values within that district.
+        district we automatically aggregate the values within that district. If
+        two org units are close to each other (within the resolution), they will
+        have the same data values.
       </p>
     </div>
   );

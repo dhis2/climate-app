@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
 import { useNavigationType, useLocation, useParams } from "react-router-dom";
-import exploreStore from "../utils/exploreStore";
+import exploreStore from "../store/exploreStore";
 import { referencePeriods } from "../components/explore/ReferencePeriodSelect";
 import { MONTHLY } from "../utils/time";
 

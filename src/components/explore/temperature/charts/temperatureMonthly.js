@@ -13,8 +13,11 @@ const getChartConfig = (
   data,
   normals,
   referencePeriod,
+  settings,
   isPlugin = false
 ) => {
+  const { tempMin, tempMax } = settings;
+
   const series = data.map((d) => ({
     x: getTimeFromId(d.id),
     y: toCelcius(d["temperature_2m"]),
@@ -72,6 +75,8 @@ const getChartConfig = (
       labels: {
         format: "{value}°C",
       },
+      min: tempMin,
+      max: tempMax,
     },
     chart: {
       height: 480,

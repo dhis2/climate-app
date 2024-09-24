@@ -54,11 +54,6 @@ export const getEarthEngineValues = (ee, datasetParams, period, features) =>
     const timeZoneEnd = endTimePlusOne.format(null, timeZone);
     const mappedPeriods = getMappedPeriods(period);
 
-    periods.reduce((map, p) => {
-      map.set(toIso(p.startTime, calendar), p.iso);
-      return map;
-    }, mappedPeriods);
-
     const dataParser = (data) =>
       data.map((f) => ({
         ...f.properties,
@@ -321,7 +316,8 @@ export const getClimateNormals = (ee, dataset, period, geometry) => {
     )
   );
 
-  const eeScale = getScale(collection.first());
+  const eeScale =
+    type === "Point" ? ee.Number(1) : getScale(collection.first());
 
   const eeReducer = ee.Reducer.mean();
 

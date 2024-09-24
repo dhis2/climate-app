@@ -4,10 +4,12 @@ import MonthSelect from "../MonthSelect";
 import ReferencePeriod from "../ReferencePeriodSelect";
 import Chart from "../Chart";
 import DataLoader from "../../shared/DataLoader";
+import Resolution from "../../shared/Resolution";
 import getChartConfig from "./charts/temperatureAnomaly";
 import useEarthEngineTimeSeries from "../../../hooks/useEarthEngineTimeSeries";
 import useEarthEngineClimateNormals from "../../../hooks/useEarthEngineClimateNormals";
-import exploreStore from "../../../utils/exploreStore";
+import exploreStore from "../../../store/exploreStore";
+import useAppSettings from "../../../hooks/useAppSettings";
 import {
   era5MonthlyTemperatures,
   era5MonthlyNormals,
@@ -22,6 +24,7 @@ const ClimateChange = () => {
   const orgUnit = exploreStore((state) => state.orgUnit);
   const month = exploreStore((state) => state.month);
   const referencePeriod = exploreStore((state) => state.referencePeriod);
+  const { settings } = useAppSettings();
 
   const filters = useMemo(
     () => [
@@ -58,7 +61,8 @@ const ClimateChange = () => {
           data,
           normals,
           month,
-          referencePeriod
+          referencePeriod,
+          settings
         )}
       />
       <div className={styles.monthSelect}>
@@ -70,6 +74,7 @@ const ClimateChange = () => {
           "Temperature anomaly is the difference of a temperature from a reference value, calculated as the average temperature over a period of 30 years. Blue columns shows temperatures below the average, while red columns are above."
         )}
       </div>
+      <Resolution resolution={era5MonthlyTemperatures.resolution} />
     </>
   );
 };

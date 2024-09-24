@@ -21,7 +21,7 @@ const SetupPage = () => {
       </p>
       <p>
         {i18n.t(
-          "Create DHIS2 data elements for the climate and weather data you want to import. We recommend including the data source (ERA5-Land) in the name to distinguish it from data imported from local weather stations. If you use the same code specified below, we will preselect the data element in the import interface."
+          "Create DHIS2 data elements for the climate and weather data you want to import. We recommend including the data source in the name to distinguish it from data imported from local weather stations. If you use the same code specified below, we will preselect the data element in the import interface."
         )}
       </p>
       {datasets.map((dataset) => (

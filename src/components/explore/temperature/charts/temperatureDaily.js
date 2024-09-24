@@ -3,7 +3,9 @@ import { colors } from "@dhis2/ui";
 import { animation, credits, getDailyPeriod } from "../../../../utils/chart";
 import { toCelcius } from "../../../../utils/calc";
 
-const getChart = (name, data, isPlugin) => {
+const getChart = (name, data, settings, isPlugin) => {
+  const { tempMin, tempMax } = settings;
+
   const series = data.map((d) => ({
     x: new Date(d.id).getTime(),
     y: toCelcius(d["temperature_2m"]),
@@ -43,6 +45,8 @@ const getChart = (name, data, isPlugin) => {
       labels: {
         format: "{value}°C",
       },
+      min: tempMin,
+      max: tempMax,
     },
     chart: {
       height: 480,

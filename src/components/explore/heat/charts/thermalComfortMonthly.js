@@ -13,7 +13,7 @@ import {
   getThickPositons,
 } from "./thermalComfortDaily";
 
-const getChart = (name, data) => {
+const getChart = (name, data, settings) => {
   const series = data.map((d) => ({
     x: new Date(d.id).getTime(),
     y: toCelcius(d["utci_mean"]),
@@ -30,7 +30,7 @@ const getChart = (name, data) => {
     toCelcius(d["utci_max"]),
   ]);
 
-  const plotBands = getPlotBands(minMax);
+  const plotBands = getPlotBands(minMax, settings);
   const plotLines = getPlotLines(plotBands);
   const tickPositions = getThickPositons(plotBands);
 

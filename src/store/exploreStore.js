@@ -3,10 +3,9 @@ import {
   getDefaultMonthlyPeriod,
   getDefaultExplorePeriod,
   getLastMonth,
-} from "./time";
+} from "../utils/time";
 import { defaultReferencePeriod } from "../components/explore/ReferencePeriodSelect";
-import { MONTHLY } from "./time";
-import OrgUnit from "../components/explore/OrgUnit";
+import { MONTHLY } from "../utils/time";
 
 const exploreStore = create((set) => ({
   orgUnit: null,
