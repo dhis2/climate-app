@@ -35,6 +35,11 @@
   margin-bottom: 8px;
 }
 
+.container caption p {
+  font-weight: normal;
+  margin-bottom: 4px;
+}
+
 .container th {
   font-weight: 500;
   text-align: left;

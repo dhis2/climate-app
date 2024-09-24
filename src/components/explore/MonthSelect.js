@@ -1,6 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
 import { SingleSelectField, SingleSelectOption } from "@dhis2/ui";
-import exploreStore from "../../utils/exploreStore";
+import exploreStore from "../../store/exploreStore";
 
 export const months = [
   {

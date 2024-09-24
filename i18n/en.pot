@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-09-24T08:18:30.056Z\n"
-"PO-Revision-Date: 2024-09-24T08:18:30.056Z\n"
+"POT-Creation-Date: 2024-09-24T14:25:57.807Z\n"
+"PO-Revision-Date: 2024-09-24T14:25:57.807Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -659,6 +659,42 @@ msgstr "Org unit parent needs to be above or equal to the org unit level"
 msgid "Daily values will be imported between start and end dates"
 msgstr "Daily values will be imported between start and end dates"
 
+msgid ""
+"Set y-axis values for charts in the Explore data section to make it easier "
+"to compare different org units. Leave blank to calculate based on data "
+"shown."
+msgstr ""
+"Set y-axis values for charts in the Explore data section to make it easier "
+"to compare different org units. Leave blank to calculate based on data "
+"shown."
+
+msgid "Max temperature in °C"
+msgstr "Max temperature in °C"
+
+msgid "Min temperature in °C"
+msgstr "Min temperature in °C"
+
+msgid "Min temperature must be less than max temperature"
+msgstr "Min temperature must be less than max temperature"
+
+msgid "Max change in temperature in +/- °C"
+msgstr "Max change in temperature in +/- °C"
+
+msgid "Max monthly precipitation in mm"
+msgstr "Max monthly precipitation in mm"
+
+msgid "Max daily precipitation in mm"
+msgstr "Max daily precipitation in mm"
+
+msgid "Heat stress upper category"
+msgstr "Heat stress upper category"
+
+msgid "Heat stress lower category"
+msgstr "Heat stress lower category"
+
+msgid "Calculate from data"
+msgstr "Calculate from data"
+
 msgid "App settings"
 msgstr "App settings"
 
@@ -916,6 +952,9 @@ msgstr "Minimum felt temperature in °C"
 
 msgid "Heat/cold stress"
 msgstr "Heat/cold stress"
+
+msgid "You only need to include categories that are relevant for your area."
+msgstr "You only need to include categories that are relevant for your area."
 
 msgid "Extreme cold stress"
 msgstr "Extreme cold stress"
