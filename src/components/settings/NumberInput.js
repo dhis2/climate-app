@@ -10,7 +10,6 @@ const NumberInput = ({ id, label, value, validationText, onChange }) => (
     }
     warning={!!validationText}
     validationText={validationText}
-    inputWidth="100px"
   />
 );
 

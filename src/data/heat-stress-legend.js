@@ -4,6 +4,9 @@ const opacity = 0.4;
 
 export default {
   name: i18n.t("Heat/cold stress"),
+  description: i18n.t(
+    "You only need to include categories that are relevant for your area."
+  ),
   items: [
     {
       name: i18n.t("Extreme cold stress"),
