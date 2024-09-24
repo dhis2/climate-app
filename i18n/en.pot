@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-09-21T21:20:37.273Z\n"
-"PO-Revision-Date: 2024-09-21T21:20:37.273Z\n"
+"POT-Creation-Date: 2024-09-24T08:18:30.056Z\n"
+"PO-Revision-Date: 2024-09-24T08:18:30.056Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -200,11 +200,29 @@ msgstr "Climate change"
 msgid "Air quality"
 msgstr "Air quality"
 
+msgid "{{name}}: Carbon monoxide {{period}}"
+msgstr "{{name}}: Carbon monoxide {{period}}"
+
+msgid "Total column carbon monoxide"
+msgstr "Total column carbon monoxide"
+
+msgid "{{name}}: Nitrogen dioxide {{period}}"
+msgstr "{{name}}: Nitrogen dioxide {{period}}"
+
+msgid "Total column nitrogen dioxide"
+msgstr "Total column nitrogen dioxide"
+
 msgid "{{name}}: Particle pollution {{period}}"
 msgstr "{{name}}: Particle pollution {{period}}"
 
 msgid "Particulate matter d < 2.5 um (PM2.5)"
 msgstr "Particulate matter d < 2.5 um (PM2.5)"
+
+msgid "{{name}}: Sulphur dioxide {{period}}"
+msgstr "{{name}}: Sulphur dioxide {{period}}"
+
+msgid "Total column sulphur dioxide"
+msgstr "Total column sulphur dioxide"
 
 msgid ""
 "Temperature anomaly is the difference of a temperature from a reference "
