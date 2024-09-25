@@ -75,7 +75,7 @@ const getChartConfig = (name, data, normals, referencePeriod) => {
     },
     plotOptions: {
       series: {
-        groupPadding: 0,
+        grouping: false,
         borderWidth: 0,
         animation,
       },
@@ -122,7 +122,7 @@ const getChartConfig = (name, data, normals, referencePeriod) => {
         type: "column",
         data: monthMormals,
         color: colors.blue200,
-        pointPlacement: -0.1,
+        pointPlacement: -0.2,
         zIndex: 0,
       },
       {

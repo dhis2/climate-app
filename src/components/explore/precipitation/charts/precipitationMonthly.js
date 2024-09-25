@@ -54,7 +54,7 @@ const getChartConfig = (name, data, normals, referencePeriod, settings) => {
     },
     plotOptions: {
       series: {
-        groupPadding: 0,
+        grouping: false,
         borderWidth: 0,
         animation,
       },
@@ -85,7 +85,7 @@ const getChartConfig = (name, data, normals, referencePeriod, settings) => {
         data: monthMormals,
         name: i18n.t("Normal precipitation"),
         color: colors.blue200,
-        pointPlacement: -0.1,
+        pointPlacement: -0.2,
         zIndex: 0,
       },
     ],
