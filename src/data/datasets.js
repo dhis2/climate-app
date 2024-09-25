@@ -215,7 +215,7 @@ export const era5Daily = {
   datasetId: "ECMWF/ERA5_LAND/DAILY_AGGR",
   band: era5band,
   // reducer: ["mean", "min", "max", "mean", "mean"],
-  reducer: "mean",
+  reducer: "mean", // Use mean to reduce outlier effect
   resolution: era5LandResolution,
 };
 
