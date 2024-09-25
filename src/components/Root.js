@@ -21,7 +21,7 @@ const Root = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (pathname === "/" && settings.startPage) {
+    if (pathname === "/" && settings?.startPage) {
       navigate(settings.startPage);
     }
   }, [settings]);

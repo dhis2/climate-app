@@ -20,7 +20,7 @@ const HeatMonthly = () => {
   return (
     <>
       <PeriodTypeSelect />
-      {data ? (
+      {data && settings ? (
         <Chart
           config={getMonthlyConfig(orgUnit.properties.name, data, settings)}
         />

@@ -49,7 +49,7 @@ const ClimateChange = () => {
     orgUnit
   );
 
-  if (!data || !normals) {
+  if (!data || !normals || !settings) {
     return <DataLoader />;
   }
 

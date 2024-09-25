@@ -5,6 +5,11 @@ import useAppSettings from "../../hooks/useAppSettings";
 
 const ChartSettings = () => {
   const { settings, changeSetting } = useAppSettings();
+
+  if (!settings) {
+    return null;
+  }
+
   const {
     tempMin,
     tempMax,
