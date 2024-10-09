@@ -19,7 +19,7 @@ const PrecipitationDaily = () => {
   return (
     <>
       <PeriodTypeSelect />
-      {data ? (
+      {data && settings ? (
         <Chart
           config={getDailyConfig(orgUnit.properties.name, data, settings)}
         />

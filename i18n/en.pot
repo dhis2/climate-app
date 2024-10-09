@@ -5,17 +5,11 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-09-24T14:25:57.807Z\n"
-"PO-Revision-Date: 2024-09-24T14:25:57.807Z\n"
+"POT-Creation-Date: 2024-09-25T12:23:54.679Z\n"
+"PO-Revision-Date: 2024-09-25T12:23:54.679Z\n"
 
 msgid "About this app"
 msgstr "About this app"
-
-msgid "You need access to Google Earth Engine to use this app."
-msgstr "You need access to Google Earth Engine to use this app."
-
-msgid "How to get access?"
-msgstr "How to get access?"
 
 msgid ""
 "This pilot app is part of the ongoing “DHIS2 for Climate“ project. It will "
@@ -790,6 +784,12 @@ msgstr ""
 
 msgid "Loading data"
 msgstr "Loading data"
+
+msgid "You need access to Google Earth Engine to use this app."
+msgstr "You need access to Google Earth Engine to use this app."
+
+msgid "How to get access?"
+msgstr "How to get access?"
 
 msgid ""
 "For a temporary period there is limited data available for 2024. This is "
