@@ -8,7 +8,7 @@ const resource = `dataStore/${APP_NAMESPACE}/${SETTINGS_KEY}`;
 
 const useAppSettings = () => {
   const [loading, setLoading] = useState(true);
-  const [settings, setSettings] = useState({});
+  const [settings, setSettings] = useState();
   const [error, setError] = useState();
   const engine = useDataEngine();
 

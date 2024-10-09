@@ -28,7 +28,7 @@ const PrecipitationMonthly = () => {
   return (
     <>
       <PeriodTypeSelect />
-      {data && normals ? (
+      {data && normals && settings ? (
         <Chart
           config={getMonthlyConfig(
             orgUnit.properties.name,

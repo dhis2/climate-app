@@ -7,6 +7,11 @@ import styles from "./styles/SettingsPage.module.css";
 
 const SettingsPage = () => {
   const { settings, changeSetting } = useAppSettings();
+
+  if (!settings) {
+    return null;
+  }
+
   const { startPage, timeZone } = settings;
 
   return (

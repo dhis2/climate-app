@@ -5,6 +5,7 @@ import { Card, Button } from "@dhis2/ui";
 import Dataset from "./Dataset";
 import Period from "./Period";
 import OrgUnits from "./OrgUnits";
+import GEETokenCheck from "../shared/GEETokenCheck";
 import Resolution from "../shared/Resolution";
 import DataElement from "./DataElement";
 import ExtractData from "./ExtractData";
@@ -52,6 +53,7 @@ const ImportPage = () => {
   return (
     <div className={styles.page}>
       <h1>{i18n.t("Import weather and climate data")}</h1>
+      <GEETokenCheck />
       <div className={styles.column}>
         <Card className={styles.card}>
           <div className={styles.container}>
