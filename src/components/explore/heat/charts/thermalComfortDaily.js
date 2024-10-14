@@ -9,7 +9,7 @@ import {
 } from "../../../../utils/chart";
 import { toCelcius } from "../../../../utils/calc";
 
-export const getPlotBands = (minMax, settings) => {
+export const getPlotBands = (minMax, settings = {}) => {
   const { heatMin, heatMax } = settings;
 
   const minValue =
@@ -61,7 +61,7 @@ export const getThickPositons = (plotBands) => [
   plotBands[plotBands.length - 1].to,
 ];
 
-const getChart = (name, data, settings) => {
+const getChart = (name, data, settings, isPlugin) => {
   const series = data.map((d) => ({
     x: new Date(d.id).getTime(),
     y: toCelcius(d["utci_mean"]),
@@ -78,13 +78,15 @@ const getChart = (name, data, settings) => {
   const tickPositions = getThickPositons(plotBands);
 
   return {
-    title: {
-      text: i18n.t("{{name}}: Thermal comfort {{period}}", {
-        name,
-        period: getDailyPeriod(data),
-        nsSeparator: ";",
-      }),
-    },
+    title: !isPlugin
+      ? {
+          text: i18n.t("{{name}}: Thermal comfort {{period}}", {
+            name,
+            period: getDailyPeriod(data),
+            nsSeparator: ";",
+          }),
+        }
+      : "",
     credits: heatCredits,
     tooltip: {
       crosshairs: true,
@@ -142,6 +144,9 @@ const getChart = (name, data, settings) => {
         zIndex: 0,
       },
     ],
+    exporting: {
+      enabled: !isPlugin,
+    },
   };
 };
 
