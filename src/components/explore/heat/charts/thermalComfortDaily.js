@@ -9,7 +9,7 @@ import {
 } from "../../../../utils/chart";
 import { toCelcius } from "../../../../utils/calc";
 
-export const getPlotBands = (minMax, settings) => {
+export const getPlotBands = (minMax, settings = {}) => {
   const { heatMin, heatMax } = settings;
 
   const minValue =
