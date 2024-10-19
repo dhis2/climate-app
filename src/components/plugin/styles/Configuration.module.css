@@ -1,0 +1,18 @@
+.content h3 {
+  font-size: 14px;
+  font-weight: normal;
+  margin-bottom: 5px;
+}
+
+.orgUnitTree {
+  border: 1px solid #e0e0e0;
+  height: 150px;
+  overflow-y: auto;
+}
+
+.validation {
+  color: rgb(187, 70, 13);
+  margin-top: 6px;
+  font-size: 13px;
+  line-height: 14px;
+}

@@ -1,5 +1,6 @@
 // import PluginItems from "./PluginItems";
 import OrgUnitLoader from "./OrgUnitLoader";
+import Configuration from "./Configuration";
 
 // TODO: Keep in data store
 const pluginItems = [
@@ -67,7 +68,8 @@ const Plugin = (props) => {
     });
   }
 
-  return <OrgUnitLoader {...pluginItem} {...props} />;
+  // return <OrgUnitLoader {...pluginItem} {...props} />;
+  return <Configuration {...props} />;
 };
 
 export default Plugin;
