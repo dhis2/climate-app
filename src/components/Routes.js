@@ -3,6 +3,7 @@ import { useDataEngine } from "@dhis2/app-runtime";
 import Root from "./Root";
 import AboutPage from "./AboutPage";
 import ExplorePage from "./explore/ExplorePage";
+import StationPage from "./station/StationPage";
 import OrgUnit from "./explore/OrgUnit";
 import Tabs from "./explore/Tabs";
 import Forecast from "./explore/forecast/Forecast";
@@ -148,6 +149,10 @@ const Routes = () => {
               children: tabRoutes,
             },
           ],
+        },
+        {
+          path: "station",
+          element: <StationPage />,
         },
         {
           path: "import",

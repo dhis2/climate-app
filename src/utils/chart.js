@@ -65,3 +65,8 @@ export const heatCredits = {
     "ERA5-HEAT / Copernicus Climate Change Service / Google Earth Engine"
   ),
 };
+
+export const airQoCredits = {
+  href: "https://airqo.net",
+  text: i18n.t("AirQo"),
+};
