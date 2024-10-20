@@ -5,7 +5,7 @@ import getChartConfig from "../charts/AirQualityGauge";
 import legend from "../../../data/pm2.5-legend";
 import styles from "./styles/SiteMeasurements.module.css";
 
-const token = "4ZFXXVHKFJYNAMYV"; // TODO: Change
+const token = ""; // TODO: Read from settings / use Routes API
 
 const testData = {
   device: "airqo-g5139",
@@ -94,8 +94,6 @@ const SiteMeasurements = ({ siteId }) => {
   const {
     siteDetails: { name, city },
     aqi_category: category,
-    aqi_color: color,
-    health_tips,
     no2: { value: no2 },
     pm2_5: { value: pm2_5 },
     pm10: { value: pm10 },
@@ -108,11 +106,24 @@ const SiteMeasurements = ({ siteId }) => {
     (item) => item.category === category
   )?.description;
 
-  console.log("time", new Date(time));
+  const formattedTime = new Date(time).toLocaleTimeString([], {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 
   return data ? (
     <div className={styles.container}>
-      <Chart config={getChartConfig(name, pm2_5, category)} />
+      <Chart
+        config={getChartConfig(
+          `${name}, ${city}`,
+          pm2_5,
+          category,
+          formattedTime
+        )}
+      />
       {description && <div className={styles.description}>{description}</div>}
     </div>
   ) : null;

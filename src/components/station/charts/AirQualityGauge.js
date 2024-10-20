@@ -1,18 +1,28 @@
 import i18n from "@dhis2/d2-i18n";
 import legend from "../../../data/pm2.5-legend";
 import { roundOneDecimal } from "../../../utils/calc";
-import { airQoCredits } from "../../../utils/chart";
 
 const thickness = 50;
 
-const getChartConfig = (name, value, category) => ({
+const getChartConfig = (name, value, category, time) => ({
   title: {
-    text: i18n.t("Air Quality PM 2.5"),
+    text: i18n.t("Air Quality PM<sub>2.5</sub>"),
+    useHTML: true,
   },
   subtitle: {
-    text: name,
+    text: `${name}<br>${time}`,
+    style: {
+      fontSize: "14px",
+      lineHeight: "20px",
+    },
   },
-  credits: airQoCredits,
+  credits: {
+    href: "https://airqo.net",
+    text: i18n.t("AirQo"),
+    style: {
+      fontSize: "12px",
+    },
+  },
   chart: {
     type: "gauge",
     plotBackgroundColor: null,
@@ -51,16 +61,21 @@ const getChartConfig = (name, value, category) => ({
       borderRadius: "50%",
     })),
   },
+  tooltip: {
+    useHTML: true,
+  },
   series: [
     {
-      name: "PM2.5",
+      name: "PM<sub>2.5</sub>",
       data: [value],
       tooltip: {
-        valueSuffix: " μg/m3",
+        valueSuffix: " μg/m<sup>3</sup>",
       },
       dataLabels: {
         useHTML: true,
-        format: `${category}<span>${roundOneDecimal(value)} μg/m3</span>`,
+        format: `${category}<span>${roundOneDecimal(
+          value
+        )} μg/m<sup>3</sup></span>`,
         borderWidth: 0,
         className: "airquality-label",
         color: "#333333",
