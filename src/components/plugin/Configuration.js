@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import i18n from "@dhis2/d2-i18n";
+import { Button } from "@dhis2/ui";
 import DataSelect from "./DataSelect";
 import OrgUnitTree from "../shared/OrgUnitTree";
 import useOrgUnit from "../../hooks/useOrgUnit";
+import { datasets } from "./DataSelect";
 import styles from "./styles/Configuration.module.css";
 
 const noGeometryWarning = i18n.t(
@@ -13,24 +15,54 @@ const onlyPointWarning = i18n.t(
   "Data is only available for facilities (point locations)."
 );
 
-const Configuration = (props) => {
-  const [dataset, setDataset] = useState(null);
+const getPluginConfig = (datasetId, orgUnit) => {
+  const { id: orgUnitId, displayName } = orgUnit;
+
+  if (datasetId === "forecast10days") {
+    return {
+      id: `${orgUnitId}/forecast10days`,
+      url: `#/explore/${orgUnitId}/forecast10days`,
+      title: `${displayName}: ${i18n.t("Weather forecast")}`,
+      display: "forecast10days",
+      orgUnitId,
+    };
+  }
+};
+
+const Configuration = ({ config, onDone }) => {
+  const [datasetId, setDatasetId] = useState();
   const [orgUnit, setOrgUnit] = useState(null);
   const loadedOrgUnit = useOrgUnit(orgUnit?.id);
+  const dataset = datasets.find((d) => d.id === datasetId);
   const isLoaded = !!loadedOrgUnit;
   const hasGeometry = loadedOrgUnit?.geometry;
   const geometryType = loadedOrgUnit?.geometry?.type;
+  const isValid =
+    dataset &&
+    orgUnit &&
+    isLoaded &&
+    hasGeometry &&
+    (dataset.geometryType ? geometryType === dataset.geometryType : true);
 
-  // console.log("Configuration", dataset);
+  const onDoneClick = () => onDone(getPluginConfig(datasetId, orgUnit));
+
+  // console.log("Configuration", config, datasetId, orgUnit);
+
+  useEffect(() => {
+    if (config) {
+      setDatasetId(config.display);
+      // setOrgUnit({ id: config.orgUnitId });
+    }
+  }, [config]);
 
   // TODO: Select user org unit
   return (
     <div className={styles.content}>
       <h2>{i18n.t("Configuration")}</h2>
-      <DataSelect value={dataset} onChange={setDataset} />
-      {dataset && (
+      <DataSelect value={datasetId} onChange={setDatasetId} />
+      {datasetId && (
         <>
-          <h3>{i18n.t("Organisation unit")}</h3>
+          <h3>{i18n.t("Select organisation unit")}</h3>
           <div className={styles.orgUnitTree}>
             <OrgUnitTree
               orgUnit={orgUnit}
@@ -48,6 +80,13 @@ const Configuration = (props) => {
             )}
         </>
       )}
+      <Button
+        className={styles.doneButton}
+        disabled={!isValid}
+        onClick={onDoneClick}
+      >
+        {i18n.t("Done")}
+      </Button>
     </div>
   );
 };

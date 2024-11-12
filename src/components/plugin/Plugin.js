@@ -1,75 +1,69 @@
-// import PluginItems from "./PluginItems";
+import { useState, useEffect } from "react";
+import i18n from "@dhis2/d2-i18n";
+import { Button } from "@dhis2/ui";
 import OrgUnitLoader from "./OrgUnitLoader";
 import Configuration from "./Configuration";
+import usePluginConfig from "../../hooks/usePluginConfig";
+import styles from "./styles/Plugin.module.css";
 
-// TODO: Keep in data store
-const pluginItems = [
-  {
-    id: "DiszpKrYNg8/forecast10days",
-    url: "#/explore/DiszpKrYNg8/forecast10days",
-    title: "Ngelehun CHC: Weather forecast",
-    orgUnitId: "DiszpKrYNg8",
-    display: "forecast10days",
-  },
-  {
-    id: "DiszpKrYNg8/temperature/monthly",
-    url: "#/explore/DiszpKrYNg8/temperature/monthly/2023-09/2024-08/1991-2020",
-    title: "Ngelehun CHC: Monthly temperatures 2023-2024",
-    orgUnitId: "DiszpKrYNg8",
-    display: "temperature/monthly",
-    period: { startTime: "2023-09", endTime: "2024-08" },
-    referencePeriod: { id: "1991-2020", startTime: 1991, endTime: 2020 },
-  },
-  {
-    id: "DiszpKrYNg8/temperature/daily",
-    url: "#/explore/DiszpKrYNg8/temperature/daily/2023-09-01/2024-08-31",
-    title: "Ngelehun CHC: Daily Temperatures 2023-2024",
-    orgUnitId: "DiszpKrYNg8",
-    display: "temperature/daily",
-    period: { startTime: "2023-08-01", endTime: "2024-07-12" },
-  },
-  {
-    id: "DiszpKrYNg8/heat/daily",
-    url: "#/explore/DiszpKrYNg8/heat/daily/2023-09-01/2024-08-31",
-    title: "Ngelehun CHC: Daily Temperatures 2023-2024",
-    orgUnitId: "DiszpKrYNg8",
-    display: "heat/daily",
-    period: { startTime: "2023-09-01", endTime: "2024-08-31" },
-  },
-];
+const Plugin = ({
+  dashboardItemId,
+  setDashboardItemDetails,
+  dashboardMode,
+}) => {
+  const [editMode, setEditMode] = useState();
+  const { config, loading, setPluginConfig } = usePluginConfig(dashboardItemId);
 
-// TODO: Keep in data store
-const dashboardItems = {
-  tf116s7c3YO: "DiszpKrYNg8/forecast10days",
-};
+  useEffect(() => {
+    if (config && setDashboardItemDetails) {
+      setDashboardItemDetails({
+        itemTitle: config.title,
+        appUrl: config.url,
+      });
+    }
+  }, [setDashboardItemDetails, config]);
 
-const Plugin = (props) => {
-  /*
-  const { dashboardItemId } = props;
-  const pluginItemId = dashboardItems[dashboardItemId];
+  useEffect(() => {
+    if (
+      dashboardMode === "edit" &&
+      !loading &&
+      !config &&
+      editMode === undefined
+    ) {
+      setEditMode(true);
+    }
+  }, [editMode, config, loading, dashboardMode]);
 
-  if (!pluginItemId) {
-    <PluginItems items={pluginItems} />;
+  if (editMode) {
+    return (
+      <Configuration
+        config={config}
+        onDone={(config) => {
+          setPluginConfig(config);
+          setEditMode(false);
+        }}
+      />
+    );
   }
 
-  const pluginItem = pluginItems.find((item) => item.id === pluginItemId);
-
-  if (!pluginItem) {
-    return <div>Plugin item not found (this should not happen)</div>;
-  }
-  */
-
-  const pluginItem = pluginItems[3];
-
-  if (props.setDashboardItemDetails) {
-    props.setDashboardItemDetails({
-      itemTitle: pluginItem.title,
-      appUrl: pluginItem.url,
-    });
+  if (loading) {
+    return <div>Loading...</div>;
   }
 
-  // return <OrgUnitLoader {...pluginItem} {...props} />;
-  return <Configuration {...props} />;
+  return (
+    <div className={styles.container}>
+      {config ? (
+        <OrgUnitLoader {...config} />
+      ) : (
+        <div>{i18n.t("Not configured")}</div>
+      )}
+      {dashboardMode === "edit" && (
+        <div className={styles.editButton}>
+          <Button onClick={() => setEditMode(true)}>{i18n.t("Edit")}</Button>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default Plugin;

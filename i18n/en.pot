@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-10-17T10:15:42.972Z\n"
-"PO-Revision-Date: 2024-10-17T10:15:42.972Z\n"
+"POT-Creation-Date: 2024-11-12T11:06:57.733Z\n"
+"PO-Revision-Date: 2024-11-12T11:06:57.733Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -626,14 +626,26 @@ msgstr "Org unit parent needs to be above or equal to the org unit level"
 msgid "Daily values will be imported between start and end dates"
 msgstr "Daily values will be imported between start and end dates"
 
+msgid "Selected org unit has no geometry, which is required to display data."
+msgstr "Selected org unit has no geometry, which is required to display data."
+
+msgid "Data is only available for facilities (point locations)."
+msgstr "Data is only available for facilities (point locations)."
+
+msgid "Weather forecast"
+msgstr "Weather forecast"
+
 msgid "Configuration"
 msgstr "Configuration"
 
+msgid "Select organisation unit"
+msgstr "Select organisation unit"
+
+msgid "Done"
+msgstr "Done"
+
 msgid "Select data"
 msgstr "Select data"
-
-msgid "Organisation unit"
-msgstr "Organisation unit"
 
 msgid ""
 "Set y-axis values for charts in the Explore data section to make it easier "

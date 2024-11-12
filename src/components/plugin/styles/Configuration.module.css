@@ -1,12 +1,24 @@
+.content {
+  padding: 10px;
+}
+
+.content h2 {
+  font-size: 15px;
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
 .content h3 {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: normal;
-  margin-bottom: 5px;
+  margin-top: 16px;
+  margin-bottom: 3px;
 }
 
 .orgUnitTree {
   border: 1px solid #e0e0e0;
-  height: 150px;
+  height: 190px;
   overflow-y: auto;
 }
 
@@ -15,4 +27,8 @@
   margin-top: 6px;
   font-size: 13px;
   line-height: 14px;
+}
+
+.doneButton {
+  margin-top: 10px;
 }
