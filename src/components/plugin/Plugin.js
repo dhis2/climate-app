@@ -6,13 +6,12 @@ import Configuration from "./Configuration";
 import usePluginConfig from "../../hooks/usePluginConfig";
 import styles from "./styles/Plugin.module.css";
 
-const Plugin = ({
-  dashboardItemId,
-  setDashboardItemDetails,
-  dashboardMode,
-}) => {
+const Plugin = (props) => {
+  const { dashboardItemId, setDashboardItemDetails, dashboardMode } = props;
   const [editMode, setEditMode] = useState();
   const { config, loading, setPluginConfig } = usePluginConfig(dashboardItemId);
+
+  console.log("Climate Plugin props", props);
 
   useEffect(() => {
     if (config && setDashboardItemDetails) {

@@ -32,7 +32,7 @@ const getPluginConfig = (datasetId, orgUnit) => {
 const Configuration = ({ config, onDone }) => {
   const [datasetId, setDatasetId] = useState();
   const [orgUnit, setOrgUnit] = useState(null);
-  const loadedOrgUnit = useOrgUnit(orgUnit?.id);
+  const loadedOrgUnit = useOrgUnit(orgUnit?.id || config?.orgUnitId);
   const dataset = datasets.find((d) => d.id === datasetId);
   const isLoaded = !!loadedOrgUnit;
   const hasGeometry = loadedOrgUnit?.geometry;
@@ -46,12 +46,9 @@ const Configuration = ({ config, onDone }) => {
 
   const onDoneClick = () => onDone(getPluginConfig(datasetId, orgUnit));
 
-  // console.log("Configuration", config, datasetId, orgUnit);
-
   useEffect(() => {
     if (config) {
       setDatasetId(config.display);
-      // setOrgUnit({ id: config.orgUnitId });
     }
   }, [config]);
 
@@ -60,12 +57,12 @@ const Configuration = ({ config, onDone }) => {
     <div className={styles.content}>
       <h2>{i18n.t("Configuration")}</h2>
       <DataSelect value={datasetId} onChange={setDatasetId} />
-      {datasetId && (
+      {datasetId && loadedOrgUnit && (
         <>
           <h3>{i18n.t("Select organisation unit")}</h3>
           <div className={styles.orgUnitTree}>
             <OrgUnitTree
-              orgUnit={orgUnit}
+              orgUnit={loadedOrgUnit}
               rootIsDefault={false}
               onChange={setOrgUnit}
             />
