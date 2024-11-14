@@ -18,6 +18,8 @@ const ImportData = ({ data, dataElement, features }) => {
   const [mutate, { error }] = useDataMutation(dataImportMutation);
 
   useEffect(() => {
+    console.log("Import", data);
+
     mutate({
       dataValues: data
         .filter((d) => !isNaN(d.value))

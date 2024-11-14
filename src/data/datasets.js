@@ -20,8 +20,16 @@ const relativeHumidityParser = ([dewData, tempData]) =>
     ),
   }));
 
+// meter to mm without scientific notation
+// https://stackoverflow.com/questions/1685680/how-to-avoid-scientific-notation-for-large-numbers-in-javascript
+const precipitationParser = (v) =>
+  (v * 1000).toLocaleString("fullwide", {
+    useGrouping: false,
+  });
+
 export const era5Resolution = i18n.t("Approximately 31 km (0.25°)");
 export const era5LandResolution = i18n.t("Approximately 9 km (0.1°)");
+export const chirpsResolution = i18n.t("Approximately 5 km (0.05°)");
 
 export default [
   {
@@ -91,7 +99,7 @@ export default [
     id: "ECMWF/ERA5_LAND/DAILY_AGGR/total_precipitation_sum",
     datasetId: "ECMWF/ERA5_LAND/DAILY_AGGR",
     name: i18n.t("Precipitation (ERA5-Land)"),
-    shortName: i18n.t("Precipitation"),
+    shortName: i18n.t("Precipitation (ERA5"),
     description: i18n.t("Total precipitation in mm"),
     resolution: era5LandResolution,
     band: "total_precipitation_sum",
@@ -102,9 +110,21 @@ export default [
       periodType: HOURLY,
       periodReducer: "sum",
     },
-    valueParser: (v) => Math.round(v * 1000 * 1000) / 1000, // meter to mm with 3 decimals
+    valueParser: precipitationParser,
     aggregationType: i18n.t("Sum"),
     dataElementCode: "ERA5_LAND_PRECIPITATION",
+  },
+  {
+    id: "UCSB-CHG/CHIRPS/DAILY",
+    datasetId: "UCSB-CHG/CHIRPS/DAILY",
+    name: i18n.t("Precipitation (CHIRPS)"),
+    shortName: i18n.t("Precipitation (CHIRPS)"),
+    description: i18n.t("Precipitation in mm"),
+    resolution: chirpsResolution,
+    band: "precipitation",
+    reducer: "mean",
+    aggregationType: i18n.t("Sum"),
+    dataElementCode: "CHIRPS_PRECIPITATION",
   },
   {
     id: "ECMWF/ERA5_LAND/DAILY_AGGR/dewpoint_temperature_2m",
