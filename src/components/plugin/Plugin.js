@@ -6,18 +6,21 @@ import Configuration from "./Configuration";
 import usePluginConfig from "../../hooks/usePluginConfig";
 import styles from "./styles/Plugin.module.css";
 
+function wait(milliseconds) {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
+}
+
 const Plugin = (props) => {
   const { dashboardItemId, setDashboardItemDetails, dashboardMode } = props;
   const [editMode, setEditMode] = useState();
   const { config, loading, setPluginConfig } = usePluginConfig(dashboardItemId);
-
-  console.log("Climate Plugin props", props);
 
   useEffect(() => {
     if (config && setDashboardItemDetails) {
       setDashboardItemDetails({
         itemTitle: config.title,
         appUrl: config.url,
+        onRemove: () => wait(1000),
       });
     }
   }, [setDashboardItemDetails, config]);
