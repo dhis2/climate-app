@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-11-12T11:06:57.733Z\n"
-"PO-Revision-Date: 2024-11-12T11:06:57.733Z\n"
+"POT-Creation-Date: 2024-11-13T13:42:01.843Z\n"
+"PO-Revision-Date: 2024-11-13T13:42:01.843Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -646,6 +646,12 @@ msgstr "Done"
 
 msgid "Select data"
 msgstr "Select data"
+
+msgid "Not configured"
+msgstr "Not configured"
+
+msgid "Edit"
+msgstr "Edit"
 
 msgid ""
 "Set y-axis values for charts in the Explore data section to make it easier "

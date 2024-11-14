@@ -16,13 +16,13 @@ const onlyPointWarning = i18n.t(
 );
 
 const getPluginConfig = (datasetId, orgUnit) => {
-  const { id: orgUnitId, displayName } = orgUnit;
+  const { id: orgUnitId, properties } = orgUnit;
 
   if (datasetId === "forecast10days") {
     return {
       id: `${orgUnitId}/forecast10days`,
       url: `#/explore/${orgUnitId}/forecast10days`,
-      title: `${displayName}: ${i18n.t("Weather forecast")}`,
+      title: `${properties.name}: ${i18n.t("Weather forecast")}`,
       display: "forecast10days",
       orgUnitId,
     };
@@ -32,7 +32,7 @@ const getPluginConfig = (datasetId, orgUnit) => {
 const Configuration = ({ config, onDone }) => {
   const [datasetId, setDatasetId] = useState();
   const [orgUnit, setOrgUnit] = useState(null);
-  const loadedOrgUnit = useOrgUnit(orgUnit?.id || config?.orgUnitId);
+  const loadedOrgUnit = useOrgUnit(orgUnit?.id);
   const dataset = datasets.find((d) => d.id === datasetId);
   const isLoaded = !!loadedOrgUnit;
   const hasGeometry = loadedOrgUnit?.geometry;
@@ -44,11 +44,12 @@ const Configuration = ({ config, onDone }) => {
     hasGeometry &&
     (dataset.geometryType ? geometryType === dataset.geometryType : true);
 
-  const onDoneClick = () => onDone(getPluginConfig(datasetId, orgUnit));
+  const onDoneClick = () => onDone(getPluginConfig(datasetId, loadedOrgUnit));
 
   useEffect(() => {
     if (config) {
       setDatasetId(config.display);
+      setOrgUnit({ id: config.orgUnitId });
     }
   }, [config]);
 
@@ -57,7 +58,7 @@ const Configuration = ({ config, onDone }) => {
     <div className={styles.content}>
       <h2>{i18n.t("Configuration")}</h2>
       <DataSelect value={datasetId} onChange={setDatasetId} />
-      {datasetId && loadedOrgUnit && (
+      {datasetId && (!config || loadedOrgUnit) && (
         <>
           <h3>{i18n.t("Select organisation unit")}</h3>
           <div className={styles.orgUnitTree}>

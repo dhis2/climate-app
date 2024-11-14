@@ -35,18 +35,20 @@ const Plugin = (props) => {
 
   if (editMode) {
     return (
-      <Configuration
-        config={config}
-        onDone={(config) => {
-          setPluginConfig(config);
-          setEditMode(false);
-        }}
-      />
+      <div className={styles.container}>
+        <Configuration
+          config={config}
+          onDone={(config) => {
+            setPluginConfig(config);
+            setEditMode(false);
+          }}
+        />
+      </div>
     );
   }
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className={styles.container}>Loading...</div>;
   }
 
   return (

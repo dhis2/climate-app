@@ -22,8 +22,6 @@ const OrgUnitTree = ({ orgUnit, rootIsDefault = true, onChange }) => {
       ? [pathArray.slice(0, -1).join("/")]
       : roots?.map((r) => r.path);
 
-  console.log("initiallyExpanded", initiallyExpanded);
-
   // The warnings "The query should be static, don't create it within the render loop!"
   // comes from the OrganisationUnitTree component:
   // https://dhis2.slack.com/archives/C0BP0RABF/p1641544953003000x
@@ -33,7 +31,7 @@ const OrgUnitTree = ({ orgUnit, rootIsDefault = true, onChange }) => {
       selected={orgUnit?.selected || path ? [path] : undefined}
       onChange={onChange}
       singleSelection={true}
-      initiallyExpanded={["/ImspTQPwCqd/O6uvpzGd5pu/YuQRtpLP10I"]}
+      initiallyExpanded={initiallyExpanded}
     />
   ) : error ? (
     <div>{error.message}</div>
