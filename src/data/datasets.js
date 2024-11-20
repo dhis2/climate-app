@@ -99,7 +99,7 @@ export default [
     id: "ECMWF/ERA5_LAND/DAILY_AGGR/total_precipitation_sum",
     datasetId: "ECMWF/ERA5_LAND/DAILY_AGGR",
     name: i18n.t("Precipitation (ERA5-Land)"),
-    shortName: i18n.t("Precipitation (ERA5"),
+    shortName: i18n.t("Precipitation (ERA5)"),
     description: i18n.t("Total precipitation in mm"),
     resolution: era5LandResolution,
     band: "total_precipitation_sum",
