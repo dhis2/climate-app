@@ -20,7 +20,10 @@ const Plugin = (props) => {
       setDashboardItemDetails({
         itemTitle: config.title,
         appUrl: config.url,
-        onRemove: () => wait(1000),
+        onRemove: () =>
+          wait(1000).then(() => {
+            console.log("Item will removed");
+          }),
       });
     }
   }, [setDashboardItemDetails, config]);
