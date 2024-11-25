@@ -13,17 +13,15 @@ function wait(milliseconds) {
 const Plugin = (props) => {
   const { dashboardItemId, setDashboardItemDetails, dashboardMode } = props;
   const [editMode, setEditMode] = useState();
-  const { config, loading, setPluginConfig } = usePluginConfig(dashboardItemId);
+  const { config, loading, setPluginConfig, clearPluginConfig } =
+    usePluginConfig(dashboardItemId);
 
   useEffect(() => {
     if (config && setDashboardItemDetails) {
       setDashboardItemDetails({
         itemTitle: config.title,
         appUrl: config.url,
-        onRemove: () =>
-          wait(1000).then(() => {
-            console.log("Item will removed");
-          }),
+        onRemove: clearPluginConfig,
       });
     }
   }, [setDashboardItemDetails, config]);

@@ -1,13 +1,13 @@
 import { useState, useCallback, useEffect } from "react";
 import { useDataEngine } from "@dhis2/app-runtime";
+import { createKeyInNamespace } from "../utils/dataStore";
 
 const APP_NAMESPACE = "CLIMATE_DATA";
 const PLUGINS_KEY = "plugins";
 
 const resource = `dataStore/${APP_NAMESPACE}/${PLUGINS_KEY}`;
 
-// TODO: Only load one plugin config
-// TODO: Delete plugin config
+// TODO: Only load one plugin config at a time
 const usePluginConfig = (pluginId) => {
   const [loading, setLoading] = useState(true);
   const [plugins, setPlugins] = useState();
@@ -22,22 +22,6 @@ const usePluginConfig = (pluginId) => {
     engine
       .query({ dataStore: { resource: "dataStore" } })
       .then(({ dataStore }) => {
-        const createNamespaceKey = () =>
-          engine
-            .mutate({
-              resource,
-              type: "create",
-              data: {},
-            })
-            .then((response) => {
-              if (response.httpStatusCode === 201) {
-                setLoading(false);
-              } else {
-                setError(response);
-              }
-            })
-            .catch(setError);
-
         if (dataStore.includes(APP_NAMESPACE)) {
           // Fetch plugin configs if namespace/keys exists in data store
           engine
@@ -49,11 +33,15 @@ const usePluginConfig = (pluginId) => {
             .catch((error) => {
               if (error.message.includes("(404)")) {
                 // key not found
-                createNamespaceKey();
+                createKeyInNamespace(engine, resource)
+                  .then(() => setLoading(false))
+                  .catch(setError);
               }
             });
         } else {
-          createNamespaceKey();
+          createKeyInNamespace(engine, resource)
+            .then(() => setLoading(false))
+            .catch(setError);
         }
       });
   }, [engine]);
@@ -81,11 +69,45 @@ const usePluginConfig = (pluginId) => {
     [engine, pluginId, plugins, getPlugins]
   );
 
+  const clearPluginConfig = useCallback(
+    () =>
+      new Promise((resolve, reject) => {
+        const { [pluginId]: removedPlugin, ...remainingPlugins } = plugins;
+
+        engine
+          .mutate({
+            resource,
+            type: "update",
+            data: remainingPlugins,
+          })
+          .then((response) => {
+            if (response.httpStatusCode === 200) {
+              getPlugins();
+              resolve(response);
+            } else {
+              setError(response);
+              reject(response);
+            }
+          })
+          .catch((error) => {
+            setError(error);
+            reject(error);
+          });
+      }),
+    [engine, pluginId, plugins, getPlugins]
+  );
+
   useEffect(() => {
     getPlugins();
   }, [engine, getPlugins]);
 
-  return { config, loading: !config && loading, error, setPluginConfig };
+  return {
+    config,
+    loading: !config && loading,
+    error,
+    setPluginConfig,
+    clearPluginConfig,
+  };
 };
 
 export default usePluginConfig;
