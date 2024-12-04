@@ -48,7 +48,11 @@ const Plugin = (props) => {
   }
 
   if (loading) {
-    return <div className={styles.container}>Loading...</div>;
+    return (
+      <div className={styles.container}>
+        <div className={styles.message}>{i18n.t("Loading")}...</div>
+      </div>
+    );
   }
 
   return (
@@ -57,7 +61,7 @@ const Plugin = (props) => {
         {config ? (
           <OrgUnitLoader {...config} />
         ) : (
-          <div className={styles.notConfigured}>
+          <div className={styles.message}>
             {i18n.t(
               "No data source. Edit this dashboard to configure this item."
             )}

@@ -5,7 +5,7 @@
   position: relative;
 }
 
-.notConfigured {
+.message {
   display: flex;
   justify-content: center;
   align-items: center;

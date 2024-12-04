@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-12-04T13:47:27.860Z\n"
-"PO-Revision-Date: 2024-12-04T13:47:27.860Z\n"
+"POT-Creation-Date: 2024-12-04T13:59:15.469Z\n"
+"PO-Revision-Date: 2024-12-04T13:59:15.469Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -680,6 +680,9 @@ msgstr "Done"
 
 msgid "Choose a data source"
 msgstr "Choose a data source"
+
+msgid "Loading"
+msgstr "Loading"
 
 msgid "No data source. Edit this dashboard to configure this item."
 msgstr "No data source. Edit this dashboard to configure this item."
