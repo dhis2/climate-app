@@ -6,10 +6,6 @@ import Configuration from "./Configuration";
 import usePluginConfig from "../../hooks/usePluginConfig";
 import styles from "./styles/Plugin.module.css";
 
-function wait(milliseconds) {
-  return new Promise((resolve) => setTimeout(resolve, milliseconds));
-}
-
 const Plugin = (props) => {
   const { dashboardItemId, setDashboardItemDetails, dashboardMode } = props;
   const [editMode, setEditMode] = useState();
@@ -56,18 +52,26 @@ const Plugin = (props) => {
   }
 
   return (
-    <div className={styles.container}>
-      {config ? (
-        <OrgUnitLoader {...config} />
-      ) : (
-        <div>{i18n.t("Not configured")}</div>
-      )}
+    <>
+      <div className={styles.container}>
+        {config ? (
+          <OrgUnitLoader {...config} />
+        ) : (
+          <div className={styles.notConfigured}>
+            {i18n.t(
+              "No data source. Edit this dashboard to configure this item."
+            )}
+          </div>
+        )}
+      </div>
       {dashboardMode === "edit" && (
         <div className={styles.editButton}>
-          <Button onClick={() => setEditMode(true)}>{i18n.t("Edit")}</Button>
+          <Button onClick={() => setEditMode(true)}>
+            {i18n.t("Configure data source")}
+          </Button>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

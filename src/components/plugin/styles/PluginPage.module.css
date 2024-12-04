@@ -1,34 +1,52 @@
+.pluginPage {
+  height: calc(100% - 50px);
+}
+
 .dashboard {
-  background-color: #f4f6f8;
-  padding: 100px;
+  padding: 50px;
+  height: calc(100% - 50px);
   margin-right: 30px;
+  background-color: #f4f6f8;
 }
 
 .dashboardItem {
+  position: absolute;
   background-color: #fff;
   border-radius: 3px;
   box-shadow: 0 0 3px 0 #999;
   width: 550px;
-  height: 564px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
   overflow: hidden !important;
 }
 
 .dashboardItemHeader {
+  display: flex;
   margin: 8px;
-  line-height: 18.4px;
+  line-height: 30px;
 }
 
 .dashboardItemHeader p {
   color: rgb(64, 75, 90);
   font-size: 14px;
   font-weight: 700;
+  margin: 0;
+  padding: 0;
 }
 
 .dashboardItemContent {
-  margin: 0 4px 4px 4px;
+  box-sizing: border-box;
+  margin-block-end: 4px;
+  margin-block-start: 0;
+  margin-inline-end: 4px;
+  margin-inline-start: 4px;
+  flex: 1 1;
+  overflow: hidden;
+  position: relative;
 }
 
 .plugin {
-  box-sizing: content-box;
   overflow: hidden !important;
+  height: 100%;
 }

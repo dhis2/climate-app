@@ -1,12 +1,12 @@
 import i18n from "@dhis2/d2-i18n";
 import { SingleSelectField, SingleSelectOption } from "@dhis2/ui";
+import styles from "./styles/DataSelect.module.css";
 
 export const datasets = [
   {
     id: "forecast10days",
     name: "10 days forecast",
     path: "/forecast10days",
-    // description: "Only available for facilities (points)",
     geometryType: "Point",
   },
 ];
@@ -14,9 +14,9 @@ export const datasets = [
 const DataSelect = ({ value, onChange }) => {
   const dataset = datasets.find((d) => d.id === value);
   return (
-    <div>
+    <div className={styles.dataSelect}>
       <SingleSelectField
-        label={i18n.t("Select data")}
+        label={i18n.t("Choose a data source")}
         selected={value}
         onChange={({ selected }) => onChange(selected)}
       >

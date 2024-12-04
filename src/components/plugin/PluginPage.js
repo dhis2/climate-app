@@ -6,12 +6,12 @@ const PluginPage = () => {
   const [details, setDetails] = useState(null);
 
   return (
-    <div>
+    <div className={styles.pluginPage}>
       <h1>Plugin</h1>
       <div className={styles.dashboard}>
         <div className={styles.dashboardItem}>
           <div className={styles.dashboardItemHeader}>
-            {details && <p>{details.itemTitle}</p>}
+            <p>{details ? details.itemTitle : "Climate Data"}</p>
           </div>
           <div className={styles.dashboardItemContent}>
             <div className={styles.plugin}>

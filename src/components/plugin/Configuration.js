@@ -53,14 +53,12 @@ const Configuration = ({ config, onDone }) => {
     }
   }, [config]);
 
-  // TODO: Select user org unit
   return (
-    <div className={styles.content}>
-      <h2>{i18n.t("Configuration")}</h2>
+    <div className={styles.configuration}>
       <DataSelect value={datasetId} onChange={setDatasetId} />
       {datasetId && (!config || loadedOrgUnit) && (
-        <>
-          <h3>{i18n.t("Select organisation unit")}</h3>
+        <div className={styles.orgUnitSelect}>
+          <h3>{i18n.t("Choose an organisation unit")}</h3>
           <div className={styles.orgUnitTree}>
             <OrgUnitTree
               orgUnit={loadedOrgUnit}
@@ -76,15 +74,17 @@ const Configuration = ({ config, onDone }) => {
             geometryType !== dataset.geometryType && (
               <div className={styles.validation}>{onlyPointWarning}</div>
             )}
-        </>
+        </div>
       )}
-      <Button
-        className={styles.doneButton}
-        disabled={!isValid}
-        onClick={onDoneClick}
-      >
-        {i18n.t("Done")}
-      </Button>
+      <div className={styles.actions}>
+        <Button
+          className={styles.doneButton}
+          disabled={!isValid}
+          onClick={onDoneClick}
+        >
+          {i18n.t("Done")}
+        </Button>
+      </div>
     </div>
   );
 };
