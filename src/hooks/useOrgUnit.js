@@ -21,6 +21,7 @@ const useOrgUnit = (id) => {
         geometry: ou.geometry,
         properties: {
           name: ou.displayName,
+          path: ou.path,
         },
       }),
   });
