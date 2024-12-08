@@ -14,7 +14,7 @@ const AboutPage = () => (
     </p>
     <p>
       {i18n.t(
-        "The app allows you to explore and import temperature and precipitation data in DHIS2. The data source is ERA5, which is considered the most accurate and complete global climate dataset available. The video below shows you how this dataset was created by combining weather observations with a weather model (climate reanalysis)."
+        "The app allows you to explore and import temperature, precipitation, humidity and heat stress data in DHIS2. The main data source is ERA5-Land, which is considered the most accurate and complete global climate dataset available. The video below shows you how this dataset was created by combining weather observations with a weather model (climate reanalysis)."
       )}
     </p>
     <iframe
@@ -25,10 +25,28 @@ const AboutPage = () => (
     ></iframe>
     <p>
       <a
-        href="https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-land"
+        href="https://cds.climate.copernicus.eu/datasets/reanalysis-era5-land"
         target="_blank"
       >
         {i18n.t("Read about ERA5-Land on Copernicus Climate Data Store")}
+      </a>
+    </p>
+    <p>
+      {i18n.t(
+        "In additon to ERA5-Land, precipitation data can also be imported from the CHIRPS dataset. For heat stress we use data from ERA5-HEAT."
+      )}
+    </p>
+    <p>
+      <a href="https://www.chc.ucsb.edu/data/chirps" target="_blank">
+        {i18n.t("Read about CHIRPS on Climate Hazards Center")}
+      </a>
+    </p>
+    <p>
+      <a
+        href="https://cds.climate.copernicus.eu/datasets/derived-utci-historical"
+        target="_blank"
+      >
+        {i18n.t("Read about ERA5-HEAT on Copernicus Climate Data Store")}
       </a>
     </p>
     <p>
@@ -47,18 +65,15 @@ const AboutPage = () => (
       )}
     </p>
     <p>
-      After the data is imported, you should generate the analytics tables in
-      the Data Administration app. This will allow you to see the data in the
-      DHIS2 analytics apps.
+      {i18n.t(
+        "After the data is imported, you should generate the analytics tables in the Data Administration app. This will allow you to see the data in the DHIS2 analytics apps."
+      )}
     </p>
     <h2>{i18n.t("How the data is calculated")}</h2>
     <p>
-      The data is calculated for your organsation units on Google Earth Engine.
-      Pleace check the resolution of the data. If you select a health facility
-      we use the value where the facility is located. If you select a district
-      we automatically aggregate the values within that district. If two org
-      units are close to each other (within the resolution), they will have the
-      same data values.
+      {i18n.t(
+        "The data is calculated for your organsation units on Google Earth Engine. Pleace check the resolution of the data. If you select a health facility we use the value where the facility is located. If you select a district we automatically aggregate the values within that district. If two org units are close to each other (within the resolution), they will have the same data values."
+      )}
     </p>
   </div>
 );
