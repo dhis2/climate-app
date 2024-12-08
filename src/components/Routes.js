@@ -15,6 +15,7 @@ import HumidityDaily from "./explore/humidity/HumidityDaily";
 import HeatMonthly from "./explore/heat/HeatMonthly";
 import HeatDaily from "./explore/heat/HeatDaily";
 import ClimateChange from "./explore/climateChange/ClimateChange";
+import AirQuality from "./explore/airQuality/AirQuality";
 import ImportPage from "./import/ImportPage";
 import SetupPage from "./setup/SetupPage";
 import SettingsPage from "./settings/SettingsPage";
@@ -101,6 +102,17 @@ const tabRoutes = [
       {
         path: ":month/:referencePeriodId",
         element: <ClimateChange />,
+      },
+    ],
+  },
+  {
+    path: "airquality",
+    element: <Tabs />,
+    children: [
+      {
+        // path: ":month/:referencePeriodId",
+        index: true,
+        element: <AirQuality />,
       },
     ],
   },

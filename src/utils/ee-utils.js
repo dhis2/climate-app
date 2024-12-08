@@ -344,7 +344,5 @@ export const getCacheKey = (dataset, period, feature, filter) => {
   const bandkey = Array.isArray(band) ? band.join("-") : band;
   const filterKey = getKeyFromFilter(filter);
 
-  return `${id}-${datasetId}-${bandkey}-${startTime}-${endTime}${getKeyFromFilter(
-    filter
-  )}`;
+  return `${id}-${datasetId}-${bandkey}-${startTime}-${endTime}${filterKey}`;
 };
