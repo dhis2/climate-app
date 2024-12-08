@@ -6,7 +6,7 @@ import getParticulateMatterConfig from "./charts/particulateMatter";
 import getCarbonMonoxideConfig from "./charts/carbonMonoxide";
 import getNitrogetDioxideConfig from "./charts/nitrogenDioxide";
 import getSulfurDioxideConfig from "./charts/sulfurDioxide";
-import exploreStore from "../../../utils/exploreStore";
+import exploreStore from "../../../store/exploreStore";
 import useEarthEngineTimeSeries from "../../../hooks/useEarthEngineTimeSeries";
 import { camsDaily } from "../../../data/datasets";
 
