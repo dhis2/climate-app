@@ -6,6 +6,7 @@ import {
 } from "../utils/time";
 import { defaultReferencePeriod } from "../components/explore/ReferencePeriodSelect";
 import { MONTHLY } from "../utils/time";
+import { NDVI } from "../components/explore/land/VegetationIndexSelect";
 
 const exploreStore = create((set) => ({
   orgUnit: null,
@@ -15,6 +16,8 @@ const exploreStore = create((set) => ({
   monthlyPeriod: getDefaultMonthlyPeriod(),
   referencePeriod: defaultReferencePeriod,
   month: getLastMonth(),
+  vegetationIndex: NDVI,
+  landCoverType: 13,
   setOrgUnit: (orgUnit) => set({ orgUnit }),
   setTab: (tab) => set({ tab }),
   setPeriodType: (periodType) => set({ periodType }),
@@ -22,6 +25,8 @@ const exploreStore = create((set) => ({
   setMonthlyPeriod: (monthlyPeriod) => set({ monthlyPeriod }),
   setReferencePeriod: (referencePeriod) => set({ referencePeriod }),
   setMonth: (month) => set({ month }),
+  setVegetationIndex: (vegetationIndex) => set({ vegetationIndex }),
+  setLandCoverType: (landCoverType) => set({ landCoverType }),
 }));
 
 export default exploreStore;
