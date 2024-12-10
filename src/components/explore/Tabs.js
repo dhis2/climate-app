@@ -16,6 +16,7 @@ const tabs = [
   // { id: "land", label: i18n.t("Land") },
   { id: "vegetation", label: i18n.t("Vegetation") },
   { id: "landcover", label: i18n.t("Land cover") },
+  { id: "airquality", label: i18n.t("Air quality") },
 ];
 
 const Tabs = () => {

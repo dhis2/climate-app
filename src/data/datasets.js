@@ -29,6 +29,7 @@ const precipitationParser = (v) =>
 
 export const era5Resolution = i18n.t("Approximately 31 km (0.25°)");
 export const era5LandResolution = i18n.t("Approximately 9 km (0.1°)");
+export const camsResolution = i18n.t("Approximately 40 km");
 export const chirpsResolution = i18n.t("Approximately 5 km (0.05°)");
 
 export default [
@@ -272,4 +273,15 @@ export const era5HeatDaily = {
 export const era5HeatMonthly = {
   ...era5HeatDaily,
   aggregationPeriod: MONTHLY,
+};
+
+export const camsDaily = {
+  datasetId: "ECMWF/CAMS/NRT",
+  band: [
+    "particulate_matter_d_less_than_25_um_surface",
+    "total_column_nitrogen_dioxide_surface",
+    "total_column_sulphur_dioxide_surface",
+    "total_column_carbon_monoxide_surface",
+  ],
+  resolution: camsResolution,
 };

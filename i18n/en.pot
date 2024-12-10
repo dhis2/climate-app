@@ -237,6 +237,33 @@ msgstr "Vegetation"
 msgid "Land cover"
 msgstr "Land cover"
 
+msgid "Air quality"
+msgstr "Air quality"
+
+msgid "{{name}}: Carbon monoxide {{period}}"
+msgstr "{{name}}: Carbon monoxide {{period}}"
+
+msgid "Total column carbon monoxide"
+msgstr "Total column carbon monoxide"
+
+msgid "{{name}}: Nitrogen dioxide {{period}}"
+msgstr "{{name}}: Nitrogen dioxide {{period}}"
+
+msgid "Total column nitrogen dioxide"
+msgstr "Total column nitrogen dioxide"
+
+msgid "{{name}}: Particle pollution {{period}}"
+msgstr "{{name}}: Particle pollution {{period}}"
+
+msgid "Particulate matter d < 2.5 um (PM2.5)"
+msgstr "Particulate matter d < 2.5 um (PM2.5)"
+
+msgid "{{name}}: Sulphur dioxide {{period}}"
+msgstr "{{name}}: Sulphur dioxide {{period}}"
+
+msgid "Total column sulphur dioxide"
+msgstr "Total column sulphur dioxide"
+
 msgid ""
 "Temperature anomaly is the difference of a temperature from a reference "
 "value, calculated as the average temperature over a period of 30 years. "
@@ -934,6 +961,9 @@ msgstr "Approximately 31 km (0.25°)"
 
 msgid "Approximately 9 km (0.1°)"
 msgstr "Approximately 9 km (0.1°)"
+
+msgid "Approximately 40 km"
+msgstr "Approximately 40 km"
 
 msgid "Approximately 5 km (0.05°)"
 msgstr "Approximately 5 km (0.05°)"

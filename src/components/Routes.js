@@ -17,6 +17,7 @@ import HeatDaily from "./explore/heat/HeatDaily";
 import ClimateChange from "./explore/climateChange/ClimateChange";
 import LandCover from "./explore/land/LandCover";
 import Vegetation from "./explore/land/Vegetation";
+import AirQuality from "./explore/airQuality/AirQuality";
 import ImportPage from "./import/ImportPage";
 import SetupPage from "./setup/SetupPage";
 import SettingsPage from "./settings/SettingsPage";
@@ -103,6 +104,17 @@ const tabRoutes = [
       {
         path: ":month/:referencePeriodId",
         element: <ClimateChange />,
+      },
+    ],
+  },
+  {
+    path: "airquality",
+    element: <Tabs />,
+    children: [
+      {
+        // path: ":month/:referencePeriodId",
+        index: true,
+        element: <AirQuality />,
       },
     ],
   },
