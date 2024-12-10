@@ -15,6 +15,8 @@ import HumidityDaily from "./explore/humidity/HumidityDaily";
 import HeatMonthly from "./explore/heat/HeatMonthly";
 import HeatDaily from "./explore/heat/HeatDaily";
 import ClimateChange from "./explore/climateChange/ClimateChange";
+import LandCover from "./explore/land/LandCover";
+import Vegetation from "./explore/land/Vegetation";
 import ImportPage from "./import/ImportPage";
 import SetupPage from "./setup/SetupPage";
 import SettingsPage from "./settings/SettingsPage";
@@ -101,6 +103,28 @@ const tabRoutes = [
       {
         path: ":month/:referencePeriodId",
         element: <ClimateChange />,
+      },
+    ],
+  },
+  {
+    path: "vegetation",
+    element: <Tabs />,
+    children: [
+      {
+        path: ":vegetationIndex",
+        // index: true,
+        element: <Vegetation />,
+      },
+    ],
+  },
+  {
+    path: "landcover",
+    element: <Tabs />,
+    children: [
+      {
+        // path: ":month/:referencePeriodId",
+        index: true,
+        element: <LandCover />,
       },
     ],
   },
