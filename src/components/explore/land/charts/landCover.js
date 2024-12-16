@@ -32,7 +32,7 @@ const getChartConfig = (name, data, type) => {
     credits: landCoverCredits,
     yAxis: {
       min: 0,
-      max: 50,
+      max: 20,
       labels: {
         format: "{value}%",
       },

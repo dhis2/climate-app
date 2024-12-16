@@ -13,10 +13,9 @@ const tabs = [
   { id: "humidity", label: i18n.t("Humidity") },
   { id: "heat", label: i18n.t("Heat") },
   { id: "climatechange", label: i18n.t("Climate change") },
-  // { id: "land", label: i18n.t("Land") },
+  { id: "airquality", label: i18n.t("Air quality") },
   { id: "vegetation", label: i18n.t("Vegetation") },
   { id: "landcover", label: i18n.t("Land cover") },
-  { id: "airquality", label: i18n.t("Air quality") },
 ];
 
 const Tabs = () => {
