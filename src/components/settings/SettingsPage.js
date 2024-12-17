@@ -2,6 +2,7 @@ import i18n from "@dhis2/d2-i18n";
 import StartPageSelect from "./StartPageSelect";
 import TimeZoneSelect from "./TimeZoneSelect";
 import ChartSettings from "./ChartSettings";
+import DataSettings from "./DataSettings";
 import useAppSettings from "../../hooks/useAppSettings";
 import styles from "./styles/SettingsPage.module.css";
 
@@ -21,6 +22,7 @@ const SettingsPage = () => {
       <StartPageSelect startPage={startPage} onChange={changeSetting} />
       <TimeZoneSelect timeZone={timeZone} onChange={changeSetting} />
       <ChartSettings />
+      <DataSettings />
     </div>
   );
 };
