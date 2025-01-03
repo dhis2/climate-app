@@ -67,7 +67,7 @@ export const getCurrentYear = () => new Date().getFullYear();
  * Returns the current month
  * @returns {String} Current month
  */
-export const getCurrentMonth = () => padWithZeroes(new Date().getMonth() + 1);
+export const getCurrentMonth = () => new Date().getMonth() + 1;
 
 /**
  * Returns the last month
@@ -80,10 +80,14 @@ export const getLastMonth = (lagTime = 10) => {
 
   // The delay is to ensure that the previous month is fully available
   if (currentDay > lagTime) {
-    return padWithZeroes(currentMonth === 1 ? 12 : currentMonth - 1);
+    // console.log("getLastMonth A", currentMonth);
+    // return padWithZeroes(currentMonth === 1 ? 12 : currentMonth - 1);
+    return currentMonth === 1 ? 12 : currentMonth - 1;
   }
 
-  return padWithZeroes(currentMonth === 1 ? 11 : currentMonth - 2);
+  // console.log("getLastMonth B", currentMonth);
+  // return padWithZeroes(currentMonth === 1 ? 11 : currentMonth - 2);
+  return currentMonth === 1 ? 11 : currentMonth - 2;
 };
 
 // Returns the default monthly period (12 months back)

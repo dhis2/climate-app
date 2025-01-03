@@ -25,6 +25,9 @@ const TemperatureMonthly = () => {
     orgUnit
   );
 
+  return null;
+
+  /*
   return (
     <>
       <PeriodTypeSelect />
@@ -46,6 +49,7 @@ const TemperatureMonthly = () => {
       <Resolution resolution={era5Monthly.resolution} />
     </>
   );
+  */
 };
 
 export default TemperatureMonthly;

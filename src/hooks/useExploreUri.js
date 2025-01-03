@@ -79,7 +79,9 @@ const useExploreUri = () => {
         store.setPeriodType(periodType);
 
         if (periodType === MONTHLY) {
-          store.setMonthlyPeriod({ startTime, endTime });
+          console.log("endTime", endTime);
+
+          // store.setMonthlyPeriod({ startTime, endTime });
         } else if (periodType === "DAILY") {
           store.setDailyPeriod({ startTime, endTime });
         }
