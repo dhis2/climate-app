@@ -5,7 +5,6 @@ import ReferencePeriod from "../ReferencePeriodSelect";
 import DataLoader from "../../shared/DataLoader";
 import Resolution from "../../shared/Resolution";
 import getMonthlyConfig from "./charts/temperatureMonthly";
-
 import useEarthEngineTimeSeries from "../../../hooks/useEarthEngineTimeSeries";
 import useEarthEngineClimateNormals from "../../../hooks/useEarthEngineClimateNormals";
 import exploreStore from "../../../store/exploreStore";
