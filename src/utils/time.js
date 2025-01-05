@@ -65,7 +65,7 @@ export const getCurrentYear = () => new Date().getFullYear();
 
 /**
  * Returns the current month
- * @returns {String} Current month
+ * @returns {Number} Current month
  */
 export const getCurrentMonth = () => new Date().getMonth() + 1;
 
