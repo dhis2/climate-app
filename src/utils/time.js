@@ -71,6 +71,7 @@ export const getCurrentMonth = () => new Date().getMonth() + 1;
 
 /**
  * Returns the last available month
+ * @param {Date} date Current date
  * @param {Number} lagTime Delay in days (10 days for ERA5-Land)
  * @returns {Array} Last year and month
  */
