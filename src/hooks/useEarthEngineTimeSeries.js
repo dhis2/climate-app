@@ -47,13 +47,11 @@ const useEarthEngineTimeSeries = (dataset, period, feature, filter) => {
           filter
         ).then(parseIds);
 
-        cachedPromise[key]
-          .then((data) => {
-            if (!canceled) {
-              setData(data);
-            }
-          })
-          .catch((error) => console.error(error));
+        cachedPromise[key].then((data) => {
+          if (!canceled) {
+            setData(data);
+          }
+        });
       });
 
       return () => {
