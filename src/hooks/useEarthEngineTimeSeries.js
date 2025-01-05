@@ -37,7 +37,6 @@ const useEarthEngineTimeSeries = (dataset, period, feature, filter) => {
       }
 
       setData();
-
       eePromise.then((ee) => {
         cachedPromise[key] = getTimeSeriesData(
           ee,
