@@ -37,6 +37,7 @@ const useEarthEngineTimeSeries = (dataset, period, feature, filter) => {
       }
 
       setData();
+
       eePromise.then((ee) => {
         cachedPromise[key] = getTimeSeriesData(
           ee,
@@ -46,11 +47,13 @@ const useEarthEngineTimeSeries = (dataset, period, feature, filter) => {
           filter
         ).then(parseIds);
 
-        cachedPromise[key].then((data) => {
-          if (!canceled) {
-            setData(data);
-          }
-        });
+        cachedPromise[key]
+          .then((data) => {
+            if (!canceled) {
+              setData(data);
+            }
+          })
+          .catch((error) => console.error(error));
       });
 
       return () => {

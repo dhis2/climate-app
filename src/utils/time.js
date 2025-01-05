@@ -70,30 +70,28 @@ export const getCurrentYear = () => new Date().getFullYear();
 export const getCurrentMonth = () => new Date().getMonth() + 1;
 
 /**
- * Returns the last month
+ * Returns the last available month
  * @param {Number} lagTime Delay in days (10 days for ERA5-Land)
- * @returns {String} Last month
+ * @returns {Array} Last year and month
  */
-export const getLastMonth = (lagTime = 10) => {
-  const currentMonth = getCurrentMonth();
-  const currentDay = new Date().getDate();
+export const getLastMonth = (date, lagTime = 10) => {
+  // Based on https://stackoverflow.com/a/7937257
+  const newDate = new Date(date.getTime());
+  const month = newDate.getMonth();
+  const monthsBack = newDate.getDate() > lagTime ? 1 : 2;
 
-  // The delay is to ensure that the previous month is fully available
-  if (currentDay > lagTime) {
-    // console.log("getLastMonth A", currentMonth);
-    // return padWithZeroes(currentMonth === 1 ? 12 : currentMonth - 1);
-    return currentMonth === 1 ? 12 : currentMonth - 1;
+  newDate.setMonth(month - monthsBack);
+
+  while (newDate.getMonth() === month) {
+    newDate.setDate(newDate.getDate() - 1);
   }
 
-  // console.log("getLastMonth B", currentMonth);
-  // return padWithZeroes(currentMonth === 1 ? 11 : currentMonth - 2);
-  return currentMonth === 1 ? 11 : currentMonth - 2;
+  return [newDate.getFullYear(), newDate.getMonth() + 1];
 };
 
 // Returns the default monthly period (12 months back)
 export const getDefaultMonthlyPeriod = (lagTime) => {
-  const endYear = getCurrentYear();
-  const endMonth = getLastMonth(lagTime);
+  const [endYear, endMonth] = getLastMonth(new Date(), lagTime);
   const endTime = new Date(endYear, endMonth, 0);
   const startTime = new Date(endYear, endTime.getMonth() - 11, 1);
   const startYear = startTime.getFullYear();
