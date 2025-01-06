@@ -14,7 +14,7 @@ const getChartConfig = (
   referencePeriod,
   settings
 ) => {
-  const normal = normals.find((n) => n.id === month)[band];
+  const normal = normals.find((n) => n.id === String(month))[band];
   const years = data.map((d) => d.id.substring(0, 4));
   const monthName = months.find((m) => m.id === month).name;
   const series = data.map((d) => roundOneDecimal(d[band] - normal));
