@@ -72,14 +72,14 @@ export const getCurrentMonth = () => new Date().getMonth() + 1;
 /**
  * Returns the last available month
  * @param {Date} date Current date
- * @param {Number} lagTime Delay in days (10 days for ERA5-Land)
+ * @param {Number} lagDays Delay in days (10 days for ERA5-Land)
  * @returns {Array} Last year and month
  */
-export const getLastMonth = (date, lagTime = 10) => {
+export const getLastMonth = (date, lagDays = 10) => {
   // Based on https://stackoverflow.com/a/7937257
   const newDate = new Date(date.getTime());
   const month = newDate.getMonth();
-  const monthsBack = newDate.getDate() > lagTime ? 1 : 2;
+  const monthsBack = newDate.getDate() > lagDays ? 1 : 2;
 
   newDate.setMonth(month - monthsBack);
 
@@ -91,8 +91,8 @@ export const getLastMonth = (date, lagTime = 10) => {
 };
 
 // Returns the default monthly period (12 months back)
-export const getDefaultMonthlyPeriod = (lagTime) => {
-  const [endYear, endMonth] = getLastMonth(new Date(), lagTime);
+export const getDefaultMonthlyPeriod = (lagDays) => {
+  const [endYear, endMonth] = getLastMonth(new Date(), lagDays);
   const endTime = new Date(endYear, endMonth, 0);
   const startTime = new Date(endYear, endTime.getMonth() - 11, 1);
   const startYear = startTime.getFullYear();
@@ -117,13 +117,13 @@ export const getDefaultImportPeriod = (calendar) => ({
 
 /**
  * Returns the default explore data period (12 months back)
- * @param {Number} lagTime Delay in days (10 days for ERA5-Land)
+ * @param {Number} lagDays Delay in days (10 days for ERA5-Land)
  * @returns {Object} Default explore data period with standard date strings
  */
-export const getDefaultExplorePeriod = (lagTime = 10) => {
+export const getDefaultExplorePeriod = (lagDays = 10) => {
   const endTime = new Date();
 
-  endTime.setDate(endTime.getDate() - lagTime);
+  endTime.setDate(endTime.getDate() - lagDays); // Subtract lag days
   endTime.setDate(0); // Last day of the previous month
 
   // First day 12 months back
