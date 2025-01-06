@@ -75,7 +75,7 @@ export const getCurrentMonth = () => new Date().getMonth() + 1;
  * @param {Number} lagDays Delay in days (10 days for ERA5-Land)
  * @returns {Array} Last year and month
  */
-export const getLastMonth = (date, lagDays = 10) => {
+export const getLastMonth = (date = new Date(), lagDays = 10) => {
   // Based on https://stackoverflow.com/a/7937257
   const newDate = new Date(date.getTime());
   const month = newDate.getMonth();
