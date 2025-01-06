@@ -30,7 +30,7 @@ const ClimateChange = () => {
     () => [
       {
         type: "calendarRange",
-        arguments: [parseInt(month), parseInt(month), "month"],
+        arguments: [month, month, "month"],
       },
     ],
     [month]
