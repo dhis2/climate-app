@@ -74,7 +74,7 @@ const useExploreUri = () => {
       const { month, startTime, endTime, referencePeriodId } = params;
 
       if (tab === "climatechange") {
-        store.setMonth(month);
+        store.setMonth(Number(month));
       } else if (hasMonthlyAndDailyData.includes(tab)) {
         const periodType = pathname.split("/")[4]?.toUpperCase() || MONTHLY;
         store.setPeriodType(periodType);
