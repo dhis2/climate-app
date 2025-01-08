@@ -42,7 +42,8 @@ const useExploreUri = () => {
       const baseUri = `/${section}/${orgUnit.id}/${tab}`;
       let uri;
 
-      if (tab === "forecast10days") {
+      // if (tab === "forecast10days") {
+      if (tab === "forecast10days" || tab === "airquality") {
         uri = baseUri;
       } else if (tab === "climatechange" && month && referencePeriod) {
         uri = `${baseUri}/${month}/${referencePeriod.id}`;
