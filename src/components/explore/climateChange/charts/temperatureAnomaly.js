@@ -2,6 +2,7 @@ import i18n from "@dhis2/d2-i18n";
 import { colors } from "@dhis2/ui";
 import { animation, credits } from "../../../../utils/chart";
 import { roundOneDecimal } from "../../../../utils/calc";
+import { padWithZeroes } from "../../../../utils/time";
 import { months } from "../../MonthSelect";
 
 const band = "temperature_2m";
@@ -14,7 +15,7 @@ const getChartConfig = (
   referencePeriod,
   settings
 ) => {
-  const normal = normals.find((n) => n.id === month)[band];
+  const normal = normals.find((n) => n.id === padWithZeroes(month))[band];
   const years = data.map((d) => d.id.substring(0, 4));
   const monthName = months.find((m) => m.id === month).name;
   const series = data.map((d) => roundOneDecimal(d[band] - normal));

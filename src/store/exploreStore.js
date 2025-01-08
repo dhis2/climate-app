@@ -14,7 +14,7 @@ const exploreStore = create((set) => ({
   dailyPeriod: getDefaultExplorePeriod(),
   monthlyPeriod: getDefaultMonthlyPeriod(),
   referencePeriod: defaultReferencePeriod,
-  month: getLastMonth(),
+  month: getLastMonth()[1],
   setOrgUnit: (orgUnit) => set({ orgUnit }),
   setTab: (tab) => set({ tab }),
   setPeriodType: (periodType) => set({ periodType }),
