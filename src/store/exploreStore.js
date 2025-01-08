@@ -15,7 +15,7 @@ const exploreStore = create((set) => ({
   dailyPeriod: getDefaultExplorePeriod(),
   monthlyPeriod: getDefaultMonthlyPeriod(),
   referencePeriod: defaultReferencePeriod,
-  month: getLastMonth(),
+  month: getLastMonth()[1],
   vegetationIndex: NDVI,
   landCoverType: 13,
   setOrgUnit: (orgUnit) => set({ orgUnit }),
