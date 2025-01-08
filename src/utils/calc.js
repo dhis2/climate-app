@@ -5,6 +5,8 @@ export const getRelativeHumidity = (temperature, dewpoint) =>
 
 export const roundOneDecimal = (v) => Math.round(v * 10) / 10;
 
+export const roundTwoDecimals = (v) => Math.round(v * 100) / 100;
+
 export const kelvinToCelsius = (k) => k - 273.15;
 
 export const toCelcius = (k) => roundOneDecimal(kelvinToCelsius(k));
