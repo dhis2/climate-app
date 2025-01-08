@@ -1,44 +1,27 @@
 import i18n from "@dhis2/d2-i18n";
 import { colors } from "@dhis2/ui";
-import {
-  animation,
-  credits,
-  getSelectedMonths,
-  getTemperatureMonthNormal,
-  getMonthlyPeriod,
-} from "../../../utils/chart";
-import { toCelcius } from "../../../utils/calc";
+import { animation, credits, getDailyPeriod } from "../../../../utils/chart";
+import { toCelcius } from "../../../../utils/calc";
 
-const getChartConfig = (name, data, monthlyPeriod, referencePeriod) => {
-  const months = getSelectedMonths(data, monthlyPeriod);
+const getChart = (name, data, settings) => {
+  const { tempMin, tempMax } = settings;
 
-  const series = months.map((d) => ({
+  const series = data.map((d) => ({
     x: new Date(d.id).getTime(),
     y: toCelcius(d["temperature_2m"]),
   }));
 
-  const minMax = months.map((d) => [
+  const minMax = data.map((d) => [
     new Date(d.id).getTime(),
     toCelcius(d["temperature_2m_min"]),
     toCelcius(d["temperature_2m_max"]),
   ]);
 
-  const normals = months.map((d) => ({
-    x: new Date(d.id).getTime(),
-    y: getTemperatureMonthNormal(data, d.id.substring(5, 7), referencePeriod),
-  }));
-
   return {
     title: {
-      text: i18n.t("{{name}}: Monthly temperatures {{period}}", {
+      text: i18n.t("{{name}}: Daily temperatures {{period}}", {
         name,
-        period: getMonthlyPeriod(monthlyPeriod),
-        nsSeparator: ";",
-      }),
-    },
-    subtitle: {
-      text: i18n.t("Normals from reference period: {{period}}", {
-        period: referencePeriod,
+        period: getDailyPeriod(data),
         nsSeparator: ";",
       }),
     },
@@ -60,10 +43,13 @@ const getChartConfig = (name, data, monthlyPeriod, referencePeriod) => {
       labels: {
         format: "{value}°C",
       },
+      min: tempMin,
+      max: tempMax,
     },
     chart: {
       height: 480,
       marginBottom: 75,
+      zoomType: "x",
     },
     plotOptions: {
       series: {
@@ -77,6 +63,7 @@ const getChartConfig = (name, data, monthlyPeriod, referencePeriod) => {
         name: i18n.t("Mean temperature"),
         color: colors.red800,
         negativeColor: colors.blue800,
+        lineWidth: 1.5,
         zIndex: 2,
       },
       {
@@ -90,20 +77,8 @@ const getChartConfig = (name, data, monthlyPeriod, referencePeriod) => {
         },
         zIndex: 0,
       },
-      {
-        type: "spline",
-        data: normals,
-        name: i18n.t("Normal temperature"),
-        dashStyle: "dash",
-        color: colors.red500,
-        negativeColor: colors.blue500,
-        marker: {
-          enabled: false,
-        },
-        zIndex: 1,
-      },
     ],
   };
 };
 
-export default getChartConfig;
+export default getChart;

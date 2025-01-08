@@ -3,36 +3,42 @@ import { colors } from "@dhis2/ui";
 import {
   animation,
   credits,
-  getSelectedMonths,
-  getPrecipitationMonthNormal,
   getMonthlyPeriod,
-} from "../../../utils/chart";
-import { metersToMillimeters } from "../../../utils/calc";
+  getMonthFromId,
+} from "../../../../utils/chart";
+import { getTimeFromId, metersToMillimeters } from "../../../../utils/calc";
 
-const getChartConfig = (name, data, monthlyPeriod, referencePeriod) => {
-  const months = getSelectedMonths(data, monthlyPeriod);
+const band = "total_precipitation_sum";
 
-  const series = months.map((d) => ({
-    x: new Date(d.id).getTime(),
-    y: metersToMillimeters(d["total_precipitation_sum"]),
+const getChartConfig = (name, data, normals, referencePeriod, settings) => {
+  const { precipMonthlyMax } = settings;
+
+  const series = data.map((d) => ({
+    x: getTimeFromId(d.id),
+    y: metersToMillimeters(d[band]),
   }));
 
-  const normals = months.map((d) => ({
-    x: new Date(d.id).getTime(),
-    y: getPrecipitationMonthNormal(data, d.id.substring(5, 7), referencePeriod),
-  }));
+  const monthMormals = data.map((d) => {
+    const month = getMonthFromId(d.id);
+    const normal = normals.find((n) => n.id === month);
+
+    return {
+      x: getTimeFromId(d.id),
+      y: metersToMillimeters(normal[band]),
+    };
+  });
 
   return {
     title: {
       text: i18n.t("{{name}}: Monthly precipitation {{period}}", {
         name,
-        period: getMonthlyPeriod(monthlyPeriod),
+        period: getMonthlyPeriod(data),
         nsSeparator: ";",
       }),
     },
     subtitle: {
       text: i18n.t("Normals from reference period: {{period}}", {
-        period: referencePeriod,
+        period: referencePeriod.id,
         nsSeparator: ";",
       }),
     },
@@ -48,7 +54,7 @@ const getChartConfig = (name, data, monthlyPeriod, referencePeriod) => {
     },
     plotOptions: {
       series: {
-        groupPadding: 0,
+        grouping: false,
         borderWidth: 0,
         animation,
       },
@@ -62,6 +68,7 @@ const getChartConfig = (name, data, monthlyPeriod, referencePeriod) => {
     },
     yAxis: {
       min: 0,
+      max: precipMonthlyMax,
       title: false,
       labels: {
         format: "{value} mm",
@@ -75,10 +82,10 @@ const getChartConfig = (name, data, monthlyPeriod, referencePeriod) => {
         zIndex: 1,
       },
       {
-        data: normals,
+        data: monthMormals,
         name: i18n.t("Normal precipitation"),
         color: colors.blue200,
-        pointPlacement: -0.1,
+        pointPlacement: -0.2,
         zIndex: 0,
       },
     ],

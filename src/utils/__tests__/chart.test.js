@@ -97,10 +97,12 @@ describe("chart utils", () => {
   });
 
   it("it should get monthly period", () => {
-    expect(getMonthlyPeriod(monthlyperiod)).toEqual("2023-2024");
+    expect(getMonthlyPeriod(monthlyData)).toEqual("2023-2024");
     expect(
-      getMonthlyPeriod({ startTime: "2024-01", endTime: "2024-04" })
-    ).toEqual("2024");
+      getMonthlyPeriod(
+        monthlyData.filter((d) => getYearFromId(d.id) === "2023")
+      )
+    ).toEqual("2023");
   });
 
   it("it should select monthly data for period", () => {

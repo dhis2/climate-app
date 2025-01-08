@@ -1,15 +1,17 @@
 import { useState } from "react";
-import PropTypes from "prop-types";
 import i18n from "@dhis2/d2-i18n";
 import { Button } from "@dhis2/ui";
 import DatePicker from "../shared/DatePicker";
 import { getNumberOfDays } from "../../utils/time";
+import exploreStore from "../../store/exploreStore";
 import styles from "./styles/Period.module.css";
 
 const maxDays = 1000;
 
-const DailyPeriodSelect = ({ currentPeriod, onUpdate }) => {
-  const [period, setPeriod] = useState(currentPeriod);
+const DailyPeriodSelect = () => {
+  const { dailyPeriod, setDailyPeriod } = exploreStore();
+  const [period, setPeriod] = useState(dailyPeriod);
+
   const { startTime, endTime } = period;
   const days = getNumberOfDays(startTime, endTime);
 
@@ -26,7 +28,10 @@ const DailyPeriodSelect = ({ currentPeriod, onUpdate }) => {
           defaultVal={endTime}
           onChange={(endTime) => setPeriod({ ...period, endTime })}
         />
-        <Button disabled={days > maxDays} onClick={() => onUpdate(period)}>
+        <Button
+          disabled={days > maxDays}
+          onClick={() => setDailyPeriod(period)}
+        >
           Update
         </Button>
       </div>
@@ -37,11 +42,6 @@ const DailyPeriodSelect = ({ currentPeriod, onUpdate }) => {
       )}
     </div>
   );
-};
-
-DailyPeriodSelect.propTypes = {
-  currentPeriod: PropTypes.object.isRequired,
-  onUpdate: PropTypes.func.isRequired,
 };
 
 export default DailyPeriodSelect;

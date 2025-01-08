@@ -5,18 +5,12 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-08-15T09:41:36.442Z\n"
-"PO-Revision-Date: 2024-08-15T09:41:36.442Z\n"
+"POT-Creation-Date: 2024-11-20T14:17:35.520Z\n"
+"PO-Revision-Date: 2024-11-20T14:17:35.520Z\n"
 
 msgid "About this app"
 msgstr "About this app"
 
-msgid "You need access to Google Earth Engine to use this app."
-msgstr "You need access to Google Earth Engine to use this app."
-
-msgid "How to get access?"
-msgstr "How to get access?"
-
 msgid ""
 "This pilot app is part of the ongoing “DHIS2 for Climate“ project. It will "
 "get frequent updates, so please make sure you have the latest version from "
@@ -31,22 +25,35 @@ msgstr ""
 "into the DHIS2 core in the future, based on your feedback."
 
 msgid ""
-"The app allows you to explore and import temperature and precipitation data "
-"in DHIS2. The data source is “ERA5-Land“, which is considered the most "
-"accurate and complete global climate dataset available. The video below "
-"shows you how this dataset was created by combining weather observations "
-"with a weather model (climate reanalysis)."
+"The app allows you to explore and import temperature, precipitation, "
+"humidity and heat stress data in DHIS2. The main data source is ERA5-Land, "
+"which is considered the most accurate and complete global climate dataset "
+"available. The video below shows you how this dataset was created by "
+"combining weather observations with a weather model (climate reanalysis)."
 msgstr ""
-"The app allows you to explore and import temperature and precipitation data "
-"in DHIS2. The data source is “ERA5-Land“, which is considered the most "
-"accurate and complete global climate dataset available. The video below "
-"shows you how this dataset was created by combining weather observations "
-"with a weather model (climate reanalysis)."
+"The app allows you to explore and import temperature, precipitation, "
+"humidity and heat stress data in DHIS2. The main data source is ERA5-Land, "
+"which is considered the most accurate and complete global climate dataset "
+"available. The video below shows you how this dataset was created by "
+"combining weather observations with a weather model (climate reanalysis)."
 
 msgid "Read about ERA5-Land on Copernicus Climate Data Store"
 msgstr "Read about ERA5-Land on Copernicus Climate Data Store"
 
 msgid ""
+"In additon to ERA5-Land, precipitation data can also be imported from the "
+"CHIRPS dataset. For heat stress we use data from ERA5-HEAT."
+msgstr ""
+"In additon to ERA5-Land, precipitation data can also be imported from the "
+"CHIRPS dataset. For heat stress we use data from ERA5-HEAT."
+
+msgid "Read about CHIRPS on Climate Hazards Center"
+msgstr "Read about CHIRPS on Climate Hazards Center"
+
+msgid "Read about ERA5-HEAT on Copernicus Climate Data Store"
+msgstr "Read about ERA5-HEAT on Copernicus Climate Data Store"
+
+msgid ""
 "If you just want to look at weather and climate data for your organisation "
 "units, click on “Explore data” in the left menu. No configuration is needed."
 msgstr ""
@@ -70,9 +77,33 @@ msgid ""
 msgstr ""
 "After the configuration is done, you can import temperature and "
 "precipitation data under “Import data”."
+
+msgid ""
+"After the data is imported, you should generate the analytics tables in the "
+"Data Administration app. This will allow you to see the data in the DHIS2 "
+"analytics apps."
+msgstr ""
+"After the data is imported, you should generate the analytics tables in the "
+"Data Administration app. This will allow you to see the data in the DHIS2 "
+"analytics apps."
 
 msgid "How the data is calculated"
 msgstr "How the data is calculated"
+
+msgid ""
+"The data is calculated for your organsation units on Google Earth Engine. "
+"Pleace check the resolution of the data. If you select a health facility we "
+"use the value where the facility is located. If you select a district we "
+"automatically aggregate the values within that district. If two org units "
+"are close to each other (within the resolution), they will have the same "
+"data values."
+msgstr ""
+"The data is calculated for your organsation units on Google Earth Engine. "
+"Pleace check the resolution of the data. If you select a health facility we "
+"use the value where the facility is located. If you select a district we "
+"automatically aggregate the values within that district. If two org units "
+"are close to each other (within the resolution), they will have the same "
+"data values."
 
 msgid "Home"
 msgstr "Home"
@@ -106,9 +137,6 @@ msgstr "End date"
 
 msgid "Maximum {{maxDays}} days allowed"
 msgstr "Maximum {{maxDays}} days allowed"
-
-msgid "Loading organisation unit"
-msgstr "Loading organisation unit"
 
 msgid "Explore weather and climate data"
 msgstr "Explore weather and climate data"
@@ -164,17 +192,6 @@ msgstr "End month"
 msgid "Maximum {{maxMonths}} months allowed"
 msgstr "Maximum {{maxMonths}} months allowed"
 
-msgid ""
-"Temperature anomaly is the difference of a temperature from a reference "
-"value, calculated as the average temperature over a period of 30 years. "
-"Blue columns shows temperatures below the average, while red columns are "
-"above."
-msgstr ""
-"Temperature anomaly is the difference of a temperature from a reference "
-"value, calculated as the average temperature over a period of 30 years. "
-"Blue columns shows temperatures below the average, while red columns are "
-"above."
-
 msgid "No geometry found"
 msgstr "No geometry found"
 
@@ -190,74 +207,46 @@ msgstr "Monthly"
 msgid "Daily"
 msgstr "Daily"
 
-msgid "1991 - 2020"
-msgstr "1991 - 2020"
-
-msgid "1961 - 1990"
-msgstr "1961 - 1990"
-
 msgid "Reference period"
 msgstr "Reference period"
 
-msgid "{{name}}: Daily relative humidity {{period}}"
-msgstr "{{name}}: Daily relative humidity {{period}}"
+msgid "10 days forecast"
+msgstr "10 days forecast"
 
-msgid "Relative humidity"
-msgstr "Relative humidity"
+msgid "Temperature"
+msgstr "Temperature"
 
-msgid "{{name}}: Relative humidity {{period}}"
-msgstr "{{name}}: Relative humidity {{period}}"
+msgid "Precipitation"
+msgstr "Precipitation"
 
-msgid "Normals from reference period: {{period}}"
-msgstr "Normals from reference period: {{period}}"
+msgid "Humidity"
+msgstr "Humidity"
 
-msgid "Normal relative humidity"
-msgstr "Normal relative humidity"
+msgid "Heat"
+msgstr "Heat"
 
-msgid "Dewpoint temperature"
-msgstr "Dewpoint temperature"
+msgid "Climate change"
+msgstr "Climate change"
 
-msgid "Air temperature"
-msgstr "Air temperature"
+msgid ""
+"Temperature anomaly is the difference of a temperature from a reference "
+"value, calculated as the average temperature over a period of 30 years. "
+"Blue columns shows temperatures below the average, while red columns are "
+"above."
+msgstr ""
+"Temperature anomaly is the difference of a temperature from a reference "
+"value, calculated as the average temperature over a period of 30 years. "
+"Blue columns shows temperatures below the average, while red columns are "
+"above."
 
-msgid "{{name}}: Daily precipitation {{period}}"
-msgstr "{{name}}: Daily precipitation {{period}}"
-
-msgid "Daily precipitation"
-msgstr "Daily precipitation"
-
-msgid "{{name}}: Monthly precipitation {{period}}"
-msgstr "{{name}}: Monthly precipitation {{period}}"
-
-msgid "Monthly precipitation"
-msgstr "Monthly precipitation"
-
-msgid "Normal precipitation"
-msgstr "Normal precipitation"
-
-msgid "{{name}}: {{month}} temperature anomaly {{years}}"
-msgstr "{{name}}: {{month}} temperature anomaly {{years}}"
+msgid "{{name}}: {{month}} temperature difference {{years}}"
+msgstr "{{name}}: {{month}} temperature difference {{years}}"
 
 msgid "Reference period: {{period}}"
 msgstr "Reference period: {{period}}"
 
 msgid "Temperature anomaly"
 msgstr "Temperature anomaly"
-
-msgid "{{name}}: Daily temperatures {{period}}"
-msgstr "{{name}}: Daily temperatures {{period}}"
-
-msgid "Mean temperature"
-msgstr "Mean temperature"
-
-msgid "Temperature range"
-msgstr "Temperature range"
-
-msgid "{{name}}: Monthly temperatures {{period}}"
-msgstr "{{name}}: Monthly temperatures {{period}}"
-
-msgid "Normal temperature"
-msgstr "Normal temperature"
 
 msgid "{{precip}} mm"
 msgstr "{{precip}} mm"
@@ -430,6 +419,89 @@ msgstr "Heavy snow and thunder"
 msgid "Fog"
 msgstr "Fog"
 
+msgid ""
+"The Universal Thermal Climate Index (UTCI) is an index that combines the "
+"effects of air temperature, humidity, wind speed, and radiation on the "
+"human body. It is a measure of the thermal stress experienced by a person "
+"in a given environment."
+msgstr ""
+"The Universal Thermal Climate Index (UTCI) is an index that combines the "
+"effects of air temperature, humidity, wind speed, and radiation on the "
+"human body. It is a measure of the thermal stress experienced by a person "
+"in a given environment."
+
+msgid "{{name}}: Thermal comfort {{period}}"
+msgstr "{{name}}: Thermal comfort {{period}}"
+
+msgid "Average felt temperature"
+msgstr "Average felt temperature"
+
+msgid "Felt temperature range"
+msgstr "Felt temperature range"
+
+msgid "Average temperature"
+msgstr "Average temperature"
+
+msgid ""
+"Relative humidity is the the amount of water vapour present in air "
+"expressed as a percentage of the amount needed for saturation at the same "
+"temperature (dewpoint)."
+msgstr ""
+"Relative humidity is the the amount of water vapour present in air "
+"expressed as a percentage of the amount needed for saturation at the same "
+"temperature (dewpoint)."
+
+msgid "{{name}}: Daily relative humidity {{period}}"
+msgstr "{{name}}: Daily relative humidity {{period}}"
+
+msgid "Relative humidity"
+msgstr "Relative humidity"
+
+msgid "{{name}}: Relative humidity {{period}}"
+msgstr "{{name}}: Relative humidity {{period}}"
+
+msgid "Normals from reference period: {{period}}"
+msgstr "Normals from reference period: {{period}}"
+
+msgid "Normal relative humidity"
+msgstr "Normal relative humidity"
+
+msgid "Dewpoint temperature"
+msgstr "Dewpoint temperature"
+
+msgid "Air temperature"
+msgstr "Air temperature"
+
+msgid "{{name}}: Daily precipitation {{period}}"
+msgstr "{{name}}: Daily precipitation {{period}}"
+
+msgid "Daily precipitation"
+msgstr "Daily precipitation"
+
+msgid "{{name}}: Monthly precipitation {{period}}"
+msgstr "{{name}}: Monthly precipitation {{period}}"
+
+msgid "Monthly precipitation"
+msgstr "Monthly precipitation"
+
+msgid "Normal precipitation"
+msgstr "Normal precipitation"
+
+msgid "{{name}}: Daily temperatures {{period}}"
+msgstr "{{name}}: Daily temperatures {{period}}"
+
+msgid "Mean temperature"
+msgstr "Mean temperature"
+
+msgid "Temperature range"
+msgstr "Temperature range"
+
+msgid "{{name}}: Monthly temperatures {{period}}"
+msgstr "{{name}}: Monthly temperatures {{period}}"
+
+msgid "Normal temperature"
+msgstr "Normal temperature"
+
 msgid "Data element"
 msgstr "Data element"
 
@@ -498,12 +570,8 @@ msgstr ""
 "Data can be imported in batches. We recommend that you start with a few "
 "organisation units to make sure everything works as expected."
 
-msgid ""
-"Select the ERA5-Land variable you would like to import. So far we only "
-"support temperature (average, min, max) and precipitation."
-msgstr ""
-"Select the ERA5-Land variable you would like to import. So far we only "
-"support temperature (average, min, max) and precipitation."
+msgid "Select the variable you would like to import."
+msgstr "Select the variable you would like to import."
 
 msgid "Period"
 msgstr "Period"
@@ -595,6 +663,42 @@ msgstr "Org unit parent needs to be above or equal to the org unit level"
 msgid "Daily values will be imported between start and end dates"
 msgstr "Daily values will be imported between start and end dates"
 
+msgid ""
+"Set y-axis values for charts in the Explore data section to make it easier "
+"to compare different org units. Leave blank to calculate based on data "
+"shown."
+msgstr ""
+"Set y-axis values for charts in the Explore data section to make it easier "
+"to compare different org units. Leave blank to calculate based on data "
+"shown."
+
+msgid "Max temperature in °C"
+msgstr "Max temperature in °C"
+
+msgid "Min temperature in °C"
+msgstr "Min temperature in °C"
+
+msgid "Min temperature must be less than max temperature"
+msgstr "Min temperature must be less than max temperature"
+
+msgid "Max change in temperature in +/- °C"
+msgstr "Max change in temperature in +/- °C"
+
+msgid "Max monthly precipitation in mm"
+msgstr "Max monthly precipitation in mm"
+
+msgid "Max daily precipitation in mm"
+msgstr "Max daily precipitation in mm"
+
+msgid "Heat stress upper category"
+msgstr "Heat stress upper category"
+
+msgid "Heat stress lower category"
+msgstr "Heat stress lower category"
+
+msgid "Calculate from data"
+msgstr "Calculate from data"
+
 msgid "App settings"
 msgstr "App settings"
 
@@ -673,16 +777,14 @@ msgstr ""
 
 msgid ""
 "Create DHIS2 data elements for the climate and weather data you want to "
-"import. We recommend including the data source (ERA5-Land) in the name to "
-"distinguish it from data imported from local weather stations. If you use "
-"the same code specified below, we will preselect the data element in the "
-"import interface."
+"import. We recommend including the data source in the name to distinguish "
+"it from data imported from local weather stations. If you use the same code "
+"specified below, we will preselect the data element in the import interface."
 msgstr ""
 "Create DHIS2 data elements for the climate and weather data you want to "
-"import. We recommend including the data source (ERA5-Land) in the name to "
-"distinguish it from data imported from local weather stations. If you use "
-"the same code specified below, we will preselect the data element in the "
-"import interface."
+"import. We recommend including the data source in the name to distinguish "
+"it from data imported from local weather stations. If you use the same code "
+"specified below, we will preselect the data element in the import interface."
 
 msgid "Data set"
 msgstr "Data set"
@@ -720,6 +822,12 @@ msgstr ""
 msgid "Loading data"
 msgstr "Loading data"
 
+msgid "You need access to Google Earth Engine to use this app."
+msgstr "You need access to Google Earth Engine to use this app."
+
+msgid "How to get access?"
+msgstr "How to get access?"
+
 msgid ""
 "For a temporary period there is limited data available for 2024. This is "
 "due to modernization work impacting the Copernicus Climate Data Store (CDS) "
@@ -732,8 +840,34 @@ msgstr ""
 msgid "Read more on the CDS user forum"
 msgstr "Read more on the CDS user forum"
 
+msgid "Data resolution"
+msgstr "Data resolution"
+
+msgid ""
+"You can import data for the lowest levels in your org unit hierarchy, but "
+"it won't improve the resolution of the data."
+msgstr ""
+"You can import data for the lowest levels in your org unit hierarchy, but "
+"it won't improve the resolution of the data."
+
+msgid ""
+"If two org units are close to each other (within the resolution), they will "
+"have the same data values."
+msgstr ""
+"If two org units are close to each other (within the resolution), they will "
+"have the same data values."
+
 msgid "Time zone"
 msgstr "Time zone"
+
+msgid "Approximately 31 km (0.25°)"
+msgstr "Approximately 31 km (0.25°)"
+
+msgid "Approximately 9 km (0.1°)"
+msgstr "Approximately 9 km (0.1°)"
+
+msgid "Approximately 5 km (0.05°)"
+msgstr "Approximately 5 km (0.05°)"
 
 msgid "Air temperature (ERA5-Land)"
 msgstr "Air temperature (ERA5-Land)"
@@ -743,18 +877,6 @@ msgstr "Average air temperature in °C at 2 m above the surface"
 
 msgid "Average"
 msgstr "Average"
-
-msgid "Min temperature (ERA5-Land)"
-msgstr "Min temperature (ERA5-Land)"
-
-msgid "Min air temperature"
-msgstr "Min air temperature"
-
-msgid "Minimum air temperature in °C at 2 m above the surface"
-msgstr "Minimum air temperature in °C at 2 m above the surface"
-
-msgid "Min"
-msgstr "Min"
 
 msgid "Max air temperature (ERA5-Land)"
 msgstr "Max air temperature (ERA5-Land)"
@@ -768,17 +890,35 @@ msgstr "Maximum air temperature in °C at 2 m above the surface"
 msgid "Max"
 msgstr "Max"
 
+msgid "Min temperature (ERA5-Land)"
+msgstr "Min temperature (ERA5-Land)"
+
+msgid "Min air temperature"
+msgstr "Min air temperature"
+
+msgid "Minimum air temperature in °C at 2 m above the surface"
+msgstr "Minimum air temperature in °C at 2 m above the surface"
+
+msgid "Min"
+msgstr "Min"
+
 msgid "Precipitation (ERA5-Land)"
 msgstr "Precipitation (ERA5-Land)"
 
-msgid "Precipitation"
-msgstr "Precipitation"
+msgid "Precipitation (ERA5)"
+msgstr "Precipitation (ERA5)"
 
 msgid "Total precipitation in mm"
 msgstr "Total precipitation in mm"
 
 msgid "Sum"
 msgstr "Sum"
+
+msgid "Precipitation (CHIRPS)"
+msgstr "Precipitation (CHIRPS)"
+
+msgid "Precipitation in mm"
+msgstr "Precipitation in mm"
 
 msgid "Dewpoint temperature (ERA5-Land)"
 msgstr "Dewpoint temperature (ERA5-Land)"
@@ -802,8 +942,104 @@ msgstr ""
 "that can exist in the air at its current temperature. Calculated using air "
 "temperature and dewpoint temperature at 2 m above surface."
 
+msgid "Heat stress (ERA5-HEAT)"
+msgstr "Heat stress (ERA5-HEAT)"
+
+msgid "Heat stress"
+msgstr "Heat stress"
+
+msgid "Average felt temperature in °C"
+msgstr "Average felt temperature in °C"
+
+msgid "Max heat stress (ERA5-HEAT)"
+msgstr "Max heat stress (ERA5-HEAT)"
+
+msgid "Max heat stress"
+msgstr "Max heat stress"
+
+msgid "Maximum felt temperature in °C"
+msgstr "Maximum felt temperature in °C"
+
+msgid "Min heat stress (ERA5-HEAT)"
+msgstr "Min heat stress (ERA5-HEAT)"
+
+msgid "Min heat stress"
+msgstr "Min heat stress"
+
+msgid "Minimum felt temperature in °C"
+msgstr "Minimum felt temperature in °C"
+
+msgid "Heat/cold stress"
+msgstr "Heat/cold stress"
+
+msgid "You only need to include categories that are relevant for your area."
+msgstr "You only need to include categories that are relevant for your area."
+
+msgid "Extreme cold stress"
+msgstr "Extreme cold stress"
+
+msgid "Extreme<br>cold stress"
+msgstr "Extreme<br>cold stress"
+
+msgid "Very strong cold stress"
+msgstr "Very strong cold stress"
+
+msgid "Very strong<br>cold stress"
+msgstr "Very strong<br>cold stress"
+
+msgid "Strong cold stress"
+msgstr "Strong cold stress"
+
+msgid "Strong<br>cold stress"
+msgstr "Strong<br>cold stress"
+
+msgid "Moderate cold stress"
+msgstr "Moderate cold stress"
+
+msgid "Moderate<br>cold stress"
+msgstr "Moderate<br>cold stress"
+
+msgid "Slight cold stress"
+msgstr "Slight cold stress"
+
+msgid "Slight<br>cold stress"
+msgstr "Slight<br>cold stress"
+
+msgid "No thermal stress"
+msgstr "No thermal stress"
+
+msgid "No thermal<br>stress"
+msgstr "No thermal<br>stress"
+
+msgid "Moderate heat stress"
+msgstr "Moderate heat stress"
+
+msgid "Moderate<br>heat stress"
+msgstr "Moderate<br>heat stress"
+
+msgid "Strong heat stress"
+msgstr "Strong heat stress"
+
+msgid "Strong<br>heat stress"
+msgstr "Strong<br>heat stress"
+
+msgid "Very strong heat stress"
+msgstr "Very strong heat stress"
+
+msgid "Very strong<br>heat stress"
+msgstr "Very strong<br>heat stress"
+
+msgid "Extreme heat stress"
+msgstr "Extreme heat stress"
+
+msgid "Extreme<br>heat stress"
+msgstr "Extreme<br>heat stress"
+
 msgid "ERA5-Land / Copernicus Climate Change Service / Google Earth Engine"
 msgstr "ERA5-Land / Copernicus Climate Change Service / Google Earth Engine"
+
+msgid "ERA5-HEAT / Copernicus Climate Change Service / Google Earth Engine"
+msgstr "ERA5-HEAT / Copernicus Climate Change Service / Google Earth Engine"
 
 msgid "No data found for the selected period"
 msgstr "No data found for the selected period"

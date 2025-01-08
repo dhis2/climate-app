@@ -1,6 +1,6 @@
 import i18n from "@dhis2/d2-i18n";
 import area from "@turf/area";
-import { HOURLY, getMappedPeriods } from "./time";
+import { HOURLY, MONTHLY, getMappedPeriods } from "./time";
 
 const VALUE_LIMIT = 5000;
 
@@ -53,11 +53,6 @@ export const getEarthEngineValues = (ee, datasetParams, period, features) =>
     const timeZoneStart = ee.Date(startTime).format(null, timeZone);
     const timeZoneEnd = endTimePlusOne.format(null, timeZone);
     const mappedPeriods = getMappedPeriods(period);
-
-    // periods?.reduce((map, p) => {
-    //   map.set(toIso(p.startTime, calendar), p.iso);
-    //   return map;
-    // }, mappedPeriods);
 
     const dataParser = (data) =>
       data.map((f) => ({
@@ -184,10 +179,32 @@ export const getEarthEngineData = (ee, datasetParams, period, features) => {
   }
 };
 
-export const getTimeSeriesData = async (ee, dataset, period, geometry) => {
-  const { datasetId, band, reducer = "mean", sharedInputs = false } = dataset;
+export const getTimeSeriesData = async (
+  ee,
+  dataset,
+  period,
+  geometry,
+  filter
+) => {
+  const {
+    datasetId,
+    band,
+    reducer = "mean",
+    sharedInputs = false,
+    aggregationPeriod,
+  } = dataset;
 
   let collection = ee.ImageCollection(datasetId).select(band);
+
+  if (Array.isArray(filter)) {
+    filter.forEach((f) => {
+      if (ee.Filter[f.type]) {
+        collection = collection.filter(
+          ee.Filter[f.type].apply(this, f.arguments)
+        );
+      }
+    });
+  }
 
   let eeReducer;
 
@@ -217,11 +234,39 @@ export const getTimeSeriesData = async (ee, dataset, period, geometry) => {
   }
 
   const { startTime, endTime, timeZone = "UTC" } = period;
-  const endTimePlusOne = ee.Date(endTime).advance(1, "day");
-  const timeZoneStart = ee.Date(startTime).format(null, timeZone);
-  const timeZoneEnd = endTimePlusOne.format(null, timeZone);
 
-  collection = collection.filter(ee.Filter.date(timeZoneStart, timeZoneEnd));
+  if (aggregationPeriod === MONTHLY) {
+    const startMonth = ee.Date(startTime);
+    const endMonth = ee.Date(endTime).advance(1, "month"); // Include last month
+
+    collection = collection.filter(ee.Filter.date(startMonth, endMonth));
+
+    const monthCount = endMonth.difference(startMonth, "month").round();
+    const months = ee.List.sequence(0, monthCount.subtract(1));
+    const dates = months.map((month) => startMonth.advance(month, "month"));
+
+    const byMonth = ee.ImageCollection.fromImages(
+      dates.map((date) => {
+        const startDate = ee.Date(date);
+        const endDate = startDate.advance(1, "month");
+
+        return collection
+          .filter(ee.Filter.date(startDate, endDate))
+          .mean() // Use mean to avoid extremes on monthly chart
+          .set("system:index", startDate.format("YYYYMM"))
+          .set("system:time_start", startDate.millis())
+          .set("system:time_end", endDate.millis());
+      })
+    );
+
+    collection = byMonth;
+  } else {
+    const endTimePlusOne = ee.Date(endTime).advance(1, "day");
+    const timeZoneStart = ee.Date(startTime).format(null, timeZone);
+    const timeZoneEnd = endTimePlusOne.format(null, timeZone);
+
+    collection = collection.filter(ee.Filter.date(timeZoneStart, timeZoneEnd));
+  }
 
   let eeScale = getScale(collection.first());
 
@@ -249,4 +294,57 @@ export const getTimeSeriesData = async (ee, dataset, period, geometry) => {
       )
     )
   ).then(getFeatureCollectionPropertiesArray);
+};
+
+export const getClimateNormals = (ee, dataset, period, geometry) => {
+  const { datasetId, band } = dataset;
+  const { startTime, endTime } = period;
+  const { type, coordinates } = geometry;
+  const eeGeometry = ee.Geometry[type](coordinates);
+
+  const collection = ee
+    .ImageCollection(datasetId)
+    .select(band)
+    .filterDate(`${startTime}-01-01`, `${endTime + 1}-01-01`);
+
+  const byMonth = ee.ImageCollection.fromImages(
+    ee.List.sequence(1, 12).map((month) =>
+      collection
+        .filter(ee.Filter.calendarRange(month, null, "month"))
+        .mean()
+        .set("system:index", ee.Number(month).format("%02d"))
+    )
+  );
+
+  const eeScale =
+    type === "Point" ? ee.Number(1) : getScale(collection.first());
+
+  const eeReducer = ee.Reducer.mean();
+
+  const data = ee.FeatureCollection(
+    byMonth.map((image) =>
+      ee
+        .Feature(null, image.reduceRegion(eeReducer, eeGeometry, eeScale))
+        .set("system:index", image.get("system:index"))
+    )
+  );
+
+  return getInfo(data).then(getFeatureCollectionPropertiesArray);
+};
+
+const getKeyFromFilter = (filter) =>
+  filter
+    ? `-${filter.map((f) => `${f.type}-${f.arguments.join("-")}`).join("-")}`
+    : "";
+
+export const getCacheKey = (dataset, period, feature, filter) => {
+  const { datasetId, band } = dataset;
+  const { startTime, endTime } = period;
+  const { id } = feature;
+  const bandkey = Array.isArray(band) ? band.join("-") : band;
+  const filterKey = getKeyFromFilter(filter);
+
+  return `${id}-${datasetId}-${bandkey}-${startTime}-${endTime}${getKeyFromFilter(
+    filter
+  )}`;
 };

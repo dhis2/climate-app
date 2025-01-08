@@ -1,14 +1,14 @@
 import { useState, useCallback, useEffect } from "react";
 import { useDataEngine } from "@dhis2/app-runtime";
 
-const APP_NAMESPACE = "CLIMATE_DATA_APP";
+const APP_NAMESPACE = "CLIMATE_DATA";
 const SETTINGS_KEY = "settings";
 
 const resource = `dataStore/${APP_NAMESPACE}/${SETTINGS_KEY}`;
 
 const useAppSettings = () => {
   const [loading, setLoading] = useState(true);
-  const [settings, setSettings] = useState({});
+  const [settings, setSettings] = useState();
   const [error, setError] = useState();
   const engine = useDataEngine();
 

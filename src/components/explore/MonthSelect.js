@@ -1,73 +1,72 @@
-import PropTypes from "prop-types";
 import i18n from "@dhis2/d2-i18n";
 import { SingleSelectField, SingleSelectOption } from "@dhis2/ui";
+import exploreStore from "../../store/exploreStore";
 
 export const months = [
   {
-    id: "01",
+    id: 1,
     name: i18n.t("January"),
   },
   {
-    id: "02",
+    id: 2,
     name: i18n.t("February"),
   },
   {
-    id: "03",
+    id: 3,
     name: i18n.t("March"),
   },
   {
-    id: "04",
+    id: 4,
     name: i18n.t("April"),
   },
   {
-    id: "05",
+    id: 5,
     name: i18n.t("May"),
   },
   {
-    id: "06",
+    id: 6,
     name: i18n.t("June"),
   },
   {
-    id: "07",
+    id: 7,
     name: i18n.t("July"),
   },
   {
-    id: "08",
+    id: 8,
     name: i18n.t("August"),
   },
   {
-    id: "09",
+    id: 9,
     name: i18n.t("September"),
   },
   {
-    id: "10",
+    id: 10,
     name: i18n.t("October"),
   },
   {
-    id: "11",
+    id: 11,
     name: i18n.t("November"),
   },
   {
-    id: "12",
+    id: 12,
     name: i18n.t("December"),
   },
 ];
 
-const MonthSelect = ({ selected, onChange }) => (
-  <SingleSelectField
-    label={i18n.t("Month")}
-    selected={selected}
-    onChange={({ selected }) => onChange(selected)}
-  >
-    {months.map((d) => (
-      <SingleSelectOption key={d.id} value={d.id} label={d.name} />
-    ))}
-  </SingleSelectField>
-);
+const MonthSelect = () => {
+  const { month, setMonth } = exploreStore();
 
-MonthSelect.propTypes = {
-  selected: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+  return (
+    <SingleSelectField
+      label={i18n.t("Month")}
+      selected={String(month)}
+      onChange={({ selected }) => setMonth(Number(selected))}
+    >
+      {months.map((d) => (
+        <SingleSelectOption key={d.id} value={String(d.id)} label={d.name} />
+      ))}
+    </SingleSelectField>
+  );
 };
 
 export default MonthSelect;

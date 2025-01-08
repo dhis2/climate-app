@@ -5,13 +5,15 @@ import { Card, Button } from "@dhis2/ui";
 import Dataset from "./Dataset";
 import Period from "./Period";
 import OrgUnits from "./OrgUnits";
+import GEETokenCheck from "../shared/GEETokenCheck";
+import Resolution from "../shared/Resolution";
 import DataElement from "./DataElement";
 import ExtractData from "./ExtractData";
 import useOrgUnitCount from "../../hooks/useOrgUnitCount";
-import { getNumberOfDaysFromPeriod } from "../../utils/time";
 import {
   getDefaultImportPeriod,
   getStandardPeriod,
+  getNumberOfDaysFromPeriod,
   isValidPeriod,
 } from "../../utils/time";
 import styles from "./styles/ImportPage.module.css";
@@ -51,6 +53,7 @@ const ImportPage = () => {
   return (
     <div className={styles.page}>
       <h1>{i18n.t("Import weather and climate data")}</h1>
+      <GEETokenCheck />
       <div className={styles.column}>
         <Card className={styles.card}>
           <div className={styles.container}>
@@ -75,6 +78,9 @@ const ImportPage = () => {
                   }
                 )}
               </div>
+            )}
+            {dataset && (
+              <Resolution resolution={dataset.resolution} isImport={true} />
             )}
             <DataElement
               selected={dataElement}
@@ -114,9 +120,7 @@ const ImportPage = () => {
           </p>
           <p>
             <strong>{i18n.t("Data")}</strong>:{" "}
-            {i18n.t(
-              "Select the ERA5-Land variable you would like to import. So far we only support temperature (average, min, max) and precipitation."
-            )}
+            {i18n.t("Select the variable you would like to import.")}
           </p>
           <p>
             <strong>{i18n.t("Period")}</strong>:{" "}

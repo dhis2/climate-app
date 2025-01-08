@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import i18n from "@dhis2/d2-i18n";
-import PropTypes from "prop-types";
-import DataLoader from "../../shared/DataLoader";
+import DataLoader from "../../shared/DataLoader.js";
 import DayForecast from "./DayForecast.js";
-import useAppSettings from "../../../hooks/useAppSettings";
+import useAppSettings from "../../../hooks/useAppSettings.js";
+import exploreStore from "../../../store/exploreStore";
 import styles from "./styles/ForecastTab.module.css";
 
 const convertTimezone = (date, timeZone) =>
@@ -11,11 +11,12 @@ const convertTimezone = (date, timeZone) =>
 
 const browserTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-const ForecastTab = ({ geometry }) => {
+const Forecast = () => {
+  const orgUnit = exploreStore((state) => state.orgUnit);
   const [data, setData] = useState();
   const { settings, loading } = useAppSettings();
 
-  const [lng, lat] = geometry.coordinates;
+  const [lng, lat] = orgUnit.geometry.coordinates;
 
   useEffect(() => {
     fetch(
@@ -26,7 +27,7 @@ const ForecastTab = ({ geometry }) => {
   }, [lng, lat]);
 
   if (!data || loading) {
-    return <DataLoader height={400} />;
+    return <DataLoader />;
   }
 
   const timeZone = settings?.timeZone || browserTimeZone || "Etc/UTC";
@@ -104,9 +105,4 @@ const ForecastTab = ({ geometry }) => {
   );
 };
 
-ForecastTab.propTypes = {
-  name: PropTypes.string.isRequired,
-  geometry: PropTypes.object.isRequired,
-};
-
-export default ForecastTab;
+export default Forecast;

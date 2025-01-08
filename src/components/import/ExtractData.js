@@ -18,7 +18,7 @@ const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
   );
   
   if (!features) {
-    return <DataLoader label={i18n.t("Loading org units")} />;
+    return <DataLoader label={i18n.t("Loading org units")} height={100} />;
   } else if (!features.length) {
     return (
       <div className={styles.container}>
@@ -41,6 +41,7 @@ const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
             valueCount,
           }
         )}
+        height={100}
       />
     );
   }

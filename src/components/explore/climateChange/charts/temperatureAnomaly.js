@@ -1,29 +1,29 @@
 import i18n from "@dhis2/d2-i18n";
 import { colors } from "@dhis2/ui";
-import {
-  animation,
-  credits,
-  getTemperatureMonthNormal,
-} from "../../../utils/chart";
-import { roundOneDecimal, kelvinToCelsius } from "../../../utils/calc";
-import { months } from "../MonthSelect";
+import { animation, credits } from "../../../../utils/chart";
+import { roundOneDecimal } from "../../../../utils/calc";
+import { padWithZeroes } from "../../../../utils/time";
+import { months } from "../../MonthSelect";
 
-// https://climate.copernicus.eu/copernicus-september-2023-unprecedented-temperature-anomalies
-// https://developers.google.com/earth-engine/datasets/catalog/ECMWF_ERA5_LAND_MONTHLY_AGGR
-const getChartConfig = (name, data, month, referencePeriod) => {
-  const monthData = data.filter(
-    (d) => d.id.substring(5, 7) === month && d.id.substring(0, 4) >= "1970"
-  );
+const band = "temperature_2m";
+
+const getChartConfig = (
+  name,
+  data,
+  normals,
+  month,
+  referencePeriod,
+  settings
+) => {
+  const normal = normals.find((n) => n.id === padWithZeroes(month))[band];
+  const years = data.map((d) => d.id.substring(0, 4));
   const monthName = months.find((m) => m.id === month).name;
-  const normal = getTemperatureMonthNormal(data, month, referencePeriod);
-  const years = monthData.map((d) => d.id.substring(0, 4));
-  const series = monthData.map((d) =>
-    roundOneDecimal(kelvinToCelsius(d["temperature_2m"]) - normal)
-  );
+  const series = data.map((d) => roundOneDecimal(d[band] - normal));
+  const { tempChange } = settings;
 
   return {
     title: {
-      text: i18n.t("{{name}}: {{month}} temperature anomaly {{years}}", {
+      text: i18n.t("{{name}}: {{month}} temperature difference {{years}}", {
         name,
         month: monthName,
         years: `${years[0]}-${years[years.length - 1]}`,
@@ -32,7 +32,7 @@ const getChartConfig = (name, data, month, referencePeriod) => {
     },
     subtitle: {
       text: i18n.t("Reference period: {{period}}", {
-        period: referencePeriod,
+        period: referencePeriod.id,
         nsSeparator: ";",
       }),
     },
@@ -64,6 +64,8 @@ const getChartConfig = (name, data, month, referencePeriod) => {
       },
     },
     yAxis: {
+      max: tempChange,
+      min: tempChange !== undefined ? -tempChange : undefined,
       title: false,
       labels: {
         format: "{value}°C",

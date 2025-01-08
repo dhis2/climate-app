@@ -3,7 +3,7 @@ import i18n from "@dhis2/d2-i18n";
 import { CenteredContent, CircularLoader } from "@dhis2/ui";
 import styles from "./styles/DataLoader.module.css";
 
-const DataLoader = ({ label, height }) => (
+const DataLoader = ({ label, height = 400 }) => (
   <div className={styles.container} style={{ height }}>
     <CenteredContent>
       <div className={styles.loader}>

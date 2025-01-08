@@ -8,6 +8,7 @@ import {
   getNumberOfMonths,
   getNumberOfDays,
   getNumberOfDaysFromPeriod,
+  getLastMonth,
   getStandardPeriod,
   isValidPeriod,
   padWithZeroes,
@@ -200,6 +201,15 @@ describe("time utils", () => {
       endTime: toStandardDate(ethiopicEndDate, ethiopicCalendar),
       calendar: ethiopicCalendar,
     });
+  });
+
+  it("it should get the previous month subtracting lag time", () => {
+    expect(getLastMonth(new Date("December 1, 2024"), 10)).toEqual([2024, 10]);
+    expect(getLastMonth(new Date("December 31, 2024"), 10)).toEqual([2024, 11]);
+    expect(getLastMonth(new Date("January 1, 2025"), 10)).toEqual([2024, 11]);
+    expect(getLastMonth(new Date("January 11, 2025"), 10)).toEqual([2024, 12]);
+    expect(getLastMonth(new Date("February 1, 2025"), 10)).toEqual([2024, 12]);
+    expect(getLastMonth(new Date("February 11, 2025"), 10)).toEqual([2025, 1]);
   });
 
   it("it should create mapped gregory periods", () => {

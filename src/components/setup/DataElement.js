@@ -10,7 +10,7 @@ const DataElement = ({
 }) => (
   <table>
     <caption>
-      {i18n.t("Data element")}: "{shortName}"
+      {i18n.t("Data element")}: "{name}"
     </caption>
     <tbody>
       <tr>
