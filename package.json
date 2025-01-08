@@ -1,6 +1,6 @@
 {
   "name": "climate-data",
-  "version": "1.5.1",
+  "version": "999.99.0-dashboard-plugin.25",
   "description": "Explore and import weather and climate data in DHIS2.",
   "license": "BSD-3-Clause",
   "private": true,
@@ -14,6 +14,7 @@
     "@dhis2/cli-app-scripts": "^11.7.0"
   },
   "dependencies": {
+    "@dhis2/analytics": "git+https://github.com/d2-ci/analytics.git#dca4316cdf2a8fd9482dfe1244575baad7ffe228",
     "@dhis2/app-runtime": "^3.10.6",
     "@dhis2/multi-calendar-dates": "1.0.0-alpha.27",
     "@turf/area": "^6.5.0",

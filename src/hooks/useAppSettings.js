@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import { useDataEngine } from "@dhis2/app-runtime";
+import { createKeyInNamespace } from "../utils/dataStore";
 
 const APP_NAMESPACE = "CLIMATE_DATA";
 const SETTINGS_KEY = "settings";
@@ -20,25 +21,24 @@ const useAppSettings = () => {
       .then(({ dataStore }) => {
         if (dataStore.includes(APP_NAMESPACE)) {
           // Fetch settings if namespace/keys exists in data store
-          engine.query({ settings: { resource } }).then(({ settings }) => {
-            setSettings(settings);
-            setLoading(false);
-          });
+          engine
+            .query({ settings: { resource } })
+            .then(({ settings }) => {
+              setSettings(settings);
+              setLoading(false);
+            })
+            .catch((error) => {
+              if (error.message.includes("(404)")) {
+                // key not found
+                createKeyInNamespace(engine, resource)
+                  .then(() => setLoading(false))
+                  .catch(setError);
+              }
+            });
         } else {
           // Create namespace/keys if missing in data store
-          engine
-            .mutate({
-              resource,
-              type: "create",
-              data: {},
-            })
-            .then((response) => {
-              if (response.httpStatusCode === 201) {
-                setLoading(false);
-              } else {
-                setError(response);
-              }
-            })
+          createKeyInNamespace(engine, resource)
+            .then(() => setLoading(false))
             .catch(setError);
         }
       });

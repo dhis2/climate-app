@@ -20,6 +20,7 @@ import SetupPage from "./setup/SetupPage";
 import SettingsPage from "./settings/SettingsPage";
 import ErrorPage from "./ErrorPage";
 import CheckPage from "./check/CheckPage";
+import PluginPage from "./plugin/PluginPage";
 import orgUnitLoader from "../utils/orgUnitLoader";
 import checkPlaceLoader from "../utils/checkPlaceLoader";
 
@@ -160,6 +161,10 @@ const Routes = () => {
         {
           path: "settings",
           element: <SettingsPage />,
+        },
+        {
+          path: "plugin",
+          element: <PluginPage />,
         },
       ],
     },
