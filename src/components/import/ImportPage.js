@@ -15,6 +15,7 @@ import {
   getStandardPeriod,
   getNumberOfDaysFromPeriod,
   isValidPeriod,
+  getPeriodItems,
 } from "../../utils/time";
 import styles from "./styles/ImportPage.module.css";
 
@@ -49,6 +50,11 @@ const ImportPage = () => {
   useEffect(() => {
     setStartExtract(false);
   }, [dataset, period, orgUnits, dataElement]);
+
+  // TODO: Remove
+  useEffect(() => {
+    console.log("period", period, getPeriodItems(period));
+  }, [period]);
 
   return (
     <div className={styles.page}>

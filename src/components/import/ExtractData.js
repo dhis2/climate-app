@@ -17,6 +17,8 @@ const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
     features
   );
 
+  console.log("ExtractData", data);
+
   if (!features) {
     return <DataLoader label={i18n.t("Loading org units")} height={100} />;
   } else if (!features.length) {

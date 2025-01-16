@@ -4,7 +4,7 @@ import {
   getRelativeHumidity,
   roundOneDecimal,
 } from "../utils/calc";
-import { HOURLY, MONTHLY } from "../utils/time";
+import { HOURLY, DAILY, MONTHLY } from "../utils/time";
 
 // kelvin to celsius with one decimal
 const temperatureParser = (v) => roundOneDecimal(kelvinToCelsius(v));
@@ -41,6 +41,7 @@ export default [
       "Average air temperature in °C at 2 m above the surface"
     ),
     resolution: era5LandResolution,
+    periodType: DAILY,
     band: "temperature_2m",
     reducer: "mean",
     timeZone: {
@@ -62,6 +63,7 @@ export default [
       "Maximum air temperature in °C at 2 m above the surface"
     ),
     resolution: era5LandResolution,
+    periodType: DAILY,
     band: "temperature_2m_max",
     reducer: "max",
     timeZone: {
@@ -83,6 +85,7 @@ export default [
       "Minimum air temperature in °C at 2 m above the surface"
     ),
     resolution: era5LandResolution,
+    periodType: DAILY,
     band: "temperature_2m_min",
     reducer: "min",
     timeZone: {
@@ -102,6 +105,7 @@ export default [
     shortName: i18n.t("Precipitation (ERA5)"),
     description: i18n.t("Total precipitation in mm"),
     resolution: era5LandResolution,
+    periodType: DAILY,
     band: "total_precipitation_sum",
     reducer: "mean",
     timeZone: {
@@ -121,6 +125,7 @@ export default [
     shortName: i18n.t("Precipitation (CHIRPS)"),
     description: i18n.t("Precipitation in mm"),
     resolution: chirpsResolution,
+    periodType: DAILY,
     band: "precipitation",
     reducer: "mean",
     aggregationType: i18n.t("Sum"),
@@ -135,6 +140,7 @@ export default [
       "Temperature in °C at 2 m above the surface to which the air would have to be cooled for saturation to occur."
     ),
     resolution: era5LandResolution,
+    periodType: DAILY,
     band: "dewpoint_temperature_2m",
     reducer: "mean",
     timeZone: {
@@ -156,6 +162,7 @@ export default [
       "Percentage of water vapor in the air compared to the total amount of vapor that can exist in the air at its current temperature. Calculated using air temperature and dewpoint temperature at 2 m above surface."
     ),
     resolution: era5LandResolution,
+    periodType: DAILY,
     bands: [
       {
         band: "dewpoint_temperature_2m",
@@ -189,6 +196,7 @@ export default [
     shortName: i18n.t("Heat stress"),
     description: i18n.t("Average felt temperature in °C"),
     resolution: era5Resolution,
+    periodType: DAILY,
     band: "utci_mean",
     reducer: "mean",
     valueParser: temperatureParser,
@@ -202,6 +210,7 @@ export default [
     shortName: i18n.t("Max heat stress"),
     description: i18n.t("Maximum felt temperature in °C"),
     resolution: era5Resolution,
+    periodType: DAILY,
     band: "utci_max",
     reducer: "max",
     valueParser: temperatureParser,
@@ -215,6 +224,7 @@ export default [
     shortName: i18n.t("Min heat stress"),
     description: i18n.t("Minimum felt temperature in °C"),
     resolution: era5Resolution,
+    periodType: DAILY,
     band: "utci_min",
     reducer: "min",
     valueParser: temperatureParser,

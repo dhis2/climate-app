@@ -1,3 +1,4 @@
+import i18n from "@dhis2/d2-i18n";
 import {
   convertFromIso8601,
   convertToIso8601,
@@ -7,9 +8,25 @@ import {
 
 export const HOURLY = "HOURLY";
 export const DAILY = "DAILY";
+export const WEEKLY = "WEEKLY";
 export const MONTHLY = "MONTHLY";
 
 const oneDayInMs = 1000 * 60 * 60 * 24;
+
+export const periodTypes = [
+  {
+    id: DAILY,
+    name: i18n.t("Daily"),
+  },
+  {
+    id: WEEKLY,
+    name: i18n.t("Weekly"),
+  },
+  {
+    id: MONTHLY,
+    name: i18n.t("Monthly"),
+  },
+];
 
 /**
  * Pads a number with zeroes to the left
@@ -110,7 +127,9 @@ export const getDefaultMonthlyPeriod = (lagDays) => {
  * @returns {Object} Default import data period with calendar date strings
  */
 export const getDefaultImportPeriod = (calendar) => ({
-  startTime: getCalendarDate(calendar, { months: -7 }),
+  periodType: WEEKLY, // TODO: Change to DAILY,
+  // startTime: getCalendarDate(calendar, { months: -7 }),
+  startTime: getCalendarDate(calendar, { months: -2 }),
   endTime: getCalendarDate(calendar, { months: -1 }),
   calendar,
 });
@@ -235,11 +254,41 @@ export const fromStandardDate = (dateString, calendar) => {
  * @param {String} calendar Calendar used
  * @returns {Object} Standard period object
  */
-export const getStandardPeriod = ({ startTime, endTime, calendar }) => ({
+export const getStandardPeriod = ({
+  startTime,
+  endTime,
+  calendar,
+  periodType,
+}) => ({
   startTime: toStandardDate(startTime, calendar),
   endTime: toStandardDate(endTime, calendar),
+  periodType,
   calendar, // Include original calendar to allow conversion back to DHIS2 date
 });
+
+export const getPeriodItems = (period, locale = "en") => {
+  const { periodType, startTime, endTime, calendar } = period;
+
+  const startYear = extractYear(fromStandardDate(startTime, calendar));
+  const endYear = extractYear(fromStandardDate(endTime, calendar));
+
+  let items = [];
+
+  for (let year = startYear; year <= endYear; year++) {
+    items = items.concat(
+      generateFixedPeriods({
+        year,
+        calendar,
+        locale,
+        periodType,
+      }).filter(
+        (p) => p.startDate <= endTime && p.endDate >= startTime // Filter out periods outside the range
+      )
+    );
+  }
+
+  return items;
+};
 
 /**
  * Creates a map of standard dates and DHIS2 calendar date ids
@@ -248,13 +297,15 @@ export const getStandardPeriod = ({ startTime, endTime, calendar }) => ({
  * @param {String} locale Locale used for calendar
  * @returns {Map} Map with standard date as key and DHIS2 calendar date as value
  */
-export const getMappedPeriods = (period, periodType = DAILY, locale = "en") => {
-  const { startTime, endTime, calendar } = period;
+export const getMappedPeriods = (period, locale = "en") => {
+  const { periodType, startTime, endTime, calendar } = period;
 
   const startYear = extractYear(fromStandardDate(startTime, calendar));
   const endYear = extractYear(fromStandardDate(endTime, calendar));
 
   const mappedPeriods = new Map();
+
+  // TODO: get period items from above function
 
   for (let year = startYear; year <= endYear; year++) {
     generateFixedPeriods({

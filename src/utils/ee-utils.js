@@ -1,6 +1,12 @@
 import i18n from "@dhis2/d2-i18n";
 import area from "@turf/area";
-import { HOURLY, MONTHLY, getMappedPeriods } from "./time";
+import {
+  HOURLY,
+  DAILY,
+  MONTHLY,
+  getMappedPeriods,
+  getPeriodItems,
+} from "./time";
 
 const VALUE_LIMIT = 5000;
 
@@ -33,6 +39,14 @@ export const cleanData = (data) =>
     value: f.properties.value,
   }));
 
+const getReducedCollection = (ee, collection, startDate, endDate, reducer) =>
+  collection
+    .filter(ee.Filter.date(startDate, endDate))
+    [reducer]()
+    .set("system:index", startDate.format("YYYYMMdd"))
+    .set("system:time_start", startDate.millis())
+    .set("system:time_end", endDate.millis());
+
 export const getEarthEngineValues = (ee, datasetParams, period, features) =>
   new Promise(async (resolve, reject) => {
     const dataset = period.timeZone
@@ -43,12 +57,21 @@ export const getEarthEngineValues = (ee, datasetParams, period, features) =>
       datasetId,
       band,
       reducer = "mean",
-      periodType,
+      periodType: datasetPeriodType,
       periodReducer = reducer,
       valueParser,
     } = dataset;
 
-    const { startTime, endTime, timeZone = "UTC", calendar } = period;
+    const {
+      startTime,
+      endTime,
+      timeZone = "UTC",
+      periodType,
+      calendar,
+    } = period;
+
+    const periodItems = getPeriodItems(period);
+
     const endTimePlusOne = ee.Date(endTime).advance(1, "day");
     const timeZoneStart = ee.Date(startTime).format(null, timeZone);
     const timeZoneEnd = endTimePlusOne.format(null, timeZone);
@@ -95,31 +118,63 @@ export const getEarthEngineValues = (ee, datasetParams, period, features) =>
 
     const eeReducer = ee.Reducer[reducer]();
 
-    let dailyCollection;
+    let periodCollection;
 
-    if (periodType === HOURLY) {
-      const days = ee
-        .Date(timeZoneEnd)
-        .difference(ee.Date(timeZoneStart), "days");
+    if (periodType !== datasetPeriodType) {
+      // TODO Check if periodType is valid for datasetPeriodType
 
-      const daysList = ee.List.sequence(0, days.subtract(1));
+      const removeEmptyImagesFilter = ee.Filter.listContains(
+        "system:band_names",
+        band
+      );
 
-      dailyCollection = ee.ImageCollection.fromImages(
-        daysList.map((day) => {
-          const startUTC = ee.Date(startTime).advance(day, "days");
-          const start = ee.Date(startUTC.format(null, timeZone));
-          const end = start.advance(1, "days");
-          const filtered = collection.filter(ee.Filter.date(start, end));
+      // Go from hourly to daily
+      if (datasetPeriodType === HOURLY) {
+        const days = ee
+          .Date(timeZoneEnd)
+          .difference(ee.Date(timeZoneStart), "days");
 
-          return filtered[periodReducer]()
-            .set("system:index", startUTC.format("YYYYMMdd"))
-            .set("system:time_start", start.millis())
-            .set("system:time_end", end.millis());
-        })
-      ).filter(ee.Filter.listContains("system:band_names", band)); // Remove empty images
+        const daysList = ee.List.sequence(0, days.subtract(1));
+
+        periodCollection = ee.ImageCollection.fromImages(
+          daysList.map((day) => {
+            const startUTC = ee.Date(startTime).advance(day, "days");
+            const start = ee.Date(startUTC.format(null, timeZone));
+            const end = start.advance(1, "days");
+
+            return getReducedCollection(
+              ee,
+              collection,
+              start,
+              end,
+              periodReducer
+            );
+          })
+        ).filter(removeEmptyImagesFilter);
+      }
+
+      if (periodType !== DAILY) {
+        const periodList = ee.List(periodItems);
+
+        periodCollection = ee.ImageCollection.fromImages(
+          periodList.map((item) => {
+            const period = ee.Dictionary(item);
+            const start = ee.Date(period.get("startDate"));
+            const end = ee.Date(period.get("endDate")).advance(1, "day");
+
+            return getReducedCollection(
+              ee,
+              periodCollection || collection,
+              start,
+              end,
+              periodReducer
+            );
+          })
+        ).filter(removeEmptyImagesFilter);
+      }
     }
 
-    const reduced = (dailyCollection || collection)
+    const reduced = (periodCollection || collection)
       .map((image) =>
         image
           .reduceRegions({

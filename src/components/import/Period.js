@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import i18n from "@dhis2/d2-i18n";
+import PeriodType from "./PeriodType";
 import { CalendarInput } from "@dhis2/ui";
 import { useDataQuery } from "@dhis2/app-runtime";
 import TimeZone from "../shared/TimeZone";
@@ -17,7 +18,7 @@ const userSettingsQuery = {
 const Period = ({ calendar, period, onChange }) => {
   const result = useDataQuery(userSettingsQuery);
   const { data: { userSettings: { keyUiLocale: locale } = {} } = {} } = result;
-  const { startTime, endTime } = period;
+  const { periodType, startTime, endTime } = period;
 
   return (
     <div className={styles.container}>
@@ -26,6 +27,10 @@ const Period = ({ calendar, period, onChange }) => {
         {i18n.t("Daily values will be imported between start and end dates")}
       </p>
       <div className={styles.pickers}>
+        <PeriodType
+          periodType={periodType}
+          onChange={(periodType) => onChange({ ...period, periodType })}
+        />
         <CalendarInput
           label={i18n.t("Start date")}
           date={startTime}
