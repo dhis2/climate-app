@@ -5,7 +5,7 @@ module.exports = {
     // Needed to add this to support ?? and ?. operators, for some reason
     parserOptions: { ecmaVersion: 'latest' },
     // These are common lint errors
-    // TODO: remove these options to let them create errors again
+    // TODO: address lines flagged with these rules (either turn off or back on)
     rules: {
         'import/extensions': 'warn',
         'max-params': 'warn',
