@@ -1,31 +1,31 @@
 {
-  "name": "climate-data",
-  "version": "1.5.1",
-  "description": "Explore and import weather and climate data in DHIS2.",
-  "license": "BSD-3-Clause",
-  "private": true,
-  "scripts": {
-    "build": "d2-app-scripts build",
-    "start": "d2-app-scripts start",
-    "test": "d2-app-scripts test",
-    "deploy": "d2-app-scripts deploy",
-    "lint": "d2-style check",
-    "format": "d2-style apply"
-  },
-  "devDependencies": {
-    "@dhis2/cli-app-scripts": "^11.7.0",
-    "@dhis2/cli-style": "^10.7.5"
-  },
-  "dependencies": {
-    "@dhis2/app-runtime": "^3.10.6",
-    "@dhis2/multi-calendar-dates": "1.0.0-alpha.27",
-    "@turf/area": "^6.5.0",
-    "highcharts": "^10.3.3",
-    "react-router-dom": "^6.26.1",
-    "zustand": "^4.5.5"
-  },
-  "resolutions": {
-    "@dhis2/cli-app-scripts/**/@dhis2/multi-calendar-dates": "1.2.3",
-    "@dhis2/multi-calendar-dates": "1.0.0-alpha.27"
-  }
+    "name": "climate-data",
+    "version": "1.5.1",
+    "description": "Explore and import weather and climate data in DHIS2.",
+    "license": "BSD-3-Clause",
+    "private": true,
+    "scripts": {
+        "build": "d2-app-scripts build",
+        "start": "d2-app-scripts start",
+        "test": "d2-app-scripts test",
+        "deploy": "d2-app-scripts deploy",
+        "lint": "d2-style check",
+        "format": "d2-style apply"
+    },
+    "devDependencies": {
+        "@dhis2/cli-app-scripts": "^11.7.0",
+        "@dhis2/cli-style": "^10.7.5"
+    },
+    "dependencies": {
+        "@dhis2/app-runtime": "^3.10.6",
+        "@dhis2/multi-calendar-dates": "1.0.0-alpha.27",
+        "@turf/area": "^6.5.0",
+        "highcharts": "^10.3.3",
+        "react-router-dom": "^6.26.1",
+        "zustand": "^4.5.5"
+    },
+    "resolutions": {
+        "@dhis2/cli-app-scripts/**/@dhis2/multi-calendar-dates": "1.2.3",
+        "@dhis2/multi-calendar-dates": "1.0.0-alpha.27"
+    }
 }

@@ -1,5 +1,5 @@
-import Routes from "./components/Routes";
+import Routes from './components/Routes'
 
-const App = () => <Routes />;
+const App = () => <Routes />
 
-export default App;
+export default App
