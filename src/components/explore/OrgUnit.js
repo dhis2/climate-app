@@ -1,13 +1,13 @@
-import { useEffect } from 'react'
 import i18n from '@dhis2/d2-i18n'
+import { useEffect } from 'react'
 import {
     Outlet,
     useLoaderData,
     useLocation,
     useNavigate,
 } from 'react-router-dom'
-import OrgUnitType from './OrgUnitType'
 import exploreStore from '../../store/exploreStore'
+import OrgUnitType from './OrgUnitType'
 import styles from './styles/OrgUnit.module.css'
 
 const tabIsValid = (tab, orgUnit) =>

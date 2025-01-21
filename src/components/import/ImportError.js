@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types'
 import i18n from '@dhis2/d2-i18n'
-import styles from './styles/ImportError.module.css'
+import PropTypes from 'prop-types'
 import ImportResponse from './ImportResponse'
+import styles from './styles/ImportError.module.css'
 
 const ImportError = ({ response = {} }) => {
     const { conflicts, importCount } = response

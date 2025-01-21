@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types'
+import { useDataQuery } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { CalendarInput } from '@dhis2/ui'
-import { useDataQuery } from '@dhis2/app-runtime'
+import PropTypes from 'prop-types'
 import TimeZone from '../shared/TimeZone'
 import styles from './styles/Period.module.css'
 

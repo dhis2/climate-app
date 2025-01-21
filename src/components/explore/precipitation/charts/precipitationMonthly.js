@@ -1,12 +1,12 @@
 import i18n from '@dhis2/d2-i18n'
 import { colors } from '@dhis2/ui'
+import { getTimeFromId, metersToMillimeters } from '../../../../utils/calc'
 import {
     animation,
     credits,
     getMonthlyPeriod,
     getMonthFromId,
 } from '../../../../utils/chart'
-import { getTimeFromId, metersToMillimeters } from '../../../../utils/calc'
 
 const band = 'total_precipitation_sum'
 

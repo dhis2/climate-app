@@ -1,13 +1,13 @@
-import Chart from '../Chart'
-import PeriodTypeSelect from '../PeriodTypeSelect'
-import DailyPeriodSelect from '../DailyPeriodSelect'
-import DataLoader from '../../shared/DataLoader'
-import Resolution from '../../shared/Resolution'
-import getDailyConfig from './charts/precipitationDaily'
+import { era5Daily } from '../../../data/datasets'
+import useAppSettings from '../../../hooks/useAppSettings'
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries'
 import exploreStore from '../../../store/exploreStore'
-import useAppSettings from '../../../hooks/useAppSettings'
-import { era5Daily } from '../../../data/datasets'
+import DataLoader from '../../shared/DataLoader'
+import Resolution from '../../shared/Resolution'
+import Chart from '../Chart'
+import DailyPeriodSelect from '../DailyPeriodSelect'
+import PeriodTypeSelect from '../PeriodTypeSelect'
+import getDailyConfig from './charts/precipitationDaily'
 
 const PrecipitationDaily = () => {
     const orgUnit = exploreStore((state) => state.orgUnit)

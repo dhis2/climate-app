@@ -1,11 +1,11 @@
-import { Fragment, useEffect } from 'react'
-import { CssVariables, CssReset, Menu, MenuItem } from '@dhis2/ui'
-import { Outlet, useResolvedPath, useNavigate } from 'react-router-dom'
 import i18n from '@dhis2/d2-i18n'
-import styles from './styles/Root.module.css'
-import OrgUnitTree from './explore/OrgUnitTree'
-import CheckOrgUnitTree from './check/OrgUnitTree'
+import { CssVariables, CssReset, Menu, MenuItem } from '@dhis2/ui'
+import { Fragment, useEffect } from 'react'
+import { Outlet, useResolvedPath, useNavigate } from 'react-router-dom'
 import useAppSettings from '../hooks/useAppSettings'
+import CheckOrgUnitTree from './check/OrgUnitTree'
+import OrgUnitTree from './explore/OrgUnitTree'
+import styles from './styles/Root.module.css'
 
 export const appPages = [
     { path: '/', name: i18n.t('Home') },

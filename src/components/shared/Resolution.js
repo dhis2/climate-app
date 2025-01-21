@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types'
 import i18n from '@dhis2/d2-i18n'
+import PropTypes from 'prop-types'
 import styles from './styles/Resolution.module.css'
 
 const Resolution = ({ resolution, isImport = false }) => (

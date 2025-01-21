@@ -1,11 +1,11 @@
-import PropTypes from 'prop-types'
 import i18n from '@dhis2/d2-i18n'
-import useOrgUnits from '../../hooks/useOrgUnits'
+import PropTypes from 'prop-types'
 import useEarthEngineData from '../../hooks/useEarthEngineData'
-import ImportData from './ImportData'
+import useOrgUnits from '../../hooks/useOrgUnits'
+import { getNumberOfDaysFromPeriod } from '../../utils/time'
 import DataLoader from '../shared/DataLoader'
 import ErrorMessage from '../shared/ErrorMessage'
-import { getNumberOfDaysFromPeriod } from '../../utils/time'
+import ImportData from './ImportData'
 import styles from './styles/ExtractData.module.css'
 
 const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {

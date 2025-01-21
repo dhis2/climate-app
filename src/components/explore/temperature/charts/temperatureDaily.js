@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { colors } from '@dhis2/ui'
-import { animation, credits, getDailyPeriod } from '../../../../utils/chart'
 import { toCelcius } from '../../../../utils/calc'
+import { animation, credits, getDailyPeriod } from '../../../../utils/chart'
 
 const getChart = (name, data, settings) => {
     const { tempMin, tempMax } = settings

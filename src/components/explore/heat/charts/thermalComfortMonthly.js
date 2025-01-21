@@ -1,12 +1,12 @@
 import i18n from '@dhis2/d2-i18n'
 import { colors } from '@dhis2/ui'
+import { toCelcius } from '../../../../utils/calc'
 import {
     animation,
     heatCredits,
     strokePattern,
     getMonthlyPeriod,
 } from '../../../../utils/chart'
-import { toCelcius } from '../../../../utils/calc'
 import {
     getPlotBands,
     getPlotLines,

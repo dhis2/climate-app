@@ -1,10 +1,10 @@
+import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
 import React from 'react'
-import i18n from '@dhis2/d2-i18n'
+import { roundOneDecimal } from '../../../utils/calc'
 import styles from './styles/DayForecast.module.css'
 import TemperatureValue from './TemperatureValue.js'
 import WeatherSymbol from './WeatherSymbol.js'
-import { roundOneDecimal } from '../../../utils/calc'
 
 const sixHours = [
     { start: '00', end: '06' },

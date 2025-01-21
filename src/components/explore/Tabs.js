@@ -1,9 +1,9 @@
-import { useEffect } from 'react'
 import i18n from '@dhis2/d2-i18n'
 import { TabBar, Tab } from '@dhis2/ui'
+import { useEffect } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
-import exploreStore from '../../store/exploreStore'
 import useExploreUri from '../../hooks/useExploreUri'
+import exploreStore from '../../store/exploreStore'
 import styles from './styles/Tabs.module.css'
 
 const tabs = [

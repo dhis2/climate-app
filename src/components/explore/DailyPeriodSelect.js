@@ -1,9 +1,9 @@
-import { useState } from 'react'
 import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
-import DatePicker from '../shared/DatePicker'
-import { getNumberOfDays } from '../../utils/time'
+import { useState } from 'react'
 import exploreStore from '../../store/exploreStore'
+import { getNumberOfDays } from '../../utils/time'
+import DatePicker from '../shared/DatePicker'
 import styles from './styles/Period.module.css'
 
 const maxDays = 1000

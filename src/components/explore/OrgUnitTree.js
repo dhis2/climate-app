@@ -1,7 +1,7 @@
-import { useNavigate } from 'react-router-dom'
 import { OrganisationUnitTree } from '@dhis2/ui'
-import exploreStore from '../../store/exploreStore'
+import { useNavigate } from 'react-router-dom'
 import useOrgUnitRoots from '../../hooks/useOrgUnitRoots'
+import exploreStore from '../../store/exploreStore'
 import styles from './styles/OrgUnitTree.module.css'
 
 const OrgUnitTree = () => {

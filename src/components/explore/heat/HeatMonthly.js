@@ -1,14 +1,14 @@
-import Chart from '../Chart'
-import PeriodTypeSelect from '../PeriodTypeSelect'
-import MonthlyPeriodSelect from '../MonthlyPeriodSelect'
-import DataLoader from '../../shared/DataLoader'
-import Resolution from '../../shared/Resolution'
-import HeatDescription from './HeatDescription'
-import getMonthlyConfig from './charts/thermalComfortMonthly'
+import { era5HeatMonthly } from '../../../data/datasets'
+import useAppSettings from '../../../hooks/useAppSettings'
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries'
 import exploreStore from '../../../store/exploreStore'
-import useAppSettings from '../../../hooks/useAppSettings'
-import { era5HeatMonthly } from '../../../data/datasets'
+import DataLoader from '../../shared/DataLoader'
+import Resolution from '../../shared/Resolution'
+import Chart from '../Chart'
+import MonthlyPeriodSelect from '../MonthlyPeriodSelect'
+import PeriodTypeSelect from '../PeriodTypeSelect'
+import getMonthlyConfig from './charts/thermalComfortMonthly'
+import HeatDescription from './HeatDescription'
 
 const HeatMonthly = () => {
     const orgUnit = exploreStore((state) => state.orgUnit)

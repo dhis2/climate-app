@@ -1,17 +1,17 @@
 import i18n from '@dhis2/d2-i18n'
 import { colors } from '@dhis2/ui'
 import {
-    animation,
-    credits,
-    getMonthFromId,
-    getMonthlyPeriod,
-} from '../../../../utils/chart'
-import {
     getRelativeHumidity,
     kelvinToCelsius,
     roundOneDecimal,
     getTimeFromId,
 } from '../../../../utils/calc'
+import {
+    animation,
+    credits,
+    getMonthFromId,
+    getMonthlyPeriod,
+} from '../../../../utils/chart'
 
 const getChartConfig = (name, data, normals, referencePeriod) => {
     const dewpoint = data.map((d) => ({

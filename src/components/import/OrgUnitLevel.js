@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types'
 import i18n from '@dhis2/d2-i18n'
-import { useEffect } from 'react'
 import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
+import PropTypes from 'prop-types'
+import { useEffect } from 'react'
 import useOrgUnitLevels from '../../hooks/useOrgUnitLevels'
 
 const OrgUnitLevel = ({ level, onChange }) => {

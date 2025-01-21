@@ -1,13 +1,13 @@
 import i18n from '@dhis2/d2-i18n'
 import { colors } from '@dhis2/ui'
 import legend from '../../../../data/heat-stress-legend'
+import { toCelcius } from '../../../../utils/calc'
 import {
     animation,
     heatCredits,
     strokePattern,
     getDailyPeriod,
 } from '../../../../utils/chart'
-import { toCelcius } from '../../../../utils/calc'
 
 export const getPlotBands = (minMax, settings) => {
     const { heatMin, heatMax } = settings

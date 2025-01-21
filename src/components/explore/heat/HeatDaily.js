@@ -1,14 +1,14 @@
-import Chart from '../Chart'
-import PeriodTypeSelect from '../PeriodTypeSelect'
-import DailyPeriodSelect from '../DailyPeriodSelect'
-import DataLoader from '../../shared/DataLoader'
-import Resolution from '../../shared/Resolution'
-import HeatDescription from './HeatDescription'
-import getDailyConfig from './charts/thermalComfortDaily'
+import { era5HeatDaily } from '../../../data/datasets'
+import useAppSettings from '../../../hooks/useAppSettings'
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries'
 import exploreStore from '../../../store/exploreStore'
-import useAppSettings from '../../../hooks/useAppSettings'
-import { era5HeatDaily } from '../../../data/datasets'
+import DataLoader from '../../shared/DataLoader'
+import Resolution from '../../shared/Resolution'
+import Chart from '../Chart'
+import DailyPeriodSelect from '../DailyPeriodSelect'
+import PeriodTypeSelect from '../PeriodTypeSelect'
+import getDailyConfig from './charts/thermalComfortDaily'
+import HeatDescription from './HeatDescription'
 
 const HeatDaily = () => {
     const orgUnit = exploreStore((state) => state.orgUnit)

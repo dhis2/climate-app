@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types'
 import i18n from '@dhis2/d2-i18n'
 import { Tooltip, IconLocation24, IconEmptyFrame24 } from '@dhis2/ui'
+import PropTypes from 'prop-types'
 
 const OrgUntType = ({ type }) => (
     <Tooltip

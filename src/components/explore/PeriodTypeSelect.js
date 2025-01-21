@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { SegmentedControl } from '@dhis2/ui'
-import { DAILY, MONTHLY } from '../../utils/time'
 import exploreStore from '../../store/exploreStore'
+import { DAILY, MONTHLY } from '../../utils/time'
 import styles from './styles/PeriodTypeSelect.module.css'
 
 const PeriodTypeSelect = () => {

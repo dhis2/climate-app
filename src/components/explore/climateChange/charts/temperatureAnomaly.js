@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { colors } from '@dhis2/ui'
-import { animation, credits } from '../../../../utils/chart'
 import { roundOneDecimal } from '../../../../utils/calc'
+import { animation, credits } from '../../../../utils/chart'
 import { padWithZeroes } from '../../../../utils/time'
 import { months } from '../../MonthSelect'
 

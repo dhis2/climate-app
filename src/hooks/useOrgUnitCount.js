@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
 import { useDataQuery } from '@dhis2/app-runtime'
+import { useState, useEffect } from 'react'
 import { ORG_UNITS_QUERY } from './useOrgUnits'
 
 const useOrgUnitCount = (parent, level) => {

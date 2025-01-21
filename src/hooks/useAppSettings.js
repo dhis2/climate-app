@@ -1,5 +1,5 @@
-import { useState, useCallback, useEffect } from 'react'
 import { useDataEngine } from '@dhis2/app-runtime'
+import { useState, useCallback, useEffect } from 'react'
 
 const APP_NAMESPACE = 'CLIMATE_DATA'
 const SETTINGS_KEY = 'settings'

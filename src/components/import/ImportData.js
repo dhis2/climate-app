@@ -1,9 +1,9 @@
-import PropTypes from 'prop-types'
-import i18n from '@dhis2/d2-i18n'
 import { useDataMutation } from '@dhis2/app-runtime'
+import i18n from '@dhis2/d2-i18n'
+import PropTypes from 'prop-types'
 import { useState, useEffect } from 'react'
-import ImportResponse from './ImportResponse'
 import ImportError from './ImportError'
+import ImportResponse from './ImportResponse'
 import NoOrgUnitData from './NoOrgUnitData'
 import styles from './styles/ImportData.module.css'
 

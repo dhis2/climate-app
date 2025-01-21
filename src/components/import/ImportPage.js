@@ -1,14 +1,7 @@
-import { useState, useEffect } from 'react'
-import i18n from '@dhis2/d2-i18n'
 import { useConfig } from '@dhis2/app-runtime'
+import i18n from '@dhis2/d2-i18n'
 import { Card, Button } from '@dhis2/ui'
-import Dataset from './Dataset'
-import Period from './Period'
-import OrgUnits from './OrgUnits'
-import GEETokenCheck from '../shared/GEETokenCheck'
-import Resolution from '../shared/Resolution'
-import DataElement from './DataElement'
-import ExtractData from './ExtractData'
+import { useState, useEffect } from 'react'
 import useOrgUnitCount from '../../hooks/useOrgUnitCount'
 import {
     getDefaultImportPeriod,
@@ -16,6 +9,13 @@ import {
     getNumberOfDaysFromPeriod,
     isValidPeriod,
 } from '../../utils/time'
+import GEETokenCheck from '../shared/GEETokenCheck'
+import Resolution from '../shared/Resolution'
+import DataElement from './DataElement'
+import Dataset from './Dataset'
+import ExtractData from './ExtractData'
+import OrgUnits from './OrgUnits'
+import Period from './Period'
 import styles from './styles/ImportPage.module.css'
 
 const maxValues = 50000

@@ -1,20 +1,20 @@
-import { useMemo } from 'react'
 import i18n from '@dhis2/d2-i18n'
-import MonthSelect from '../MonthSelect'
-import ReferencePeriod from '../ReferencePeriodSelect'
-import Chart from '../Chart'
-import DataLoader from '../../shared/DataLoader'
-import Resolution from '../../shared/Resolution'
-import getChartConfig from './charts/temperatureAnomaly'
-import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries'
-import useEarthEngineClimateNormals from '../../../hooks/useEarthEngineClimateNormals'
-import exploreStore from '../../../store/exploreStore'
-import useAppSettings from '../../../hooks/useAppSettings'
+import { useMemo } from 'react'
 import {
     era5MonthlyTemperatures,
     era5MonthlyNormals,
 } from '../../../data/datasets'
+import useAppSettings from '../../../hooks/useAppSettings'
+import useEarthEngineClimateNormals from '../../../hooks/useEarthEngineClimateNormals'
+import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries'
+import exploreStore from '../../../store/exploreStore'
 import { getCurrentYear } from '../../../utils/time'
+import DataLoader from '../../shared/DataLoader'
+import Resolution from '../../shared/Resolution'
+import Chart from '../Chart'
+import MonthSelect from '../MonthSelect'
+import ReferencePeriod from '../ReferencePeriodSelect'
+import getChartConfig from './charts/temperatureAnomaly'
 import styles from './styles/ClimateChangeTab.module.css'
 
 // Fetch all years from 1970 to the current year
