@@ -53075,4 +53075,5 @@ ee.data.Profiler.Format.JSON = new ee.data.Profiler.Format('json')
 })()
 
 goog.Timer.defaultTimerObject = window
-module.exports = goog.global.ee = ee
+// Use ES module format to work with Vite:
+export default goog.global.ee = ee
