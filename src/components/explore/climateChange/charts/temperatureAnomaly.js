@@ -3,7 +3,7 @@ import { colors } from '@dhis2/ui'
 import { roundOneDecimal } from '../../../../utils/calc'
 import { animation, credits } from '../../../../utils/chart'
 import { padWithZeroes } from '../../../../utils/time'
-import { months } from '../../MonthSelect'
+import { months } from '../../MonthSelect.jsx'
 
 const band = 'temperature_2m'
 

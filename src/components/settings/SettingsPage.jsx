@@ -1,9 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
 import useAppSettings from '../../hooks/useAppSettings'
-import ChartSettings from './ChartSettings'
-import StartPageSelect from './StartPageSelect'
+import ChartSettings from './ChartSettings.jsx'
+import StartPageSelect from './StartPageSelect.jsx'
 import styles from './styles/SettingsPage.module.css'
-import TimeZoneSelect from './TimeZoneSelect'
+import TimeZoneSelect from './TimeZoneSelect.jsx'
 
 const SettingsPage = () => {
     const { settings, changeSetting } = useAppSettings()

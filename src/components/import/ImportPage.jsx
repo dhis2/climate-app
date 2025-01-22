@@ -9,13 +9,13 @@ import {
     getNumberOfDaysFromPeriod,
     isValidPeriod,
 } from '../../utils/time'
-import GEETokenCheck from '../shared/GEETokenCheck'
-import Resolution from '../shared/Resolution'
-import DataElement from './DataElement'
-import Dataset from './Dataset'
-import ExtractData from './ExtractData'
-import OrgUnits from './OrgUnits'
-import Period from './Period'
+import GEETokenCheck from '../shared/GEETokenCheck.jsx'
+import Resolution from '../shared/Resolution.jsx'
+import DataElement from './DataElement.jsx'
+import Dataset from './Dataset.jsx'
+import ExtractData from './ExtractData.jsx'
+import OrgUnits from './OrgUnits.jsx'
+import Period from './Period.jsx'
 import styles from './styles/ImportPage.module.css'
 
 const maxValues = 50000

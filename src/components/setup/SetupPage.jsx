@@ -1,8 +1,8 @@
 import i18n from '@dhis2/d2-i18n'
 import datasets from '../../data/datasets'
 import heatStressLegend from '../../data/heat-stress-legend'
-import DataElement from './DataElement'
-import Legend from './Legend'
+import DataElement from './DataElement.jsx'
+import Legend from './Legend.jsx'
 import styles from './styles/SetupPage.module.css'
 
 const SetupPage = () => {

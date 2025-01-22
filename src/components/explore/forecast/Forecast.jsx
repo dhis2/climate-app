@@ -2,8 +2,8 @@ import i18n from '@dhis2/d2-i18n'
 import { useState, useEffect } from 'react'
 import useAppSettings from '../../../hooks/useAppSettings.js'
 import exploreStore from '../../../store/exploreStore'
-import DataLoader from '../../shared/DataLoader.js'
-import DayForecast from './DayForecast.js'
+import DataLoader from '../../shared/DataLoader.jsx'
+import DayForecast from './DayForecast.jsx'
 import styles from './styles/ForecastTab.module.css'
 
 const convertTimezone = (date, timeZone) =>

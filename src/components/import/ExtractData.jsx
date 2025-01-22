@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import useEarthEngineData from '../../hooks/useEarthEngineData'
 import useOrgUnits from '../../hooks/useOrgUnits'
 import { getNumberOfDaysFromPeriod } from '../../utils/time'
-import DataLoader from '../shared/DataLoader'
-import ErrorMessage from '../shared/ErrorMessage'
-import ImportData from './ImportData'
+import DataLoader from '../shared/DataLoader.jsx'
+import ErrorMessage from '../shared/ErrorMessage.jsx'
+import ImportData from './ImportData.jsx'
 import styles from './styles/ExtractData.module.css'
 
 const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {

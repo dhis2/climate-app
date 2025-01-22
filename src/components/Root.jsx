@@ -3,8 +3,8 @@ import { CssVariables, CssReset, Menu, MenuItem } from '@dhis2/ui'
 import { Fragment, useEffect } from 'react'
 import { Outlet, useResolvedPath, useNavigate } from 'react-router-dom'
 import useAppSettings from '../hooks/useAppSettings'
-import CheckOrgUnitTree from './check/OrgUnitTree'
-import OrgUnitTree from './explore/OrgUnitTree'
+import CheckOrgUnitTree from './check/OrgUnitTree.jsx'
+import OrgUnitTree from './explore/OrgUnitTree.jsx'
 import styles from './styles/Root.module.css'
 
 export const appPages = [

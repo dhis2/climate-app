@@ -2,50 +2,48 @@ import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
 import { useState } from 'react'
 import exploreStore from '../../store/exploreStore'
-import { getNumberOfMonths } from '../../utils/time'
-import MonthPicker from '../shared/MonthPicker'
+import { getNumberOfDays } from '../../utils/time'
+import DatePicker from '../shared/DatePicker.jsx'
 import styles from './styles/Period.module.css'
 
-const maxMonths = 60
+const maxDays = 1000
 
-const MonthlyPeriodSelect = () => {
-    const { monthlyPeriod, setMonthlyPeriod } = exploreStore()
-    const [period, setPeriod] = useState(monthlyPeriod)
+const DailyPeriodSelect = () => {
+    const { dailyPeriod, setDailyPeriod } = exploreStore()
+    const [period, setPeriod] = useState(dailyPeriod)
 
     const { startTime, endTime } = period
-    const months = getNumberOfMonths(startTime, endTime)
+    const days = getNumberOfDays(startTime, endTime)
 
     return (
         <div className={styles.container}>
             <div className={styles.pickers}>
-                <MonthPicker
-                    label={i18n.t('Start month')}
+                <DatePicker
+                    label={i18n.t('Start date')}
                     defaultVal={startTime}
                     onChange={(startTime) =>
                         setPeriod({ ...period, startTime })
                     }
                 />
-                <MonthPicker
-                    label={i18n.t('End month')}
+                <DatePicker
+                    label={i18n.t('End date')}
                     defaultVal={endTime}
                     onChange={(endTime) => setPeriod({ ...period, endTime })}
                 />
                 <Button
-                    disabled={months > maxMonths}
-                    onClick={() => setMonthlyPeriod(period)}
+                    disabled={days > maxDays}
+                    onClick={() => setDailyPeriod(period)}
                 >
                     Update
                 </Button>
             </div>
-            {months > maxMonths && (
+            {days > maxDays && (
                 <div className={styles.warning}>
-                    {i18n.t('Maximum {{maxMonths}} months allowed', {
-                        maxMonths,
-                    })}
+                    {i18n.t('Maximum {{maxDays}} days allowed', { maxDays })}
                 </div>
             )}
         </div>
     )
 }
 
-export default MonthlyPeriodSelect
+export default DailyPeriodSelect

@@ -1,13 +1,13 @@
 import { era5Daily } from '../../../data/datasets'
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries'
 import exploreStore from '../../../store/exploreStore'
-import DataLoader from '../../shared/DataLoader'
-import Resolution from '../../shared/Resolution'
-import Chart from '../Chart'
-import DailyPeriodSelect from '../DailyPeriodSelect'
-import PeriodTypeSelect from '../PeriodTypeSelect'
+import DataLoader from '../../shared/DataLoader.jsx'
+import Resolution from '../../shared/Resolution.jsx'
+import Chart from '../Chart.jsx'
+import DailyPeriodSelect from '../DailyPeriodSelect.jsx'
+import PeriodTypeSelect from '../PeriodTypeSelect.jsx'
 import getDailyConfig from './charts/humidityDaily'
-import HumidityDescription from './HumidityDescription'
+import HumidityDescription from './HumidityDescription.jsx'
 
 const HumidityDaily = () => {
     const orgUnit = exploreStore((state) => state.orgUnit)

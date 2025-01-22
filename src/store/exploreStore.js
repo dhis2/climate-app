@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { defaultReferencePeriod } from '../components/explore/ReferencePeriodSelect'
+import { defaultReferencePeriod } from '../components/explore/ReferencePeriodSelect.jsx'
 import {
     getDefaultMonthlyPeriod,
     getDefaultExplorePeriod,

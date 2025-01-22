@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import useAppSettings from '../../hooks/useAppSettings'
-import HeatCategory from './HeatCategory'
-import NumberInput from './NumberInput'
+import HeatCategory from './HeatCategory.jsx'
+import NumberInput from './NumberInput.jsx'
 
 const ChartSettings = () => {
     const { settings, changeSetting } = useAppSettings()

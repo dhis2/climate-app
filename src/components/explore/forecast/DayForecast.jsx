@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { roundOneDecimal } from '../../../utils/calc'
 import styles from './styles/DayForecast.module.css'
-import TemperatureValue from './TemperatureValue.js'
-import WeatherSymbol from './WeatherSymbol.js'
+import TemperatureValue from './TemperatureValue.jsx'
+import WeatherSymbol from './WeatherSymbol.jsx'
 
 const sixHours = [
     { start: '00', end: '06' },

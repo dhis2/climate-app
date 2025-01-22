@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
-import OrgUnitLevel from './OrgUnitLevel'
-import OrgUnitTree from './OrgUnitTree'
+import OrgUnitLevel from './OrgUnitLevel.jsx'
+import OrgUnitTree from './OrgUnitTree.jsx'
 import styles from './styles/OrgUnits.module.css'
 
 const OrgUnits = ({ selected = {}, onChange }) => {

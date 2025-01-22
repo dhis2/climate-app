@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import GEETokenCheck from '../shared/GEETokenCheck'
+import GEETokenCheck from '../shared/GEETokenCheck.jsx'
 import styles from './styles/ExplorePage.module.css'
 
 const ExplorePage = () => (

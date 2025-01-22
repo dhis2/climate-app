@@ -2,9 +2,9 @@ import { useDataMutation } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
 import { useState, useEffect } from 'react'
-import ImportError from './ImportError'
-import ImportResponse from './ImportResponse'
-import NoOrgUnitData from './NoOrgUnitData'
+import ImportError from './ImportError.jsx'
+import ImportResponse from './ImportResponse.jsx'
+import NoOrgUnitData from './NoOrgUnitData.jsx'
 import styles from './styles/ImportData.module.css'
 
 const dataImportMutation = {

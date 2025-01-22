@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import { appPages } from '../Root'
+import { appPages } from '../Root.jsx'
 
 const StartPageSelect = ({ startPage, onChange }) => (
     <SingleSelectField
