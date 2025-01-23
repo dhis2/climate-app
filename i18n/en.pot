@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2024-11-20T14:17:35.520Z\n"
-"PO-Revision-Date: 2024-11-20T14:17:35.520Z\n"
+"POT-Creation-Date: 2025-01-23T16:19:51.054Z\n"
+"PO-Revision-Date: 2025-01-23T16:19:51.055Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -711,6 +711,9 @@ msgstr "Default start page for users"
 msgid "Time zone where your org units are located"
 msgstr "Time zone where your org units are located"
 
+msgid "Data element: \"{{name}}\""
+msgstr "Data element: \"{{name}}\""
+
 msgid "Name"
 msgstr "Name"
 
@@ -738,8 +741,8 @@ msgstr "Aggregation levels"
 msgid "Assign all org unit levels"
 msgstr "Assign all org unit levels"
 
-msgid "Legend"
-msgstr "Legend"
+msgid "Legend: \"{{name}}\""
+msgstr "Legend: \"{{name}}\""
 
 msgid "Start value"
 msgstr "Start value"
@@ -786,8 +789,8 @@ msgstr ""
 "it from data imported from local weather stations. If you use the same code "
 "specified below, we will preselect the data element in the import interface."
 
-msgid "Data set"
-msgstr "Data set"
+msgid "Data set: \"Climate/Weather\""
+msgstr "Data set: \"Climate/Weather\""
 
 msgid "Climate/Weather"
 msgstr "Climate/Weather"
@@ -807,8 +810,8 @@ msgstr "Organisation units"
 msgid "Select all organisation units in your system"
 msgstr "Select all organisation units in your system"
 
-msgid "Data element group"
-msgstr "Data element group"
+msgid "Data element group: \"Climate/Weather\""
+msgstr "Data element group: \"Climate/Weather\""
 
 msgid ""
 "You should now be able to import climate data with this app. Please reach "

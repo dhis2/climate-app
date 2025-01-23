@@ -10,7 +10,7 @@ const DataElement = ({
 }) => (
     <table>
         <caption>
-            {i18n.t('Data element')}: &quot;{name}&quot;
+            {i18n.t('Data element: "{{name}}"', { name, nsSeparator: '%' })}
         </caption>
         <tbody>
             <tr>

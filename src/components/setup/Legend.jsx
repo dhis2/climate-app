@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 const Legend = ({ name, description, items }) => (
     <table>
         <caption>
-            {i18n.t('Legend')}: &quot;{name}&quot;
+            {i18n.t('Legend: "{{name}}"', { name, nsSeparator: '%' })}
             {description && <p>{description}</p>}
         </caption>
         <thead>

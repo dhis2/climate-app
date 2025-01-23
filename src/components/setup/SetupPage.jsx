@@ -42,8 +42,9 @@ const SetupPage = () => {
             </p>
             <table>
                 <caption>
-                    {i18n.t('Data set')}: &quot;{i18n.t('Climate/Weather')}
-                    &quot;
+                    {i18n.t('Data set: "Climate/Weather"', {
+                        nsSeparator: '%',
+                    })}
                 </caption>
                 <tbody>
                     <tr>
@@ -83,9 +84,9 @@ const SetupPage = () => {
             </p>
             <table>
                 <caption>
-                    {i18n.t('Data element group')}: &quot;
-                    {i18n.t('Climate/Weather')}
-                    &quot;
+                    {i18n.t('Data element group: "Climate/Weather"', {
+                        nsSeparator: '%',
+                    })}
                 </caption>
                 <tbody>
                     <tr>
