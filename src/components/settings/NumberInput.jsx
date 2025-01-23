@@ -1,4 +1,3 @@
-import { validateDateString } from '@dhis2/multi-calendar-dates'
 import { InputField } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 
