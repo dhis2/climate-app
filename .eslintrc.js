@@ -10,4 +10,7 @@ module.exports = {
         'no-unused-vars': 'warn',
         'react/react-in-jsx-scope': 'off',
     },
+    settings: {
+        'import/resolver': { node: { extensions: ['.js', '.jsx'] } },
+    },
 }
