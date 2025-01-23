@@ -59,9 +59,9 @@ const DataElement = ({ selected, dataset, onChange }) => {
 }
 
 DataElement.propTypes = {
-    selected: PropTypes.object,
-    dataset: PropTypes.object,
     onChange: PropTypes.func.isRequired,
+    dataset: PropTypes.object,
+    selected: PropTypes.object,
 }
 
 export default DataElement

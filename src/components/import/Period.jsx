@@ -54,8 +54,9 @@ const Period = ({ calendar, period, onChange }) => {
 }
 
 Period.propTypes = {
-    period: PropTypes.object,
     onChange: PropTypes.func.isRequired,
+    calendar: PropTypes.string,
+    period: PropTypes.object,
 }
 
 export default Period

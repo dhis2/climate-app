@@ -27,6 +27,7 @@ const AboutPage = () => (
             <a
                 href="https://cds.climate.copernicus.eu/datasets/reanalysis-era5-land"
                 target="_blank"
+                rel="noreferrer"
             >
                 {i18n.t(
                     'Read about ERA5-Land on Copernicus Climate Data Store'
@@ -39,7 +40,11 @@ const AboutPage = () => (
             )}
         </p>
         <p>
-            <a href="https://www.chc.ucsb.edu/data/chirps" target="_blank">
+            <a
+                href="https://www.chc.ucsb.edu/data/chirps"
+                target="_blank"
+                rel="noreferrer"
+            >
                 {i18n.t('Read about CHIRPS on Climate Hazards Center')}
             </a>
         </p>
@@ -47,6 +52,7 @@ const AboutPage = () => (
             <a
                 href="https://cds.climate.copernicus.eu/datasets/derived-utci-historical"
                 target="_blank"
+                rel="noreferrer"
             >
                 {i18n.t(
                     'Read about ERA5-HEAT on Copernicus Climate Data Store'

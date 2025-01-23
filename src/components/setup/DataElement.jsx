@@ -10,7 +10,7 @@ const DataElement = ({
 }) => (
     <table>
         <caption>
-            {i18n.t('Data element')}: "{name}"
+            {i18n.t('Data element')}: &quot;{name}&quot;
         </caption>
         <tbody>
             <tr>
@@ -48,11 +48,11 @@ const DataElement = ({
 )
 
 DataElement.propTypes = {
-    name: PropTypes.string.isRequired,
-    shortName: PropTypes.string.isRequired,
+    aggregationType: PropTypes.string.isRequired,
     dataElementCode: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
-    aggregationType: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    shortName: PropTypes.string.isRequired,
 }
 
 export default DataElement

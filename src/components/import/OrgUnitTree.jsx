@@ -35,8 +35,8 @@ const OrgUnitTree = ({ orgUnit, onChange }) => {
 }
 
 OrgUnitTree.propTypes = {
-    orgUnit: PropTypes.object,
     onChange: PropTypes.func.isRequired,
+    orgUnit: PropTypes.object,
 }
 
 export default OrgUnitTree

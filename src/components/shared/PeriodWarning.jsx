@@ -1,4 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
+import PropTypes from 'prop-types'
 import styles from './styles/PeriodWarning.module.css'
 
 const islimitedData = (period) => {
@@ -17,11 +18,15 @@ const PeriodWarning = ({ period }) => {
             <a
                 href="https://forum.ecmwf.int/t/a-new-cds-soon-to-be-launched-expect-some-disruptions/1607"
                 target="_blank"
+                rel="noreferrer"
             >
                 {i18n.t('Read more on the CDS user forum')}
             </a>
         </div>
     ) : null
+}
+PeriodWarning.propTypes = {
+    period: PropTypes.object,
 }
 
 export default PeriodWarning

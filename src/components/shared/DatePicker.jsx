@@ -51,11 +51,11 @@ const DatePicker = ({
 
 DatePicker.propTypes = {
     label: PropTypes.string.isRequired,
-    onBlur: PropTypes.func,
-    onChange: PropTypes.func,
     className: PropTypes.string,
     defaultVal: PropTypes.string,
     name: PropTypes.string,
+    onBlur: PropTypes.func,
+    onChange: PropTypes.func,
 }
 
 export default DatePicker

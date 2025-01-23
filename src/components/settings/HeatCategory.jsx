@@ -51,8 +51,8 @@ const HeatCategory = ({ id, label, value, onChange }) => {
 HeatCategory.propTypes = {
     id: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
-    value: PropTypes.number,
     onChange: PropTypes.func.isRequired,
+    value: PropTypes.number,
 }
 
 export default HeatCategory

@@ -54,10 +54,10 @@ const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
 }
 
 ExtractData.propTypes = {
-    dataset: PropTypes.object.isRequired,
-    period: PropTypes.object.isRequired,
-    orgUnits: PropTypes.object.isRequired,
     dataElement: PropTypes.object.isRequired,
+    dataset: PropTypes.object.isRequired,
+    orgUnits: PropTypes.object.isRequired,
+    period: PropTypes.object.isRequired,
 }
 
 export default ExtractData

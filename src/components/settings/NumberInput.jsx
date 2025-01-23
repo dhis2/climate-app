@@ -1,4 +1,6 @@
+import { validateDateString } from '@dhis2/multi-calendar-dates'
 import { InputField } from '@dhis2/ui'
+import PropTypes from 'prop-types'
 
 const NumberInput = ({ id, label, value, validationText, onChange }) => (
     <InputField
@@ -12,5 +14,12 @@ const NumberInput = ({ id, label, value, validationText, onChange }) => (
         validationText={validationText}
     />
 )
+NumberInput.propTypes = {
+    id: PropTypes.string,
+    label: PropTypes.node,
+    validationText: PropTypes.string,
+    value: PropTypes.number,
+    onChange: PropTypes.func,
+}
 
 export default NumberInput

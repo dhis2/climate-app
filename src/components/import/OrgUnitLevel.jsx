@@ -38,8 +38,8 @@ const OrgUnitLevel = ({ level, onChange }) => {
 }
 
 OrgUnitLevel.propTypes = {
-    level: PropTypes.string,
     onChange: PropTypes.func.isRequired,
+    level: PropTypes.string,
 }
 
 export default OrgUnitLevel

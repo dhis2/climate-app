@@ -28,7 +28,6 @@ const ImportError = ({ response = {} }) => {
 }
 
 ImportError.propTypes = {
-    message: PropTypes.string,
     response: PropTypes.object,
 }
 

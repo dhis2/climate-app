@@ -32,8 +32,8 @@ const OrgUnits = ({ selected = {}, onChange }) => {
 }
 
 OrgUnits.propTypes = {
-    selected: PropTypes.object,
     onChange: PropTypes.func.isRequired,
+    selected: PropTypes.object,
 }
 
 export default OrgUnits

@@ -4,7 +4,8 @@ import PropTypes from 'prop-types'
 const Legend = ({ name, description, items }) => (
     <table>
         <caption>
-            {i18n.t('Legend')}: "{name}"{description && <p>{description}</p>}
+            {i18n.t('Legend')}: &quot;{name}&quot;
+            {description && <p>{description}</p>}
         </caption>
         <thead>
             <tr>
@@ -35,6 +36,8 @@ const Legend = ({ name, description, items }) => (
 
 Legend.propTypes = {
     name: PropTypes.string.isRequired,
+    description: PropTypes.string,
+    items: PropTypes.array,
 }
 
 export default Legend
