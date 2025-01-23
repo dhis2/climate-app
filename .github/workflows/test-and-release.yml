@@ -31,5 +31,5 @@ jobs:
         if: '!github.event.push.repository.fork'
         secrets: inherit
         with:
-            publish-apphub: true
-            publish-github: true
+            publish_apphub: true
+            publish_github: true
