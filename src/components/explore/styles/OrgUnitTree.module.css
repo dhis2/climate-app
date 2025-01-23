@@ -1,9 +1,9 @@
 .container {
-  overflow: hidden;
+    overflow: hidden;
 }
 
 .orgUnitTree {
-  overflow-y: auto;
-  padding-left: 10px;
-  padding-bottom: 10px;
+    overflow-y: auto;
+    padding-left: 10px;
+    padding-bottom: 10px;
 }

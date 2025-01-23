@@ -1,13 +1,13 @@
 .container {
-  box-sizing: content-box;
-  line-height: 30px;
-  font-size: 14px;
-  font-style: italic;
-  color: #555;
+    box-sizing: content-box;
+    line-height: 30px;
+    font-size: 14px;
+    font-style: italic;
+    color: #555;
 }
 
 .loader > div:first-child {
-  display: inline-block;
-  margin-right: 10px;
-  vertical-align: bottom;
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: bottom;
 }
