@@ -1,8 +1,8 @@
 import i18n from '@dhis2/d2-i18n'
 import { colors } from '@dhis2/ui'
-import { roundOneDecimal } from '../../../../utils/calc'
-import { animation, credits } from '../../../../utils/chart'
-import { padWithZeroes } from '../../../../utils/time'
+import { roundOneDecimal } from '../../../../utils/calc.js'
+import { animation, credits } from '../../../../utils/chart.js'
+import { padWithZeroes } from '../../../../utils/time.js'
 import { months } from '../../MonthSelect.jsx'
 
 const band = 'temperature_2m'

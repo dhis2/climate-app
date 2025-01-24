@@ -1,8 +1,8 @@
 import { useState, useMemo, useEffect } from 'react'
 import { useNavigationType, useLocation, useParams } from 'react-router-dom'
 import { referencePeriods } from '../components/explore/ReferencePeriodSelect.jsx'
-import exploreStore from '../store/exploreStore'
-import { MONTHLY } from '../utils/time'
+import exploreStore from '../store/exploreStore.js'
+import { MONTHLY } from '../utils/time.js'
 
 const hasMonthlyAndDailyData = [
     'temperature',

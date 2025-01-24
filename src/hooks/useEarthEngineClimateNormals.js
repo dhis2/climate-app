@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import { getClimateNormals, getCacheKey } from '../utils/ee-utils'
-import useEarthEngine from './useEarthEngine'
+import { getClimateNormals, getCacheKey } from '../utils/ee-utils.js'
+import useEarthEngine from './useEarthEngine.js'
 
 const cachedPromise = {}
 

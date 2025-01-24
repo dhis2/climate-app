@@ -5,7 +5,7 @@ import {
     metersToMillimeters,
     roundOneDecimal,
     toCelcius,
-} from '../calc'
+} from '../calc.js'
 
 describe('calc utils', () => {
     it('it should round numbers to one decimal', () => {

@@ -1,15 +1,15 @@
-import { era5Monthly, era5MonthlyNormals } from '../../../data/datasets'
-import useAppSettings from '../../../hooks/useAppSettings'
-import useEarthEngineClimateNormals from '../../../hooks/useEarthEngineClimateNormals'
-import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries'
-import exploreStore from '../../../store/exploreStore'
+import { era5Monthly, era5MonthlyNormals } from '../../../data/datasets.js'
+import useAppSettings from '../../../hooks/useAppSettings.js'
+import useEarthEngineClimateNormals from '../../../hooks/useEarthEngineClimateNormals.js'
+import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
+import exploreStore from '../../../store/exploreStore.js'
 import DataLoader from '../../shared/DataLoader.jsx'
 import Resolution from '../../shared/Resolution.jsx'
 import Chart from '../Chart.jsx'
 import MonthlyPeriodSelect from '../MonthlyPeriodSelect.jsx'
 import PeriodTypeSelect from '../PeriodTypeSelect.jsx'
 import ReferencePeriod from '../ReferencePeriodSelect.jsx'
-import getMonthlyConfig from './charts/temperatureMonthly'
+import getMonthlyConfig from './charts/temperatureMonthly.js'
 
 const TemperatureMonthly = () => {
     const orgUnit = exploreStore((state) => state.orgUnit)

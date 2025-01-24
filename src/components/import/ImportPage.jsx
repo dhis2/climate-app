@@ -2,13 +2,13 @@ import { useConfig } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Card, Button } from '@dhis2/ui'
 import { useState, useEffect } from 'react'
-import useOrgUnitCount from '../../hooks/useOrgUnitCount'
+import useOrgUnitCount from '../../hooks/useOrgUnitCount.js'
 import {
     getDefaultImportPeriod,
     getStandardPeriod,
     getNumberOfDaysFromPeriod,
     isValidPeriod,
-} from '../../utils/time'
+} from '../../utils/time.js'
 import GEETokenCheck from '../shared/GEETokenCheck.jsx'
 import Resolution from '../shared/Resolution.jsx'
 import DataElement from './DataElement.jsx'

@@ -5,8 +5,8 @@ import {
     kelvinToCelsius,
     roundOneDecimal,
     getTimeFromId,
-} from '../../../../utils/calc'
-import { animation, credits, getDailyPeriod } from '../../../../utils/chart'
+} from '../../../../utils/calc.js'
+import { animation, credits, getDailyPeriod } from '../../../../utils/chart.js'
 
 const getChart = (name, data) => {
     const humidity = data.map((d) => ({

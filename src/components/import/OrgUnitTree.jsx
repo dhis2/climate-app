@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import { OrganisationUnitTree } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import { useEffect } from 'react'
-import useOrgUnitRoots from '../../hooks/useOrgUnitRoots'
+import useOrgUnitRoots from '../../hooks/useOrgUnitRoots.js'
 
 const OrgUnitTree = ({ orgUnit, onChange }) => {
     const { roots, error } = useOrgUnitRoots()

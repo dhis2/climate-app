@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import { useEffect } from 'react'
-import useSystemInfo from '../../hooks/useSystemInfo'
+import useSystemInfo from '../../hooks/useSystemInfo.js'
 
 const utcTimeZone = 'Etc/UTC'
 

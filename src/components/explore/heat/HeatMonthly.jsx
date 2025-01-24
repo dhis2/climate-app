@@ -1,13 +1,13 @@
-import { era5HeatMonthly } from '../../../data/datasets'
-import useAppSettings from '../../../hooks/useAppSettings'
-import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries'
-import exploreStore from '../../../store/exploreStore'
+import { era5HeatMonthly } from '../../../data/datasets.js'
+import useAppSettings from '../../../hooks/useAppSettings.js'
+import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
+import exploreStore from '../../../store/exploreStore.js'
 import DataLoader from '../../shared/DataLoader.jsx'
 import Resolution from '../../shared/Resolution.jsx'
 import Chart from '../Chart.jsx'
 import MonthlyPeriodSelect from '../MonthlyPeriodSelect.jsx'
 import PeriodTypeSelect from '../PeriodTypeSelect.jsx'
-import getMonthlyConfig from './charts/thermalComfortMonthly'
+import getMonthlyConfig from './charts/thermalComfortMonthly.js'
 import HeatDescription from './HeatDescription.jsx'
 
 const HeatMonthly = () => {

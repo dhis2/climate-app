@@ -3,18 +3,18 @@ import { useMemo } from 'react'
 import {
     era5MonthlyTemperatures,
     era5MonthlyNormals,
-} from '../../../data/datasets'
-import useAppSettings from '../../../hooks/useAppSettings'
-import useEarthEngineClimateNormals from '../../../hooks/useEarthEngineClimateNormals'
-import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries'
-import exploreStore from '../../../store/exploreStore'
-import { getCurrentYear } from '../../../utils/time'
+} from '../../../data/datasets.js'
+import useAppSettings from '../../../hooks/useAppSettings.js'
+import useEarthEngineClimateNormals from '../../../hooks/useEarthEngineClimateNormals.js'
+import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
+import exploreStore from '../../../store/exploreStore.js'
+import { getCurrentYear } from '../../../utils/time.js'
 import DataLoader from '../../shared/DataLoader.jsx'
 import Resolution from '../../shared/Resolution.jsx'
 import Chart from '../Chart.jsx'
 import MonthSelect from '../MonthSelect.jsx'
 import ReferencePeriod from '../ReferencePeriodSelect.jsx'
-import getChartConfig from './charts/temperatureAnomaly'
+import getChartConfig from './charts/temperatureAnomaly.js'
 import styles from './styles/ClimateChangeTab.module.css'
 
 // Fetch all years from 1970 to the current year

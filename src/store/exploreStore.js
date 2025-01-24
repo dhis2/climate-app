@@ -5,7 +5,7 @@ import {
     getDefaultExplorePeriod,
     getLastMonth,
     MONTHLY,
-} from '../utils/time'
+} from '../utils/time.js'
 
 const exploreStore = create((set) => ({
     orgUnit: null,

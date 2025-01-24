@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { useState, useEffect } from 'react'
 import useAppSettings from '../../../hooks/useAppSettings.js'
-import exploreStore from '../../../store/exploreStore'
+import exploreStore from '../../../store/exploreStore.js'
 import DataLoader from '../../shared/DataLoader.jsx'
 import DayForecast from './DayForecast.jsx'
 import styles from './styles/ForecastTab.module.css'

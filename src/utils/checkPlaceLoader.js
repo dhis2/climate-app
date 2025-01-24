@@ -1,4 +1,4 @@
-import { findLocation } from '../data/locations'
+import { findLocation } from '../data/locations.js'
 
 const checkPlaceLoader = async ({ params }) => {
     const location = findLocation(params.placeId)

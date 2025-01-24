@@ -6,7 +6,7 @@ import {
     useLocation,
     useNavigate,
 } from 'react-router-dom'
-import exploreStore from '../../store/exploreStore'
+import exploreStore from '../../store/exploreStore.js'
 import OrgUnitType from './OrgUnitType.jsx'
 import styles from './styles/OrgUnit.module.css'
 

@@ -1,8 +1,8 @@
 import { CustomDataProvider } from '@dhis2/app-runtime'
 import { OrganisationUnitTree } from '@dhis2/ui'
 import { useNavigate } from 'react-router-dom'
-import { locations, findLocation } from '../../data/locations'
-import exploreStore from '../../store/exploreStore'
+import { locations, findLocation } from '../../data/locations.js'
+import exploreStore from '../../store/exploreStore.js'
 import styles from '../explore/styles/OrgUnitTree.module.css'
 
 // Inspired by https://github.com/dhis2/ui/blob/master/components/organisation-unit-tree/src/__stories__/shared.js

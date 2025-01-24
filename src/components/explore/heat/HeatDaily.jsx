@@ -1,13 +1,13 @@
-import { era5HeatDaily } from '../../../data/datasets'
-import useAppSettings from '../../../hooks/useAppSettings'
-import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries'
-import exploreStore from '../../../store/exploreStore'
+import { era5HeatDaily } from '../../../data/datasets.js'
+import useAppSettings from '../../../hooks/useAppSettings.js'
+import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
+import exploreStore from '../../../store/exploreStore.js'
 import DataLoader from '../../shared/DataLoader.jsx'
 import Resolution from '../../shared/Resolution.jsx'
 import Chart from '../Chart.jsx'
 import DailyPeriodSelect from '../DailyPeriodSelect.jsx'
 import PeriodTypeSelect from '../PeriodTypeSelect.jsx'
-import getDailyConfig from './charts/thermalComfortDaily'
+import getDailyConfig from './charts/thermalComfortDaily.js'
 import HeatDescription from './HeatDescription.jsx'
 
 const HeatDaily = () => {

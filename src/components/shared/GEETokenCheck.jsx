@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { NoticeBox } from '@dhis2/ui'
 import { useState, useEffect } from 'react'
-import useEarthEngineToken from '../../hooks/useEarthEngineToken'
+import useEarthEngineToken from '../../hooks/useEarthEngineToken.js'
 import styles from './styles/GEETokenCheck.module.css'
 
 const GEETokenCheck = () => {

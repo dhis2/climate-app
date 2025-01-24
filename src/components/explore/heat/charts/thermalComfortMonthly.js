@@ -1,17 +1,17 @@
 import i18n from '@dhis2/d2-i18n'
 import { colors } from '@dhis2/ui'
-import { toCelcius } from '../../../../utils/calc'
+import { toCelcius } from '../../../../utils/calc.js'
 import {
     animation,
     heatCredits,
     strokePattern,
     getMonthlyPeriod,
-} from '../../../../utils/chart'
+} from '../../../../utils/chart.js'
 import {
     getPlotBands,
     getPlotLines,
     getThickPositons,
-} from './thermalComfortDaily'
+} from './thermalComfortDaily.js'
 
 const getChart = (name, data, settings) => {
     const series = data.map((d) => ({

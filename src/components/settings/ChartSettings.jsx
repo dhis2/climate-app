@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import useAppSettings from '../../hooks/useAppSettings'
+import useAppSettings from '../../hooks/useAppSettings.js'
 import HeatCategory from './HeatCategory.jsx'
 import NumberInput from './NumberInput.jsx'
 

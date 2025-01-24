@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import { getTimeSeriesData, getCacheKey } from '../utils/ee-utils'
-import useEarthEngine from './useEarthEngine'
+import { getTimeSeriesData, getCacheKey } from '../utils/ee-utils.js'
+import useEarthEngine from './useEarthEngine.js'
 
 const getPeriodFromId = (id) => {
     const year = id.slice(0, 4)

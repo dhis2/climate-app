@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import heatStressLegend from '../../data/heat-stress-legend'
+import heatStressLegend from '../../data/heat-stress-legend.js'
 
 const noValue = -999
 

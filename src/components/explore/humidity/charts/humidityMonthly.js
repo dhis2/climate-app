@@ -5,13 +5,13 @@ import {
     kelvinToCelsius,
     roundOneDecimal,
     getTimeFromId,
-} from '../../../../utils/calc'
+} from '../../../../utils/calc.js'
 import {
     animation,
     credits,
     getMonthFromId,
     getMonthlyPeriod,
-} from '../../../../utils/chart'
+} from '../../../../utils/chart.js'
 
 const getChartConfig = (name, data, normals, referencePeriod) => {
     const dewpoint = data.map((d) => ({

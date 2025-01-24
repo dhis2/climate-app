@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { roundOneDecimal } from '../../../utils/calc'
+import { roundOneDecimal } from '../../../utils/calc.js'
 import styles from './styles/DayForecast.module.css'
 import TemperatureValue from './TemperatureValue.jsx'
 import WeatherSymbol from './WeatherSymbol.jsx'
