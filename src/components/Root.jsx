@@ -24,7 +24,7 @@ const Root = () => {
         if (pathname === '/' && settings?.startPage) {
             navigate(settings.startPage)
         }
-    }, [settings])
+    }, [settings, pathname, navigate])
 
     return (
         <>

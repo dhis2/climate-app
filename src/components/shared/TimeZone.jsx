@@ -16,7 +16,7 @@ const TimeZone = ({ period, onChange }) => {
         if (timeZone && timeZone !== utcTimeZone) {
             onChange((period) => ({
                 ...period,
-                timeZone: system.systemInfo.serverTimeZoneId,
+                timeZone: timeZone,
             }))
         }
     }, [timeZone, onChange])

@@ -100,7 +100,7 @@ const useExploreUri = () => {
         return () => {
             setIsPop(false)
         }
-    }, [store, isPop, tab, params])
+    }, [store, isPop, tab, params, pathname])
 
     return uri
 }
