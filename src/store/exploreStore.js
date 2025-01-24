@@ -1,11 +1,11 @@
 import { create } from 'zustand'
-import { defaultReferencePeriod } from '../components/explore/ReferencePeriodSelect'
+import { defaultReferencePeriod } from '../components/explore/ReferencePeriodSelect.jsx'
 import {
     getDefaultMonthlyPeriod,
     getDefaultExplorePeriod,
     getLastMonth,
     MONTHLY,
-} from '../utils/time'
+} from '../utils/time.js'
 
 const exploreStore = create((set) => ({
     orgUnit: null,

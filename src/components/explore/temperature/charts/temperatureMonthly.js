@@ -1,14 +1,14 @@
 import i18n from '@dhis2/d2-i18n'
 import { colors } from '@dhis2/ui'
-import { getTimeFromId, toCelcius } from '../../../../utils/calc'
+import { getTimeFromId, toCelcius } from '../../../../utils/calc.js'
 import {
     animation,
     credits,
     getMonthlyPeriod,
     getMonthFromId,
-} from '../../../../utils/chart'
+} from '../../../../utils/chart.js'
 
-const getChartConfig = (name, data, normals, referencePeriod, settings) => {
+const getChartConfig = ({ name, data, normals, referencePeriod, settings }) => {
     const { tempMin, tempMax } = settings
 
     const series = data.map((d) => ({

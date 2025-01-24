@@ -1,5 +1,5 @@
-import ee from '../lib/earthengine'
-import useEarthEngineToken from './useEarthEngineToken'
+import ee from '../lib/earthengine.js'
+import useEarthEngineToken from './useEarthEngineToken.js'
 
 const eePromise = (tokenPromise) =>
     new Promise((resolve, reject) => {

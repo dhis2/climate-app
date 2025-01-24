@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import { getTimeSeriesData, getCacheKey } from '../utils/ee-utils'
-import useEarthEngine from './useEarthEngine'
+import { getTimeSeriesData, getCacheKey } from '../utils/ee-utils.js'
+import useEarthEngine from './useEarthEngine.js'
 
 const getPeriodFromId = (id) => {
     const year = id.slice(0, 4)
@@ -14,7 +14,7 @@ const parseIds = (data) =>
 
 const cachedPromise = {}
 
-const useEarthEngineTimeSeries = (dataset, period, feature, filter) => {
+const useEarthEngineTimeSeries = ({ dataset, period, feature, filter }) => {
     const [data, setData] = useState()
     const eePromise = useEarthEngine()
 
@@ -22,7 +22,8 @@ const useEarthEngineTimeSeries = (dataset, period, feature, filter) => {
         let canceled = false
 
         if (dataset && period && feature) {
-            const key = getCacheKey(dataset, period, feature, filter)
+            const key = getCacheKey({ dataset, period, feature, filter })
+            const { geometry } = feature
 
             if (cachedPromise[key]) {
                 cachedPromise[key].then((data) => {
@@ -38,13 +39,13 @@ const useEarthEngineTimeSeries = (dataset, period, feature, filter) => {
 
             setData()
             eePromise.then((ee) => {
-                cachedPromise[key] = getTimeSeriesData(
+                cachedPromise[key] = getTimeSeriesData({
                     ee,
                     dataset,
                     period,
-                    feature.geometry,
-                    filter
-                ).then(parseIds)
+                    geometry,
+                    filter,
+                }).then(parseIds)
 
                 cachedPromise[key].then((data) => {
                     if (!canceled) {

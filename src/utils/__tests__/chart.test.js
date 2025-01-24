@@ -4,7 +4,7 @@ import {
     getDailyPeriod,
     getMonthlyPeriod,
     getSelectedMonths,
-} from '../chart'
+} from '../chart.js'
 
 const dailyData = [
     {

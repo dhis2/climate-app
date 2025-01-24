@@ -1,20 +1,20 @@
 import i18n from '@dhis2/d2-i18n'
 import { colors } from '@dhis2/ui'
-import { roundOneDecimal } from '../../../../utils/calc'
-import { animation, credits } from '../../../../utils/chart'
-import { padWithZeroes } from '../../../../utils/time'
-import { months } from '../../MonthSelect'
+import { roundOneDecimal } from '../../../../utils/calc.js'
+import { animation, credits } from '../../../../utils/chart.js'
+import { padWithZeroes } from '../../../../utils/time.js'
+import { months } from '../../MonthSelect.jsx'
 
 const band = 'temperature_2m'
 
-const getChartConfig = (
+const getChartConfig = ({
     name,
     data,
     normals,
     month,
     referencePeriod,
-    settings
-) => {
+    settings,
+}) => {
     const normal = normals.find((n) => n.id === padWithZeroes(month))[band]
     const years = data.map((d) => d.id.substring(0, 4))
     const monthName = months.find((m) => m.id === month).name

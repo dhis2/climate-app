@@ -3,8 +3,8 @@ import {
     kelvinToCelsius,
     getRelativeHumidity,
     roundOneDecimal,
-} from '../utils/calc'
-import { HOURLY, MONTHLY } from '../utils/time'
+} from '../utils/calc.js'
+import { HOURLY, MONTHLY } from '../utils/time.js'
 
 // kelvin to celsius with one decimal
 const temperatureParser = (v) => roundOneDecimal(kelvinToCelsius(v))

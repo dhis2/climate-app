@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import { getEarthEngineData } from '../utils/ee-utils'
-import useEarthEngine from './useEarthEngine'
+import { getEarthEngineData } from '../utils/ee-utils.js'
+import useEarthEngine from './useEarthEngine.js'
 
 const useEarthEngineData = (dataset, period, features) => {
     const [loading, setLoading] = useState(true)
@@ -13,7 +13,7 @@ const useEarthEngineData = (dataset, period, features) => {
             setLoading(true)
             setData()
             eePromise.then((ee) =>
-                getEarthEngineData(ee, dataset, period, features)
+                getEarthEngineData({ ee, dataset, period, features })
                     .then((data) => {
                         setData(data)
                         setLoading(false)

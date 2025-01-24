@@ -14,7 +14,7 @@ import {
     padWithZeroes,
     toDateObject,
     toStandardDate,
-} from '../time'
+} from '../time.js'
 
 const timestamp = 1722902400000 // 2024-08-06
 

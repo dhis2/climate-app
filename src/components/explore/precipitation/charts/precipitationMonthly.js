@@ -1,16 +1,16 @@
 import i18n from '@dhis2/d2-i18n'
 import { colors } from '@dhis2/ui'
-import { getTimeFromId, metersToMillimeters } from '../../../../utils/calc'
+import { getTimeFromId, metersToMillimeters } from '../../../../utils/calc.js'
 import {
     animation,
     credits,
     getMonthlyPeriod,
     getMonthFromId,
-} from '../../../../utils/chart'
+} from '../../../../utils/chart.js'
 
 const band = 'total_precipitation_sum'
 
-const getChartConfig = (name, data, normals, referencePeriod, settings) => {
+const getChartConfig = ({ name, data, normals, referencePeriod, settings }) => {
     const { precipMonthlyMax } = settings
 
     const series = data.map((d) => ({

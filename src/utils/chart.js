@@ -1,20 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
 
-const filterMonthData = (data, month) =>
-    data.filter((d) => getMonthFromId(d.id) === month)
-
-const referencePeriodFilter =
-    ({ startTime, endTime }) =>
-    (d) => {
-        const year = getYearFromId(d.id)
-        return year >= startTime && year <= endTime
-    }
-
-const referencePeriodYearCount = ({ startTime, endTime }) =>
-    endTime - startTime + 1
-
-const periodBandReducer = (band) => (v, d) => v + d[band]
-
 const getYearPeriod = (startYear, endYear) =>
     `${startYear}${endYear !== startYear ? `-${endYear}` : ''}`
 
