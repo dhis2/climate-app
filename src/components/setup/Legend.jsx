@@ -16,7 +16,7 @@ const Legend = ({ name, description, items }) => (
             </tr>
         </thead>
         <tbody>
-            {items.map(({ name, from, to, hexColor, textColor }) => (
+            {items.map(({ name, from, to, hexColor }) => (
                 <tr key={hexColor}>
                     <td>{name}</td>
                     <td>{from}</td>

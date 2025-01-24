@@ -17,7 +17,11 @@ const PrecipitationMonthly = () => {
     const referencePeriod = exploreStore((state) => state.referencePeriod)
     const { settings } = useAppSettings()
 
-    const data = useEarthEngineTimeSeries(era5Monthly, monthlyPeriod, orgUnit)
+    const data = useEarthEngineTimeSeries({
+        dataset: era5Monthly,
+        period: monthlyPeriod,
+        feature: orgUnit,
+    })
 
     const normals = useEarthEngineClimateNormals(
         era5MonthlyNormals,
@@ -25,18 +29,20 @@ const PrecipitationMonthly = () => {
         orgUnit
     )
 
+    const { name } = orgUnit.properties
+
     return (
         <>
             <PeriodTypeSelect />
             {data && normals && settings ? (
                 <Chart
-                    config={getMonthlyConfig(
-                        orgUnit.properties.name,
+                    config={getMonthlyConfig({
+                        name,
                         data,
                         normals,
                         referencePeriod,
-                        settings
-                    )}
+                        settings,
+                    })}
                 />
             ) : (
                 <DataLoader />

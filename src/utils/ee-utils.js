@@ -33,12 +33,12 @@ export const cleanData = (data) =>
         value: f.properties.value,
     }))
 
-export const getEarthEngineValues = async (
+export const getEarthEngineValues = async ({
     ee,
-    datasetParams,
+    dataset: datasetParams,
     period,
-    features
-) => {
+    features,
+}) => {
     const dataset = period.timeZone
         ? { ...datasetParams, ...datasetParams.timeZone }
         : datasetParams
@@ -52,7 +52,7 @@ export const getEarthEngineValues = async (
         valueParser,
     } = dataset
 
-    const { startTime, endTime, timeZone = 'UTC', calendar } = period
+    const { startTime, endTime, timeZone = 'UTC' } = period
     const endTimePlusOne = ee.Date(endTime).advance(1, 'day')
     const timeZoneStart = ee.Date(startTime).format(null, timeZone)
     const timeZoneEnd = endTimePlusOne.format(null, timeZone)
@@ -164,33 +164,33 @@ export const getEarthEngineValues = async (
     }
 }
 
-export const getEarthEngineData = (ee, datasetParams, period, features) => {
-    if (datasetParams.bands) {
+export const getEarthEngineData = ({ ee, dataset, period, features }) => {
+    if (dataset.bands) {
         // Multiple bands (used for relative humidity)
-        const { bandsParser = (v) => v } = datasetParams
+        const { bandsParser = (v) => v } = dataset
 
         return Promise.all(
-            datasetParams.bands.map((band) =>
-                getEarthEngineValues(
+            dataset.bands.map((band) =>
+                getEarthEngineValues({
                     ee,
-                    { ...datasetParams, ...band },
+                    dataset: { ...dataset, ...band },
                     period,
-                    features
-                )
+                    features,
+                })
             )
         ).then(bandsParser)
     } else {
-        return getEarthEngineValues(ee, datasetParams, period, features)
+        return getEarthEngineValues({ ee, dataset, period, features })
     }
 }
 
-export const getTimeSeriesData = async (
+export const getTimeSeriesData = async ({
     ee,
     dataset,
     period,
     geometry,
-    filter
-) => {
+    filter,
+}) => {
     const {
         datasetId,
         band,
@@ -306,7 +306,7 @@ export const getTimeSeriesData = async (
     ).then(getFeatureCollectionPropertiesArray)
 }
 
-export const getClimateNormals = (ee, dataset, period, geometry) => {
+export const getClimateNormals = ({ ee, dataset, period, geometry }) => {
     const { datasetId, band } = dataset
     const { startTime, endTime } = period
     const { type, coordinates } = geometry
@@ -352,14 +352,12 @@ const getKeyFromFilter = (filter) =>
               .join('-')}`
         : ''
 
-export const getCacheKey = (dataset, period, feature, filter) => {
+export const getCacheKey = ({ dataset, period, feature, filter }) => {
     const { datasetId, band } = dataset
     const { startTime, endTime } = period
     const { id } = feature
     const bandkey = Array.isArray(band) ? band.join('-') : band
     const filterKey = getKeyFromFilter(filter)
 
-    return `${id}-${datasetId}-${bandkey}-${startTime}-${endTime}${getKeyFromFilter(
-        filter
-    )}`
+    return `${id}-${datasetId}-${bandkey}-${startTime}-${endTime}${filterKey}`
 }

@@ -13,7 +13,7 @@ const useEarthEngineData = (dataset, period, features) => {
             setLoading(true)
             setData()
             eePromise.then((ee) =>
-                getEarthEngineData(ee, dataset, period, features)
+                getEarthEngineData({ ee, dataset, period, features })
                     .then((data) => {
                         setData(data)
                         setLoading(false)

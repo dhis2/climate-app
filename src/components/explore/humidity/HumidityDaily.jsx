@@ -13,7 +13,11 @@ const HumidityDaily = () => {
     const orgUnit = exploreStore((state) => state.orgUnit)
     const period = exploreStore((state) => state.dailyPeriod)
 
-    const data = useEarthEngineTimeSeries(era5Daily, period, orgUnit)
+    const data = useEarthEngineTimeSeries({
+        dataset: era5Daily,
+        period,
+        feature: orgUnit,
+    })
 
     return (
         <>

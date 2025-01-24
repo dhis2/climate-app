@@ -15,7 +15,11 @@ const HeatDaily = () => {
     const period = exploreStore((state) => state.dailyPeriod)
     const { settings } = useAppSettings()
 
-    const data = useEarthEngineTimeSeries(era5HeatDaily, period, orgUnit)
+    const data = useEarthEngineTimeSeries({
+        dataset: era5HeatDaily,
+        period,
+        feature: orgUnit,
+    })
 
     return (
         <>

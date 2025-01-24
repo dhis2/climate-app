@@ -26,7 +26,7 @@ const ClimateChange = () => {
     const referencePeriod = exploreStore((state) => state.referencePeriod)
     const { settings } = useAppSettings()
 
-    const filters = useMemo(
+    const filter = useMemo(
         () => [
             {
                 type: 'calendarRange',
@@ -36,12 +36,12 @@ const ClimateChange = () => {
         [month]
     )
 
-    const data = useEarthEngineTimeSeries(
-        era5MonthlyTemperatures,
+    const data = useEarthEngineTimeSeries({
+        dataset: era5MonthlyTemperatures,
         period,
-        orgUnit,
-        filters
-    )
+        feature: orgUnit,
+        filter,
+    })
 
     const normals = useEarthEngineClimateNormals(
         era5MonthlyNormals,
@@ -53,17 +53,19 @@ const ClimateChange = () => {
         return <DataLoader />
     }
 
+    const { name } = orgUnit.properties
+
     return (
         <>
             <Chart
-                config={getChartConfig(
-                    orgUnit.properties.name,
+                config={getChartConfig({
+                    name,
                     data,
                     normals,
                     month,
                     referencePeriod,
-                    settings
-                )}
+                    settings,
+                })}
             />
             <div className={styles.monthSelect}>
                 <MonthSelect />

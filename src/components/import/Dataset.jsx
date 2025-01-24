@@ -13,7 +13,7 @@ const Dataset = ({ selected, onChange }) => (
                 onChange(datasets.find((d) => d.id === selected))
             }
         >
-            {datasets.map((d, i) => (
+            {datasets.map((d) => (
                 <SingleSelectOption key={d.id} value={d.id} label={d.name} />
             ))}
         </SingleSelectField>

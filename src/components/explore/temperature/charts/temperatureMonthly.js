@@ -8,7 +8,7 @@ import {
     getMonthFromId,
 } from '../../../../utils/chart.js'
 
-const getChartConfig = (name, data, normals, referencePeriod, settings) => {
+const getChartConfig = ({ name, data, normals, referencePeriod, settings }) => {
     const { tempMin, tempMax } = settings
 
     const series = data.map((d) => ({

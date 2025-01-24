@@ -7,14 +7,14 @@ import { months } from '../../MonthSelect.jsx'
 
 const band = 'temperature_2m'
 
-const getChartConfig = (
+const getChartConfig = ({
     name,
     data,
     normals,
     month,
     referencePeriod,
-    settings
-) => {
+    settings,
+}) => {
     const normal = normals.find((n) => n.id === padWithZeroes(month))[band]
     const years = data.map((d) => d.id.substring(0, 4))
     const monthName = months.find((m) => m.id === month).name

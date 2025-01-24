@@ -10,7 +10,7 @@ import {
 
 const band = 'total_precipitation_sum'
 
-const getChartConfig = (name, data, normals, referencePeriod, settings) => {
+const getChartConfig = ({ name, data, normals, referencePeriod, settings }) => {
     const { precipMonthlyMax } = settings
 
     const series = data.map((d) => ({
