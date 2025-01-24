@@ -1,8 +1,8 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
 import { useState } from 'react'
-import exploreStore from '../../store/exploreStore'
-import { getNumberOfMonths } from '../../utils/time'
+import exploreStore from '../../store/exploreStore.js'
+import { getNumberOfMonths } from '../../utils/time.js'
 import MonthPicker from '../shared/MonthPicker.jsx'
 import styles from './styles/Period.module.css'
 
