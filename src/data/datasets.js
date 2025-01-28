@@ -3,7 +3,7 @@ import {
     kelvinToCelsius,
     getRelativeHumidity,
     roundOneDecimal,
-    roundTwoDecimal,
+    roundTwoDecimals,
 } from '../utils/calc.js'
 import { HOURLY, MONTHLY } from '../utils/time.js'
 
@@ -124,7 +124,7 @@ export default [
         resolution: chirpsResolution,
         band: 'precipitation',
         reducer: 'mean',
-        valueParser: roundTwoDecimal,
+        valueParser: roundTwoDecimals,
         aggregationType: i18n.t('Sum'),
         dataElementCode: 'CHIRPS_PRECIPITATION',
     },
