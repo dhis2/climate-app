@@ -53,6 +53,7 @@ export const getEarthEngineValues = ({
     period,
     features,
 }) =>
+    // eslint-disable-line
     new Promise(async (resolve, reject) => {
         const dataset = period.timeZone
             ? { ...datasetParams, ...datasetParams.timeZone }
