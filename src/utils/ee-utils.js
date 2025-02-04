@@ -68,19 +68,13 @@ export const getEarthEngineValues = ({
             valueParser,
         } = dataset
 
-        const {
-            startTime,
-            endTime,
-            timeZone = 'UTC',
-            periodType,
-            calendar,
-        } = period
+        const { startTime, endTime, timeZone = 'UTC', periodType } = period
 
         const periods = getPeriods(period)
         const endTimePlusOne = ee.Date(endTime).advance(1, 'day')
         const timeZoneStart = ee.Date(startTime).format(null, timeZone)
         const timeZoneEnd = endTimePlusOne.format(null, timeZone)
-        const mappedPeriods = getMappedPeriods(periods, calendar)
+        const mappedPeriods = getMappedPeriods(periods)
 
         const dataParser = (data) =>
             data.map((f) => ({
