@@ -13,6 +13,8 @@ import {
     padWithZeroes,
     toDateObject,
     toStandardDate,
+    getPeriods,
+    DAILY,
 } from '../time.js'
 
 const timestamp = 1722902400000 // 2024-08-06
@@ -35,6 +37,7 @@ const gregoryPeriod = {
     startTime: gregoryStartDate,
     endTime: gregoryEndDate,
     calendar: gregoryCalendar,
+    periodType: DAILY,
 }
 
 const nepaliDate = {
@@ -189,6 +192,7 @@ describe('time utils', () => {
             startTime: gregoryStartDate,
             endTime: gregoryEndDate,
             calendar: gregoryCalendar,
+            periodType: DAILY,
         })
 
         expect(getStandardPeriod(nepaliPeriod)).toEqual({
@@ -226,27 +230,33 @@ describe('time utils', () => {
     })
 
     it('it should create mapped gregory periods', () => {
-        const mappedPeriods = getMappedPeriods(gregoryPeriod)
+        const periods = getPeriods(gregoryPeriod)
+        const mappedPeriods = getMappedPeriods(periods)
 
         expect(mappedPeriods.get(gregoryStartDate)).toEqual('20230801')
         expect(mappedPeriods.get(gregoryEndDate)).toEqual('20240731')
     })
 
     it('it should create mapped nepali periods', () => {
-        const mappedPeriods = getMappedPeriods({
+        const periods = getPeriods({
             ...gregoryPeriod,
             calendar: nepaliCalendar,
         })
+
+        const mappedPeriods = getMappedPeriods(periods)
 
         expect(mappedPeriods.get(gregoryStartDate)).toEqual('20800416')
         expect(mappedPeriods.get(gregoryEndDate)).toEqual('20810416')
     })
 
     it('it should create mapped ethiopic periods', () => {
-        const mappedPeriods = getMappedPeriods({
+        const periods = getPeriods({
             ...gregoryPeriod,
             calendar: ethiopicCalendar,
         })
+
+        const mappedPeriods = getMappedPeriods(periods)
+
         expect(mappedPeriods.get(gregoryStartDate)).toEqual('20151125')
         expect(mappedPeriods.get(gregoryEndDate)).toEqual('20161124')
     })

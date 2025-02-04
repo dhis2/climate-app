@@ -281,9 +281,15 @@ export const getPeriods = (period) => {
                 calendar,
                 locale,
                 periodType,
-            }).filter(
-                (p) => p.startDate <= endTime && p.endDate >= startTime // Filter out periods outside the range
-            )
+            })
+                .map((p) => ({
+                    ...p,
+                    startDate: toStandardDate(p.startDate, calendar),
+                    endDate: toStandardDate(p.endDate, calendar),
+                }))
+                .filter(
+                    (p) => p.startDate <= endTime && p.endDate >= startTime // Filter out periods outside the range
+                )
         )
     }
 
@@ -293,17 +299,11 @@ export const getPeriods = (period) => {
 /**
  * Creates a map of standard dates and DHIS2 calendar date ids
  * @param {Array} periods Period items
- * @param {String} calendar Calendar used
  * @returns {Map} Map with standard date as key and DHIS2 calendar date as value
  */
-export const getMappedPeriods = (periods, calendar) => {
+export const getMappedPeriods = (periods) => {
     const mappedPeriods = new Map()
-
-    periods.reduce(
-        (map, p) => map.set(toStandardDate(p.startDate, calendar), p.id),
-        mappedPeriods
-    )
-
+    periods.reduce((map, p) => map.set(p.startDate, p.id), mappedPeriods)
     return mappedPeriods
 }
 
