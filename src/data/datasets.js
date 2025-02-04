@@ -109,6 +109,7 @@ export default [
         periodType: DAILY,
         band: 'total_precipitation_sum',
         reducer: 'mean',
+        periodReducer: 'sum',
         timeZone: {
             datasetId: 'ECMWF/ERA5_LAND/HOURLY',
             band: 'total_precipitation',
@@ -129,6 +130,7 @@ export default [
         periodType: DAILY,
         band: 'precipitation',
         reducer: 'mean',
+        periodReducer: 'sum',
         valueParser: roundTwoDecimals,
         aggregationType: i18n.t('Sum'),
         dataElementCode: 'CHIRPS_PRECIPITATION',
