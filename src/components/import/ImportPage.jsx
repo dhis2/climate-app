@@ -6,9 +6,9 @@ import useOrgUnitCount from '../../hooks/useOrgUnitCount.js'
 import {
     getDefaultImportPeriod,
     getStandardPeriod,
-    getNumberOfDaysFromPeriod,
     isValidPeriod,
     getPeriods,
+    periodTypes,
 } from '../../utils/time.js'
 import GEETokenCheck from '../shared/GEETokenCheck.jsx'
 import Resolution from '../shared/Resolution.jsx'
@@ -32,8 +32,11 @@ const ImportPage = () => {
     const standardPeriod = getStandardPeriod(period) // ISO 8601 used by GEE
     const [startExtract, setStartExtract] = useState(false)
     const orgUnitCount = useOrgUnitCount(orgUnits?.parent?.id, orgUnits?.level)
-    const daysCount = getNumberOfDaysFromPeriod(period)
-    const valueCount = orgUnitCount * daysCount
+    const periodCount = getPeriods(period).length
+    const valueCount = orgUnitCount * periodCount
+    const periodType = periodTypes
+        .find((type) => type.id === period.periodType)
+        ?.name.toLowerCase()
 
     const isValidOrgUnits =
         orgUnits?.parent &&
@@ -75,12 +78,13 @@ const ImportPage = () => {
                         {valueCount > maxValues && (
                             <div className={styles.warning}>
                                 {i18n.t(
-                                    'You can maximum import {{maxValues}} data values in a single import, but you are trying to import {{valueCount}} values for {{orgUnitCount}} organisation units over {{daysCount}} days. Please select a shorter period or fewer organisation units. You can always import more data later.',
+                                    'You can maximum import {{maxValues}} data values in a single import, but you are trying to import {{valueCount}} values for {{orgUnitCount}} organisation units over {{periodCount}} {{periodType}} periods. Please select a shorter period or fewer organisation units. You can always import more data later.',
                                     {
                                         maxValues,
                                         valueCount,
                                         orgUnitCount,
-                                        daysCount,
+                                        periodCount,
+                                        periodType,
                                     }
                                 )}
                             </div>

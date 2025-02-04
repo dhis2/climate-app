@@ -198,14 +198,6 @@ export const formatDate = (date) => {
 }
 
 /**
- * Returns number of days in a period object
- * @param {Object} period Period object with startTime and endTime
- * @returns {Number} Number of days in period
- */
-export const getNumberOfDaysFromPeriod = (period) =>
-    getNumberOfDays(period.startTime, period.endTime)
-
-/**
  * Translates a date string to a date object
  * @param {String} dateString Date string in the format YYYY-MM-DD
  * @returns {Object} Date object with year, month and day

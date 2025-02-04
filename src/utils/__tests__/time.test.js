@@ -7,7 +7,6 @@ import {
     getMappedPeriods,
     getNumberOfMonths,
     getNumberOfDays,
-    getNumberOfDaysFromPeriod,
     getLastMonth,
     getStandardPeriod,
     isValidPeriod,
@@ -171,10 +170,6 @@ describe('time utils', () => {
 
     it('it should get the number of days between two dates', () => {
         expect(getNumberOfDays(gregoryStartDate, gregoryEndDate)).toEqual(366)
-    })
-
-    it('it should get the number of days from a period object', () => {
-        expect(getNumberOfDaysFromPeriod(gregoryPeriod)).toEqual(366)
     })
 
     it('it should convert a date string to a date object', () => {

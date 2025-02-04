@@ -2,11 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
 import useEarthEngineData from '../../hooks/useEarthEngineData.js'
 import useOrgUnits from '../../hooks/useOrgUnits.js'
-import {
-    getNumberOfDaysFromPeriod,
-    getPeriods,
-    periodTypes,
-} from '../../utils/time.js'
+import { getPeriods, periodTypes } from '../../utils/time.js'
 import DataLoader from '../shared/DataLoader.jsx'
 import ErrorMessage from '../shared/ErrorMessage.jsx'
 import ImportData from './ImportData.jsx'
@@ -31,14 +27,12 @@ const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
         )
     }
     const orgUnitsCount = features.length
-    const daysCount = getNumberOfDaysFromPeriod(period)
-    const valueCount = daysCount * orgUnitsCount
-
     const periodType = periodTypes
         .find((type) => type.id === period.periodType)
         ?.name.toLowerCase()
     const periods = getPeriods(period)
     const periodCount = periods.length
+    const valueCount = periodCount * orgUnitsCount
 
     if (loading) {
         return (
