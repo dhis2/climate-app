@@ -282,11 +282,15 @@ export const getPeriods = (period) => {
                 locale,
                 periodType,
             })
-                .map((p) => ({
-                    ...p,
-                    startDate: toStandardDate(p.startDate, calendar),
-                    endDate: toStandardDate(p.endDate, calendar),
-                }))
+                .map((p) =>
+                    calendar !== 'iso8601'
+                        ? {
+                              ...p,
+                              startDate: toStandardDate(p.startDate, calendar),
+                              endDate: toStandardDate(p.endDate, calendar),
+                          }
+                        : p
+                )
                 .filter(
                     (p) => p.startDate <= endTime && p.endDate >= startTime // Filter out periods outside the range
                 )
