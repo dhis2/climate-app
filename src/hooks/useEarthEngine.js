@@ -1,48 +1,55 @@
-import ee from "../lib/earthengine";
-import useEarthEngineToken from "./useEarthEngineToken";
+import ee from '../lib/earthengine.js'
+import useEarthEngineToken from './useEarthEngineToken.js'
 
 const eePromise = (tokenPromise) =>
-  new Promise((resolve, reject) => {
-    if (ee.data.getAuthToken()) {
-      ee.initialize(null, null, () => resolve(ee), reject);
-    } else {
-      tokenPromise
-        .then((token) => {
-          const { token_type, access_token, client_id, expires_in } = token;
-          const extraScopes = null;
-          const updateAuthLibrary = false;
+    new Promise((resolve, reject) => {
+        if (ee.data.getAuthToken()) {
+            ee.initialize(null, null, () => resolve(ee), reject)
+        } else {
+            tokenPromise
+                .then((token) => {
+                    const { token_type, access_token, client_id, expires_in } =
+                        token
+                    const extraScopes = null
+                    const updateAuthLibrary = false
 
-          ee.data.setAuthToken(
-            client_id,
-            token_type,
-            access_token,
-            expires_in,
-            extraScopes,
-            () => ee.initialize(null, null, () => resolve(ee), reject),
-            updateAuthLibrary
-          );
+                    ee.data.setAuthToken(
+                        client_id,
+                        token_type,
+                        access_token,
+                        expires_in,
+                        extraScopes,
+                        () =>
+                            ee.initialize(
+                                null,
+                                null,
+                                () => resolve(ee),
+                                reject
+                            ),
+                        updateAuthLibrary
+                    )
 
-          ee.data.setAuthTokenRefresher(async (authArgs, callback) =>
-            callback({
-              ...(await tokenPromise),
-              state: authArgs.scope,
-            })
-          );
-        })
-        .catch(reject);
-    }
-  });
+                    ee.data.setAuthTokenRefresher(async (authArgs, callback) =>
+                        callback({
+                            ...(await tokenPromise),
+                            state: authArgs.scope,
+                        })
+                    )
+                })
+                .catch(reject)
+        }
+    })
 
-let eeInstance;
+let eeInstance
 
 const useEarthEngine = () => {
-  const tokenPromise = useEarthEngineToken();
+    const tokenPromise = useEarthEngineToken()
 
-  if (!eeInstance) {
-    eeInstance = eePromise(tokenPromise);
-  }
+    if (!eeInstance) {
+        eeInstance = eePromise(tokenPromise)
+    }
 
-  return eeInstance;
-};
+    return eeInstance
+}
 
-export default useEarthEngine;
+export default useEarthEngine

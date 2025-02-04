@@ -1,0 +1,12 @@
+name: comment-and-close
+
+on:
+    issues:
+        types: [opened]
+
+jobs:
+    comment-and-close:
+        uses: dhis2/workflows-platform/.github/workflows/comment-and-close.yml@v1
+        if: '!contains(fromJson(''["dhis2-bot", "kodiakhq", "dependabot"]''), github.event.issue.sender.login)'
+        with:
+            issue_number: ${{ github.event.issue.number }}

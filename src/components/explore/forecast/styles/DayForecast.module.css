@@ -1,24 +1,24 @@
 .day {
-  padding-left: 10px;
-  padding-right: 10px;
-  color: #555;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #555;
 }
 
 .temp {
-  text-align: right;
-  color: var(--colors-red700);
-  padding-right: 10px;
+    text-align: right;
+    color: var(--colors-red700);
+    padding-right: 10px;
 }
 
 .precip {
-  text-align: right;
-  color: var(--colors-blue700);
-  padding-left: 20px;
+    text-align: right;
+    color: var(--colors-blue700);
+    padding-left: 20px;
 }
 
 .wind {
-  text-align: right;
-  color: #555;
-  padding-left: 30px;
-  padding-right: 10px;
+    text-align: right;
+    color: #555;
+    padding-left: 30px;
+    padding-right: 10px;
 }
