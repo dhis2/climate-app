@@ -19,7 +19,6 @@ const useEarthEngineData = (dataset, period, features) => {
                         setLoading(false)
                     })
                     .catch((error) => {
-                        console.error('Error loading Earth Engine data', error)
                         setError(error)
                         setLoading(false)
                     })

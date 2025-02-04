@@ -3,8 +3,8 @@ import i18n from '@dhis2/d2-i18n'
 import { CalendarInput } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import { useEffect } from 'react'
-import PeriodType from './PeriodType.jsx'
 import TimeZone from '../shared/TimeZone.jsx'
+import PeriodType from './PeriodType.jsx'
 import styles from './styles/Period.module.css'
 
 const userSettingsQuery = {

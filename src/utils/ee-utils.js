@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import area from '@turf/area'
-import { HOURLY, DAILY, MONTHLY, getMappedPeriods, getPeriods } from './time'
+import { HOURLY, DAILY, MONTHLY, getMappedPeriods, getPeriods } from './time.js'
 
 const VALUE_LIMIT = 5000
 

@@ -127,9 +127,8 @@ export const getDefaultMonthlyPeriod = (lagDays) => {
  * @returns {Object} Default import data period with calendar date strings
  */
 export const getDefaultImportPeriod = (calendar) => ({
-    periodType: WEEKLY, // TODO: Change to DAILY,
-    // startTime: getCalendarDate(calendar, { months: -7 }),
-    startTime: getCalendarDate(calendar, { months: -2 }),
+    periodType: DAILY,
+    startTime: getCalendarDate(calendar, { months: -7 }),
     endTime: getCalendarDate(calendar, { months: -1 }),
     calendar,
 })
