@@ -15,6 +15,8 @@ import {
     toStandardDate,
     getPeriods,
     DAILY,
+    WEEKLY,
+    MONTHLY,
 } from '../time.js'
 
 const timestamp = 1722902400000 // 2024-08-06
@@ -54,6 +56,7 @@ const nepaliPeriod = {
     startTime: nepaliStartDate,
     endTime: nepaliEndDate,
     calendar: nepaliCalendar,
+    periodType: DAILY,
 }
 
 const ethiopicDate = {
@@ -70,6 +73,7 @@ const ethiopicPeriod = {
     startTime: ethiopicStartDate,
     endTime: ethiopicEndDate,
     calendar: ethiopicCalendar,
+    periodType: DAILY,
 }
 
 const oneDayInMs = 1000 * 60 * 60 * 24
@@ -199,12 +203,14 @@ describe('time utils', () => {
             startTime: toStandardDate(nepaliStartDate, nepaliCalendar),
             endTime: toStandardDate(nepaliEndDate, nepaliCalendar),
             calendar: nepaliCalendar,
+            periodType: DAILY,
         })
 
         expect(getStandardPeriod(ethiopicPeriod)).toEqual({
             startTime: toStandardDate(ethiopicStartDate, ethiopicCalendar),
             endTime: toStandardDate(ethiopicEndDate, ethiopicCalendar),
             calendar: ethiopicCalendar,
+            periodType: DAILY,
         })
     })
 
@@ -230,32 +236,31 @@ describe('time utils', () => {
     })
 
     it('it should create mapped gregory periods', () => {
-        const periods = getPeriods(gregoryPeriod)
-        const mappedPeriods = getMappedPeriods(periods)
+        const mappedPeriods = getMappedPeriods(getPeriods(gregoryPeriod))
 
         expect(mappedPeriods.get(gregoryStartDate)).toEqual('20230801')
         expect(mappedPeriods.get(gregoryEndDate)).toEqual('20240731')
     })
 
     it('it should create mapped nepali periods', () => {
-        const periods = getPeriods({
-            ...gregoryPeriod,
-            calendar: nepaliCalendar,
-        })
-
-        const mappedPeriods = getMappedPeriods(periods)
+        const mappedPeriods = getMappedPeriods(
+            getPeriods({
+                ...gregoryPeriod,
+                calendar: nepaliCalendar,
+            })
+        )
 
         expect(mappedPeriods.get(gregoryStartDate)).toEqual('20800416')
         expect(mappedPeriods.get(gregoryEndDate)).toEqual('20810416')
     })
 
     it('it should create mapped ethiopic periods', () => {
-        const periods = getPeriods({
-            ...gregoryPeriod,
-            calendar: ethiopicCalendar,
-        })
-
-        const mappedPeriods = getMappedPeriods(periods)
+        const mappedPeriods = getMappedPeriods(
+            getPeriods({
+                ...gregoryPeriod,
+                calendar: ethiopicCalendar,
+            })
+        )
 
         expect(mappedPeriods.get(gregoryStartDate)).toEqual('20151125')
         expect(mappedPeriods.get(gregoryEndDate)).toEqual('20161124')
@@ -270,5 +275,28 @@ describe('time utils', () => {
                 endDate: gregoryStartDate,
             })
         ).toEqual(false)
+    })
+
+    it('it should generate daily periods', () => {
+        const periods = getPeriods(gregoryPeriod)
+        expect(periods.length).toEqual(366)
+        expect(periods[0].startDate).toEqual(gregoryStartDate)
+        expect(periods[periods.length - 1].endDate).toEqual(gregoryEndDate)
+    })
+
+    it('it should generate weekly periods', () => {
+        const periods = getPeriods({
+            ...gregoryPeriod,
+            periodType: WEEKLY,
+        })
+        expect(periods.length).toEqual(53)
+    })
+
+    it('it should generate monthly periods', () => {
+        const periods = getPeriods({
+            ...gregoryPeriod,
+            periodType: MONTHLY,
+        })
+        expect(periods.length).toEqual(12)
     })
 })
