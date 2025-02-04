@@ -1,12 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import area from '@turf/area'
-import {
-    HOURLY,
-    DAILY,
-    MONTHLY,
-    getMappedPeriods,
-    getPeriodItems,
-} from './time'
+import { HOURLY, DAILY, MONTHLY, getMappedPeriods, getPeriods } from './time'
 
 const VALUE_LIMIT = 5000
 
@@ -81,11 +75,11 @@ export const getEarthEngineValues = ({
             calendar,
         } = period
 
-        const periodItems = getPeriodItems(period)
+        const periods = getPeriods(period)
         const endTimePlusOne = ee.Date(endTime).advance(1, 'day')
         const timeZoneStart = ee.Date(startTime).format(null, timeZone)
         const timeZoneEnd = endTimePlusOne.format(null, timeZone)
-        const mappedPeriods = getMappedPeriods(period)
+        const mappedPeriods = getMappedPeriods(periods, calendar)
 
         const dataParser = (data) =>
             data.map((f) => ({
@@ -96,7 +90,7 @@ export const getEarthEngineValues = ({
                     : f.properties.value,
             }))
 
-        const collection = ee
+        let collection = ee
             .ImageCollection(datasetId)
             .select(band)
             .filter(ee.Filter.date(timeZoneStart, timeZoneEnd))
@@ -130,12 +124,9 @@ export const getEarthEngineValues = ({
 
         const eeReducer = ee.Reducer[reducer]()
 
-        let periodCollection
-
         if (periodType !== datasetPeriodType) {
-            // TODO Check if periodType is valid for datasetPeriodType
-
-            const removeEmptyImagesFilter = ee.Filter.listContains(
+            // Filter images with data
+            const imagesWithData = ee.Filter.listContains(
                 'system:band_names',
                 band
             )
@@ -148,7 +139,7 @@ export const getEarthEngineValues = ({
 
                 const daysList = ee.List.sequence(0, days.subtract(1))
 
-                periodCollection = ee.ImageCollection.fromImages(
+                collection = ee.ImageCollection.fromImages(
                     daysList.map((day) => {
                         const startUTC = ee.Date(startTime).advance(day, 'days')
                         const startDate = ee.Date(
@@ -164,13 +155,14 @@ export const getEarthEngineValues = ({
                             reducer: periodReducer,
                         })
                     })
-                ).filter(removeEmptyImagesFilter)
+                ).filter(imagesWithData)
             }
 
+            // Go from daily to period type (weekly or monthly)
             if (periodType !== DAILY) {
-                const periodList = ee.List(periodItems)
+                const periodList = ee.List(periods)
 
-                periodCollection = ee.ImageCollection.fromImages(
+                collection = ee.ImageCollection.fromImages(
                     periodList.map((item) => {
                         const period = ee.Dictionary(item)
                         const startDate = ee.Date(period.get('startDate'))
@@ -180,17 +172,18 @@ export const getEarthEngineValues = ({
 
                         return getReducedCollection({
                             ee,
-                            collection: periodCollection || collection,
+                            collection,
                             startDate,
                             endDate,
                             reducer: periodReducer,
                         })
                     })
-                ).filter(removeEmptyImagesFilter)
+                ).filter(imagesWithData)
             }
         }
 
-        const reduced = (periodCollection || collection)
+        // Aggregate data for each feature
+        const reduced = collection
             .map((image) =>
                 image
                     .reduceRegions({

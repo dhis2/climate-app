@@ -8,7 +8,7 @@ import {
     getStandardPeriod,
     getNumberOfDaysFromPeriod,
     isValidPeriod,
-    getPeriodItems,
+    getPeriods,
 } from '../../utils/time.js'
 import GEETokenCheck from '../shared/GEETokenCheck.jsx'
 import Resolution from '../shared/Resolution.jsx'
@@ -24,6 +24,7 @@ const maxValues = 50000
 const ImportPage = () => {
     const { systemInfo = {} } = useConfig()
     const { calendar = 'gregory' } = systemInfo
+
     const [dataset, setDataset] = useState()
     const [period, setPeriod] = useState(getDefaultImportPeriod(calendar))
     const [orgUnits, setOrgUnits] = useState()
@@ -50,13 +51,6 @@ const ImportPage = () => {
     useEffect(() => {
         setStartExtract(false)
     }, [dataset, period, orgUnits, dataElement])
-
-    // TODO: Remove
-    /*
-    useEffect(() => {
-        console.log('period', period, getPeriodItems(period))
-    }, [period])
-    */
 
     return (
         <div className={styles.page}>

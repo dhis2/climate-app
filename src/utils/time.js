@@ -270,8 +270,13 @@ export const getStandardPeriod = ({
     calendar, // Include original calendar to allow conversion back to DHIS2 date
 })
 
-export const getPeriodItems = (period, locale = 'en') => {
-    const { periodType, startTime, endTime, calendar } = period
+/**
+ * Returns an array of period items for a given period object
+ * @param {Object} period Calendar period object
+ * @returns {Array} Period items
+ */
+export const getPeriods = (period) => {
+    const { periodType, startTime, endTime, calendar, locale = 'en' } = period
 
     const startYear = extractYear(fromStandardDate(startTime, calendar))
     const endYear = extractYear(fromStandardDate(endTime, calendar))
@@ -296,31 +301,17 @@ export const getPeriodItems = (period, locale = 'en') => {
 
 /**
  * Creates a map of standard dates and DHIS2 calendar date ids
- * @param {Object} period Standard period object
- * @param {String} periodType Period type
- * @param {String} locale Locale used for calendar
+ * @param {Array} periods Period items
+ * @param {String} calendar Calendar used
  * @returns {Map} Map with standard date as key and DHIS2 calendar date as value
  */
-export const getMappedPeriods = (period, locale = 'en') => {
-    const { periodType, startTime, endTime, calendar } = period
-
-    const startYear = extractYear(fromStandardDate(startTime, calendar))
-    const endYear = extractYear(fromStandardDate(endTime, calendar))
-
+export const getMappedPeriods = (periods, calendar) => {
     const mappedPeriods = new Map()
 
-    // TODO: get period items from above function
-    for (let year = startYear; year <= endYear; year++) {
-        generateFixedPeriods({
-            year,
-            calendar,
-            locale,
-            periodType,
-        }).reduce(
-            (map, p) => map.set(toStandardDate(p.startDate, calendar), p.id),
-            mappedPeriods
-        )
-    }
+    periods.reduce(
+        (map, p) => map.set(toStandardDate(p.startDate, calendar), p.id),
+        mappedPeriods
+    )
 
     return mappedPeriods
 }
