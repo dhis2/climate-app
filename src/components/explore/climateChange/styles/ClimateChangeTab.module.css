@@ -1,13 +1,13 @@
 .monthSelect {
-  display: inline-block;
-  max-width: 150px;
-  margin-top: 10px;
-  margin-right: 20px;
+    display: inline-block;
+    max-width: 150px;
+    margin-top: 10px;
+    margin-right: 20px;
 }
 
 .description {
-  margin-top: 10px;
-  margin-bottom: 20px;
-  font-size: 14px;
-  line-height: 18px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 18px;
 }
