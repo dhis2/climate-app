@@ -15,7 +15,7 @@ const DataLoader = ({ label, height = 400 }) => (
 )
 
 DataLoader.propTypes = {
-    height: PropTypes.oneOf([PropTypes.string, PropTypes.number]),
+    height: PropTypes.number,
     label: PropTypes.string,
 }
 

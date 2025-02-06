@@ -214,6 +214,23 @@ export const locations = {
                 },
             ],
         },
+        {
+            id: 'uganda',
+            path: '/world/uganda',
+            displayName: 'Uganda',
+            children: [
+                {
+                    id: 'kampala',
+                    path: '/world/uganda/kampala',
+                    displayName: 'Kampala',
+                    children: [],
+                    geometry: {
+                        type: 'Point',
+                        coordinates: [32.581111, 0.313611],
+                    },
+                },
+            ],
+        },
     ],
 }
 
