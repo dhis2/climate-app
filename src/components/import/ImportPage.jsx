@@ -1,7 +1,7 @@
 import { useConfig } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Card, Button } from '@dhis2/ui'
-import { useState, useEffect } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import useOrgUnitCount from '../../hooks/useOrgUnitCount.js'
 import {
     getDefaultImportPeriod,
@@ -32,7 +32,7 @@ const ImportPage = () => {
     const standardPeriod = getStandardPeriod(period) // ISO 8601 used by GEE
     const [startExtract, setStartExtract] = useState(false)
     const orgUnitCount = useOrgUnitCount(orgUnits?.parent?.id, orgUnits?.level)
-    const periodCount = getPeriods(period).length
+    const periodCount = useMemo(() => getPeriods(period).length, [period])
     const valueCount = orgUnitCount * periodCount
     const periodType = periodTypes
         .find((type) => type.id === period.periodType)

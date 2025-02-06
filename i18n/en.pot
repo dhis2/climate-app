@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-02-05T10:45:16.315Z\n"
-"PO-Revision-Date: 2025-02-05T10:45:16.315Z\n"
+"POT-Creation-Date: 2025-02-06T14:06:33.277Z\n"
+"PO-Revision-Date: 2025-02-06T14:06:33.277Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -745,9 +745,6 @@ msgstr "Aggregation levels"
 
 msgid "Assign all org unit levels"
 msgstr "Assign all org unit levels"
-
-msgid "Legend: \"{{name}}\""
-msgstr "Legend: \"{{name}}\""
 
 msgid "Start value"
 msgstr "Start value"
