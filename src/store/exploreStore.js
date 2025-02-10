@@ -6,7 +6,7 @@ import {
     getLastMonth,
     MONTHLY,
 } from '../utils/time.js'
-import { NDVI } from '../components/explore/land/VegetationIndexSelect'
+import { NDVI } from '../components/explore/land/VegetationIndexSelect.jsx'
 
 const exploreStore = create((set) => ({
     orgUnit: null,

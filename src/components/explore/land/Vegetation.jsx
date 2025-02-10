@@ -1,10 +1,9 @@
 import Chart from '../Chart'
-import VegetationIndexSelect from './VegetationIndexSelect'
+import VegetationIndexSelect, { NDVI, EVI } from './VegetationIndexSelect.jsx'
 import DataLoader from '../../shared/DataLoader'
 import getChartConfig from './charts/vegetation'
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries'
 import exploreStore from '../../../store/exploreStore'
-import { NDVI, EVI } from './VegetationIndexSelect'
 
 const dataset = {
     datasetId: 'MODIS/061/MOD13Q1',
