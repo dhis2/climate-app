@@ -7,13 +7,16 @@ import {
     getMappedPeriods,
     getNumberOfMonths,
     getNumberOfDays,
-    getNumberOfDaysFromPeriod,
     getLastMonth,
     getStandardPeriod,
     isValidPeriod,
     padWithZeroes,
     toDateObject,
     toStandardDate,
+    getPeriods,
+    DAILY,
+    WEEKLY,
+    MONTHLY,
 } from '../time.js'
 
 const timestamp = 1722902400000 // 2024-08-06
@@ -36,6 +39,7 @@ const gregoryPeriod = {
     startTime: gregoryStartDate,
     endTime: gregoryEndDate,
     calendar: gregoryCalendar,
+    periodType: DAILY,
 }
 
 const nepaliDate = {
@@ -52,6 +56,7 @@ const nepaliPeriod = {
     startTime: nepaliStartDate,
     endTime: nepaliEndDate,
     calendar: nepaliCalendar,
+    periodType: DAILY,
 }
 
 const ethiopicDate = {
@@ -68,6 +73,7 @@ const ethiopicPeriod = {
     startTime: ethiopicStartDate,
     endTime: ethiopicEndDate,
     calendar: ethiopicCalendar,
+    periodType: DAILY,
 }
 
 const oneDayInMs = 1000 * 60 * 60 * 24
@@ -173,10 +179,6 @@ describe('time utils', () => {
         expect(getNumberOfDays(gregoryStartDate, gregoryEndDate)).toEqual(366)
     })
 
-    it('it should get the number of days from a period object', () => {
-        expect(getNumberOfDaysFromPeriod(gregoryPeriod)).toEqual(366)
-    })
-
     it('it should convert a date string to a date object', () => {
         expect(toDateObject(gregoryDateString)).toEqual(gregoryDate)
         expect(toDateObject(nepaliDateString)).toEqual(nepaliDate)
@@ -194,18 +196,21 @@ describe('time utils', () => {
             startTime: gregoryStartDate,
             endTime: gregoryEndDate,
             calendar: gregoryCalendar,
+            periodType: DAILY,
         })
 
         expect(getStandardPeriod(nepaliPeriod)).toEqual({
             startTime: toStandardDate(nepaliStartDate, nepaliCalendar),
             endTime: toStandardDate(nepaliEndDate, nepaliCalendar),
             calendar: nepaliCalendar,
+            periodType: DAILY,
         })
 
         expect(getStandardPeriod(ethiopicPeriod)).toEqual({
             startTime: toStandardDate(ethiopicStartDate, ethiopicCalendar),
             endTime: toStandardDate(ethiopicEndDate, ethiopicCalendar),
             calendar: ethiopicCalendar,
+            periodType: DAILY,
         })
     })
 
@@ -231,27 +236,32 @@ describe('time utils', () => {
     })
 
     it('it should create mapped gregory periods', () => {
-        const mappedPeriods = getMappedPeriods(gregoryPeriod)
+        const mappedPeriods = getMappedPeriods(getPeriods(gregoryPeriod))
 
         expect(mappedPeriods.get(gregoryStartDate)).toEqual('20230801')
         expect(mappedPeriods.get(gregoryEndDate)).toEqual('20240731')
     })
 
     it('it should create mapped nepali periods', () => {
-        const mappedPeriods = getMappedPeriods({
-            ...gregoryPeriod,
-            calendar: nepaliCalendar,
-        })
+        const mappedPeriods = getMappedPeriods(
+            getPeriods({
+                ...gregoryPeriod,
+                calendar: nepaliCalendar,
+            })
+        )
 
         expect(mappedPeriods.get(gregoryStartDate)).toEqual('20800416')
         expect(mappedPeriods.get(gregoryEndDate)).toEqual('20810416')
     })
 
     it('it should create mapped ethiopic periods', () => {
-        const mappedPeriods = getMappedPeriods({
-            ...gregoryPeriod,
-            calendar: ethiopicCalendar,
-        })
+        const mappedPeriods = getMappedPeriods(
+            getPeriods({
+                ...gregoryPeriod,
+                calendar: ethiopicCalendar,
+            })
+        )
+
         expect(mappedPeriods.get(gregoryStartDate)).toEqual('20151125')
         expect(mappedPeriods.get(gregoryEndDate)).toEqual('20161124')
     })
@@ -265,5 +275,28 @@ describe('time utils', () => {
                 endDate: gregoryStartDate,
             })
         ).toEqual(false)
+    })
+
+    it('it should generate daily periods', () => {
+        const periods = getPeriods(gregoryPeriod)
+        expect(periods.length).toEqual(366)
+        expect(periods[0].startDate).toEqual(gregoryStartDate)
+        expect(periods[periods.length - 1].endDate).toEqual(gregoryEndDate)
+    })
+
+    it('it should generate weekly periods', () => {
+        const periods = getPeriods({
+            ...gregoryPeriod,
+            periodType: WEEKLY,
+        })
+        expect(periods.length).toEqual(53)
+    })
+
+    it('it should generate monthly periods', () => {
+        const periods = getPeriods({
+            ...gregoryPeriod,
+            periodType: MONTHLY,
+        })
+        expect(periods.length).toEqual(12)
     })
 })

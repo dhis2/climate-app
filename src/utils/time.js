@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import {
     convertFromIso8601,
     convertToIso8601,
@@ -7,9 +8,25 @@ import {
 
 export const HOURLY = 'HOURLY'
 export const DAILY = 'DAILY'
+export const WEEKLY = 'WEEKLY'
 export const MONTHLY = 'MONTHLY'
 
 const oneDayInMs = 1000 * 60 * 60 * 24
+
+export const periodTypes = [
+    {
+        id: DAILY,
+        name: i18n.t('Daily'),
+    },
+    {
+        id: WEEKLY,
+        name: i18n.t('Weekly'),
+    },
+    {
+        id: MONTHLY,
+        name: i18n.t('Monthly'),
+    },
+]
 
 /**
  * Pads a number with zeroes to the left
@@ -110,6 +127,7 @@ export const getDefaultMonthlyPeriod = (lagDays) => {
  * @returns {Object} Default import data period with calendar date strings
  */
 export const getDefaultImportPeriod = (calendar) => ({
+    periodType: DAILY,
     startTime: getCalendarDate(calendar, { months: -7 }),
     endTime: getCalendarDate(calendar, { months: -1 }),
     calendar,
@@ -179,14 +197,6 @@ export const formatDate = (date) => {
 }
 
 /**
- * Returns number of days in a period object
- * @param {Object} period Period object with startTime and endTime
- * @returns {Number} Number of days in period
- */
-export const getNumberOfDaysFromPeriod = (period) =>
-    getNumberOfDays(period.startTime, period.endTime)
-
-/**
  * Translates a date string to a date object
  * @param {String} dateString Date string in the format YYYY-MM-DD
  * @returns {Object} Date object with year, month and day
@@ -239,39 +249,65 @@ export const fromStandardDate = (dateString, calendar) => {
  * @param {String} calendar Calendar used
  * @returns {Object} Standard period object
  */
-export const getStandardPeriod = ({ startTime, endTime, calendar }) => ({
+export const getStandardPeriod = ({
+    startTime,
+    endTime,
+    calendar,
+    periodType,
+}) => ({
     startTime: toStandardDate(startTime, calendar),
     endTime: toStandardDate(endTime, calendar),
+    periodType,
     calendar, // Include original calendar to allow conversion back to DHIS2 date
 })
 
 /**
- * Creates a map of standard dates and DHIS2 calendar date ids
- * @param {Object} period Standard period object
- * @param {String} periodType Period type
- * @param {String} locale Locale used for calendar
- * @returns {Map} Map with standard date as key and DHIS2 calendar date as value
+ * Returns an array of period items for a given period object
+ * @param {Object} period Calendar period object
+ * @returns {Array} Period items
  */
-export const getMappedPeriods = (period, periodType = DAILY, locale = 'en') => {
-    const { startTime, endTime, calendar } = period
+export const getPeriods = (period) => {
+    const { periodType, startTime, endTime, calendar, locale = 'en' } = period
 
     const startYear = extractYear(fromStandardDate(startTime, calendar))
     const endYear = extractYear(fromStandardDate(endTime, calendar))
 
-    const mappedPeriods = new Map()
+    let items = []
 
     for (let year = startYear; year <= endYear; year++) {
-        generateFixedPeriods({
-            year,
-            calendar,
-            locale,
-            periodType,
-        }).reduce(
-            (map, p) => map.set(toStandardDate(p.startDate, calendar), p.id),
-            mappedPeriods
+        items = items.concat(
+            generateFixedPeriods({
+                year,
+                calendar,
+                locale,
+                periodType,
+            })
+                .map((p) =>
+                    calendar !== 'iso8601'
+                        ? {
+                              ...p,
+                              startDate: toStandardDate(p.startDate, calendar),
+                              endDate: toStandardDate(p.endDate, calendar),
+                          }
+                        : p
+                )
+                .filter(
+                    (p) => p.startDate <= endTime && p.endDate >= startTime // Filter out periods outside the range
+                )
         )
     }
 
+    return items
+}
+
+/**
+ * Creates a map of standard dates and DHIS2 calendar date ids
+ * @param {Array} periods Period items
+ * @returns {Map} Map with standard date as key and DHIS2 calendar date as value
+ */
+export const getMappedPeriods = (periods) => {
+    const mappedPeriods = new Map()
+    periods.reduce((map, p) => map.set(p.startDate, p.id), mappedPeriods)
     return mappedPeriods
 }
 
