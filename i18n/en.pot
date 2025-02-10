@@ -5,8 +5,13 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
+<<<<<<< HEAD
 "POT-Creation-Date: 2024-12-10T16:17:52.945Z\n"
 "PO-Revision-Date: 2024-12-10T16:17:52.945Z\n"
+=======
+"POT-Creation-Date: 2025-02-06T14:06:33.277Z\n"
+"PO-Revision-Date: 2025-02-06T14:06:33.277Z\n"
+>>>>>>> main
 
 msgid "About this app"
 msgstr "About this app"
@@ -593,11 +598,11 @@ msgid "No org units with geometry found for this level"
 msgstr "No org units with geometry found for this level"
 
 msgid ""
-"Extracting data for {{daysCount}} days and {{orgUnitsCount}} org units "
-"({{valueCount}} values)"
+"Extracting data for {{periodCount}} {{periodType}} periods and "
+"{{orgUnitsCount}} org units ({{valueCount}} values)"
 msgstr ""
-"Extracting data for {{daysCount}} days and {{orgUnitsCount}} org units "
-"({{valueCount}} values)"
+"Extracting data for {{periodCount}} {{periodType}} periods and "
+"{{orgUnitsCount}} org units ({{valueCount}} values)"
 
 msgid "Importing data to DHIS2"
 msgstr "Importing data to DHIS2"
@@ -614,13 +619,15 @@ msgstr "Import weather and climate data"
 msgid ""
 "You can maximum import {{maxValues}} data values in a single import, but "
 "you are trying to import {{valueCount}} values for {{orgUnitCount}} "
-"organisation units over {{daysCount}} days. Please select a shorter period "
-"or fewer organisation units. You can always import more data later."
+"organisation units over {{periodCount}} {{periodType}} periods. Please "
+"select a shorter period or fewer organisation units. You can always import "
+"more data later."
 msgstr ""
 "You can maximum import {{maxValues}} data values in a single import, but "
 "you are trying to import {{valueCount}} values for {{orgUnitCount}} "
-"organisation units over {{daysCount}} days. Please select a shorter period "
-"or fewer organisation units. You can always import more data later."
+"organisation units over {{periodCount}} {{periodType}} periods. Please "
+"select a shorter period or fewer organisation units. You can always import "
+"more data later."
 
 msgid "Instructions"
 msgstr "Instructions"
@@ -732,6 +739,9 @@ msgstr "Org unit parent needs to be above or equal to the org unit level"
 msgid "Daily values will be imported between start and end dates"
 msgstr "Daily values will be imported between start and end dates"
 
+msgid "Period type"
+msgstr "Period type"
+
 msgid ""
 "Set y-axis values for charts in the Explore data section to make it easier "
 "to compare different org units. Leave blank to calculate based on data "
@@ -780,6 +790,9 @@ msgstr "Default start page for users"
 msgid "Time zone where your org units are located"
 msgstr "Time zone where your org units are located"
 
+msgid "Data element: \"{{name}}\""
+msgstr "Data element: \"{{name}}\""
+
 msgid "Name"
 msgstr "Name"
 
@@ -806,9 +819,6 @@ msgstr "Aggregation levels"
 
 msgid "Assign all org unit levels"
 msgstr "Assign all org unit levels"
-
-msgid "Legend"
-msgstr "Legend"
 
 msgid "Start value"
 msgstr "Start value"
@@ -855,14 +865,11 @@ msgstr ""
 "it from data imported from local weather stations. If you use the same code "
 "specified below, we will preselect the data element in the import interface."
 
-msgid "Data set"
-msgstr "Data set"
+msgid "Data set: \"Climate/Weather\""
+msgstr "Data set: \"Climate/Weather\""
 
 msgid "Climate/Weather"
 msgstr "Climate/Weather"
-
-msgid "Period type"
-msgstr "Period type"
 
 msgid "Data elements"
 msgstr "Data elements"
@@ -876,8 +883,8 @@ msgstr "Organisation units"
 msgid "Select all organisation units in your system"
 msgstr "Select all organisation units in your system"
 
-msgid "Data element group"
-msgstr "Data element group"
+msgid "Data element group: \"Climate/Weather\""
+msgstr "Data element group: \"Climate/Weather\""
 
 msgid ""
 "You should now be able to import climate data with this app. Please reach "
@@ -1115,3 +1122,6 @@ msgstr "NASA LP DAAC at the USGS EROS Center / Google Earth Engine"
 
 msgid "No data found for the selected period"
 msgstr "No data found for the selected period"
+
+msgid "Weekly"
+msgstr "Weekly"

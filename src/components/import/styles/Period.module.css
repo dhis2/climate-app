@@ -1,14 +1,15 @@
 .container {
-  margin: 0 0 1rem 0;
+    margin: 0 0 1rem 0;
 }
 
 .pickers {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
 }
 
 .pickers > div {
-  width: 45%;
+    width: 45%;
 }
