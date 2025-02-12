@@ -1,12 +1,13 @@
 import { useDataEngine } from '@dhis2/app-runtime'
-import { useState, useEffect } from 'react'
 import i18n from '@dhis2/d2-i18n'
-import Chart from '../../explore/Chart.jsx'
-import getChartConfig from '../charts/AirQualityGauge.js'
+import PropTypes from 'prop-types'
+import { useState, useEffect } from 'react'
 import legend from '../../../data/pm2.5-legend.js'
 import useAppSettings from '../../../hooks/useAppSettings.js'
-import styles from './styles/AirQoPlugin.module.css'
 import useGetRoute from '../../../hooks/useGetRoute.js'
+import Chart from '../../explore/Chart.jsx'
+import getChartConfig from '../charts/AirQualityGauge.js'
+import styles from './styles/AirQoPlugin.module.css'
 
 const AirQoPlugin = ({ siteId }) => {
     const engine = useDataEngine()
@@ -73,6 +74,10 @@ const AirQoPlugin = ({ siteId }) => {
             )}
         </div>
     ) : null
+}
+
+AirQoPlugin.propTypes = {
+    siteId: PropTypes.string.isRequired,
 }
 
 export default AirQoPlugin
