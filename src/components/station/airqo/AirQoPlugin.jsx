@@ -1,3 +1,4 @@
+import { useDataEngine } from '@dhis2/app-runtime'
 import { useState, useEffect } from 'react'
 import i18n from '@dhis2/d2-i18n'
 import Chart from '../../explore/Chart.jsx'
@@ -5,37 +6,31 @@ import getChartConfig from '../charts/AirQualityGauge.js'
 import legend from '../../../data/pm2.5-legend.js'
 import useAppSettings from '../../../hooks/useAppSettings.js'
 import styles from './styles/AirQoPlugin.module.css'
+import useGetRoute from '../../../hooks/useGetRoute.js'
 
 const AirQoPlugin = ({ siteId }) => {
+    const engine = useDataEngine()
     const [data, setData] = useState()
     const { settings = {} } = useAppSettings()
-    const { airqoToken } = settings
-
+    const { route } = useGetRoute()
     useEffect(() => {
-        if (airqoToken && !data) {
-            fetch(
-                `https://api.airqo.net/api/v2/devices/measurements/sites/${siteId}/recent?token=${airqoToken}`
-            )
+        if (route && route.id && !data) {
+            const resource = `routes/${route.id}/run/${siteId}/recent`
+
+            engine
+                .query({
+                    routes: { resource },
+                })
                 .then((response) => {
-                    if (response.ok) {
-                        response.json().then((data) => {
-                            setData(data?.measurements?.[0])
-                        })
-                    } else {
-                        console.error(
-                            'Error fetching data:',
-                            response.status,
-                            response.statusText
-                        )
-                    }
+                    setData(response?.routes?.measurements?.[0])
                 })
                 .catch((error) => {
-                    console.error('Error fetching data:', error)
+                    console.error('Error fetching airqo data:', error)
                 })
         }
-    }, [airqoToken, data])
+    }, [route, data])
 
-    if (!airqoToken) {
+    if (!route || !route.id) {
         return <div>{i18n.t('AirQo token not set')}</div>
     }
 
