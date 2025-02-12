@@ -2,7 +2,9 @@ import { useDataQuery } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { CalendarInput } from '@dhis2/ui'
 import PropTypes from 'prop-types'
+import { useEffect } from 'react'
 import TimeZone from '../shared/TimeZone.jsx'
+import PeriodType from './PeriodType.jsx'
 import styles from './styles/Period.module.css'
 
 const userSettingsQuery = {
@@ -17,7 +19,14 @@ const userSettingsQuery = {
 const Period = ({ calendar, period, onChange }) => {
     const result = useDataQuery(userSettingsQuery)
     const { data: { userSettings: { keyUiLocale: locale } = {} } = {} } = result
-    const { startTime, endTime } = period
+    const { periodType, startTime, endTime } = period
+
+    // Set period locale from user settings
+    useEffect(() => {
+        if (locale && locale !== period.locale) {
+            onChange({ ...period, locale })
+        }
+    }, [locale, onChange, period])
 
     return (
         <div className={styles.container}>
@@ -28,6 +37,12 @@ const Period = ({ calendar, period, onChange }) => {
                 )}
             </p>
             <div className={styles.pickers}>
+                <PeriodType
+                    periodType={periodType}
+                    onChange={(periodType) =>
+                        onChange({ ...period, periodType })
+                    }
+                />
                 <CalendarInput
                     label={i18n.t('Start date')}
                     date={startTime}
@@ -42,6 +57,7 @@ const Period = ({ calendar, period, onChange }) => {
                     label={i18n.t('End date')}
                     date={endTime}
                     calendar={calendar}
+                    locale={locale || 'en'}
                     defaultVal={endTime}
                     onDateSelect={({ calendarDateString }) =>
                         onChange({ ...period, endTime: calendarDateString })

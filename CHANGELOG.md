@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/dhis2/climate-app/compare/v1.5.3...v1.6.0) (2025-02-10)
+
+
+### Features
+
+* support multiple period types for data import ([#58](https://github.com/dhis2/climate-app/issues/58)) ([282d917](https://github.com/dhis2/climate-app/commit/282d9174f5346cae6b46e8f9662186e210786687))
+
 ## [1.5.3](https://github.com/dhis2/climate-app/compare/v1.5.2...v1.5.3) (2025-01-28)
 
 
