@@ -17,10 +17,12 @@ const period = {
 }
 
 const Vegetation = () => {
-    const orgUnit = exploreStore((state) => state.orgUnit)
+    const feature = exploreStore((state) => state.orgUnit)
     const index = exploreStore((state) => state.vegetationIndex)
 
-    const data = useEarthEngineTimeSeries(dataset, period, orgUnit)
+    const data = useEarthEngineTimeSeries({ dataset, period, feature })
+
+    // console.log('Vegetation', data, dataset, period, orgUnit)
 
     if (!data) {
         return <DataLoader />
@@ -30,7 +32,7 @@ const Vegetation = () => {
         <>
             <VegetationIndexSelect />
             <Chart
-                config={getChartConfig(orgUnit.properties.name, data, index)}
+                config={getChartConfig(feature.properties.name, data, index)}
             />
         </>
     )

@@ -11,7 +11,7 @@ export const DAILY = 'DAILY'
 export const WEEKLY = 'WEEKLY'
 export const MONTHLY = 'MONTHLY'
 
-const oneDayInMs = 1000 * 60 * 60 * 24
+export const oneDayInMs = 1000 * 60 * 60 * 24
 
 export const periodTypes = [
     {
@@ -27,6 +27,23 @@ export const periodTypes = [
         name: i18n.t('Monthly'),
     },
 ]
+
+// TODO: In UTC?
+export const addPeriodTimestamp = (period) => {
+    const startTime = new Date(period.startDate).getTime()
+    const endTime = new Date(period.endDate).getTime() + oneDayInMs
+    const middleTime = startTime + (endTime - startTime) / 2
+
+    return {
+        ...period,
+        startTime,
+        endTime,
+        middleTime,
+    }
+}
+
+export const getMiddleTime = (period) =>
+    period.startTime + (period.endTime - period.startTime) / 2
 
 /**
  * Pads a number with zeroes to the left
