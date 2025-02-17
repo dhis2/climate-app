@@ -12,7 +12,7 @@ import styles from './styles/AirQoPlugin.module.css'
 const AirQoPlugin = ({ siteId }) => {
     const engine = useDataEngine()
     const [data, setData] = useState()
-    const { settings = {} } = useAppSettings()
+    // const { settings = {} } = useAppSettings()
     const { route } = useGetRoute()
     useEffect(() => {
         if (route && route.id && !data) {
