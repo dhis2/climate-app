@@ -22,7 +22,7 @@ const Vegetation = () => {
 
     const data = useEarthEngineTimeSeries({ dataset, period, feature })
 
-    // console.log('Vegetation', data, dataset, period, orgUnit)
+    console.log('Vegetation', data)
 
     if (!data) {
         return <DataLoader />

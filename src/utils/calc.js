@@ -1,3 +1,5 @@
+import { getMiddleTime } from './time'
+
 // Based on: https://bmcnoldy.earth.miami.edu/Humidity.html
 export const getRelativeHumidity = (temperature, dewpoint) =>
     (100 * Math.exp((17.625 * dewpoint) / (243.04 + dewpoint))) /
@@ -23,7 +25,7 @@ export const interpolate = (periods, targetTime, band = 'value') => {
     // Find the two periods surrounding the targetTime
     for (let i = 0; i < periods.length; i++) {
         const period = periods[i]
-        const { middleTime } = period
+        const middleTime = period.middleTime || getMiddleTime(period)
 
         if (middleTime <= targetTime) {
             lower = period
@@ -40,8 +42,8 @@ export const interpolate = (periods, targetTime, band = 'value') => {
     }
 
     // Perform linear interpolation
-    const t1 = lower.middleTime
-    const t2 = upper.middleTime
+    const t1 = lower.middleTime || getMiddleTime(lower)
+    const t2 = upper.middleTime || getMiddleTime(upper)
     const y1 = lower[band]
     const y2 = upper[band]
 
