@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-02-10T14:57:44.655Z\n"
-"PO-Revision-Date: 2025-02-10T14:57:44.655Z\n"
+"POT-Creation-Date: 2025-02-17T14:02:13.248Z\n"
+"PO-Revision-Date: 2025-02-17T14:02:13.248Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -475,8 +475,8 @@ msgstr "Dewpoint temperature"
 msgid "Air temperature"
 msgstr "Air temperature"
 
-msgid "{{name}}: {{index}} vegetation index {{period}}"
-msgstr "{{name}}: {{index}} vegetation index {{period}}"
+msgid "{{name}}: {{band}} vegetation index 2024"
+msgstr "{{name}}: {{band}} vegetation index 2024"
 
 msgid "{{name}}: Daily precipitation {{period}}"
 msgstr "{{name}}: Daily precipitation {{period}}"
@@ -877,6 +877,9 @@ msgstr "Approximately 9 km (0.1°)"
 msgid "Approximately 5 km (0.05°)"
 msgstr "Approximately 5 km (0.05°)"
 
+msgid "Approximately 250 m"
+msgstr "Approximately 250 m"
+
 msgid "Air temperature (ERA5-Land)"
 msgstr "Air temperature (ERA5-Land)"
 
@@ -976,6 +979,24 @@ msgstr "Min heat stress"
 
 msgid "Minimum felt temperature in °C"
 msgstr "Minimum felt temperature in °C"
+
+msgid "Normalized difference vegetation index (NDVI)"
+msgstr "Normalized difference vegetation index (NDVI)"
+
+msgid "NDVI"
+msgstr "NDVI"
+
+msgid "NDVI is a measure of vegetation greenness"
+msgstr "NDVI is a measure of vegetation greenness"
+
+msgid "Enhanced vegetation index (EVI)"
+msgstr "Enhanced vegetation index (EVI)"
+
+msgid "EVI"
+msgstr "EVI"
+
+msgid "EVI is a measure of vegetation greenness"
+msgstr "EVI is a measure of vegetation greenness"
 
 msgid "Heat/cold stress"
 msgstr "Heat/cold stress"
