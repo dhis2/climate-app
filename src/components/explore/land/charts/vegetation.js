@@ -1,13 +1,13 @@
 import i18n from '@dhis2/d2-i18n'
-import { colors } from '@dhis2/ui'
 import { generateFixedPeriods } from '@dhis2/multi-calendar-dates'
+import { colors } from '@dhis2/ui'
+import { interpolate, roundTwoDecimals } from '../../../../utils/calc.js'
 import {
     animation,
     vegetationCredits,
     getDailyPeriod,
-} from '../../../../utils/chart'
-import { interpolate, roundTwoDecimals } from '../../../../utils/calc'
-import { addPeriodTimestamp, getMiddleTime } from '../../../../utils/time'
+} from '../../../../utils/chart.js'
+import { addPeriodTimestamp, getMiddleTime } from '../../../../utils/time.js'
 
 const getChartConfig = (name, data, band = 'value') => {
     const years = [...new Set(data.map((d) => d.id.slice(0, 4)).map(Number))]

@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { NDVI } from '../components/explore/land/VegetationIndexSelect.jsx'
 import { defaultReferencePeriod } from '../components/explore/ReferencePeriodSelect.jsx'
 import {
     getDefaultMonthlyPeriod,
@@ -6,7 +7,6 @@ import {
     getLastMonth,
     MONTHLY,
 } from '../utils/time.js'
-import { NDVI } from '../components/explore/land/VegetationIndexSelect.jsx'
 
 const exploreStore = create((set) => ({
     orgUnit: null,
