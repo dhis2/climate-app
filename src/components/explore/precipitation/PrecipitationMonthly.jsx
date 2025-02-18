@@ -15,6 +15,7 @@ const PrecipitationMonthly = () => {
     const orgUnit = exploreStore((state) => state.orgUnit)
     const monthlyPeriod = exploreStore((state) => state.monthlyPeriod)
     const referencePeriod = exploreStore((state) => state.referencePeriod)
+    const showForecast = exploreStore((state) => state.showForecast)
     const { settings } = useAppSettings()
 
     const data = useEarthEngineTimeSeries({
@@ -22,6 +23,16 @@ const PrecipitationMonthly = () => {
         period: monthlyPeriod,
         feature: orgUnit,
     })
+
+    let forecastData = null
+    {showForecast && (
+        forecastData = [
+            {'id': '2025-02', 'forecast_precipitation_sum': 0.18},
+            {'id': '2025-03', 'forecast_precipitation_sum': 0.33},
+            {'id': '2025-04', 'forecast_precipitation_sum': 0.5},
+            {'id': '2025-05', 'forecast_precipitation_sum': 0.88}
+        ]
+    )}
 
     const normals = useEarthEngineClimateNormals(
         era5MonthlyNormals,
@@ -39,6 +50,7 @@ const PrecipitationMonthly = () => {
                     config={getMonthlyConfig({
                         name,
                         data,
+                        forecastData,
                         normals,
                         referencePeriod,
                         settings,

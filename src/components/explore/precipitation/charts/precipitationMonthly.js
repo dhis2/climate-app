@@ -9,8 +9,9 @@ import {
 } from '../../../../utils/chart.js'
 
 const band = 'total_precipitation_sum'
+const forecastBand = 'forecast_precipitation_sum'
 
-const getChartConfig = ({ name, data, normals, referencePeriod, settings }) => {
+const getChartConfig = ({ name, data, forecastData, normals, referencePeriod, settings }) => {
     const { precipMonthlyMax } = settings
 
     const series = data.map((d) => ({
@@ -27,6 +28,38 @@ const getChartConfig = ({ name, data, normals, referencePeriod, settings }) => {
             y: metersToMillimeters(normal[band]),
         }
     })
+
+    const seriesConfig = [
+        {
+            data: series,
+            name: i18n.t('Monthly precipitation'),
+            color: colors.blue500,
+            zIndex: 1,
+        },
+        {
+            data: monthMormals,
+            name: i18n.t('Normal precipitation'),
+            color: colors.blue200,
+            pointPlacement: -0.2,
+            zIndex: 0,
+        },
+    ]
+
+    if (forecastData) {
+        const forecastSeries = forecastData.map((d) => ({
+            x: getTimeFromId(d.id),
+            y: metersToMillimeters(d[forecastBand]),
+        }))
+        console.log('forecast data', forecastData)
+        console.log('forecast series', forecastSeries)
+
+        seriesConfig.push({
+            data: forecastSeries,
+            name: i18n.t('Monthly precipitation forecast'),
+            color: '#B19CD8',
+            zIndex: 2,
+        })
+    }
 
     return {
         title: {
@@ -74,21 +107,7 @@ const getChartConfig = ({ name, data, normals, referencePeriod, settings }) => {
                 format: '{value} mm',
             },
         },
-        series: [
-            {
-                data: series,
-                name: i18n.t('Monthly precipitation'),
-                color: colors.blue500,
-                zIndex: 1,
-            },
-            {
-                data: monthMormals,
-                name: i18n.t('Normal precipitation'),
-                color: colors.blue200,
-                pointPlacement: -0.2,
-                zIndex: 0,
-            },
-        ],
+        series: seriesConfig,
     }
 }
 
