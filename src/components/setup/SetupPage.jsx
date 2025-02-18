@@ -1,7 +1,12 @@
 import i18n from '@dhis2/d2-i18n'
-import datasets from '../../data/datasets.js'
+import datasets, {
+    dhisDataSets,
+    dhisDataElementGroups,
+} from '../../data/datasets.js'
 import heatStressLegend from '../../data/heat-stress-legend.js'
 import DataElement from './DataElement.jsx'
+import DataSet from './DataSet.jsx'
+import DataElementGroup from './DataElementGroup.jsx'
 import Legend from './Legend.jsx'
 import styles from './styles/SetupPage.module.css'
 
@@ -24,8 +29,8 @@ const SetupPage = () => {
                     'Create DHIS2 data elements for the climate and weather data you want to import. We recommend including the data source in the name to distinguish it from data imported from local weather stations. If you use the same code specified below, we will preselect the data element in the import interface.'
                 )}
             </p>
-            {datasets.map((dataset) => (
-                <DataElement key={dataset.id} {...dataset} />
+            {datasets.map((dataElement) => (
+                <DataElement key={dataElement.id} {...dataElement} />
             ))}
             <p>
                 Since these data elements are collected daily, we recommend they
@@ -40,71 +45,17 @@ const SetupPage = () => {
                 leave that decision to users. Most probable choice is all
                 organisation units in your system.
             </p>
-            <table>
-                <caption>
-                    {i18n.t('Data set: "Climate/Weather"', {
-                        nsSeparator: '%',
-                    })}
-                </caption>
-                <tbody>
-                    <tr>
-                        <th>{i18n.t('Name')}</th>
-                        <td>{i18n.t('Climate/Weather')}</td>
-                    </tr>
-                    <tr>
-                        <th>{i18n.t('Short name')}</th>
-                        <td>{i18n.t('Climate/Weather')}</td>
-                    </tr>
-                    <tr>
-                        <th>{i18n.t('Period type')}</th>
-                        <td>{i18n.t('Daily')}</td>
-                    </tr>
-                    <tr>
-                        <th>{i18n.t('Data elements')}</th>
-                        <td>
-                            <em>{i18n.t('Assign the above data elements')}</em>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>{i18n.t('Organisation units')}</th>
-                        <td>
-                            <em>
-                                {i18n.t(
-                                    'Select all organisation units in your system'
-                                )}
-                            </em>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            {dhisDataSets.map((dataSet) => (
+                <DataSet key={dataSet.name} {...dataSet} />
+            ))}
             <p>
                 {i18n.t(
                     'To be able to select the data elements in all the DHIS2 analytics apps you also need to assign them to a data element group:'
                 )}
             </p>
-            <table>
-                <caption>
-                    {i18n.t('Data element group: "Climate/Weather"', {
-                        nsSeparator: '%',
-                    })}
-                </caption>
-                <tbody>
-                    <tr>
-                        <th>{i18n.t('Name')}</th>
-                        <td>{i18n.t('Climate/Weather')}</td>
-                    </tr>
-                    <tr>
-                        <th>{i18n.t('Short name')}</th>
-                        <td>{i18n.t('Climate/Weather')}</td>
-                    </tr>
-                    <tr>
-                        <th>{i18n.t('Data elements')}</th>
-                        <td>
-                            <em>{i18n.t('Assign the above data elements')}</em>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            {dhisDataElementGroups.map((group) => (
+                <DataElementGroup key={group.name} {...group} />
+            ))}
             <Legend {...heatStressLegend} />
             <p>
                 {i18n.t(

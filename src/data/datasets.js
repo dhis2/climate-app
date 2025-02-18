@@ -318,3 +318,29 @@ export const era5HeatMonthly = {
     ...era5HeatDaily,
     aggregationPeriod: MONTHLY,
 }
+
+export const dhisDataSets = [
+    {
+        name: i18n.t('Climate/Weather'),
+        shortName: i18n.t('Climate/Weather'),
+        periodType: i18n.t('Daily'),
+    },
+    {
+        name: i18n.t('Environment'),
+        shortName: i18n.t('Environment'),
+        periodType: i18n.t('Weekly'),
+    },
+]
+
+export const dhisDataElementGroups = [
+    {
+        name: i18n.t('Climate/Weather'),
+        shortName: i18n.t('Climate/Weather'),
+        dataElements: i18n.t('Assign the above data elements'),
+    },
+    {
+        name: i18n.t('Environment'),
+        shortName: i18n.t('Environment'),
+        dataElements: i18n.t('Assign the above data elements'),
+    },
+]
