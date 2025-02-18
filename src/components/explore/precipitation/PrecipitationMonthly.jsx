@@ -47,7 +47,7 @@ const PrecipitationMonthly = () => {
             ) : (
                 <DataLoader />
             )}
-            <MonthlyPeriodSelect />
+            <MonthlyPeriodSelect allowForecast={true} />
             <ReferencePeriod />
             <Resolution resolution={era5Monthly.resolution} />
         </>
