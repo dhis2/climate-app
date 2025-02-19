@@ -46,6 +46,22 @@ const getChartConfig = ({ name, data, forecastData, normals, referencePeriod, se
     ]
 
     if (forecastData) {
+        // repeat the normals for future forecasts
+        const forecastMormals = forecastData.map((d) => {
+            const month = getMonthFromId(d.id)
+            const normal = normals.find((n) => n.id === month)
+    
+            return {
+                x: getTimeFromId(d.id),
+                y: metersToMillimeters(normal[band]),
+            }
+        })
+        const normalsConfig = seriesConfig[1]
+        console.log('forecastnormals', forecastMormals)
+        console.log(normalsConfig)
+        normalsConfig.data.push(...forecastMormals)
+
+        // convert forecast data to series
         const forecastSeries = forecastData.map((d) => ({
             x: getTimeFromId(d.id),
             y: metersToMillimeters(d[forecastBand]),
@@ -53,6 +69,7 @@ const getChartConfig = ({ name, data, forecastData, normals, referencePeriod, se
         console.log('forecast data', forecastData)
         console.log('forecast series', forecastSeries)
 
+        // add new forecast series to chart
         seriesConfig.push({
             data: forecastSeries,
             name: i18n.t('Monthly precipitation forecast'),
