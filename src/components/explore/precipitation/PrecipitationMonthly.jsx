@@ -2,6 +2,7 @@ import { era5Monthly, era5MonthlyNormals } from '../../../data/datasets.js'
 import useAppSettings from '../../../hooks/useAppSettings.js'
 import useEarthEngineClimateNormals from '../../../hooks/useEarthEngineClimateNormals.js'
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
+import useDataConnectorTimeSeries from '../../../hooks/useDataConnectorTimeSeries.js'
 import exploreStore from '../../../store/exploreStore.js'
 import DataLoader from '../../shared/DataLoader.jsx'
 import Resolution from '../../shared/Resolution.jsx'
@@ -10,6 +11,20 @@ import MonthlyPeriodSelect from '../MonthlyPeriodSelect.jsx'
 import PeriodTypeSelect from '../PeriodTypeSelect.jsx'
 import ReferencePeriod from '../ReferencePeriodSelect.jsx'
 import getMonthlyConfig from './charts/precipitationMonthly.js'
+
+const incrementMonth = (month, i) => {
+    //if (!/^\d{4}-\d{2}$/.test(month)) {
+    //  throw new Error("Invalid month format. Expected 'YYYY-MM'.");
+    //}
+  
+    let [year, monthStr] = month.split('-').map(Number);
+    let totalMonths = year * 12 + (monthStr - 1) + i; // Convert year & month to total months
+  
+    const newYear = Math.floor(totalMonths / 12);
+    const newMonth = (totalMonths % 12) + 1;
+  
+    return `${newYear}-${String(newMonth).padStart(2, '0')}`;
+  };  
 
 const PrecipitationMonthly = () => {
     const orgUnit = exploreStore((state) => state.orgUnit)
@@ -24,15 +39,14 @@ const PrecipitationMonthly = () => {
         feature: orgUnit,
     })
 
-    let forecastData = null
-    {showForecast && (
-        forecastData = [
-            {'id': '2025-02', 'forecast_precipitation_sum': 0.18},
-            {'id': '2025-03', 'forecast_precipitation_sum': 0.33},
-            {'id': '2025-04', 'forecast_precipitation_sum': 0.5},
-            {'id': '2025-05', 'forecast_precipitation_sum': 0.88}
-        ]
-    )}
+    const forecastData = useDataConnectorTimeSeries({
+        host: 'http://localhost:7000',
+        dataset: showForecast ? 'total_precipitation' : null, // 👈 Conditional fetching,
+        periodType: 'month',
+        periodStart: incrementMonth(monthlyPeriod.endTime, 1),
+        periodEnd: incrementMonth(monthlyPeriod.endTime, 6), // for now, max of next 6 months
+        orgunits: {type: 'FeatureCollection', features: [orgUnit]},
+    })
 
     const normals = useEarthEngineClimateNormals(
         era5MonthlyNormals,

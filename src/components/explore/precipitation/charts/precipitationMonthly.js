@@ -1,34 +1,37 @@
-import i18n from '@dhis2/d2-i18n'
-import { colors } from '@dhis2/ui'
-import { getTimeFromId, metersToMillimeters } from '../../../../utils/calc.js'
+import i18n from '@dhis2/d2-i18n';
+import { colors } from '@dhis2/ui';
+import { getTimeFromId, metersToMillimeters } from '../../../../utils/calc.js';
 import {
     animation,
     credits,
     getMonthlyPeriod,
     getMonthFromId,
-} from '../../../../utils/chart.js'
+} from '../../../../utils/chart.js';
 
-const band = 'total_precipitation_sum'
-const forecastBand = 'forecast_precipitation_sum'
+const band = 'total_precipitation_sum';
+const forecastBand = 'forecast_precipitation_sum';
 
 const getChartConfig = ({ name, data, forecastData, normals, referencePeriod, settings }) => {
-    const { precipMonthlyMax } = settings
+    const { precipMonthlyMax } = settings;
 
+    // ✅ Historical precipitation data
     const series = data.map((d) => ({
         x: getTimeFromId(d.id),
         y: metersToMillimeters(d[band]),
-    }))
+    }));
 
+    // ✅ Historical normals data
     const monthMormals = data.map((d) => {
-        const month = getMonthFromId(d.id)
-        const normal = normals.find((n) => n.id === month)
+        const month = getMonthFromId(d.id);
+        const normal = normals.find((n) => n.id === month);
 
         return {
             x: getTimeFromId(d.id),
             y: metersToMillimeters(normal[band]),
-        }
-    })
+        };
+    });
 
+    // ✅ Base series configuration
     const seriesConfig = [
         {
             data: series,
@@ -43,40 +46,44 @@ const getChartConfig = ({ name, data, forecastData, normals, referencePeriod, se
             pointPlacement: -0.2,
             zIndex: 0,
         },
-    ]
+    ];
 
-    if (forecastData) {
-        // repeat the normals for future forecasts
-        const forecastMormals = forecastData.map((d) => {
-            const month = getMonthFromId(d.id)
-            const normal = normals.find((n) => n.id === month)
-    
+    // ✅ If forecastData exists, append forecast series & extend normals
+    if (forecastData && forecastData.length > 0) {
+        console.log('Adding forecast series:', forecastData);
+
+        // Forecast precipitation series
+        const forecastSeries = forecastData.map((d) => ({
+            x: getTimeFromId(d.id),
+            y: d[forecastBand], // TODO: currently the api returns in actual mm, so no conversion from meters needed, but should make this more flexible depending on the api... 
+        })).sort((a, b) => a.x - b.x);
+
+        // Forecast normals for future periods
+        const forecastNormals = forecastData.map((d) => {
+            const month = getMonthFromId(d.id);
+            const normal = normals.find((n) => n.id === month);
             return {
                 x: getTimeFromId(d.id),
                 y: metersToMillimeters(normal[band]),
-            }
-        })
-        const normalsConfig = seriesConfig[1]
-        console.log('forecastnormals', forecastMormals)
-        console.log(normalsConfig)
-        normalsConfig.data.push(...forecastMormals)
+            };
+        });
 
-        // convert forecast data to series
-        const forecastSeries = forecastData.map((d) => ({
-            x: getTimeFromId(d.id),
-            y: metersToMillimeters(d[forecastBand]),
-        }))
-        console.log('forecast data', forecastData)
-        console.log('forecast series', forecastSeries)
+        // ✅ Append forecast normals to the existing normals series
+        seriesConfig[1] = {
+            ...seriesConfig[1],
+            data: [...seriesConfig[1].data, ...forecastNormals].sort((a, b) => a.x - b.x),
+        };
 
-        // add new forecast series to chart
+        // ✅ Add the forecast series
         seriesConfig.push({
             data: forecastSeries,
             name: i18n.t('Monthly precipitation forecast'),
             color: '#B19CD8',
             zIndex: 2,
-        })
+        });
     }
+
+    console.log('Final series config:', seriesConfig);
 
     return {
         title: {
@@ -111,7 +118,7 @@ const getChartConfig = ({ name, data, forecastData, normals, referencePeriod, se
         },
         xAxis: {
             type: 'datetime',
-            tickInterval: 2592000000,
+            tickInterval: 2592000000, // One month in milliseconds
             labels: {
                 format: '{value: %b}',
             },
@@ -124,8 +131,8 @@ const getChartConfig = ({ name, data, forecastData, normals, referencePeriod, se
                 format: '{value} mm',
             },
         },
-        series: seriesConfig,
-    }
-}
+        series: seriesConfig, // ✅ Updated series configuration
+    };
+};
 
-export default getChartConfig
+export default getChartConfig;
