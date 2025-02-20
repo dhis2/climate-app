@@ -49,7 +49,7 @@ const getChartConfig = ({ name, data, forecastData, normals, referencePeriod, se
     ];
 
     // ✅ If forecastData exists, append forecast series & extend normals
-    if (forecastData && forecastData.length > 0) {
+    if (forecastData?.length > 0) {
         console.log('Adding forecast series:', forecastData);
 
         // Forecast precipitation series

@@ -39,14 +39,16 @@ const PrecipitationMonthly = () => {
         feature: orgUnit,
     })
 
+    console.log('should fetch forecast data based on showForecast state?', showForecast)
     const forecastData = useDataConnectorTimeSeries({
         host: 'http://localhost:7000',
         dataset: showForecast ? 'total_precipitation' : null, // 👈 Conditional fetching,
         periodType: 'month',
         periodStart: incrementMonth(monthlyPeriod.endTime, 1),
-        periodEnd: incrementMonth(monthlyPeriod.endTime, 6), // for now, max of next 6 months
+        periodEnd: incrementMonth(monthlyPeriod.endTime, 4), // for now, next 4 months only
         orgunits: {type: 'FeatureCollection', features: [orgUnit]},
     })
+    console.log('fetched forecastData', forecastData)
 
     const normals = useEarthEngineClimateNormals(
         era5MonthlyNormals,
@@ -61,6 +63,7 @@ const PrecipitationMonthly = () => {
             <PeriodTypeSelect />
             {data && normals && settings ? (
                 <Chart
+                    key={showForecast ? 'with-forecast' : 'no-forecast'} // ✅ Forces React to remount on toggler change
                     config={getMonthlyConfig({
                         name,
                         data,

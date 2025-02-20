@@ -77,47 +77,51 @@ const useDataConnectorTimeSeries = ({
     useEffect(() => {
       let canceled = false;
   
-      if (dataset && periodType && orgunits) {
-        const key = getCacheKey({ host, dataset, periodType, periodStart, periodEnd, orgunits });
-  
-        if (cachedPromise[key]) {
+      // ✅ Immediately reset data and return if dataset is null
+      if (!dataset) {
+        setData(null); // ✅ Clears forecast data when toggler is off
+        return;
+      }
+
+      const key = getCacheKey({ host, dataset, periodType, periodStart, periodEnd, orgunits });
+
+      if (cachedPromise[key]) {
           // ✅ Use cached promise if available
           cachedPromise[key].then((data) => {
-            if (!canceled) {
+          if (!canceled) {
               console.log('Using cached data', data);
               setData(data);
-            }
+          }
           });
-  
+
           return () => {
-            canceled = true;
+          canceled = true;
           };
-        }
-  
-        setData(); // Reset before fetching new data
-        // ✅ Fetch new data and store the promise in cache
-        cachedPromise[key] = dataConnectorRequest({
+      }
+
+      setData(null); // Reset before fetching new data
+      // ✅ Fetch new data and store the promise in cache
+      cachedPromise[key] = dataConnectorRequest({
           host,
           dataset,
           periodType,
           periodStart,
           periodEnd,
           orgunits,
-        })
-        .then((response) => response.json())
-        .then((jsonData) => parseResults(jsonData));
-  
-        cachedPromise[key].then((data) => {
+      })
+      .then((response) => response.json())
+      .then((jsonData) => parseResults(jsonData));
+
+      cachedPromise[key].then((data) => {
           if (!canceled) {
-            console.log('Fetched new data', data);
-            setData(data);
+          console.log('Fetched new data', data);
+          setData(data);
           }
-        });
-  
-        return () => {
+      });
+
+      return () => {
           canceled = true;
-        };
-      }
+      };
     }, [host, dataset, periodType, periodStart, periodEnd, orgunits]);
   
     return data;

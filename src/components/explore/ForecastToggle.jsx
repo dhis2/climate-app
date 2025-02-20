@@ -5,6 +5,7 @@ const ForecastToggle = ({ onChange }) => {
     const [showForecast, setShowForecast] = useState(false);
 
     const handleToggle = () => {
+        console.log('forecast toggler', showForecast)
         setShowForecast(!showForecast);
         onChange(!showForecast); // Pass state to parent component
     };
