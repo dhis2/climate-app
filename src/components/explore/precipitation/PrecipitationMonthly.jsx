@@ -61,7 +61,7 @@ const PrecipitationMonthly = () => {
     return (
         <>
             <PeriodTypeSelect />
-            {data && normals && settings ? (
+            {data && normals && settings && (!showForecast || (forecastData?.length > 0)) ? (
                 <Chart
                     key={showForecast ? 'with-forecast' : 'no-forecast'} // ✅ Forces React to remount on toggler change
                     config={getMonthlyConfig({
