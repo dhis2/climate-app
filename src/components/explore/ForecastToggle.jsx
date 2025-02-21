@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { Switch, Box } from "@dhis2/ui";
+import exploreStore from '../../store/exploreStore.js'
 
-const ForecastToggle = ({ onChange }) => {
-    const [showForecast, setShowForecast] = useState(false);
+const ForecastToggle = () => {
+    const { showForecast, setShowForecast } = exploreStore()
+    
+    console.log('forecast toggler will be set to', showForecast)
 
     const handleToggle = () => {
         console.log('forecast toggler', showForecast)
-        setShowForecast(!showForecast);
-        onChange(!showForecast); // Pass state to parent component
+        setShowForecast(!showForecast)
     };
 
     return (

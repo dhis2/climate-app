@@ -11,7 +11,6 @@ const maxMonths = 60
 
 const MonthlyPeriodSelect = ({ allowForecast = false }) => {
     const { monthlyPeriod, setMonthlyPeriod } = exploreStore()
-    const { showForecast, setShowForecast } = exploreStore()
     const [period, setPeriod] = useState(monthlyPeriod)
 
     const { startTime, endTime } = period
@@ -42,9 +41,7 @@ const MonthlyPeriodSelect = ({ allowForecast = false }) => {
             {/* Conditionally show the forecast toggle */}
             {allowForecast && (
                 <div className={styles.forecastContainer}>
-                    <ForecastToggle
-                        onChange={(showForecast) => setShowForecast(showForecast) }
-                    />
+                    <ForecastToggle />
                 </div>
             )}
             {months > maxMonths && (
