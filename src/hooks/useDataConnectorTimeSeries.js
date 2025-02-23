@@ -24,7 +24,7 @@ const parseResults = (responseData) => {
     */
     console.log('Raw results', responseData)
     const parsedData = responseData.result.map((item) => ({
-        id: item.year_month, //.replace('2024', '2025'), // TEMP HACK!!!  
+        id: item.period,  
         forecast_precipitation_sum: item.value, // key is hardcoded for now, needs to be more generic
     }));
     

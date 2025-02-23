@@ -3,13 +3,48 @@ import { colors } from '@dhis2/ui'
 import { metersToMillimeters } from '../../../../utils/calc.js'
 import { animation, credits, getDailyPeriod } from '../../../../utils/chart.js'
 
-const getChart = (name, data, settings) => {
+const band = 'total_precipitation_sum';
+const forecastBand = 'forecast_precipitation_sum';
+
+const getChart = (name, data, forecastData, settings) => {
     const { precipDailyMax } = settings
 
+    // Historical precipitation
     const series = data.map((d) => ({
         x: new Date(d.id).getTime(),
-        y: metersToMillimeters(d['total_precipitation_sum']),
+        y: metersToMillimeters(d[band]),
     }))
+
+    // ✅ Base series configuration
+    const seriesConfig = [
+        {
+            data: series,
+            name: i18n.t('Daily precipitation'),
+            color: colors.blue500,
+            zIndex: 1,
+        },
+    ];
+
+    // ✅ If forecastData exists, append forecast series & extend normals
+    if (forecastData?.length > 0) {
+        console.log('Adding forecast series:', forecastData);
+
+        // Forecast precipitation series
+        const forecastSeries = forecastData.map((d) => ({
+            x: new Date(d.id).getTime(),
+            y: d[forecastBand], // TODO: currently the api returns in actual mm, so no conversion from meters needed, but should make this more flexible depending on the api... 
+        })).sort((a, b) => a.x - b.x);
+
+        // ✅ Add the forecast series
+        seriesConfig.push({
+            data: forecastSeries,
+            name: i18n.t('Daily precipitation forecast'),
+            color: '#B19CD8',
+            zIndex: 2,
+        });
+    }
+
+    console.log('Final series config:', seriesConfig);
 
     return {
         title: {
@@ -52,14 +87,7 @@ const getChart = (name, data, settings) => {
                 format: '{value} mm',
             },
         },
-        series: [
-            {
-                data: series,
-                name: i18n.t('Daily precipitation'),
-                color: colors.blue500,
-                zIndex: 1,
-            },
-        ],
+        series: seriesConfig, // ✅ Updated series configuration,
     }
 }
 

@@ -11,20 +11,7 @@ import MonthlyPeriodSelect from '../MonthlyPeriodSelect.jsx'
 import PeriodTypeSelect from '../PeriodTypeSelect.jsx'
 import ReferencePeriod from '../ReferencePeriodSelect.jsx'
 import getMonthlyConfig from './charts/precipitationMonthly.js'
-
-const incrementMonth = (month, i) => {
-    //if (!/^\d{4}-\d{2}$/.test(month)) {
-    //  throw new Error("Invalid month format. Expected 'YYYY-MM'.");
-    //}
-  
-    let [year, monthStr] = month.split('-').map(Number);
-    let totalMonths = year * 12 + (monthStr - 1) + i; // Convert year & month to total months
-  
-    const newYear = Math.floor(totalMonths / 12);
-    const newMonth = (totalMonths % 12) + 1;
-  
-    return `${newYear}-${String(newMonth).padStart(2, '0')}`;
-  };  
+import {incrementMonths} from '../../../utils/time.js'
 
 const PrecipitationMonthly = () => {
     const orgUnit = exploreStore((state) => state.orgUnit)
@@ -44,8 +31,8 @@ const PrecipitationMonthly = () => {
         host: 'http://localhost:7000',
         dataset: showForecast ? 'total_precipitation' : null, // 👈 Conditional fetching,
         periodType: 'month',
-        periodStart: incrementMonth(monthlyPeriod.endTime, 1),
-        periodEnd: incrementMonth(monthlyPeriod.endTime, 4), // for now, next 4 months only
+        periodStart: incrementMonths(monthlyPeriod.endTime, 1),
+        periodEnd: incrementMonths(monthlyPeriod.endTime, 4), // for now, next 4 months only
         orgunits: {type: 'FeatureCollection', features: [orgUnit]},
     })
     console.log('fetched forecastData', forecastData)

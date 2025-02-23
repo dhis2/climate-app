@@ -5,10 +5,11 @@ import exploreStore from '../../store/exploreStore.js'
 import { getNumberOfDays } from '../../utils/time.js'
 import DatePicker from '../shared/DatePicker.jsx'
 import styles from './styles/Period.module.css'
+import ForecastToggle from "./ForecastToggle";
 
 const maxDays = 1000
 
-const DailyPeriodSelect = () => {
+const DailyPeriodSelect = ({allowForecast = false}) => {
     const { dailyPeriod, setDailyPeriod } = exploreStore()
     const [period, setPeriod] = useState(dailyPeriod)
 
@@ -37,6 +38,12 @@ const DailyPeriodSelect = () => {
                     Update
                 </Button>
             </div>
+            {/* Conditionally show the forecast toggle */}
+            {allowForecast && (
+                <div className={styles.forecastContainer}>
+                    <ForecastToggle />
+                </div>
+            )}
             {days > maxDays && (
                 <div className={styles.warning}>
                     {i18n.t('Maximum {{maxDays}} days allowed', { maxDays })}

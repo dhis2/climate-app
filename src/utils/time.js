@@ -107,6 +107,28 @@ export const getLastMonth = (date = new Date(), lagDays = 10) => {
     return [newDate.getFullYear(), newDate.getMonth() + 1]
 }
 
+// Returns a given year-month string incremented by i months
+export const incrementMonths = (month, i) => {
+    //if (!/^\d{4}-\d{2}$/.test(month)) {
+    //  throw new Error("Invalid month format. Expected 'YYYY-MM'.");
+    //}
+  
+    let [year, monthStr] = month.split('-').map(Number);
+    let totalMonths = year * 12 + (monthStr - 1) + i; // Convert year & month to total months
+  
+    const newYear = Math.floor(totalMonths / 12);
+    const newMonth = (totalMonths % 12) + 1;
+  
+    return `${newYear}-${String(newMonth).padStart(2, '0')}`;
+}
+
+// Returns a given Date object incremented by i days
+export const incrementDays = (date, i) => {
+    const newDate = new Date(date); // ✅ Create a copy to avoid mutating the original date
+    newDate.setDate(newDate.getDate() + i); // ✅ Add the specified number of days
+    return newDate;
+};
+
 // Returns the default monthly period (12 months back)
 export const getDefaultMonthlyPeriod = (lagDays) => {
     const [endYear, endMonth] = getLastMonth(new Date(), lagDays)
