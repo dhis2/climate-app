@@ -4,7 +4,10 @@ import PropTypes from 'prop-types'
 const DataElementGroup = ({ name, shortName, dataElements }) => (
     <table>
         <caption>
-            {i18n.t('Data element: "{{-name}}"', { name, nsSeparator: '%' })}
+            {i18n.t('Data element group: "{{-name}}"', {
+                name,
+                nsSeparator: '%',
+            })}
         </caption>
         <tbody>
             <tr>

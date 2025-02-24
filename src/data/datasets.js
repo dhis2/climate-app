@@ -328,7 +328,7 @@ export const dhisDataSets = [
     {
         name: i18n.t('Environment'),
         shortName: i18n.t('Environment'),
-        periodType: i18n.t('Weekly'),
+        periodType: i18n.t('Weekly or Monthly'),
     },
 ]
 

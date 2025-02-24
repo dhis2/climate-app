@@ -30,10 +30,10 @@ const Period = ({ calendar, period, datasetPeriodType, onChange }) => {
     }, [locale, onChange, period])
 
     useEffect(() => {
-        if (datasetPeriodType === SIXTEEN_DAYS && periodType === DAILY) {
+        if (datasetPeriodType === SIXTEEN_DAYS && period.periodType === DAILY) {
             onChange({ ...period, periodType: WEEKLY })
         }
-    }, [period])
+    }, [period, datasetPeriodType, onChange])
 
     return (
         <div className={styles.container}>
