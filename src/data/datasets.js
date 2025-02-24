@@ -8,7 +8,7 @@ import {
 import { HOURLY, DAILY, MONTHLY } from '../utils/time.js'
 
 // kelvin to celsius with one decimal
-const temperatureParser = (v) => roundOneDecimal(kelvinToCelsius(v))
+const temperatureParser = (v) => roundOneDecimal(kelvinToCelsius(v)).toString()
 
 const relativeHumidityParser = ([dewData, tempData]) =>
     tempData.map((temp, i) => ({
@@ -18,7 +18,7 @@ const relativeHumidityParser = ([dewData, tempData]) =>
                 kelvinToCelsius(temp.value),
                 kelvinToCelsius(dewData[i].value)
             )
-        ),
+        ).toString(),
     }))
 
 // meter to mm without scientific notation
@@ -27,6 +27,8 @@ const precipitationParser = (v) =>
     (v * 1000).toLocaleString('fullwide', {
         useGrouping: false,
     })
+
+const twoDecimals = (v) => roundTwoDecimals(v).toString()
 
 export const era5Resolution = i18n.t('Approximately 31 km (0.25°)')
 export const era5LandResolution = i18n.t('Approximately 9 km (0.1°)')
