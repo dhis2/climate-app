@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/dhis2/climate-app/compare/v1.6.0...v1.6.1) (2025-02-24)
+
+
+### Bug Fixes
+
+* import data values as strings ([7bf1d55](https://github.com/dhis2/climate-app/commit/7bf1d55960574f41af9b391d6c762c5271237e77))
+
 # [1.6.0](https://github.com/dhis2/climate-app/compare/v1.5.3...v1.6.0) (2025-02-10)
 
 
