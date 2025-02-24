@@ -5,8 +5,8 @@ import datasets, {
 } from '../../data/datasets.js'
 import heatStressLegend from '../../data/heat-stress-legend.js'
 import DataElement from './DataElement.jsx'
-import DataSet from './DataSet.jsx'
 import DataElementGroup from './DataElementGroup.jsx'
+import DataSet from './DataSet.jsx'
 import Legend from './Legend.jsx'
 import styles from './styles/SetupPage.module.css'
 

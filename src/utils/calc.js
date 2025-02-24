@@ -1,4 +1,4 @@
-import { getMiddleTime } from './time'
+import { getMiddleTime } from './time.js'
 
 // Based on: https://bmcnoldy.earth.miami.edu/Humidity.html
 export const getRelativeHumidity = (temperature, dewpoint) =>

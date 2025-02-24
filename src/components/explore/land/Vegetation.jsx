@@ -1,12 +1,12 @@
+import { modisResolution } from '../../../data/datasets.js'
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
 import exploreStore from '../../../store/exploreStore.js'
-import MonthlyPeriodSelect from '../MonthlyPeriodSelect.jsx'
 import DataLoader from '../../shared/DataLoader.jsx'
+import Resolution from '../../shared/Resolution.jsx'
 import Chart from '../Chart.jsx'
+import MonthlyPeriodSelect from '../MonthlyPeriodSelect.jsx'
 import getChartConfig from './charts/vegetation.js'
 import VegetationIndexSelect, { NDVI, EVI } from './VegetationIndexSelect.jsx'
-import Resolution from '../../shared/Resolution.jsx'
-import { modisResolution } from '../../../data/datasets.js'
 
 const dataset = {
     datasetId: 'MODIS/061/MOD13Q1',

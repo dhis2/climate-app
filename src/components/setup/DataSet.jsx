@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
 
-const DataSet = ({ name, shortName, periodType, dataElements }) => (
+const DataSet = ({ name, shortName, periodType }) => (
     <table>
         <caption>
             {i18n.t('Data set: "{{-name}}"', { name, nsSeparator: '%' })}
@@ -43,8 +43,8 @@ const DataSet = ({ name, shortName, periodType, dataElements }) => (
 
 DataSet.propTypes = {
     name: PropTypes.string.isRequired,
-    shortName: PropTypes.string.isRequired,
     periodType: PropTypes.string.isRequired,
+    shortName: PropTypes.string.isRequired,
 }
 
 export default DataSet

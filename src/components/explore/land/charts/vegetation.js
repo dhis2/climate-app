@@ -12,7 +12,7 @@ import {
     getPeriods,
 } from '../../../../utils/time.js'
 
-const getInterpolatedSeries = (periodType, period, data, band) =>
+const getInterpolatedSeries = ({ periodType, period, data, band }) =>
     getPeriods({ ...period, periodType })
         .map(addPeriodTimestamp)
         .map((p) => {
@@ -28,7 +28,7 @@ const getChartConfig = ({
     data,
     band,
     period,
-    interpolate, //  = 'WEEKLY',
+    interpolate, // = 'WEEKLY',
 }) => {
     const series = [
         {
@@ -48,7 +48,12 @@ const getChartConfig = ({
     if (interpolate) {
         series.push({
             type: 'line',
-            data: getInterpolatedSeries(interpolate, period, data, band),
+            data: getInterpolatedSeries({
+                periodType: interpolate,
+                period,
+                data,
+                band,
+            }),
             name: interpolate,
             color: '#555',
             lineWidth: 1,

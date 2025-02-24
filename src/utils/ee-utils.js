@@ -1,5 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import area from '@turf/area'
+import { interpolate } from './calc.js'
 import {
     HOURLY,
     DAILY,
@@ -10,8 +11,6 @@ import {
     addPeriodTimestamp,
     SIXTEEN_DAYS,
 } from './time.js'
-import { interpolate } from './calc.js'
-import { time } from 'highcharts'
 
 const VALUE_LIMIT = 5000
 

@@ -3,10 +3,10 @@ import i18n from '@dhis2/d2-i18n'
 import { CalendarInput } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import { useEffect } from 'react'
+import { DAILY, SIXTEEN_DAYS, WEEKLY } from '../../utils/time.js'
 import TimeZone from '../shared/TimeZone.jsx'
 import PeriodType from './PeriodType.jsx'
 import styles from './styles/Period.module.css'
-import { DAILY, SIXTEEN_DAYS, WEEKLY } from '../../utils/time.js'
 
 const userSettingsQuery = {
     userSettings: {

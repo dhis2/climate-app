@@ -29,9 +29,9 @@ const DataElementGroup = ({ name, shortName, dataElements }) => (
 )
 
 DataElementGroup.propTypes = {
+    dataElements: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     shortName: PropTypes.string.isRequired,
-    dataElements: PropTypes.string.isRequired,
 }
 
 export default DataElementGroup
