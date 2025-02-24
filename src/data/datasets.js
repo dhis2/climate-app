@@ -133,7 +133,7 @@ export default [
         band: 'precipitation',
         reducer: 'mean',
         periodReducer: 'sum',
-        valueParser: roundTwoDecimals,
+        valueParser: twoDecimals,
         aggregationType: i18n.t('Sum'),
         dataElementCode: 'CHIRPS_PRECIPITATION',
     },
