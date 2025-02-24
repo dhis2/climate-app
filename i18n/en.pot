@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-02-06T14:06:33.277Z\n"
-"PO-Revision-Date: 2025-02-06T14:06:33.277Z\n"
+"POT-Creation-Date: 2025-02-24T13:38:58.053Z\n"
+"PO-Revision-Date: 2025-02-24T13:38:58.053Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -739,6 +739,12 @@ msgstr "Aggregate"
 
 msgid "Aggregation type"
 msgstr "Aggregation type"
+
+msgid "Store zero data values"
+msgstr "Store zero data values"
+
+msgid "Make sure it is checked"
+msgstr "Make sure it is checked"
 
 msgid "Aggregation levels"
 msgstr "Aggregation levels"
