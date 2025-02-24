@@ -93,12 +93,9 @@ export const getEarthEngineValues = ({
 
         const dataParser = (features) => {
             let data = features.map(getFeatureProperties)
-            // let test
 
             if (datasetPeriodType === SIXTEEN_DAYS) {
                 const orgUnits = [...new Set(data.map((d) => d.ou))]
-
-                // console.log('####', orgUnits, data)
 
                 data = orgUnits
                     .map((ou) => {
@@ -114,11 +111,7 @@ export const getEarthEngineValues = ({
                         })
                     })
                     .flat()
-
-                // console.log('####', test)
             }
-
-            // console.log('####', test, data)
 
             return data.map((d) => ({
                 ...d,
