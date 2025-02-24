@@ -8,7 +8,7 @@ import {
 import { HOURLY, DAILY, MONTHLY, SIXTEEN_DAYS } from '../utils/time.js'
 
 // kelvin to celsius with one decimal
-const temperatureParser = (v) => roundOneDecimal(kelvinToCelsius(v))
+const temperatureParser = (v) => roundOneDecimal(kelvinToCelsius(v)).toString()
 
 const relativeHumidityParser = ([dewData, tempData]) =>
     tempData.map((temp, i) => ({
@@ -18,7 +18,7 @@ const relativeHumidityParser = ([dewData, tempData]) =>
                 kelvinToCelsius(temp.value),
                 kelvinToCelsius(dewData[i].value)
             )
-        ),
+        ).toString(),
     }))
 
 // meter to mm without scientific notation
@@ -28,7 +28,9 @@ const precipitationParser = (v) =>
         useGrouping: false,
     })
 
-const vegetationIndexParser = (v) => roundTwoDecimals(v * 0.0001)
+const vegetationIndexParser = (v) => roundTwoDecimals(v * 0.0001).toString()
+
+const twoDecimals = (v) => roundTwoDecimals(v).toString()
 
 export const era5Resolution = i18n.t('Approximately 31 km (0.25°)')
 export const era5LandResolution = i18n.t('Approximately 9 km (0.1°)')
@@ -134,7 +136,7 @@ export default [
         band: 'precipitation',
         reducer: 'mean',
         periodReducer: 'sum',
-        valueParser: roundTwoDecimals,
+        valueParser: twoDecimals,
         aggregationType: i18n.t('Sum'),
         dataElementCode: 'CHIRPS_PRECIPITATION',
     },

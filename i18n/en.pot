@@ -746,6 +746,12 @@ msgstr "Aggregate"
 msgid "Aggregation type"
 msgstr "Aggregation type"
 
+msgid "Store zero data values"
+msgstr "Store zero data values"
+
+msgid "Make sure it is checked"
+msgstr "Make sure it is checked"
+
 msgid "Aggregation levels"
 msgstr "Aggregation levels"
 
