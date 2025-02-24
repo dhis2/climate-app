@@ -1,5 +1,4 @@
 import i18n from '@dhis2/d2-i18n'
-import { generateFixedPeriods } from '@dhis2/multi-calendar-dates'
 import { colors } from '@dhis2/ui'
 import { interpolate, roundTwoDecimals } from '../../../../utils/calc.js'
 import {
@@ -7,64 +6,55 @@ import {
     vegetationCredits,
     getDailyPeriod,
 } from '../../../../utils/chart.js'
-import { addPeriodTimestamp, getMiddleTime } from '../../../../utils/time.js'
+import {
+    addPeriodTimestamp,
+    getMiddleTime,
+    getPeriods,
+} from '../../../../utils/time.js'
 
-const getChartConfig = (name, data, band = 'value') => {
-    const years = [...new Set(data.map((d) => d.id.slice(0, 4)).map(Number))]
+const getInterpolatedSeries = (periodType, period, data, band) =>
+    getPeriods({ ...period, periodType })
+        .map(addPeriodTimestamp)
+        .map((p) => {
+            const value = interpolate(data, p.middleTime, band)
+            return {
+                x: p.middleTime,
+                y: value !== null ? value * 0.0001 : null,
+            }
+        })
 
-    const series = years.map((year) =>
-        data
-            .filter((d) => d.id.startsWith(year))
-            .map((d) => ({
-                // x: new Date(d.id).getTime() + eightDaysInMs, // TODO: Remove eightDaysInMs,
+const getChartConfig = ({
+    name,
+    data,
+    band,
+    period,
+    interpolate, //  = 'WEEKLY',
+}) => {
+    const series = [
+        {
+            type: 'line',
+            data: data.map((d) => ({
                 x: getMiddleTime(d),
                 y: roundTwoDecimals(d[band] * 0.0001),
-            }))
-    )
+            })),
+            name: '16-days',
+            color: colors.green600,
+            lineWidth: 3,
+            zIndex: 2,
+        },
+    ]
 
-    const last = series.length - 1
-
-    const lastYear = data
-        .filter((d) => d.id.startsWith('2024'))
-        .map((d) => ({
-            ...d,
-            middleTime: getMiddleTime(d),
-        }))
-    const lastYearSeries = lastYear.map((d) => ({
-        x: getMiddleTime(d),
-        y: d[band] * 0.0001,
-    }))
-
-    const weeks = generateFixedPeriods({
-        year: 2024,
-        calendar: 'gregory',
-        locale: 'en',
-        periodType: 'WEEKLY',
-    })
-        .map(addPeriodTimestamp)
-        .map((p) => {
-            const value = interpolate(lastYear, p.middleTime, band)
-            return {
-                x: p.middleTime,
-                y: value !== null ? value * 0.0001 : null,
-            }
+    // Used to debug WEEKLY and MONTHLY interpolation
+    if (interpolate) {
+        series.push({
+            type: 'line',
+            data: getInterpolatedSeries(interpolate, period, data, band),
+            name: interpolate,
+            color: '#555',
+            lineWidth: 1,
+            zIndex: 3,
         })
-
-    const months = generateFixedPeriods({
-        year: 2024,
-        calendar: 'gregory',
-        locale: 'en',
-        periodType: 'MONTHLY',
-    })
-        .map(addPeriodTimestamp)
-        .map((p) => {
-            const value = interpolate(lastYear, p.middleTime, band)
-
-            return {
-                x: p.middleTime,
-                y: value !== null ? value * 0.0001 : null,
-            }
-        })
+    }
 
     return {
         title: {
@@ -81,27 +71,13 @@ const getChartConfig = (name, data, band = 'value') => {
             shared: true,
             valueSuffix: '°C',
         },
-        // https://jsfiddle.net/BlackLabel/bvr639p5/
-        /*
-    xAxis: {
-      type: "datetime",
-      tickInterval: 2592000000,
-      labels: {
-        format: "{value: %b}",
-      },
-    },
-    */
-        xAxis: years.map((year, index) => ({
+        xAxis: {
             type: 'datetime',
-            visible: index === 0,
-            dateTimeLabelFormats: {
-                month: '%b',
+            tickInterval: 2592000000,
+            labels: {
+                format: '{value: %b}',
             },
-            top: '0%',
-            height: '100%',
-            min: Date.UTC(year, 0, 1),
-            max: Date.UTC(year, 11, 31),
-        })),
+        },
         yAxis: {
             title: false,
             min: 0,
@@ -121,68 +97,7 @@ const getChartConfig = (name, data, band = 'value') => {
                 groupPadding: 0,
             },
         },
-        /*
-        series: series.map((s, i) => ({
-            type: 'spline',
-            xAxis: i,
-            data: s,
-            name: years[i],
-            color: i === last ? colors.green500 : colors.green300,
-            lineWidth: i === last ? 3 : 1,
-            marker: {
-                enabled: false,
-            },
-            zIndex: i === last ? 2 : 1,
-        })),
-        */
-        series: [
-            /*
-            ...series.map((s, i) => ({
-                type: 'spline',
-                xAxis: i,
-                data: s,
-                name: years[i],
-                color: i === last ? colors.green500 : colors.green300,
-                lineWidth: i === last ? 3 : 1,
-                marker: {
-                    enabled: false,
-                },
-                zIndex: i === last ? 2 : 1,
-            })),
-            */
-            {
-                type: 'line',
-                xAxis: last,
-                data: lastYearSeries,
-                name: '16-days',
-                // color: colors.green500,
-                color: colors.green300,
-                lineWidth: 3,
-                zIndex: 2,
-            },
-            /*
-            {
-                type: 'line',
-                xAxis: last,
-                data: weeks,
-                name: 'Weekly',
-                // color: colors.red300,
-                color: '#333',
-                lineWidth: 1.5,
-                zIndex: 3,
-            },
-            */
-            {
-                type: 'line',
-                xAxis: last,
-                data: months,
-                name: 'Monthly',
-                // color: colors.blue300,
-                color: '#333',
-                lineWidth: 1.5,
-                zIndex: 4,
-            },
-        ],
+        series,
     }
 }
 

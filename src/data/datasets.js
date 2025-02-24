@@ -243,7 +243,7 @@ export default [
     {
         id: 'MODIS/061/MOD13Q1/NDVI',
         datasetId: 'MODIS/061/MOD13Q1',
-        name: i18n.t('Normalized difference vegetation index (NDVI)'),
+        name: i18n.t('NDVI - Normalized difference vegetation index (MODIS)'),
         shortName: i18n.t('NDVI'),
         description: i18n.t('NDVI is a measure of vegetation greenness'),
         resolution: modisResolution,
@@ -257,7 +257,7 @@ export default [
     {
         id: 'MODIS/061/MOD13Q1/EVI',
         datasetId: 'MODIS/061/MOD13Q1',
-        name: i18n.t('Enhanced vegetation index (EVI)'),
+        name: i18n.t('EVI - Enhanced vegetation index (MODIS)'),
         shortName: i18n.t('EVI'),
         description: i18n.t('EVI is a measure of vegetation greenness'),
         resolution: modisResolution,
@@ -338,11 +338,11 @@ export const dhisDataElementGroups = [
     {
         name: i18n.t('Climate/Weather'),
         shortName: i18n.t('Climate/Weather'),
-        dataElements: i18n.t('Assign the above data elements'),
+        dataElements: i18n.t('Assign above data elements (weather & climate)'),
     },
     {
         name: i18n.t('Environment'),
         shortName: i18n.t('Environment'),
-        dataElements: i18n.t('Assign the above data elements'),
+        dataElements: i18n.t('Assign above data elements (vegetation)'),
     },
 ]

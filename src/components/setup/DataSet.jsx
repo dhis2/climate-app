@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
 
-const DataSet = ({ name, shortName, periodType }) => (
+const DataSet = ({ name, shortName, periodType, dataElements }) => (
     <table>
         <caption>
             {i18n.t('Data set: "{{-name}}"', { name, nsSeparator: '%' })}
@@ -22,7 +22,11 @@ const DataSet = ({ name, shortName, periodType }) => (
             <tr>
                 <th>{i18n.t('Data elements')}</th>
                 <td>
-                    <em>{i18n.t('Assign the above data elements')}</em>
+                    <em>
+                        {i18n.t(
+                            'Assign above data elements with the same period type'
+                        )}
+                    </em>
                 </td>
             </tr>
             <tr>

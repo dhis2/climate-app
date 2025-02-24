@@ -216,12 +216,16 @@ export const formatDate = (date) => {
 
 /**
  * Translates a date string to a date object
- * @param {String} dateString Date string in the format YYYY-MM-DD
+ * @param {String} dateString Date string in the format YYYY-MM-DD or YYYY-MM
  * @returns {Object} Date object with year, month and day
  */
 export const toDateObject = (dateString) => {
     const [year, month, day] = dateString.split('-')
-    return { year: parseInt(year), month: parseInt(month), day: parseInt(day) }
+    return {
+        year: parseInt(year),
+        month: parseInt(month),
+        day: day ? parseInt(day) : 1,
+    }
 }
 
 /**
@@ -285,7 +289,13 @@ export const getStandardPeriod = ({
  * @returns {Array} Period items
  */
 export const getPeriods = (period) => {
-    const { periodType, startTime, endTime, calendar, locale = 'en' } = period
+    const {
+        periodType,
+        startTime,
+        endTime,
+        calendar = 'gregory',
+        locale = 'en',
+    } = period
 
     const startYear = extractYear(fromStandardDate(startTime, calendar))
     const endYear = extractYear(fromStandardDate(endTime, calendar))
