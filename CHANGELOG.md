@@ -1,3 +1,10 @@
+## [1.6.2](https://github.com/dhis2/climate-app/compare/v1.6.1...v1.6.2) (2025-02-24)
+
+
+### Bug Fixes
+
+* store zero data values in setup guide ([#62](https://github.com/dhis2/climate-app/issues/62)) ([e1b4129](https://github.com/dhis2/climate-app/commit/e1b412960c13feb7af058e6d05e3b079c22642cf))
+
 ## [1.6.1](https://github.com/dhis2/climate-app/compare/v1.6.0...v1.6.1) (2025-02-24)
 
 

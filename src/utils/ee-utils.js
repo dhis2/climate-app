@@ -46,6 +46,7 @@ export const cleanData = (data) =>
     }))
 
 // Calculates the monthly normals for each band
+// Previously we tried to do this on GEE but we got wrong results
 export const getMonthlyNormals = (bands) => (data) => {
     const normals = []
 
@@ -445,7 +446,6 @@ export const getClimateNormals = ({ ee, dataset, period, geometry }) => {
     const data = collection.map((image) =>
         ee
             .Feature(null, image.reduceRegion(eeReducer, eeGeometry, eeScale))
-            .set('system:index', image.get('system:index'))
             .set('month', ee.String(image.get('system:index')).slice(-2))
     )
 
