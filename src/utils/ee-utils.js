@@ -45,6 +45,31 @@ export const cleanData = (data) =>
         value: f.properties.value,
     }))
 
+// Calculates the monthly normals for each band
+export const getMonthlyNormals = (bands) => (data) => {
+    const normals = []
+
+    for (let month = 1; month <= 12; month++) {
+        const monthData = data.features.filter(
+            (f) => Number(f.properties.month) === month
+        )
+
+        const monthNormals = {
+            id: month,
+        }
+
+        bands.forEach((band) => {
+            monthNormals[band] =
+                monthData.reduce((v, f) => v + f.properties[band], 0) /
+                monthData.length
+        })
+
+        normals.push(monthNormals)
+    }
+
+    return normals
+}
+
 const getReducedCollection = ({
     ee,
     collection,
@@ -412,32 +437,19 @@ export const getClimateNormals = ({ ee, dataset, period, geometry }) => {
         .select(band)
         .filterDate(`${startTime}-01-01`, `${endTime + 1}-01-01`)
 
-    const byMonth = ee.ImageCollection.fromImages(
-        ee.List.sequence(1, 12).map((month) =>
-            collection
-                .filter(ee.Filter.calendarRange(month, null, 'month'))
-                .mean()
-                .set('system:index', ee.Number(month).format('%02d'))
-        )
-    )
-
     const eeScale =
         type === 'Point' ? ee.Number(1) : getScale(collection.first())
 
     const eeReducer = ee.Reducer.mean()
 
-    const data = ee.FeatureCollection(
-        byMonth.map((image) =>
-            ee
-                .Feature(
-                    null,
-                    image.reduceRegion(eeReducer, eeGeometry, eeScale)
-                )
-                .set('system:index', image.get('system:index'))
-        )
+    const data = collection.map((image) =>
+        ee
+            .Feature(null, image.reduceRegion(eeReducer, eeGeometry, eeScale))
+            .set('system:index', image.get('system:index'))
+            .set('month', ee.String(image.get('system:index')).slice(-2))
     )
 
-    return getInfo(data).then(getFeatureCollectionPropertiesArray)
+    return getInfo(data).then(getMonthlyNormals(band))
 }
 
 const getKeyFromFilter = (filter) =>
