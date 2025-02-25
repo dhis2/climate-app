@@ -99,7 +99,7 @@ const getChartConfig = ({ name, data, normals, referencePeriod, settings }) => {
             {
                 type: 'spline',
                 data: monthMormals,
-                name: i18n.t('Normal temperature'),
+                name: i18n.t('Normal temperature in reference period'),
                 dashStyle: 'dash',
                 color: colors.red500,
                 negativeColor: colors.blue500,
