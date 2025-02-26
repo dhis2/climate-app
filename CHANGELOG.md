@@ -1,3 +1,10 @@
+## [1.6.3](https://github.com/dhis2/climate-app/compare/v1.6.2...v1.6.3) (2025-02-26)
+
+
+### Bug Fixes
+
+* climate normals ([#63](https://github.com/dhis2/climate-app/issues/63)) ([3ac1e5d](https://github.com/dhis2/climate-app/commit/3ac1e5d8ac52799cb7c17fb72a5fb2ffbb698020))
+
 ## [1.6.2](https://github.com/dhis2/climate-app/compare/v1.6.1...v1.6.2) (2025-02-24)
 
 
