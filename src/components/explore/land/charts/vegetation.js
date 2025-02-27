@@ -23,13 +23,7 @@ const getInterpolatedSeries = ({ periodType, period, data, band }) =>
             }
         })
 
-const getChartConfig = ({
-    name,
-    data,
-    band,
-    period,
-    interpolate, // = 'WEEKLY',
-}) => {
+const getChartConfig = ({ name, data, band, period, periodType }) => {
     const series = [
         {
             type: 'line',
@@ -45,16 +39,16 @@ const getChartConfig = ({
     ]
 
     // Used to debug WEEKLY and MONTHLY interpolation
-    if (interpolate) {
+    if (periodType) {
         series.push({
             type: 'line',
             data: getInterpolatedSeries({
-                periodType: interpolate,
+                periodType,
                 period,
                 data,
                 band,
             }),
-            name: interpolate,
+            name: periodType,
             color: '#555',
             lineWidth: 1,
             zIndex: 3,

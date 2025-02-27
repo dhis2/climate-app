@@ -15,7 +15,6 @@ const useEarthEngineClimateNormals = (dataset, period, feature) => {
             const key = getCacheKey({ dataset, period, feature })
             const { geometry } = feature
 
-            /*
             if (cachedPromise[key]) {
                 cachedPromise[key].then((data) => {
                     if (!canceled) {
@@ -27,7 +26,6 @@ const useEarthEngineClimateNormals = (dataset, period, feature) => {
                     canceled = true
                 }
             }
-            */
 
             setData()
             eePromise.then((ee) => {
