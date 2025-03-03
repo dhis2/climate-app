@@ -245,7 +245,9 @@ export default [
         datasetId: 'MODIS/061/MOD13Q1',
         name: i18n.t('NDVI - Normalized difference vegetation index (MODIS)'),
         shortName: i18n.t('NDVI'),
-        description: i18n.t('NDVI is a measure of vegetation greenness'),
+        description: i18n.t(
+            'Landsat Normalized Difference Vegetation Index (NDVI) is used to quantify vegetation greenness and is useful in understanding vegetation density and assessing changes in plant health. NDVI values range from -1 to 1, with higher values indicating denser vegetation. Data originates from MODIS (NASA).'
+        ),
         resolution: modisResolution,
         periodType: SIXTEEN_DAYS,
         band: 'NDVI',
@@ -259,7 +261,9 @@ export default [
         datasetId: 'MODIS/061/MOD13Q1',
         name: i18n.t('EVI - Enhanced vegetation index (MODIS)'),
         shortName: i18n.t('EVI'),
-        description: i18n.t('EVI is a measure of vegetation greenness'),
+        description: i18n.t(
+            'Enhanced vegetation index (EVI) differs from NDVI by reducing the influence of atmospheric conditions and canopy background noise. EVI values range from -1 to 1, with higher values indicating denser vegetation. Data originates from MODIS (NASA).'
+        ),
         resolution: modisResolution,
         periodType: SIXTEEN_DAYS,
         band: 'EVI',
