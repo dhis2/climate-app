@@ -29,7 +29,19 @@ export const periodTypes = [
     },
 ]
 
-// TODO: In UTC?
+/**
+ * Calculates the middle time of a period with start and end timestamp
+ * @param {*} period
+ * @returns middle time as timestamp
+ */
+export const getMiddleTime = (period) =>
+    period.startTime + (period.endTime - period.startTime) / 2
+
+/**
+ * Adds a start, end and middle timestamps to a period object
+ * @param {Object} period Period object with startDate and endDate
+ * @returns {Object} Period object with startTime, endTime and middleTime
+ */
 export const addPeriodTimestamp = (period) => {
     const startTime = new Date(period.startDate).getTime()
     const endTime = new Date(period.endDate).getTime() + oneDayInMs
@@ -42,9 +54,6 @@ export const addPeriodTimestamp = (period) => {
         middleTime,
     }
 }
-
-export const getMiddleTime = (period) =>
-    period.startTime + (period.endTime - period.startTime) / 2
 
 /**
  * Pads a number with zeroes to the left
