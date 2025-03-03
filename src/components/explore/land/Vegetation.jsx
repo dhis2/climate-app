@@ -1,4 +1,8 @@
-import { modisResolution } from '../../../data/datasets.js'
+import {
+    modisResolution,
+    ndviDescription,
+    eviDescription,
+} from '../../../data/datasets.js'
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
 import exploreStore from '../../../store/exploreStore.js'
 import DataLoader from '../../shared/DataLoader.jsx'
@@ -6,6 +10,7 @@ import Resolution from '../../shared/Resolution.jsx'
 import Chart from '../Chart.jsx'
 import MonthlyPeriodSelect from '../MonthlyPeriodSelect.jsx'
 import getChartConfig from './charts/vegetation.js'
+import styles from './styles/VegetationIndexSelect.module.css'
 import VegetationIndexSelect, { NDVI, EVI } from './VegetationIndexSelect.jsx'
 
 const dataset = {
@@ -39,6 +44,9 @@ const Vegetation = () => {
                 })}
             />
             <MonthlyPeriodSelect />
+            <div className={styles.description}>
+                {band === NDVI ? ndviDescription : eviDescription}
+            </div>
             <Resolution resolution={modisResolution} />
         </>
     )

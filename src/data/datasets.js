@@ -37,6 +37,14 @@ export const era5LandResolution = i18n.t('Approximately 9 km (0.1°)')
 export const chirpsResolution = i18n.t('Approximately 5 km (0.05°)')
 export const modisResolution = i18n.t('Approximately 250 m')
 
+export const ndviDescription = i18n.t(
+    'Landsat Normalized Difference Vegetation Index (NDVI) is used to quantify vegetation greenness and is useful in understanding vegetation density and assessing changes in plant health. NDVI values range from -1 to 1, with higher values indicating denser vegetation. Data originates from MODIS (NASA).'
+)
+
+export const eviDescription = i18n.t(
+    'Enhanced vegetation index (EVI) differs from NDVI by reducing the influence of atmospheric conditions and canopy background noise. EVI values range from -1 to 1, with higher values indicating denser vegetation. Data originates from MODIS (NASA).'
+)
+
 export default [
     {
         id: 'ECMWF/ERA5_LAND/DAILY_AGGR/temperature_2m',
@@ -245,9 +253,7 @@ export default [
         datasetId: 'MODIS/061/MOD13Q1',
         name: i18n.t('NDVI - Normalized difference vegetation index (MODIS)'),
         shortName: i18n.t('NDVI'),
-        description: i18n.t(
-            'Landsat Normalized Difference Vegetation Index (NDVI) is used to quantify vegetation greenness and is useful in understanding vegetation density and assessing changes in plant health. NDVI values range from -1 to 1, with higher values indicating denser vegetation. Data originates from MODIS (NASA).'
-        ),
+        description: ndviDescription,
         resolution: modisResolution,
         periodType: SIXTEEN_DAYS,
         band: 'NDVI',
@@ -261,9 +267,7 @@ export default [
         datasetId: 'MODIS/061/MOD13Q1',
         name: i18n.t('EVI - Enhanced vegetation index (MODIS)'),
         shortName: i18n.t('EVI'),
-        description: i18n.t(
-            'Enhanced vegetation index (EVI) differs from NDVI by reducing the influence of atmospheric conditions and canopy background noise. EVI values range from -1 to 1, with higher values indicating denser vegetation. Data originates from MODIS (NASA).'
-        ),
+        description: eviDescription,
         resolution: modisResolution,
         periodType: SIXTEEN_DAYS,
         band: 'EVI',
@@ -324,7 +328,6 @@ export const era5HeatMonthly = {
     ...era5HeatDaily,
     aggregationPeriod: MONTHLY,
 }
-
 export const dhisDataSets = [
     {
         name: i18n.t('Climate/Weather'),
