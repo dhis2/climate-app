@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { NDVI } from '../components/explore/land/VegetationIndexSelect.jsx'
+import { NDVI } from '../components/explore/vegetation/VegetationIndexSelect.jsx'
 import { defaultReferencePeriod } from '../components/explore/ReferencePeriodSelect.jsx'
 import {
     getDefaultMonthlyPeriod,
