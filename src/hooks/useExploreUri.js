@@ -33,6 +33,7 @@ const useExploreUri = () => {
                 dailyPeriod,
                 referencePeriod,
                 month,
+                vegetationIndex,
             } = store
 
             if (!orgUnit || !tab) {
@@ -44,6 +45,8 @@ const useExploreUri = () => {
 
             if (tab === 'forecast10days') {
                 uri = baseUri
+            } else if (tab === 'vegetation') {
+                uri = `${baseUri}/${vegetationIndex}`
             } else if (tab === 'climatechange' && month && referencePeriod) {
                 uri = `${baseUri}/${month}/${referencePeriod.id}`
             } else if (hasMonthlyAndDailyData.includes(tab)) {
@@ -95,6 +98,9 @@ const useExploreUri = () => {
                     referencePeriods.find((p) => p.id === referencePeriodId)
                 )
             }
+        } else if (!store.tab) {
+            // Set tab if directly navigation to an url
+            store.setTab(tab)
         }
 
         return () => {
