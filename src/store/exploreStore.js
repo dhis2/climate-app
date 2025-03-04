@@ -8,23 +8,44 @@ import {
     MONTHLY,
 } from '../utils/time.js'
 
-const exploreStore = create((set) => ({
-    orgUnit: null,
-    tab: null,
-    periodType: MONTHLY,
-    dailyPeriod: getDefaultExplorePeriod(),
-    monthlyPeriod: getDefaultMonthlyPeriod(),
-    referencePeriod: defaultReferencePeriod,
-    month: getLastMonth()[1],
-    vegetationIndex: NDVI,
-    setOrgUnit: (orgUnit) => set({ orgUnit }),
-    setTab: (tab) => set({ tab }),
-    setPeriodType: (periodType) => set({ periodType }),
-    setDailyPeriod: (dailyPeriod) => set({ dailyPeriod }),
-    setMonthlyPeriod: (monthlyPeriod) => set({ monthlyPeriod }),
-    setReferencePeriod: (referencePeriod) => set({ referencePeriod }),
-    setMonth: (month) => set({ month }),
-    setVegetationIndex: (vegetationIndex) => set({ vegetationIndex }),
-}))
+const exploreStore = create((set) => {
+    const setIfChanged = (key) => (value) =>
+        set((state) => (state[key] !== value ? { [key]: value } : state))
+
+    const setIfPeriodChanged = (key) => (period) =>
+        set((state) =>
+            state[key].startTime !== period.startTime ||
+            state[key].endTime !== period.endTime
+                ? { [key]: period }
+                : state
+        )
+
+    return {
+        orgUnit: null,
+        tab: null,
+        periodType: MONTHLY,
+        dailyPeriod: getDefaultExplorePeriod(),
+        monthlyPeriod: getDefaultMonthlyPeriod(),
+        referencePeriod: defaultReferencePeriod,
+        month: getLastMonth()[1],
+        vegetationIndex: NDVI,
+        // setOrgUnit: (orgUnit) => set({ orgUnit }),
+        // setTab: (tab) => set((state) => (state.tab !== tab ? { tab } : state)),
+        // setPeriodType: (periodType) => set({ periodType }),
+        // setDailyPeriod: (dailyPeriod) => set({ dailyPeriod }),
+        // setMonthlyPeriod: (monthlyPeriod) => set({ monthlyPeriod }),
+        // setReferencePeriod: (referencePeriod) => set({ referencePeriod }),
+        // setMonth: (month) => set({ month }),
+        // setVegetationIndex: (vegetationIndex) => set({ vegetationIndex }),
+        setOrgUnit: setIfChanged('orgUnit'),
+        setTab: setIfChanged('tab'),
+        setPeriodType: setIfChanged('periodType'),
+        setDailyPeriod: setIfPeriodChanged('dailyPeriod'),
+        setMonthlyPeriod: setIfPeriodChanged('monthlyPeriod'),
+        setReferencePeriod: setIfChanged('referencePeriod'),
+        setMonth: setIfChanged('month'),
+        setVegetationIndex: setIfChanged('vegetationIndex'),
+    }
+})
 
 export default exploreStore
