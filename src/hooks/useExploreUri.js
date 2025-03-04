@@ -98,6 +98,9 @@ const useExploreUri = () => {
                     referencePeriods.find((p) => p.id === referencePeriodId)
                 )
             }
+        } else if (!store.tab) {
+            // Set tab if directly navigation to an url
+            store.setTab(tab)
         }
 
         return () => {
