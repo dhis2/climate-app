@@ -16,7 +16,6 @@ import VegetationIndexSelect, { NDVI, EVI } from './VegetationIndexSelect.jsx'
 const dataset = {
     datasetId: 'MODIS/061/MOD13Q1',
     band: [NDVI, EVI],
-    resolution: 250,
 }
 
 const Vegetation = () => {

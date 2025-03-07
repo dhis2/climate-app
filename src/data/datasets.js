@@ -36,6 +36,7 @@ export const era5Resolution = i18n.t('Approximately 31 km (0.25°)')
 export const era5LandResolution = i18n.t('Approximately 9 km (0.1°)')
 export const chirpsResolution = i18n.t('Approximately 5 km (0.05°)')
 export const modisResolution = i18n.t('Approximately 250 m')
+export const demResolution = i18n.t('Approximately 30 m')
 
 export const ndviDescription = i18n.t(
     'Landsat Normalized Difference Vegetation Index (NDVI) is used to quantify vegetation greenness and is useful in understanding vegetation density and assessing changes in plant health. NDVI values range from -1 to 1, with higher values indicating denser vegetation. Data originates from MODIS (NASA).'

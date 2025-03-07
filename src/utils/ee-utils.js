@@ -11,6 +11,7 @@ import {
     addPeriodTimestamp,
     SIXTEEN_DAYS,
 } from './time.js'
+import { create } from 'zustand'
 
 const VALUE_LIMIT = 5000
 
@@ -69,6 +70,40 @@ export const getMonthlyNormals = (bands) => (data) => {
     }
 
     return normals
+}
+
+// Create a reducer from the dataset parameters
+const createReducer = (ee, dataset) => {
+    const { band, reducer = 'mean', sharedInputs = false } = dataset
+
+    let eeReducer
+
+    if (Array.isArray(reducer)) {
+        // Combine multiple reducers
+        // sharedInputs = true means that all reducers are applied to all bands
+        // sharedInouts = false means one reducer for each band
+        eeReducer = reducer.reduce(
+            (r, t, i) =>
+                i === 0
+                    ? r[t]().unweighted()
+                    : r.combine({
+                          reducer2: ee.Reducer[t]().unweighted(),
+                          outputPrefix: sharedInputs ? '' : String(i),
+                          sharedInputs,
+                      }),
+            ee.Reducer
+        )
+
+        if (!sharedInputs && Array.isArray(band)) {
+            // Use band names as output names
+            eeReducer = eeReducer.setOutputs(band)
+        }
+    } else {
+        // Single reducer
+        eeReducer = ee.Reducer[reducer]()
+    }
+
+    return eeReducer
 }
 
 const getReducedCollection = ({
@@ -310,13 +345,7 @@ export const getTimeSeriesData = async ({
     geometry,
     filter,
 }) => {
-    const {
-        datasetId,
-        band,
-        reducer = 'mean',
-        sharedInputs = false,
-        aggregationPeriod,
-    } = dataset
+    const { datasetId, band, aggregationPeriod } = dataset
 
     let collection = ee.ImageCollection(datasetId).select(band)
 
@@ -330,32 +359,7 @@ export const getTimeSeriesData = async ({
         })
     }
 
-    let eeReducer
-
-    if (Array.isArray(reducer)) {
-        // Combine multiple reducers
-        // sharedInputs = true means that all reducers are applied to all bands
-        // sharedInouts = false means one reducer for each band
-        eeReducer = reducer.reduce(
-            (r, t, i) =>
-                i === 0
-                    ? r[t]().unweighted()
-                    : r.combine({
-                          reducer2: ee.Reducer[t]().unweighted(),
-                          outputPrefix: sharedInputs ? '' : String(i),
-                          sharedInputs,
-                      }),
-            ee.Reducer
-        )
-
-        if (!sharedInputs && Array.isArray(band)) {
-            // Use band names as output names
-            eeReducer = eeReducer.setOutputs(band)
-        }
-    } else {
-        // Single reducer
-        eeReducer = ee.Reducer[reducer]()
-    }
+    const eeReducer = createReducer(ee, dataset)
 
     const { startTime, endTime, timeZone = 'UTC' } = period
 
@@ -452,6 +456,35 @@ export const getClimateNormals = ({ ee, dataset, period, geometry }) => {
     return getInfo(data).then(getMonthlyNormals(band))
 }
 
+// Get data from single image
+export const getImageData = async ({ ee, dataset, geometry }) => {
+    const { datasetId, band } = dataset
+    const { type, coordinates } = geometry
+
+    const eeGeometry = ee.Geometry[type](coordinates)
+    const image = ee.Image(datasetId).select(band)
+    const eeReducer = createReducer(ee, dataset)
+    const eeScale = type === 'Point' ? ee.Number(1) : getScale(image)
+
+    const data = image.reduceRegion(eeReducer, eeGeometry, eeScale)
+
+    // const reducer = ee.Reducer.frequencyHistogram()
+
+    // https://stackoverflow.com/questions/57060903/reclassify-ndvi-raster-in-intervals-on-google-earht-engine
+    // https://gis.stackexchange.com/questions/264000/reclassifying-raster-values-in-google-earth-engine
+    // const test = image.reduceRegion(ee.Reducer.frequencyHistogram(), eeGeometry)
+    // .select(['histogram'], null, false)
+    const test = image
+        // .divide(10)
+        // .ceil()
+        .reduceRegion(ee.Reducer.frequencyHistogram(), eeGeometry)
+
+    // getInfo(test).then((data) => console.log(data))
+
+    // return getInfo(data)
+    return getInfo(test)
+}
+
 const getKeyFromFilter = (filter) =>
     filter
         ? `-${filter
@@ -459,12 +492,15 @@ const getKeyFromFilter = (filter) =>
               .join('-')}`
         : ''
 
+const getKeyFromPeriod = (period) =>
+    period ? `-${period.startTime}-${period.endTime}` : ''
+
 export const getCacheKey = ({ dataset, period, feature, filter }) => {
     const { datasetId, band } = dataset
-    const { startTime, endTime } = period
     const { id } = feature
     const bandkey = Array.isArray(band) ? band.join('-') : band
+    const periodKey = getKeyFromPeriod(period)
     const filterKey = getKeyFromFilter(filter)
 
-    return `${id}-${datasetId}-${bandkey}-${startTime}-${endTime}${filterKey}`
+    return `${id}-${datasetId}-${bandkey}${periodKey}${filterKey}`
 }

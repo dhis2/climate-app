@@ -1,24 +1,22 @@
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
 import exploreStore from '../../../store/exploreStore.js'
 import DataLoader from '../../shared/DataLoader.jsx'
-// import Resolution from '../../shared/Resolution.jsx'
+import Resolution from '../../shared/Resolution.jsx'
 import Chart from '../Chart.jsx'
-// import MonthlyPeriodSelect from '../MonthlyPeriodSelect.jsx'
 import getChartConfig from './charts/elevation.js'
+import { demResolution } from '../../../data/datasets.js'
 // import styles from './styles/VegetationIndexSelect.module.css'
 
 const dataset = {
-    datasetId: 'MODIS/061/MOD13Q1',
-    // band: [NDVI, EVI],
-    resolution: 250,
+    datasetId: 'USGS/SRTMGL1_003',
+    band: 'elevation',
+    reducer: ['mean', 'stdDev', 'min', 'max'],
+    sharedInputs: true,
 }
 
 const Elevation = () => {
     const feature = exploreStore((state) => state.orgUnit)
-    // const period = exploreStore((state) => state.monthlyPeriod)
-
-    // const data = useEarthEngineTimeSeries({ dataset, period, feature })
-    const data = null
+    const data = useEarthEngineTimeSeries({ dataset, feature })
 
     if (!data) {
         return <DataLoader />
@@ -28,14 +26,8 @@ const Elevation = () => {
 
     return (
         <>
-            <Chart
-                config={getChartConfig({
-                    name,
-                    data,
-                    band,
-                    period,
-                })}
-            />
+            <Chart config={getChartConfig(name, data)} />
+            <Resolution resolution={demResolution} />
         </>
     )
 }
