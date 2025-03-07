@@ -55,7 +55,7 @@ const Vegetation = () => {
                     />
                     <Tooltip
                         content={i18n.t(
-                            'Change from 16-days to weekly or monthly periods using linear interpolation. Weekly periods are recommended when importing data to DHIS2.'
+                            'Change from 16-days to weekly or monthly periods using linear interpolation. Weekly periods are recommended when importing to DHIS2.'
                         )}
                         placement="bottom"
                     >
