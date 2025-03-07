@@ -1,0 +1,37 @@
+.selectors {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+    font-size: 14px;
+}
+
+.showWeeklyMonthly {
+    display: flex;
+    justify-content: space-between;
+    vertical-align: middle;
+    line-height: 32px;
+}
+
+.showWeeklyMonthly label {
+    margin-left: 4px;
+}
+
+.help {
+    height: 19px;
+    width: 19px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    line-height: 20px;
+    border-radius: 50%;
+    margin-left: 8px;
+    margin-top: 6px;
+    cursor: pointer;
+}
+
+.description {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 18px;
+}

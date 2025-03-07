@@ -10,6 +10,8 @@ import {
     addPeriodTimestamp,
     getMiddleTime,
     getPeriods,
+    WEEKLY,
+    MONTHLY,
 } from '../../../../utils/time.js'
 
 const getInterpolatedSeries = ({ periodType, period, data, band }) =>
@@ -23,7 +25,14 @@ const getInterpolatedSeries = ({ periodType, period, data, band }) =>
             }
         })
 
-const getChartConfig = ({ name, data, band, period, periodType }) => {
+const getChartConfig = ({
+    name,
+    data,
+    band,
+    period,
+    showWeekly,
+    showMonthly,
+}) => {
     const series = [
         {
             type: 'line',
@@ -38,20 +47,35 @@ const getChartConfig = ({ name, data, band, period, periodType }) => {
         },
     ]
 
-    // Used to debug WEEKLY and MONTHLY interpolation
-    if (periodType) {
+    if (showWeekly) {
         series.push({
             type: 'line',
             data: getInterpolatedSeries({
-                periodType,
+                periodType: WEEKLY,
                 period,
                 data,
                 band,
             }),
-            name: periodType,
-            color: '#555',
-            lineWidth: 1,
+            name: i18n.t('Weekly'),
+            color: colors.yellow600,
+            lineWidth: 2,
             zIndex: 3,
+        })
+    }
+
+    if (showMonthly) {
+        series.push({
+            type: 'line',
+            data: getInterpolatedSeries({
+                periodType: MONTHLY,
+                period,
+                data,
+                band,
+            }),
+            name: i18n.t('Monthly'),
+            color: colors.blue600,
+            lineWidth: 3,
+            zIndex: 4,
         })
     }
 
