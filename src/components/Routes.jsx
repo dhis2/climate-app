@@ -18,6 +18,7 @@ import PrecipitationMonthly from './explore/precipitation/PrecipitationMonthly.j
 import Tabs from './explore/Tabs.jsx'
 import TemperatureDaily from './explore/temperature/TemperatureDaily.jsx'
 import TemperatureMonthly from './explore/temperature/TemperatureMonthly.jsx'
+import Vegetation from './explore/vegetation/Vegetation.jsx'
 import ImportPage from './import/ImportPage.jsx'
 import Root from './Root.jsx'
 import SettingsPage from './settings/SettingsPage.jsx'
@@ -101,6 +102,16 @@ const tabRoutes = [
             {
                 path: ':month/:referencePeriodId',
                 element: <ClimateChange />,
+            },
+        ],
+    },
+    {
+        path: 'vegetation',
+        element: <Tabs />,
+        children: [
+            {
+                path: ':vegetationIndex',
+                element: <Vegetation />,
             },
         ],
     },
