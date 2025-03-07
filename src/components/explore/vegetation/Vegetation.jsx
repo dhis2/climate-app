@@ -39,30 +39,7 @@ const Vegetation = () => {
 
     return (
         <>
-            <div className={styles.selectors}>
-                <VegetationIndexSelect />
-                <div className={styles.showWeeklyMonthly}>
-                    {i18n.t('Resample')}
-                    <Checkbox
-                        label={i18n.t('Weekly')}
-                        checked={showWeekly === true}
-                        onChange={() => setShowWeekly(!showWeekly)}
-                    />
-                    <Checkbox
-                        label={i18n.t('Monthly')}
-                        checked={showMonthly === true}
-                        onChange={() => setShowMonthly(!showMonthly)}
-                    />
-                    <Tooltip
-                        content={i18n.t(
-                            'Change from 16-days to weekly or monthly periods using linear interpolation. Weekly periods are recommended when importing to DHIS2.'
-                        )}
-                        placement="bottom"
-                    >
-                        <div className={styles.help}>?</div>
-                    </Tooltip>
-                </div>
-            </div>
+            <VegetationIndexSelect />
             <Chart
                 config={getChartConfig({
                     name,
@@ -73,6 +50,27 @@ const Vegetation = () => {
                     showMonthly,
                 })}
             />
+            <div className={styles.showWeeklyMonthly}>
+                {i18n.t('Resample')}:
+                <Checkbox
+                    label={i18n.t('Weekly')}
+                    checked={showWeekly === true}
+                    onChange={() => setShowWeekly(!showWeekly)}
+                />
+                <Checkbox
+                    label={i18n.t('Monthly')}
+                    checked={showMonthly === true}
+                    onChange={() => setShowMonthly(!showMonthly)}
+                />
+                <Tooltip
+                    content={i18n.t(
+                        'Change from 16-days to weekly or monthly periods using linear interpolation. Weekly periods are recommended when importing to DHIS2.'
+                    )}
+                    placement="bottom"
+                >
+                    <div className={styles.help}>?</div>
+                </Tooltip>
+            </div>
             <MonthlyPeriodSelect />
             <div className={styles.description}>
                 {band === NDVI ? ndviDescription : eviDescription}

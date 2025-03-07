@@ -1,19 +1,12 @@
-.selectors {
+.showWeeklyMonthly {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 4px;
+    vertical-align: middle;
+    line-height: 32px;
     font-size: 14px;
 }
 
-.showWeeklyMonthly {
-    display: flex;
-    justify-content: space-between;
-    vertical-align: middle;
-    line-height: 32px;
-}
-
 .showWeeklyMonthly label {
-    margin-left: 4px;
+    margin-left: 6px;
 }
 
 .help {
