@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/dhis2/climate-app/compare/v1.6.3...v1.7.0) (2025-03-07)
+
+
+### Features
+
+* vegetation indices ([#60](https://github.com/dhis2/climate-app/issues/60)) ([225b850](https://github.com/dhis2/climate-app/commit/225b8509d1fbf5676379c16393f6032057a0b5ce))
+
 ## [1.6.3](https://github.com/dhis2/climate-app/compare/v1.6.2...v1.6.3) (2025-02-26)
 
 
