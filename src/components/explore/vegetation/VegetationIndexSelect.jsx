@@ -9,7 +9,7 @@ const VegetationIndexSelect = () => {
     const { vegetationIndex, setVegetationIndex } = exploreStore()
 
     return (
-        <div className={styles.periodTypeButtons}>
+        <div className={styles.vegetationIndexButtons}>
             <SegmentedControl
                 ariaLabel="Vegetatuion index"
                 onChange={({ value }) => setVegetationIndex(value)}
