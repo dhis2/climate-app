@@ -1,5 +1,9 @@
 import { useState, useEffect } from 'react'
-import { getTimeSeriesData, getCacheKey } from '../utils/ee-utils.js'
+import {
+    getTimeSeriesData,
+    getImageData,
+    getCacheKey,
+} from '../utils/ee-utils.js'
 import useEarthEngine from './useEarthEngine.js'
 
 const getPeriodFromId = (id) => {
@@ -22,7 +26,7 @@ const useEarthEngineTimeSeries = ({ dataset, period, feature, filter }) => {
     useEffect(() => {
         let canceled = false
 
-        if (dataset && period && feature) {
+        if (dataset && feature) {
             const key = getCacheKey({ dataset, period, feature, filter })
             const { geometry } = feature
 
@@ -40,13 +44,19 @@ const useEarthEngineTimeSeries = ({ dataset, period, feature, filter }) => {
 
             setData()
             eePromise.then((ee) => {
-                cachedPromise[key] = getTimeSeriesData({
-                    ee,
-                    dataset,
-                    period,
-                    geometry,
-                    filter,
-                }).then(parseIds)
+                cachedPromise[key] = period
+                    ? getTimeSeriesData({
+                          ee,
+                          dataset,
+                          period,
+                          geometry,
+                          filter,
+                      }).then(parseIds)
+                    : getImageData({
+                          ee,
+                          dataset,
+                          geometry,
+                      })
 
                 cachedPromise[key].then((data) => {
                     if (!canceled) {

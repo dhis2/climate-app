@@ -475,6 +475,9 @@ msgstr "Dewpoint temperature"
 msgid "Air temperature"
 msgstr "Air temperature"
 
+msgid "{{name}}: {{band}} vegetation index 2024"
+msgstr "{{name}}: {{band}} vegetation index 2024"
+
 msgid "{{name}}: Daily precipitation {{period}}"
 msgstr "{{name}}: Daily precipitation {{period}}"
 
