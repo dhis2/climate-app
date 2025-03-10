@@ -1,11 +1,10 @@
+import { demResolution } from '../../../data/datasets.js'
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
 import exploreStore from '../../../store/exploreStore.js'
 import DataLoader from '../../shared/DataLoader.jsx'
 import Resolution from '../../shared/Resolution.jsx'
 import Chart from '../Chart.jsx'
 import getChartConfig from './charts/elevation.js'
-import { demResolution } from '../../../data/datasets.js'
-// import styles from './styles/VegetationIndexSelect.module.css'
 
 const dataset = {
     datasetId: 'USGS/SRTMGL1_003',
