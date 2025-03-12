@@ -23,6 +23,7 @@ import ImportPage from './import/ImportPage.jsx'
 import Root from './Root.jsx'
 import SettingsPage from './settings/SettingsPage.jsx'
 import SetupPage from './setup/SetupPage.jsx'
+import StationPage from './station/StationPage.jsx'
 
 const monthlyPath = 'monthly/:startTime/:endTime/:referencePeriodId'
 const dailyPath = 'daily/:startTime/:endTime'
@@ -159,6 +160,10 @@ const Routes = () => {
                             children: tabRoutes,
                         },
                     ],
+                },
+                {
+                    path: 'station',
+                    element: <StationPage />,
                 },
                 {
                     path: 'import',
