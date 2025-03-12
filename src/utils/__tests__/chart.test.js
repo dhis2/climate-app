@@ -85,8 +85,8 @@ describe('chart utils', () => {
     })
 
     it('it should get month from id', () => {
-        expect(getMonthFromId('2023-12-30')).toEqual('12')
-        expect(getMonthFromId('2024-01-01')).toEqual('01')
+        expect(getMonthFromId('2023-12-30')).toEqual(12)
+        expect(getMonthFromId('2024-01-01')).toEqual(1)
     })
 
     it('it should get daily period', () => {

@@ -38,6 +38,12 @@ const DataElement = ({
                 <td>{aggregationType}</td>
             </tr>
             <tr>
+                <th>{i18n.t('Store zero data values')}</th>
+                <td>
+                    <em>{i18n.t('Make sure it is checked')}</em>
+                </td>
+            </tr>
+            <tr>
                 <th>{i18n.t('Aggregation levels')}</th>
                 <td>
                     <em>{i18n.t('Assign all org unit levels')}</em>

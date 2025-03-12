@@ -1,6 +1,16 @@
 import i18n from '@dhis2/d2-i18n'
 import area from '@turf/area'
-import { HOURLY, DAILY, MONTHLY, getMappedPeriods, getPeriods } from './time.js'
+import { interpolate } from './calc.js'
+import {
+    HOURLY,
+    DAILY,
+    MONTHLY,
+    getMappedPeriods,
+    getPeriods,
+    getMiddleTime,
+    addPeriodTimestamp,
+    SIXTEEN_DAYS,
+} from './time.js'
 
 const VALUE_LIMIT = 5000
 
@@ -19,12 +29,14 @@ export const getInfo = (instance) =>
         })
     )
 
+const getFeatureProperties = (feature) => ({
+    id: feature.id,
+    ...feature.properties,
+})
+
 // Reduce a feature collection to array of objects with id and properties
 export const getFeatureCollectionPropertiesArray = (data) =>
-    data.features.map((f) => ({
-        id: f.id,
-        ...f.properties,
-    }))
+    data.features.map(getFeatureProperties)
 
 export const cleanData = (data) =>
     data.map((f) => ({
@@ -32,6 +44,32 @@ export const cleanData = (data) =>
         date: f.id.slice(0, 8),
         value: f.properties.value,
     }))
+
+// Calculates the monthly normals for each band
+// Previously we tried to do this on GEE but we got wrong results
+export const getMonthlyNormals = (bands) => (data) => {
+    const normals = []
+
+    for (let month = 1; month <= 12; month++) {
+        const monthData = data.features.filter(
+            (f) => Number(f.properties.month) === month
+        )
+
+        const monthNormals = {
+            id: month,
+        }
+
+        bands.forEach((band) => {
+            monthNormals[band] =
+                monthData.reduce((v, f) => v + f.properties[band], 0) /
+                monthData.length
+        })
+
+        normals.push(monthNormals)
+    }
+
+    return normals
+}
 
 const getReducedCollection = ({
     ee,
@@ -70,20 +108,43 @@ export const getEarthEngineValues = ({
 
         const { startTime, endTime, timeZone = 'UTC', periodType } = period
 
-        const periods = getPeriods(period)
+        const periods = getPeriods(period).map(addPeriodTimestamp)
         const endTimePlusOne = ee.Date(endTime).advance(1, 'day')
-        const timeZoneStart = ee.Date(startTime).format(null, timeZone)
+        const timeZoneStart = ee
+            .Date(startTime)
+            .advance(datasetPeriodType === SIXTEEN_DAYS ? -32 : 0, 'day')
+            .format(null, timeZone)
         const timeZoneEnd = endTimePlusOne.format(null, timeZone)
         const mappedPeriods = getMappedPeriods(periods)
 
-        const dataParser = (data) =>
-            data.map((f) => ({
-                ...f.properties,
-                period: mappedPeriods.get(f.properties.period),
-                value: valueParser
-                    ? valueParser(f.properties.value)
-                    : f.properties.value,
+        const dataParser = (features) => {
+            let data = features.map(getFeatureProperties)
+
+            if (datasetPeriodType === SIXTEEN_DAYS) {
+                const orgUnits = [...new Set(data.map((d) => d.ou))]
+
+                data = orgUnits
+                    .map((ou) => {
+                        const ouData = data.filter((d) => d.ou === ou)
+                        return periods.map((p) => {
+                            const value = interpolate(ouData, getMiddleTime(p))
+                            const period = p.startDate
+                            return {
+                                ou,
+                                period,
+                                value,
+                            }
+                        })
+                    })
+                    .flat()
+            }
+
+            return data.map((d) => ({
+                ...d,
+                period: mappedPeriods.get(d.period),
+                value: valueParser ? valueParser(d.value) : d.value,
             }))
+        }
 
         let collection = ee
             .ImageCollection(datasetId)
@@ -154,7 +215,7 @@ export const getEarthEngineValues = ({
             }
 
             // Go from daily to period type (weekly or monthly)
-            if (periodType !== DAILY) {
+            if (datasetPeriodType === DAILY && periodType !== DAILY) {
                 const periodList = ee.List(periods)
 
                 collection = ee.ImageCollection.fromImages(
@@ -189,7 +250,9 @@ export const getEarthEngineValues = ({
                     .map((feature) =>
                         ee.Feature(null, {
                             ou: feature.get('id'),
-                            period: image.date().format('YYYY-MM-dd'),
+                            period: image.date().format('YYYY-MM-dd'), // TODO: Change?
+                            startTime: image.get('system:time_start'),
+                            endTime: image.get('system:time_end'),
                             value: feature.get(reducer),
                         })
                     )
@@ -357,6 +420,8 @@ export const getTimeSeriesData = async ({
                         image.reduceRegion(eeReducer, eeGeometry, eeScale)
                     )
                     .set('system:index', image.get('system:index'))
+                    .set('startTime', image.get('system:time_start'))
+                    .set('endTime', image.get('system:time_end'))
             )
         )
     ).then(getFeatureCollectionPropertiesArray)
@@ -373,32 +438,18 @@ export const getClimateNormals = ({ ee, dataset, period, geometry }) => {
         .select(band)
         .filterDate(`${startTime}-01-01`, `${endTime + 1}-01-01`)
 
-    const byMonth = ee.ImageCollection.fromImages(
-        ee.List.sequence(1, 12).map((month) =>
-            collection
-                .filter(ee.Filter.calendarRange(month, null, 'month'))
-                .mean()
-                .set('system:index', ee.Number(month).format('%02d'))
-        )
-    )
-
     const eeScale =
         type === 'Point' ? ee.Number(1) : getScale(collection.first())
 
     const eeReducer = ee.Reducer.mean()
 
-    const data = ee.FeatureCollection(
-        byMonth.map((image) =>
-            ee
-                .Feature(
-                    null,
-                    image.reduceRegion(eeReducer, eeGeometry, eeScale)
-                )
-                .set('system:index', image.get('system:index'))
-        )
+    const data = collection.map((image) =>
+        ee
+            .Feature(null, image.reduceRegion(eeReducer, eeGeometry, eeScale))
+            .set('month', ee.String(image.get('system:index')).slice(-2))
     )
 
-    return getInfo(data).then(getFeatureCollectionPropertiesArray)
+    return getInfo(data).then(getMonthlyNormals(band))
 }
 
 const getKeyFromFilter = (filter) =>

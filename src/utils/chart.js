@@ -9,7 +9,7 @@ export const animation = {
 
 // Date fromat YYYY-MM
 export const getYearFromId = (id) => id.substring(0, 4)
-export const getMonthFromId = (id) => id.substring(5, 7)
+export const getMonthFromId = (id) => Number(id.substring(5, 7))
 
 export const getSelectedMonths = (data, { startTime, endTime }) =>
     data.filter((d) => d.id >= startTime && d.id <= endTime)
@@ -49,4 +49,9 @@ export const heatCredits = {
     text: i18n.t(
         'ERA5-HEAT / Copernicus Climate Change Service / Google Earth Engine'
     ),
+}
+
+export const vegetationCredits = {
+    href: 'https://lpdaac.usgs.gov/products/mod13q1v061/',
+    text: i18n.t('NASA LP DAAC at the USGS EROS Center / Google Earth Engine'),
 }

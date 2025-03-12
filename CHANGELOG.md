@@ -1,3 +1,31 @@
+# [1.7.0](https://github.com/dhis2/climate-app/compare/v1.6.3...v1.7.0) (2025-03-07)
+
+
+### Features
+
+* vegetation indices ([#60](https://github.com/dhis2/climate-app/issues/60)) ([225b850](https://github.com/dhis2/climate-app/commit/225b8509d1fbf5676379c16393f6032057a0b5ce))
+
+## [1.6.3](https://github.com/dhis2/climate-app/compare/v1.6.2...v1.6.3) (2025-02-26)
+
+
+### Bug Fixes
+
+* climate normals ([#63](https://github.com/dhis2/climate-app/issues/63)) ([3ac1e5d](https://github.com/dhis2/climate-app/commit/3ac1e5d8ac52799cb7c17fb72a5fb2ffbb698020))
+
+## [1.6.2](https://github.com/dhis2/climate-app/compare/v1.6.1...v1.6.2) (2025-02-24)
+
+
+### Bug Fixes
+
+* store zero data values in setup guide ([#62](https://github.com/dhis2/climate-app/issues/62)) ([e1b4129](https://github.com/dhis2/climate-app/commit/e1b412960c13feb7af058e6d05e3b079c22642cf))
+
+## [1.6.1](https://github.com/dhis2/climate-app/compare/v1.6.0...v1.6.1) (2025-02-24)
+
+
+### Bug Fixes
+
+* import data values as strings ([7bf1d55](https://github.com/dhis2/climate-app/commit/7bf1d55960574f41af9b391d6c762c5271237e77))
+
 # [1.6.0](https://github.com/dhis2/climate-app/compare/v1.5.3...v1.6.0) (2025-02-10)
 
 
