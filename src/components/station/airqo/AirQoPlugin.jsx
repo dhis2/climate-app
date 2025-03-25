@@ -1,19 +1,32 @@
 import { useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
+import { CircularLoader, NoticeBox, Button } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import { useState, useEffect } from 'react'
 import legend from '../../../data/pm2.5-legend.js'
-import useAppSettings from '../../../hooks/useAppSettings.js'
 import useGetRoute from '../../../hooks/useGetRoute.js'
 import Chart from '../../explore/Chart.jsx'
+import RouteSetup from '../../setup/RouteSetup.jsx'
 import getChartConfig from '../charts/AirQualityGauge.js'
 import styles from './styles/AirQoPlugin.module.css'
 
 const AirQoPlugin = ({ siteId }) => {
     const engine = useDataEngine()
     const [data, setData] = useState()
-    // const { settings = {} } = useAppSettings()
     const { route } = useGetRoute()
+
+    const [isRouteSetupModalOpen, setIsRouteSetupModalOpen] = useState(false)
+
+    const routeInfo = {
+        name: 'AirQo',
+        code: 'airqo',
+        disabled: false,
+        url: 'https://api.airqo.net/api/v2/devices/measurements/sites/**',
+        auth: {
+            type: 'api-query-params',
+        },
+    }
+
     useEffect(() => {
         if (route && route.id && !data) {
             const resource = `routes/${route.id}/run/${siteId}/recent`
@@ -32,11 +45,33 @@ const AirQoPlugin = ({ siteId }) => {
     }, [route, data])
 
     if (!route || !route.id) {
-        return <div>{i18n.t('AirQo token not set')}</div>
+        return (
+            <div className={styles.margin}>
+                <NoticeBox warning title={i18n.t('Missing route')}>
+                    {i18n.t('AirQo token not set')}
+                </NoticeBox>
+
+                <div className={styles.margin}>
+                    <Button
+                        onClick={() => setIsRouteSetupModalOpen(true)}
+                        primary
+                    >
+                        {i18n.t('Create route')}
+                    </Button>
+                    {isRouteSetupModalOpen && (
+                        <RouteSetup
+                            routeInfo={routeInfo}
+                            isRouteSetupModalOpen={isRouteSetupModalOpen}
+                            setIsRouteSetupModalOpen={setIsRouteSetupModalOpen}
+                        />
+                    )}
+                </div>
+            </div>
+        )
     }
 
     if (!data) {
-        return <div>{i18n.t('Loading...')}</div>
+        return <CircularLoader className={styles.margin} />
     }
 
     const {

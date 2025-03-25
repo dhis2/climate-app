@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-03-07T10:47:32.346Z\n"
-"PO-Revision-Date: 2025-03-07T10:47:32.346Z\n"
+"POT-Creation-Date: 2025-03-21T10:46:10.062Z\n"
+"PO-Revision-Date: 2025-03-21T10:46:10.062Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -508,6 +508,19 @@ msgstr "{{name}}: Monthly temperatures {{period}}"
 msgid "Normal temperature"
 msgstr "Normal temperature"
 
+msgid "Resample"
+msgstr "Resample"
+
+msgid "Weekly"
+msgstr "Weekly"
+
+msgid ""
+"Change from 16-days to weekly or monthly periods using linear "
+"interpolation. Weekly periods are recommended when importing to DHIS2."
+msgstr ""
+"Change from 16-days to weekly or monthly periods using linear "
+"interpolation. Weekly periods are recommended when importing to DHIS2."
+
 msgid "{{name}}: {{band}} vegetation index 2024"
 msgstr "{{name}}: {{band}} vegetation index 2024"
 
@@ -791,6 +804,21 @@ msgstr "End value"
 msgid "Color"
 msgstr "Color"
 
+msgid "Route set up"
+msgstr "Route set up"
+
+msgid "Your route will be created with the following information ..."
+msgstr "Your route will be created with the following information ..."
+
+msgid "Token"
+msgstr "Token"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Save"
+msgstr "Save"
+
 msgid "How to configure this app"
 msgstr "How to configure this app"
 
@@ -906,11 +934,14 @@ msgstr ""
 msgid "Time zone"
 msgstr "Time zone"
 
+msgid "Missing route"
+msgstr "Missing route"
+
 msgid "AirQo token not set"
 msgstr "AirQo token not set"
 
-msgid "Loading..."
-msgstr "Loading..."
+msgid "Create route"
+msgstr "Create route"
 
 msgid "Air Quality PM<sub>2.5</sub>"
 msgstr "Air Quality PM<sub>2.5</sub>"
@@ -1216,6 +1247,3 @@ msgstr "NASA LP DAAC at the USGS EROS Center / Google Earth Engine"
 
 msgid "No data found for the selected period"
 msgstr "No data found for the selected period"
-
-msgid "Weekly"
-msgstr "Weekly"
