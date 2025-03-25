@@ -24,7 +24,6 @@ const RouteSetup = ({
     setIsRouteSetupModalOpen,
 }) => {
     const [token, setToken] = useState('')
-    //token = CTBMDUGQBQD9SCHA
     if (routeInfo.auth.type == 'api-query-params') {
         routeInfo.auth.queryParams = {
             token: token,
