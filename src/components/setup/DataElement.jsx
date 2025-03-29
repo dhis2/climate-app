@@ -62,6 +62,7 @@ DataElement.propTypes = {
     description: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     shortName: PropTypes.string.isRequired,
+    source: PropTypes.string.isRequired,
 }
 
 export default DataElement
