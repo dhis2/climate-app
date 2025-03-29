@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-03-29T11:34:24.730Z\n"
-"PO-Revision-Date: 2025-03-29T11:34:24.730Z\n"
+"POT-Creation-Date: 2025-03-29T18:54:35.424Z\n"
+"PO-Revision-Date: 2025-03-29T18:54:35.424Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -228,11 +228,11 @@ msgstr "Heat"
 msgid "Climate change"
 msgstr "Climate change"
 
-msgid "Elevation"
-msgstr "Elevation"
-
 msgid "Vegetation"
 msgstr "Vegetation"
+
+msgid "Elevation"
+msgstr "Elevation"
 
 msgid ""
 "Temperature anomaly is the difference of a temperature from a reference "
@@ -256,6 +256,33 @@ msgstr "Temperature anomaly"
 
 msgid "{{name}}: Elevation"
 msgstr "{{name}}: Elevation"
+
+msgid "{{value}} m"
+msgstr "{{value}} m"
+
+msgid ""
+"The chart shows the elevation distribution of the selected area. The mean, "
+"minimum, and maximum elevation values are calculated from the elevation "
+"data."
+msgstr ""
+"The chart shows the elevation distribution of the selected area. The mean, "
+"minimum, and maximum elevation values are calculated from the elevation "
+"data."
+
+msgid "Elevation: {{value}} m"
+msgstr "Elevation: {{value}} m"
+
+msgid "Area: {{value}} ha"
+msgstr "Area: {{value}} ha"
+
+msgid "Min elevation"
+msgstr "Min elevation"
+
+msgid "Mean elevation"
+msgstr "Mean elevation"
+
+msgid "Max elevation"
+msgstr "Max elevation"
 
 msgid "{{precip}} mm"
 msgstr "{{precip}} mm"
@@ -527,6 +554,9 @@ msgstr ""
 msgid "{{name}}: {{band}} vegetation index {{period}}"
 msgstr "{{name}}: {{band}} vegetation index {{period}}"
 
+msgid "Value is only for 250 x 250 m where the facility is located"
+msgstr "Value is only for 250 x 250 m where the facility is located"
+
 msgid "Data element"
 msgstr "Data element"
 
@@ -690,15 +720,15 @@ msgstr "Organisation unit level to import data to"
 msgid "Org unit parent needs to be above or equal to the org unit level"
 msgstr "Org unit parent needs to be above or equal to the org unit level"
 
+msgid "Daily values will be imported between start and end dates"
+msgstr "Daily values will be imported between start and end dates"
+
 msgid ""
 "The data don't have a period. It will be imported with the year the data "
 "was collected ({{datasetPeriod}})."
 msgstr ""
 "The data don't have a period. It will be imported with the year the data "
 "was collected ({{datasetPeriod}})."
-
-msgid "Daily values will be imported between start and end dates"
-msgstr "Daily values will be imported between start and end dates"
 
 msgid "Period type"
 msgstr "Period type"
@@ -1083,32 +1113,23 @@ msgstr "EVI"
 msgid "Mean elevation (SRTM)"
 msgstr "Mean elevation (SRTM)"
 
-msgid "Mean elevation"
-msgstr "Mean elevation"
-
 msgid "Mean elevation in meters above sea level."
 msgstr "Mean elevation in meters above sea level."
 
 msgid "NASA / USGS / JPL-Caltech"
 msgstr "NASA / USGS / JPL-Caltech"
 
-msgid "Last value"
-msgstr "Last value"
+msgid "First value"
+msgstr "First value"
 
 msgid "Min elevation (SRTM)"
 msgstr "Min elevation (SRTM)"
-
-msgid "Min elevation"
-msgstr "Min elevation"
 
 msgid "Min elevation in meters above sea level."
 msgstr "Min elevation in meters above sea level."
 
 msgid "Max elevation (SRTM)"
 msgstr "Max elevation (SRTM)"
-
-msgid "Max elevation"
-msgstr "Max elevation"
 
 msgid "Max elevation in meters above sea level."
 msgstr "Max elevation in meters above sea level."
@@ -1122,11 +1143,20 @@ msgstr "Environment"
 msgid "Weekly or Monthly"
 msgstr "Weekly or Monthly"
 
+msgid "Land"
+msgstr "Land"
+
+msgid "Yearly"
+msgstr "Yearly"
+
 msgid "Assign above data elements (weather & climate)"
 msgstr "Assign above data elements (weather & climate)"
 
 msgid "Assign above data elements (vegetation)"
 msgstr "Assign above data elements (vegetation)"
+
+msgid "Assign above data elements (elevation)"
+msgstr "Assign above data elements (elevation)"
 
 msgid "Heat/cold stress"
 msgstr "Heat/cold stress"
@@ -1202,6 +1232,9 @@ msgstr "ERA5-HEAT / Copernicus Climate Change Service / Google Earth Engine"
 
 msgid "NASA LP DAAC at the USGS EROS Center / Google Earth Engine"
 msgstr "NASA LP DAAC at the USGS EROS Center / Google Earth Engine"
+
+msgid "NASA / USGS / JPL-Caltech / Google Earth Engine"
+msgstr "NASA / USGS / JPL-Caltech / Google Earth Engine"
 
 msgid "No data found for the selected period"
 msgstr "No data found for the selected period"
