@@ -80,7 +80,7 @@ const createReducer = (ee, dataset) => {
     if (Array.isArray(reducer)) {
         // Combine multiple reducers
         // sharedInputs = true means that all reducers are applied to all bands
-        // sharedInouts = false means one reducer for each band
+        // sharedInputs = false means one reducer for each band
         eeReducer = reducer.reduce(
             (r, t, i) =>
                 i === 0

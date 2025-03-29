@@ -81,12 +81,6 @@ const now = new Date()
 const today = formatStandardDate(now)
 const tomorrow = formatStandardDate(new Date(now.getTime() + oneDayInMs))
 const yesterday = formatStandardDate(new Date(now.getTime() - oneDayInMs))
-const nextMonth = formatStandardDate(
-    new Date(now.getFullYear(), now.getMonth() + 1, now.getDate())
-)
-const lastMonth = formatStandardDate(
-    new Date(now.getFullYear(), now.getMonth() - 1, now.getDate())
-)
 
 const startMonth = '2023-08'
 const endMonth = '2024-07'
