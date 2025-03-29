@@ -104,6 +104,7 @@ const Period = ({
 Period.propTypes = {
     onChange: PropTypes.func.isRequired,
     calendar: PropTypes.string,
+    datasetPeriod: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     datasetPeriodType: PropTypes.string,
     period: PropTypes.object,
 }

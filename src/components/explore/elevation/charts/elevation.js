@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
-import { animation, elevationCredits } from '../../../../utils/chart.js'
 import { colors } from '@dhis2/ui'
+import { animation, elevationCredits } from '../../../../utils/chart.js'
 
 const createPlotLine = (value, text) => ({
     color: colors.grey600,
@@ -20,11 +20,6 @@ const createPlotLine = (value, text) => ({
 })
 
 const getChartConfig = (name, data) => {
-    // const reducers = Object.keys(data)
-    // console.log('reducers', reducers)
-
-    // console.log('data', data)
-
     const { mean, min, max, histogram } = data
 
     const elevations = Object.keys(histogram)
@@ -41,12 +36,6 @@ const getChartConfig = (name, data) => {
     const minArea = Math.min(...values)
     const maxArea = Math.max(...values)
 
-    // console.log('elevations', minElevation, maxElevation, elevations)
-
-    // frequency / histogram
-    // https://www.linkedin.com/pulse/histograms-dem-values-chonghua-yin/
-    // https://gsp.humboldt.edu/olm/Lessons/GSP_270/HTML%205%20Canvas%20Lessons/Histograms2.html
-
     return {
         title: {
             text: i18n.t('{{name}}: Elevation', {
@@ -54,34 +43,32 @@ const getChartConfig = (name, data) => {
                 nsSeparator: ';',
             }),
         },
+        chart: {
+            type: 'area',
+            height: 480,
+            marginBottom: 75,
+            marginRight: 120,
+        },
         credits: elevationCredits,
         tooltip: {
-            // crosshairs: true,
-            // shared: true,
-            // valueSuffix: '°C',
+            formatter: function () {
+                return `${i18n.t('Elevation: {{value}} m', {
+                    value: Math.round(this.point.y),
+                    nsSeparator: ';',
+                })}<br />${i18n.t('Area: {{value}} ha', {
+                    value: Math.round(this.point.x),
+                    nsSeparator: ';',
+                })}`
+            },
         },
         legend: { enabled: false },
         xAxis: {
             labels: {
                 format: '{value} ha',
             },
-            // title: 'Test',
-            /*
-            type: 'datetime',
-            tickInterval: 2592000000,
-            labels: {
-                format: '{value: %b}',
-            },
-            */
-            // title: 'Area',
-            /*
-            title: {
-                text: 'Area',
-            },
-            */
             min: minArea,
             max: maxArea,
-            // crosshair: true,
+            crosshair: false,
         },
         yAxis: {
             title: false,
@@ -96,58 +83,17 @@ const getChartConfig = (name, data) => {
                 createPlotLine(Math.round(mean), i18n.t('Mean elevation')),
                 createPlotLine(max, i18n.t('Max elevation')),
             ],
-            // crosshair: true,
         },
-        chart: {
-            type: 'area',
-            // inverted: true,
-            height: 480,
-            marginBottom: 75,
-            marginRight: 120,
-        },
-
         plotOptions: {
             series: {
                 animation,
             },
-            /*
-            column: {
-                borderColor: null,
-                pointPadding: 0,
-                groupPadding: 0,
-            },
-            */
         },
-        tooltip: {
-            crosshairs: true,
-            formatter: function (tooltip) {
-                // console.log('tooltip', this.point, tooltip)
-                // If the point value is null, display 'Null'
-
-                if (this.point.value === null) {
-                    return 'Null'
-                }
-                // If not null, use the default formatter
-                return tooltip.defaultFormatter.call(this, tooltip)
-            },
-        },
-
         series: [
             {
-                name: 'Elevation',
+                name: i18n.t('Elevation'),
                 data: series,
                 color: colors.teal300,
-
-                /*
-                dataLabels: {
-                    enabled: true,
-                    formatter: (a, b, c) => {
-                        console.log('dataLabels', a, b, c)
-                        // return this.point.label
-                        return 'label'
-                    },
-                },
-                */
             },
         ],
     }
