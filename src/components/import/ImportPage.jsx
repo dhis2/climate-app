@@ -31,8 +31,14 @@ const ImportPage = () => {
     const [dataElement, setDataElement] = useState()
     const standardPeriod = getStandardPeriod(period) // ISO 8601 used by GEE
     const [startExtract, setStartExtract] = useState(false)
+
+    const isTemporalDataset = dataset?.periodType !== 'N/A'
+
     const orgUnitCount = useOrgUnitCount(orgUnits?.parent?.id, orgUnits?.level)
-    const periodCount = useMemo(() => getPeriods(period).length, [period])
+    const periodCount = useMemo(
+        () => (isTemporalDataset ? getPeriods(period).length : 0),
+        [period, isTemporalDataset]
+    )
     const valueCount = orgUnitCount * periodCount
     const periodType = periodTypes
         .find((type) => type.id === period.periodType)
@@ -45,7 +51,7 @@ const ImportPage = () => {
 
     const isValid = !!(
         dataset &&
-        isValidPeriod(standardPeriod) &&
+        (dataset.periodType === 'N/A' || isValidPeriod(standardPeriod)) &&
         isValidOrgUnits &&
         dataElement &&
         valueCount <= maxValues
@@ -73,6 +79,7 @@ const ImportPage = () => {
                             calendar={calendar}
                             period={period}
                             datasetPeriodType={dataset?.periodType}
+                            datasetPeriod={dataset?.period}
                             onChange={setPeriod}
                         />
                         <OrgUnits selected={orgUnits} onChange={setOrgUnits} />
@@ -112,7 +119,11 @@ const ImportPage = () => {
                             {startExtract && isValid && (
                                 <ExtractData
                                     dataset={dataset}
-                                    period={standardPeriod}
+                                    period={
+                                        dataset.periodType !== 'N/A'
+                                            ? standardPeriod
+                                            : null
+                                    }
                                     orgUnits={orgUnits}
                                     dataElement={dataElement}
                                 />

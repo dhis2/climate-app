@@ -1,22 +1,47 @@
+import i18n from '@dhis2/d2-i18n'
+import { animation, elevationCredits } from '../../../../utils/chart.js'
+import { colors } from '@dhis2/ui'
+
+const createPlotLine = (value, text) => ({
+    color: colors.grey600,
+    width: 1.2,
+    dashStyle: 'Dash',
+    value,
+    label: {
+        text: `${text}<br>${i18n.t('{{value}} m', { value })}`,
+        align: 'right',
+        textAlign: 'left',
+        x: 10,
+        style: {
+            color: colors.grey800,
+        },
+    },
+    zIndex: 5,
+})
+
 const getChartConfig = (name, data) => {
-    console.log('config', name, data)
+    // const reducers = Object.keys(data)
+    // console.log('reducers', reducers)
 
-    const elevations = Object.keys(data.elevation)
-    const values = Object.values(data.elevation)
+    // console.log('data', data)
 
-    /*
+    const { mean, min, max, histogram } = data
+
+    const elevations = Object.keys(histogram)
+        .map(Number)
+        .sort((a, b) => a - b)
+
+    const values = Object.values(histogram).map((v) => v['area'])
+
     const series = elevations.map((elevation) => ({
-        x: Number(elevation),
-        y: values[elevation],
+        x: histogram[String(elevation)]['area'],
+        y: elevation,
     }))
-    */
 
-    const series = values
+    const minArea = Math.min(...values)
+    const maxArea = Math.max(...values)
 
-    const minElevation = Number(elevations[0])
-    const maxElevation = Number(elevations[elevations.length - 1])
-
-    console.log('elevations', minElevation, maxElevation, series)
+    // console.log('elevations', minElevation, maxElevation, elevations)
 
     // frequency / histogram
     // https://www.linkedin.com/pulse/histograms-dem-values-chonghua-yin/
@@ -24,15 +49,23 @@ const getChartConfig = (name, data) => {
 
     return {
         title: {
-            text: 'Elevation',
+            text: i18n.t('{{name}}: Elevation', {
+                name,
+                nsSeparator: ';',
+            }),
         },
-        // credits: vegetationCredits,
+        credits: elevationCredits,
         tooltip: {
             // crosshairs: true,
             // shared: true,
             // valueSuffix: '°C',
         },
-        yAxis: {
+        legend: { enabled: false },
+        xAxis: {
+            labels: {
+                format: '{value} ha',
+            },
+            // title: 'Test',
             /*
             type: 'datetime',
             tickInterval: 2592000000,
@@ -41,41 +74,80 @@ const getChartConfig = (name, data) => {
             },
             */
             // title: 'Area',
+            /*
             title: {
                 text: 'Area',
             },
-            min: 0,
-            max: 20000,
+            */
+            min: minArea,
+            max: maxArea,
+            // crosshair: true,
         },
-        xAxis: {
-            title: {
-                text: 'Elevation',
+        yAxis: {
+            title: false,
+            labels: {
+                format: '{value} m',
             },
-            min: minElevation,
-            max: maxElevation,
+            min,
+            max,
+            lineWidth: 1,
+            plotLines: [
+                createPlotLine(min, i18n.t('Min elevation')),
+                createPlotLine(Math.round(mean), i18n.t('Mean elevation')),
+                createPlotLine(max, i18n.t('Max elevation')),
+            ],
+            // crosshair: true,
         },
         chart: {
             type: 'area',
             // inverted: true,
             height: 480,
             marginBottom: 75,
+            marginRight: 120,
         },
-        /*
+
         plotOptions: {
             series: {
                 animation,
             },
+            /*
             column: {
                 borderColor: null,
                 pointPadding: 0,
                 groupPadding: 0,
             },
+            */
         },
-        */
+        tooltip: {
+            crosshairs: true,
+            formatter: function (tooltip) {
+                // console.log('tooltip', this.point, tooltip)
+                // If the point value is null, display 'Null'
+
+                if (this.point.value === null) {
+                    return 'Null'
+                }
+                // If not null, use the default formatter
+                return tooltip.defaultFormatter.call(this, tooltip)
+            },
+        },
+
         series: [
             {
-                data: series,
                 name: 'Elevation',
+                data: series,
+                color: colors.teal300,
+
+                /*
+                dataLabels: {
+                    enabled: true,
+                    formatter: (a, b, c) => {
+                        console.log('dataLabels', a, b, c)
+                        // return this.point.label
+                        return 'label'
+                    },
+                },
+                */
             },
         ],
     }

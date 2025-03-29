@@ -107,22 +107,22 @@ const tabRoutes = [
         ],
     },
     {
-        path: 'elevation',
-        element: <Tabs />,
-        children: [
-            {
-                index: true,
-                element: <Elevation />,
-            },
-        ],
-    },
-    {
         path: 'vegetation',
         element: <Tabs />,
         children: [
             {
                 path: ':vegetationIndex',
                 element: <Vegetation />,
+            },
+        ],
+    },
+    {
+        path: 'elevation',
+        element: <Tabs />,
+        children: [
+            {
+                index: true,
+                element: <Elevation />,
             },
         ],
     },

@@ -119,6 +119,42 @@ const getReducedCollection = ({
         .set('system:time_start', startDate.millis())
         .set('system:time_end', endDate.millis())
 
+export const getEarthEngineImageValues = ({ ee, dataset, features }) => {
+    const { datasetId, band, reducer = 'mean', period, valueParser } = dataset
+
+    const eeImage = ee.Image(datasetId).select(band)
+    const eeReducer = ee.Reducer[reducer]()
+    const featureCollection = ee.FeatureCollection(features)
+    const eeScale = getScale(eeImage)
+
+    const data = eeImage
+        .reduceRegions({
+            collection: featureCollection,
+            reducer: eeReducer,
+            scale: eeScale,
+        })
+        .map((feature) =>
+            ee.Feature(null, {
+                ou: feature.get('id'),
+                period,
+                value: feature.get(reducer),
+            })
+        )
+
+    // TODO: Make function
+    return getInfo(data).then(({ features }) =>
+        features.map((feature) => {
+            const props = getFeatureProperties(feature)
+
+            if (valueParser) {
+                props.value = valueParser(props.value)
+            }
+
+            return props
+        })
+    )
+}
+
 export const getEarthEngineValues = ({
     ee,
     dataset: datasetParams,
@@ -318,7 +354,9 @@ export const getEarthEngineValues = ({
     })
 
 export const getEarthEngineData = ({ ee, dataset, period, features }) => {
-    if (dataset.bands) {
+    if (!period) {
+        return getEarthEngineImageValues({ ee, dataset, features })
+    } else if (dataset.bands) {
         // Multiple bands (used for relative humidity)
         const { bandsParser = (v) => v } = dataset
 
@@ -455,6 +493,23 @@ export const getClimateNormals = ({ ee, dataset, period, geometry }) => {
     return getInfo(data).then(getMonthlyNormals(band))
 }
 
+export const getHistogramStatistics = (data, scale) => {
+    const sum = Object.values(data).reduce((a, b) => a + b, 0)
+    // const area = (sum * scale * scale) / 1000000 // 6317
+
+    // TODO: Make immutable
+    Object.keys(data).forEach((key) => {
+        data[key] = {
+            count: data[key],
+            area: (data[key] * scale * scale) / 10000, // hectares
+            percentage: (data[key] / sum) * 100,
+        }
+    })
+
+    // console.log('getHistogramStatistics', scale, sum, area, data)
+    return data
+}
+
 // Get data from single image
 export const getImageData = async ({ ee, dataset, geometry }) => {
     const { datasetId, band } = dataset
@@ -467,21 +522,44 @@ export const getImageData = async ({ ee, dataset, geometry }) => {
 
     const data = image.reduceRegion(eeReducer, eeGeometry, eeScale)
 
+    // TODO: Handle point locations
+
     // const reducer = ee.Reducer.frequencyHistogram()
 
     // https://stackoverflow.com/questions/57060903/reclassify-ndvi-raster-in-intervals-on-google-earht-engine
     // https://gis.stackexchange.com/questions/264000/reclassifying-raster-values-in-google-earth-engine
     // const test = image.reduceRegion(ee.Reducer.frequencyHistogram(), eeGeometry)
     // .select(['histogram'], null, false)
-    const test = image
+    const histogram = image
         // .divide(10)
         // .ceil()
+        // .toInt()
         .reduceRegion(ee.Reducer.frequencyHistogram(), eeGeometry)
 
     // getInfo(test).then((data) => console.log(data))
 
     // return getInfo(data)
-    return getInfo(test)
+    /*
+    return getInfo(histogram).then((data) => {
+        // console.log('data', data[band])
+        return data[band]
+    })
+    */
+
+    return Promise.all([
+        getInfo(data),
+        getInfo(histogram),
+        getInfo(eeScale),
+    ]).then(([data, histogram, scale]) => ({
+        ...Object.keys(data).reduce(
+            (obj, key) => ({
+                ...obj,
+                [key.replace(`${band}_`, '')]: data[key],
+            }),
+            {}
+        ),
+        histogram: getHistogramStatistics(histogram[band], scale),
+    }))
 }
 
 const getKeyFromFilter = (filter) =>

@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import { demResolution } from '../../../data/datasets.js'
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
 import exploreStore from '../../../store/exploreStore.js'
@@ -5,11 +6,12 @@ import DataLoader from '../../shared/DataLoader.jsx'
 import Resolution from '../../shared/Resolution.jsx'
 import Chart from '../Chart.jsx'
 import getChartConfig from './charts/elevation.js'
+import styles from './styles/Elevation.module.css'
 
 const dataset = {
     datasetId: 'USGS/SRTMGL1_003',
     band: 'elevation',
-    reducer: ['mean', 'stdDev', 'min', 'max'],
+    reducer: ['mean', 'min', 'max'],
     sharedInputs: true,
 }
 
@@ -25,7 +27,26 @@ const Elevation = () => {
 
     return (
         <>
-            <Chart config={getChartConfig(name, data)} />
+            {feature.geometry.type === 'Point' ? (
+                <div className={styles.facility}>
+                    <h2>
+                        {i18n.t('{{name}}: Elevation', {
+                            name,
+                            nsSeparator: ';',
+                        })}
+                    </h2>
+                    {i18n.t('{{value}} m', { value: data.mean })}
+                </div>
+            ) : (
+                <>
+                    <Chart config={getChartConfig(name, data)} />
+                    <div className={styles.description}>
+                        {i18n.t(
+                            'The chart shows the elevation distribution of the selected area. The mean, minimum, and maximum elevation values are calculated from the elevation data.'
+                        )}
+                    </div>
+                </>
+            )}
             <Resolution resolution={demResolution} />
         </>
     )

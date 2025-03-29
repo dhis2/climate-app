@@ -2,6 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import {
     convertFromIso8601,
     convertToIso8601,
+    createFixedPeriodFromPeriodId,
     generateFixedPeriods,
     getNowInCalendar,
 } from '@dhis2/multi-calendar-dates'
@@ -11,6 +12,7 @@ export const DAILY = 'DAILY'
 export const WEEKLY = 'WEEKLY'
 export const MONTHLY = 'MONTHLY'
 export const SIXTEEN_DAYS = 'SIXTEEN_DAYS'
+export const YEARLY = 'YEARLY'
 
 export const oneDayInMs = 1000 * 60 * 60 * 24
 

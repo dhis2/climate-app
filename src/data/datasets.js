@@ -277,6 +277,54 @@ export default [
         aggregationType: i18n.t('Average'),
         dataElementCode: 'MODIS_EVI',
     },
+    {
+        id: 'USGS/SRTMGL1_003/mean',
+        datasetId: 'USGS/SRTMGL1_003',
+        name: i18n.t('Mean elevation (SRTM)'),
+        shortName: i18n.t('Mean elevation'),
+        description: i18n.t('Mean elevation in meters above sea level.'),
+        source: i18n.t('NASA / USGS / JPL-Caltech'),
+        resolution: demResolution,
+        periodType: 'N/A',
+        period: '2000',
+        band: 'elevation',
+        reducer: 'mean',
+        valueParser: Math.round,
+        aggregationType: i18n.t('First value'),
+        dataElementCode: 'SRTM_ELEVATION_MEAN',
+    },
+    {
+        id: 'USGS/SRTMGL1_003/min',
+        datasetId: 'USGS/SRTMGL1_003',
+        name: i18n.t('Min elevation (SRTM)'),
+        shortName: i18n.t('Min elevation'),
+        description: i18n.t('Min elevation in meters above sea level.'),
+        source: i18n.t('NASA / USGS / JPL-Caltech'),
+        resolution: demResolution,
+        periodType: 'N/A',
+        period: '2000',
+        band: 'elevation',
+        reducer: 'min',
+        valueParser: Math.round,
+        aggregationType: i18n.t('First value'),
+        dataElementCode: 'SRTM_ELEVATION_MIN',
+    },
+    {
+        id: 'USGS/SRTMGL1_003/max',
+        datasetId: 'USGS/SRTMGL1_003',
+        name: i18n.t('Max elevation (SRTM)'),
+        shortName: i18n.t('Max elevation'),
+        description: i18n.t('Max elevation in meters above sea level.'),
+        source: i18n.t('NASA / USGS / JPL-Caltech'),
+        resolution: demResolution,
+        periodType: 'N/A',
+        period: '2000',
+        band: 'elevation',
+        reducer: 'max',
+        valueParser: Math.round,
+        aggregationType: i18n.t('First value'),
+        dataElementCode: 'SRTM_ELEVATION_MAX',
+    },
 ]
 
 const era5band = [
@@ -340,6 +388,11 @@ export const dhisDataSets = [
         shortName: i18n.t('Environment'),
         periodType: i18n.t('Weekly or Monthly'),
     },
+    {
+        name: i18n.t('Land'),
+        shortName: i18n.t('Land'),
+        periodType: i18n.t('Yearly'),
+    },
 ]
 
 export const dhisDataElementGroups = [
@@ -352,5 +405,10 @@ export const dhisDataElementGroups = [
         name: i18n.t('Environment'),
         shortName: i18n.t('Environment'),
         dataElements: i18n.t('Assign above data elements (vegetation)'),
+    },
+    {
+        name: i18n.t('Land'),
+        shortName: i18n.t('Land'),
+        dataElements: i18n.t('Assign above data elements (elevation)'),
     },
 ]
