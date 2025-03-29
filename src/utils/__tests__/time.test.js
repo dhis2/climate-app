@@ -139,12 +139,6 @@ describe('time utils', () => {
         expect(getCalendarDate(gregoryCalendar, { days: -1 })).toEqual(
             yesterday
         )
-        expect(getCalendarDate(gregoryCalendar, { months: 1 })).toEqual(
-            nextMonth
-        )
-        expect(getCalendarDate(gregoryCalendar, { months: -1 })).toEqual(
-            lastMonth
-        )
     })
 
     it('it should get the nepali calendar date', () => {

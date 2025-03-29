@@ -2,7 +2,6 @@ import i18n from '@dhis2/d2-i18n'
 import {
     convertFromIso8601,
     convertToIso8601,
-    createFixedPeriodFromPeriodId,
     generateFixedPeriods,
     getNowInCalendar,
 } from '@dhis2/multi-calendar-dates'
