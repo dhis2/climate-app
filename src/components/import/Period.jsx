@@ -27,6 +27,7 @@ const Period = ({
     const result = useDataQuery(userSettingsQuery)
     const { data: { userSettings: { keyUiLocale: locale } = {} } = {} } = result
     const { periodType, startTime, endTime } = period
+    const hasNoPeriod = dataset?.periodType === 'N/A'
     const isTemporalDataset = datasetPeriodType !== 'N/A'
 
     // Set period locale from user settings
@@ -45,7 +46,14 @@ const Period = ({
     return (
         <div className={styles.container}>
             <h2>{i18n.t('Period')}</h2>
-            {isTemporalDataset ? (
+            {hasNoPeriod ? (
+                <p>
+                    {i18n.t(
+                        "The data don't have a period. It will be imported with the year the data was collected ({{datasetPeriod}}).",
+                        { datasetPeriod }
+                    )}
+                </p>
+            ) : (
                 <>
                     <p>
                         {i18n.t(
@@ -89,13 +97,6 @@ const Period = ({
                         <TimeZone period={period} onChange={onChange} />
                     </div>
                 </>
-            ) : (
-                <p>
-                    {i18n.t(
-                        "The data don't have a period. It will be imported with the year the data was collected ({{datasetPeriod}}).",
-                        { datasetPeriod }
-                    )}
-                </p>
             )}
         </div>
     )

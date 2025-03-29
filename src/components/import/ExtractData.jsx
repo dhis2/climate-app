@@ -68,7 +68,7 @@ ExtractData.propTypes = {
     dataElement: PropTypes.object.isRequired,
     dataset: PropTypes.object.isRequired,
     orgUnits: PropTypes.object.isRequired,
-    period: PropTypes.object,
+    period: PropTypes.object.isRequired,
 }
 
 export default ExtractData

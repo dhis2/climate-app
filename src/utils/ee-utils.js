@@ -493,20 +493,17 @@ export const getClimateNormals = ({ ee, dataset, period, geometry }) => {
     return getInfo(data).then(getMonthlyNormals(band))
 }
 
-export const getHistogramStatistics = (data, scale) => {
-    const sum = Object.values(data).reduce((a, b) => a + b, 0)
-    // const area = (sum * scale * scale) / 1000000 // 6317
+// Calculate area from histogram
+export const getHistogramStatistics = (histogram, scale) => {
+    const data = {}
 
-    // TODO: Make immutable
-    Object.keys(data).forEach((key) => {
+    Object.keys(histogram).forEach((key) => {
         data[key] = {
-            count: data[key],
-            area: (data[key] * scale * scale) / 10000, // hectares
-            percentage: (data[key] / sum) * 100,
+            count: histogram[key],
+            area: (histogram[key] * scale * scale) / 10000, // hectares
         }
     })
 
-    // console.log('getHistogramStatistics', scale, sum, area, data)
     return data
 }
 
@@ -522,29 +519,10 @@ export const getImageData = async ({ ee, dataset, geometry }) => {
 
     const data = image.reduceRegion(eeReducer, eeGeometry, eeScale)
 
-    // TODO: Handle point locations
-
-    // const reducer = ee.Reducer.frequencyHistogram()
-
-    // https://stackoverflow.com/questions/57060903/reclassify-ndvi-raster-in-intervals-on-google-earht-engine
-    // https://gis.stackexchange.com/questions/264000/reclassifying-raster-values-in-google-earth-engine
-    // const test = image.reduceRegion(ee.Reducer.frequencyHistogram(), eeGeometry)
-    // .select(['histogram'], null, false)
-    const histogram = image
-        // .divide(10)
-        // .ceil()
-        // .toInt()
-        .reduceRegion(ee.Reducer.frequencyHistogram(), eeGeometry)
-
-    // getInfo(test).then((data) => console.log(data))
-
-    // return getInfo(data)
-    /*
-    return getInfo(histogram).then((data) => {
-        // console.log('data', data[band])
-        return data[band]
-    })
-    */
+    const histogram = image.reduceRegion(
+        ee.Reducer.frequencyHistogram(),
+        eeGeometry
+    )
 
     return Promise.all([
         getInfo(data),

@@ -32,12 +32,12 @@ const ImportPage = () => {
     const standardPeriod = getStandardPeriod(period) // ISO 8601 used by GEE
     const [startExtract, setStartExtract] = useState(false)
 
-    const isTemporalDataset = dataset?.periodType !== 'N/A'
+    const hasNoPeriod = dataset?.periodType === 'N/A'
 
     const orgUnitCount = useOrgUnitCount(orgUnits?.parent?.id, orgUnits?.level)
     const periodCount = useMemo(
-        () => (isTemporalDataset ? getPeriods(period).length : 0),
-        [period, isTemporalDataset]
+        () => (hasNoPeriod ? 0 : getPeriods(period).length),
+        [period, hasNoPeriod]
     )
     const valueCount = orgUnitCount * periodCount
     const periodType = periodTypes
@@ -51,7 +51,7 @@ const ImportPage = () => {
 
     const isValid = !!(
         dataset &&
-        (dataset.periodType === 'N/A' || isValidPeriod(standardPeriod)) &&
+        (hasNoPeriod || isValidPeriod(standardPeriod)) &&
         isValidOrgUnits &&
         dataElement &&
         valueCount <= maxValues
@@ -119,11 +119,7 @@ const ImportPage = () => {
                             {startExtract && isValid && (
                                 <ExtractData
                                     dataset={dataset}
-                                    period={
-                                        dataset.periodType !== 'N/A'
-                                            ? standardPeriod
-                                            : null
-                                    }
+                                    period={hasNoPeriod ? null : standardPeriod}
                                     orgUnits={orgUnits}
                                     dataElement={dataElement}
                                 />
