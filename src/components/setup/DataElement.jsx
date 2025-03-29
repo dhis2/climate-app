@@ -6,6 +6,7 @@ const DataElement = ({
     shortName,
     dataElementCode,
     description,
+    source,
     aggregationType,
 }) => (
     <table>
@@ -27,7 +28,9 @@ const DataElement = ({
             </tr>
             <tr>
                 <th>{i18n.t('Description')}</th>
-                <td>{description}</td>
+                <td>
+                    {description} {i18n.t('Data source')}: {source}
+                </td>
             </tr>
             <tr>
                 <th>{i18n.t('Domain type')}</th>

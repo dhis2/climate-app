@@ -27,8 +27,7 @@ const Period = ({
     const result = useDataQuery(userSettingsQuery)
     const { data: { userSettings: { keyUiLocale: locale } = {} } = {} } = result
     const { periodType, startTime, endTime } = period
-    const hasNoPeriod = dataset?.periodType === 'N/A'
-    const isTemporalDataset = datasetPeriodType !== 'N/A'
+    const hasNoPeriod = datasetPeriodType === 'N/A'
 
     // Set period locale from user settings
     useEffect(() => {
