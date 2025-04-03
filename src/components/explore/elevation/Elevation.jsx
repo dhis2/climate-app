@@ -42,7 +42,7 @@ const Elevation = () => {
                     <Chart config={getChartConfig(name, data)} />
                     <div className={styles.description}>
                         {i18n.t(
-                            'The chart shows the elevation distribution of the selected area. The mean, minimum, and maximum elevation values are calculated from the elevation data.'
+                            'The chart shows the elevation distribution of the selected area, for each meter above sea level it shows the area with this elevation in hectares. The mean, minimum, and maximum elevation values are calculated from the elevation data.'
                         )}
                     </div>
                 </>

@@ -48,8 +48,8 @@ const Period = ({
             {hasNoPeriod ? (
                 <p>
                     {i18n.t(
-                        "The data don't have a period. It will be imported with the year the data was collected ({{datasetPeriod}}).",
-                        { datasetPeriod }
+                        'The data will be assigned a default yearly period that matches the year it was collected: {{datasetPeriod}}',
+                        { datasetPeriod, nsSeparator: ';' }
                     )}
                 </p>
             ) : (
