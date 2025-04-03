@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/dhis2/climate-app/compare/v1.8.0...v1.9.0) (2025-04-03)
+
+
+### Features
+
+* elevation data ([#68](https://github.com/dhis2/climate-app/issues/68)) ([86701ef](https://github.com/dhis2/climate-app/commit/86701efb5c9a80243d7ed3e87c41108478627482))
+
 # [1.8.0](https://github.com/dhis2/climate-app/compare/v1.7.0...v1.8.0) (2025-04-03)
 
 
