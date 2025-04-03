@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-04-03T08:45:09.074Z\n"
-"PO-Revision-Date: 2025-04-03T08:45:09.074Z\n"
+"POT-Creation-Date: 2025-03-07T10:47:32.346Z\n"
+"PO-Revision-Date: 2025-03-07T10:47:32.346Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -231,9 +231,6 @@ msgstr "Climate change"
 msgid "Vegetation"
 msgstr "Vegetation"
 
-msgid "Elevation"
-msgstr "Elevation"
-
 msgid ""
 "Temperature anomaly is the difference of a temperature from a reference "
 "value, calculated as the average temperature over a period of 30 years. "
@@ -253,38 +250,6 @@ msgstr "Reference period: {{period}}"
 
 msgid "Temperature anomaly"
 msgstr "Temperature anomaly"
-
-msgid "{{name}}: Elevation"
-msgstr "{{name}}: Elevation"
-
-msgid "{{value}} m"
-msgstr "{{value}} m"
-
-msgid ""
-"The chart shows the elevation distribution of the selected area, for each "
-"meter above sea level it shows the area with this elevation in hectares. "
-"The mean, minimum, and maximum elevation values are calculated from the "
-"elevation data."
-msgstr ""
-"The chart shows the elevation distribution of the selected area, for each "
-"meter above sea level it shows the area with this elevation in hectares. "
-"The mean, minimum, and maximum elevation values are calculated from the "
-"elevation data."
-
-msgid "Elevation: {{value}} m"
-msgstr "Elevation: {{value}} m"
-
-msgid "Area: {{value}} ha"
-msgstr "Area: {{value}} ha"
-
-msgid "Min elevation"
-msgstr "Min elevation"
-
-msgid "Mean elevation"
-msgstr "Mean elevation"
-
-msgid "Max elevation"
-msgstr "Max elevation"
 
 msgid "{{precip}} mm"
 msgstr "{{precip}} mm"
@@ -540,24 +505,8 @@ msgstr "{{name}}: Monthly temperatures {{period}}"
 msgid "Normal temperature"
 msgstr "Normal temperature"
 
-msgid "Resample"
-msgstr "Resample"
-
-msgid "Weekly"
-msgstr "Weekly"
-
-msgid ""
-"Change from 16-days to weekly or monthly periods using linear "
-"interpolation. Weekly periods are recommended when importing to DHIS2."
-msgstr ""
-"Change from 16-days to weekly or monthly periods using linear "
-"interpolation. Weekly periods are recommended when importing to DHIS2."
-
-msgid "{{name}}: {{band}} vegetation index {{period}}"
-msgstr "{{name}}: {{band}} vegetation index {{period}}"
-
-msgid "Value is only for 250 x 250 m where the facility is located"
-msgstr "Value is only for 250 x 250 m where the facility is located"
+msgid "{{name}}: {{band}} vegetation index 2024"
+msgstr "{{name}}: {{band}} vegetation index 2024"
 
 msgid "Data element"
 msgstr "Data element"
@@ -586,9 +535,6 @@ msgid ""
 msgstr ""
 "Extracting data for {{periodCount}} {{periodType}} periods and "
 "{{orgUnitsCount}} org units ({{valueCount}} values)"
-
-msgid "Extracting data for {{orgUnitsCount}} org units"
-msgstr "Extracting data for {{orgUnitsCount}} org units"
 
 msgid "Importing data to DHIS2"
 msgstr "Importing data to DHIS2"
@@ -722,13 +668,6 @@ msgstr "Organisation unit level to import data to"
 msgid "Org unit parent needs to be above or equal to the org unit level"
 msgstr "Org unit parent needs to be above or equal to the org unit level"
 
-msgid ""
-"The data will be assigned a default yearly period that matches the year it "
-"was collected: {{datasetPeriod}}"
-msgstr ""
-"The data will be assigned a default yearly period that matches the year it "
-"was collected: {{datasetPeriod}}"
-
 msgid "Daily values will be imported between start and end dates"
 msgstr "Daily values will be imported between start and end dates"
 
@@ -798,9 +737,6 @@ msgstr "Code"
 msgid "Description"
 msgstr "Description"
 
-msgid "Data source"
-msgstr "Data source"
-
 msgid "Domain type"
 msgstr "Domain type"
 
@@ -839,9 +775,6 @@ msgstr "Organisation units"
 
 msgid "Select all organisation units in your system"
 msgstr "Select all organisation units in your system"
-
-msgid "Legend: \"{{-name}}\""
-msgstr "Legend: \"{{-name}}\""
 
 msgid "Start value"
 msgstr "Start value"
@@ -967,21 +900,6 @@ msgstr ""
 msgid "Time zone"
 msgstr "Time zone"
 
-msgid "ERA5-Land / Copernicus Climate Change Service"
-msgstr "ERA5-Land / Copernicus Climate Change Service"
-
-msgid "ERA5-Heat / Copernicus Climate Change Service"
-msgstr "ERA5-Heat / Copernicus Climate Change Service"
-
-msgid "Climate Hazards Center / UCSB"
-msgstr "Climate Hazards Center / UCSB"
-
-msgid "NASA LP DAAC at the USGS EROS Center"
-msgstr "NASA LP DAAC at the USGS EROS Center"
-
-msgid "NASA / USGS / JPL-Caltech"
-msgstr "NASA / USGS / JPL-Caltech"
-
 msgid "Approximately 31 km (0.25°)"
 msgstr "Approximately 31 km (0.25°)"
 
@@ -994,34 +912,35 @@ msgstr "Approximately 5 km (0.05°)"
 msgid "Approximately 250 m"
 msgstr "Approximately 250 m"
 
-msgid "Approximately 30 m"
-msgstr "Approximately 30 m"
-
 msgid ""
 "Landsat Normalized Difference Vegetation Index (NDVI) is used to quantify "
 "vegetation greenness and is useful in understanding vegetation density and "
 "assessing changes in plant health. NDVI values range from -1 to 1, with "
-"higher values indicating denser vegetation."
+"higher values indicating denser vegetation. Data originates from MODIS "
+"(NASA)."
 msgstr ""
 "Landsat Normalized Difference Vegetation Index (NDVI) is used to quantify "
 "vegetation greenness and is useful in understanding vegetation density and "
 "assessing changes in plant health. NDVI values range from -1 to 1, with "
-"higher values indicating denser vegetation."
+"higher values indicating denser vegetation. Data originates from MODIS "
+"(NASA)."
 
 msgid ""
 "Enhanced vegetation index (EVI) differs from NDVI by reducing the influence "
 "of atmospheric conditions and canopy background noise. EVI values range "
-"from -1 to 1, with higher values indicating denser vegetation."
+"from -1 to 1, with higher values indicating denser vegetation. Data "
+"originates from MODIS (NASA)."
 msgstr ""
 "Enhanced vegetation index (EVI) differs from NDVI by reducing the influence "
 "of atmospheric conditions and canopy background noise. EVI values range "
-"from -1 to 1, with higher values indicating denser vegetation."
+"from -1 to 1, with higher values indicating denser vegetation. Data "
+"originates from MODIS (NASA)."
 
 msgid "Air temperature (ERA5-Land)"
 msgstr "Air temperature (ERA5-Land)"
 
-msgid "Average air temperature in °C at 2 m above the surface."
-msgstr "Average air temperature in °C at 2 m above the surface."
+msgid "Average air temperature in °C at 2 m above the surface"
+msgstr "Average air temperature in °C at 2 m above the surface"
 
 msgid "Average"
 msgstr "Average"
@@ -1032,8 +951,8 @@ msgstr "Max air temperature (ERA5-Land)"
 msgid "Max air temperature"
 msgstr "Max air temperature"
 
-msgid "Maximum air temperature in °C at 2 m above the surface."
-msgstr "Maximum air temperature in °C at 2 m above the surface."
+msgid "Maximum air temperature in °C at 2 m above the surface"
+msgstr "Maximum air temperature in °C at 2 m above the surface"
 
 msgid "Max"
 msgstr "Max"
@@ -1044,8 +963,8 @@ msgstr "Min temperature (ERA5-Land)"
 msgid "Min air temperature"
 msgstr "Min air temperature"
 
-msgid "Minimum air temperature in °C at 2 m above the surface."
-msgstr "Minimum air temperature in °C at 2 m above the surface."
+msgid "Minimum air temperature in °C at 2 m above the surface"
+msgstr "Minimum air temperature in °C at 2 m above the surface"
 
 msgid "Min"
 msgstr "Min"
@@ -1056,8 +975,8 @@ msgstr "Precipitation (ERA5-Land)"
 msgid "Precipitation (ERA5)"
 msgstr "Precipitation (ERA5)"
 
-msgid "Total precipitation in mm."
-msgstr "Total precipitation in mm."
+msgid "Total precipitation in mm"
+msgstr "Total precipitation in mm"
 
 msgid "Sum"
 msgstr "Sum"
@@ -1065,8 +984,8 @@ msgstr "Sum"
 msgid "Precipitation (CHIRPS)"
 msgstr "Precipitation (CHIRPS)"
 
-msgid "Precipitation in mm."
-msgstr "Precipitation in mm."
+msgid "Precipitation in mm"
+msgstr "Precipitation in mm"
 
 msgid "Dewpoint temperature (ERA5-Land)"
 msgstr "Dewpoint temperature (ERA5-Land)"
@@ -1096,8 +1015,8 @@ msgstr "Heat stress (ERA5-HEAT)"
 msgid "Heat stress"
 msgstr "Heat stress"
 
-msgid "Average felt temperature in °C."
-msgstr "Average felt temperature in °C."
+msgid "Average felt temperature in °C"
+msgstr "Average felt temperature in °C"
 
 msgid "Max heat stress (ERA5-HEAT)"
 msgstr "Max heat stress (ERA5-HEAT)"
@@ -1105,8 +1024,8 @@ msgstr "Max heat stress (ERA5-HEAT)"
 msgid "Max heat stress"
 msgstr "Max heat stress"
 
-msgid "Maximum felt temperature in °C."
-msgstr "Maximum felt temperature in °C."
+msgid "Maximum felt temperature in °C"
+msgstr "Maximum felt temperature in °C"
 
 msgid "Min heat stress (ERA5-HEAT)"
 msgstr "Min heat stress (ERA5-HEAT)"
@@ -1114,8 +1033,8 @@ msgstr "Min heat stress (ERA5-HEAT)"
 msgid "Min heat stress"
 msgstr "Min heat stress"
 
-msgid "Minimum felt temperature in °C."
-msgstr "Minimum felt temperature in °C."
+msgid "Minimum felt temperature in °C"
+msgstr "Minimum felt temperature in °C"
 
 msgid "NDVI - Normalized difference vegetation index (MODIS)"
 msgstr "NDVI - Normalized difference vegetation index (MODIS)"
@@ -1129,27 +1048,6 @@ msgstr "EVI - Enhanced vegetation index (MODIS)"
 msgid "EVI"
 msgstr "EVI"
 
-msgid "Mean elevation (SRTM)"
-msgstr "Mean elevation (SRTM)"
-
-msgid "Mean elevation in meters above sea level."
-msgstr "Mean elevation in meters above sea level."
-
-msgid "First value"
-msgstr "First value"
-
-msgid "Min elevation (SRTM)"
-msgstr "Min elevation (SRTM)"
-
-msgid "Min elevation in meters above sea level."
-msgstr "Min elevation in meters above sea level."
-
-msgid "Max elevation (SRTM)"
-msgstr "Max elevation (SRTM)"
-
-msgid "Max elevation in meters above sea level."
-msgstr "Max elevation in meters above sea level."
-
 msgid "Climate/Weather"
 msgstr "Climate/Weather"
 
@@ -1159,20 +1057,11 @@ msgstr "Environment"
 msgid "Weekly or Monthly"
 msgstr "Weekly or Monthly"
 
-msgid "Land"
-msgstr "Land"
-
-msgid "Yearly"
-msgstr "Yearly"
-
 msgid "Assign above data elements (weather & climate)"
 msgstr "Assign above data elements (weather & climate)"
 
 msgid "Assign above data elements (vegetation)"
 msgstr "Assign above data elements (vegetation)"
-
-msgid "Assign above data elements (elevation)"
-msgstr "Assign above data elements (elevation)"
 
 msgid "Heat/cold stress"
 msgstr "Heat/cold stress"
@@ -1249,8 +1138,8 @@ msgstr "ERA5-HEAT / Copernicus Climate Change Service / Google Earth Engine"
 msgid "NASA LP DAAC at the USGS EROS Center / Google Earth Engine"
 msgstr "NASA LP DAAC at the USGS EROS Center / Google Earth Engine"
 
-msgid "NASA / USGS / JPL-Caltech / Google Earth Engine"
-msgstr "NASA / USGS / JPL-Caltech / Google Earth Engine"
-
 msgid "No data found for the selected period"
 msgstr "No data found for the selected period"
+
+msgid "Weekly"
+msgstr "Weekly"

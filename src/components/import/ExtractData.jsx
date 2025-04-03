@@ -26,35 +26,29 @@ const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
             </div>
         )
     }
+    const orgUnitsCount = features.length
+    const periodType = periodTypes
+        .find((type) => type.id === period.periodType)
+        ?.name.toLowerCase()
+    const periods = getPeriods(period)
+    const periodCount = periods.length
+    const valueCount = periodCount * orgUnitsCount
 
     if (loading) {
-        const orgUnitsCount = features.length
-        let label
-
-        if (period) {
-            const periodType = periodTypes
-                .find((type) => type.id === period.periodType)
-                ?.name.toLowerCase()
-            const periods = getPeriods(period)
-            const periodCount = periods.length
-            const valueCount = periodCount * orgUnitsCount
-
-            label = i18n.t(
-                'Extracting data for {{periodCount}} {{periodType}} periods and {{orgUnitsCount}} org units ({{valueCount}} values)',
-                {
-                    periodCount,
-                    periodType,
-                    orgUnitsCount,
-                    valueCount,
-                }
-            )
-        } else {
-            label = i18n.t('Extracting data for {{orgUnitsCount}} org units', {
-                orgUnitsCount,
-            })
-        }
-
-        return <DataLoader label={label} height={100} />
+        return (
+            <DataLoader
+                label={i18n.t(
+                    'Extracting data for {{periodCount}} {{periodType}} periods and {{orgUnitsCount}} org units ({{valueCount}} values)',
+                    {
+                        periodCount,
+                        periodType,
+                        orgUnitsCount,
+                        valueCount,
+                    }
+                )}
+                height={100}
+            />
+        )
     }
 
     return error ? (

@@ -17,21 +17,14 @@ const userSettingsQuery = {
     },
 }
 
-const Period = ({
-    calendar,
-    period,
-    datasetPeriodType,
-    datasetPeriod,
-    onChange,
-}) => {
+const Period = ({ calendar, period, datasetPeriodType, onChange }) => {
     const result = useDataQuery(userSettingsQuery)
     const { data: { userSettings: { keyUiLocale: locale } = {} } = {} } = result
     const { periodType, startTime, endTime } = period
-    const hasNoPeriod = datasetPeriodType === 'N/A'
 
     // Set period locale from user settings
     useEffect(() => {
-        if (period && locale && locale !== period.locale) {
+        if (locale && locale !== period.locale) {
             onChange({ ...period, locale })
         }
     }, [locale, onChange, period])
@@ -45,58 +38,41 @@ const Period = ({
     return (
         <div className={styles.container}>
             <h2>{i18n.t('Period')}</h2>
-            {hasNoPeriod ? (
-                <p>
-                    {i18n.t(
-                        'The data will be assigned a default yearly period that matches the year it was collected: {{datasetPeriod}}',
-                        { datasetPeriod, nsSeparator: ';' }
-                    )}
-                </p>
-            ) : (
-                <>
-                    <p>
-                        {i18n.t(
-                            'Daily values will be imported between start and end dates'
-                        )}
-                    </p>
-                    <div className={styles.pickers}>
-                        <PeriodType
-                            periodType={periodType}
-                            datasetPeriodType={datasetPeriodType}
-                            onChange={(periodType) =>
-                                onChange({ ...period, periodType })
-                            }
-                        />
-                        <CalendarInput
-                            label={i18n.t('Start date')}
-                            date={startTime}
-                            calendar={calendar}
-                            locale={locale || 'en'}
-                            defaultVal={startTime}
-                            onDateSelect={({ calendarDateString }) =>
-                                onChange({
-                                    ...period,
-                                    startTime: calendarDateString,
-                                })
-                            }
-                        />
-                        <CalendarInput
-                            label={i18n.t('End date')}
-                            date={endTime}
-                            calendar={calendar}
-                            locale={locale || 'en'}
-                            defaultVal={endTime}
-                            onDateSelect={({ calendarDateString }) =>
-                                onChange({
-                                    ...period,
-                                    endTime: calendarDateString,
-                                })
-                            }
-                        />
-                        <TimeZone period={period} onChange={onChange} />
-                    </div>
-                </>
-            )}
+            <p>
+                {i18n.t(
+                    'Daily values will be imported between start and end dates'
+                )}
+            </p>
+            <div className={styles.pickers}>
+                <PeriodType
+                    periodType={periodType}
+                    datasetPeriodType={datasetPeriodType}
+                    onChange={(periodType) =>
+                        onChange({ ...period, periodType })
+                    }
+                />
+                <CalendarInput
+                    label={i18n.t('Start date')}
+                    date={startTime}
+                    calendar={calendar}
+                    locale={locale || 'en'}
+                    defaultVal={startTime}
+                    onDateSelect={({ calendarDateString }) =>
+                        onChange({ ...period, startTime: calendarDateString })
+                    }
+                />
+                <CalendarInput
+                    label={i18n.t('End date')}
+                    date={endTime}
+                    calendar={calendar}
+                    locale={locale || 'en'}
+                    defaultVal={endTime}
+                    onDateSelect={({ calendarDateString }) =>
+                        onChange({ ...period, endTime: calendarDateString })
+                    }
+                />
+                <TimeZone period={period} onChange={onChange} />
+            </div>
         </div>
     )
 }
@@ -104,7 +80,6 @@ const Period = ({
 Period.propTypes = {
     onChange: PropTypes.func.isRequired,
     calendar: PropTypes.string,
-    datasetPeriod: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     datasetPeriodType: PropTypes.string,
     period: PropTypes.object,
 }

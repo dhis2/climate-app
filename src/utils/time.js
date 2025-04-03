@@ -11,7 +11,6 @@ export const DAILY = 'DAILY'
 export const WEEKLY = 'WEEKLY'
 export const MONTHLY = 'MONTHLY'
 export const SIXTEEN_DAYS = 'SIXTEEN_DAYS'
-export const YEARLY = 'YEARLY'
 
 export const oneDayInMs = 1000 * 60 * 60 * 24
 
