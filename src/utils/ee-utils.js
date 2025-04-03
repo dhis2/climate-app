@@ -71,6 +71,40 @@ export const getMonthlyNormals = (bands) => (data) => {
     return normals
 }
 
+// Create a reducer from the dataset parameters
+const createReducer = (ee, dataset) => {
+    const { band, reducer = 'mean', sharedInputs = false } = dataset
+
+    let eeReducer
+
+    if (Array.isArray(reducer)) {
+        // Combine multiple reducers
+        // sharedInputs = true means that all reducers are applied to all bands
+        // sharedInputs = false means one reducer for each band
+        eeReducer = reducer.reduce(
+            (r, t, i) =>
+                i === 0
+                    ? r[t]().unweighted()
+                    : r.combine({
+                          reducer2: ee.Reducer[t]().unweighted(),
+                          outputPrefix: sharedInputs ? '' : String(i),
+                          sharedInputs,
+                      }),
+            ee.Reducer
+        )
+
+        if (!sharedInputs && Array.isArray(band)) {
+            // Use band names as output names
+            eeReducer = eeReducer.setOutputs(band)
+        }
+    } else {
+        // Single reducer
+        eeReducer = ee.Reducer[reducer]()
+    }
+
+    return eeReducer
+}
+
 const getReducedCollection = ({
     ee,
     collection,
@@ -84,6 +118,42 @@ const getReducedCollection = ({
         .set('system:index', startDate.format('YYYYMMdd'))
         .set('system:time_start', startDate.millis())
         .set('system:time_end', endDate.millis())
+
+export const getEarthEngineImageValues = ({ ee, dataset, features }) => {
+    const { datasetId, band, reducer = 'mean', period, valueParser } = dataset
+
+    const eeImage = ee.Image(datasetId).select(band)
+    const eeReducer = ee.Reducer[reducer]()
+    const featureCollection = ee.FeatureCollection(features)
+    const eeScale = getScale(eeImage)
+
+    const data = eeImage
+        .reduceRegions({
+            collection: featureCollection,
+            reducer: eeReducer,
+            scale: eeScale,
+        })
+        .map((feature) =>
+            ee.Feature(null, {
+                ou: feature.get('id'),
+                period,
+                value: feature.get(reducer),
+            })
+        )
+
+    // TODO: Make function
+    return getInfo(data).then(({ features }) =>
+        features.map((feature) => {
+            const props = getFeatureProperties(feature)
+
+            if (valueParser) {
+                props.value = valueParser(props.value)
+            }
+
+            return props
+        })
+    )
+}
 
 export const getEarthEngineValues = ({
     ee,
@@ -284,7 +354,9 @@ export const getEarthEngineValues = ({
     })
 
 export const getEarthEngineData = ({ ee, dataset, period, features }) => {
-    if (dataset.bands) {
+    if (!period) {
+        return getEarthEngineImageValues({ ee, dataset, features })
+    } else if (dataset.bands) {
         // Multiple bands (used for relative humidity)
         const { bandsParser = (v) => v } = dataset
 
@@ -310,13 +382,7 @@ export const getTimeSeriesData = async ({
     geometry,
     filter,
 }) => {
-    const {
-        datasetId,
-        band,
-        reducer = 'mean',
-        sharedInputs = false,
-        aggregationPeriod,
-    } = dataset
+    const { datasetId, band, aggregationPeriod } = dataset
 
     let collection = ee.ImageCollection(datasetId).select(band)
 
@@ -330,32 +396,7 @@ export const getTimeSeriesData = async ({
         })
     }
 
-    let eeReducer
-
-    if (Array.isArray(reducer)) {
-        // Combine multiple reducers
-        // sharedInputs = true means that all reducers are applied to all bands
-        // sharedInouts = false means one reducer for each band
-        eeReducer = reducer.reduce(
-            (r, t, i) =>
-                i === 0
-                    ? r[t]().unweighted()
-                    : r.combine({
-                          reducer2: ee.Reducer[t]().unweighted(),
-                          outputPrefix: sharedInputs ? '' : String(i),
-                          sharedInputs,
-                      }),
-            ee.Reducer
-        )
-
-        if (!sharedInputs && Array.isArray(band)) {
-            // Use band names as output names
-            eeReducer = eeReducer.setOutputs(band)
-        }
-    } else {
-        // Single reducer
-        eeReducer = ee.Reducer[reducer]()
-    }
+    const eeReducer = createReducer(ee, dataset)
 
     const { startTime, endTime, timeZone = 'UTC' } = period
 
@@ -452,6 +493,53 @@ export const getClimateNormals = ({ ee, dataset, period, geometry }) => {
     return getInfo(data).then(getMonthlyNormals(band))
 }
 
+// Calculate area from histogram
+export const getHistogramStatistics = (histogram, scale) => {
+    const data = {}
+
+    Object.keys(histogram).forEach((key) => {
+        data[key] = {
+            count: histogram[key],
+            area: (histogram[key] * scale * scale) / 10000, // hectares
+        }
+    })
+
+    return data
+}
+
+// Get data from single image
+export const getImageData = async ({ ee, dataset, geometry }) => {
+    const { datasetId, band } = dataset
+    const { type, coordinates } = geometry
+
+    const eeGeometry = ee.Geometry[type](coordinates)
+    const image = ee.Image(datasetId).select(band)
+    const eeReducer = createReducer(ee, dataset)
+    const eeScale = type === 'Point' ? ee.Number(1) : getScale(image)
+
+    const data = image.reduceRegion(eeReducer, eeGeometry, eeScale)
+
+    const histogram = image.reduceRegion(
+        ee.Reducer.frequencyHistogram(),
+        eeGeometry
+    )
+
+    return Promise.all([
+        getInfo(data),
+        getInfo(histogram),
+        getInfo(eeScale),
+    ]).then(([data, histogram, scale]) => ({
+        ...Object.keys(data).reduce(
+            (obj, key) => ({
+                ...obj,
+                [key.replace(`${band}_`, '')]: data[key],
+            }),
+            {}
+        ),
+        histogram: getHistogramStatistics(histogram[band], scale),
+    }))
+}
+
 const getKeyFromFilter = (filter) =>
     filter
         ? `-${filter
@@ -459,12 +547,15 @@ const getKeyFromFilter = (filter) =>
               .join('-')}`
         : ''
 
+const getKeyFromPeriod = (period) =>
+    period ? `-${period.startTime}-${period.endTime}` : ''
+
 export const getCacheKey = ({ dataset, period, feature, filter }) => {
     const { datasetId, band } = dataset
-    const { startTime, endTime } = period
     const { id } = feature
     const bandkey = Array.isArray(band) ? band.join('-') : band
+    const periodKey = getKeyFromPeriod(period)
     const filterKey = getKeyFromFilter(filter)
 
-    return `${id}-${datasetId}-${bandkey}-${startTime}-${endTime}${filterKey}`
+    return `${id}-${datasetId}-${bandkey}${periodKey}${filterKey}`
 }
