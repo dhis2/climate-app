@@ -32,6 +32,7 @@ const getChartConfig = ({
     period,
     showWeekly,
     showMonthly,
+    isFacility,
 }) => {
     const series = [
         {
@@ -81,12 +82,17 @@ const getChartConfig = ({
 
     return {
         title: {
-            text: i18n.t('{{name}}: {{band}} vegetation index 2024', {
+            text: i18n.t('{{name}}: {{band}} vegetation index {{period}}', {
                 name,
                 band,
                 period: getDailyPeriod(data),
                 nsSeparator: ';',
             }),
+        },
+        subtitle: isFacility && {
+            text: i18n.t(
+                'Value is only for 250 x 250 m where the facility is located'
+            ),
         },
         credits: vegetationCredits,
         tooltip: {
