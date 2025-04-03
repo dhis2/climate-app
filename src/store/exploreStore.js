@@ -7,6 +7,7 @@ import {
     getLastMonth,
     MONTHLY,
 } from '../utils/time.js'
+import { NDVI } from '../components/explore/land/VegetationIndexSelect'
 
 const exploreStore = create((set) => {
     const setIfChanged = (key) => (value) =>
@@ -29,6 +30,7 @@ const exploreStore = create((set) => {
         referencePeriod: defaultReferencePeriod,
         month: getLastMonth()[1],
         vegetationIndex: NDVI,
+        landCoverType: 13,
         setOrgUnit: setIfChanged('orgUnit'),
         setTab: setIfChanged('tab'),
         setPeriodType: setIfChanged('periodType'),
@@ -37,6 +39,7 @@ const exploreStore = create((set) => {
         setReferencePeriod: setIfChanged('referencePeriod'),
         setMonth: setIfChanged('month'),
         setVegetationIndex: setIfChanged('vegetationIndex'),
+        setLandCoverType: setIfChanged('landCoverType'),
     }
 })
 
