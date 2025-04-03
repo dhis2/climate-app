@@ -19,6 +19,7 @@ import VegetationIndexSelect, { NDVI, EVI } from './VegetationIndexSelect.jsx'
 const dataset = {
     datasetId: 'MODIS/061/MOD13Q1',
     band: [NDVI, EVI],
+    resolution: 250,
 }
 
 const Vegetation = () => {
@@ -35,7 +36,6 @@ const Vegetation = () => {
     }
 
     const { name } = feature.properties
-    const isFacility = feature.geometry.type === 'Point'
 
     return (
         <>
@@ -48,7 +48,6 @@ const Vegetation = () => {
                     period,
                     showWeekly,
                     showMonthly,
-                    isFacility,
                 })}
             />
             <div className={styles.showWeeklyMonthly}>

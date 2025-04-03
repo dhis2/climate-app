@@ -32,24 +32,17 @@ const vegetationIndexParser = (v) => roundTwoDecimals(v * 0.0001).toString()
 
 const twoDecimals = (v) => roundTwoDecimals(v).toString()
 
-const era5Source = i18n.t('ERA5-Land / Copernicus Climate Change Service')
-const era5HeatSource = i18n.t('ERA5-Heat / Copernicus Climate Change Service')
-const chirpsSource = i18n.t('Climate Hazards Center / UCSB')
-const modisSource = i18n.t('NASA LP DAAC at the USGS EROS Center')
-const demSource = i18n.t('NASA / USGS / JPL-Caltech')
-
 export const era5Resolution = i18n.t('Approximately 31 km (0.25°)')
 export const era5LandResolution = i18n.t('Approximately 9 km (0.1°)')
 export const chirpsResolution = i18n.t('Approximately 5 km (0.05°)')
 export const modisResolution = i18n.t('Approximately 250 m')
-export const demResolution = i18n.t('Approximately 30 m')
 
 export const ndviDescription = i18n.t(
-    'Landsat Normalized Difference Vegetation Index (NDVI) is used to quantify vegetation greenness and is useful in understanding vegetation density and assessing changes in plant health. NDVI values range from -1 to 1, with higher values indicating denser vegetation.'
+    'Landsat Normalized Difference Vegetation Index (NDVI) is used to quantify vegetation greenness and is useful in understanding vegetation density and assessing changes in plant health. NDVI values range from -1 to 1, with higher values indicating denser vegetation. Data originates from MODIS (NASA).'
 )
 
 export const eviDescription = i18n.t(
-    'Enhanced vegetation index (EVI) differs from NDVI by reducing the influence of atmospheric conditions and canopy background noise. EVI values range from -1 to 1, with higher values indicating denser vegetation.'
+    'Enhanced vegetation index (EVI) differs from NDVI by reducing the influence of atmospheric conditions and canopy background noise. EVI values range from -1 to 1, with higher values indicating denser vegetation. Data originates from MODIS (NASA).'
 )
 
 export default [
@@ -59,9 +52,8 @@ export default [
         name: i18n.t('Air temperature (ERA5-Land)'),
         shortName: i18n.t('Air temperature'),
         description: i18n.t(
-            'Average air temperature in °C at 2 m above the surface.'
+            'Average air temperature in °C at 2 m above the surface'
         ),
-        source: era5Source,
         resolution: era5LandResolution,
         periodType: DAILY,
         band: 'temperature_2m',
@@ -82,9 +74,8 @@ export default [
         name: i18n.t('Max air temperature (ERA5-Land)'),
         shortName: i18n.t('Max air temperature'),
         description: i18n.t(
-            'Maximum air temperature in °C at 2 m above the surface.'
+            'Maximum air temperature in °C at 2 m above the surface'
         ),
-        source: era5Source,
         resolution: era5LandResolution,
         periodType: DAILY,
         band: 'temperature_2m_max',
@@ -105,9 +96,8 @@ export default [
         name: i18n.t('Min temperature (ERA5-Land)'),
         shortName: i18n.t('Min air temperature'),
         description: i18n.t(
-            'Minimum air temperature in °C at 2 m above the surface.'
+            'Minimum air temperature in °C at 2 m above the surface'
         ),
-        source: era5Source,
         resolution: era5LandResolution,
         periodType: DAILY,
         band: 'temperature_2m_min',
@@ -127,8 +117,7 @@ export default [
         datasetId: 'ECMWF/ERA5_LAND/DAILY_AGGR',
         name: i18n.t('Precipitation (ERA5-Land)'),
         shortName: i18n.t('Precipitation (ERA5)'),
-        description: i18n.t('Total precipitation in mm.'),
-        source: era5Source,
+        description: i18n.t('Total precipitation in mm'),
         resolution: era5LandResolution,
         periodType: DAILY,
         band: 'total_precipitation_sum',
@@ -149,8 +138,7 @@ export default [
         datasetId: 'UCSB-CHG/CHIRPS/DAILY',
         name: i18n.t('Precipitation (CHIRPS)'),
         shortName: i18n.t('Precipitation (CHIRPS)'),
-        description: i18n.t('Precipitation in mm.'),
-        source: chirpsSource,
+        description: i18n.t('Precipitation in mm'),
         resolution: chirpsResolution,
         periodType: DAILY,
         band: 'precipitation',
@@ -168,7 +156,6 @@ export default [
         description: i18n.t(
             'Temperature in °C at 2 m above the surface to which the air would have to be cooled for saturation to occur.'
         ),
-        source: era5Source,
         resolution: era5LandResolution,
         periodType: DAILY,
         band: 'dewpoint_temperature_2m',
@@ -191,7 +178,6 @@ export default [
         description: i18n.t(
             'Percentage of water vapor in the air compared to the total amount of vapor that can exist in the air at its current temperature. Calculated using air temperature and dewpoint temperature at 2 m above surface.'
         ),
-        source: era5Source,
         resolution: era5LandResolution,
         periodType: DAILY,
         bands: [
@@ -225,8 +211,7 @@ export default [
         datasetId: 'projects/climate-engine-pro/assets/ce-era5-heat',
         name: i18n.t('Heat stress (ERA5-HEAT)'),
         shortName: i18n.t('Heat stress'),
-        description: i18n.t('Average felt temperature in °C.'),
-        source: era5HeatSource,
+        description: i18n.t('Average felt temperature in °C'),
         resolution: era5Resolution,
         periodType: DAILY,
         band: 'utci_mean',
@@ -240,8 +225,7 @@ export default [
         datasetId: 'projects/climate-engine-pro/assets/ce-era5-heat',
         name: i18n.t('Max heat stress (ERA5-HEAT)'),
         shortName: i18n.t('Max heat stress'),
-        description: i18n.t('Maximum felt temperature in °C.'),
-        source: era5HeatSource,
+        description: i18n.t('Maximum felt temperature in °C'),
         resolution: era5Resolution,
         periodType: DAILY,
         band: 'utci_max',
@@ -255,8 +239,7 @@ export default [
         datasetId: 'projects/climate-engine-pro/assets/ce-era5-heat',
         name: i18n.t('Min heat stress (ERA5-HEAT)'),
         shortName: i18n.t('Min heat stress'),
-        description: i18n.t('Minimum felt temperature in °C.'),
-        source: era5HeatSource,
+        description: i18n.t('Minimum felt temperature in °C'),
         resolution: era5Resolution,
         periodType: DAILY,
         band: 'utci_min',
@@ -271,7 +254,6 @@ export default [
         name: i18n.t('NDVI - Normalized difference vegetation index (MODIS)'),
         shortName: i18n.t('NDVI'),
         description: ndviDescription,
-        source: modisSource,
         resolution: modisResolution,
         periodType: SIXTEEN_DAYS,
         band: 'NDVI',
@@ -286,7 +268,6 @@ export default [
         name: i18n.t('EVI - Enhanced vegetation index (MODIS)'),
         shortName: i18n.t('EVI'),
         description: eviDescription,
-        source: modisSource,
         resolution: modisResolution,
         periodType: SIXTEEN_DAYS,
         band: 'EVI',
@@ -294,54 +275,6 @@ export default [
         valueParser: vegetationIndexParser,
         aggregationType: i18n.t('Average'),
         dataElementCode: 'MODIS_EVI',
-    },
-    {
-        id: 'USGS/SRTMGL1_003/mean',
-        datasetId: 'USGS/SRTMGL1_003',
-        name: i18n.t('Mean elevation (SRTM)'),
-        shortName: i18n.t('Mean elevation'),
-        description: i18n.t('Mean elevation in meters above sea level.'),
-        source: demSource,
-        resolution: demResolution,
-        periodType: 'N/A',
-        period: '2000',
-        band: 'elevation',
-        reducer: 'mean',
-        valueParser: Math.round,
-        aggregationType: i18n.t('First value'),
-        dataElementCode: 'SRTM_ELEVATION_MEAN',
-    },
-    {
-        id: 'USGS/SRTMGL1_003/min',
-        datasetId: 'USGS/SRTMGL1_003',
-        name: i18n.t('Min elevation (SRTM)'),
-        shortName: i18n.t('Min elevation'),
-        description: i18n.t('Min elevation in meters above sea level.'),
-        source: demSource,
-        resolution: demResolution,
-        periodType: 'N/A',
-        period: '2000',
-        band: 'elevation',
-        reducer: 'min',
-        valueParser: Math.round,
-        aggregationType: i18n.t('First value'),
-        dataElementCode: 'SRTM_ELEVATION_MIN',
-    },
-    {
-        id: 'USGS/SRTMGL1_003/max',
-        datasetId: 'USGS/SRTMGL1_003',
-        name: i18n.t('Max elevation (SRTM)'),
-        shortName: i18n.t('Max elevation'),
-        description: i18n.t('Max elevation in meters above sea level.'),
-        source: demSource,
-        resolution: demResolution,
-        periodType: 'N/A',
-        period: '2000',
-        band: 'elevation',
-        reducer: 'max',
-        valueParser: Math.round,
-        aggregationType: i18n.t('First value'),
-        dataElementCode: 'SRTM_ELEVATION_MAX',
     },
 ]
 
@@ -406,11 +339,6 @@ export const dhisDataSets = [
         shortName: i18n.t('Environment'),
         periodType: i18n.t('Weekly or Monthly'),
     },
-    {
-        name: i18n.t('Land'),
-        shortName: i18n.t('Land'),
-        periodType: i18n.t('Yearly'),
-    },
 ]
 
 export const dhisDataElementGroups = [
@@ -423,10 +351,5 @@ export const dhisDataElementGroups = [
         name: i18n.t('Environment'),
         shortName: i18n.t('Environment'),
         dataElements: i18n.t('Assign above data elements (vegetation)'),
-    },
-    {
-        name: i18n.t('Land'),
-        shortName: i18n.t('Land'),
-        dataElements: i18n.t('Assign above data elements (elevation)'),
     },
 ]
