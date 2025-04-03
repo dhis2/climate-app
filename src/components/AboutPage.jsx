@@ -19,7 +19,7 @@ const AboutPage = () => (
         </p>
         <iframe
             src="https://www.youtube-nocookie.com/embed/FAGobvUGl24?si=nBJeVx1_BPM4X5vF&rel=0"
-            title="YouTube video player"
+            title="YouTube video"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
         ></iframe>
