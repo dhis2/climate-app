@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-02-06T14:06:33.277Z\n"
-"PO-Revision-Date: 2025-02-06T14:06:33.277Z\n"
+"POT-Creation-Date: 2025-04-03T08:45:09.074Z\n"
+"PO-Revision-Date: 2025-04-03T08:45:09.074Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -237,6 +237,9 @@ msgstr "Vegetation"
 msgid "Land cover"
 msgstr "Land cover"
 
+msgid "Elevation"
+msgstr "Elevation"
+
 msgid ""
 "Temperature anomaly is the difference of a temperature from a reference "
 "value, calculated as the average temperature over a period of 30 years. "
@@ -256,6 +259,38 @@ msgstr "Reference period: {{period}}"
 
 msgid "Temperature anomaly"
 msgstr "Temperature anomaly"
+
+msgid "{{name}}: Elevation"
+msgstr "{{name}}: Elevation"
+
+msgid "{{value}} m"
+msgstr "{{value}} m"
+
+msgid ""
+"The chart shows the elevation distribution of the selected area, for each "
+"meter above sea level it shows the area with this elevation in hectares. "
+"The mean, minimum, and maximum elevation values are calculated from the "
+"elevation data."
+msgstr ""
+"The chart shows the elevation distribution of the selected area, for each "
+"meter above sea level it shows the area with this elevation in hectares. "
+"The mean, minimum, and maximum elevation values are calculated from the "
+"elevation data."
+
+msgid "Elevation: {{value}} m"
+msgstr "Elevation: {{value}} m"
+
+msgid "Area: {{value}} ha"
+msgstr "Area: {{value}} ha"
+
+msgid "Min elevation"
+msgstr "Min elevation"
+
+msgid "Mean elevation"
+msgstr "Mean elevation"
+
+msgid "Max elevation"
+msgstr "Max elevation"
 
 msgid "{{precip}} mm"
 msgstr "{{precip}} mm"
@@ -571,6 +606,25 @@ msgstr "{{name}}: Monthly temperatures {{period}}"
 msgid "Normal temperature"
 msgstr "Normal temperature"
 
+msgid "Resample"
+msgstr "Resample"
+
+msgid "Weekly"
+msgstr "Weekly"
+
+msgid ""
+"Change from 16-days to weekly or monthly periods using linear "
+"interpolation. Weekly periods are recommended when importing to DHIS2."
+msgstr ""
+"Change from 16-days to weekly or monthly periods using linear "
+"interpolation. Weekly periods are recommended when importing to DHIS2."
+
+msgid "{{name}}: {{band}} vegetation index {{period}}"
+msgstr "{{name}}: {{band}} vegetation index {{period}}"
+
+msgid "Value is only for 250 x 250 m where the facility is located"
+msgstr "Value is only for 250 x 250 m where the facility is located"
+
 msgid "Data element"
 msgstr "Data element"
 
@@ -598,6 +652,9 @@ msgid ""
 msgstr ""
 "Extracting data for {{periodCount}} {{periodType}} periods and "
 "{{orgUnitsCount}} org units ({{valueCount}} values)"
+
+msgid "Extracting data for {{orgUnitsCount}} org units"
+msgstr "Extracting data for {{orgUnitsCount}} org units"
 
 msgid "Importing data to DHIS2"
 msgstr "Importing data to DHIS2"
@@ -628,11 +685,11 @@ msgid "Instructions"
 msgstr "Instructions"
 
 msgid ""
-"Before you can import weather and climate data, you need to create the "
-"associated data elements in DHIS2. See our setup guide in the left menu."
+"Before you can import data, you need to create the associated data elements "
+"in DHIS2. See our setup guide in the left menu."
 msgstr ""
-"Before you can import weather and climate data, you need to create the "
-"associated data elements in DHIS2. See our setup guide in the left menu."
+"Before you can import data, you need to create the associated data elements "
+"in DHIS2. See our setup guide in the left menu."
 
 msgid ""
 "Data can be imported in batches. We recommend that you start with a few "
@@ -731,6 +788,13 @@ msgstr "Organisation unit level to import data to"
 msgid "Org unit parent needs to be above or equal to the org unit level"
 msgstr "Org unit parent needs to be above or equal to the org unit level"
 
+msgid ""
+"The data will be assigned a default yearly period that matches the year it "
+"was collected: {{datasetPeriod}}"
+msgstr ""
+"The data will be assigned a default yearly period that matches the year it "
+"was collected: {{datasetPeriod}}"
+
 msgid "Daily values will be imported between start and end dates"
 msgstr "Daily values will be imported between start and end dates"
 
@@ -800,6 +864,9 @@ msgstr "Code"
 msgid "Description"
 msgstr "Description"
 
+msgid "Data source"
+msgstr "Data source"
+
 msgid "Domain type"
 msgstr "Domain type"
 
@@ -809,11 +876,38 @@ msgstr "Aggregate"
 msgid "Aggregation type"
 msgstr "Aggregation type"
 
+msgid "Store zero data values"
+msgstr "Store zero data values"
+
+msgid "Make sure it is checked"
+msgstr "Make sure it is checked"
+
 msgid "Aggregation levels"
 msgstr "Aggregation levels"
 
 msgid "Assign all org unit levels"
 msgstr "Assign all org unit levels"
+
+msgid "Data element group: \"{{-name}}\""
+msgstr "Data element group: \"{{-name}}\""
+
+msgid "Data elements"
+msgstr "Data elements"
+
+msgid "Data set: \"{{-name}}\""
+msgstr "Data set: \"{{-name}}\""
+
+msgid "Assign above data elements with the same period type"
+msgstr "Assign above data elements with the same period type"
+
+msgid "Organisation units"
+msgstr "Organisation units"
+
+msgid "Select all organisation units in your system"
+msgstr "Select all organisation units in your system"
+
+msgid "Legend: \"{{-name}}\""
+msgstr "Legend: \"{{-name}}\""
 
 msgid "Start value"
 msgstr "Start value"
@@ -828,58 +922,66 @@ msgid "How to configure this app"
 msgstr "How to configure this app"
 
 msgid ""
-"Before you can import weather and climate data, you need to make some "
-"configurations in the Maintenance app."
+"Before you can import data, you need to make some configurations in the "
+"Maintenance app."
 msgstr ""
-"Before you can import weather and climate data, you need to make some "
-"configurations in the Maintenance app."
+"Before you can import data, you need to make some configurations in the "
+"Maintenance app."
 
 msgid ""
-"This app imports daily weather and climate data that can be aggregated to "
-"other period types in DHIS2. We don't recommend aggregating across "
-"organisation unit levels, especially when going from facility level to "
-"higher levels defined by a geographic boundary. To make sure the values "
-"remain at its own level, assign all org unit levels as Aggregation levels "
-"for each data element below."
+"When daily data is imported it can be aggregated to other period types in "
+"DHIS2. We don't recommend aggregating across organisation unit levels, "
+"especially when going from facility level to higher levels defined by a "
+"geographic boundary. To make sure the values remain at its own level, "
+"assign all org unit levels as Aggregation levels for each data element "
+"below."
 msgstr ""
-"This app imports daily weather and climate data that can be aggregated to "
-"other period types in DHIS2. We don't recommend aggregating across "
-"organisation unit levels, especially when going from facility level to "
-"higher levels defined by a geographic boundary. To make sure the values "
-"remain at its own level, assign all org unit levels as Aggregation levels "
-"for each data element below."
+"When daily data is imported it can be aggregated to other period types in "
+"DHIS2. We don't recommend aggregating across organisation unit levels, "
+"especially when going from facility level to higher levels defined by a "
+"geographic boundary. To make sure the values remain at its own level, "
+"assign all org unit levels as Aggregation levels for each data element "
+"below."
 
 msgid ""
-"Create DHIS2 data elements for the climate and weather data you want to "
-"import. We recommend including the data source in the name to distinguish "
-"it from data imported from local weather stations. If you use the same code "
-"specified below, we will preselect the data element in the import interface."
+"Create DHIS2 data elements for the data you want to import. We recommend "
+"including the data source in the name to distinguish it from other sources "
+"(e.g. precepetation data is available from both ERA5-Land and CHIRPS, and "
+"there will be additional data providers in the future). If you use the same "
+"code specified below, we will preselect the data element in the import "
+"interface."
 msgstr ""
-"Create DHIS2 data elements for the climate and weather data you want to "
-"import. We recommend including the data source in the name to distinguish "
-"it from data imported from local weather stations. If you use the same code "
-"specified below, we will preselect the data element in the import interface."
+"Create DHIS2 data elements for the data you want to import. We recommend "
+"including the data source in the name to distinguish it from other sources "
+"(e.g. precepetation data is available from both ERA5-Land and CHIRPS, and "
+"there will be additional data providers in the future). If you use the same "
+"code specified below, we will preselect the data element in the import "
+"interface."
 
-msgid "Data set: \"Climate/Weather\""
-msgstr "Data set: \"Climate/Weather\""
-
-msgid "Climate/Weather"
-msgstr "Climate/Weather"
-
-msgid "Data elements"
-msgstr "Data elements"
-
-msgid "Assign the above data elements"
-msgstr "Assign the above data elements"
-
-msgid "Organisation units"
-msgstr "Organisation units"
-
-msgid "Select all organisation units in your system"
-msgstr "Select all organisation units in your system"
-
-msgid "Data element group: \"Climate/Weather\""
-msgstr "Data element group: \"Climate/Weather\""
+msgid ""
+"If you import daily data, you should assign the data elements to a daily "
+"data set (weather and climate). For weekly or monthly data, assign to a "
+"weekly or monthly data set (vegetation index). Assigning to a data set "
+"helps to maintain a quality metadata and data where integrity, consistency, "
+"approvals and protection are facilitated. How exactly to define such a data "
+"set depends on the available users and user groups. Similarly, which of the "
+"organisation units can collect this daily climate data set depends on "
+"situated contexts. However, since we can provide data for any "
+"administrative unit that has defined geographic boundaries we leave that "
+"decision to users. Most probable choice is all organisation units in your "
+"system."
+msgstr ""
+"If you import daily data, you should assign the data elements to a daily "
+"data set (weather and climate). For weekly or monthly data, assign to a "
+"weekly or monthly data set (vegetation index). Assigning to a data set "
+"helps to maintain a quality metadata and data where integrity, consistency, "
+"approvals and protection are facilitated. How exactly to define such a data "
+"set depends on the available users and user groups. Similarly, which of the "
+"organisation units can collect this daily climate data set depends on "
+"situated contexts. However, since we can provide data for any "
+"administrative unit that has defined geographic boundaries we leave that "
+"decision to users. Most probable choice is all organisation units in your "
+"system."
 
 msgid ""
 "You should now be able to import climate data with this app. Please reach "
@@ -931,6 +1033,21 @@ msgstr ""
 msgid "Time zone"
 msgstr "Time zone"
 
+msgid "ERA5-Land / Copernicus Climate Change Service"
+msgstr "ERA5-Land / Copernicus Climate Change Service"
+
+msgid "ERA5-Heat / Copernicus Climate Change Service"
+msgstr "ERA5-Heat / Copernicus Climate Change Service"
+
+msgid "Climate Hazards Center / UCSB"
+msgstr "Climate Hazards Center / UCSB"
+
+msgid "NASA LP DAAC at the USGS EROS Center"
+msgstr "NASA LP DAAC at the USGS EROS Center"
+
+msgid "NASA / USGS / JPL-Caltech"
+msgstr "NASA / USGS / JPL-Caltech"
+
 msgid "Approximately 31 km (0.25°)"
 msgstr "Approximately 31 km (0.25°)"
 
@@ -940,11 +1057,37 @@ msgstr "Approximately 9 km (0.1°)"
 msgid "Approximately 5 km (0.05°)"
 msgstr "Approximately 5 km (0.05°)"
 
+msgid "Approximately 250 m"
+msgstr "Approximately 250 m"
+
+msgid "Approximately 30 m"
+msgstr "Approximately 30 m"
+
+msgid ""
+"Landsat Normalized Difference Vegetation Index (NDVI) is used to quantify "
+"vegetation greenness and is useful in understanding vegetation density and "
+"assessing changes in plant health. NDVI values range from -1 to 1, with "
+"higher values indicating denser vegetation."
+msgstr ""
+"Landsat Normalized Difference Vegetation Index (NDVI) is used to quantify "
+"vegetation greenness and is useful in understanding vegetation density and "
+"assessing changes in plant health. NDVI values range from -1 to 1, with "
+"higher values indicating denser vegetation."
+
+msgid ""
+"Enhanced vegetation index (EVI) differs from NDVI by reducing the influence "
+"of atmospheric conditions and canopy background noise. EVI values range "
+"from -1 to 1, with higher values indicating denser vegetation."
+msgstr ""
+"Enhanced vegetation index (EVI) differs from NDVI by reducing the influence "
+"of atmospheric conditions and canopy background noise. EVI values range "
+"from -1 to 1, with higher values indicating denser vegetation."
+
 msgid "Air temperature (ERA5-Land)"
 msgstr "Air temperature (ERA5-Land)"
 
-msgid "Average air temperature in °C at 2 m above the surface"
-msgstr "Average air temperature in °C at 2 m above the surface"
+msgid "Average air temperature in °C at 2 m above the surface."
+msgstr "Average air temperature in °C at 2 m above the surface."
 
 msgid "Average"
 msgstr "Average"
@@ -955,8 +1098,8 @@ msgstr "Max air temperature (ERA5-Land)"
 msgid "Max air temperature"
 msgstr "Max air temperature"
 
-msgid "Maximum air temperature in °C at 2 m above the surface"
-msgstr "Maximum air temperature in °C at 2 m above the surface"
+msgid "Maximum air temperature in °C at 2 m above the surface."
+msgstr "Maximum air temperature in °C at 2 m above the surface."
 
 msgid "Max"
 msgstr "Max"
@@ -967,8 +1110,8 @@ msgstr "Min temperature (ERA5-Land)"
 msgid "Min air temperature"
 msgstr "Min air temperature"
 
-msgid "Minimum air temperature in °C at 2 m above the surface"
-msgstr "Minimum air temperature in °C at 2 m above the surface"
+msgid "Minimum air temperature in °C at 2 m above the surface."
+msgstr "Minimum air temperature in °C at 2 m above the surface."
 
 msgid "Min"
 msgstr "Min"
@@ -979,8 +1122,8 @@ msgstr "Precipitation (ERA5-Land)"
 msgid "Precipitation (ERA5)"
 msgstr "Precipitation (ERA5)"
 
-msgid "Total precipitation in mm"
-msgstr "Total precipitation in mm"
+msgid "Total precipitation in mm."
+msgstr "Total precipitation in mm."
 
 msgid "Sum"
 msgstr "Sum"
@@ -988,8 +1131,8 @@ msgstr "Sum"
 msgid "Precipitation (CHIRPS)"
 msgstr "Precipitation (CHIRPS)"
 
-msgid "Precipitation in mm"
-msgstr "Precipitation in mm"
+msgid "Precipitation in mm."
+msgstr "Precipitation in mm."
 
 msgid "Dewpoint temperature (ERA5-Land)"
 msgstr "Dewpoint temperature (ERA5-Land)"
@@ -1019,8 +1162,8 @@ msgstr "Heat stress (ERA5-HEAT)"
 msgid "Heat stress"
 msgstr "Heat stress"
 
-msgid "Average felt temperature in °C"
-msgstr "Average felt temperature in °C"
+msgid "Average felt temperature in °C."
+msgstr "Average felt temperature in °C."
 
 msgid "Max heat stress (ERA5-HEAT)"
 msgstr "Max heat stress (ERA5-HEAT)"
@@ -1028,8 +1171,8 @@ msgstr "Max heat stress (ERA5-HEAT)"
 msgid "Max heat stress"
 msgstr "Max heat stress"
 
-msgid "Maximum felt temperature in °C"
-msgstr "Maximum felt temperature in °C"
+msgid "Maximum felt temperature in °C."
+msgstr "Maximum felt temperature in °C."
 
 msgid "Min heat stress (ERA5-HEAT)"
 msgstr "Min heat stress (ERA5-HEAT)"
@@ -1037,8 +1180,65 @@ msgstr "Min heat stress (ERA5-HEAT)"
 msgid "Min heat stress"
 msgstr "Min heat stress"
 
-msgid "Minimum felt temperature in °C"
-msgstr "Minimum felt temperature in °C"
+msgid "Minimum felt temperature in °C."
+msgstr "Minimum felt temperature in °C."
+
+msgid "NDVI - Normalized difference vegetation index (MODIS)"
+msgstr "NDVI - Normalized difference vegetation index (MODIS)"
+
+msgid "NDVI"
+msgstr "NDVI"
+
+msgid "EVI - Enhanced vegetation index (MODIS)"
+msgstr "EVI - Enhanced vegetation index (MODIS)"
+
+msgid "EVI"
+msgstr "EVI"
+
+msgid "Mean elevation (SRTM)"
+msgstr "Mean elevation (SRTM)"
+
+msgid "Mean elevation in meters above sea level."
+msgstr "Mean elevation in meters above sea level."
+
+msgid "First value"
+msgstr "First value"
+
+msgid "Min elevation (SRTM)"
+msgstr "Min elevation (SRTM)"
+
+msgid "Min elevation in meters above sea level."
+msgstr "Min elevation in meters above sea level."
+
+msgid "Max elevation (SRTM)"
+msgstr "Max elevation (SRTM)"
+
+msgid "Max elevation in meters above sea level."
+msgstr "Max elevation in meters above sea level."
+
+msgid "Climate/Weather"
+msgstr "Climate/Weather"
+
+msgid "Environment"
+msgstr "Environment"
+
+msgid "Weekly or Monthly"
+msgstr "Weekly or Monthly"
+
+msgid "Land"
+msgstr "Land"
+
+msgid "Yearly"
+msgstr "Yearly"
+
+msgid "Assign above data elements (weather & climate)"
+msgstr "Assign above data elements (weather & climate)"
+
+msgid "Assign above data elements (vegetation)"
+msgstr "Assign above data elements (vegetation)"
+
+msgid "Assign above data elements (elevation)"
+msgstr "Assign above data elements (elevation)"
 
 msgid "Heat/cold stress"
 msgstr "Heat/cold stress"
@@ -1115,8 +1315,8 @@ msgstr "ERA5-HEAT / Copernicus Climate Change Service / Google Earth Engine"
 msgid "NASA LP DAAC at the USGS EROS Center / Google Earth Engine"
 msgstr "NASA LP DAAC at the USGS EROS Center / Google Earth Engine"
 
+msgid "NASA / USGS / JPL-Caltech / Google Earth Engine"
+msgstr "NASA / USGS / JPL-Caltech / Google Earth Engine"
+
 msgid "No data found for the selected period"
 msgstr "No data found for the selected period"
-
-msgid "Weekly"
-msgstr "Weekly"

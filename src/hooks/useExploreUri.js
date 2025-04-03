@@ -43,7 +43,11 @@ const useExploreUri = () => {
             const baseUri = `/${section}/${orgUnit.id}/${tab}`
             let uri
 
-            if (tab === 'forecast10days' || tab === 'landcover') {
+            if (
+                tab === 'forecast10days' ||
+                tab === 'landcover' ||
+                tab === 'elevation'
+            ) {
                 uri = baseUri
             } else if (tab === 'vegetation') {
                 uri = `${baseUri}/${vegetationIndex}`
@@ -98,6 +102,9 @@ const useExploreUri = () => {
                     referencePeriods.find((p) => p.id === referencePeriodId)
                 )
             }
+        } else if (!store.tab) {
+            // Set tab if directly navigation to an url
+            store.setTab(tab)
         }
 
         return () => {

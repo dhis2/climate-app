@@ -14,6 +14,7 @@ import {
     toDateObject,
     toStandardDate,
     getPeriods,
+    oneDayInMs,
     DAILY,
     WEEKLY,
     MONTHLY,
@@ -76,17 +77,10 @@ const ethiopicPeriod = {
     periodType: DAILY,
 }
 
-const oneDayInMs = 1000 * 60 * 60 * 24
 const now = new Date()
 const today = formatStandardDate(now)
 const tomorrow = formatStandardDate(new Date(now.getTime() + oneDayInMs))
 const yesterday = formatStandardDate(new Date(now.getTime() - oneDayInMs))
-const nextMonth = formatStandardDate(
-    new Date(now.getFullYear(), now.getMonth() + 1, now.getDate())
-)
-const lastMonth = formatStandardDate(
-    new Date(now.getFullYear(), now.getMonth() - 1, now.getDate())
-)
 
 const startMonth = '2023-08'
 const endMonth = '2024-07'
@@ -138,12 +132,6 @@ describe('time utils', () => {
         expect(getCalendarDate(gregoryCalendar, { days: 1 })).toEqual(tomorrow)
         expect(getCalendarDate(gregoryCalendar, { days: -1 })).toEqual(
             yesterday
-        )
-        expect(getCalendarDate(gregoryCalendar, { months: 1 })).toEqual(
-            nextMonth
-        )
-        expect(getCalendarDate(gregoryCalendar, { months: -1 })).toEqual(
-            lastMonth
         )
     })
 

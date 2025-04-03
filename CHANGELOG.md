@@ -1,3 +1,50 @@
+# [1.9.0](https://github.com/dhis2/climate-app/compare/v1.8.0...v1.9.0) (2025-04-03)
+
+
+### Features
+
+* elevation data ([#68](https://github.com/dhis2/climate-app/issues/68)) ([86701ef](https://github.com/dhis2/climate-app/commit/86701efb5c9a80243d7ed3e87c41108478627482))
+
+# [1.8.0](https://github.com/dhis2/climate-app/compare/v1.7.0...v1.8.0) (2025-04-03)
+
+
+### Features
+
+* elevation data ([#64](https://github.com/dhis2/climate-app/issues/64)) ([7389cbb](https://github.com/dhis2/climate-app/commit/7389cbbd3b21e38d5a544dd95dae16c828f553ff))
+
+
+### Reverts
+
+* Revert "feat: elevation data (#64)" (#65) ([de9ef39](https://github.com/dhis2/climate-app/commit/de9ef3910f9575a7c8cb1b0d5cc69153a61682d8)), closes [#64](https://github.com/dhis2/climate-app/issues/64) [#65](https://github.com/dhis2/climate-app/issues/65)
+
+# [1.7.0](https://github.com/dhis2/climate-app/compare/v1.6.3...v1.7.0) (2025-03-07)
+
+
+### Features
+
+* vegetation indices ([#60](https://github.com/dhis2/climate-app/issues/60)) ([225b850](https://github.com/dhis2/climate-app/commit/225b8509d1fbf5676379c16393f6032057a0b5ce))
+
+## [1.6.3](https://github.com/dhis2/climate-app/compare/v1.6.2...v1.6.3) (2025-02-26)
+
+
+### Bug Fixes
+
+* climate normals ([#63](https://github.com/dhis2/climate-app/issues/63)) ([3ac1e5d](https://github.com/dhis2/climate-app/commit/3ac1e5d8ac52799cb7c17fb72a5fb2ffbb698020))
+
+## [1.6.2](https://github.com/dhis2/climate-app/compare/v1.6.1...v1.6.2) (2025-02-24)
+
+
+### Bug Fixes
+
+* store zero data values in setup guide ([#62](https://github.com/dhis2/climate-app/issues/62)) ([e1b4129](https://github.com/dhis2/climate-app/commit/e1b412960c13feb7af058e6d05e3b079c22642cf))
+
+## [1.6.1](https://github.com/dhis2/climate-app/compare/v1.6.0...v1.6.1) (2025-02-24)
+
+
+### Bug Fixes
+
+* import data values as strings ([7bf1d55](https://github.com/dhis2/climate-app/commit/7bf1d55960574f41af9b391d6c762c5271237e77))
+
 # [1.6.0](https://github.com/dhis2/climate-app/compare/v1.5.3...v1.6.0) (2025-02-10)
 
 

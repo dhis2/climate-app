@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { defaultReferencePeriod } from '../components/explore/ReferencePeriodSelect.jsx'
+import { NDVI } from '../components/explore/vegetation/VegetationIndexSelect.jsx'
 import {
     getDefaultMonthlyPeriod,
     getDefaultExplorePeriod,
@@ -8,25 +9,38 @@ import {
 } from '../utils/time.js'
 import { NDVI } from '../components/explore/land/VegetationIndexSelect'
 
-const exploreStore = create((set) => ({
-    orgUnit: null,
-    tab: null,
-    periodType: MONTHLY,
-    dailyPeriod: getDefaultExplorePeriod(),
-    monthlyPeriod: getDefaultMonthlyPeriod(),
-    referencePeriod: defaultReferencePeriod,
-    month: getLastMonth()[1],
-    vegetationIndex: NDVI,
-    landCoverType: 13,
-    setOrgUnit: (orgUnit) => set({ orgUnit }),
-    setTab: (tab) => set({ tab }),
-    setPeriodType: (periodType) => set({ periodType }),
-    setDailyPeriod: (dailyPeriod) => set({ dailyPeriod }),
-    setMonthlyPeriod: (monthlyPeriod) => set({ monthlyPeriod }),
-    setReferencePeriod: (referencePeriod) => set({ referencePeriod }),
-    setMonth: (month) => set({ month }),
-    setVegetationIndex: (vegetationIndex) => set({ vegetationIndex }),
-    setLandCoverType: (landCoverType) => set({ landCoverType }),
-}))
+const exploreStore = create((set) => {
+    const setIfChanged = (key) => (value) =>
+        set((state) => (state[key] !== value ? { [key]: value } : state))
+
+    const setIfPeriodChanged = (key) => (period) =>
+        set((state) =>
+            state[key].startTime !== period.startTime ||
+            state[key].endTime !== period.endTime
+                ? { [key]: period }
+                : state
+        )
+
+    return {
+        orgUnit: null,
+        tab: null,
+        periodType: MONTHLY,
+        dailyPeriod: getDefaultExplorePeriod(),
+        monthlyPeriod: getDefaultMonthlyPeriod(),
+        referencePeriod: defaultReferencePeriod,
+        month: getLastMonth()[1],
+        vegetationIndex: NDVI,
+        landCoverType: 13,
+        setOrgUnit: setIfChanged('orgUnit'),
+        setTab: setIfChanged('tab'),
+        setPeriodType: setIfChanged('periodType'),
+        setDailyPeriod: setIfPeriodChanged('dailyPeriod'),
+        setMonthlyPeriod: setIfPeriodChanged('monthlyPeriod'),
+        setReferencePeriod: setIfChanged('referencePeriod'),
+        setMonth: setIfChanged('month'),
+        setVegetationIndex: setIfChanged('vegetationIndex'),
+        setLandCoverType: setIfChanged('landCoverType'),
+    }
+})
 
 export default exploreStore

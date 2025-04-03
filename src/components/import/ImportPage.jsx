@@ -31,8 +31,14 @@ const ImportPage = () => {
     const [dataElement, setDataElement] = useState()
     const standardPeriod = getStandardPeriod(period) // ISO 8601 used by GEE
     const [startExtract, setStartExtract] = useState(false)
+
+    const hasNoPeriod = dataset?.periodType === 'N/A'
+
     const orgUnitCount = useOrgUnitCount(orgUnits?.parent?.id, orgUnits?.level)
-    const periodCount = useMemo(() => getPeriods(period).length, [period])
+    const periodCount = useMemo(
+        () => (hasNoPeriod ? 0 : getPeriods(period).length),
+        [period, hasNoPeriod]
+    )
     const valueCount = orgUnitCount * periodCount
     const periodType = periodTypes
         .find((type) => type.id === period.periodType)
@@ -45,7 +51,7 @@ const ImportPage = () => {
 
     const isValid = !!(
         dataset &&
-        isValidPeriod(standardPeriod) &&
+        (hasNoPeriod || isValidPeriod(standardPeriod)) &&
         isValidOrgUnits &&
         dataElement &&
         valueCount <= maxValues
@@ -72,6 +78,8 @@ const ImportPage = () => {
                         <Period
                             calendar={calendar}
                             period={period}
+                            datasetPeriodType={dataset?.periodType}
+                            datasetPeriod={dataset?.period}
                             onChange={setPeriod}
                         />
                         <OrgUnits selected={orgUnits} onChange={setOrgUnits} />
@@ -111,7 +119,7 @@ const ImportPage = () => {
                             {startExtract && isValid && (
                                 <ExtractData
                                     dataset={dataset}
-                                    period={standardPeriod}
+                                    period={hasNoPeriod ? null : standardPeriod}
                                     orgUnits={orgUnits}
                                     dataElement={dataElement}
                                 />
@@ -123,7 +131,7 @@ const ImportPage = () => {
                     <h2>{i18n.t('Instructions')}</h2>
                     <p>
                         {i18n.t(
-                            'Before you can import weather and climate data, you need to create the associated data elements in DHIS2. See our setup guide in the left menu.'
+                            'Before you can import data, you need to create the associated data elements in DHIS2. See our setup guide in the left menu.'
                         )}
                     </p>
                     <p>

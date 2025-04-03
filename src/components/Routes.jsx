@@ -6,6 +6,7 @@ import AboutPage from './AboutPage.jsx'
 import CheckPage from './check/CheckPage.jsx'
 import ErrorPage from './ErrorPage.jsx'
 import ClimateChange from './explore/climateChange/ClimateChange.jsx'
+import Elevation from './explore/elevation/Elevation.jsx'
 import ExplorePage from './explore/ExplorePage.jsx'
 import Forecast from './explore/forecast/Forecast.jsx'
 import HeatDaily from './explore/heat/HeatDaily.jsx'
@@ -18,6 +19,7 @@ import PrecipitationMonthly from './explore/precipitation/PrecipitationMonthly.j
 import Tabs from './explore/Tabs.jsx'
 import TemperatureDaily from './explore/temperature/TemperatureDaily.jsx'
 import TemperatureMonthly from './explore/temperature/TemperatureMonthly.jsx'
+import Vegetation from './explore/vegetation/Vegetation.jsx'
 import ImportPage from './import/ImportPage.jsx'
 import Root from './Root.jsx'
 import SettingsPage from './settings/SettingsPage.jsx'
@@ -101,6 +103,26 @@ const tabRoutes = [
             {
                 path: ':month/:referencePeriodId',
                 element: <ClimateChange />,
+            },
+        ],
+    },
+    {
+        path: 'vegetation',
+        element: <Tabs />,
+        children: [
+            {
+                path: ':vegetationIndex',
+                element: <Vegetation />,
+            },
+        ],
+    },
+    {
+        path: 'elevation',
+        element: <Tabs />,
+        children: [
+            {
+                index: true,
+                element: <Elevation />,
             },
         ],
     },

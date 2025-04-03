@@ -6,6 +6,7 @@ const DataElement = ({
     shortName,
     dataElementCode,
     description,
+    source,
     aggregationType,
 }) => (
     <table>
@@ -27,7 +28,11 @@ const DataElement = ({
             </tr>
             <tr>
                 <th>{i18n.t('Description')}</th>
-                <td>{description}</td>
+                <td>
+                    {description}
+                    <br />
+                    {i18n.t('Data source')}: {source}
+                </td>
             </tr>
             <tr>
                 <th>{i18n.t('Domain type')}</th>
@@ -36,6 +41,12 @@ const DataElement = ({
             <tr>
                 <th>{i18n.t('Aggregation type')}</th>
                 <td>{aggregationType}</td>
+            </tr>
+            <tr>
+                <th>{i18n.t('Store zero data values')}</th>
+                <td>
+                    <em>{i18n.t('Make sure it is checked')}</em>
+                </td>
             </tr>
             <tr>
                 <th>{i18n.t('Aggregation levels')}</th>
@@ -53,6 +64,7 @@ DataElement.propTypes = {
     description: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     shortName: PropTypes.string.isRequired,
+    source: PropTypes.string.isRequired,
 }
 
 export default DataElement

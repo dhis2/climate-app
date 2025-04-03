@@ -17,6 +17,8 @@ const tabs = [
     { id: 'humidity', label: i18n.t('Humidity') },
     { id: 'heat', label: i18n.t('Heat') },
     { id: 'climatechange', label: i18n.t('Climate change') },
+    { id: 'vegetation', label: i18n.t('Vegetation') },
+    { id: 'elevation', label: i18n.t('Elevation') },
 ]
 
 const Tabs = () => {
@@ -39,7 +41,7 @@ const Tabs = () => {
 
     return (
         <>
-            <TabBar fixed>
+            <TabBar fixed scrollable>
                 {tabs
                     .filter((t) => !t.pointOnly || t.pointOnly === isPoint)
                     .map(({ id, label }) => (
