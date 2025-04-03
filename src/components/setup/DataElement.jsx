@@ -29,7 +29,9 @@ const DataElement = ({
             <tr>
                 <th>{i18n.t('Description')}</th>
                 <td>
-                    {description} {i18n.t('Data source')}: {source}
+                    {description}
+                    <br />
+                    {i18n.t('Data source')}: {source}
                 </td>
             </tr>
             <tr>
