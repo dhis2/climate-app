@@ -1,3 +1,15 @@
+# [1.8.0](https://github.com/dhis2/climate-app/compare/v1.7.0...v1.8.0) (2025-04-03)
+
+
+### Features
+
+* elevation data ([#64](https://github.com/dhis2/climate-app/issues/64)) ([7389cbb](https://github.com/dhis2/climate-app/commit/7389cbbd3b21e38d5a544dd95dae16c828f553ff))
+
+
+### Reverts
+
+* Revert "feat: elevation data (#64)" (#65) ([de9ef39](https://github.com/dhis2/climate-app/commit/de9ef3910f9575a7c8cb1b0d5cc69153a61682d8)), closes [#64](https://github.com/dhis2/climate-app/issues/64) [#65](https://github.com/dhis2/climate-app/issues/65)
+
 # [1.7.0](https://github.com/dhis2/climate-app/compare/v1.6.3...v1.7.0) (2025-03-07)
 
 
