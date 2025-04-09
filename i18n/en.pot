@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-04-03T08:45:09.074Z\n"
-"PO-Revision-Date: 2025-04-03T08:45:09.074Z\n"
+"POT-Creation-Date: 2025-04-09T18:12:31.399Z\n"
+"PO-Revision-Date: 2025-04-09T18:12:31.399Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -227,9 +227,6 @@ msgstr "Heat"
 
 msgid "Climate change"
 msgstr "Climate change"
-
-msgid "Land"
-msgstr "Land"
 
 msgid "Vegetation"
 msgstr "Vegetation"
@@ -572,9 +569,6 @@ msgstr "Land cover type"
 
 msgid "{{name}}: Land cover changes {{years}}"
 msgstr "{{name}}: Land cover changes {{years}}"
-
-msgid "{{name}}: {{index}} vegetation index {{period}}"
-msgstr "{{name}}: {{index}} vegetation index {{period}}"
 
 msgid "{{name}}: Daily precipitation {{period}}"
 msgstr "{{name}}: Daily precipitation {{period}}"

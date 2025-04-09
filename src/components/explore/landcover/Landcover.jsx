@@ -2,7 +2,7 @@ import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js
 import exploreStore from '../../../store/exploreStore.js'
 import DataLoader from '../../shared/DataLoader.jsx'
 import Chart from '../Chart.jsx'
-import getChartConfig from './charts/landcover.js'
+import getChartConfig from './charts/landCover2.js'
 import getAllConfig from './charts/landcoverAll.js'
 import LandcoverSelect from './LandcoverSelect.jsx'
 
