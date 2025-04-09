@@ -18,6 +18,7 @@ const tabs = [
     { id: 'heat', label: i18n.t('Heat') },
     { id: 'climatechange', label: i18n.t('Climate change') },
     { id: 'vegetation', label: i18n.t('Vegetation') },
+    { id: 'landcover', label: i18n.t('Land cover') },
     { id: 'elevation', label: i18n.t('Elevation') },
 ]
 
