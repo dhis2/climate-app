@@ -8,15 +8,17 @@ import ErrorPage from './ErrorPage.jsx'
 import ClimateChange from './explore/climateChange/ClimateChange.jsx'
 import Elevation from './explore/elevation/Elevation.jsx'
 import ExplorePage from './explore/ExplorePage.jsx'
+import LocalPage from './local/LocalPage.jsx'
 import Forecast from './explore/forecast/Forecast.jsx'
 import HeatDaily from './explore/heat/HeatDaily.jsx'
 import HeatMonthly from './explore/heat/HeatMonthly.jsx'
 import HumidityDaily from './explore/humidity/HumidityDaily.jsx'
 import HumidityMonthly from './explore/humidity/HumidityMonthly.jsx'
-import OrgUnit from './explore/OrgUnit.jsx'
+import ExploreOrgUnit from './explore/OrgUnit.jsx'
+import LocalOrgUnit from './local/OrgUnit.jsx'
 import PrecipitationDaily from './explore/precipitation/PrecipitationDaily.jsx'
 import PrecipitationMonthly from './explore/precipitation/PrecipitationMonthly.jsx'
-import Tabs from './explore/Tabs.jsx'
+import BuiltinDatasetTabs from './explore/BuiltinDatasetTabs.jsx'
 import TemperatureDaily from './explore/temperature/TemperatureDaily.jsx'
 import TemperatureMonthly from './explore/temperature/TemperatureMonthly.jsx'
 import Vegetation from './explore/vegetation/Vegetation.jsx'
@@ -24,15 +26,16 @@ import ImportPage from './import/ImportPage.jsx'
 import Root from './Root.jsx'
 import SettingsPage from './settings/SettingsPage.jsx'
 import SetupPage from './setup/SetupPage.jsx'
+import { fetchDataConnectorDatasets } from '../utils/dataConnector.js'
 
 const monthlyPath = 'monthly/:startTime/:endTime/:referencePeriodId'
 const dailyPath = 'daily/:startTime/:endTime'
 
 // Shared routes for explore and check sections
-const tabRoutes = [
+const builtinDatasetRoutes = [
     {
         path: 'forecast10days',
-        element: <Tabs />,
+        element: <BuiltinDatasetTabs />,
         children: [
             {
                 index: true,
@@ -42,7 +45,7 @@ const tabRoutes = [
     },
     {
         path: 'temperature',
-        element: <Tabs />,
+        element: <BuiltinDatasetTabs />,
         children: [
             {
                 path: monthlyPath,
@@ -56,7 +59,7 @@ const tabRoutes = [
     },
     {
         path: 'precipitation',
-        element: <Tabs />,
+        element: <BuiltinDatasetTabs />,
         children: [
             {
                 path: monthlyPath,
@@ -70,7 +73,7 @@ const tabRoutes = [
     },
     {
         path: 'humidity',
-        element: <Tabs />,
+        element: <BuiltinDatasetTabs />,
         children: [
             {
                 path: monthlyPath,
@@ -84,7 +87,7 @@ const tabRoutes = [
     },
     {
         path: 'heat',
-        element: <Tabs />,
+        element: <BuiltinDatasetTabs />,
         children: [
             {
                 path: 'monthly/:startTime/:endTime',
@@ -98,7 +101,7 @@ const tabRoutes = [
     },
     {
         path: 'climatechange',
-        element: <Tabs />,
+        element: <BuiltinDatasetTabs />,
         children: [
             {
                 path: ':month/:referencePeriodId',
@@ -108,7 +111,7 @@ const tabRoutes = [
     },
     {
         path: 'vegetation',
-        element: <Tabs />,
+        element: <BuiltinDatasetTabs />,
         children: [
             {
                 path: ':vegetationIndex',
@@ -118,7 +121,7 @@ const tabRoutes = [
     },
     {
         path: 'elevation',
-        element: <Tabs />,
+        element: <BuiltinDatasetTabs />,
         children: [
             {
                 index: true,
@@ -127,6 +130,28 @@ const tabRoutes = [
         ],
     },
 ]
+
+/*
+const serverDatasetRoutes = ({serverId}) => {
+    const datasets = fetchDataConnectorDatasets({host: serverId})
+    const datasetRoutes = []
+    datasets.map(ds => {
+        datasetRoutes.push(
+            {
+                path: ds.id,
+                element: <ServerTabs />,
+                children: [
+                    {
+                        index: true,
+                        element: <ServerDatasetVisualizer />,
+                    },
+                ],
+            }
+        )
+    })
+    return datasetRoutes
+}
+*/
 
 const Routes = () => {
     const engine = useDataEngine()
@@ -150,9 +175,37 @@ const Routes = () => {
                         },
                         {
                             path: ':orgUnitId',
-                            element: <OrgUnit />,
+                            element: <ExploreOrgUnit />,
                             loader: orgUnitLoader(engine),
-                            children: tabRoutes,
+                            children: builtinDatasetRoutes,
+                        },
+                    ],
+                },
+                {
+                    path: 'local',
+                    children: [
+                        {
+                            index: true,
+                            element: <LocalPage />,
+                        },
+                        {
+                            path: ':orgUnitId',
+                            element: <LocalOrgUnit />,
+                            loader: orgUnitLoader(engine),
+                            children: [
+                                {
+                                    path: ':serverId',
+                                    element: <LocalOrgUnit />,
+                                    loader: orgUnitLoader(engine),
+                                    children: [
+                                        {
+                                            path: ':datasetId',
+                                            element: <LocalOrgUnit />,
+                                            loader: orgUnitLoader(engine),
+                                        },
+                                    ]
+                                },
+                            ]
                         },
                     ],
                 },
@@ -165,9 +218,9 @@ const Routes = () => {
                         },
                         {
                             path: ':placeId',
-                            element: <OrgUnit />,
+                            element: <ExploreOrgUnit />,
                             loader: checkPlaceLoader,
-                            children: tabRoutes,
+                            children: builtinDatasetRoutes,
                         },
                     ],
                 },

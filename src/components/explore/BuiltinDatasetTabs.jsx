@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import useExploreUri from '../../hooks/useExploreUri.js'
 import exploreStore from '../../store/exploreStore.js'
-import styles from './styles/Tabs.module.css'
+import styles from './styles/BuiltinDatasetTabs.module.css'
 
 const tabs = [
     {
@@ -21,7 +21,7 @@ const tabs = [
     { id: 'elevation', label: i18n.t('Elevation') },
 ]
 
-const Tabs = () => {
+const BuiltinDatasetTabs = () => {
     const { pathname } = useLocation()
     const { orgUnit, tab, setTab } = exploreStore()
     const uri = useExploreUri()
@@ -61,4 +61,4 @@ const Tabs = () => {
     )
 }
 
-export default Tabs
+export default BuiltinDatasetTabs

@@ -4,12 +4,14 @@ import { Fragment, useEffect } from 'react'
 import { Outlet, useResolvedPath, useNavigate } from 'react-router-dom'
 import useAppSettings from '../hooks/useAppSettings.js'
 import CheckOrgUnitTree from './check/OrgUnitTree.jsx'
-import OrgUnitTree from './explore/OrgUnitTree.jsx'
+import ExploreOrgUnitTree from './explore/OrgUnitTree.jsx'
+import LocalOrgUnitTree from './local/OrgUnitTree.jsx'
 import styles from './styles/Root.module.css'
 
 export const appPages = [
     { path: '/', name: i18n.t('Home') },
     { path: '/explore', name: i18n.t('Explore data') },
+    { path: '/local', name: i18n.t('Local data') },
     { path: '/import', name: i18n.t('Import data') },
     { path: '/setup', name: i18n.t('Setup guide') },
     { path: '/settings', name: i18n.t('Settings') },
@@ -46,7 +48,11 @@ const Root = () => {
                                 />
                                 {path === '/explore' &&
                                     pathname.startsWith('/explore') && (
-                                        <OrgUnitTree />
+                                        <ExploreOrgUnitTree />
+                                    )}
+                                {path === '/local' &&
+                                    pathname.startsWith('/local') && (
+                                        <LocalOrgUnitTree />
                                     )}
                             </Fragment>
                         ))}

@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import {
     Outlet,
     useLoaderData,
@@ -52,6 +52,7 @@ const OrgUnit = () => {
                     {orgUnit.properties.name}{' '}
                     <OrgUnitType type={orgUnit?.geometry?.type} />
                 </h1>
+
                 {orgUnit.geometry ? (
                     <Outlet />
                 ) : (

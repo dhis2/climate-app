@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-04-03T08:45:09.074Z\n"
-"PO-Revision-Date: 2025-04-03T08:45:09.074Z\n"
+"POT-Creation-Date: 2025-04-23T13:00:40.862Z\n"
+"PO-Revision-Date: 2025-04-23T13:00:40.862Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -105,110 +105,11 @@ msgstr ""
 "are close to each other (within the resolution), they will have the same "
 "data values."
 
-msgid "Home"
-msgstr "Home"
-
-msgid "Explore data"
-msgstr "Explore data"
-
-msgid "Import data"
-msgstr "Import data"
-
-msgid "Setup guide"
-msgstr "Setup guide"
-
-msgid "Settings"
-msgstr "Settings"
-
-msgid "Check data"
-msgstr "Check data"
-
 msgid "Check weather and climate data"
 msgstr "Check weather and climate data"
 
 msgid "Select a location in the left panel"
 msgstr "Select a location in the left panel"
-
-msgid "Start date"
-msgstr "Start date"
-
-msgid "End date"
-msgstr "End date"
-
-msgid "Maximum {{maxDays}} days allowed"
-msgstr "Maximum {{maxDays}} days allowed"
-
-msgid "Explore weather and climate data"
-msgstr "Explore weather and climate data"
-
-msgid "Select an organisation unit in the left panel"
-msgstr "Select an organisation unit in the left panel"
-
-msgid "January"
-msgstr "January"
-
-msgid "February"
-msgstr "February"
-
-msgid "March"
-msgstr "March"
-
-msgid "April"
-msgstr "April"
-
-msgid "May"
-msgstr "May"
-
-msgid "June"
-msgstr "June"
-
-msgid "July"
-msgstr "July"
-
-msgid "August"
-msgstr "August"
-
-msgid "September"
-msgstr "September"
-
-msgid "October"
-msgstr "October"
-
-msgid "November"
-msgstr "November"
-
-msgid "December"
-msgstr "December"
-
-msgid "Month"
-msgstr "Month"
-
-msgid "Start month"
-msgstr "Start month"
-
-msgid "End month"
-msgstr "End month"
-
-msgid "Maximum {{maxMonths}} months allowed"
-msgstr "Maximum {{maxMonths}} months allowed"
-
-msgid "No geometry found"
-msgstr "No geometry found"
-
-msgid "Data for a location"
-msgstr "Data for a location"
-
-msgid "Data for an area"
-msgstr "Data for an area"
-
-msgid "Monthly"
-msgstr "Monthly"
-
-msgid "Daily"
-msgstr "Daily"
-
-msgid "Reference period"
-msgstr "Reference period"
 
 msgid "10 days forecast"
 msgstr "10 days forecast"
@@ -234,17 +135,6 @@ msgstr "Vegetation"
 msgid "Elevation"
 msgstr "Elevation"
 
-msgid ""
-"Temperature anomaly is the difference of a temperature from a reference "
-"value, calculated as the average temperature over a period of 30 years. "
-"Blue columns shows temperatures below the average, while red columns are "
-"above."
-msgstr ""
-"Temperature anomaly is the difference of a temperature from a reference "
-"value, calculated as the average temperature over a period of 30 years. "
-"Blue columns shows temperatures below the average, while red columns are "
-"above."
-
 msgid "{{name}}: {{month}} temperature difference {{years}}"
 msgstr "{{name}}: {{month}} temperature difference {{years}}"
 
@@ -254,22 +144,31 @@ msgstr "Reference period: {{period}}"
 msgid "Temperature anomaly"
 msgstr "Temperature anomaly"
 
-msgid "{{name}}: Elevation"
-msgstr "{{name}}: Elevation"
+msgid ""
+"Temperature anomaly is the difference of a temperature from a reference "
+"value, calculated as the average temperature over a period of 30 years. "
+"Blue columns shows temperatures below the average, while red columns are "
+"above."
+msgstr ""
+"Temperature anomaly is the difference of a temperature from a reference "
+"value, calculated as the average temperature over a period of 30 years. "
+"Blue columns shows temperatures below the average, while red columns are "
+"above."
+
+msgid "Start date"
+msgstr "Start date"
+
+msgid "End date"
+msgstr "End date"
+
+msgid "Maximum {{maxDays}} days allowed"
+msgstr "Maximum {{maxDays}} days allowed"
 
 msgid "{{value}} m"
 msgstr "{{value}} m"
 
-msgid ""
-"The chart shows the elevation distribution of the selected area, for each "
-"meter above sea level it shows the area with this elevation in hectares. "
-"The mean, minimum, and maximum elevation values are calculated from the "
-"elevation data."
-msgstr ""
-"The chart shows the elevation distribution of the selected area, for each "
-"meter above sea level it shows the area with this elevation in hectares. "
-"The mean, minimum, and maximum elevation values are calculated from the "
-"elevation data."
+msgid "{{name}}: Elevation"
+msgstr "{{name}}: Elevation"
 
 msgid "Elevation: {{value}} m"
 msgstr "Elevation: {{value}} m"
@@ -285,6 +184,23 @@ msgstr "Mean elevation"
 
 msgid "Max elevation"
 msgstr "Max elevation"
+
+msgid ""
+"The chart shows the elevation distribution of the selected area, for each "
+"meter above sea level it shows the area with this elevation in hectares. "
+"The mean, minimum, and maximum elevation values are calculated from the "
+"elevation data."
+msgstr ""
+"The chart shows the elevation distribution of the selected area, for each "
+"meter above sea level it shows the area with this elevation in hectares. "
+"The mean, minimum, and maximum elevation values are calculated from the "
+"elevation data."
+
+msgid "Explore weather and climate data"
+msgstr "Explore weather and climate data"
+
+msgid "Select an organisation unit in the left panel"
+msgstr "Select an organisation unit in the left panel"
 
 msgid "{{precip}} mm"
 msgstr "{{precip}} mm"
@@ -457,17 +373,6 @@ msgstr "Heavy snow and thunder"
 msgid "Fog"
 msgstr "Fog"
 
-msgid ""
-"The Universal Thermal Climate Index (UTCI) is an index that combines the "
-"effects of air temperature, humidity, wind speed, and radiation on the "
-"human body. It is a measure of the thermal stress experienced by a person "
-"in a given environment."
-msgstr ""
-"The Universal Thermal Climate Index (UTCI) is an index that combines the "
-"effects of air temperature, humidity, wind speed, and radiation on the "
-"human body. It is a measure of the thermal stress experienced by a person "
-"in a given environment."
-
 msgid "{{name}}: Thermal comfort {{period}}"
 msgstr "{{name}}: Thermal comfort {{period}}"
 
@@ -481,13 +386,15 @@ msgid "Average temperature"
 msgstr "Average temperature"
 
 msgid ""
-"Relative humidity is the the amount of water vapour present in air "
-"expressed as a percentage of the amount needed for saturation at the same "
-"temperature (dewpoint)."
+"The Universal Thermal Climate Index (UTCI) is an index that combines the "
+"effects of air temperature, humidity, wind speed, and radiation on the "
+"human body. It is a measure of the thermal stress experienced by a person "
+"in a given environment."
 msgstr ""
-"Relative humidity is the the amount of water vapour present in air "
-"expressed as a percentage of the amount needed for saturation at the same "
-"temperature (dewpoint)."
+"The Universal Thermal Climate Index (UTCI) is an index that combines the "
+"effects of air temperature, humidity, wind speed, and radiation on the "
+"human body. It is a measure of the thermal stress experienced by a person "
+"in a given environment."
 
 msgid "{{name}}: Daily relative humidity {{period}}"
 msgstr "{{name}}: Daily relative humidity {{period}}"
@@ -510,6 +417,78 @@ msgstr "Dewpoint temperature"
 msgid "Air temperature"
 msgstr "Air temperature"
 
+msgid ""
+"Relative humidity is the the amount of water vapour present in air "
+"expressed as a percentage of the amount needed for saturation at the same "
+"temperature (dewpoint)."
+msgstr ""
+"Relative humidity is the the amount of water vapour present in air "
+"expressed as a percentage of the amount needed for saturation at the same "
+"temperature (dewpoint)."
+
+msgid "Start month"
+msgstr "Start month"
+
+msgid "End month"
+msgstr "End month"
+
+msgid "Maximum {{maxMonths}} months allowed"
+msgstr "Maximum {{maxMonths}} months allowed"
+
+msgid "January"
+msgstr "January"
+
+msgid "February"
+msgstr "February"
+
+msgid "March"
+msgstr "March"
+
+msgid "April"
+msgstr "April"
+
+msgid "May"
+msgstr "May"
+
+msgid "June"
+msgstr "June"
+
+msgid "July"
+msgstr "July"
+
+msgid "August"
+msgstr "August"
+
+msgid "September"
+msgstr "September"
+
+msgid "October"
+msgstr "October"
+
+msgid "November"
+msgstr "November"
+
+msgid "December"
+msgstr "December"
+
+msgid "Month"
+msgstr "Month"
+
+msgid "No geometry found"
+msgstr "No geometry found"
+
+msgid "Data for a location"
+msgstr "Data for a location"
+
+msgid "Data for an area"
+msgstr "Data for an area"
+
+msgid "Monthly"
+msgstr "Monthly"
+
+msgid "Daily"
+msgstr "Daily"
+
 msgid "{{name}}: Daily precipitation {{period}}"
 msgstr "{{name}}: Daily precipitation {{period}}"
 
@@ -524,6 +503,9 @@ msgstr "Monthly precipitation"
 
 msgid "Normal precipitation"
 msgstr "Normal precipitation"
+
+msgid "Reference period"
+msgstr "Reference period"
 
 msgid "{{name}}: Daily temperatures {{period}}"
 msgstr "{{name}}: Daily temperatures {{period}}"
@@ -540,11 +522,17 @@ msgstr "{{name}}: Monthly temperatures {{period}}"
 msgid "Normal temperature"
 msgstr "Normal temperature"
 
-msgid "Resample"
-msgstr "Resample"
-
 msgid "Weekly"
 msgstr "Weekly"
+
+msgid "{{name}}: {{band}} vegetation index {{period}}"
+msgstr "{{name}}: {{band}} vegetation index {{period}}"
+
+msgid "Value is only for 250 x 250 m where the facility is located"
+msgstr "Value is only for 250 x 250 m where the facility is located"
+
+msgid "Resample"
+msgstr "Resample"
 
 msgid ""
 "Change from 16-days to weekly or monthly periods using linear "
@@ -552,12 +540,6 @@ msgid ""
 msgstr ""
 "Change from 16-days to weekly or monthly periods using linear "
 "interpolation. Weekly periods are recommended when importing to DHIS2."
-
-msgid "{{name}}: {{band}} vegetation index {{period}}"
-msgstr "{{name}}: {{band}} vegetation index {{period}}"
-
-msgid "Value is only for 250 x 250 m where the facility is located"
-msgstr "Value is only for 250 x 250 m where the facility is located"
 
 msgid "Data element"
 msgstr "Data element"
@@ -567,6 +549,9 @@ msgstr "No match found"
 
 msgid "Data element to import data to"
 msgstr "Data element to import data to"
+
+msgid "Error"
+msgstr "Error"
 
 msgid "Data"
 msgstr "Data"
@@ -734,6 +719,27 @@ msgstr "Daily values will be imported between start and end dates"
 
 msgid "Period type"
 msgstr "Period type"
+
+msgid "Explore local weather and climate data"
+msgstr "Explore local weather and climate data"
+
+msgid "Home"
+msgstr "Home"
+
+msgid "Explore data"
+msgstr "Explore data"
+
+msgid "Import data"
+msgstr "Import data"
+
+msgid "Setup guide"
+msgstr "Setup guide"
+
+msgid "Settings"
+msgstr "Settings"
+
+msgid "Check data"
+msgstr "Check data"
 
 msgid ""
 "Set y-axis values for charts in the Explore data section to make it easier "

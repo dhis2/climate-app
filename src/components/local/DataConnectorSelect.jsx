@@ -1,0 +1,35 @@
+import { useState, useEffect } from 'react'
+import { SingleSelect, SingleSelectOption } from '@dhis2/ui'
+import useAppSettings from '../../hooks/useAppSettings.js'
+import { useNavigate } from 'react-router-dom'
+
+const DataConnectorSelect = ({selected, onChange}) => {
+    const { settings, changeSetting } = useAppSettings()
+    if (!settings) {return null}
+
+    const { dataConnectors = [] } = settings
+
+    return (
+        <>
+            {dataConnectors && (
+                <>
+                    <SingleSelect selected={selected} onChange={onChange}>
+                        {dataConnectors.map(d => (
+                            <SingleSelectOption key={d.id} value={d.id} label={d.name}/>
+                        ))}
+                    </SingleSelect>
+                    {selected && (
+                        <p>{selected.description}</p>
+                    )}
+                </>
+            )}
+            {!dataConnectors && (
+                <>
+                    <p>No data servers have been added. Please go to the Settings page to configure server connections.</p>
+                </>
+            )}
+        </>
+    )
+}
+
+export default DataConnectorSelect
