@@ -42,10 +42,7 @@ const DatasetMonthly = () => {
                     There was a problem fetching the dataset. Please try again later.
                 </NoticeBox>
             )}
-            {loading && (
-                <DataLoader />
-            )}
-            {data && settings && (
+            {data && settings ? (
                 <Chart
                     config={getMonthlyConfig({
                         name,
@@ -53,6 +50,8 @@ const DatasetMonthly = () => {
                         settings,
                     })}
                 />
+            ) : (
+                <DataLoader />
             )}
             <MonthlyPeriodSelect />
             <Resolution resolution={dataset.resolution} />

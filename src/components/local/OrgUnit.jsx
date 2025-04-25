@@ -30,8 +30,21 @@ const OrgUnit = () => {
     }, [dataConnector, setDatasets])
 
     const handleServerChange = ({ selected }) => {
+        console.log('handling server change', selected)
         navigate(`/local/${orgUnitId}/${selected}`)
     }
+
+    // redirect to first available server if not given
+    useEffect(() => {
+        if (!serverId && settings) {
+            if (!settings) return
+            const { dataConnectors = [] } = settings
+            console.log('defaulting to first available data connector', dataConnectors)
+            if (dataConnectors) {
+                handleServerChange({selected: dataConnectors[0].id})
+            }
+        }
+    }, [serverId, settings])
 
     return (
         <div className={styles.container}>

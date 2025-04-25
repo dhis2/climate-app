@@ -11,10 +11,22 @@ const DataConnectorDatasetTabs = ({ datasets }) => {
     const navigate = useNavigate()
     console.log('datasetId', datasetId)
 
-    const handleChange = (value) => {
-        console.log('navigating due to click event')
-        navigate(`/local/${orgUnit.id}/${serverId}/${value}`)
+    const handleChange = (tabValue) => {
+        const currentHash = window.location.hash
+        if (!currentHash.endsWith(`/${tabValue}`)) {
+            console.log(`Navigating from ${currentHash} to ${tabValue}`)
+            navigate(tabValue)
+        }
     }
+
+    // Set default dataset
+    useEffect(() => {
+        if (!datasetId && datasets?.length>0) {
+            console.log('defaulting to first available dataset', datasets)
+            navigate(`${datasets[0].id}`)
+        }
+    }, [datasetId, datasets, navigate])
+
 
     return (
         <TabBar selected={datasetId} fixed scrollable>

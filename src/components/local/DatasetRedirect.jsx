@@ -1,25 +1,23 @@
-import { useParams, Navigate } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 import localStore from '../../store/localStore'
+import { CircularLoader } from '@dhis2/ui'
+import DataLoader from '../shared/DataLoader'
 
 const DatasetRedirect = () => {
     const { orgUnitId, serverId, datasetId } = useParams()
+    const navigate = useNavigate()
     const { monthlyPeriod } = localStore()
 
-    if (!monthlyPeriod?.startTime) {
-        return <p>Preparing redirect...</p> // Optional fallback
-    }
+    useEffect(() => {
+        if (monthlyPeriod?.startTime && monthlyPeriod?.endTime) {
+            const path = `monthly/${monthlyPeriod.startTime}/${monthlyPeriod.endTime}`
+            console.log(`🚀 Redirecting to: ${path}`)
+            navigate(path, { replace: true })
+        }
+    }, [monthlyPeriod, navigate])
 
-    console.log('Redirecting to:', `/local/${orgUnitId}/${serverId}/${datasetId}/monthly/${monthlyPeriod.startTime}/${monthlyPeriod.endTime}`)
-
-    return (
-        <>
-            <p>THIS SHOULD REDIRECT</p>
-            <Navigate
-                replace
-                to={`monthly/${monthlyPeriod.startTime}/${monthlyPeriod.endTime}`}
-            />
-        </>
-    )
+    return <DataLoader />
 }
 
 export default DatasetRedirect

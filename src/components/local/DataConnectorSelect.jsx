@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
 import { SingleSelect, SingleSelectOption } from '@dhis2/ui'
 import useAppSettings from '../../hooks/useAppSettings.js'
-import { useNavigate } from 'react-router-dom'
 
 const DataConnectorSelect = ({selected, onChange}) => {
     const { settings, changeSetting } = useAppSettings()
+
     if (!settings) {return null}
 
     const { dataConnectors = [] } = settings

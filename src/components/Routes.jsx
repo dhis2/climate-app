@@ -27,10 +27,8 @@ import SettingsPage from './settings/SettingsPage.jsx'
 import SetupPage from './setup/SetupPage.jsx'
 import LocalOrgUnit from './local/OrgUnit.jsx'
 import LocalDataConnector from './local/DataConnector.jsx'
-import LocalDataset from './local/Dataset.jsx'
 import LocalDatasetRedirect from './local/DatasetRedirect.jsx'
 import LocalDatasetMonthly from './local/DatasetMonthly.jsx'
-import DummyElement from './local/DummyElement.jsx'
 
 const monthlyPath = 'monthly/:startTime/:endTime/:referencePeriodId'
 const dailyPath = 'daily/:startTime/:endTime'
@@ -182,7 +180,6 @@ const Routes = () => {
                                     children: [
                                         {
                                             path: ':datasetId',
-                                            element: <LocalDataset />,
                                             children: [
                                                 {
                                                     index: true,
