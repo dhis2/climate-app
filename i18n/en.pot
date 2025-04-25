@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-04-23T13:00:40.862Z\n"
-"PO-Revision-Date: 2025-04-23T13:00:40.862Z\n"
+"POT-Creation-Date: 2025-04-25T07:17:20.460Z\n"
+"PO-Revision-Date: 2025-04-25T07:17:20.461Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -723,11 +723,17 @@ msgstr "Period type"
 msgid "Explore local weather and climate data"
 msgstr "Explore local weather and climate data"
 
+msgid "Please select a data server to continue."
+msgstr "Please select a data server to continue."
+
 msgid "Home"
 msgstr "Home"
 
 msgid "Explore data"
 msgstr "Explore data"
+
+msgid "Local data"
+msgstr "Local data"
 
 msgid "Import data"
 msgstr "Import data"

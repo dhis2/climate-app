@@ -5,13 +5,14 @@ import { fetchDataConnectorDatasets } from '../../utils/dataConnector'
 import styles from './styles/DataConnectorTabs.module.css'
 import { useLoaderData, Routes, Route, useParams, useNavigate } from 'react-router-dom'
 
-const ServerDatasetTabs = ({ datasets }) => {
+const DataConnectorDatasetTabs = ({ datasets }) => {
     const orgUnit = useLoaderData()
-    const { serverId, datasetId } = useParams() // <- use this as selected
+    const { serverId, datasetId, startTime } = useParams() // <- use this as selected
     const navigate = useNavigate()
     console.log('datasetId', datasetId)
 
     const handleChange = (value) => {
+        console.log('navigating due to click event')
         navigate(`/local/${orgUnit.id}/${serverId}/${value}`)
     }
 
@@ -31,4 +32,4 @@ const ServerDatasetTabs = ({ datasets }) => {
     )
 }
 
-export default ServerDatasetTabs
+export default DataConnectorDatasetTabs

@@ -63,68 +63,92 @@ const cachedPromise = {}
 
 const getCacheKey = ({ host, dataset, periodType, periodStart, periodEnd, orgunits }) =>
     JSON.stringify({ host, dataset, periodType, periodStart, periodEnd, orgunits });
-  
+
 const useDataConnectorTimeSeries = ({
     host,
     dataset,
-    periodType,
-    periodStart,
-    periodEnd,
-    orgunits,
-  }) => {
-    const [data, setData] = useState();
-  
+    period,
+    feature,
+}) => {
+    const [data, setData] = useState(null)
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(null)
+
+    const periodIdToType = (periodId) => {
+        if (periodId.length === 7) return 'month'
+        if (periodId.length === 10) return 'day'
+        return null
+    }
+
+    const periodStart = period?.startTime
+    const periodEnd = period?.endTime
+    const periodType = periodIdToType(periodStart)
+
     useEffect(() => {
-      let canceled = false;
-  
-      // ✅ Immediately reset data and return if dataset is null
-      if (!dataset) {
-        setData(null); // ✅ Clears forecast data when toggler is off
-        return;
-      }
+        if (!host || !dataset || !periodStart || !periodEnd || !feature) {
+            return
+        }
 
-      const key = getCacheKey({ host, dataset, periodType, periodStart, periodEnd, orgunits });
+        let canceled = false
+        setLoading(true)
+        setError(null)
 
-      if (cachedPromise[key]) {
-          // ✅ Use cached promise if available
-          cachedPromise[key].then((data) => {
-          if (!canceled) {
-              console.log('Using cached data', data);
-              setData(data);
-          }
-          });
+        const key = getCacheKey({ host, dataset, periodType, periodStart, periodEnd, feature })
 
-          return () => {
-          canceled = true;
-          };
-      }
+        if (cachedPromise[key]) {
+            cachedPromise[key]
+                .then((data) => {
+                    if (!canceled) {
+                        setData(data)
+                        setLoading(false)
+                    }
+                })
+                .catch((err) => {
+                    if (!canceled) {
+                        setError(err)
+                        setLoading(false)
+                    }
+                })
 
-      setData(null); // Reset before fetching new data
-      // ✅ Fetch new data and store the promise in cache
-      cachedPromise[key] = dataConnectorRequest({
-          host,
-          dataset,
-          periodType,
-          periodStart,
-          periodEnd,
-          orgunits,
-      })
-      .then((response) => response.json())
-      .then((jsonData) => parseResults(jsonData));
+            return () => {
+                canceled = true
+            }
+        }
 
-      cachedPromise[key].then((data) => {
-          if (!canceled) {
-          console.log('Fetched new data', data);
-          setData(data);
-          }
-      });
+        setData(null)
 
-      return () => {
-          canceled = true;
-      };
-    }, [host, dataset, periodType, periodStart, periodEnd, orgunits]);
-  
-    return data;
-  };
+        cachedPromise[key] = dataConnectorRequest({
+            host,
+            dataset,
+            periodType,
+            periodStart,
+            periodEnd,
+            orgunits: {type: 'FeatureCollection', features: [feature]},
+        })
+            .then((response) => response.json())
+            .then(parseResults)
+
+        cachedPromise[key]
+            .then((data) => {
+                if (!canceled) {
+                    setData(data)
+                    setLoading(false)
+                }
+            })
+            .catch((err) => {
+                if (!canceled) {
+                    console.log('Error fetching dataset', err)
+                    setError(err)
+                    setLoading(false)
+                }
+            })
+
+        return () => {
+            canceled = true
+        }
+    }, [host, dataset, periodType, periodStart, periodEnd, feature])
+
+    return { data, loading, error }
+}
 
 export default useDataConnectorTimeSeries

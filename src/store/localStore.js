@@ -25,12 +25,16 @@ const localStore = create((set) => {
         dailyPeriod: getDefaultExplorePeriod(),
         monthlyPeriod: getDefaultMonthlyPeriod(),
         month: getLastMonth()[1],
+        dataConnector: null,
+        datasets: [],
         setOrgUnit: setIfChanged('orgUnit'),
         setTab: setIfChanged('tab'),
         setPeriodType: setIfChanged('periodType'),
         setDailyPeriod: setIfPeriodChanged('dailyPeriod'),
         setMonthlyPeriod: setIfPeriodChanged('monthlyPeriod'),
         setMonth: setIfChanged('month'),
+        setDataConnector: setIfChanged('dataConnector'),
+        setDatasets: setIfChanged('datasets'),
     }
 })
 

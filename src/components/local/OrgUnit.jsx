@@ -1,61 +1,37 @@
 import i18n from '@dhis2/d2-i18n'
 import { useState, useEffect } from 'react'
-import {
-    Outlet,
-    useLoaderData,
-    useLocation,
-    useNavigate,
-    useParams,
-} from 'react-router-dom'
-import exploreStore from '../../store/exploreStore.js'
-import OrgUnitType from './OrgUnitType.jsx'
-import DataConnectorSelect from './DataConnectorSelect.jsx'
-import ServerDatasetTabs from './ServerDatasetTabs.jsx'
-import { fetchDataConnectorDatasets } from '../../utils/dataConnector.js'
+import { useLoaderData, Outlet, useParams, useNavigate } from 'react-router-dom'
+import useAppSettings from '../../hooks/useAppSettings'
 import styles from './styles/OrgUnit.module.css'
-import useAppSettings from '../../hooks/useAppSettings.js'
-import localStore from '../../store/localStore.js'
+import OrgUnitType from './OrgUnitType'
+import DataConnectorSelect from './DataConnectorSelect'
+import localStore from '../../store/localStore'
+import { fetchDataConnectorDatasets } from '../../utils/dataConnector'
 
 const OrgUnit = () => {
     const orgUnit = useLoaderData()
-    const { orgUnitId, serverId, datasetId } = useParams()
+    const { orgUnitId, serverId } = useParams()
     const navigate = useNavigate()
     const { settings } = useAppSettings()
-    const { setOrgUnit } = localStore()
-
-    const [datasets, setDatasets] = useState([])
-    const [dataConnector, setDataConnector] = useState(undefined)
-
-    useEffect(() => {
-        setOrgUnit(orgUnit)
-        return () => {
-            setOrgUnit(null)
-        }
-    }, [orgUnit, setOrgUnit])
+    const { dataConnector, setDataConnector, setDatasets } = localStore()
 
     useEffect(() => {
         if (!settings) return
-        const { dataConnectors = [] } = settings
-        const match = dataConnectors.find((m) => m.id == serverId)
-        console.log('data connector', match)
+        const match = settings.dataConnectors?.find(d => d.id === serverId)
         setDataConnector(match)
     }, [settings, serverId])
 
     useEffect(() => {
         if (dataConnector) {
-            const serverUrl = dataConnector.url
-            fetchDataConnectorDatasets({ host: serverUrl })
+            fetchDataConnectorDatasets({ host: dataConnector.url })
                 .then(setDatasets)
                 .catch(() => setDatasets([]))
         }
-    }, [dataConnector])
+    }, [dataConnector, setDatasets])
 
-    const handleServerChange = ({selected}) => {
-        console.log('server change', selected)
+    const handleServerChange = ({ selected }) => {
         navigate(`/local/${orgUnitId}/${selected}`)
     }
-
-    const showGraph = serverId && datasetId
 
     return (
         <div className={styles.container}>
@@ -66,28 +42,17 @@ const OrgUnit = () => {
                 </h1>
 
                 {!orgUnit.geometry && (
-                    <div className={styles.message}>
-                        No geometry found
-                    </div>
+                    <div className={styles.message}>No geometry found</div>
                 )}
 
-                <DataConnectorSelect
-                    selected={serverId}
-                    onChange={handleServerChange}
-                />
+                <div className={styles.orgUnit}>
+                    <DataConnectorSelect selected={serverId} onChange={handleServerChange} />
+                    {!dataConnector && <p>{i18n.t('Please select a data server to continue.')}</p>}
+                    {dataConnector && <p>{dataConnector.description}</p>}
+                </div>
 
-                {dataConnector && (
-                    <>
-                        <p>{dataConnector.description}</p>
-                        <ServerDatasetTabs
-                            datasets={datasets}
-                        />
-                    </>
-                )}
+                <Outlet />
 
-                {showGraph && (
-                    <p>Graph placeholder for dataset {datasetId}...</p>
-                )}
             </div>
         </div>
     )

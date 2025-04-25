@@ -15,7 +15,6 @@ import HeatMonthly from './explore/heat/HeatMonthly.jsx'
 import HumidityDaily from './explore/humidity/HumidityDaily.jsx'
 import HumidityMonthly from './explore/humidity/HumidityMonthly.jsx'
 import ExploreOrgUnit from './explore/OrgUnit.jsx'
-import LocalOrgUnit from './local/OrgUnit.jsx'
 import PrecipitationDaily from './explore/precipitation/PrecipitationDaily.jsx'
 import PrecipitationMonthly from './explore/precipitation/PrecipitationMonthly.jsx'
 import BuiltinDatasetTabs from './explore/BuiltinDatasetTabs.jsx'
@@ -26,7 +25,12 @@ import ImportPage from './import/ImportPage.jsx'
 import Root from './Root.jsx'
 import SettingsPage from './settings/SettingsPage.jsx'
 import SetupPage from './setup/SetupPage.jsx'
-import { fetchDataConnectorDatasets } from '../utils/dataConnector.js'
+import LocalOrgUnit from './local/OrgUnit.jsx'
+import LocalDataConnector from './local/DataConnector.jsx'
+import LocalDataset from './local/Dataset.jsx'
+import LocalDatasetRedirect from './local/DatasetRedirect.jsx'
+import LocalDatasetMonthly from './local/DatasetMonthly.jsx'
+import DummyElement from './local/DummyElement.jsx'
 
 const monthlyPath = 'monthly/:startTime/:endTime/:referencePeriodId'
 const dailyPath = 'daily/:startTime/:endTime'
@@ -131,28 +135,6 @@ const builtinDatasetRoutes = [
     },
 ]
 
-/*
-const serverDatasetRoutes = ({serverId}) => {
-    const datasets = fetchDataConnectorDatasets({host: serverId})
-    const datasetRoutes = []
-    datasets.map(ds => {
-        datasetRoutes.push(
-            {
-                path: ds.id,
-                element: <ServerTabs />,
-                children: [
-                    {
-                        index: true,
-                        element: <ServerDatasetVisualizer />,
-                    },
-                ],
-            }
-        )
-    })
-    return datasetRoutes
-}
-*/
-
 const Routes = () => {
     const engine = useDataEngine()
 
@@ -195,13 +177,28 @@ const Routes = () => {
                             children: [
                                 {
                                     path: ':serverId',
-                                    element: <LocalOrgUnit />,
+                                    element: <LocalDataConnector />,
                                     loader: orgUnitLoader(engine),
                                     children: [
                                         {
                                             path: ':datasetId',
-                                            element: <LocalOrgUnit />,
-                                            loader: orgUnitLoader(engine),
+                                            element: <LocalDataset />,
+                                            children: [
+                                                {
+                                                    index: true,
+                                                    element: <LocalDatasetRedirect />,
+                                                },
+                                                {
+                                                    path: 'monthly/:startTime/:endTime',
+                                                    element: <LocalDatasetMonthly />,
+                                                    loader: orgUnitLoader(engine),
+                                                },
+                                                //{
+                                                //    path: 'daily/:startTime/:endTime',
+                                                //    element: <DatasetDaily />,
+                                                //    loader: orgUnitLoader(engine),
+                                                //},
+                                            ]
                                         },
                                     ]
                                 },
