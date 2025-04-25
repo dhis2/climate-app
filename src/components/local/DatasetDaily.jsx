@@ -4,15 +4,15 @@ import localStore from '../../store/localStore.js'
 import DataLoader from '../shared/DataLoader.jsx'
 import Resolution from '../shared/Resolution.jsx'
 import Chart from './Chart.jsx'
-import MonthlyPeriodSelect from './MonthlyPeriodSelect.jsx'
+import DailyPeriodSelect from './DailyPeriodSelect.jsx'
 import PeriodTypeSelect from './PeriodTypeSelect.jsx'
-import getMonthlyConfig from './chartConfigs/datasetMonthly'
+import getDailyConfig from './chartConfigs/datasetDaily.js'
 import { useParams, useLoaderData } from 'react-router-dom'
 import { NoticeBox } from '@dhis2/ui'
 
-const DatasetMonthly = () => {
+const DatasetDaily = () => {
     const orgUnit = useLoaderData()
-    const period = localStore((state) => state.monthlyPeriod)
+    const period = localStore((state) => state.dailyPeriod)
     const { dataConnector, datasets } = localStore()
     const { settings } = useAppSettings()
     const { serverId, datasetId } = useParams()
@@ -40,7 +40,7 @@ const DatasetMonthly = () => {
             )}
             {data && settings ? (
                 <Chart
-                    config={getMonthlyConfig({
+                    config={getDailyConfig({
                         orgUnitName: name,
                         dataset,
                         data,
@@ -50,10 +50,10 @@ const DatasetMonthly = () => {
             ) : (
                 <DataLoader />
             )}
-            <MonthlyPeriodSelect />
+            <DailyPeriodSelect />
             <Resolution resolution={dataset.resolution} />
         </>
     )
 }
 
-export default DatasetMonthly
+export default DatasetDaily

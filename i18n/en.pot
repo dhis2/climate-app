@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-04-25T07:17:20.460Z\n"
-"PO-Revision-Date: 2025-04-25T07:17:20.461Z\n"
+"POT-Creation-Date: 2025-04-25T14:08:07.084Z\n"
+"PO-Revision-Date: 2025-04-25T14:08:07.085Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -719,6 +719,12 @@ msgstr "Daily values will be imported between start and end dates"
 
 msgid "Period type"
 msgstr "Period type"
+
+msgid "{{orgUnitName}}: {{dataName}} {{period}}"
+msgstr "{{orgUnitName}}: {{dataName}} {{period}}"
+
+msgid "{{dataName}}"
+msgstr "{{dataName}}"
 
 msgid "Explore local weather and climate data"
 msgstr "Explore local weather and climate data"

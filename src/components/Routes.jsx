@@ -29,6 +29,7 @@ import LocalOrgUnit from './local/OrgUnit.jsx'
 import LocalDataConnector from './local/DataConnector.jsx'
 import LocalDatasetRedirect from './local/DatasetRedirect.jsx'
 import LocalDatasetMonthly from './local/DatasetMonthly.jsx'
+import LocalDatasetDaily from './local/DatasetDaily.jsx'
 
 const monthlyPath = 'monthly/:startTime/:endTime/:referencePeriodId'
 const dailyPath = 'daily/:startTime/:endTime'
@@ -180,21 +181,22 @@ const Routes = () => {
                                     children: [
                                         {
                                             path: ':datasetId',
+                                            element: <LocalDatasetRedirect />,
                                             children: [
-                                                {
-                                                    index: true,
-                                                    element: <LocalDatasetRedirect />,
-                                                },
+                                                //{
+                                                //    index: true,
+                                                //    element: <LocalDatasetRedirect />,
+                                                //},
                                                 {
                                                     path: 'monthly/:startTime/:endTime',
                                                     element: <LocalDatasetMonthly />,
                                                     loader: orgUnitLoader(engine),
                                                 },
-                                                //{
-                                                //    path: 'daily/:startTime/:endTime',
-                                                //    element: <DatasetDaily />,
-                                                //    loader: orgUnitLoader(engine),
-                                                //},
+                                                {
+                                                    path: 'daily/:startTime/:endTime',
+                                                    element: <LocalDatasetDaily />,
+                                                    loader: orgUnitLoader(engine),
+                                                },
                                             ]
                                         },
                                     ]

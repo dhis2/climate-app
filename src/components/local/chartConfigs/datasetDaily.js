@@ -3,8 +3,7 @@ import { colors } from '@dhis2/ui'
 import { getTimeFromId, toCelcius } from '../../../utils/calc.js'
 import {
     animation,
-    getMonthlyPeriod,
-    getMonthFromId,
+    getDailyPeriod,
 } from '../../../utils/chart.js'
 
 const getChartConfig = ({ orgUnitName, dataset, data, settings }) => {
@@ -25,7 +24,7 @@ const getChartConfig = ({ orgUnitName, dataset, data, settings }) => {
             text: i18n.t('{{orgUnitName}}: {{dataName}} {{period}}', {
                 orgUnitName,
                 dataName: dataset.shortName,
-                period: getMonthlyPeriod(data),
+                period: getDailyPeriod(data),
                 nsSeparator: ';',
             }),
         },
