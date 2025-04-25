@@ -33,8 +33,8 @@ const DataConnectorDatasetTabs = ({ datasets }) => {
             {datasets.map((d) => (
                 <Tab
                     key={d.id}
-                    label={d.shortName}
                     value={d.id}
+                    selected={d.id == datasetId}
                     onClick={() => handleChange(d.id)}
                 >
                     {d.shortName}

@@ -20,7 +20,6 @@ const DatasetMonthly = () => {
     const dataset = datasets.find((d) => d.id == datasetId)
     console.log('dataset obj', dataset)
 
-    console.log('fetching', [dataConnector.url,datasetId,period,orgUnit])
     const {data, loading, error} = useDataConnectorTimeSeries({
         host: dataConnector.url,
         dataset: datasetId,

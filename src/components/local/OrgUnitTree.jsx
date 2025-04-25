@@ -10,6 +10,8 @@ const OrgUnitTree = () => {
     const navigate = useNavigate()
     const path = orgUnit?.path.split('/')
 
+    console.log('orgunit select', orgUnit)
+
     const initiallyExpanded =
         path?.length > 2
             ? [path.slice(0, -1).join('/')]

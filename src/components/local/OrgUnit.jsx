@@ -13,7 +13,14 @@ const OrgUnit = () => {
     const { orgUnitId, serverId } = useParams()
     const navigate = useNavigate()
     const { settings } = useAppSettings()
-    const { dataConnector, setDataConnector, setDatasets } = localStore()
+    const { dataConnector, setDataConnector, setDatasets, setOrgUnit } = localStore()
+
+    useEffect(() => {
+        setOrgUnit(orgUnit)
+        return () => {
+            setOrgUnit(null)
+        }
+    }, [orgUnit, setOrgUnit])
 
     useEffect(() => {
         if (!settings) return
