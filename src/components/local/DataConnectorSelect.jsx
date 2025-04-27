@@ -18,9 +18,6 @@ const DataConnectorSelect = ({selected, onChange}) => {
                             <SingleSelectOption key={d.id} value={d.id} label={d.name}/>
                         ))}
                     </SingleSelect>
-                    {selected && (
-                        <p>{selected.description}</p>
-                    )}
                 </>
             )}
             {!dataConnectors && (

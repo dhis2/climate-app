@@ -7,13 +7,17 @@ import OrgUnitType from './OrgUnitType'
 import DataConnectorSelect from './DataConnectorSelect'
 import localStore from '../../store/localStore'
 import { fetchDataConnectorDatasets } from '../../utils/dataConnector'
+import { useSyncLocalStoreFromUrl } from '../../hooks/useSyncLocalStoreFromUrl'
+import DataLoader from '../shared/DataLoader'
 
 const OrgUnit = () => {
     const orgUnit = useLoaderData()
     const { orgUnitId, serverId } = useParams()
     const navigate = useNavigate()
     const { settings } = useAppSettings()
-    const { dataConnector, setDataConnector, setDatasets, setOrgUnit } = localStore()
+
+    const { ready } = useSyncLocalStoreFromUrl()
+    const { dataConnector, setOrgUnit } = localStore()
 
     useEffect(() => {
         setOrgUnit(orgUnit)
@@ -22,19 +26,22 @@ const OrgUnit = () => {
         }
     }, [orgUnit, setOrgUnit])
 
-    useEffect(() => {
+    {/*useEffect(() => {
+        console.log('trying to set datacon', settings.dataConnectors, dataConnector, serverId)
         if (!settings) return
-        const match = settings.dataConnectors?.find(d => d.id === serverId)
+        const match = settings.dataConnectors?.find(s => s.id === serverId)
         setDataConnector(match)
-    }, [settings, serverId])
+    }, [settings, serverId, dataConnector])
+    */}
 
-    useEffect(() => {
+    {/*useEffect(() => {
         if (dataConnector) {
             fetchDataConnectorDatasets({ host: dataConnector.url })
                 .then(setDatasets)
                 .catch(() => setDatasets([]))
         }
     }, [dataConnector, setDatasets])
+    */}
 
     const handleServerChange = ({ selected }) => {
         console.log('handling server change', selected)
@@ -53,6 +60,12 @@ const OrgUnit = () => {
         }
     }, [serverId, settings])
 
+    if (!ready) return (
+        <div style={{maxWidth: '800px'}}>
+            <DataLoader label="Loading page..."/>
+        </div>
+    )
+
     return (
         <div className={styles.container}>
             <div className={styles.orgUnit}>
@@ -68,7 +81,7 @@ const OrgUnit = () => {
                 <div className={styles.orgUnit}>
                     <DataConnectorSelect selected={serverId} onChange={handleServerChange} />
                     {!dataConnector && <p>{i18n.t('Please select a data server to continue.')}</p>}
-                    {dataConnector && <p>{dataConnector.description}</p>}
+                    {dataConnector && <p style={{ margin: '20px 10px'}}>{dataConnector.description}</p>}
                 </div>
 
                 <Outlet />
