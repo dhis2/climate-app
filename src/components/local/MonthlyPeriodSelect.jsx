@@ -5,15 +5,29 @@ import localStore from '../../store/localStore.js'
 import { getNumberOfMonths } from '../../utils/time.js'
 import MonthPicker from '../shared/MonthPicker.jsx'
 import styles from './styles/Period.module.css'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { useSyncLocalStoreFromUrl } from '../../hooks/useSyncLocalStoreFromUrl.jsx'
 
 const maxMonths = 60
 
 const MonthlyPeriodSelect = () => {
-    const { monthlyPeriod, setMonthlyPeriod } = localStore()
+    const { ready } = useSyncLocalStoreFromUrl()
+    const navigate = useNavigate()
+    const path = useLocation().pathname
+
+    const { monthlyPeriod } = localStore()
     const [period, setPeriod] = useState(monthlyPeriod)
 
     const { startTime, endTime } = period
     const months = getNumberOfMonths(startTime, endTime)
+
+    const handleChange = (p) => {
+        let pathParts = path.split('/')
+        pathParts[pathParts.length-2] = p.startTime
+        pathParts[pathParts.length-1] = p.endTime
+        const newPath = pathParts.join('/')
+        navigate(newPath)
+    }
 
     return (
         <div className={styles.container}>
@@ -32,7 +46,7 @@ const MonthlyPeriodSelect = () => {
                 />
                 <Button
                     disabled={months > maxMonths}
-                    onClick={() => setMonthlyPeriod(period)}
+                    onClick={() => handleChange(period)}
                 >
                     Update
                 </Button>

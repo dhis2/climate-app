@@ -21,27 +21,7 @@ const OrgUnit = () => {
 
     useEffect(() => {
         setOrgUnit(orgUnit)
-        return () => {
-            setOrgUnit(null)
-        }
     }, [orgUnit, setOrgUnit])
-
-    {/*useEffect(() => {
-        console.log('trying to set datacon', settings.dataConnectors, dataConnector, serverId)
-        if (!settings) return
-        const match = settings.dataConnectors?.find(s => s.id === serverId)
-        setDataConnector(match)
-    }, [settings, serverId, dataConnector])
-    */}
-
-    {/*useEffect(() => {
-        if (dataConnector) {
-            fetchDataConnectorDatasets({ host: dataConnector.url })
-                .then(setDatasets)
-                .catch(() => setDatasets([]))
-        }
-    }, [dataConnector, setDatasets])
-    */}
 
     const handleServerChange = ({ selected }) => {
         console.log('handling server change', selected)
@@ -60,7 +40,8 @@ const OrgUnit = () => {
         }
     }, [serverId, settings])
 
-    if (!ready) return (
+    // wait until url syncing and orgunit loading is done
+    if (!ready | !orgUnit) return (
         <div style={{maxWidth: '800px'}}>
             <DataLoader label="Loading page..."/>
         </div>

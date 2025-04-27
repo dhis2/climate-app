@@ -5,15 +5,29 @@ import localStore from '../../store/localStore.js'
 import { getNumberOfDays } from '../../utils/time.js'
 import DatePicker from '../shared/DatePicker.jsx'
 import styles from './styles/Period.module.css'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { useSyncLocalStoreFromUrl } from '../../hooks/useSyncLocalStoreFromUrl.jsx'
 
 const maxDays = 1000
 
 const DailyPeriodSelect = () => {
-    const { dailyPeriod, setDailyPeriod } = localStore()
+    const { ready } = useSyncLocalStoreFromUrl()
+    const navigate = useNavigate()
+    const path = useLocation().pathname
+
+    const { dailyPeriod } = localStore()
     const [period, setPeriod] = useState(dailyPeriod)
 
     const { startTime, endTime } = period
     const days = getNumberOfDays(startTime, endTime)
+
+    const handleChange = (p) => {
+        let pathParts = path.split('/')
+        pathParts[pathParts.length-2] = p.startTime
+        pathParts[pathParts.length-1] = p.endTime
+        const newPath = pathParts.join('/')
+        navigate(newPath)
+    }
 
     return (
         <div className={styles.container}>
@@ -32,7 +46,7 @@ const DailyPeriodSelect = () => {
                 />
                 <Button
                     disabled={days > maxDays}
-                    onClick={() => setDailyPeriod(period)}
+                    onClick={() => handleChange(period)}
                 >
                     Update
                 </Button>

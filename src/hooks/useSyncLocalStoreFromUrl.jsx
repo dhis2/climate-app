@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import useAppSettings from './useAppSettings'
 import localStore from '../store/localStore' // adjust path to your zustand store
 import { fetchDataConnectorDatasets } from '../utils/dataConnector'
@@ -7,8 +7,9 @@ import { fetchDataConnectorDatasets } from '../utils/dataConnector'
 export function useSyncLocalStoreFromUrl() {
     const { orgUnitId, serverId, datasetId, startTime, endTime } = useParams()
     const { settings, loading } = useAppSettings()
-    const { dataConnector, setDataConnector, datasets, setDatasets } = localStore()
+    const { dataConnector, setDataConnector, datasets, setDatasets, periodType, setPeriodType, setMonthlyPeriod, setDailyPeriod } = localStore()
     const [ready, setReady] = useState(false)
+    const path = useLocation().pathname
     console.log('inside syncing element')
 
     useEffect(() => {
@@ -36,9 +37,27 @@ export function useSyncLocalStoreFromUrl() {
                     .catch(() => setDatasets([]))
             }
         }
+
+        // TODO: hacky, and should use period type constants
+        // also period type should probably be made a url param 
+        if (path.includes('/monthly/')) {
+            setPeriodType('MONTHLY')
+        } else if (path.includes('/daily/')) {
+            setPeriodType('DAILY')
+        }
+
+        if (startTime && endTime) {
+            if (periodType == 'MONTHLY') {
+                setMonthlyPeriod({startTime, endTime})
+            } else if (periodType == 'DAILY') {
+                setDailyPeriod({startTime, endTime})
+            }
+        }
+        
         console.log('stillWaiting', stillWaiting)
         setReady(!stillWaiting)
-    }, [orgUnitId, serverId, dataConnector, datasets, settings])
+
+    }, [orgUnitId, serverId, dataConnector, datasets, startTime, endTime, settings])
 
     return { ready }
 }

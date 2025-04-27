@@ -11,8 +11,7 @@ import { useParams, useLoaderData } from 'react-router-dom'
 import { NoticeBox } from '@dhis2/ui'
 
 const DatasetDaily = () => {
-    const orgUnit = useLoaderData()
-    const period = localStore((state) => state.dailyPeriod)
+    const { orgUnit, dailyPeriod } = localStore()
     const { dataConnector, datasets } = localStore()
     const { settings } = useAppSettings()
     const { serverId, datasetId } = useParams()
@@ -23,7 +22,7 @@ const DatasetDaily = () => {
     const {data, loading, error} = useDataConnectorTimeSeries({
         host: dataConnector.url,
         dataset: datasetId,
-        period,
+        period: dailyPeriod,
         feature: orgUnit,
     })
 

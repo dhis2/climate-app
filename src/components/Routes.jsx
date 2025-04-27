@@ -177,25 +177,18 @@ const Routes = () => {
                                 {
                                     path: ':serverId',
                                     element: <LocalDataConnector />,
-                                    loader: orgUnitLoader(engine),
                                     children: [
                                         {
                                             path: ':datasetId',
                                             element: <LocalDatasetRedirect />,
                                             children: [
-                                                //{
-                                                //    index: true,
-                                                //    element: <LocalDatasetRedirect />,
-                                                //},
                                                 {
                                                     path: 'monthly/:startTime/:endTime',
                                                     element: <LocalDatasetMonthly />,
-                                                    loader: orgUnitLoader(engine),
                                                 },
                                                 {
                                                     path: 'daily/:startTime/:endTime',
                                                     element: <LocalDatasetDaily />,
-                                                    loader: orgUnitLoader(engine),
                                                 },
                                             ]
                                         },

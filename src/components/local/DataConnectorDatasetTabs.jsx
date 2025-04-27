@@ -3,10 +3,11 @@ import { TabBar, Tab } from '@dhis2/ui'
 import { useState, useEffect, Outlet } from 'react'
 import { fetchDataConnectorDatasets } from '../../utils/dataConnector'
 import styles from './styles/DataConnectorTabs.module.css'
-import { useLoaderData, Routes, Route, useParams, useNavigate } from 'react-router-dom'
+import { Routes, Route, useParams, useNavigate } from 'react-router-dom'
+import localStore from '../../store/localStore'
 
 const DataConnectorDatasetTabs = ({ datasets }) => {
-    const orgUnit = useLoaderData()
+    const { orgUnit } = localStore()
     const { serverId, datasetId, startTime } = useParams() // <- use this as selected
     const navigate = useNavigate()
     console.log('datasetId', datasetId)
