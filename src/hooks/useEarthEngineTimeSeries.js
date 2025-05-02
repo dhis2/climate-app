@@ -26,6 +26,8 @@ const useEarthEngineTimeSeries = ({ dataset, period, feature, filter }) => {
     useEffect(() => {
         let canceled = false
 
+        // console.log('A', dataset, feature)
+
         if (dataset && feature) {
             const key = getCacheKey({ dataset, period, feature, filter })
             const { geometry } = feature
@@ -41,6 +43,8 @@ const useEarthEngineTimeSeries = ({ dataset, period, feature, filter }) => {
                     canceled = true
                 }
             }
+
+            // console.log('B')
 
             setData()
             eePromise.then((ee) => {
