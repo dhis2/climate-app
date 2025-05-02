@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import localStore from '../../store/localStore.js'
 import { getNumberOfDays } from '../../utils/time.js'
 import DatePicker from '../shared/DatePicker.jsx'
@@ -16,10 +16,7 @@ const DailyPeriodSelect = () => {
     const path = useLocation().pathname
 
     const { dailyPeriod } = localStore()
-    const [period, setPeriod] = useState(dailyPeriod)
-
-    const { startTime, endTime } = period
-    const days = getNumberOfDays(startTime, endTime)
+    const [period, setPeriod] = useState(null)
 
     const handleChange = (p) => {
         let pathParts = path.split('/')
@@ -28,6 +25,16 @@ const DailyPeriodSelect = () => {
         const newPath = pathParts.join('/')
         navigate(newPath)
     }
+
+    useEffect(() => {
+        console.log('setting initial period state from localstore', dailyPeriod)
+        setPeriod(dailyPeriod)
+    }, [])
+
+    if (!period) {return}
+
+    const { startTime, endTime } = period
+    const days = getNumberOfDays(startTime, endTime)
 
     return (
         <div className={styles.container}>

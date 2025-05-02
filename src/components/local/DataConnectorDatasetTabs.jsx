@@ -3,20 +3,23 @@ import { TabBar, Tab } from '@dhis2/ui'
 import { useState, useEffect, Outlet } from 'react'
 import { fetchDataConnectorDatasets } from '../../utils/dataConnector'
 import styles from './styles/DataConnectorTabs.module.css'
-import { Routes, Route, useParams, useNavigate } from 'react-router-dom'
+import { Routes, Route, useParams, useNavigate, useLocation } from 'react-router-dom'
 import localStore from '../../store/localStore'
 
 const DataConnectorDatasetTabs = ({ datasets }) => {
     const { orgUnit } = localStore()
     const { serverId, datasetId, startTime } = useParams() // <- use this as selected
+    const curPath = useLocation().pathname
     const navigate = useNavigate()
     console.log('datasetId', datasetId)
 
     const handleChange = (tabValue) => {
-        const currentHash = window.location.hash
-        if (!currentHash.endsWith(`/${tabValue}`)) {
-            console.log(`Navigating from ${currentHash} to ${tabValue}`)
-            navigate(tabValue)
+        if (!curPath.includes(`/${tabValue}/`) | !curPath.endsWith(`/${tabValue}`)) {
+            const parts = curPath.split('/')
+            parts[parts.length-4] = tabValue
+            const newPath = parts.join('/')
+            console.log(`Navigating from ${curPath} to ${newPath}`)
+            navigate(newPath)
         }
     }
 

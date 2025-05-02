@@ -10,7 +10,7 @@ export function useSyncLocalStoreFromUrl() {
     const { dataConnector, setDataConnector, datasets, setDatasets, periodType, setPeriodType, setMonthlyPeriod, setDailyPeriod } = localStore()
     const [ready, setReady] = useState(false)
     const path = useLocation().pathname
-    console.log('inside syncing element')
+    console.log('inside syncing element at', path)
 
     useEffect(() => {
         const storeState = localStore.getState()
@@ -28,6 +28,7 @@ export function useSyncLocalStoreFromUrl() {
                 console.log('Syncing dataConnector', settings.dataConnectors, serverId, storeState.dataConnector)
                 const match = settings.dataConnectors?.find(s => s.id === serverId)
                 setDataConnector(match)
+                setDatasets([])
             }
             if (storeState.dataConnector && !storeState.datasets.length > 0) {
                 stillWaiting = true
@@ -47,17 +48,17 @@ export function useSyncLocalStoreFromUrl() {
         }
 
         if (startTime && endTime) {
-            if (periodType == 'MONTHLY') {
+            if (localStore.getState().periodType == 'MONTHLY') {
                 setMonthlyPeriod({startTime, endTime})
-            } else if (periodType == 'DAILY') {
+            } else if (localStore.getState().periodType == 'DAILY') {
                 setDailyPeriod({startTime, endTime})
             }
         }
         
-        console.log('stillWaiting', stillWaiting)
+        console.log('stillWaiting?', stillWaiting)
         setReady(!stillWaiting)
 
-    }, [orgUnitId, serverId, dataConnector, datasets, startTime, endTime, settings])
+    }, [path, orgUnitId, serverId, dataConnector, datasets, startTime, endTime, settings])
 
     return { ready }
 }
