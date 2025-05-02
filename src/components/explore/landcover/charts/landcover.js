@@ -2,8 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import { roundOneDecimal } from '../../../../utils/calc.js'
 import { animation, landCoverCredits } from '../../../../utils/chart.js'
 import { landcoverTypes } from '../LandcoverSelect.jsx'
-
-const band = 'LC_Type1'
+import { band } from '../Landcover.jsx'
 
 const getChartConfig = (name, data, type) => {
     const legend = landcoverTypes.find((c) => c.value === type)
@@ -20,6 +19,8 @@ const getChartConfig = (name, data, type) => {
         y: roundOneDecimal(((d[band][type] || 0) / total) * 100),
     }))
 
+    const maxValue = Math.max(...series.map((d) => d.y))
+
     return {
         chart: {
             type: 'column',
@@ -35,7 +36,7 @@ const getChartConfig = (name, data, type) => {
         credits: landCoverCredits,
         yAxis: {
             min: 0,
-            max: 50,
+            max: maxValue <= 1 ? 1 : undefined,
             labels: {
                 format: '{value}%',
             },

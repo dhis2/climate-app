@@ -42,6 +42,7 @@ export const era5Resolution = i18n.t('Approximately 31 km (0.25°)')
 export const era5LandResolution = i18n.t('Approximately 9 km (0.1°)')
 export const chirpsResolution = i18n.t('Approximately 5 km (0.05°)')
 export const modisResolution = i18n.t('Approximately 250 m')
+export const landcoverResolution = i18n.t('Approximately 500 m')
 export const demResolution = i18n.t('Approximately 30 m')
 
 export const ndviDescription = i18n.t(
@@ -50,6 +51,10 @@ export const ndviDescription = i18n.t(
 
 export const eviDescription = i18n.t(
     'Enhanced vegetation index (EVI) differs from NDVI by reducing the influence of atmospheric conditions and canopy background noise. EVI values range from -1 to 1, with higher values indicating denser vegetation.'
+)
+
+export const landcoverDescription = i18n.t(
+    'Land cover types at yearly intervals'
 )
 
 export default [

@@ -1,7 +1,8 @@
 import i18n from '@dhis2/d2-i18n'
 import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
 import exploreStore from '../../../store/exploreStore.js'
-import styles from './styles/LandCoverSelect.module.css'
+import styles from './styles/LandcoverSelect.module.css'
+import { band } from './Landcover.jsx'
 
 export const landcoverTypes = [
     // http://www.eomf.ou.edu/static/IGBP.pdf
@@ -92,7 +93,7 @@ export const landcoverTypes = [
     },
 ]
 
-const LandcoverSelect = () => {
+const LandcoverSelect = ({ data }) => {
     const { landcoverType, setLandcoverType } = exploreStore()
 
     return (
@@ -107,6 +108,7 @@ const LandcoverSelect = () => {
                         key={t.value}
                         value={String(t.value)}
                         label={t.name}
+                        disabled={!data.some((d) => d[band][t.value] > 0)}
                     />
                 ))}
             </SingleSelectField>
