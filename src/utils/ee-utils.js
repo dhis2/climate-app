@@ -384,7 +384,17 @@ export const getTimeSeriesData = async ({
 }) => {
     const { datasetId, band, aggregationPeriod } = dataset
 
-    let collection = ee.ImageCollection(datasetId).select(band)
+    const { type, coordinates } = geometry
+    const eeGeometry = ee.Geometry[type](coordinates)
+
+    // console.log('getTimeSeriesData', dataset)
+
+    // let collection = ee.ImageCollection(datasetId).select(band)
+    let collection = ee
+        .ImageCollection(datasetId)
+        .select(band)
+        .filter(ee.Filter.bounds(eeGeometry))
+    // .reduce(ee.Reducer.mode())
 
     if (Array.isArray(filter)) {
         filter.forEach((f) => {
@@ -410,17 +420,23 @@ export const getTimeSeriesData = async ({
         const months = ee.List.sequence(0, monthCount.subtract(1))
         const dates = months.map((month) => startMonth.advance(month, 'month'))
 
+        // console.log('#########')
+
         const byMonth = ee.ImageCollection.fromImages(
             dates.map((date) => {
                 const startDate = ee.Date(date)
                 const endDate = startDate.advance(1, 'month')
 
-                return collection
-                    .filter(ee.Filter.date(startDate, endDate))
-                    .mean() // Use mean to avoid extremes on monthly chart
-                    .set('system:index', startDate.format('YYYYMM'))
-                    .set('system:time_start', startDate.millis())
-                    .set('system:time_end', endDate.millis())
+                return (
+                    collection
+                        .filter(ee.Filter.date(startDate, endDate))
+                        .mean() // Use mean to avoid extremes on monthly chart
+                        // .mode()
+                        // .reduce(ee.Reducer.mode())
+                        .set('system:index', startDate.format('YYYYMM'))
+                        .set('system:time_start', startDate.millis())
+                        .set('system:time_end', endDate.millis())
+                )
             })
         )
 
@@ -437,7 +453,7 @@ export const getTimeSeriesData = async ({
 
     let eeScale = getScale(collection.first())
 
-    const { type, coordinates } = geometry
+    // const { type, coordinates } = geometry
 
     if (type.includes('Polygon')) {
         // unweighted reducer may fail if the features are smaller than the pixel area
@@ -449,7 +465,9 @@ export const getTimeSeriesData = async ({
         }
     }
 
-    const eeGeometry = ee.Geometry[type](coordinates)
+    // const eeGeometry = ee.Geometry[type](coordinates)
+
+    const maxPixels = 1e13
 
     // Returns a time series array of objects
     return getInfo(
@@ -458,7 +476,12 @@ export const getTimeSeriesData = async ({
                 ee
                     .Feature(
                         null,
-                        image.reduceRegion(eeReducer, eeGeometry, eeScale)
+                        image.reduceRegion({
+                            reducer: eeReducer,
+                            geometry: eeGeometry,
+                            scale: eeScale,
+                            maxPixels: maxPixels,
+                        })
                     )
                     .set('system:index', image.get('system:index'))
                     // .set("id", image.get("system:index"))
