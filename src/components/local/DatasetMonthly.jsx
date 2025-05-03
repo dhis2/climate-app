@@ -28,6 +28,8 @@ const DatasetMonthly = () => {
 
     const { name } = orgUnit.properties
 
+    console.log('dataset monthly', [data,loading,error])
+
     return (
         <>
             <PeriodTypeSelect />
@@ -36,7 +38,7 @@ const DatasetMonthly = () => {
                     There was a problem fetching the dataset. Please try again later.
                 </NoticeBox>
             )}
-            {data && settings ? (
+            {data && settings && (
                 <Chart
                     config={getMonthlyConfig({
                         orgUnitName: name,
@@ -45,7 +47,8 @@ const DatasetMonthly = () => {
                         settings,
                     })}
                 />
-            ) : (
+            )}
+            {loading && (
                 <DataLoader />
             )}
             <MonthlyPeriodSelect />

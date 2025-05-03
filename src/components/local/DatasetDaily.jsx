@@ -28,6 +28,8 @@ const DatasetDaily = () => {
 
     const { name } = orgUnit.properties
 
+    console.log('dataset daily', [data,loading,error])
+
     return (
         <>
             <PeriodTypeSelect />
@@ -36,7 +38,7 @@ const DatasetDaily = () => {
                     There was a problem fetching the dataset. Please try again later.
                 </NoticeBox>
             )}
-            {data && settings ? (
+            {data && settings && (
                 <Chart
                     config={getDailyConfig({
                         orgUnitName: name,
@@ -45,7 +47,8 @@ const DatasetDaily = () => {
                         settings,
                     })}
                 />
-            ) : (
+            )}
+            {loading && (
                 <DataLoader />
             )}
             <DailyPeriodSelect />

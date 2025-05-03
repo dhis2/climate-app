@@ -61,8 +61,8 @@ const dataConnectorRequest = ({
 
 const cachedPromise = {}
 
-const getCacheKey = ({ host, dataset, periodType, periodStart, periodEnd, orgunits }) =>
-    JSON.stringify({ host, dataset, periodType, periodStart, periodEnd, orgunits });
+const getCacheKey = ({ host, dataset, periodType, periodStart, periodEnd, feature }) =>
+    JSON.stringify({ host, dataset, periodType, periodStart, periodEnd, feature });
 
 const useDataConnectorTimeSeries = ({
     host,
@@ -73,10 +73,11 @@ const useDataConnectorTimeSeries = ({
     const [data, setData] = useState(null)
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
+    console.log('inside useData hook', [data, loading, error])
 
     const periodIdToType = (periodId) => {
-        if (periodId.length === 7) return 'month'
-        if (periodId.length === 10) return 'day'
+        if (periodId.length === 7) return 'monthly'
+        if (periodId.length === 10) return 'daily'
         return null
     }
 
@@ -85,6 +86,7 @@ const useDataConnectorTimeSeries = ({
     const periodType = periodIdToType(periodStart)
 
     useEffect(() => {
+        console.log('useData hook effect triggered', [host, dataset, periodType, periodStart, periodEnd, feature])
         if (!host || !dataset || !periodStart || !periodEnd || !feature) {
             return
         }
@@ -96,17 +98,20 @@ const useDataConnectorTimeSeries = ({
         const key = getCacheKey({ host, dataset, periodType, periodStart, periodEnd, feature })
 
         if (cachedPromise[key]) {
+            console.log('getting old data from cache', key)
             cachedPromise[key]
                 .then((data) => {
                     if (!canceled) {
                         setData(data)
                         setLoading(false)
+                        setError(null)
                     }
                 })
                 .catch((err) => {
                     if (!canceled) {
-                        setError(err)
+                        setData(null)
                         setLoading(false)
+                        setError(err)
                     }
                 })
 
@@ -115,6 +120,8 @@ const useDataConnectorTimeSeries = ({
             }
         }
 
+
+        console.log('fetching new data from url')
         setData(null)
 
         cachedPromise[key] = dataConnectorRequest({
@@ -133,13 +140,15 @@ const useDataConnectorTimeSeries = ({
                 if (!canceled) {
                     setData(data)
                     setLoading(false)
+                    setError(null)
                 }
             })
             .catch((err) => {
                 if (!canceled) {
                     console.log('Error fetching dataset', err)
-                    setError(err)
+                    setData(null)
                     setLoading(false)
+                    setError(err)
                 }
             })
 
