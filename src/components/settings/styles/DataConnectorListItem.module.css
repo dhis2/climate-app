@@ -1,0 +1,33 @@
+
+.dataConnectorCard {
+    margin: 20px 0px;
+    padding: 10px;
+    display: flex !important;
+    flex-direction: column;
+    color: gray;
+}
+
+.dataConnectorStatusDiv {
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    gap: 5px;
+}
+
+.dataConnectorStatusIcon {
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+}
+
+.dataConnectorOnline {
+    background-color: green;
+}
+
+.dataConnectorOffline {
+    background-color: red;
+}
+
+.buttons {
+    justify-content: end;
+}

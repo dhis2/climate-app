@@ -4,6 +4,7 @@ import ChartSettings from './ChartSettings.jsx'
 import StartPageSelect from './StartPageSelect.jsx'
 import styles from './styles/SettingsPage.module.css'
 import TimeZoneSelect from './TimeZoneSelect.jsx'
+import DataConnectorList from './DataConnectorList.jsx'
 
 const SettingsPage = () => {
     const { settings, changeSetting } = useAppSettings()
@@ -12,7 +13,7 @@ const SettingsPage = () => {
         return null
     }
 
-    const { startPage, timeZone } = settings
+    const { startPage, timeZone, dataConnectors } = settings
 
     return (
         <div className={styles.container}>
@@ -24,6 +25,7 @@ const SettingsPage = () => {
             </p>
             <StartPageSelect startPage={startPage} onChange={changeSetting} />
             <TimeZoneSelect timeZone={timeZone} onChange={changeSetting} />
+            <DataConnectorList dataConnectors={dataConnectors} onChange={changeSetting} />
             <ChartSettings />
         </div>
     )
