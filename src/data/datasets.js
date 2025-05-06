@@ -6,6 +6,7 @@ import {
     roundTwoDecimals,
 } from '../utils/calc.js'
 import { HOURLY, DAILY, MONTHLY, SIXTEEN_DAYS, YEARLY } from '../utils/time.js'
+import heatStressLegend from './heat-stress-legend.js'
 
 // kelvin to celsius with one decimal
 const temperatureParser = (v) => roundOneDecimal(kelvinToCelsius(v)).toString()
@@ -56,6 +57,38 @@ export const eviDescription = i18n.t(
 export const landcoverDescription = i18n.t(
     'Land cover types at yearly intervals'
 )
+const climateDataSet = {
+    name: i18n.t('Climate/Weather'),
+    shortName: i18n.t('Climate/Weather'),
+    periodType: i18n.t('Daily'),
+}
+
+const environmentDataSet = {
+    name: i18n.t('Environment'),
+    shortName: i18n.t('Environment'),
+    periodType: i18n.t('Weekly or Monthly'),
+}
+
+const landDataSet = {
+    name: i18n.t('Land'),
+    shortName: i18n.t('Land'),
+    periodType: i18n.t('Yearly'),
+}
+
+const climateGroup = {
+    name: i18n.t('Climate/Weather'),
+    shortName: i18n.t('Climate/Weather'),
+}
+
+const environmentGroup = {
+    name: i18n.t('Environment'),
+    shortName: i18n.t('Environment'),
+}
+
+const landGroup = {
+    name: i18n.t('Land'),
+    shortName: i18n.t('Land'),
+}
 
 export default [
     {
@@ -80,6 +113,8 @@ export default [
         valueParser: temperatureParser,
         aggregationType: i18n.t('Average'),
         dataElementCode: 'ERA5_LAND_TEMPERATURE',
+        dataElementGroup: climateGroup,
+        dataSet: climateDataSet,
     },
     {
         id: 'ECMWF/ERA5_LAND/DAILY_AGGR/temperature_2m_max',
@@ -103,6 +138,8 @@ export default [
         valueParser: temperatureParser,
         aggregationType: i18n.t('Max'),
         dataElementCode: 'ERA5_LAND_TEMPERATURE_MAX',
+        dataElementGroup: climateGroup,
+        dataSet: climateDataSet,
     },
     {
         id: 'ECMWF/ERA5_LAND/DAILY_AGGR/temperature_2m_min',
@@ -126,6 +163,8 @@ export default [
         valueParser: temperatureParser,
         aggregationType: i18n.t('Min'),
         dataElementCode: 'ERA5_LAND_TEMPERATURE_MIN',
+        dataElementGroup: climateGroup,
+        dataSet: climateDataSet,
     },
     {
         id: 'ECMWF/ERA5_LAND/DAILY_AGGR/total_precipitation_sum',
@@ -148,6 +187,8 @@ export default [
         valueParser: precipitationParser,
         aggregationType: i18n.t('Sum'),
         dataElementCode: 'ERA5_LAND_PRECIPITATION',
+        dataElementGroup: climateGroup,
+        dataSet: climateDataSet,
     },
     {
         id: 'UCSB-CHG/CHIRPS/DAILY',
@@ -164,6 +205,8 @@ export default [
         valueParser: twoDecimals,
         aggregationType: i18n.t('Sum'),
         dataElementCode: 'CHIRPS_PRECIPITATION',
+        dataElementGroup: climateGroup,
+        dataSet: climateDataSet,
     },
     {
         id: 'ECMWF/ERA5_LAND/DAILY_AGGR/dewpoint_temperature_2m',
@@ -187,6 +230,8 @@ export default [
         valueParser: temperatureParser,
         aggregationType: i18n.t('Average'),
         dataElementCode: 'ERA5_LAND_DEWPOINT_TEMPERATURE',
+        dataElementGroup: climateGroup,
+        dataSet: climateDataSet,
     },
     {
         id: 'ECMWF/ERA5_LAND/DAILY_AGGR/relative_humidity_2m',
@@ -224,6 +269,8 @@ export default [
         bandsParser: relativeHumidityParser,
         aggregationType: i18n.t('Average'),
         dataElementCode: 'ERA5_LAND_RELATIVE_HUMIDITY',
+        dataElementGroup: climateGroup,
+        dataSet: climateDataSet,
     },
     {
         id: 'projects/climate-engine-pro/assets/ce-era5-heat/utci_mean',
@@ -239,6 +286,9 @@ export default [
         valueParser: temperatureParser,
         aggregationType: i18n.t('Average'),
         dataElementCode: 'ERA5_HEAT_UTCI',
+        dataElementGroup: climateGroup,
+        dataSet: climateDataSet,
+        legend: heatStressLegend,
     },
     {
         id: 'projects/climate-engine-pro/assets/ce-era5-heat/utci_max',
@@ -254,6 +304,9 @@ export default [
         valueParser: temperatureParser,
         aggregationType: i18n.t('Max'),
         dataElementCode: 'ERA5_HEAT_UTCI_MAX',
+        dataElementGroup: climateGroup,
+        dataSet: climateDataSet,
+        legend: heatStressLegend,
     },
     {
         id: 'projects/climate-engine-pro/assets/ce-era5-heat/utci_min',
@@ -269,6 +322,9 @@ export default [
         valueParser: temperatureParser,
         aggregationType: i18n.t('Min'),
         dataElementCode: 'ERA5_HEAT_UTCI_MIN',
+        dataElementGroup: climateGroup,
+        dataSet: climateDataSet,
+        legend: heatStressLegend,
     },
     {
         id: 'MODIS/061/MOD13Q1/NDVI',
@@ -284,6 +340,8 @@ export default [
         valueParser: vegetationIndexParser,
         aggregationType: i18n.t('Average'),
         dataElementCode: 'MODIS_NDVI',
+        dataElementGroup: environmentGroup,
+        dataSet: environmentDataSet,
     },
     {
         id: 'MODIS/061/MOD13Q1/EVI',
@@ -299,6 +357,8 @@ export default [
         valueParser: vegetationIndexParser,
         aggregationType: i18n.t('Average'),
         dataElementCode: 'MODIS_EVI',
+        dataElementGroup: environmentGroup,
+        dataSet: environmentDataSet,
     },
     {
         id: 'USGS/SRTMGL1_003/mean',
@@ -315,6 +375,8 @@ export default [
         valueParser: Math.round,
         aggregationType: i18n.t('First value'),
         dataElementCode: 'SRTM_ELEVATION_MEAN',
+        dataElementGroup: landGroup,
+        dataSet: landDataSet,
     },
     {
         id: 'USGS/SRTMGL1_003/min',
@@ -331,6 +393,8 @@ export default [
         valueParser: Math.round,
         aggregationType: i18n.t('First value'),
         dataElementCode: 'SRTM_ELEVATION_MIN',
+        dataElementGroup: landGroup,
+        dataSet: landDataSet,
     },
     {
         id: 'USGS/SRTMGL1_003/max',
@@ -347,6 +411,8 @@ export default [
         valueParser: Math.round,
         aggregationType: i18n.t('First value'),
         dataElementCode: 'SRTM_ELEVATION_MAX',
+        dataElementGroup: landGroup,
+        dataSet: landDataSet,
     },
     {
         id: 'MODIS/061/MCD12Q1/LC_Type1/13',
@@ -365,6 +431,8 @@ export default [
         valueParser: twoDecimals,
         aggregationType: i18n.t('Average'),
         dataElementCode: 'MODIS_LANDCOVER_URBAN',
+        dataElementGroup: landGroup,
+        dataSet: landDataSet,
     },
 ]
 
@@ -418,38 +486,3 @@ export const era5HeatMonthly = {
     ...era5HeatDaily,
     aggregationPeriod: MONTHLY,
 }
-export const dhisDataSets = [
-    {
-        name: i18n.t('Climate/Weather'),
-        shortName: i18n.t('Climate/Weather'),
-        periodType: i18n.t('Daily'),
-    },
-    {
-        name: i18n.t('Environment'),
-        shortName: i18n.t('Environment'),
-        periodType: i18n.t('Weekly or Monthly'),
-    },
-    {
-        name: i18n.t('Land'),
-        shortName: i18n.t('Land'),
-        periodType: i18n.t('Yearly'),
-    },
-]
-
-export const dhisDataElementGroups = [
-    {
-        name: i18n.t('Climate/Weather'),
-        shortName: i18n.t('Climate/Weather'),
-        dataElements: i18n.t('Assign above data elements (weather & climate)'),
-    },
-    {
-        name: i18n.t('Environment'),
-        shortName: i18n.t('Environment'),
-        dataElements: i18n.t('Assign above data elements (vegetation)'),
-    },
-    {
-        name: i18n.t('Land'),
-        shortName: i18n.t('Land'),
-        dataElements: i18n.t('Assign above data elements (elevation)'),
-    },
-]
