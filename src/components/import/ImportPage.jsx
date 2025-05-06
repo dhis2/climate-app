@@ -10,10 +10,10 @@ import {
     getPeriods,
     periodTypes,
 } from '../../utils/time.js'
+import Dataset from '../shared/Dataset.jsx'
 import GEETokenCheck from '../shared/GEETokenCheck.jsx'
 import Resolution from '../shared/Resolution.jsx'
 import DataElement from './DataElement.jsx'
-import Dataset from './Dataset.jsx'
 import ExtractData from './ExtractData.jsx'
 import OrgUnits from './OrgUnits.jsx'
 import Period from './Period.jsx'
