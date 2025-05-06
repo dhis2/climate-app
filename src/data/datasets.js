@@ -5,7 +5,7 @@ import {
     roundOneDecimal,
     roundTwoDecimals,
 } from '../utils/calc.js'
-import { HOURLY, DAILY, MONTHLY, SIXTEEN_DAYS } from '../utils/time.js'
+import { HOURLY, DAILY, MONTHLY, SIXTEEN_DAYS, YEARLY } from '../utils/time.js'
 
 // kelvin to celsius with one decimal
 const temperatureParser = (v) => roundOneDecimal(kelvinToCelsius(v)).toString()
@@ -347,6 +347,24 @@ export default [
         valueParser: Math.round,
         aggregationType: i18n.t('First value'),
         dataElementCode: 'SRTM_ELEVATION_MAX',
+    },
+    {
+        id: 'MODIS/061/MCD12Q1/LC_Type1/13',
+        datasetId: 'MODIS/061/MCD12Q1',
+        name: i18n.t('Urban and built-up (MODIS)'),
+        shortName: i18n.t('Urban and built-up'),
+        description: i18n.t('Percentage of area being urban and built-up.'),
+        source: modisSource,
+        resolution: landcoverResolution,
+        periodType: YEARLY,
+        minYear: 2001,
+        maxYear: 2023,
+        band: 'LC_Type1',
+        reducer: 'frequencyHistogram',
+        value: 13,
+        valueParser: twoDecimals,
+        aggregationType: i18n.t('Average'),
+        dataElementCode: 'MODIS_LANDCOVER_URBAN',
     },
 ]
 

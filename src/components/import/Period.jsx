@@ -3,9 +3,10 @@ import i18n from '@dhis2/d2-i18n'
 import { CalendarInput } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import { useEffect } from 'react'
-import { DAILY, SIXTEEN_DAYS, WEEKLY } from '../../utils/time.js'
+import { DAILY, WEEKLY, SIXTEEN_DAYS, YEARLY } from '../../utils/time.js'
 import TimeZone from '../shared/TimeZone.jsx'
 import PeriodType from './PeriodType.jsx'
+import YearRange from './YearRange.jsx'
 import styles from './styles/Period.module.css'
 
 const userSettingsQuery = {
@@ -17,15 +18,15 @@ const userSettingsQuery = {
     },
 }
 
-const Period = ({
-    calendar,
-    period,
-    datasetPeriodType,
-    datasetPeriod,
-    onChange,
-}) => {
+const Period = ({ calendar, period, dataset = {}, onChange }) => {
     const result = useDataQuery(userSettingsQuery)
     const { data: { userSettings: { keyUiLocale: locale } = {} } = {} } = result
+    const {
+        periodType: datasetPeriodType,
+        period: datasetPeriod,
+        minYear,
+        maxYear,
+    } = dataset
     const { periodType, startTime, endTime } = period
     const hasNoPeriod = datasetPeriodType === 'N/A'
 
@@ -37,9 +38,17 @@ const Period = ({
     }, [locale, onChange, period])
 
     useEffect(() => {
-        if (datasetPeriodType === SIXTEEN_DAYS && period.periodType === DAILY) {
+        if (
+            datasetPeriodType === SIXTEEN_DAYS &&
+            [DAILY, YEARLY].includes(period.periodType)
+        ) {
             onChange({ ...period, periodType: WEEKLY })
-        }
+        } /* else if (
+            datasetPeriodType === YEARLY &&
+            period.periodType !== YEARLY
+        ) {
+            onChange({ ...period, periodType: YEARLY })
+        } */
     }, [period, datasetPeriodType, onChange])
 
     return (
@@ -52,6 +61,13 @@ const Period = ({
                         { datasetPeriod, nsSeparator: ';' }
                     )}
                 </p>
+            ) : datasetPeriodType === YEARLY ? (
+                <YearRange
+                    period={period}
+                    minYear={minYear}
+                    maxYear={maxYear}
+                    onChange={onChange}
+                />
             ) : (
                 <>
                     <p>
@@ -104,8 +120,7 @@ const Period = ({
 Period.propTypes = {
     onChange: PropTypes.func.isRequired,
     calendar: PropTypes.string,
-    datasetPeriod: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    datasetPeriodType: PropTypes.string,
+    dataset: PropTypes.object,
     period: PropTypes.object,
 }
 

@@ -178,10 +178,12 @@ export const getEarthEngineValues = ({
 
         const { startTime, endTime, timeZone = 'UTC', periodType } = period
 
+        console.log('getEarthEngineValues', startTime, endTime)
+
         const periods = getPeriods(period).map(addPeriodTimestamp)
-        const endTimePlusOne = ee.Date(endTime).advance(1, 'day')
+        const endTimePlusOne = ee.Date(String(endTime)).advance(1, 'day')
         const timeZoneStart = ee
-            .Date(startTime)
+            .Date(String(startTime))
             .advance(datasetPeriodType === SIXTEEN_DAYS ? -32 : 0, 'day')
             .format(null, timeZone)
         const timeZoneEnd = endTimePlusOne.format(null, timeZone)
@@ -222,6 +224,8 @@ export const getEarthEngineValues = ({
             .filter(ee.Filter.date(timeZoneStart, timeZoneEnd))
 
         const imageCount = await getInfo(collection.size())
+
+        console.log('Image count', imageCount)
 
         if (imageCount === 0) {
             reject(new Error(i18n.t('No data found for the selected period')))
