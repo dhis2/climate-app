@@ -19,8 +19,8 @@ const YearSelect = ({ label, year, minYear, maxYear, onChange }) => (
 
 YearSelect.propTypes = {
     label: PropTypes.string.isRequired,
-    minYear: PropTypes.number.isRequired,
     maxYear: PropTypes.number.isRequired,
+    minYear: PropTypes.number.isRequired,
     onChange: PropTypes.func.isRequired,
     year: PropTypes.number,
 }

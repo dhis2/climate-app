@@ -3,7 +3,7 @@ import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import exploreStore from '../../../store/exploreStore.js'
 import { band } from './Landcover.jsx'
-import styles from './styles/LandcoverSelect.module.css'
+import styles from './styles/LandcoverSelect2.module.css'
 
 export const landcoverTypes = [
     // http://www.eomf.ou.edu/static/IGBP.pdf
