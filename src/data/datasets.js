@@ -1,4 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
+import { landcoverTypes } from '../components/explore/landcover/LandcoverSelect.jsx'
 import {
     kelvinToCelsius,
     getRelativeHumidity,
@@ -88,6 +89,22 @@ const environmentGroup = {
 const landGroup = {
     name: i18n.t('Land'),
     shortName: i18n.t('Land'),
+}
+
+const landcoverDefaults = {
+    datasetId: 'MODIS/061/MCD12Q1',
+    description: i18n.t('Percentage of area with this land cover type.'),
+    source: modisSource,
+    resolution: landcoverResolution,
+    periodType: YEARLY,
+    minYear: 2001,
+    maxYear: 2023,
+    band: 'LC_Type1',
+    reducer: 'frequencyHistogram',
+    valueParser: twoDecimals,
+    aggregationType: i18n.t('Average'),
+    dataElementGroup: landGroup,
+    dataSet: landDataSet,
 }
 
 export default [
@@ -414,12 +431,12 @@ export default [
         dataElementGroup: landGroup,
         dataSet: landDataSet,
     },
-    {
-        id: 'MODIS/061/MCD12Q1/LC_Type1/13',
+    ...landcoverTypes.map(({ name, value }) => ({
+        id: `MODIS/061/MCD12Q1/LC_Type1/${value}`,
         datasetId: 'MODIS/061/MCD12Q1',
-        name: i18n.t('Urban and built-up (MODIS)'),
-        shortName: i18n.t('Urban and built-up'),
-        description: i18n.t('Percentage of area being urban and built-up.'),
+        name: `${name} (MODIS)`,
+        shortName: name,
+        description: i18n.t('Percentage of area with this land cover type.'),
         source: modisSource,
         resolution: landcoverResolution,
         periodType: YEARLY,
@@ -427,13 +444,13 @@ export default [
         maxYear: 2023,
         band: 'LC_Type1',
         reducer: 'frequencyHistogram',
-        histogramKey: 13,
+        histogramKey: value,
         valueParser: twoDecimals,
         aggregationType: i18n.t('Average'),
-        dataElementCode: 'MODIS_LANDCOVER_URBAN',
+        dataElementCode: `MODIS_LANDCOVER_${value}`,
         dataElementGroup: landGroup,
         dataSet: landDataSet,
-    },
+    })),
 ]
 
 const era5band = [
