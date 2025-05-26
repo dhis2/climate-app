@@ -118,11 +118,7 @@ const LandcoverSelect = ({ data }) => {
 }
 
 LandcoverSelect.propTypes = {
-    data: PropTypes.arrayOf(
-        PropTypes.shape({
-            [band]: PropTypes.object.isRequired,
-        })
-    ).isRequired,
+    data: PropTypes.array.isRequired,
 }
 
 export default LandcoverSelect
