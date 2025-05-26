@@ -15,11 +15,13 @@ const PeriodType = ({ periodType, datasetPeriodType, onChange }) => (
         onChange={({ selected }) => onChange(selected)}
     >
         {periodTypes
-            ?.filter((type) =>
-                (datasetPeriodType === SIXTEEN_DAYS && type.id === DAILY) ||
-                (datasetPeriodType === YEARLY && type.id !== YEARLY)
-                    ? false
-                    : true
+            ?.filter(
+                (type) =>
+                    !(
+                        (datasetPeriodType === SIXTEEN_DAYS &&
+                            type.id === DAILY) ||
+                        (datasetPeriodType === YEARLY && type.id !== YEARLY)
+                    )
             )
             .map((type) => (
                 <SingleSelectOption

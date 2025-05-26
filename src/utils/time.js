@@ -298,7 +298,7 @@ export const getStandardPeriod = ({
               periodType,
               calendar, // Include original calendar to allow conversion back to DHIS2 date
           }
-        : { startTime, endTime, calendar, periodType } // TODO: Pass back period
+        : { startTime, endTime, calendar, periodType }
 
 /**
  * Returns an array of period items for a given period object

@@ -49,21 +49,23 @@ const Period = ({ calendar, period, dataset = {}, onChange }) => {
     return (
         <div className={styles.container}>
             <h2>{i18n.t('Period')}</h2>
-            {hasNoPeriod ? (
+            {hasNoPeriod && (
                 <p>
                     {i18n.t(
                         'The data will be assigned a default yearly period that matches the year it was collected: {{datasetPeriod}}',
                         { datasetPeriod, nsSeparator: ';' }
                     )}
                 </p>
-            ) : datasetPeriodType === YEARLY ? (
+            )}
+            {datasetPeriodType === YEARLY && (
                 <YearRange
                     period={period}
                     minYear={minYear}
                     maxYear={maxYear}
                     onChange={onChange}
                 />
-            ) : (
+            )}
+            {!(hasNoPeriod || datasetPeriodType === YEARLY) && (
                 <>
                     <p>
                         {i18n.t(
