@@ -5,6 +5,7 @@ import { animation, elevationCredits } from '../../../../utils/chart.js'
 // Max elevation range before binning is applied
 const maxElevationRange = 200
 
+// Calculate the bin size based on the data length
 const getBinSize = (dataLength) => {
     const desiredBins = 100
     let binSize = 1
@@ -16,6 +17,7 @@ const getBinSize = (dataLength) => {
     return binSize
 }
 
+// Create binned data from the histogram
 const createBinnedData = (histogram, binSize) =>
     Object.entries(histogram).reduce((acc, [elevation, value]) => {
         const bin = Math.floor(elevation / binSize) * binSize
