@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import area from '@turf/area'
-import { interpolate } from './calc.js'
+import { interpolate, roundOneDecimal } from './calc.js'
 import {
     HOURLY,
     DAILY,
@@ -74,8 +74,6 @@ export const getMonthlyNormals = (bands) => (data) => {
 // Create a reducer from the dataset parameters
 const createReducer = (ee, dataset) => {
     const { band, reducer = 'mean', sharedInputs = false } = dataset
-
-    console.log('#################### createReducer', reducer)
 
     let eeReducer
 
@@ -157,9 +155,10 @@ export const getEarthEngineImageValues = ({ ee, dataset, features }) => {
     )
 }
 
-const getHistogramValue = (histogram, key) => {
-    console.log('getHistogramValue', histogram, key)
-    return 0
+const getHistogramPercentage = (histogram, key) => {
+    const total = Object.values(histogram).reduce((acc, cur) => acc + cur, 0)
+    const value = histogram[key] || 0
+    return roundOneDecimal((value / total) * 100)
 }
 
 export const getEarthEngineValues = ({
@@ -180,7 +179,7 @@ export const getEarthEngineValues = ({
             reducer = 'mean',
             periodType: datasetPeriodType,
             periodReducer = reducer,
-            histogramValue,
+            histogramKey,
             valueParser,
         } = dataset
 
@@ -223,7 +222,7 @@ export const getEarthEngineValues = ({
                 return data.map((d) => ({
                     ...d,
                     period: mappedPeriods.get(d.period),
-                    value: getHistogramValue(d.histogram, histogramKey),
+                    value: getHistogramPercentage(d.histogram, histogramKey),
                 }))
             }
 
@@ -240,8 +239,6 @@ export const getEarthEngineValues = ({
             .filter(ee.Filter.date(timeZoneStart, timeZoneEnd))
 
         const imageCount = await getInfo(collection.size())
-
-        console.log('Image count', imageCount)
 
         if (imageCount === 0) {
             reject(new Error(i18n.t('No data found for the selected period')))
@@ -349,8 +346,6 @@ export const getEarthEngineValues = ({
                     )
             )
             .flatten()
-
-        console.log('reducer', reducer)
 
         const valueCollection = ee.FeatureCollection(reduced)
 
