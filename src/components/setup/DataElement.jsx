@@ -21,6 +21,7 @@ const DataElement = ({
                 {i18n.t('Data element: "{{name}}"', {
                     name,
                     nsSeparator: '%',
+                    interpolation: { escapeValue: false },
                 })}
             </caption>
             <tbody>
