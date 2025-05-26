@@ -29,6 +29,7 @@ const Period = ({ calendar, period, dataset = {}, onChange }) => {
     } = dataset
     const { periodType, startTime, endTime } = period
     const hasNoPeriod = datasetPeriodType === 'N/A'
+    const isYearly = datasetPeriodType === YEARLY
 
     // Set period locale from user settings
     useEffect(() => {
@@ -57,7 +58,7 @@ const Period = ({ calendar, period, dataset = {}, onChange }) => {
                     )}
                 </p>
             )}
-            {datasetPeriodType === YEARLY && (
+            {isYearly && (
                 <YearRange
                     period={period}
                     minYear={minYear}
@@ -65,7 +66,7 @@ const Period = ({ calendar, period, dataset = {}, onChange }) => {
                     onChange={onChange}
                 />
             )}
-            {!(hasNoPeriod || datasetPeriodType === YEARLY) && (
+            {!hasNoPeriod && !isYearly && (
                 <>
                     <p>
                         {i18n.t(
