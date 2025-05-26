@@ -91,22 +91,6 @@ const landGroup = {
     shortName: i18n.t('Land'),
 }
 
-const landcoverDefaults = {
-    datasetId: 'MODIS/061/MCD12Q1',
-    description: i18n.t('Percentage of area with this land cover type.'),
-    source: modisSource,
-    resolution: landcoverResolution,
-    periodType: YEARLY,
-    minYear: 2001,
-    maxYear: 2023,
-    band: 'LC_Type1',
-    reducer: 'frequencyHistogram',
-    valueParser: twoDecimals,
-    aggregationType: i18n.t('Average'),
-    dataElementGroup: landGroup,
-    dataSet: landDataSet,
-}
-
 export default [
     {
         id: 'ECMWF/ERA5_LAND/DAILY_AGGR/temperature_2m',
