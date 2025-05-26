@@ -4,7 +4,7 @@ import { roundOneDecimal } from '../../../../utils/calc.js'
 import { animation, elevationCredits } from '../../../../utils/chart.js'
 
 // Max elevation range before binning is applied
-const maxElevationRange = 2000
+const maxElevationRange = 200
 
 // Calculate the bin size based on the data length
 const getBinSize = (dataLength) => {
