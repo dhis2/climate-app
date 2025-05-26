@@ -24,7 +24,7 @@ const period = {
     endTime: String(new Date().getFullYear()), // Is the dataset updated every year?
 }
 
-const LandCover = () => {
+const Landcover = () => {
     const feature = exploreStore((state) => state.orgUnit)
     const type = exploreStore((state) => state.landcoverType)
     const data = useEarthEngineTimeSeries({ dataset, period, feature })
@@ -45,4 +45,4 @@ const LandCover = () => {
     )
 }
 
-export default LandCover
+export default Landcover

@@ -1,8 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
 import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
+import PropTypes from 'prop-types'
 import exploreStore from '../../../store/exploreStore.js'
-import styles from './styles/LandcoverSelect.module.css'
 import { band } from './Landcover.jsx'
+import styles from './styles/LandcoverSelect.module.css'
 
 export const landcoverTypes = [
     // http://www.eomf.ou.edu/static/IGBP.pdf
@@ -114,6 +115,14 @@ const LandcoverSelect = ({ data }) => {
             </SingleSelectField>
         </div>
     )
+}
+
+LandcoverSelect.propTypes = {
+    data: PropTypes.arrayOf(
+        PropTypes.shape({
+            [band]: PropTypes.object.isRequired,
+        })
+    ).isRequired,
 }
 
 export default LandcoverSelect

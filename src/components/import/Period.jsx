@@ -6,8 +6,8 @@ import { useEffect } from 'react'
 import { DAILY, WEEKLY, SIXTEEN_DAYS, YEARLY } from '../../utils/time.js'
 import TimeZone from '../shared/TimeZone.jsx'
 import PeriodType from './PeriodType.jsx'
-import YearRange from './YearRange.jsx'
 import styles from './styles/Period.module.css'
+import YearRange from './YearRange.jsx'
 
 const userSettingsQuery = {
     userSettings: {
@@ -43,12 +43,7 @@ const Period = ({ calendar, period, dataset = {}, onChange }) => {
             [DAILY, YEARLY].includes(period.periodType)
         ) {
             onChange({ ...period, periodType: WEEKLY })
-        } /* else if (
-            datasetPeriodType === YEARLY &&
-            period.periodType !== YEARLY
-        ) {
-            onChange({ ...period, periodType: YEARLY })
-        } */
+        }
     }, [period, datasetPeriodType, onChange])
 
     return (

@@ -1,8 +1,8 @@
 import i18n from '@dhis2/d2-i18n'
 import { roundOneDecimal } from '../../../../utils/calc.js'
 import { animation, landCoverCredits } from '../../../../utils/chart.js'
-import { landcoverTypes } from '../LandcoverSelect.jsx'
 import { band } from '../Landcover.jsx'
+import { landcoverTypes } from '../LandcoverSelect.jsx'
 
 const getChartConfig = (name, data, type) => {
     const legend = landcoverTypes.find((c) => c.value === type)

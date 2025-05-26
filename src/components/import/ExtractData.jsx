@@ -57,9 +57,6 @@ const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
         return <DataLoader label={label} height={100} />
     }
 
-    console.log('ExtractData', { data, error })
-    return null
-
     return error ? (
         <ErrorMessage error={error} />
     ) : (
