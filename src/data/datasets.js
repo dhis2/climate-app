@@ -427,7 +427,7 @@ export default [
         maxYear: 2023,
         band: 'LC_Type1',
         reducer: 'frequencyHistogram',
-        value: 13,
+        histogramKey: 13,
         valueParser: twoDecimals,
         aggregationType: i18n.t('Average'),
         dataElementCode: 'MODIS_LANDCOVER_URBAN',

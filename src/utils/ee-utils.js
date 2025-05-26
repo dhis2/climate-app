@@ -75,6 +75,8 @@ export const getMonthlyNormals = (bands) => (data) => {
 const createReducer = (ee, dataset) => {
     const { band, reducer = 'mean', sharedInputs = false } = dataset
 
+    console.log('#################### createReducer', reducer)
+
     let eeReducer
 
     if (Array.isArray(reducer)) {
@@ -155,6 +157,11 @@ export const getEarthEngineImageValues = ({ ee, dataset, features }) => {
     )
 }
 
+const getHistogramValue = (histogram, key) => {
+    console.log('getHistogramValue', histogram, key)
+    return 0
+}
+
 export const getEarthEngineValues = ({
     ee,
     dataset: datasetParams,
@@ -173,6 +180,7 @@ export const getEarthEngineValues = ({
             reducer = 'mean',
             periodType: datasetPeriodType,
             periodReducer = reducer,
+            histogramValue,
             valueParser,
         } = dataset
 
@@ -209,6 +217,14 @@ export const getEarthEngineValues = ({
                         })
                     })
                     .flat()
+            }
+
+            if (histogramKey !== undefined) {
+                return data.map((d) => ({
+                    ...d,
+                    period: mappedPeriods.get(d.period),
+                    value: getHistogramValue(d.histogram, histogramKey),
+                }))
             }
 
             return data.map((d) => ({
@@ -328,10 +344,13 @@ export const getEarthEngineValues = ({
                             startTime: image.get('system:time_start'),
                             endTime: image.get('system:time_end'),
                             value: feature.get(reducer),
+                            histogram: feature.get('histogram'),
                         })
                     )
             )
             .flatten()
+
+        console.log('reducer', reducer)
 
         const valueCollection = ee.FeatureCollection(reduced)
 
