@@ -2,6 +2,9 @@ import i18n from '@dhis2/d2-i18n'
 import { colors } from '@dhis2/ui'
 import { animation, elevationCredits } from '../../../../utils/chart.js'
 
+// Max elevation range before binning is applied
+const maxElevationRange = 200
+
 const getBinSize = (dataLength) => {
     const desiredBins = 100
     let binSize = 1
@@ -12,6 +15,16 @@ const getBinSize = (dataLength) => {
 
     return binSize
 }
+
+const createBinnedData = (histogram, binSize) =>
+    Object.entries(histogram).reduce((acc, [elevation, value]) => {
+        const bin = Math.floor(elevation / binSize) * binSize
+        if (!acc[bin]) {
+            acc[bin] = { area: 0 }
+        }
+        acc[bin].area += value.area
+        return acc
+    }, {})
 
 const createPlotLine = (value, text) => ({
     color: colors.grey600,
@@ -32,48 +45,24 @@ const createPlotLine = (value, text) => ({
 
 const getChartConfig = (name, data) => {
     const { mean, min, max, histogram } = data
+    const useBinning = maxElevationRange > max - min
 
-    const elevations = Object.keys(histogram)
+    const binSize = getBinSize(max - min)
+
+    const binnedData = useBinning
+        ? createBinnedData(histogram, binSize)
+        : histogram
+
+    const elevations = Object.keys(binnedData)
         .map(Number)
         .sort((a, b) => a - b)
 
-    let values
-    let series
-    let binSize
+    const values = Object.values(binnedData).map((v) => v['area'])
 
-    if (elevations.length <= 100) {
-        values = Object.values(histogram).map((v) => v['area'])
-
-        series = elevations.map((elevation) => ({
-            x: histogram[String(elevation)]['area'],
-            y: elevation,
-        }))
-    } else {
-        binSize = getBinSize(elevations.length)
-
-        const binned = Object.entries(histogram).reduce(
-            (acc, [elevation, value]) => {
-                const bin = Math.floor(elevation / binSize) * binSize
-                if (!acc[bin]) {
-                    acc[bin] = { area: 0 }
-                }
-                acc[bin].area += value.area
-                return acc
-            },
-            {}
-        )
-
-        values = Object.values(binned).map((v) => v['area'])
-
-        series = Object.entries(binned).map(([elevation, value]) => ({
-            x: value.area,
-            y: Number(elevation),
-        }))
-
-        if (series[0].y < min) {
-            series[0] = { x: 0, y: min }
-        }
-    }
+    const series = elevations.map((elevation) => ({
+        x: binnedData[String(elevation)]['area'],
+        y: elevation,
+    }))
 
     const minArea = Math.min(...values)
     const maxArea = Math.max(...values)
@@ -96,7 +85,7 @@ const getChartConfig = (name, data) => {
             formatter: function () {
                 let elevation = Math.round(this.point.y)
 
-                if (binSize) {
+                if (useBinning) {
                     elevation += ' - ' + (elevation + binSize)
                 }
 
