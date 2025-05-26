@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { colors } from '@dhis2/ui'
-import { animation, elevationCredits } from '../../../../utils/chart.js'
 import { roundOneDecimal } from '../../../../utils/calc.js'
+import { animation, elevationCredits } from '../../../../utils/chart.js'
 
 // Max elevation range before binning is applied
 const maxElevationRange = 200
