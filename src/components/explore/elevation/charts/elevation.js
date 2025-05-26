@@ -1,6 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { colors } from '@dhis2/ui'
 import { animation, elevationCredits } from '../../../../utils/chart.js'
+import { roundOneDecimal } from '../../../../utils/calc.js'
 
 // Max elevation range before binning is applied
 const maxElevationRange = 200
@@ -47,7 +48,7 @@ const createPlotLine = (value, text) => ({
 
 const getChartConfig = (name, data) => {
     const { mean, min, max, histogram } = data
-    const useBinning = maxElevationRange > max - min
+    const useBinning = max - min > maxElevationRange
 
     const binSize = getBinSize(max - min)
 
@@ -65,6 +66,14 @@ const getChartConfig = (name, data) => {
         x: binnedData[String(elevation)]['area'],
         y: elevation,
     }))
+
+    // Ensure the first point is the minimum elevation
+    if (useBinning && series[0].y < min) {
+        series[0] = {
+            x: 0,
+            y: min,
+        }
+    }
 
     const minArea = Math.min(...values)
     const maxArea = Math.max(...values)
@@ -85,7 +94,7 @@ const getChartConfig = (name, data) => {
         credits: elevationCredits,
         tooltip: {
             formatter: function () {
-                let elevation = Math.round(this.point.y)
+                let elevation = this.point.y
 
                 if (useBinning) {
                     elevation += ' - ' + (elevation + binSize)
@@ -94,8 +103,8 @@ const getChartConfig = (name, data) => {
                 return `${i18n.t('Elevation: {{value}} m', {
                     value: elevation,
                     nsSeparator: ';',
-                })}<br />${i18n.t('Area: {{value}} ha', {
-                    value: Math.round(this.point.x),
+                })}<br />${i18n.t('Area: {{value}} km²', {
+                    value: roundOneDecimal(this.point.x),
                     nsSeparator: ';',
                 })}`
             },
@@ -103,10 +112,10 @@ const getChartConfig = (name, data) => {
         legend: { enabled: false },
         xAxis: {
             labels: {
-                format: '{value} ha',
+                format: '{value} km²',
             },
             min: minArea,
-            max: maxArea,
+            max: maxArea * 1.01,
             crosshair: false,
         },
         yAxis: {
