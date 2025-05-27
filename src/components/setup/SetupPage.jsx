@@ -10,7 +10,7 @@ const SetupPage = () => {
 
     return (
         <div className={styles.container}>
-            <h1>{i18n.t('How to configure this app')}</h1>
+            <h1>{i18n.t('Configuring DHIS2 before importing climate data')}</h1>
             <p>
                 {i18n.t(
                     'Before you can import data, you need to make some configurations in the Maintenance app. For detailed instructions on how to configure DHIS2, choose which data you would like to import below.'
