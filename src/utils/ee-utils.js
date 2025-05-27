@@ -185,8 +185,6 @@ export const getEarthEngineValues = ({
 
         const { startTime, endTime, timeZone = 'UTC', periodType } = period
 
-        console.log('getEarthEngineValues', startTime, endTime)
-
         const periods = getPeriods(period).map(addPeriodTimestamp)
         const endTimePlusOne = ee.Date(String(endTime)).advance(1, 'day')
         const timeZoneStart = ee
@@ -479,7 +477,6 @@ export const getTimeSeriesData = async ({
                         image.reduceRegion(eeReducer, eeGeometry, eeScale)
                     )
                     .set('system:index', image.get('system:index'))
-                    // .set("id", image.get("system:index"))
                     .set('startTime', image.get('system:time_start'))
                     .set('endTime', image.get('system:time_end'))
             )
