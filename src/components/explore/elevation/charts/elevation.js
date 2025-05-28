@@ -1,6 +1,33 @@
 import i18n from '@dhis2/d2-i18n'
 import { colors } from '@dhis2/ui'
+import { roundOneDecimal } from '../../../../utils/calc.js'
 import { animation, elevationCredits } from '../../../../utils/chart.js'
+
+// Max elevation range before binning is applied
+const maxElevationRange = 200
+
+// Calculate the bin size based on the data length
+const getBinSize = (dataLength) => {
+    const desiredBins = 100
+    let binSize = 1
+
+    while (dataLength / binSize > desiredBins) {
+        binSize *= 10
+    }
+
+    return binSize
+}
+
+// Create binned data from the histogram
+const createBinnedData = (histogram, binSize) =>
+    Object.entries(histogram).reduce((acc, [elevation, value]) => {
+        const bin = Math.floor(elevation / binSize) * binSize
+        if (!acc[bin]) {
+            acc[bin] = { area: 0 }
+        }
+        acc[bin].area += value.area
+        return acc
+    }, {})
 
 const createPlotLine = (value, text) => ({
     color: colors.grey600,
@@ -21,17 +48,32 @@ const createPlotLine = (value, text) => ({
 
 const getChartConfig = (name, data) => {
     const { mean, min, max, histogram } = data
+    const useBinning = max - min > maxElevationRange
 
-    const elevations = Object.keys(histogram)
+    const binSize = getBinSize(max - min)
+
+    const binnedData = useBinning
+        ? createBinnedData(histogram, binSize)
+        : histogram
+
+    const elevations = Object.keys(binnedData)
         .map(Number)
         .sort((a, b) => a - b)
 
-    const values = Object.values(histogram).map((v) => v['area'])
+    const values = Object.values(binnedData).map((v) => v['area'])
 
     const series = elevations.map((elevation) => ({
-        x: histogram[String(elevation)]['area'],
+        x: binnedData[String(elevation)]['area'],
         y: elevation,
     }))
+
+    // Ensure the first point is the minimum elevation
+    if (useBinning && series[0].y < min) {
+        series[0] = {
+            x: 0,
+            y: min,
+        }
+    }
 
     const minArea = Math.min(...values)
     const maxArea = Math.max(...values)
@@ -52,11 +94,17 @@ const getChartConfig = (name, data) => {
         credits: elevationCredits,
         tooltip: {
             formatter: function () {
+                let elevation = this.point.y
+
+                if (useBinning) {
+                    elevation += ' - ' + (elevation + binSize)
+                }
+
                 return `${i18n.t('Elevation: {{value}} m', {
-                    value: Math.round(this.point.y),
+                    value: elevation,
                     nsSeparator: ';',
-                })}<br />${i18n.t('Area: {{value}} ha', {
-                    value: Math.round(this.point.x),
+                })}<br />${i18n.t('Area: {{value}} km²', {
+                    value: roundOneDecimal(this.point.x),
                     nsSeparator: ';',
                 })}`
             },
@@ -64,10 +112,10 @@ const getChartConfig = (name, data) => {
         legend: { enabled: false },
         xAxis: {
             labels: {
-                format: '{value} ha',
+                format: '{value} km²',
             },
             min: minArea,
-            max: maxArea,
+            max: maxArea * 1.01,
             crosshair: false,
         },
         yAxis: {
