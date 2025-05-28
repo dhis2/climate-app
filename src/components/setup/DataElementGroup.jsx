@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 const DataElementGroup = ({ name, shortName }) => (
     <>
-        <h2>{i18n.t('Assign to a data element group')}</h2>
+        <h2>{i18n.t('3. Assign to a data element group')}</h2>
         <p>
             {i18n.t(
                 'To be able to select the data elements in all the DHIS2 analytics apps you also need to assign them to a data element group:'

@@ -10,7 +10,7 @@ const SetupPage = () => {
 
     return (
         <div className={styles.container}>
-            <h1>{i18n.t('Configuring DHIS2 before importing climate data')}</h1>
+            <h1>{i18n.t('Configuring DHIS2 before importing data')}</h1>
             <p>
                 {i18n.t(
                     'Before you can import data, you need to make some configurations in the Maintenance app. For detailed instructions on how to configure DHIS2, choose which data you would like to import below.'
@@ -22,7 +22,7 @@ const SetupPage = () => {
                 onChange={setDataset}
                 showDescription={false}
             />
-            <h2>{i18n.t('Create the data element')}</h2>
+            <h2>{i18n.t('1. Create the data element')}</h2>
             <p>
                 {i18n.t(
                     'Create DHIS2 data elements only for the data you want to import. We recommend including the data source in the name to distinguish it from other sources (e.g. precepetation data is available from both ERA5-Land and CHIRPS, and there will be additional data providers in the future). If you use the same code specified below, we will preselect the data element in the import interface.'
