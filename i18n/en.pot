@@ -5,13 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-<<<<<<< HEAD
-"POT-Creation-Date: 2025-05-26T15:43:49.314Z\n"
-"PO-Revision-Date: 2025-05-26T15:43:49.314Z\n"
-=======
 "POT-Creation-Date: 2025-05-28T09:13:04.048Z\n"
 "PO-Revision-Date: 2025-05-28T09:13:04.048Z\n"
->>>>>>> main
 
 msgid "About this app"
 msgstr "About this app"
@@ -899,12 +894,9 @@ msgstr ""
 "on climate-app@dhis2.org if you have any questions or need help with the "
 "setup."
 
-<<<<<<< HEAD
-=======
 msgid "3. Assign to a data element group"
 msgstr "3. Assign to a data element group"
 
->>>>>>> main
 msgid "Data element group: \"{{-name}}\""
 msgstr "Data element group: \"{{-name}}\""
 
@@ -914,12 +906,9 @@ msgstr "Data elements"
 msgid "Assign above data element"
 msgstr "Assign above data element"
 
-<<<<<<< HEAD
-=======
 msgid "2. Assign to a data set"
 msgstr "2. Assign to a data set"
 
->>>>>>> main
 msgid ""
 "If you import daily data, you should assign the data elements to a daily "
 "data set (weather and climate). For weekly or monthly data, assign to a "
@@ -954,12 +943,9 @@ msgstr "Organisation units"
 msgid "Select all organisation units in your system"
 msgstr "Select all organisation units in your system"
 
-<<<<<<< HEAD
-=======
 msgid "4. Add a legend"
 msgstr "4. Add a legend"
 
->>>>>>> main
 msgid "Recommended legend for this data element."
 msgstr "Recommended legend for this data element."
 
@@ -1020,24 +1006,6 @@ msgstr ""
 "assign all org unit levels as Aggregation levels for each data element "
 "created."
 
-<<<<<<< HEAD
-msgid ""
-"Create DHIS2 data elements for the data you want to import. We recommend "
-"including the data source in the name to distinguish it from other sources "
-"(e.g. precepetation data is available from both ERA5-Land and CHIRPS, and "
-"there will be additional data providers in the future). If you use the same "
-"code specified below, we will preselect the data element in the import "
-"interface."
-msgstr ""
-"Create DHIS2 data elements for the data you want to import. We recommend "
-"including the data source in the name to distinguish it from other sources "
-"(e.g. precepetation data is available from both ERA5-Land and CHIRPS, and "
-"there will be additional data providers in the future). If you use the same "
-"code specified below, we will preselect the data element in the import "
-"interface."
-
-=======
->>>>>>> main
 msgid "Loading data"
 msgstr "Loading data"
 
@@ -1135,12 +1103,6 @@ msgstr ""
 "of atmospheric conditions and canopy background noise. EVI values range "
 "from -1 to 1, with higher values indicating denser vegetation."
 
-<<<<<<< HEAD
-msgid "Land cover types at yearly intervals"
-msgstr "Land cover types at yearly intervals"
-
-=======
->>>>>>> main
 msgid "Climate/Weather"
 msgstr "Climate/Weather"
 
@@ -1289,12 +1251,6 @@ msgstr "Max elevation (SRTM)"
 msgid "Max elevation in meters above sea level."
 msgstr "Max elevation in meters above sea level."
 
-<<<<<<< HEAD
-msgid "Percentage of area with this land cover type."
-msgstr "Percentage of area with this land cover type."
-
-=======
->>>>>>> main
 msgid "Heat/cold stress"
 msgstr "Heat/cold stress"
 
