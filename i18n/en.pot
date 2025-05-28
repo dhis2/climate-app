@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-05-28T08:47:20.599Z\n"
-"PO-Revision-Date: 2025-05-28T08:47:20.599Z\n"
+"POT-Creation-Date: 2025-05-28T09:13:04.048Z\n"
+"PO-Revision-Date: 2025-05-28T09:13:04.048Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -274,8 +274,8 @@ msgstr ""
 msgid "Elevation: {{value}} m"
 msgstr "Elevation: {{value}} m"
 
-msgid "Area: {{value}} ha"
-msgstr "Area: {{value}} ha"
+msgid "Area: {{value}} km²"
+msgstr "Area: {{value}} km²"
 
 msgid "Min elevation"
 msgstr "Min elevation"
@@ -876,6 +876,9 @@ msgstr "Organisation units"
 
 msgid "Select all organisation units in your system"
 msgstr "Select all organisation units in your system"
+
+msgid "4. Add a legend"
+msgstr "4. Add a legend"
 
 msgid "Recommended legend for this data element."
 msgstr "Recommended legend for this data element."
