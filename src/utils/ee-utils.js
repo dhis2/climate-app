@@ -500,7 +500,7 @@ export const getHistogramStatistics = (histogram, scale) => {
     Object.keys(histogram).forEach((key) => {
         data[key] = {
             count: histogram[key],
-            area: (histogram[key] * scale * scale) / 10000, // hectares
+            area: (histogram[key] * scale * scale) / 1e6, // km2
         }
     })
 
@@ -519,10 +519,13 @@ export const getImageData = async ({ ee, dataset, geometry }) => {
 
     const data = image.reduceRegion(eeReducer, eeGeometry, eeScale)
 
-    const histogram = image.reduceRegion(
-        ee.Reducer.frequencyHistogram(),
-        eeGeometry
-    )
+    const histogram = image.reduceRegion({
+        reducer: ee.Reducer.frequencyHistogram(),
+        geometry: eeGeometry,
+        scale: eeScale,
+        maxPixels: 1e13,
+        bestEffort: true,
+    })
 
     return Promise.all([
         getInfo(data),
