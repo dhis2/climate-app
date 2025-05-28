@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/dhis2/climate-app/compare/v1.9.0...v1.10.0) (2025-05-28)
+
+
+### Features
+
+* simplified setup page and elevation ranges  ([#75](https://github.com/dhis2/climate-app/issues/75)) ([27e9177](https://github.com/dhis2/climate-app/commit/27e91770b19520cf673069f4ac239306ec56ac48))
+
 # [1.9.0](https://github.com/dhis2/climate-app/compare/v1.8.0...v1.9.0) (2025-04-03)
 
 

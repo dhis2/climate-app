@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 const Legend = ({ name, description, items }) => (
     <>
+        <h2>{i18n.t('4. Add a legend')}</h2>
         <p>{i18n.t('Recommended legend for this data element.')}</p>
         <table>
             <caption>

@@ -58,6 +58,7 @@ export const eviDescription = i18n.t(
 export const landcoverDescription = i18n.t(
     'Land cover types at yearly intervals'
 )
+
 const climateDataSet = {
     name: i18n.t('Climate/Weather'),
     shortName: i18n.t('Climate/Weather'),
