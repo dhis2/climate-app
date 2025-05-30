@@ -56,6 +56,11 @@ export const vegetationCredits = {
     text: i18n.t('NASA LP DAAC at the USGS EROS Center / Google Earth Engine'),
 }
 
+export const landCoverCredits = {
+    href: 'https://lpdaac.usgs.gov/products/mcd12q1v061/',
+    text: i18n.t('NASA LP DAAC at the USGS EROS Center / Google Earth Engine'),
+}
+
 export const elevationCredits = {
     href: 'https://lpdaac.usgs.gov/products/srtmgl1v003/',
     text: i18n.t('NASA / USGS / JPL-Caltech / Google Earth Engine'),

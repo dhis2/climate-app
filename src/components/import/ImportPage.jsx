@@ -78,8 +78,7 @@ const ImportPage = () => {
                         <Period
                             calendar={calendar}
                             period={period}
-                            datasetPeriodType={dataset?.periodType}
-                            datasetPeriod={dataset?.period}
+                            dataset={dataset}
                             onChange={setPeriod}
                         />
                         <OrgUnits selected={orgUnits} onChange={setOrgUnits} />

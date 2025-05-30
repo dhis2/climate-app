@@ -28,6 +28,10 @@ export const periodTypes = [
         id: MONTHLY,
         name: i18n.t('Monthly'),
     },
+    {
+        id: YEARLY,
+        name: i18n.t('Yearly'),
+    },
 ]
 
 /**
@@ -286,12 +290,15 @@ export const getStandardPeriod = ({
     endTime,
     calendar,
     periodType,
-}) => ({
-    startTime: toStandardDate(startTime, calendar),
-    endTime: toStandardDate(endTime, calendar),
-    periodType,
-    calendar, // Include original calendar to allow conversion back to DHIS2 date
-})
+}) =>
+    periodType !== YEARLY
+        ? {
+              startTime: toStandardDate(startTime, calendar),
+              endTime: toStandardDate(endTime, calendar),
+              periodType,
+              calendar, // Include original calendar to allow conversion back to DHIS2 date
+          }
+        : { startTime, endTime, calendar, periodType }
 
 /**
  * Returns an array of period items for a given period object
@@ -306,6 +313,16 @@ export const getPeriods = (period) => {
         calendar = 'gregory',
         locale = 'en',
     } = period
+
+    if (periodType === YEARLY) {
+        return generateFixedPeriods({
+            year: endTime,
+            calendar,
+            locale,
+            periodType: YEARLY,
+            yearsCount: endTime - startTime + 1,
+        })
+    }
 
     const startYear = extractYear(fromStandardDate(startTime, calendar))
     const endYear = extractYear(fromStandardDate(endTime, calendar))
