@@ -1,3 +1,10 @@
+## [1.11.1](https://github.com/dhis2/climate-app/compare/v1.11.0...v1.11.1) (2025-06-01)
+
+
+### Bug Fixes
+
+* set start year for land cover data ([#78](https://github.com/dhis2/climate-app/issues/78)) ([8ecc906](https://github.com/dhis2/climate-app/commit/8ecc906de5bca5ff0e9bf77e5e8592d2380fac8e))
+
 # [1.11.0](https://github.com/dhis2/climate-app/compare/v1.10.0...v1.11.0) (2025-06-01)
 
 
