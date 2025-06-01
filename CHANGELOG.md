@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/dhis2/climate-app/compare/v1.10.0...v1.11.0) (2025-06-01)
+
+
+### Features
+
+* land cover data ([#47](https://github.com/dhis2/climate-app/issues/47)) ([7f98025](https://github.com/dhis2/climate-app/commit/7f98025d2db467f066dca6a42599f999c7078353))
+
 # [1.10.0](https://github.com/dhis2/climate-app/compare/v1.9.0...v1.10.0) (2025-05-28)
 
 
