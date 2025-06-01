@@ -425,7 +425,7 @@ export default [
         source: modisSource,
         resolution: landcoverResolution,
         periodType: YEARLY,
-        minYear: 2001,
+        minYear: 2002,
         maxYear: 2023,
         band: 'LC_Type1',
         reducer: 'frequencyHistogram',
