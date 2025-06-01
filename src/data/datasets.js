@@ -1,11 +1,12 @@
 import i18n from '@dhis2/d2-i18n'
+import { landcoverTypes } from '../components/explore/landcover/LandcoverSelect.jsx'
 import {
     kelvinToCelsius,
     getRelativeHumidity,
     roundOneDecimal,
     roundTwoDecimals,
 } from '../utils/calc.js'
-import { HOURLY, DAILY, MONTHLY, SIXTEEN_DAYS } from '../utils/time.js'
+import { HOURLY, DAILY, MONTHLY, SIXTEEN_DAYS, YEARLY } from '../utils/time.js'
 import heatStressLegend from './heat-stress-legend.js'
 
 // kelvin to celsius with one decimal
@@ -43,6 +44,7 @@ export const era5Resolution = i18n.t('Approximately 31 km (0.25°)')
 export const era5LandResolution = i18n.t('Approximately 9 km (0.1°)')
 export const chirpsResolution = i18n.t('Approximately 5 km (0.05°)')
 export const modisResolution = i18n.t('Approximately 250 m')
+export const landcoverResolution = i18n.t('Approximately 500 m')
 export const demResolution = i18n.t('Approximately 30 m')
 
 export const ndviDescription = i18n.t(
@@ -51,6 +53,10 @@ export const ndviDescription = i18n.t(
 
 export const eviDescription = i18n.t(
     'Enhanced vegetation index (EVI) differs from NDVI by reducing the influence of atmospheric conditions and canopy background noise. EVI values range from -1 to 1, with higher values indicating denser vegetation.'
+)
+
+export const landcoverDescription = i18n.t(
+    'Land cover types at yearly intervals'
 )
 
 const climateDataSet = {
@@ -410,6 +416,26 @@ export default [
         dataElementGroup: landGroup,
         dataSet: landDataSet,
     },
+    ...landcoverTypes.map(({ name, value }) => ({
+        id: `MODIS/061/MCD12Q1/LC_Type1/${value}`,
+        datasetId: 'MODIS/061/MCD12Q1',
+        name: `${name} (MODIS)`,
+        shortName: name,
+        description: i18n.t('Percentage of area with this land cover type.'),
+        source: modisSource,
+        resolution: landcoverResolution,
+        periodType: YEARLY,
+        minYear: 2001,
+        maxYear: 2023,
+        band: 'LC_Type1',
+        reducer: 'frequencyHistogram',
+        histogramKey: value,
+        valueParser: twoDecimals,
+        aggregationType: i18n.t('Average'),
+        dataElementCode: `MODIS_LANDCOVER_${value}`,
+        dataElementGroup: landGroup,
+        dataSet: landDataSet,
+    })),
 ]
 
 const era5band = [

@@ -13,6 +13,7 @@ import HeatDaily from './explore/heat/HeatDaily.jsx'
 import HeatMonthly from './explore/heat/HeatMonthly.jsx'
 import HumidityDaily from './explore/humidity/HumidityDaily.jsx'
 import HumidityMonthly from './explore/humidity/HumidityMonthly.jsx'
+import Landcover from './explore/landcover/Landcover.jsx'
 import OrgUnit from './explore/OrgUnit.jsx'
 import PrecipitationDaily from './explore/precipitation/PrecipitationDaily.jsx'
 import PrecipitationMonthly from './explore/precipitation/PrecipitationMonthly.jsx'
@@ -113,6 +114,16 @@ const tabRoutes = [
             {
                 path: ':vegetationIndex',
                 element: <Vegetation />,
+            },
+        ],
+    },
+    {
+        path: 'landcover',
+        element: <Tabs />,
+        children: [
+            {
+                index: true,
+                element: <Landcover />,
             },
         ],
     },
