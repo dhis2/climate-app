@@ -20,7 +20,7 @@ const dataset = {
 }
 
 const period = {
-    startTime: '2001',
+    startTime: '2002',
     endTime: String(new Date().getFullYear()), // Is the dataset updated every year?
 }
 
