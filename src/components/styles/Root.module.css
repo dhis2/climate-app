@@ -1,23 +1,23 @@
 body {
-  overflow: hidden; /* scrolling is handled by app-shell, this causes issues with "double" scroll */
-  /*background-color: var(--colors-grey050); */
+    overflow: hidden; /* scrolling is handled by app-shell, this causes issues with "double" scroll */
+    /*background-color: var(--colors-grey050); */
 }
 
 .container {
-  display: grid;
-  height: 100%;
-  grid-gap: 0 var(--spacers-dp24);
-  grid-template-columns: [sidebar] 280px [content] minmax(0, 1fr);
+    display: grid;
+    height: 100%;
+    grid-gap: 0 var(--spacers-dp24);
+    grid-template-columns: [sidebar] 280px [content] minmax(0, 1fr);
 }
 
 .sidebar {
-  grid-column: sidebar;
-  /* background-color: var(--colors-grey200); */
-  border-right: 1px solid var(--colors-grey400);
-  height: 100%;
+    grid-column: sidebar;
+    /* background-color: var(--colors-grey200); */
+    border-right: 1px solid var(--colors-grey400);
+    height: 100%;
 }
 
 .content {
-  grid-column: content;
-  background-color: inherit;
+    grid-column: content;
+    background-color: inherit;
 }
