@@ -98,7 +98,6 @@ const getChartConfig = ({
         tooltip: {
             crosshairs: true,
             shared: true,
-            valueSuffix: '°C',
         },
         xAxis: {
             type: 'datetime',

@@ -12,6 +12,7 @@ const Dataset = ({
     <div>
         {title && <h2>{title}</h2>}
         <SingleSelectField
+            filterable
             label={i18n.t('Select data to import')}
             selected={selected?.id}
             onChange={({ selected }) =>
