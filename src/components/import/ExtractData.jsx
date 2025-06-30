@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
-import useImportEngine from "../../hooks/useImportEngine";
+import useImport from "../../hooks/useImport.js";
 import useOrgUnits from '../../hooks/useOrgUnits.js'
 import { getPeriods, periodTypes } from '../../utils/time.js'
 import DataLoader from '../shared/DataLoader.jsx'
@@ -11,7 +11,7 @@ import styles from './styles/ExtractData.module.css'
 const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
     const { parent, level } = orgUnits
     const { features } = useOrgUnits(parent.id, level)
-    const { data, error, loading } = useImportEngine(
+    const { data, error, loading } = useImport(
         dataset,
         period,
         features
