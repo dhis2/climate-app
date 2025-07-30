@@ -21,12 +21,15 @@ const userSettingsQuery = {
 const Period = ({ calendar, period, dataset = {}, onChange }) => {
     const result = useDataQuery(userSettingsQuery)
     const { data: { userSettings: { keyUiLocale: locale } = {} } = {} } = result
+    //console.log('period period', period)
+    //console.log('period dataset', dataset)
     const {
         periodType: datasetPeriodType,
         period: datasetPeriod,
         minYear,
         maxYear,
     } = dataset
+    //console.log('period extracted', datasetPeriodType, datasetPeriod)
     const { periodType, startTime, endTime } = period
     const hasNoPeriod = datasetPeriodType === 'N/A'
     const isYearly = datasetPeriodType === YEARLY
@@ -38,6 +41,7 @@ const Period = ({ calendar, period, dataset = {}, onChange }) => {
         }
     }, [locale, onChange, period])
 
+    // TODO: adds weekly to the selection for sixteendays datasets, but should already be set correctly...
     useEffect(() => {
         if (
             datasetPeriodType === SIXTEEN_DAYS &&
@@ -46,6 +50,13 @@ const Period = ({ calendar, period, dataset = {}, onChange }) => {
             onChange({ ...period, periodType: WEEKLY })
         }
     }, [period, datasetPeriodType, onChange])
+
+    // For yearly datasets, force year range to fit within dataset range
+    // TODO: Not sure if this should be inside useEffect, with onChange, or if this is ok... 
+    if (datasetPeriodType == YEARLY) {
+        period.startTime = (period.startTime >= minYear) ? period.startTime : minYear
+        period.endTime = (period.endTime <= maxYear) ? period.endTime : maxYear
+    }
 
     return (
         <div className={styles.container}>
