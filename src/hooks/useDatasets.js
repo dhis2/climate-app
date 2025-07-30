@@ -9,7 +9,6 @@ const useDatasets = () => {
     // Call all custom hooks at the top level
     const results = []
     results.push( useIriDatasets() )
-    console.log('useDatasets results push', results)
     
     // Combine hook results
     const loading = results.some(r => r.loading);

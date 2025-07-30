@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
+import { useMemo } from "react";
+import { useQuery } from '@tanstack/react-query';
+import useRoutesAPI from "./useRoutesAPI";
 
-const apiUrl = 'http://168.253.224.242:9091/dst';
-const apiKey = 'lyKKVwxx8m2UD65Q'
+const routeCode = 'iri-enacts' // TODO: Probably need to define this more centrally. Needs to match the route code in the Routes API, and as set in SettingsPage.jsx in dataProviders = ...
 
 const parseIriAggregateResults = (results) => {
+    console.log('parsing iri data', results)
     // need to convert from original iri results
     // to structure expected by the climate app
     // ie: ou, period, value
@@ -11,53 +13,87 @@ const parseIriAggregateResults = (results) => {
 }
 
 const useIriData = (dataset, period, features) => {
-    const [loading, setLoading] = useState(true);
-    const [data, setData] = useState([]);
-    const [error, setError] = useState();
+    // check and get iri url from route api
+    const { routes, loading: routesLoading, error: routesError } = useRoutesAPI()
+    const iriRoute = (!routesLoading && !routesError)
+        ? routes.find(route => route.code == routeCode)
+        : null
+    if (!routesLoading && !routesError && !iriRoute) {
+        // means the route has not been set
+        throw new Error(`Could not find a route with the code "${routeCode}"`)
+    }
 
-    const downloadUrl = `${apiUrl}/download_raw_data`;
+    // fetch raw data info from server
+    const dataUrl = iriRoute ? `${iriRoute.url}/download_raw_data` : null;
     
-    useEffect(() => {
-        fetch(downloadUrl, {
-            method : 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-API-Key': apiKey, // can also be Authorization or apiKey
-            },
-            body : JSON.stringify({
-                variable: dataset.variable,
-                temporalRes: dataset.periodType, // need converting? 
-                startDate: dataset.period.startDate,
-                endDate: dataset.period.endDate,
-                geomExtract: 'geojson',
-                geojsonSource: 'upload',
-                geojsonData: {type: 'FeatureCollection', features},
-                geojsonField: 'id', // can we always expect this? 
-                outFormat: 'JSON-Format',
+    const fetchDataRaw = async () => {
+        console.log('fetching iri data', dataUrl)
+        console.log('dataset to import', dataset)
+        //return dataIriTestOnly // testing only... 
+        // NOTE: valid authorization headers: X-API-Key: "<key>", Authorization: "apiKey <key>", apiKey: "<key>" (I think...)
+        // TODO: shouldn't set authorization headers here, url should be accessed via route api which handles the authorization method
+        const apiKey = 'lyKKVwxx8m2UD65Q' // this is a dummy key and will be removed
+        try {
+            const resp = await fetch(dataUrl, {
+                method : 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `apiKey ${apiKey}`,
+                    //'X-API-Key': apiKey,
+                },
+                body : JSON.stringify({
+                    variable: dataset.variable,
+                    temporalRes: dataset.periodType, // need converting? 
+                    startDate: period.startDate,
+                    endDate: period.endDate,
+                    geomExtract: 'geojson',
+                    geojsonSource: 'upload',
+                    geojsonData: {type: 'FeatureCollection', features},
+                    geojsonField: 'id', // can we always expect this? 
+                    outFormat: 'JSON-Format',
+                })
             })
-
-        }).then(res => {
-            if (res.status == 400) {
-                setLoading(false)
-                setError({message :"Something went wrong"})
+            if (!resp.ok) {
+                throw new Error(`IRI server returned HTTP error at ${dataUrl}: ${resp.status} - ${resp.statusText}`);
             }
-            const parsed = parseIriAggregateResults(res.json())
-            return parsed
+            const rawData = await resp.json()
+            console.log('rawData', rawData)
+            if ("code" in rawData && rawData.code !== 200) {
+                // IRI server returns error message
+                throw new Error(`IRI server responded with an error message: ${rawData.code} - ${rawData.message}`);
+            }
+            return rawData
+        } catch (error) {
+            // error could be network failure, CORS, or something else
+            if (error instanceof TypeError && error.message === 'Failed to fetch') {
+                throw new Error(`Failed to fetch IRI data from ${dataUrl}. Please check that the route url is configured correctly and has CORS enabled to allow requests from this app's origin.`);
+            } else {
+                console.error(error)
+                throw new Error(`Failed to fetch IRI data from ${dataUrl}: ${error}`)
+            }
+        }
+    }
 
-        }).then(data => {
-            console.log(data)
-            setLoading(false)
-            setData(data)
+    const { data: queryData, isLoading: queryLoading, error: queryError } = useQuery({
+        queryKey: ['use-iri-data'],
+        queryFn: fetchDataRaw,
+        enabled: !!dataUrl, // <-- only run query when URL is ready
+    })
 
-        } ).catch(err => {
-            console.log(err)
-            setError(err)
-            setLoading(false)
-        })
-    }, [dataset,period,features])
+    // process results
+    const processedData = useMemo(() => {
+        if (!queryData) return undefined
+        return parseIriAggregateResults(queryData)
+    }, [queryData])
 
-    return {data, error, loading}
-  
-} 
+    // return
+    const error = routesError || queryError
+
+    const loading = iriRoute && (routesLoading || queryLoading) && !error
+
+    console.log('useIriData final', processedData, loading, error)
+
+    return {data: processedData, error, loading}
+}
 
 export default useIriData;

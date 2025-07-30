@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { useQuery } from '@tanstack/react-query';
 import useRoutesAPI from "./useRoutesAPI";
 
@@ -40,11 +40,11 @@ const parseIriDataset = (d) => {
 
 const useIriDatasets = () => {
     // check and get iri url from route api
-    const { routes, routesLoading, routesError } = useRoutesAPI()
+    const { routes, loading: routesLoading, error: routesError } = useRoutesAPI()
     const iriRoute = (!routesLoading && !routesError)
         ? routes.find(route => route.code == routeCode)
         : null
-    if (!iriRoute) {
+    if (!routesLoading && !routesError && !iriRoute) {
         // means the route has simply not been set, only silently warn in the console
         console.warn(`Could not find a route with the code "${routeCode}"`)
     }
@@ -58,14 +58,15 @@ const useIriDatasets = () => {
         try {
             const resp = await fetch(datasetsUrl)
             if (!resp.ok) {
-                throw new Error(`IRI server returned HTTP error at ${datasetsUrl}: ${resp.status - resp.statusText}.`);
+                throw new Error(`IRI server returned HTTP error at ${datasetsUrl}: ${resp.status} - ${resp.statusText}`);
             }
             return resp.json()
         } catch (error) {
             // error could be network failure, CORS, or something else
-            if (error instanceof TypeError) {
+            if (error instanceof TypeError && error.message === 'Failed to fetch') {
                 throw new Error(`Failed to fetch IRI datasets from ${datasetsUrl}. Please check that the route url is configured correctly and has CORS enabled to allow requests from this app's origin.`);
             } else {
+                console.error(error)
                 throw new Error(`Failed to fetch IRI datasets from ${datasetsUrl}: ${error}`)
             }
         }
@@ -77,6 +78,7 @@ const useIriDatasets = () => {
         enabled: !!datasetsUrl, // <-- only run query when URL is ready
     })
 
+    // process results
     const processedData = useMemo(() => {
         if (!queryData) return undefined
 
@@ -99,6 +101,7 @@ const useIriDatasets = () => {
         return parsedData.filter((d) => d.periodType != undefined)
     }, [queryData])
 
+    // return
     const error = routesError || queryError
 
     const loading = iriRoute && (routesLoading || queryLoading) && !error
