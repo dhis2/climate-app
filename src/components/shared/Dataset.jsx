@@ -10,8 +10,7 @@ const Dataset = ({
     onChange,
     showDescription = true,
 }) => {
-    const { datasets, loading, error } = useDatasets();
-    console.log(datasets)
+    const { data: datasets, loading, error } = useDatasets();
 
     if (loading) return <CircularLoader large />;
     if (false) return <NoticeBox title={i18n.t('Error')} error>{error}</NoticeBox>;
@@ -33,7 +32,14 @@ const Dataset = ({
             {selected && showDescription && <p>{selected.description}</p>}
 
             {error && (
-                <NoticeBox title={i18n.t('Error')} error>{error}</NoticeBox>
+                <NoticeBox title={i18n.t('Warning')} warning>
+                    Error fetching additional datasets from one or more local data providers:
+                    <ul>
+                        {error.map((err) => (
+                            <li>{err.message}</li>
+                        ))}
+                    </ul>
+                </NoticeBox>
             )}
         </div>
     )

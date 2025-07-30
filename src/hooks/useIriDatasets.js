@@ -1,74 +1,111 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
+import { useQuery } from '@tanstack/react-query';
+import useRoutesAPI from "./useRoutesAPI";
 
-const apiUrl = 'http://168.253.224.242:9091/dst';
+//import datasetsIriTestOnly from "../data/datasetsIriTestOnly"; // for testing only
+
+const routeCode = 'iri-enacts' // TODO: Probably need to define this more centrally. Needs to match the route code in the Routes API, and as set in SettingsPage.jsx in dataProviders = ...
+
+const parsePeriodType = (periodType) => {
+    return {
+        daily: "DAILY",
+        weekly: "WEEKLY",
+        monthly: "MONTHLY",
+        annual: "YEARLY"
+    }[periodType]
+}
 
 const parseIriDataset = (d) => {
-    console.log('received iri dataset', d)
-    parsed = {
+    console.log('parsing iri dataset', d)
+    const parsed = {
         id: `${d.dataset_name}-${d.variable_name}-${d.temporal_resolution}`,
         name: `${d.dataset_longname} - ${d.variable_longname} (IRI ENACTS)`,
         shortName: `${d.dataset_longname} - ${d.variable_longname}`,
         units: d.variable_units,
-        periodType: d.temporal_resolution,
+        periodType: parsePeriodType(d.temporal_resolution),
         temporalAggregation: 'mean', // how to determine, maybe not allowed?...
         spatialAggregation: 'mean', // how to determine, maybe not allowed?...
         resolution: `${d.spatial_resolution.lon} degrees x ${d.spatial_resolution.lat} degrees`,
         source: 'IRI ENACTS Data Sharing Tool (DST)',
-        sourceUrl: `${apiUrl}/dst/`,
+        sourceUrl: 'placeholder url...', //`${apiUrl}`, // need a way to access the route url here
         variable: d.variable_name,
         provider: 'iri',
+    }
+    if (parsed.periodType == 'YEARLY') {
+        parsed.minYear = parseInt(d.temporal_coverage.start)
+        parsed.maxYear = parseInt(d.temporal_coverage.end)
     }
     return parsed
 }
 
-const useIriDatasets = (dataset, period, features) => {
-    const [loading, setLoading] = useState(true);
-    const [data, setData] = useState([]);
-    const [error, setError] = useState();
+const useIriDatasets = () => {
+    // check and get iri url from route api
+    const { routes, routesLoading, routesError } = useRoutesAPI()
+    const iriRoute = (!routesLoading && !routesError)
+        ? routes.find(route => route.code == routeCode)
+        : null
+    if (!iriRoute) {
+        // means the route has simply not been set, only silently warn in the console
+        console.warn(`Could not find a route with the code "${routeCode}"`)
+    }
 
-    const datasetsUrl = `${apiUrl}/dataset_info`;
-    
-    useEffect(() => {
+    // fetch raw datasets info from server
+    const datasetsUrl = iriRoute ? `${iriRoute.url}/dataset_info` : null;
+
+    const fetchDatasetsRaw = async () => {
         console.log('fetching iri datasets', datasetsUrl)
-        fetch(datasetsUrl, {
-            method : 'POST',
-            headers: {
-                'Content-Type': 'application/json',
+        //return datasetsIriTestOnly // testing only... 
+        try {
+            const resp = await fetch(datasetsUrl)
+            if (!resp.ok) {
+                throw new Error(`IRI server returned HTTP error at ${datasetsUrl}: ${resp.status - resp.statusText}.`);
             }
-            
-        }).then(res => {
-            if (res.status == 400) {
-                setLoading(false)
-                setError({message :"Something went wrong"})
+            return resp.json()
+        } catch (error) {
+            // error could be network failure, CORS, or something else
+            if (error instanceof TypeError) {
+                throw new Error(`Failed to fetch IRI datasets from ${datasetsUrl}. Please check that the route url is configured correctly and has CORS enabled to allow requests from this app's origin.`);
+            } else {
+                throw new Error(`Failed to fetch IRI datasets from ${datasetsUrl}: ${error}`)
             }
-            // convert nested structures to get flat list of datasets
-            const nestedResp = res.json();
-            const flatResp = [];
-            Object.entries(nestedResp).forEach(([category, citems]) => {
-                Object.entries(citems).forEach(([temporal, titems]) => {
-                    Object.keys(titems).forEach(variable => {
-                        flatResp.push(titems[variable]);
-                    });
+        }
+    }
+
+    const { data: queryData, isLoading: queryLoading, error: queryError } = useQuery({
+        queryKey: ['use-iri-datasets'],
+        queryFn: fetchDatasetsRaw,
+        enabled: !!datasetsUrl, // <-- only run query when URL is ready
+    })
+
+    const processedData = useMemo(() => {
+        if (!queryData) return undefined
+
+        console.log('processing list of iri datasets', queryData)
+
+        // convert nested structures to get flat list of datasets
+        const flatData = [];
+        Object.entries(queryData).forEach(([category, citems]) => {
+            Object.entries(citems).forEach(([temporal, titems]) => {
+                Object.keys(titems).forEach(variable => {
+                    flatData.push(titems[variable]);
                 });
             });
-            // parse to expected dataset dict
-            const parsed = flatResp.map((d) => parseIriDataset(d))
-            return parsed
+        });
 
-        }).then(data => {
-            console.log(data)
-            setLoading(false)
-            setData(data)
+        // parse to expected dataset dict
+        const parsedData = flatData.map(parseIriDataset)
 
-        }).catch(err => {
-            console.log(err)
-            setError(err)
-            setLoading(false)
-        })
-    }, [dataset,period,features])
+        // filter to only supported/parseable period types
+        return parsedData.filter((d) => d.periodType != undefined)
+    }, [queryData])
 
-    return {data, error, loading}
-  
-} 
+    const error = routesError || queryError
+
+    const loading = iriRoute && (routesLoading || queryLoading) && !error
+
+    console.log('useIriDatasets final', processedData, loading, error)
+
+    return {data: processedData, error, loading}
+}
 
 export default useIriDatasets;
