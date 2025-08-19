@@ -24,22 +24,18 @@ const useIriData = (dataset, period, features) => {
     }
 
     // fetch raw data info from server
-    const dataUrl = iriRoute ? `${iriRoute.url}/download_raw_data` : null;
+    const dataUrl = iriRoute ? `${iriRoute.href}/run/download_raw_data` : null;
     
     const fetchDataRaw = async () => {
         console.log('fetching iri data', dataUrl)
         console.log('dataset to import', dataset)
         //return dataIriTestOnly // testing only... 
-        // NOTE: valid authorization headers: X-API-Key: "<key>", Authorization: "apiKey <key>", apiKey: "<key>" (I think...)
-        // TODO: shouldn't set authorization headers here, url should be accessed via route api which handles the authorization method
-        const apiKey = 'lyKKVwxx8m2UD65Q' // this is a dummy key and will be removed
         try {
             const resp = await fetch(dataUrl, {
+                credentials: 'include', // needed to pass on dhis2 login credentials
                 method : 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `apiKey ${apiKey}`,
-                    //'X-API-Key': apiKey,
                 },
                 body : JSON.stringify({
                     variable: dataset.variable,

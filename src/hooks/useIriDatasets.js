@@ -50,13 +50,13 @@ const useIriDatasets = () => {
     }
 
     // fetch raw datasets info from server
-    const datasetsUrl = iriRoute ? `${iriRoute.url}/dataset_info` : null;
+    const datasetsUrl = iriRoute ? `${iriRoute.href}/run/dataset_info` : null;
 
     const fetchDatasetsRaw = async () => {
         console.log('fetching iri datasets', datasetsUrl)
         //return datasetsIriTestOnly // testing only... 
         try {
-            const resp = await fetch(datasetsUrl)
+            const resp = await fetch(datasetsUrl, {credentials: 'include'}) // needed to pass on dhis2 login credentials
             if (!resp.ok) {
                 throw new Error(`IRI server returned HTTP error at ${datasetsUrl}: ${resp.status} - ${resp.statusText}`);
             }

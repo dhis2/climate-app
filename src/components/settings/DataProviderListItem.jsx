@@ -11,10 +11,11 @@ const DataProviderListItem = ({ dataProvider, index }) => {
     const [providerStatus,setProviderStatus] = useState(undefined)
 
     const pingDataProvider = async () => {
-        if (dataProvider?.url) {
-            const pingUrl = dataProvider.url
-            fetch(pingUrl)
+        if (dataProvider?.href) {
+            const pingUrl = `${dataProvider.href}/run` // not sure if the base url is enough for pinging
+            fetch(pingUrl, {credentials: 'include'}) // needed to pass on dhis2 login credentials
             .then(response => {
+                //console.log('pinging', pingUrl, response.ok, response)
                 if (response.ok) {setProviderStatus('Online')}
                 else {setProviderStatus('Offline')}
             })
