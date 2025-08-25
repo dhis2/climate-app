@@ -7,9 +7,40 @@ const routeCode = 'iri-enacts' // TODO: Probably need to define this more centra
 const parseIriAggregateResults = (results) => {
     console.log('parsing iri data', results)
     // need to convert from original iri results
+    // eg: Data.Name ie orgunit, Data.Values array, Dates which maps to values array, and Missing which can be used to convert to null
     // to structure expected by the climate app
     // ie: ou, period, value
-    return results
+    const parsed = []
+    const dates = results.Dates
+    const missing = results.Missing
+    results.Data.map((item) => {
+        const ou = item.Name // orgunit id
+        const values = item.Values
+        for (let i=0; i < values.length; i++) {
+            const period = dates[i]
+            const value = values[i] == missing ? null : values[i] // get value or null for missing
+            // TODO: need to check the correct value for missing, or if this should throw some error... 
+            parsed.push({ou, period, value})
+        }
+    })
+    console.log('parsed', parsed)
+    return parsed
+}
+
+const encodeTemporalRes = (periodType) => {
+    return periodType.toLowerCase()
+}
+
+const encodeDate = (date, periodType) => {
+    if (periodType == 'DAILY') {
+        return date
+    } else if (periodType == 'MONTHLY') {
+        return date.slice(0, 7)
+    } else if (periodType == 'YEARLY') {
+        return date.slice(0, 5)
+    } else {
+        throw Error(`Period type ${periodType} not yet supported`)
+    }
 }
 
 const useIriData = (dataset, period, features) => {
@@ -25,6 +56,7 @@ const useIriData = (dataset, period, features) => {
 
     // fetch raw data info from server
     const dataUrl = iriRoute ? `${iriRoute.href}/run/download_raw_data` : null;
+    //const dataUrl = iriRoute ? `http://168.253.224.242:9091/dst-test-data/download_raw_data` : null;
     
     const fetchDataRaw = async () => {
         console.log('fetching iri data', dataUrl)
@@ -35,16 +67,18 @@ const useIriData = (dataset, period, features) => {
                 credentials: 'include', // needed to pass on dhis2 login credentials
                 method : 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    //'Content-Type': 'application/json',
+                    //'X-API-Key': '......',
                 },
                 body : JSON.stringify({
+                    dataset: 'MON', // TODO: need to store and retrieve the dataset code somehow... 
                     variable: dataset.variable,
-                    temporalRes: dataset.periodType, // need converting? 
-                    startDate: period.startDate,
-                    endDate: period.endDate,
+                    temporalRes: encodeTemporalRes(dataset.periodType),
+                    startDate: encodeDate(period.startTime, dataset.periodType),
+                    endDate: encodeDate(period.endTime, dataset.periodType),
                     geomExtract: 'geojson',
                     geojsonSource: 'upload',
-                    geojsonData: {type: 'FeatureCollection', features},
+                    geojsonData: {type: 'FeatureCollection', features: features},
                     geojsonField: 'id', // can we always expect this? 
                     outFormat: 'JSON-Format',
                 })
@@ -71,9 +105,14 @@ const useIriData = (dataset, period, features) => {
     }
 
     const { data: queryData, isLoading: queryLoading, error: queryError } = useQuery({
-        queryKey: ['use-iri-data'],
+        queryKey: ['use-iri-data', dataset, period, features],
         queryFn: fetchDataRaw,
-        enabled: !!dataUrl, // <-- only run query when URL is ready
+        enabled: !!(
+            dataUrl &&
+            dataset &&
+            period &&
+            features?.length > 0
+        )
     })
 
     // process results

@@ -7,6 +7,7 @@ import useRoutesAPI from "./useRoutesAPI";
 const routeCode = 'iri-enacts' // TODO: Probably need to define this more centrally. Needs to match the route code in the Routes API, and as set in SettingsPage.jsx in dataProviders = ...
 
 const parsePeriodType = (periodType) => {
+    //return periodType // TODO: check what the valid period types should be
     return {
         daily: "DAILY",
         weekly: "WEEKLY",
@@ -19,17 +20,18 @@ const parseIriDataset = (d) => {
     console.log('parsing iri dataset', d)
     const parsed = {
         id: `${d.dataset_name}-${d.variable_name}-${d.temporal_resolution}`,
-        name: `${d.dataset_longname} - ${d.variable_longname} (IRI ENACTS)`,
-        shortName: `${d.dataset_longname} - ${d.variable_longname}`,
+        name: `${d.variable_longname} (${d.dataset_longname})`,
+        shortName: `${d.variable_longname}`,
         units: d.variable_units,
         periodType: parsePeriodType(d.temporal_resolution),
         temporalAggregation: 'mean', // how to determine, maybe not allowed?...
         spatialAggregation: 'mean', // how to determine, maybe not allowed?...
         resolution: `${d.spatial_resolution.lon} degrees x ${d.spatial_resolution.lat} degrees`,
-        source: 'IRI ENACTS Data Sharing Tool (DST)',
-        sourceUrl: 'placeholder url...', //`${apiUrl}`, // need a way to access the route url here
         variable: d.variable_name,
         provider: 'iri',
+        providerName: 'IRI ENACTS Data Sharing Tool (DST)',
+        providerNameShort: 'IRI ENACTS',
+        providerUrl: '<placeholder url...>', //`${apiUrl}`, // need a way to access the route url here
     }
     if (parsed.periodType == 'YEARLY') {
         parsed.minYear = parseInt(d.temporal_coverage.start)

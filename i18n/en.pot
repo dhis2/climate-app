@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-06-24T10:41:46.172Z\n"
-"PO-Revision-Date: 2025-06-24T10:41:46.175Z\n"
+"POT-Creation-Date: 2025-08-18T07:35:54.281Z\n"
+"PO-Revision-Date: 2025-08-18T07:35:54.282Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -1014,6 +1014,9 @@ msgstr "Error"
 
 msgid "Select data to import"
 msgstr "Select data to import"
+
+msgid "Warning"
+msgstr "Warning"
 
 msgid "You need access to Google Earth Engine to use this app."
 msgstr "You need access to Google Earth Engine to use this app."
