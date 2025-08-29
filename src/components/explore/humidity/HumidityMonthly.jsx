@@ -1,4 +1,4 @@
-import { era5Monthly, era5MonthlyNormals } from '../../../data/datasets.js'
+import { era5Monthly, era5MonthlyNormals } from '../../../data/earth-engine-datasets.js'
 import useEarthEngineClimateNormals from '../../../hooks/useEarthEngineClimateNormals.js'
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
 import exploreStore from '../../../store/exploreStore.js'

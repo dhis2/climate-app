@@ -26,7 +26,7 @@ const Dataset = ({
                 }
             >
                 {datasets.map((d) => (
-                    <SingleSelectOption key={d.id} value={d.id} label={d?.provider ? `${d.providerNameShort}: ${d.name}` : `Google Earth Engine: ${d.name}`} />
+                    <SingleSelectOption key={d.id} value={d.id} label={`${d.provider.nameShort}: ${d.name}`} />
                 ))}
             </SingleSelectField>
             {selected && showDescription && <p>{selected.description}</p>}

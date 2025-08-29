@@ -11,11 +11,14 @@ import DataProviderListItem from './DataProviderListItem.jsx'
 import styles from './styles/DataProviderList.module.css'
 
 const DataProviderList = ({ dataProviders = [] }) => {
+    // exclude google earth engine so we only list additional providers
+    dataProviders = dataProviders.filter(provider => provider.id != 'gee')
+
     return (
         <div>
-            <h2>Data Providers</h2>
+            <h2>Additional Data Providers</h2>
 
-            <Field label="In addition to Google Earth Engine data sources, you can connect to additional climate data APIs listed below. Use the Route Manager app to customize the API URL and user credentials."></Field>
+            <Field label="In addition to the builtin Google Earth Engine datasets, you can connect to additional climate data APIs listed below. Use the Route Manager app to customize the API URL and user credentials."></Field>
 
             <div>
                 <Table>

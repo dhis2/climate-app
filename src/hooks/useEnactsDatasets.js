@@ -3,7 +3,8 @@ import { useQuery } from '@tanstack/react-query';
 import useRoutesAPI from "./useRoutesAPI";
 import dataProviders from "../data/providers";
 
-const routeCode = dataProviders.find(item => item.id == 'enacts')['routeCode']
+const dataProvider = dataProviders.find(item => item.id == 'enacts')
+const routeCode = dataProvider['routeCode']
 
 const parsePeriodType = (periodType) => {
     //return periodType // TODO: check what the valid period types should be
@@ -27,10 +28,7 @@ const parseEnactsDataset = (d) => {
         spatialAggregation: 'mean', // how to determine, maybe not allowed?...
         resolution: `${d.spatial_resolution.lon} degrees x ${d.spatial_resolution.lat} degrees`,
         variable: d.variable_name,
-        provider: 'enacts',
-        providerName: 'ENACTS Data Sharing Tool (DST)',
-        providerNameShort: 'ENACTS',
-        providerUrl: '<placeholder url...>', //`${apiUrl}`, // need a way to access the route url here
+        provider: dataProvider, // nested dict
     }
     if (parsed.periodType == 'YEARLY') {
         parsed.minYear = parseInt(d.temporal_coverage.start)
