@@ -1,10 +1,9 @@
 import { useMemo } from "react";
 import { useQuery } from '@tanstack/react-query';
 import useRoutesAPI from "./useRoutesAPI";
+import dataProviders from "../data/providers";
 
-//import datasetsIriTestOnly from "../data/datasetsIriTestOnly"; // for testing only
-
-const routeCode = 'iri-enacts' // TODO: Probably need to define this more centrally. Needs to match the route code in the Routes API, and as set in SettingsPage.jsx in dataProviders = ...
+const routeCode = dataProviders.find(item => item.id == 'enacts')['routeCode']
 
 const parsePeriodType = (periodType) => {
     //return periodType // TODO: check what the valid period types should be

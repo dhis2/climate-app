@@ -1,8 +1,9 @@
 import { useMemo } from "react";
 import { useQuery } from '@tanstack/react-query';
 import useRoutesAPI from "./useRoutesAPI";
+import dataProviders from "../data/providers";
 
-const routeCode = 'iri-enacts' // TODO: Probably need to define this more centrally. Needs to match the route code in the Routes API, and as set in SettingsPage.jsx in dataProviders = ...
+const routeCode = dataProviders.find(item => item.id == 'enacts')['routeCode']
 
 const parseIriAggregateResults = (results) => {
     console.log('parsing iri data', results)
@@ -32,6 +33,7 @@ const encodeTemporalRes = (periodType) => {
 }
 
 const encodeDate = (date, periodType) => {
+    // TODO: Use constants instead
     if (periodType == 'DAILY') {
         return date
     } else if (periodType == 'MONTHLY') {
