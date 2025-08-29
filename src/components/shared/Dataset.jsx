@@ -29,7 +29,10 @@ const Dataset = ({
                     <SingleSelectOption key={d.id} value={d.id} label={`${d.provider.nameShort}: ${d.name}`} />
                 ))}
             </SingleSelectField>
+            
             {selected && showDescription && <p>{selected.description}</p>}
+
+            {selected && showDescription && <p>Data is from {selected.source}. Accessed via {selected.provider.name}.</p>}
 
             {error && (
                 <NoticeBox title={i18n.t('Warning')} warning>

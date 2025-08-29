@@ -6,6 +6,21 @@ import dataProviders from "../data/providers";
 const dataProvider = dataProviders.find(item => item.id == 'enacts')
 const routeCode = dataProvider['routeCode']
 
+const enactsDataCollections = {
+    ALL: {
+        name: 'All stations',
+        description: 'This dataset is generated using all available stations at the MetServices (synoptic, climatological, agro, rain gauge, AWS).',
+    },
+    MON: {
+        name: 'Monitoring',
+        description: 'This dataset is for monitoring purposes and generated using all available station data every day, at the end of the pentad or dekad.',
+    },
+    CLM: {
+        name: 'Climatology',
+        description: 'This dataset is generated using stations having a long series of data (at least 15 years of observation data).',
+    },
+}
+
 const parsePeriodType = (periodType) => {
     //return periodType // TODO: check what the valid period types should be
     return {
@@ -20,14 +35,16 @@ const parseEnactsDataset = (d) => {
     console.log('parsing enacts dataset', d)
     const parsed = {
         id: `${d.dataset_name}-${d.variable_name}-${d.temporal_resolution}`,
-        name: `${d.variable_longname} (${d.dataset_longname})`,
+        name: `${enactsDataCollections[d.dataset_name].name} - ${d.variable_longname}`,
         shortName: `${d.variable_longname}`,
+        description: `${d.variable_longname} measured in ${d.variable_units}. ${enactsDataCollections[d.dataset_name].description}`,
         units: d.variable_units,
         periodType: parsePeriodType(d.temporal_resolution),
         temporalAggregation: 'mean', // how to determine, maybe not allowed?...
         spatialAggregation: 'mean', // how to determine, maybe not allowed?...
         resolution: `${d.spatial_resolution.lon} degrees x ${d.spatial_resolution.lat} degrees`,
         variable: d.variable_name,
+        source: 'Malawi Department of Climate Change and Meteorological Services', // TODO: This is hardcoded for now, need a way so users can define this themselves
         provider: dataProvider, // nested dict
     }
     if (parsed.periodType == 'YEARLY') {
