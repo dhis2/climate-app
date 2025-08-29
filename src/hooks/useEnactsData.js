@@ -71,7 +71,7 @@ const useEnactsData = (dataset, period, features) => {
                     //'X-API-Key': '......',
                 },
                 body : JSON.stringify({
-                    dataset: 'MON', // TODO: need to store and retrieve the dataset code somehow... 
+                    dataset: dataset.id.slice(0, 3), // ENACTS dataset type is stored as the first 3 characters of the dataset id
                     variable: dataset.variable,
                     temporalRes: encodeTemporalRes(dataset.periodType),
                     startDate: encodeDate(period.startTime, dataset.periodType),
