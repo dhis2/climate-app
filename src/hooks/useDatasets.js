@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import datasets from '../data/datasets.js'; // ✅ Hardcoded datasets
-import useIriDatasets from '../hooks/useIriDatasets.js'
+import useEnactsDatasets from './useEnactsDatasets.js'
 
 const useDatasets = () => {
     console.log('running useDatasets')
@@ -8,7 +8,7 @@ const useDatasets = () => {
   
     // Call all custom hooks at the top level
     const results = []
-    results.push( useIriDatasets() )
+    results.push( useEnactsDatasets() )
     
     // Combine hook results
     const loading = results.some(r => r.loading);

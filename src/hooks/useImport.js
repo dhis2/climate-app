@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import useEarthEngineData from "./useEarthEngineData"
-import useIriData from "./useIriData"
+import useEnactsData from "./useEnactsData"
 
 const useImport = (dataset, period, features) => {
-  if (dataset?.provider == 'iri') {
-    const {data, error, loading} = useIriData(
+  if (dataset?.provider == 'enacts') {
+    const {data, error, loading} = useEnactsData(
       dataset,
       period,
       features

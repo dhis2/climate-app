@@ -15,8 +15,8 @@ const parsePeriodType = (periodType) => {
     }[periodType]
 }
 
-const parseIriDataset = (d) => {
-    console.log('parsing iri dataset', d)
+const parseEnactsDataset = (d) => {
+    console.log('parsing enacts dataset', d)
     const parsed = {
         id: `${d.dataset_name}-${d.variable_name}-${d.temporal_resolution}`,
         name: `${d.variable_longname} (${d.dataset_longname})`,
@@ -27,9 +27,9 @@ const parseIriDataset = (d) => {
         spatialAggregation: 'mean', // how to determine, maybe not allowed?...
         resolution: `${d.spatial_resolution.lon} degrees x ${d.spatial_resolution.lat} degrees`,
         variable: d.variable_name,
-        provider: 'iri',
-        providerName: 'IRI ENACTS Data Sharing Tool (DST)',
-        providerNameShort: 'IRI ENACTS',
+        provider: 'enacts',
+        providerName: 'ENACTS Data Sharing Tool (DST)',
+        providerNameShort: 'ENACTS',
         providerUrl: '<placeholder url...>', //`${apiUrl}`, // need a way to access the route url here
     }
     if (parsed.periodType == 'YEARLY') {
@@ -39,42 +39,41 @@ const parseIriDataset = (d) => {
     return parsed
 }
 
-const useIriDatasets = () => {
-    // check and get iri url from route api
+const useEnactsDatasets = () => {
+    // check and get enacts url from route api
     const { routes, loading: routesLoading, error: routesError } = useRoutesAPI()
-    const iriRoute = (!routesLoading && !routesError)
+    const enactsRoute = (!routesLoading && !routesError)
         ? routes.find(route => route.code == routeCode)
         : null
-    if (!routesLoading && !routesError && !iriRoute) {
+    if (!routesLoading && !routesError && !enactsRoute) {
         // means the route has simply not been set, only silently warn in the console
         console.warn(`Could not find a route with the code "${routeCode}"`)
     }
 
     // fetch raw datasets info from server
-    const datasetsUrl = iriRoute ? `${iriRoute.href}/run/dataset_info` : null;
+    const datasetsUrl = enactsRoute ? `${enactsRoute.href}/run/dataset_info` : null;
 
     const fetchDatasetsRaw = async () => {
-        console.log('fetching iri datasets', datasetsUrl)
-        //return datasetsIriTestOnly // testing only... 
+        console.log('fetching enacts datasets', datasetsUrl)
         try {
             const resp = await fetch(datasetsUrl, {credentials: 'include'}) // needed to pass on dhis2 login credentials
             if (!resp.ok) {
-                throw new Error(`IRI server returned HTTP error at ${datasetsUrl}: ${resp.status} - ${resp.statusText}`);
+                throw new Error(`ENACTS server returned HTTP error at ${datasetsUrl}: ${resp.status} - ${resp.statusText}`);
             }
             return resp.json()
         } catch (error) {
             // error could be network failure, CORS, or something else
             if (error instanceof TypeError && error.message === 'Failed to fetch') {
-                throw new Error(`Failed to fetch IRI datasets from ${datasetsUrl}. Please check that the route url is configured correctly and has CORS enabled to allow requests from this app's origin.`);
+                throw new Error(`Failed to fetch ENACTS datasets from ${datasetsUrl}. Please check that the route url is configured correctly and has CORS enabled to allow requests from this app's origin.`);
             } else {
                 console.error(error)
-                throw new Error(`Failed to fetch IRI datasets from ${datasetsUrl}: ${error}`)
+                throw new Error(`Failed to fetch ENACTS datasets from ${datasetsUrl}: ${error}`)
             }
         }
     }
 
     const { data: queryData, isLoading: queryLoading, error: queryError } = useQuery({
-        queryKey: ['use-iri-datasets'],
+        queryKey: ['use-enacts-datasets'],
         queryFn: fetchDatasetsRaw,
         enabled: !!datasetsUrl, // <-- only run query when URL is ready
     })
@@ -83,7 +82,7 @@ const useIriDatasets = () => {
     const processedData = useMemo(() => {
         if (!queryData) return undefined
 
-        console.log('processing list of iri datasets', queryData)
+        console.log('processing list of enacts datasets', queryData)
 
         // convert nested structures to get flat list of datasets
         const flatData = [];
@@ -96,7 +95,7 @@ const useIriDatasets = () => {
         });
 
         // parse to expected dataset dict
-        const parsedData = flatData.map(parseIriDataset)
+        const parsedData = flatData.map(parseEnactsDataset)
 
         // filter to only supported/parseable period types
         return parsedData.filter((d) => d.periodType != undefined)
@@ -105,11 +104,11 @@ const useIriDatasets = () => {
     // return
     const error = routesError || queryError
 
-    const loading = iriRoute && (routesLoading || queryLoading) && !error
+    const loading = enactsRoute && (routesLoading || queryLoading) && !error
 
-    console.log('useIriDatasets final', processedData, loading, error)
+    console.log('useEnactsDatasets final', processedData, loading, error)
 
     return {data: processedData, error, loading}
 }
 
-export default useIriDatasets;
+export default useEnactsDatasets;

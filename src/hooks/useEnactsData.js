@@ -5,9 +5,9 @@ import dataProviders from "../data/providers";
 
 const routeCode = dataProviders.find(item => item.id == 'enacts')['routeCode']
 
-const parseIriAggregateResults = (results) => {
-    console.log('parsing iri data', results)
-    // need to convert from original iri results
+const parseEnactsData = (results) => {
+    console.log('parsing enacts data', results)
+    // need to convert from original enacts results
     // eg: Data.Name ie orgunit, Data.Values array, Dates which maps to values array, and Missing which can be used to convert to null
     // to structure expected by the climate app
     // ie: ou, period, value
@@ -45,25 +45,23 @@ const encodeDate = (date, periodType) => {
     }
 }
 
-const useIriData = (dataset, period, features) => {
-    // check and get iri url from route api
+const useEnactsData = (dataset, period, features) => {
+    // check and get enacts url from route api
     const { routes, loading: routesLoading, error: routesError } = useRoutesAPI()
-    const iriRoute = (!routesLoading && !routesError)
+    const enactsRoute = (!routesLoading && !routesError)
         ? routes.find(route => route.code == routeCode)
         : null
-    if (!routesLoading && !routesError && !iriRoute) {
+    if (!routesLoading && !routesError && !enactsRoute) {
         // means the route has not been set
         throw new Error(`Could not find a route with the code "${routeCode}"`)
     }
 
     // fetch raw data info from server
-    const dataUrl = iriRoute ? `${iriRoute.href}/run/download_raw_data` : null;
-    //const dataUrl = iriRoute ? `http://168.253.224.242:9091/dst-test-data/download_raw_data` : null;
+    const dataUrl = enactsRoute ? `${enactsRoute.href}/run/download_raw_data` : null;
     
     const fetchDataRaw = async () => {
-        console.log('fetching iri data', dataUrl)
+        console.log('fetching enacts data', dataUrl)
         console.log('dataset to import', dataset)
-        //return dataIriTestOnly // testing only... 
         try {
             const resp = await fetch(dataUrl, {
                 credentials: 'include', // needed to pass on dhis2 login credentials
@@ -86,28 +84,28 @@ const useIriData = (dataset, period, features) => {
                 })
             })
             if (!resp.ok) {
-                throw new Error(`IRI server returned HTTP error at ${dataUrl}: ${resp.status} - ${resp.statusText}`);
+                throw new Error(`ENACTS server returned HTTP error at ${dataUrl}: ${resp.status} - ${resp.statusText}`);
             }
             const rawData = await resp.json()
             console.log('rawData', rawData)
             if ("code" in rawData && rawData.code !== 200) {
-                // IRI server returns error message
-                throw new Error(`IRI server responded with an error message: ${rawData.code} - ${rawData.message}`);
+                // server returns error message
+                throw new Error(`ENACTS server responded with an error message: ${rawData.code} - ${rawData.message}`);
             }
             return rawData
         } catch (error) {
             // error could be network failure, CORS, or something else
             if (error instanceof TypeError && error.message === 'Failed to fetch') {
-                throw new Error(`Failed to fetch IRI data from ${dataUrl}. Please check that the route url is configured correctly and has CORS enabled to allow requests from this app's origin.`);
+                throw new Error(`Failed to fetch ENACTS data from ${dataUrl}. Please check that the route url is configured correctly and has CORS enabled to allow requests from this app's origin.`);
             } else {
                 console.error(error)
-                throw new Error(`Failed to fetch IRI data from ${dataUrl}: ${error}`)
+                throw new Error(`Failed to fetch ENACTS data from ${dataUrl}: ${error}`)
             }
         }
     }
 
     const { data: queryData, isLoading: queryLoading, error: queryError } = useQuery({
-        queryKey: ['use-iri-data', dataset, period, features],
+        queryKey: ['use-enacts-data', dataset, period, features],
         queryFn: fetchDataRaw,
         enabled: !!(
             dataUrl &&
@@ -120,17 +118,17 @@ const useIriData = (dataset, period, features) => {
     // process results
     const processedData = useMemo(() => {
         if (!queryData) return undefined
-        return parseIriAggregateResults(queryData)
+        return parseEnactsData(queryData)
     }, [queryData])
 
     // return
     const error = routesError || queryError
 
-    const loading = iriRoute && (routesLoading || queryLoading) && !error
+    const loading = enactsRoute && (routesLoading || queryLoading) && !error
 
-    console.log('useIriData final', processedData, loading, error)
+    console.log('useEnactsData final', processedData, loading, error)
 
     return {data: processedData, error, loading}
 }
 
-export default useIriData;
+export default useEnactsData;
