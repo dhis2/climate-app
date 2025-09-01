@@ -90,9 +90,9 @@ const useEnactsData = (dataset, period, features) => {
             }
             const rawData = await resp.json()
             console.log('rawData', rawData)
-            if ("code" in rawData && rawData.code !== 200) {
+            if (rawData?.status == -1) {
                 // server returns error message
-                throw new Error(`ENACTS server responded with an error message: ${rawData.code} - ${rawData.message}`);
+                throw new Error(`ENACTS server responded with an error message code '${rawData?.code}': ${rawData.message}`);
             }
             return rawData
         } catch (error) {
