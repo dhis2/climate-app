@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { useQuery } from '@tanstack/react-query';
 import useRoutesAPI from "./useRoutesAPI";
 import dataProviders from "../data/providers";
+import { HOURLY, DAILY, WEEKLY, MONTHLY, SIXTEEN_DAYS, YEARLY } from '../utils/time.js'
 
 const routeCode = dataProviders.find(item => item.id == 'enacts')['routeCode']
 
@@ -33,12 +34,12 @@ const encodeTemporalRes = (periodType) => {
 }
 
 const encodeDate = (date, periodType) => {
-    // TODO: Use constants instead
-    if (periodType == 'DAILY') {
+    // convert date from internal date format to format expected by enacts
+    if (periodType == DAILY) {
         return date
-    } else if (periodType == 'MONTHLY') {
+    } else if (periodType == MONTHLY) {
         return date.slice(0, 7)
-    } else if (periodType == 'YEARLY') {
+    } else if (periodType == YEARLY) {
         return date.slice(0, 5)
     } else {
         throw Error(`Period type ${periodType} not yet supported`)

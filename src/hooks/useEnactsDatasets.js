@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { useQuery } from '@tanstack/react-query';
 import useRoutesAPI from "./useRoutesAPI";
 import dataProviders from "../data/providers";
+import { HOURLY, DAILY, WEEKLY, MONTHLY, SIXTEEN_DAYS, YEARLY } from '../utils/time.js'
 
 const dataProvider = dataProviders.find(item => item.id == 'enacts')
 const routeCode = dataProvider['routeCode']
@@ -9,25 +10,25 @@ const routeCode = dataProvider['routeCode']
 const enactsDataCollections = {
     ALL: {
         name: 'All stations',
-        description: 'This dataset is generated using all available stations at the MetServices (synoptic, climatological, agro, rain gauge, AWS).',
+        description: 'This type of dataset is for comprehensive analysis and only generated once the full set of all available stations at the MetServices becomes available (synoptic, climatological, agro, rain gauge, AWS).',
     },
     MON: {
         name: 'Monitoring',
-        description: 'This dataset is for monitoring purposes and generated using all available station data every day, at the end of the pentad or dekad.',
+        description: 'This type of dataset is for monitoring purposes and is generated using a subset of only those station data that have been made available at a given time.',
     },
     CLM: {
         name: 'Climatology',
-        description: 'This dataset is generated using stations having a long series of data (at least 15 years of observation data).',
+        description: 'This type of dataset is generated using a subset of stations having a long series of data (at least 15 years of observation data).',
     },
 }
 
 const parsePeriodType = (periodType) => {
-    //return periodType // TODO: check what the valid period types should be
+    // convert enacts period types to internal period type names
     return {
-        daily: "DAILY",
-        weekly: "WEEKLY",
-        monthly: "MONTHLY",
-        annual: "YEARLY"
+        daily: DAILY,
+        weekly: WEEKLY,
+        monthly: MONTHLY,
+        annual: YEARLY
     }[periodType]
 }
 
@@ -40,14 +41,14 @@ const parseEnactsDataset = (d) => {
         description: `${d.variable_longname} measured in ${d.variable_units}. ${enactsDataCollections[d.dataset_name].description}`,
         units: d.variable_units,
         periodType: parsePeriodType(d.temporal_resolution),
-        temporalAggregation: 'mean', // how to determine, maybe not allowed?...
-        spatialAggregation: 'mean', // how to determine, maybe not allowed?...
+        temporalAggregation: 'mean', // TODO: how to determine, maybe not allowed?...
+        spatialAggregation: 'mean', // TODO: how to determine, maybe not allowed?...
         resolution: `${d.spatial_resolution.lon} degrees x ${d.spatial_resolution.lat} degrees`,
         variable: d.variable_name,
         source: 'Malawi Department of Climate Change and Meteorological Services', // TODO: This is hardcoded for now, need a way so users can define this themselves
         provider: dataProvider, // nested dict
     }
-    if (parsed.periodType == 'YEARLY') {
+    if (parsed.periodType == YEARLY) {
         parsed.minYear = parseInt(d.temporal_coverage.start)
         parsed.maxYear = parseInt(d.temporal_coverage.end)
     }
