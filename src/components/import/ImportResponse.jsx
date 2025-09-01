@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styles from './styles/ImportResponse.module.css'
 
 const ImportResponse = ({ importCount }) => {
-    const { imported, updated, ignored } = importCount
+    const { imported, updated, ignored, missing } = importCount
     return (
         <div className={styles.container}>
             <div className={styles.title}>{i18n.t('Data is imported')}</div>
@@ -15,6 +15,9 @@ const ImportResponse = ({ importCount }) => {
             </div>
             <div>
                 {i18n.t('Ignored')}: {ignored}
+            </div>
+            <div>
+                {i18n.t('Missing')}: {missing}
             </div>
         </div>
     )

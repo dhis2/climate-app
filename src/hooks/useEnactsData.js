@@ -20,8 +20,8 @@ const parseEnactsData = (results) => {
         const values = item.Values
         for (let i=0; i < values.length; i++) {
             const period = dates[i]
-            const value = values[i] == missing ? null : values[i] // get value or null for missing
-            // TODO: need to check the correct value for missing, or if this should throw some error... 
+            const value = values[i] == missing ? NaN : values[i] // get value or NaN for missing
+            // NOTE: NaN values are later filtered out and reported to the user
             parsed.push({ou, period, value})
         }
     })
@@ -30,6 +30,7 @@ const parseEnactsData = (results) => {
 }
 
 const encodeTemporalRes = (periodType) => {
+    // TODO: check that this is correct
     return periodType.toLowerCase()
 }
 

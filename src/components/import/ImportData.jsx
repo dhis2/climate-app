@@ -13,6 +13,18 @@ const dataImportMutation = {
     data: (dataValues) => dataValues,
 }
 
+const countMissing = (data) => {
+    // Note: for now we require that all missing values have been converted 
+    // ...to NaN in a previous step
+    let missing = 0
+    data.map(obj => {
+        if (isNaN(obj.value)) {
+            missing += 1
+        }
+    })
+    return missing
+}
+
 const ImportData = ({ data, dataElement, features }) => {
     const [response, setResponse] = useState(false)
     const [mutate, { error }] = useDataMutation(dataImportMutation)
@@ -20,7 +32,7 @@ const ImportData = ({ data, dataElement, features }) => {
     useEffect(() => {
         mutate({
             dataValues: data
-                .filter((d) => !isNaN(d.value))
+                .filter((d) => !isNaN(d.value)) // NaN values are ignored before sending to DHIS2
                 .map((obj) => ({
                     value: obj.value,
                     orgUnit: obj.ou,
@@ -30,10 +42,14 @@ const ImportData = ({ data, dataElement, features }) => {
         }).then((response) => {
             // support for 2.38 +
             if (response.httpStatus === 'OK') {
+                // count and add number of missing values to response metadata
+                response.response.importCount.missing = countMissing(data)
                 setResponse(response.response)
             }
             //support for 2.37
             else if (response.status === 'SUCCESS') {
+                // count and add number of missing values to response metadata
+                response.importCount.missing = countMissing(data)
                 setResponse(response)
             }
         })
