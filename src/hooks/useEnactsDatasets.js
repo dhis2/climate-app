@@ -26,19 +26,31 @@ const parsePeriodType = (periodType) => {
     // convert enacts period types to internal period type names
     return {
         daily: DAILY,
-        weekly: WEEKLY,
         monthly: MONTHLY,
         annual: YEARLY
     }[periodType]
 }
 
+const parseVariableName = (variableName) => {
+    // enacts datasets include periodtype as part of the variable name, so we strip it away
+    const firstSpaceIndex = variableName.indexOf(" ")
+    const nameStripped = variableName.slice(firstSpaceIndex + 1)
+    const titleCased = nameStripped.charAt(0).toUpperCase() + nameStripped.slice(1)
+    return titleCased
+}
+
 const parseEnactsDataset = (d) => {
+    // Note: enacts uses different terminology
+    // "dataset" for collections of datasets, eg All stations or Monitoring
+    // and "variable" for dataset, eg precip
     console.log('parsing enacts dataset', d)
+    const collection = enactsDataCollections[d.dataset_name]
+    const datasetName = parseVariableName(d.variable_longname)
     const parsed = {
-        id: `${d.dataset_name}-${d.variable_name}-${d.temporal_resolution}`,
-        name: `${enactsDataCollections[d.dataset_name].name} - ${d.variable_longname}`,
-        shortName: `${d.variable_longname}`,
-        description: `${d.variable_longname} measured in ${d.variable_units}. ${enactsDataCollections[d.dataset_name].description}`,
+        id: `${d.dataset_name}-${d.variable_name}`,
+        name: `${collection.name} - ${datasetName}`,
+        shortName: `${datasetName}`,
+        description: `${datasetName} measured in ${d.variable_units}. ${collection.description}`,
         units: d.variable_units,
         periodType: parsePeriodType(d.temporal_resolution),
         temporalAggregation: 'mean', // TODO: how to determine, maybe not allowed?...
@@ -102,12 +114,14 @@ const useEnactsDatasets = () => {
 
         // convert nested structures to get flat list of datasets
         const flatData = [];
-        Object.entries(queryData).forEach(([category, citems]) => {
-            Object.entries(citems).forEach(([temporal, titems]) => {
-                Object.keys(titems).forEach(variable => {
-                    flatData.push(titems[variable]);
-                });
-            });
+        Object.entries(queryData).forEach(([dataType, periodGroups]) => {
+            // enacts has a separate dataset for each time period of each variable
+            // instead only get the datasets/variables for a single period (daily)
+            // and allow user to select period type in frontend (assumes all datasets
+            // also exists at higher tempoeral aggregations)
+            Object.entries(periodGroups.daily).forEach(([variable, dataInfo]) => {
+                flatData.push(dataInfo)
+            })
         });
 
         // parse to expected dataset dict

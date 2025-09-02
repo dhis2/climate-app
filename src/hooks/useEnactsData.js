@@ -9,7 +9,7 @@ const routeCode = dataProviders.find(item => item.id == 'enacts')['routeCode']
 const parseEnactsData = (results) => {
     console.log('parsing enacts data', results)
     // need to convert from original enacts results
-    // eg: Data.Name ie orgunit, Data.Values array, Dates which maps to values array, and Missing which can be used to convert to null
+    // eg: Data.Name ie orgunit, Data.Values array, Dates which maps to values array, and Missing which can be used to convert to NaN
     // to structure expected by the climate app
     // ie: ou, period, value
     const parsed = []
@@ -30,8 +30,12 @@ const parseEnactsData = (results) => {
 }
 
 const encodeTemporalRes = (periodType) => {
-    // TODO: check that this is correct
-    return periodType.toLowerCase()
+    // convert from internal period type format to format expected by enacts
+    return {
+        DAILY: 'daily',
+        MONTHLY: 'monthly',
+        YEARLY: 'annual',
+    }[periodType]
 }
 
 const encodeDate = (date, periodType) => {
@@ -64,6 +68,7 @@ const useEnactsData = (dataset, period, features) => {
     const fetchDataRaw = async () => {
         console.log('fetching enacts data', dataUrl)
         console.log('dataset to import', dataset)
+        console.log('period', period)
         try {
             const resp = await fetch(dataUrl, {
                 credentials: 'include', // needed to pass on dhis2 login credentials
@@ -75,9 +80,9 @@ const useEnactsData = (dataset, period, features) => {
                 body : JSON.stringify({
                     dataset: dataset.id.slice(0, 3), // ENACTS dataset type is stored as the first 3 characters of the dataset id
                     variable: dataset.variable,
-                    temporalRes: encodeTemporalRes(dataset.periodType),
-                    startDate: encodeDate(period.startTime, dataset.periodType),
-                    endDate: encodeDate(period.endTime, dataset.periodType),
+                    temporalRes: encodeTemporalRes(period.periodType),
+                    startDate: encodeDate(period.startTime, period.periodType),
+                    endDate: encodeDate(period.endTime, period.periodType),
                     geomExtract: 'geojson',
                     geojsonSource: 'upload',
                     geojsonData: {type: 'FeatureCollection', features: features},
@@ -125,11 +130,12 @@ const useEnactsData = (dataset, period, features) => {
 
     // return
     const error = routesError || queryError
+    console.log('error status', routesError, queryError, error)
 
-    const loading = enactsRoute && (routesLoading || queryLoading) && !error
+    const loading = (routesLoading || queryLoading) && !error
+    console.log('loading status', routesLoading, queryLoading, loading)
 
     console.log('useEnactsData final', processedData, loading, error)
-
     return {data: processedData, error, loading}
 }
 
