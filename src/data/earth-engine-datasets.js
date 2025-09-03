@@ -9,6 +9,14 @@ import {
 import { HOURLY, DAILY, MONTHLY, SIXTEEN_DAYS, YEARLY } from '../utils/time.js'
 import heatStressLegend from './heat-stress-legend.js'
 import dataProviders from "./providers.js";
+import {
+    climateDataSet,
+    climateGroup,
+    environmentDataSet,
+    environmentGroup,
+    landDataSet,
+    landGroup,
+} from './groupings.js'
 
 // fetch provider metadata for GEE
 const dataProvider = dataProviders.find(item => item.id == 'gee')
@@ -62,39 +70,6 @@ export const eviDescription = i18n.t(
 export const landcoverDescription = i18n.t(
     'Land cover types at yearly intervals'
 )
-
-const climateDataSet = {
-    name: i18n.t('Climate/Weather'),
-    shortName: i18n.t('Climate/Weather'),
-    periodType: i18n.t('Daily'),
-}
-
-const environmentDataSet = {
-    name: i18n.t('Environment'),
-    shortName: i18n.t('Environment'),
-    periodType: i18n.t('Weekly or Monthly'),
-}
-
-const landDataSet = {
-    name: i18n.t('Land'),
-    shortName: i18n.t('Land'),
-    periodType: i18n.t('Yearly'),
-}
-
-const climateGroup = {
-    name: i18n.t('Climate/Weather'),
-    shortName: i18n.t('Climate/Weather'),
-}
-
-const environmentGroup = {
-    name: i18n.t('Environment'),
-    shortName: i18n.t('Environment'),
-}
-
-const landGroup = {
-    name: i18n.t('Land'),
-    shortName: i18n.t('Land'),
-}
 
 export default [
     {

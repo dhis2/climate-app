@@ -1,8 +1,13 @@
+import i18n from '@dhis2/d2-i18n'
 import { useMemo } from "react";
 import { useQuery } from '@tanstack/react-query';
 import useRoutesAPI from "./useRoutesAPI";
 import dataProviders from "../data/providers";
 import { HOURLY, DAILY, WEEKLY, MONTHLY, SIXTEEN_DAYS, YEARLY } from '../utils/time.js'
+import {
+    climateDataSet,
+    climateGroup,
+} from '../data/groupings.js'
 
 const dataProvider = dataProviders.find(item => item.id == 'enacts')
 const routeCode = dataProvider['routeCode']
@@ -20,6 +25,12 @@ const enactsDataCollections = {
         name: 'Climatology',
         description: 'This type of dataset is generated using a subset of stations having a long series of data (at least 15 years of observation data).',
     },
+}
+
+const enactsAggregations = {
+    precip: i18n.t('Sum'),
+    tmin: i18n.t('Min'),
+    tmax: i18n.t('Max'),
 }
 
 const parsePeriodType = (periodType) => {
@@ -58,6 +69,10 @@ const parseEnactsDataset = (d) => {
         resolution: `${d.spatial_resolution.lon} degrees x ${d.spatial_resolution.lat} degrees`,
         variable: d.variable_name,
         source: 'Malawi Department of Climate Change and Meteorological Services', // TODO: This is hardcoded for now, need a way so users can define this themselves
+        dataElementCode: `ENACTS_${d.dataset_name.toUpperCase()}_${d.variable_name.toUpperCase()}`,
+        dataElementGroup: climateGroup,
+        dataSet: climateDataSet,
+        aggregationType: enactsAggregations[d.variable_name],
         provider: dataProvider, // nested dict
     }
     if (parsed.periodType == YEARLY) {
