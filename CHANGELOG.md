@@ -1,3 +1,10 @@
+# [1.12.0](https://github.com/dhis2/climate-app/compare/v1.11.2...v1.12.0) (2025-09-08)
+
+
+### Features
+
+* standard deviation of elevation ([#83](https://github.com/dhis2/climate-app/issues/83)) ([b8c09f8](https://github.com/dhis2/climate-app/commit/b8c09f895573ae0d8c611e20d4172216e4fe8151))
+
 ## [1.11.2](https://github.com/dhis2/climate-app/compare/v1.11.1...v1.11.2) (2025-06-26)
 
 
