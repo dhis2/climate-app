@@ -416,6 +416,26 @@ export default [
         dataElementGroup: landGroup,
         dataSet: landDataSet,
     },
+    {
+        id: 'USGS/SRTMGL1_003/stddev',
+        datasetId: 'USGS/SRTMGL1_003',
+        name: i18n.t('Standard deviation of elevation (SRTM)'),
+        shortName: i18n.t('Std dev elevation'),
+        description: i18n.t(
+            'Standard deviation of elevation in meters above sea level.'
+        ),
+        source: demSource,
+        resolution: demResolution,
+        periodType: 'N/A',
+        period: '2000',
+        band: 'elevation',
+        reducer: 'stdDev',
+        valueParser: Math.round,
+        aggregationType: i18n.t('First value'),
+        dataElementCode: 'SRTM_ELEVATION_STDDEV',
+        dataElementGroup: landGroup,
+        dataSet: landDataSet,
+    },
     ...landcoverTypes.map(({ name, value }) => ({
         id: `MODIS/061/MCD12Q1/LC_Type1/${value}`,
         datasetId: 'MODIS/061/MCD12Q1',
