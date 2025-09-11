@@ -9,7 +9,7 @@ const dataProviders = [
     },
     {
         id: 'enacts',
-        routeCode: 'enacts-test',
+        routeCode: 'enacts',
         name: 'ENACTS Data Sharing Tool (DST)',
         nameShort: 'ENACTS',
         url: '<placeholder url...>', //`${apiUrl}`, // need a way to access the route url here

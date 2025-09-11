@@ -378,3 +378,79 @@ export const isValidPeriod = (period) =>
             period.endTime &&
             new Date(period.startTime) <= new Date(period.endTime)
     )
+
+/** 
+ * Format period string to human readable string that respects local language
+ * TODO: Not sure if these respect calendar...?
+ * @param {Object} period Period object with start and end
+ * @returns {string} human readable period string
+ */
+export const formatPeriodString = (period) => {
+    const locale = i18n.language
+    if (/^\d{4}$/.test(period)) {
+        // Year only
+        return new Intl.DateTimeFormat(locale, { year: 'numeric' })
+        .format(new Date(period, 0, 1));
+    } else if (/^\d{4}-\d{2}$/.test(period)) {
+        // Year + month
+        const [year, month] = period.split('-');
+        return new Intl.DateTimeFormat(locale, { year: 'numeric', month: 'long' })
+        .format(new Date(year, month - 1, 1));
+    } else if (/^\d{4}-\d{2}-\d{2}$/.test(period)) {
+        // Full date
+        return new Intl.DateTimeFormat(locale, { year: 'numeric', month: 'long', day: 'numeric' })
+        .format(new Date(period));
+    }
+    return period; // fallback: return as-is
+}
+
+/**
+ * Normalize partial ISO strings into full ISO date strings (YYYY-MM-DD).
+ * TODO: Not sure if these respect calendar...?
+ * Supported inputs:
+ *   - YYYY (year)
+ *   - YYYY-MM (year + month)
+ *   - YYYY-Www (ISO week)
+ *   - YYYY-MM-DD (full date, unchanged)
+ *
+ * @param {string} input
+ * @returns {string} Normalized ISO date string (YYYY-MM-DD)
+ */
+export const normalizeIsoDate = (input) => {
+    // Year only → first day of year
+    if (/^\d{4}$/.test(input)) {
+      return `${input}-01-01`;
+    }
+  
+    // Year + month → first day of month
+    if (/^\d{4}-\d{2}$/.test(input)) {
+      return `${input}-01`;
+    }
+  
+    // ISO week: YYYY-Www
+    const weekMatch = input.match(/^(\d{4})-W(\d{2})$/);
+    if (weekMatch) {
+      const [_, yearStr, weekStr] = weekMatch;
+      const year = parseInt(yearStr, 10);
+      const week = parseInt(weekStr, 10);
+  
+      // ISO weeks: week 1 = first week with Thursday in it
+      const simple = new Date(Date.UTC(year, 0, 4)); // Jan 4 is always in week 1
+      const dayOfWeek = simple.getUTCDay() || 7; // Sunday → 7
+      const isoWeek1Start = new Date(simple);
+      isoWeek1Start.setUTCDate(simple.getUTCDate() - dayOfWeek + 1);
+  
+      // Add weeks
+      const date = new Date(isoWeek1Start);
+      date.setUTCDate(date.getUTCDate() + (week - 1) * 7);
+  
+      return date.toISOString().slice(0, 10);
+    }
+  
+    // Full ISO date → return as-is (after validation)
+    if (/^\d{4}-\d{2}-\d{2}$/.test(input)) {
+      return input;
+    }
+  
+    throw new Error(`Unsupported ISO date format: ${input}`);
+  }

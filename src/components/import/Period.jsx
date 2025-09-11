@@ -4,6 +4,7 @@ import { CalendarInput } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import { useEffect } from 'react'
 import { DAILY, WEEKLY, SIXTEEN_DAYS, YEARLY } from '../../utils/time.js'
+import { normalizeIsoDate, formatPeriodString } from '../../utils/time.js'
 import TimeZone from '../shared/TimeZone.jsx'
 import PeriodType from './PeriodType.jsx'
 import styles from './styles/Period.module.css'
@@ -25,6 +26,7 @@ const Period = ({ calendar, period, dataset = {}, onChange }) => {
     //console.log('period dataset', dataset)
     const {
         periodType: datasetPeriodType,
+        periodRange: datasetPeriodRange,
         period: datasetPeriod,
         minYear,
         maxYear,
@@ -57,6 +59,16 @@ const Period = ({ calendar, period, dataset = {}, onChange }) => {
         period.startTime = (period.startTime >= minYear) ? period.startTime : minYear
         period.endTime = (period.endTime <= maxYear) ? period.endTime : maxYear
     }
+
+    // Set min and max date for the calendar inputs
+    // TODO: not working yet...
+    let minDate = null
+    let maxDate = null
+    if (datasetPeriodRange) {
+        minDate = normalizeIsoDate(datasetPeriodRange.start)
+        maxDate = normalizeIsoDate(datasetPeriodRange.end)
+    }
+    console.log('Calendar input min max date', minDate, maxDate)
 
     return (
         <div className={styles.container}>
@@ -95,6 +107,8 @@ const Period = ({ calendar, period, dataset = {}, onChange }) => {
                         <CalendarInput
                             label={i18n.t('Start date')}
                             date={startTime}
+                            minDate={minDate}
+                            maxDate={maxDate}
                             calendar={calendar}
                             locale={locale || 'en'}
                             defaultVal={startTime}
@@ -108,6 +122,8 @@ const Period = ({ calendar, period, dataset = {}, onChange }) => {
                         <CalendarInput
                             label={i18n.t('End date')}
                             date={endTime}
+                            minDate={minDate}
+                            maxDate={maxDate}
                             calendar={calendar}
                             locale={locale || 'en'}
                             defaultVal={endTime}
@@ -121,6 +137,11 @@ const Period = ({ calendar, period, dataset = {}, onChange }) => {
                         <TimeZone period={period} onChange={onChange} />
                     </div>
                 </>
+            )}
+            {datasetPeriodRange && (
+                <p>
+                    {i18n.t('Valid range')}: <strong>{formatPeriodString(datasetPeriodRange.start)}</strong> - <strong>{formatPeriodString(datasetPeriodRange.end)}</strong>
+                </p>
             )}
         </div>
     )
