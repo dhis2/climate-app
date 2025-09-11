@@ -30,6 +30,7 @@ const PeriodType = ({ periodType, datasetPeriodType, onChange }) => {
     // if period type is unsupported, set to first allowable type
     if (filteredPeriodTypes.length > 0 && selectedPeriodType === undefined) {
         selectedPeriodType = filteredPeriodTypes[0].id
+        onChange(selectedPeriodType)
     }
     //console.log('periodtype selected', selectedPeriodType)
     
