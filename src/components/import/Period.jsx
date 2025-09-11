@@ -22,16 +22,13 @@ const userSettingsQuery = {
 const Period = ({ calendar, period, dataset = {}, onChange }) => {
     const result = useDataQuery(userSettingsQuery)
     const { data: { userSettings: { keyUiLocale: locale } = {} } = {} } = result
-    //console.log('period period', period)
-    //console.log('period dataset', dataset)
+    console.log('period', period)
     const {
         periodType: datasetPeriodType,
         periodRange: datasetPeriodRange,
         period: datasetPeriod,
-        minYear,
-        maxYear,
     } = dataset
-    //console.log('period extracted', datasetPeriodType, datasetPeriod)
+    console.log('dataset period', datasetPeriodType, datasetPeriodRange)
     const { periodType, startTime, endTime } = period
     const hasNoPeriod = datasetPeriodType === 'N/A'
     const isYearly = datasetPeriodType === YEARLY
@@ -55,10 +52,11 @@ const Period = ({ calendar, period, dataset = {}, onChange }) => {
 
     // For yearly datasets, force year range to fit within dataset range
     // TODO: Not sure if this should be inside useEffect, with onChange, or if this is ok... 
-    if (datasetPeriodType == YEARLY) {
-        period.startTime = (period.startTime >= minYear) ? period.startTime : minYear
-        period.endTime = (period.endTime <= maxYear) ? period.endTime : maxYear
-    }
+    //if (datasetPeriodType == YEARLY) {
+    //    period.startTime = (period.startTime >= datasetPeriodRange.start) ? period.startTime : datasetPeriodRange.start
+    //    period.endTime = (period.endTime <= datasetPeriodRange.end) ? period.endTime : datasetPeriodRange.end
+    //    console.log('period changed', period)
+    //}
 
     // Set min and max date for the calendar inputs
     // TODO: not working yet...
@@ -68,7 +66,7 @@ const Period = ({ calendar, period, dataset = {}, onChange }) => {
         minDate = normalizeIsoDate(datasetPeriodRange.start)
         maxDate = normalizeIsoDate(datasetPeriodRange.end)
     }
-    console.log('Calendar input min max date', minDate, maxDate)
+    console.log('Calendar input min/max date', minDate, maxDate)
 
     return (
         <div className={styles.container}>
@@ -84,8 +82,8 @@ const Period = ({ calendar, period, dataset = {}, onChange }) => {
             {isYearly && (
                 <YearRange
                     period={period}
-                    minYear={minYear}
-                    maxYear={maxYear}
+                    minYear={parseInt(datasetPeriodRange.start)}
+                    maxYear={parseInt(datasetPeriodRange.end)}
                     onChange={onChange}
                 />
             )}

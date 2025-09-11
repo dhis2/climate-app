@@ -78,10 +78,6 @@ const parseEnactsDataset = (d) => {
         aggregationType: enactsAggregations[d.variable_name],
         provider: dataProvider, // nested dict
     }
-    if (parsed.periodType == YEARLY) {
-        parsed.minYear = parseInt(d.temporal_coverage.start)
-        parsed.maxYear = parseInt(d.temporal_coverage.end)
-    }
     return parsed
 }
 
