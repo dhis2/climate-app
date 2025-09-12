@@ -41,6 +41,16 @@ const Period = ({ calendar, period, dataset = {}, onChange }) => {
         }
     }, [locale, onChange, period])
 
+    // When switching from yearly to other period types
+    // convert start/end years to dates
+    useEffect(() => {
+        if (period && period.periodType != YEARLY && period.startTime.length == 4) {
+            const startTime = period.startTime + '-01-01'
+            const endTime = period.endTime + '-12-31'
+            onChange({ ...period, startTime, endTime })
+        }
+    }, [onChange, period])
+
     // For yearly datasets, force year range to fit within dataset range
     // TODO: Not sure if this should be inside useEffect, with onChange, or if this is ok... 
     //if (datasetPeriodType == YEARLY) {

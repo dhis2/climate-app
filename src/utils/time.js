@@ -230,14 +230,14 @@ export const formatDate = (date) => {
 
 /**
  * Translates a date string to a date object
- * @param {String} dateString Date string in the format YYYY-MM-DD or YYYY-MM
+ * @param {String} dateString Date string in the format YYYY-MM-DD or YYYY-MM or YYYY
  * @returns {Object} Date object with year, month and day
  */
 export const toDateObject = (dateString) => {
     const [year, month, day] = dateString.split('-')
     return {
         year: parseInt(year),
-        month: parseInt(month),
+        month: month ? parseInt(month) : 1,
         day: day ? parseInt(day) : 1,
     }
 }
