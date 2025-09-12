@@ -25,10 +25,11 @@ const Period = ({ calendar, period, dataset = {}, onChange }) => {
     console.log('period', period)
     const {
         periodType: datasetPeriodType,
+        supportedPeriodTypes: datasetSupportedPeriodTypes,
         periodRange: datasetPeriodRange,
         period: datasetPeriod,
     } = dataset
-    console.log('dataset period', datasetPeriodType, datasetPeriodRange)
+    console.log('dataset period', datasetPeriodType, datasetSupportedPeriodTypes, datasetPeriodRange)
     const { periodType, startTime, endTime } = period
     const hasNoPeriod = datasetPeriodType === 'N/A'
     const isYearly = datasetPeriodType === YEARLY
@@ -39,16 +40,6 @@ const Period = ({ calendar, period, dataset = {}, onChange }) => {
             onChange({ ...period, locale })
         }
     }, [locale, onChange, period])
-
-    // TODO: adds weekly to the selection for sixteendays datasets, but should already be set correctly...
-    useEffect(() => {
-        if (
-            datasetPeriodType === SIXTEEN_DAYS &&
-            [DAILY, YEARLY].includes(period.periodType)
-        ) {
-            onChange({ ...period, periodType: WEEKLY })
-        }
-    }, [period, datasetPeriodType, onChange])
 
     // For yearly datasets, force year range to fit within dataset range
     // TODO: Not sure if this should be inside useEffect, with onChange, or if this is ok... 
@@ -97,7 +88,7 @@ const Period = ({ calendar, period, dataset = {}, onChange }) => {
                     <div className={styles.pickers}>
                         <PeriodType
                             periodType={periodType}
-                            datasetPeriodType={datasetPeriodType}
+                            supportedPeriodTypes={datasetSupportedPeriodTypes}
                             onChange={(periodType) =>
                                 onChange({ ...period, periodType })
                             }

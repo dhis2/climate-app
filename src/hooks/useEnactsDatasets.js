@@ -66,6 +66,7 @@ const parseEnactsDataset = (d) => {
         description: `${datasetName} measured in ${d.variable_units}. ${collection.description}`,
         units: d.variable_units,
         periodType: parsePeriodType(d.temporal_resolution),
+        supportedPeriodTypes: [parsePeriodType(d.temporal_resolution)],
         periodRange: parsePeriodRange(d.temporal_coverage),
         temporalAggregation: 'mean', // TODO: how to determine, maybe not allowed?...
         spatialAggregation: 'mean', // TODO: how to determine, maybe not allowed?...

@@ -3,33 +3,33 @@ import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import { periodTypes, DAILY, WEEKLY, SIXTEEN_DAYS, MONTHLY, YEARLY } from '../../utils/time.js'
 
-const PeriodType = ({ periodType, datasetPeriodType, onChange }) => {
-    //console.log('periodtype func', periodType, datasetPeriodType, periodTypes)
+const PeriodType = ({ periodType, supportedPeriodTypes, onChange }) => {
+    //console.log('periodtype func', periodType, supportedPeriodTypes)
+    
+    // wait for necessary information about supported period types
+    if (!supportedPeriodTypes) {
+        return null
+    }
 
-    // filter supported period types for dataset
-    // for now, don't allow aggregating past month level, and year is only acceptable for yearly datasets
-    const filteredPeriodTypes = periodTypes
+    // get period type objects from supported period type ids
+    const supportedPeriodTypeObjects = periodTypes
             ?.filter(
                 (type) =>
                     (
-                        (datasetPeriodType === DAILY && [DAILY, WEEKLY, MONTHLY].includes(type.id)) ||
-                        (datasetPeriodType === WEEKLY && [WEEKLY, MONTHLY].includes(type.id)) ||
-                        (datasetPeriodType === SIXTEEN_DAYS && [WEEKLY, MONTHLY].includes(type.id)) ||
-                        (datasetPeriodType === MONTHLY && [MONTHLY].includes(type.id)) ||
-                        (datasetPeriodType === YEARLY && [YEARLY].includes(type.id))
+                        (supportedPeriodTypes.includes(type.id))
                     )
             )
-    //console.log('periodtype filtered', filteredPeriodTypes)
+    //console.log('periodtype supported', supportedPeriodTypeObjects)
 
     // make sure selected period type is supported by dataset period type, or set to undefined
     let selectedPeriodType = 
-        filteredPeriodTypes.map((type) => type.id).includes(periodType)
+        supportedPeriodTypeObjects.map((type) => type.id).includes(periodType)
         ? periodType
         : undefined
 
     // if period type is unsupported, set to first allowable type
-    if (filteredPeriodTypes.length > 0 && selectedPeriodType === undefined) {
-        selectedPeriodType = filteredPeriodTypes[0].id
+    if (supportedPeriodTypeObjects.length > 0 && selectedPeriodType === undefined) {
+        selectedPeriodType = supportedPeriodTypeObjects[0].id
         onChange(selectedPeriodType)
     }
     //console.log('periodtype selected', selectedPeriodType)
@@ -41,7 +41,7 @@ const PeriodType = ({ periodType, datasetPeriodType, onChange }) => {
             selected={selectedPeriodType}
             onChange={({ selected }) => onChange(selected)}
         >
-            {filteredPeriodTypes
+            {supportedPeriodTypeObjects
                 .map((type) => (
                     <SingleSelectOption
                         key={type.id}

@@ -6,7 +6,7 @@ import {
     roundOneDecimal,
     roundTwoDecimals,
 } from '../utils/calc.js'
-import { HOURLY, DAILY, MONTHLY, SIXTEEN_DAYS, YEARLY } from '../utils/time.js'
+import { HOURLY, DAILY, WEEKLY, MONTHLY, SIXTEEN_DAYS, YEARLY } from '../utils/time.js'
 import heatStressLegend from './heat-stress-legend.js'
 import dataProviders from "./providers.js";
 import {
@@ -83,6 +83,7 @@ export default [
         source: era5Source,
         resolution: era5LandResolution,
         periodType: DAILY,
+        supportedPeriodTypes: [DAILY, WEEKLY, MONTHLY],
         band: 'temperature_2m',
         reducer: 'mean',
         timeZone: {
@@ -109,6 +110,7 @@ export default [
         source: era5Source,
         resolution: era5LandResolution,
         periodType: DAILY,
+        supportedPeriodTypes: [DAILY, WEEKLY, MONTHLY],
         band: 'temperature_2m_max',
         reducer: 'max',
         timeZone: {
@@ -135,6 +137,7 @@ export default [
         source: era5Source,
         resolution: era5LandResolution,
         periodType: DAILY,
+        supportedPeriodTypes: [DAILY, WEEKLY, MONTHLY],
         band: 'temperature_2m_min',
         reducer: 'min',
         timeZone: {
@@ -159,6 +162,7 @@ export default [
         source: era5Source,
         resolution: era5LandResolution,
         periodType: DAILY,
+        supportedPeriodTypes: [DAILY, WEEKLY, MONTHLY],
         band: 'total_precipitation_sum',
         reducer: 'mean',
         periodReducer: 'sum',
@@ -184,6 +188,7 @@ export default [
         source: chirpsSource,
         resolution: chirpsResolution,
         periodType: DAILY,
+        supportedPeriodTypes: [DAILY, WEEKLY, MONTHLY],
         band: 'precipitation',
         reducer: 'mean',
         periodReducer: 'sum',
@@ -205,6 +210,7 @@ export default [
         source: era5Source,
         resolution: era5LandResolution,
         periodType: DAILY,
+        supportedPeriodTypes: [DAILY, WEEKLY, MONTHLY],
         band: 'dewpoint_temperature_2m',
         reducer: 'mean',
         timeZone: {
@@ -231,6 +237,7 @@ export default [
         source: era5Source,
         resolution: era5LandResolution,
         periodType: DAILY,
+        supportedPeriodTypes: [DAILY, WEEKLY, MONTHLY],
         bands: [
             {
                 band: 'dewpoint_temperature_2m',
@@ -305,6 +312,7 @@ export default [
         source: era5HeatSource,
         resolution: era5Resolution,
         periodType: DAILY,
+        supportedPeriodTypes: [DAILY, WEEKLY, MONTHLY],
         band: 'utci_mean',
         reducer: 'mean',
         valueParser: temperatureParser,
@@ -324,6 +332,7 @@ export default [
         source: era5HeatSource,
         resolution: era5Resolution,
         periodType: DAILY,
+        supportedPeriodTypes: [DAILY, WEEKLY, MONTHLY],
         band: 'utci_max',
         reducer: 'max',
         valueParser: temperatureParser,
@@ -343,6 +352,7 @@ export default [
         source: era5HeatSource,
         resolution: era5Resolution,
         periodType: DAILY,
+        supportedPeriodTypes: [DAILY, WEEKLY, MONTHLY],
         band: 'utci_min',
         reducer: 'min',
         valueParser: temperatureParser,
@@ -362,6 +372,7 @@ export default [
         source: modisSource,
         resolution: modisResolution,
         periodType: SIXTEEN_DAYS,
+        supportedPeriodTypes: [WEEKLY, MONTHLY],
         band: 'NDVI',
         reducer: 'mean',
         valueParser: vegetationIndexParser,
@@ -380,6 +391,7 @@ export default [
         source: modisSource,
         resolution: modisResolution,
         periodType: SIXTEEN_DAYS,
+        supportedPeriodTypes: [WEEKLY, MONTHLY],
         band: 'EVI',
         reducer: 'mean',
         valueParser: vegetationIndexParser,
@@ -455,8 +467,9 @@ export default [
         source: modisSource,
         resolution: landcoverResolution,
         periodType: YEARLY,
+        supportedPeriodTypes: [YEARLY],
         periodRange: {
-            start: '2002', 
+            start: '2002',
             end: '2023'
         },
         band: 'LC_Type1',
