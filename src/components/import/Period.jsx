@@ -71,12 +71,21 @@ const Period = ({ calendar, period, dataset = {}, onChange }) => {
                 </p>
             )}
             {isYearly && (
-                <YearRange
-                    period={period}
-                    minYear={parseInt(datasetPeriodRange.start)}
-                    maxYear={parseInt(datasetPeriodRange.end)}
-                    onChange={onChange}
-                />
+                <div className={styles.pickers}>
+                    <PeriodType
+                        periodType={periodType}
+                        supportedPeriodTypes={datasetSupportedPeriodTypes}
+                        onChange={(periodType) =>
+                            onChange({ ...period, periodType })
+                        }
+                    />
+                    <YearRange
+                        period={period}
+                        minYear={parseInt(datasetPeriodRange.start)}
+                        maxYear={parseInt(datasetPeriodRange.end)}
+                        onChange={onChange}
+                    />
+                </div>
             )}
             {!hasNoPeriod && !isYearly && (
                 <>

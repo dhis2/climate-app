@@ -27,7 +27,7 @@ const YearRange = ({ period, minYear, maxYear, onChange }) => {
     }
 
     return (
-        <div className={styles.yearRange}>
+        <div className={styles.pickers}>
             <YearSelect
                 label={i18n.t('Start year')}
                 year={period.startTime}
