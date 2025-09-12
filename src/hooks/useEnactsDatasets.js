@@ -48,7 +48,10 @@ const parsePeriodRange = (periodRange) => {
 }
 
 const parseVariableName = (variableName) => {
-    const titleCased = variableName.charAt(0).toUpperCase() + variableName.slice(1)
+    // enacts datasets include periodtype as part of the variable name, so we strip it away
+    const firstSpaceIndex = variableName.indexOf(" ")
+    const nameStripped = variableName.slice(firstSpaceIndex + 1)
+    const titleCased = nameStripped.charAt(0).toUpperCase() + nameStripped.slice(1)
     return titleCased
 }
 
@@ -60,13 +63,13 @@ const parseEnactsDataset = (d) => {
     const collection = enactsDataCollections[d.dataset_name]
     const datasetName = parseVariableName(d.variable_longname)
     const parsed = {
-        id: `${d.dataset_name}-${d.variable_name}-${d.temporal_resolution}`,
+        id: `${d.dataset_name}-${d.variable_name}`,
         name: `${collection.name} - ${datasetName}`,
         shortName: `${datasetName}`,
         description: `${datasetName} measured in ${d.variable_units}. ${collection.description}`,
         units: d.variable_units,
         periodType: parsePeriodType(d.temporal_resolution),
-        supportedPeriodTypes: [parsePeriodType(d.temporal_resolution)],
+        supportedPeriodTypes: [DAILY, MONTHLY],
         periodRange: parsePeriodRange(d.temporal_coverage),
         temporalAggregation: 'mean', // TODO: how to determine, maybe not allowed?...
         spatialAggregation: 'mean', // TODO: how to determine, maybe not allowed?...
@@ -129,12 +132,14 @@ const useEnactsDatasets = () => {
 
         // convert nested structures to get flat list of datasets
         const flatData = [];
-        Object.entries(queryData).forEach(([category, citems]) => {
-            Object.entries(citems).forEach(([temporal, titems]) => {
-                Object.keys(titems).forEach(variable => {
-                    flatData.push(titems[variable]);
-                });
-            });
+        Object.entries(queryData).forEach(([dataType, periodGroups]) => {
+            // enacts has a separate dataset for each time period of each variable
+            // instead only get the datasets/variables for a single period (daily)
+            // and allow user to select period type in frontend (assumes all datasets
+            // also exists at higher tempoeral aggregations)
+            Object.entries(periodGroups.daily).forEach(([variable, dataInfo]) => {
+                flatData.push(dataInfo)
+            })
         });
 
         // parse to expected dataset dict
