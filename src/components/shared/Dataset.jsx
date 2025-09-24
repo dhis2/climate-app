@@ -3,10 +3,16 @@ import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import datasets from '../../data/datasets.js'
 
-const Dataset = ({ selected, onChange }) => (
+const Dataset = ({
+    title = i18n.t('Data'),
+    selected,
+    onChange,
+    showDescription = true,
+}) => (
     <div>
-        <h2>{i18n.t('Data')}</h2>
+        {title && <h2>{title}</h2>}
         <SingleSelectField
+            filterable
             label={i18n.t('Select data to import')}
             selected={selected?.id}
             onChange={({ selected }) =>
@@ -17,13 +23,15 @@ const Dataset = ({ selected, onChange }) => (
                 <SingleSelectOption key={d.id} value={d.id} label={d.name} />
             ))}
         </SingleSelectField>
-        {selected && <p>{selected.description}</p>}
+        {selected && showDescription && <p>{selected.description}</p>}
     </div>
 )
 
 Dataset.propTypes = {
     onChange: PropTypes.func.isRequired,
     selected: PropTypes.object,
+    showDescription: PropTypes.bool,
+    title: PropTypes.string,
 }
 
 export default Dataset

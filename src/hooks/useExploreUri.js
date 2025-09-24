@@ -43,7 +43,11 @@ const useExploreUri = () => {
             const baseUri = `/${section}/${orgUnit.id}/${tab}`
             let uri
 
-            if (tab === 'forecast10days' || tab === 'elevation') {
+            if (
+                tab === 'forecast10days' ||
+                tab === 'landcover' ||
+                tab === 'elevation'
+            ) {
                 uri = baseUri
             } else if (tab === 'vegetation') {
                 uri = `${baseUri}/${vegetationIndex}`

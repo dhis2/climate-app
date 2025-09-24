@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import area from '@turf/area'
-import { interpolate } from './calc.js'
+import { interpolate, roundOneDecimal } from './calc.js'
 import {
     HOURLY,
     DAILY,
@@ -155,6 +155,12 @@ export const getEarthEngineImageValues = ({ ee, dataset, features }) => {
     )
 }
 
+const getHistogramPercentage = (histogram, key) => {
+    const total = Object.values(histogram).reduce((acc, cur) => acc + cur, 0)
+    const value = histogram[key] || 0
+    return roundOneDecimal((value / total) * 100)
+}
+
 export const getEarthEngineValues = ({
     ee,
     dataset: datasetParams,
@@ -173,15 +179,16 @@ export const getEarthEngineValues = ({
             reducer = 'mean',
             periodType: datasetPeriodType,
             periodReducer = reducer,
+            histogramKey,
             valueParser,
         } = dataset
 
         const { startTime, endTime, timeZone = 'UTC', periodType } = period
 
         const periods = getPeriods(period).map(addPeriodTimestamp)
-        const endTimePlusOne = ee.Date(endTime).advance(1, 'day')
+        const endTimePlusOne = ee.Date(String(endTime)).advance(1, 'day')
         const timeZoneStart = ee
-            .Date(startTime)
+            .Date(String(startTime))
             .advance(datasetPeriodType === SIXTEEN_DAYS ? -32 : 0, 'day')
             .format(null, timeZone)
         const timeZoneEnd = endTimePlusOne.format(null, timeZone)
@@ -207,6 +214,14 @@ export const getEarthEngineValues = ({
                         })
                     })
                     .flat()
+            }
+
+            if (histogramKey !== undefined) {
+                return data.map((d) => ({
+                    ...d,
+                    period: mappedPeriods.get(d.period),
+                    value: getHistogramPercentage(d.histogram, histogramKey),
+                }))
             }
 
             return data.map((d) => ({
@@ -324,6 +339,7 @@ export const getEarthEngineValues = ({
                             startTime: image.get('system:time_start'),
                             endTime: image.get('system:time_end'),
                             value: feature.get(reducer),
+                            histogram: feature.get('histogram'),
                         })
                     )
             )
