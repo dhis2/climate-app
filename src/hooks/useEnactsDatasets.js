@@ -27,12 +27,6 @@ const enactsDataCollections = {
     },
 }
 
-const enactsAggregations = {
-    precip: i18n.t('Sum'),
-    tmin: i18n.t('Min'),
-    tmax: i18n.t('Max'),
-}
-
 const parsePeriodType = (periodType) => {
     // convert enacts period types to internal period type names
     return {
@@ -79,7 +73,7 @@ const parseEnactsDataset = (d) => {
         dataElementCode: `ENACTS_${d.dataset_name.toUpperCase()}_${d.variable_name.toUpperCase()}`,
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
-        aggregationType: enactsAggregations[d.variable_name],
+        aggregationType: null, // we don't know which datasets will be returned so can't map or assume any aggregation types 
         provider: dataProvider, // nested dict
     }
     return parsed
@@ -136,7 +130,7 @@ const useEnactsDatasets = () => {
             // enacts has a separate dataset for each time period of each variable
             // instead only get the datasets/variables for a single period (daily)
             // and allow user to select period type in frontend (assumes all datasets
-            // also exists at higher tempoeral aggregations)
+            // also exists at higher temporal aggregations)
             Object.entries(periodGroups.daily).forEach(([variable, dataInfo]) => {
                 flatData.push(dataInfo)
             })

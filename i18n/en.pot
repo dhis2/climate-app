@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-09-08T13:24:18.054Z\n"
-"PO-Revision-Date: 2025-09-08T13:24:18.056Z\n"
+"POT-Creation-Date: 2025-10-06T07:15:13.239Z\n"
+"PO-Revision-Date: 2025-10-06T07:15:13.244Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -773,6 +773,9 @@ msgstr ""
 
 msgid "Daily values will be imported between start and end dates"
 msgstr "Daily values will be imported between start and end dates"
+
+msgid "Valid range"
+msgstr "Valid range"
 
 msgid "Period type"
 msgstr "Period type"
