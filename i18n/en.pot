@@ -1260,6 +1260,15 @@ msgstr "Max elevation (SRTM)"
 msgid "Max elevation in meters above sea level."
 msgstr "Max elevation in meters above sea level."
 
+msgid "Standard deviation of elevation (SRTM)"
+msgstr "Standard deviation of elevation (SRTM)"
+
+msgid "Std dev elevation"
+msgstr "Std dev elevation"
+
+msgid "Standard deviation of elevation in meters above sea level."
+msgstr "Standard deviation of elevation in meters above sea level."
+
 msgid "Percentage of area with this land cover type."
 msgstr "Percentage of area with this land cover type."
 

@@ -1,3 +1,17 @@
+# [1.12.0](https://github.com/dhis2/climate-app/compare/v1.11.2...v1.12.0) (2025-09-08)
+
+
+### Features
+
+* standard deviation of elevation ([#83](https://github.com/dhis2/climate-app/issues/83)) ([b8c09f8](https://github.com/dhis2/climate-app/commit/b8c09f895573ae0d8c611e20d4172216e4fe8151))
+
+## [1.11.2](https://github.com/dhis2/climate-app/compare/v1.11.1...v1.11.2) (2025-06-26)
+
+
+### Bug Fixes
+
+* make data field filterable and remove wrong value suffix in vegetation chart tooltip ([#81](https://github.com/dhis2/climate-app/issues/81)) ([4c2274e](https://github.com/dhis2/climate-app/commit/4c2274e90d2dbb01f599e6fcb15350ced43a4c8c))
+
 ## [1.11.1](https://github.com/dhis2/climate-app/compare/v1.11.0...v1.11.1) (2025-06-01)
 
 
