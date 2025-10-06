@@ -477,6 +477,7 @@ export default [
         dataElementCode: 'SRTM_ELEVATION_STDDEV',
         dataElementGroup: landGroup,
         dataSet: landDataSet,
+        provider: dataProvider,
     },
     ...landcoverTypes.map(({ name, value }) => ({
         id: `MODIS/061/MCD12Q1/LC_Type1/${value}`,
