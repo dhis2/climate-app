@@ -8,6 +8,7 @@ import {
     climateDataSet,
     climateGroup,
 } from '../data/groupings.js'
+import useEnactsInfo from './useEnactsInfo.js';
 
 const dataProvider = dataProviders.find(item => item.id == 'enacts')
 const routeCode = dataProvider['routeCode']
@@ -49,7 +50,7 @@ const parseVariableName = (variableName) => {
     return titleCased
 }
 
-const parseEnactsDataset = (d) => {
+const parseEnactsDataset = (d, enactsInfo) => {
     // Note: enacts uses different terminology
     // "dataset" for collections of datasets, eg All stations or Monitoring
     // and "variable" for dataset, eg precip
@@ -69,7 +70,7 @@ const parseEnactsDataset = (d) => {
         spatialAggregation: 'mean', // TODO: how to determine, maybe not allowed?...
         resolution: `${d.spatial_resolution.lon} degrees x ${d.spatial_resolution.lat} degrees`,
         variable: d.variable_name,
-        source: 'Malawi Department of Climate Change and Meteorological Services', // TODO: This is hardcoded for now, need a way so users can define this themselves
+        source: enactsInfo.owner, // retrieved from the enacts server metadata
         dataElementCode: `ENACTS_${d.dataset_name.toUpperCase()}_${d.variable_name.toUpperCase()}`,
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
@@ -80,7 +81,7 @@ const parseEnactsDataset = (d) => {
 }
 
 const useEnactsDatasets = () => {
-    // check and get enacts url from route api
+    // check and get enacts route from route api
     const { routes, loading: routesLoading, error: routesError } = useRoutesAPI()
     const enactsRoute = (!routesLoading && !routesError)
         ? routes.find(route => route.code == routeCode)
@@ -89,6 +90,9 @@ const useEnactsDatasets = () => {
         // means the route has simply not been set, only silently warn in the console
         console.warn(`Could not find a route with the code "${routeCode}"`)
     }
+
+    // call enacts server info hook
+    const { data: enactsInfo, loading: enactsInfoLoading, error: enactsInfoError } = useEnactsInfo(enactsRoute)
 
     // fetch raw datasets info from server
     const datasetsUrl = enactsRoute ? `${enactsRoute.href}/run/dataset_info` : null;
@@ -115,7 +119,7 @@ const useEnactsDatasets = () => {
     const { data: queryData, isLoading: queryLoading, error: queryError } = useQuery({
         queryKey: ['use-enacts-datasets'],
         queryFn: fetchDatasetsRaw,
-        enabled: !!datasetsUrl, // <-- only run query when URL is ready
+        enabled: !!datasetsUrl && !!enactsInfo, // <-- only run query when URL is ready and server info has finished
     })
 
     // process results
@@ -137,16 +141,16 @@ const useEnactsDatasets = () => {
         });
 
         // parse to expected dataset dict
-        const parsedData = flatData.map(parseEnactsDataset)
+        const parsedData = flatData.map(d => parseEnactsDataset(d, enactsInfo) )
 
         // filter to only supported/parseable period types
         return parsedData.filter((d) => d.periodType != undefined)
     }, [queryData])
 
     // return
-    const error = routesError || queryError
+    const error = routesError || enactsInfoError || queryError
 
-    const loading = enactsRoute && (routesLoading || queryLoading) && !error
+    const loading = enactsRoute && (routesLoading || enactsInfoLoading || queryLoading) && !error
 
     console.log('useEnactsDatasets final', processedData, loading, error)
 
