@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import useEarthEngineDatasets from './useEarthEngineDatasets.js'
 import useEnactsDatasets from './useEnactsDatasets.js'
 

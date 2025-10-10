@@ -1,18 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
 import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import {
-    periodTypes,
-    DAILY,
-    WEEKLY,
-    SIXTEEN_DAYS,
-    MONTHLY,
-    YEARLY,
-} from '../../utils/time.js'
+import { periodTypes } from '../../utils/time.js'
 
 const PeriodType = ({ periodType, supportedPeriodTypes, onChange }) => {
-    //console.log('periodtype func', periodType, supportedPeriodTypes)
-
     // wait for necessary information about supported period types
     if (!supportedPeriodTypes) {
         return null
@@ -62,7 +53,7 @@ const PeriodType = ({ periodType, supportedPeriodTypes, onChange }) => {
 PeriodType.propTypes = {
     periodType: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
-    datasetPeriodType: PropTypes.string,
+    supportedPeriodTypes: PropTypes.arrayOf(PropTypes.string),
 }
 
 export default PeriodType

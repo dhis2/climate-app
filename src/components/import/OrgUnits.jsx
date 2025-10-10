@@ -4,7 +4,9 @@ import OrgUnitLevel from './OrgUnitLevel.jsx'
 import OrgUnitTree from './OrgUnitTree.jsx'
 import styles from './styles/OrgUnits.module.css'
 
-const OrgUnits = ({ selected = {}, onChange }) => {
+const DEFAULT_SELECTED = {}
+
+const OrgUnits = ({ selected = DEFAULT_SELECTED, onChange }) => {
     const { parent, level } = selected
 
     const parentIsBelowLevel =

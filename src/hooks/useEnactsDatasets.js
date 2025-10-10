@@ -1,18 +1,10 @@
-import i18n from '@dhis2/d2-i18n'
 import { useQuery } from '@tanstack/react-query'
 import { useMemo } from 'react'
 import { climateDataSet, climateGroup } from '../data/groupings.js'
-import dataProviders from '../data/providers'
-import {
-    HOURLY,
-    DAILY,
-    WEEKLY,
-    MONTHLY,
-    SIXTEEN_DAYS,
-    YEARLY,
-} from '../utils/time.js'
+import dataProviders from '../data/providers.js'
+import { DAILY, MONTHLY, YEARLY } from '../utils/time.js'
 import useEnactsInfo from './useEnactsInfo.js'
-import useRoutesAPI from './useRoutesAPI'
+import useRoutesAPI from './useRoutesAPI.js'
 
 const dataProvider = dataProviders.find((item) => item.id == 'enacts')
 const routeCode = dataProvider['routeCode']
@@ -164,16 +156,14 @@ const useEnactsDatasets = () => {
 
         // convert nested structures to get flat list of datasets
         const flatData = []
-        Object.entries(queryData).forEach(([dataType, periodGroups]) => {
+        Object.entries(queryData).forEach(([, periodGroups]) => {
             // enacts has a separate dataset for each time period of each variable
             // instead only get the datasets/variables for a single period (daily)
             // and allow user to select period type in frontend (assumes all datasets
             // also exists at higher temporal aggregations)
-            Object.entries(periodGroups.daily).forEach(
-                ([variable, dataInfo]) => {
-                    flatData.push(dataInfo)
-                }
-            )
+            Object.entries(periodGroups.daily).forEach(([, dataInfo]) => {
+                flatData.push(dataInfo)
+            })
         })
 
         // parse to expected dataset dict
@@ -183,7 +173,7 @@ const useEnactsDatasets = () => {
 
         // filter to only supported/parseable period types
         return parsedData.filter((d) => d.periodType != undefined)
-    }, [queryData])
+    }, [queryData, enactsInfo])
 
     // return
     const error = routesError || enactsInfoError || queryError

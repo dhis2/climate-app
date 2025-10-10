@@ -11,7 +11,7 @@ import TimeZoneSelect from './TimeZoneSelect.jsx'
 const SettingsPage = () => {
     const { settings, changeSetting } = useAppSettings()
 
-    const { routes, routesLoading, routesError } = useRoutesAPI()
+    const { routes } = useRoutesAPI()
     console.log('routes', routes)
 
     if (!settings) {

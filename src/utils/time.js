@@ -436,7 +436,7 @@ export const normalizeIsoDate = (input) => {
     // ISO week: YYYY-Www
     const weekMatch = input.match(/^(\d{4})-W(\d{2})$/)
     if (weekMatch) {
-        const [_, yearStr, weekStr] = weekMatch
+        const [, yearStr, weekStr] = weekMatch
         const year = parseInt(yearStr, 10)
         const week = parseInt(weekStr, 10)
 

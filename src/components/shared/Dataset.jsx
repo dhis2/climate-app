@@ -62,8 +62,8 @@ const Dataset = ({
                     Error fetching additional datasets from one or more local
                     data providers:
                     <ul>
-                        {error.map((err) => (
-                            <li>{err.message}</li>
+                        {error.map((err, index) => (
+                            <li key={`error-${index}`}>{err.message}</li>
                         ))}
                     </ul>
                 </NoticeBox>

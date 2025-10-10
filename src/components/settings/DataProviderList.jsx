@@ -1,19 +1,18 @@
 import {
-    Input,
-    Button,
     Field,
-    Divider,
     Table,
     TableHead,
     TableRow,
     TableCell,
     TableBody,
 } from '@dhis2/ui'
-import React, { useState } from 'react'
+import PropTypes from 'prop-types'
+import React from 'react'
 import DataProviderListItem from './DataProviderListItem.jsx'
-import styles from './styles/DataProviderList.module.css'
 
-const DataProviderList = ({ dataProviders = [] }) => {
+const DEFAULT_DATA_PROVIDERS = []
+
+const DataProviderList = ({ dataProviders = DEFAULT_DATA_PROVIDERS }) => {
     // exclude google earth engine so we only list additional providers
     dataProviders = dataProviders.filter((provider) => provider.id != 'gee')
 
@@ -47,6 +46,10 @@ const DataProviderList = ({ dataProviders = [] }) => {
             </div>
         </div>
     )
+}
+
+DataProviderList.propTypes = {
+    dataProviders: PropTypes.array,
 }
 
 export default DataProviderList

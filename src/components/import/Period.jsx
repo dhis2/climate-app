@@ -4,9 +4,6 @@ import { CalendarInput } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import { useEffect } from 'react'
 import {
-    DAILY,
-    WEEKLY,
-    SIXTEEN_DAYS,
     YEARLY,
     normalizeIsoDate,
     formatPeriodString,
@@ -25,7 +22,9 @@ const userSettingsQuery = {
     },
 }
 
-const Period = ({ calendar, period, dataset = {}, onChange }) => {
+const DEFAULT_DATASET = {}
+
+const Period = ({ calendar, period, dataset = DEFAULT_DATASET, onChange }) => {
     const result = useDataQuery(userSettingsQuery)
     const { data: { userSettings: { keyUiLocale: locale } = {} } = {} } = result
     console.log('period', period)

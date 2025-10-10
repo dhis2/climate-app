@@ -1,31 +1,33 @@
-import { Input, Button, ButtonStrip, Field, Divider, Card, CircularLoader ,
-    TableRow,
-    TableCell,
-, InputField } from '@dhis2/ui'
-import styles from './styles/DataProviderListItem.module.css'
+import { CircularLoader, TableRow, TableCell } from '@dhis2/ui'
+import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
+import styles from './styles/DataProviderListItem.module.css'
 
 const DataProviderListItem = ({ dataProvider, index }) => {
-    const [providerStatus,setProviderStatus] = useState(undefined)
-
-    const pingDataProvider = async () => {
-        if (dataProvider?.href) {
-            const pingUrl = `${dataProvider.href}/run` // not sure if the base url is enough for pinging
-            fetch(pingUrl, {credentials: 'include'}) // needed to pass on dhis2 login credentials
-            .then(response => {
-                //console.log('pinging', pingUrl, response.ok, response)
-                if (response.ok) {setProviderStatus('Online')}
-                else {setProviderStatus('Offline')}
-            })
-            .catch(error => {setProviderStatus('Offline')})
-        } else {
-            setProviderStatus('Missing')
-        }
-    }
+    const [providerStatus, setProviderStatus] = useState(undefined)
 
     useEffect(() => {
+        const pingDataProvider = async () => {
+            if (dataProvider?.href) {
+                const pingUrl = `${dataProvider.href}/run` // not sure if the base url is enough for pinging
+                fetch(pingUrl, { credentials: 'include' }) // needed to pass on dhis2 login credentials
+                    .then((response) => {
+                        //console.log('pinging', pingUrl, response.ok, response)
+                        if (response.ok) {
+                            setProviderStatus('Online')
+                        } else {
+                            setProviderStatus('Offline')
+                        }
+                    })
+                    .catch(() => {
+                        setProviderStatus('Offline')
+                    })
+            } else {
+                setProviderStatus('Missing')
+            }
+        }
         pingDataProvider()
-    }, [])
+    }, [dataProvider])
 
     const statusClassMap = {
         Online: styles.dataProviderOnline,
@@ -37,38 +39,38 @@ const DataProviderListItem = ({ dataProvider, index }) => {
     console.log(statusClass)
 
     return (
-            <TableRow>
-                <TableCell>
-                    {index + 1}
-                </TableCell>
-
-                <TableCell>
-                    {dataProvider.name}
-                </TableCell>
-
-                <TableCell>
-                    {dataProvider.routeCode}
-                </TableCell>
-
-                <TableCell>
-                    {(dataProvider?.url !== undefined) ? String(dataProvider.url) : `<Please go to the Routes API and register a Route with the code "${dataProvider.routeCode}">`}
-                </TableCell>
-
-                <TableCell>
-                    <div className={`${styles.dataProviderStatusDiv}`}>
-                        {providerStatus && (
-                            <div className={`${styles.dataProviderStatusIcon} ${statusClass}`}></div>
-                        )}
-                        {providerStatus && (
-                            <span>{providerStatus}</span>
-                        )}
-                        {!providerStatus && (
-                            <CircularLoader extrasmall={true}/>
-                        )}
-                    </div>
-                </TableCell>
-            </TableRow>
+        <TableRow>
+            <TableCell>{index + 1}</TableCell>
+            <TableCell>{dataProvider.name}</TableCell>
+            <TableCell>{dataProvider.routeCode}</TableCell>
+            <TableCell>
+                {dataProvider?.url !== undefined
+                    ? String(dataProvider.url)
+                    : `<Please go to the Routes API and register a Route with the code "${dataProvider.routeCode}">`}
+            </TableCell>
+            <TableCell>
+                <div className={`${styles.dataProviderStatusDiv}`}>
+                    {providerStatus && (
+                        <div
+                            className={`${styles.dataProviderStatusIcon} ${statusClass}`}
+                        ></div>
+                    )}
+                    {providerStatus && <span>{providerStatus}</span>}
+                    {!providerStatus && <CircularLoader extrasmall={true} />}
+                </div>
+            </TableCell>
+        </TableRow>
     )
+}
+
+DataProviderListItem.propTypes = {
+    dataProvider: PropTypes.shape({
+        href: PropTypes.string,
+        name: PropTypes.string,
+        routeCode: PropTypes.string,
+        url: PropTypes.any,
+    }).isRequired,
+    index: PropTypes.number.isRequired,
 }
 
 export default DataProviderListItem

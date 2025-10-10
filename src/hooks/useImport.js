@@ -1,6 +1,5 @@
-import { useEffect } from 'react'
-import useEarthEngineData from './useEarthEngineData'
-import useEnactsData from './useEnactsData'
+import useEarthEngineData from './useEarthEngineData.js'
+import useEnactsData from './useEnactsData.js'
 
 const useImport = (dataset, period, features) => {
     if (dataset?.provider.id == 'gee') {

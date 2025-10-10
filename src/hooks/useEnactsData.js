@@ -1,15 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
 import { useMemo } from 'react'
-import dataProviders from '../data/providers'
-import {
-    HOURLY,
-    DAILY,
-    WEEKLY,
-    MONTHLY,
-    SIXTEEN_DAYS,
-    YEARLY,
-} from '../utils/time.js'
-import useRoutesAPI from './useRoutesAPI'
+import dataProviders from '../data/providers.js'
+import { DAILY, MONTHLY, YEARLY } from '../utils/time.js'
+import useRoutesAPI from './useRoutesAPI.js'
 
 const routeCode = dataProviders.find((item) => item.id == 'enacts')['routeCode']
 
