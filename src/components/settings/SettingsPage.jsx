@@ -1,16 +1,16 @@
 import i18n from '@dhis2/d2-i18n'
+import dataProviders from '../../data/providers.js'
 import useAppSettings from '../../hooks/useAppSettings.js'
+import useRoutesAPI from '../../hooks/useRoutesAPI.js'
 import ChartSettings from './ChartSettings.jsx'
+import DataProviderList from './DataProviderList.jsx'
 import StartPageSelect from './StartPageSelect.jsx'
 import styles from './styles/SettingsPage.module.css'
 import TimeZoneSelect from './TimeZoneSelect.jsx'
-import DataProviderList from './DataProviderList.jsx'
-import useRoutesAPI from '../../hooks/useRoutesAPI.js'
-import dataProviders from '../../data/providers.js'
 
 const SettingsPage = () => {
     const { settings, changeSetting } = useAppSettings()
-    
+
     const { routes, routesLoading, routesError } = useRoutesAPI()
     console.log('routes', routes)
 
@@ -21,12 +21,14 @@ const SettingsPage = () => {
     const { startPage, timeZone } = settings
 
     // convert routes list to a lookup dict
-    const routesLookup = Object.fromEntries(routes.map(item => [item.code, item]))
-    
+    const routesLookup = Object.fromEntries(
+        routes.map((item) => [item.code, item])
+    )
+
     // fill in data provider details based on route codes in routes api
-    const dataProvidersUpdated = dataProviders.map(item => ({
+    const dataProvidersUpdated = dataProviders.map((item) => ({
         ...item,
-        ...(routesLookup[item.routeCode] || {})
+        ...(routesLookup[item.routeCode] || {}),
     }))
     console.log('data providers', dataProvidersUpdated)
 

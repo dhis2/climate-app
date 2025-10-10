@@ -14,10 +14,10 @@ const dataImportMutation = {
 }
 
 const countMissing = (data) => {
-    // Note: for now we require that all missing values have been converted 
+    // Note: for now we require that all missing values have been converted
     // ...to NaN in a previous step
     let missing = 0
-    data.map(obj => {
+    data.map((obj) => {
         if (isNaN(obj.value)) {
             missing += 1
         }

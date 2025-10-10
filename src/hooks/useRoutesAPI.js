@@ -14,7 +14,7 @@ const useRoutesAPI = () => {
                     resource: 'routes', // hits /api/routes
                     params: {
                         fields: 'id,code,displayName,url,href',
-                    }
+                    },
                 },
             })
             .then(({ routes }) => {

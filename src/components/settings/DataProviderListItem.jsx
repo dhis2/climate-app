@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { Input, Button, ButtonStrip, Field, Divider, Card, CircularLoader } from '@dhis2/ui'
-import {
+import { Input, Button, ButtonStrip, Field, Divider, Card, CircularLoader ,
     TableRow,
     TableCell,
-} from '@dhis2/ui'
+, InputField } from '@dhis2/ui'
 import styles from './styles/DataProviderListItem.module.css'
-import { InputField } from '@dhis2/ui'
+import React, { useEffect, useState } from 'react'
 
 const DataProviderListItem = ({ dataProvider, index }) => {
     const [providerStatus,setProviderStatus] = useState(undefined)

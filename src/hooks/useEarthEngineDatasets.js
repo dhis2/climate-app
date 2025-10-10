@@ -6,7 +6,7 @@ const useEarthEngineDatasets = () => {
     const error = false
     console.log('useEarthEngineDatasets final', geeDatasets, loading, error)
 
-    return {data: geeDatasets, error, loading}
+    return { data: geeDatasets, error, loading }
 }
 
 export default useEarthEngineDatasets

@@ -6,9 +6,14 @@ import {
     roundOneDecimal,
     roundTwoDecimals,
 } from '../utils/calc.js'
-import { HOURLY, DAILY, WEEKLY, MONTHLY, SIXTEEN_DAYS, YEARLY } from '../utils/time.js'
-import heatStressLegend from './heat-stress-legend.js'
-import dataProviders from "./providers.js";
+import {
+    HOURLY,
+    DAILY,
+    WEEKLY,
+    MONTHLY,
+    SIXTEEN_DAYS,
+    YEARLY,
+} from '../utils/time.js'
 import {
     climateDataSet,
     climateGroup,
@@ -17,9 +22,11 @@ import {
     landDataSet,
     landGroup,
 } from './groupings.js'
+import heatStressLegend from './heat-stress-legend.js'
+import dataProviders from './providers.js'
 
 // fetch provider metadata for GEE
-const dataProvider = dataProviders.find(item => item.id == 'gee')
+const dataProvider = dataProviders.find((item) => item.id == 'gee')
 
 // kelvin to celsius with one decimal
 const temperatureParser = (v) => roundOneDecimal(kelvinToCelsius(v)).toString()
@@ -268,42 +275,42 @@ export default [
         provider: dataProvider,
     },
     // {
-  //   id: "Local Min Tempreture",
-  //   datasetId: "Local_Data",
-  //   tag : 'min temp',
-  //   name: i18n.t("Local Min Tempreture (Land)"),
-  //   shortName: i18n.t("Air temperature"),
-  //   description: i18n.t(
-  //     "Average local  max observed air temperature in °C"
-  //   ),
-  //   aggregationType: i18n.t("Min"),
-  //   dataElementCode: "LOCAL_TEMPERATURE_MAX",
-  // },
-  // {
-  //   id: "Local Max Tempreture",
-  //   datasetId: "Local_Data",
-  //   tag : 'max temp',
-  //   name: i18n.t("Local Max Tempreture (Land)"),
-  //   shortName: i18n.t("Air temperature"),
-  //   description: i18n.t(
-  //     "Average local min observed air temperature in °C"
-  //   ),
-  //   aggregationType: i18n.t("Min"),
-  //   dataElementCode: "LOCAL_TEMPERATURE_MIN",
-  //   },
-//   {
-//     id: "Local Precipitation",
-//     datasetId: "Local_Data",
-//     tag : 'Rainfall',
-//     name: i18n.t("Local Precipitation "),
-//     shortName: i18n.t("Precipitation"),
-//     description: i18n.t(
-//       "Precipitation received in mm"
-//     ),
-//     aggregationType: i18n.t("Average"),
-//     dataElementCode: "LOCAL_TEMPERATURE_MAX",
-//   },
-  {
+    //   id: "Local Min Tempreture",
+    //   datasetId: "Local_Data",
+    //   tag : 'min temp',
+    //   name: i18n.t("Local Min Tempreture (Land)"),
+    //   shortName: i18n.t("Air temperature"),
+    //   description: i18n.t(
+    //     "Average local  max observed air temperature in °C"
+    //   ),
+    //   aggregationType: i18n.t("Min"),
+    //   dataElementCode: "LOCAL_TEMPERATURE_MAX",
+    // },
+    // {
+    //   id: "Local Max Tempreture",
+    //   datasetId: "Local_Data",
+    //   tag : 'max temp',
+    //   name: i18n.t("Local Max Tempreture (Land)"),
+    //   shortName: i18n.t("Air temperature"),
+    //   description: i18n.t(
+    //     "Average local min observed air temperature in °C"
+    //   ),
+    //   aggregationType: i18n.t("Min"),
+    //   dataElementCode: "LOCAL_TEMPERATURE_MIN",
+    //   },
+    //   {
+    //     id: "Local Precipitation",
+    //     datasetId: "Local_Data",
+    //     tag : 'Rainfall',
+    //     name: i18n.t("Local Precipitation "),
+    //     shortName: i18n.t("Precipitation"),
+    //     description: i18n.t(
+    //       "Precipitation received in mm"
+    //     ),
+    //     aggregationType: i18n.t("Average"),
+    //     dataElementCode: "LOCAL_TEMPERATURE_MAX",
+    //   },
+    {
         id: 'projects/climate-engine-pro/assets/ce-era5-heat/utci_mean',
         datasetId: 'projects/climate-engine-pro/assets/ce-era5-heat',
         name: i18n.t('Heat stress (ERA5-HEAT)'),
@@ -491,7 +498,7 @@ export default [
         supportedPeriodTypes: [YEARLY],
         periodRange: {
             start: '2002',
-            end: '2023'
+            end: '2023',
         },
         band: 'LC_Type1',
         reducer: 'frequencyHistogram',

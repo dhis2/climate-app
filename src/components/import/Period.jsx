@@ -3,8 +3,14 @@ import i18n from '@dhis2/d2-i18n'
 import { CalendarInput } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import { useEffect } from 'react'
-import { DAILY, WEEKLY, SIXTEEN_DAYS, YEARLY } from '../../utils/time.js'
-import { normalizeIsoDate, formatPeriodString } from '../../utils/time.js'
+import {
+    DAILY,
+    WEEKLY,
+    SIXTEEN_DAYS,
+    YEARLY,
+    normalizeIsoDate,
+    formatPeriodString,
+} from '../../utils/time.js'
 import TimeZone from '../shared/TimeZone.jsx'
 import PeriodType from './PeriodType.jsx'
 import styles from './styles/Period.module.css'
@@ -29,7 +35,12 @@ const Period = ({ calendar, period, dataset = {}, onChange }) => {
         periodRange: datasetPeriodRange,
         period: datasetPeriod,
     } = dataset
-    console.log('dataset period', datasetPeriodType, datasetSupportedPeriodTypes, datasetPeriodRange)
+    console.log(
+        'dataset period',
+        datasetPeriodType,
+        datasetSupportedPeriodTypes,
+        datasetPeriodRange
+    )
     const { periodType, startTime, endTime } = period
     const hasNoPeriod = datasetPeriodType === 'N/A'
     const isYearly = datasetPeriodType === YEARLY
@@ -44,7 +55,11 @@ const Period = ({ calendar, period, dataset = {}, onChange }) => {
     // When switching from yearly to other period types
     // convert start/end years to dates
     useEffect(() => {
-        if (period && period.periodType != YEARLY && period.startTime.length == 4) {
+        if (
+            period &&
+            period.periodType != YEARLY &&
+            period.startTime.length == 4
+        ) {
             const startTime = period.startTime + '-01-01'
             const endTime = period.endTime + '-12-31'
             onChange({ ...period, startTime, endTime })
@@ -52,7 +67,7 @@ const Period = ({ calendar, period, dataset = {}, onChange }) => {
     }, [onChange, period])
 
     // For yearly datasets, force year range to fit within dataset range
-    // TODO: Not sure if this should be inside useEffect, with onChange, or if this is ok... 
+    // TODO: Not sure if this should be inside useEffect, with onChange, or if this is ok...
     //if (datasetPeriodType == YEARLY) {
     //    period.startTime = (period.startTime >= datasetPeriodRange.start) ? period.startTime : datasetPeriodRange.start
     //    period.endTime = (period.endTime <= datasetPeriodRange.end) ? period.endTime : datasetPeriodRange.end
@@ -148,7 +163,14 @@ const Period = ({ calendar, period, dataset = {}, onChange }) => {
             )}
             {datasetPeriodRange && (
                 <p>
-                    {i18n.t('Valid range')}: <strong>{formatPeriodString(datasetPeriodRange.start)}</strong> - <strong>{formatPeriodString(datasetPeriodRange.end)}</strong>
+                    {i18n.t('Valid range')}:{' '}
+                    <strong>
+                        {formatPeriodString(datasetPeriodRange.start)}
+                    </strong>{' '}
+                    -{' '}
+                    <strong>
+                        {formatPeriodString(datasetPeriodRange.end)}
+                    </strong>
                 </p>
             )}
         </div>

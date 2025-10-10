@@ -1,18 +1,21 @@
-import React, { useState } from 'react'
-import { Input, Button, Field, Divider } from '@dhis2/ui'
 import {
+    Input,
+    Button,
+    Field,
+    Divider,
     Table,
     TableHead,
     TableRow,
     TableCell,
-    TableBody
+    TableBody,
 } from '@dhis2/ui'
+import React, { useState } from 'react'
 import DataProviderListItem from './DataProviderListItem.jsx'
 import styles from './styles/DataProviderList.module.css'
 
 const DataProviderList = ({ dataProviders = [] }) => {
     // exclude google earth engine so we only list additional providers
-    dataProviders = dataProviders.filter(provider => provider.id != 'gee')
+    dataProviders = dataProviders.filter((provider) => provider.id != 'gee')
 
     return (
         <div>
@@ -33,7 +36,11 @@ const DataProviderList = ({ dataProviders = [] }) => {
                     </TableHead>
                     <TableBody>
                         {dataProviders.map((provider, index) => (
-                            <DataProviderListItem key={index} dataProvider={provider} index={index} />
+                            <DataProviderListItem
+                                key={index}
+                                dataProvider={provider}
+                                index={index}
+                            />
                         ))}
                     </TableBody>
                 </Table>

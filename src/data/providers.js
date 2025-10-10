@@ -1,4 +1,3 @@
-
 // define list of data provider route codes that can be registered
 const dataProviders = [
     {

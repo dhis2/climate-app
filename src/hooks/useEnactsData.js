@@ -1,10 +1,17 @@
-import { useMemo } from "react";
-import { useQuery } from '@tanstack/react-query';
-import useRoutesAPI from "./useRoutesAPI";
-import dataProviders from "../data/providers";
-import { HOURLY, DAILY, WEEKLY, MONTHLY, SIXTEEN_DAYS, YEARLY } from '../utils/time.js'
+import { useQuery } from '@tanstack/react-query'
+import { useMemo } from 'react'
+import dataProviders from '../data/providers'
+import {
+    HOURLY,
+    DAILY,
+    WEEKLY,
+    MONTHLY,
+    SIXTEEN_DAYS,
+    YEARLY,
+} from '../utils/time.js'
+import useRoutesAPI from './useRoutesAPI'
 
-const routeCode = dataProviders.find(item => item.id == 'enacts')['routeCode']
+const routeCode = dataProviders.find((item) => item.id == 'enacts')['routeCode']
 
 const parseEnactsData = (results) => {
     console.log('parsing enacts data', results)
@@ -18,11 +25,11 @@ const parseEnactsData = (results) => {
     results.Data.map((item) => {
         const ou = item.Name // orgunit id
         const values = item.Values
-        for (let i=0; i < values.length; i++) {
+        for (let i = 0; i < values.length; i++) {
             const period = dates[i]
             const value = values[i] == missing ? NaN : values[i] // get value or NaN for missing
             // NOTE: NaN values are later filtered out and reported to the user
-            parsed.push({ou, period, value})
+            parsed.push({ ou, period, value })
         }
     })
     console.log('parsed', parsed)
@@ -53,18 +60,25 @@ const encodeDate = (date, periodType) => {
 
 const useEnactsData = (dataset, period, features) => {
     // check and get enacts url from route api
-    const { routes, loading: routesLoading, error: routesError } = useRoutesAPI()
-    const enactsRoute = (!routesLoading && !routesError)
-        ? routes.find(route => route.code == routeCode)
-        : null
+    const {
+        routes,
+        loading: routesLoading,
+        error: routesError,
+    } = useRoutesAPI()
+    const enactsRoute =
+        !routesLoading && !routesError
+            ? routes.find((route) => route.code == routeCode)
+            : null
     if (!routesLoading && !routesError && !enactsRoute) {
         // means the route has not been set
         throw new Error(`Could not find a route with the code "${routeCode}"`)
     }
 
     // fetch raw data info from server
-    const dataUrl = enactsRoute ? `${enactsRoute.href}/run/download_raw_data` : null;
-    
+    const dataUrl = enactsRoute
+        ? `${enactsRoute.href}/run/download_raw_data`
+        : null
+
     const fetchDataRaw = async () => {
         console.log('fetching enacts data', dataUrl)
         console.log('dataset to import', dataset)
@@ -72,12 +86,12 @@ const useEnactsData = (dataset, period, features) => {
         try {
             const resp = await fetch(dataUrl, {
                 credentials: 'include', // needed to pass on dhis2 login credentials
-                method : 'POST',
+                method: 'POST',
                 headers: {
                     //'Content-Type': 'application/json',
                     //'X-API-Key': '......',
                 },
-                body : JSON.stringify({
+                body: JSON.stringify({
                     dataset: dataset.id.slice(0, 3), // ENACTS dataset type is stored as the first 3 characters of the dataset id
                     variable: dataset.variable,
                     temporalRes: encodeTemporalRes(period.periodType),
@@ -85,46 +99,61 @@ const useEnactsData = (dataset, period, features) => {
                     endDate: encodeDate(period.endTime, period.periodType),
                     geomExtract: 'geojson',
                     geojsonSource: 'upload',
-                    geojsonData: {type: 'FeatureCollection', features: features},
-                    geojsonField: 'id', // can we always expect this? 
+                    geojsonData: {
+                        type: 'FeatureCollection',
+                        features: features,
+                    },
+                    geojsonField: 'id', // can we always expect this?
                     outFormat: 'JSON-Format',
-                })
+                }),
             })
             if (!resp.ok) {
-                throw new Error(`ENACTS server returned HTTP error at ${dataUrl}: ${resp.status} - ${resp.statusText}`);
+                throw new Error(
+                    `ENACTS server returned HTTP error at ${dataUrl}: ${resp.status} - ${resp.statusText}`
+                )
             }
             const rawData = await resp.json()
             console.log('rawData', rawData)
             if (rawData?.status == -1) {
                 // server returns error message
-                throw new Error(`ENACTS server responded with an error message code '${rawData?.code}': ${rawData.message}`);
+                throw new Error(
+                    `ENACTS server responded with an error message code '${rawData?.code}': ${rawData.message}`
+                )
             }
             return rawData
         } catch (error) {
             // error could be network failure, CORS, or something else
-            if (error instanceof TypeError && error.message === 'Failed to fetch') {
-                throw new Error(`Failed to fetch ENACTS data from ${dataUrl}. Please check that the route url is configured correctly and has CORS enabled to allow requests from this app's origin.`);
+            if (
+                error instanceof TypeError &&
+                error.message === 'Failed to fetch'
+            ) {
+                throw new Error(
+                    `Failed to fetch ENACTS data from ${dataUrl}. Please check that the route url is configured correctly and has CORS enabled to allow requests from this app's origin.`
+                )
             } else {
                 console.error(error)
-                throw new Error(`Failed to fetch ENACTS data from ${dataUrl}: ${error}`)
+                throw new Error(
+                    `Failed to fetch ENACTS data from ${dataUrl}: ${error}`
+                )
             }
         }
     }
 
-    const { data: queryData, isLoading: queryLoading, error: queryError } = useQuery({
+    const {
+        data: queryData,
+        isLoading: queryLoading,
+        error: queryError,
+    } = useQuery({
         queryKey: ['use-enacts-data', dataset, period, features],
         queryFn: fetchDataRaw,
-        enabled: !!(
-            dataUrl &&
-            dataset &&
-            period &&
-            features?.length > 0
-        )
+        enabled: !!(dataUrl && dataset && period && features?.length > 0),
     })
 
     // process results
     const processedData = useMemo(() => {
-        if (!queryData) return undefined
+        if (!queryData) {
+            return undefined
+        }
         return parseEnactsData(queryData)
     }, [queryData])
 
@@ -136,7 +165,7 @@ const useEnactsData = (dataset, period, features) => {
     console.log('loading status', routesLoading, queryLoading, loading)
 
     console.log('useEnactsData final', processedData, loading, error)
-    return {data: processedData, error, loading}
+    return { data: processedData, error, loading }
 }
 
-export default useEnactsData;
+export default useEnactsData

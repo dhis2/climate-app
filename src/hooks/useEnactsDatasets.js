@@ -1,30 +1,37 @@
 import i18n from '@dhis2/d2-i18n'
-import { useMemo } from "react";
-import { useQuery } from '@tanstack/react-query';
-import useRoutesAPI from "./useRoutesAPI";
-import dataProviders from "../data/providers";
-import { HOURLY, DAILY, WEEKLY, MONTHLY, SIXTEEN_DAYS, YEARLY } from '../utils/time.js'
+import { useQuery } from '@tanstack/react-query'
+import { useMemo } from 'react'
+import { climateDataSet, climateGroup } from '../data/groupings.js'
+import dataProviders from '../data/providers'
 import {
-    climateDataSet,
-    climateGroup,
-} from '../data/groupings.js'
-import useEnactsInfo from './useEnactsInfo.js';
+    HOURLY,
+    DAILY,
+    WEEKLY,
+    MONTHLY,
+    SIXTEEN_DAYS,
+    YEARLY,
+} from '../utils/time.js'
+import useEnactsInfo from './useEnactsInfo.js'
+import useRoutesAPI from './useRoutesAPI'
 
-const dataProvider = dataProviders.find(item => item.id == 'enacts')
+const dataProvider = dataProviders.find((item) => item.id == 'enacts')
 const routeCode = dataProvider['routeCode']
 
 const enactsDataCollections = {
     ALL: {
         name: 'All stations',
-        description: 'This type of dataset is for comprehensive analysis and only generated once the full set of all available stations at the MetServices becomes available (synoptic, climatological, agro, rain gauge, AWS).',
+        description:
+            'This type of dataset is for comprehensive analysis and only generated once the full set of all available stations at the MetServices becomes available (synoptic, climatological, agro, rain gauge, AWS).',
     },
     MON: {
         name: 'Monitoring',
-        description: 'This type of dataset is for monitoring purposes and is generated using a subset of only those station data that have been made available at a given time.',
+        description:
+            'This type of dataset is for monitoring purposes and is generated using a subset of only those station data that have been made available at a given time.',
     },
     CLM: {
         name: 'Climatology',
-        description: 'This type of dataset is generated using a subset of stations having a long series of data (at least 15 years of observation data).',
+        description:
+            'This type of dataset is generated using a subset of stations having a long series of data (at least 15 years of observation data).',
     },
 }
 
@@ -33,20 +40,21 @@ const parsePeriodType = (periodType) => {
     return {
         daily: DAILY,
         monthly: MONTHLY,
-        annual: YEARLY
+        annual: YEARLY,
     }[periodType]
 }
 
 const parsePeriodRange = (periodRange) => {
     // convert enacts period range to internal period range format
-    return {start: periodRange.start, end: periodRange.end}
+    return { start: periodRange.start, end: periodRange.end }
 }
 
 const parseVariableName = (variableName) => {
     // enacts datasets include periodtype as part of the variable name, so we strip it away
-    const firstSpaceIndex = variableName.indexOf(" ")
+    const firstSpaceIndex = variableName.indexOf(' ')
     const nameStripped = variableName.slice(firstSpaceIndex + 1)
-    const titleCased = nameStripped.charAt(0).toUpperCase() + nameStripped.slice(1)
+    const titleCased =
+        nameStripped.charAt(0).toUpperCase() + nameStripped.slice(1)
     return titleCased
 }
 
@@ -74,7 +82,7 @@ const parseEnactsDataset = (d, enactsInfo) => {
         dataElementCode: `ENACTS_${d.dataset_name.toUpperCase()}_${d.variable_name.toUpperCase()}`,
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
-        aggregationType: null, // we don't know which datasets will be returned so can't map or assume any aggregation types 
+        aggregationType: null, // we don't know which datasets will be returned so can't map or assume any aggregation types
         provider: dataProvider, // nested dict
     }
     return parsed
@@ -82,41 +90,65 @@ const parseEnactsDataset = (d, enactsInfo) => {
 
 const useEnactsDatasets = () => {
     // check and get enacts route from route api
-    const { routes, loading: routesLoading, error: routesError } = useRoutesAPI()
-    const enactsRoute = (!routesLoading && !routesError)
-        ? routes.find(route => route.code == routeCode)
-        : null
+    const {
+        routes,
+        loading: routesLoading,
+        error: routesError,
+    } = useRoutesAPI()
+    const enactsRoute =
+        !routesLoading && !routesError
+            ? routes.find((route) => route.code == routeCode)
+            : null
     if (!routesLoading && !routesError && !enactsRoute) {
         // means the route has simply not been set, only silently warn in the console
         console.warn(`Could not find a route with the code "${routeCode}"`)
     }
 
     // call enacts server info hook
-    const { data: enactsInfo, loading: enactsInfoLoading, error: enactsInfoError } = useEnactsInfo(enactsRoute)
+    const {
+        data: enactsInfo,
+        loading: enactsInfoLoading,
+        error: enactsInfoError,
+    } = useEnactsInfo(enactsRoute)
 
     // fetch raw datasets info from server
-    const datasetsUrl = enactsRoute ? `${enactsRoute.href}/run/dataset_info` : null;
+    const datasetsUrl = enactsRoute
+        ? `${enactsRoute.href}/run/dataset_info`
+        : null
 
     const fetchDatasetsRaw = async () => {
         console.log('fetching enacts datasets', datasetsUrl)
         try {
-            const resp = await fetch(datasetsUrl, {credentials: 'include'}) // needed to pass on dhis2 login credentials
+            const resp = await fetch(datasetsUrl, { credentials: 'include' }) // needed to pass on dhis2 login credentials
             if (!resp.ok) {
-                throw new Error(`ENACTS server returned HTTP error at ${datasetsUrl}: ${resp.status} - ${resp.statusText}`);
+                throw new Error(
+                    `ENACTS server returned HTTP error at ${datasetsUrl}: ${resp.status} - ${resp.statusText}`
+                )
             }
             return resp.json()
         } catch (error) {
             // error could be network failure, CORS, or something else
-            if (error instanceof TypeError && error.message === 'Failed to fetch') {
-                throw new Error(`Failed to fetch ENACTS datasets from ${datasetsUrl}. Please check that the route url is configured correctly and has CORS enabled to allow requests from this app's origin.`);
+            if (
+                error instanceof TypeError &&
+                error.message === 'Failed to fetch'
+            ) {
+                throw new Error(
+                    `Failed to fetch ENACTS datasets from ${datasetsUrl}. Please check that the route url is configured correctly and has CORS enabled to allow requests from this app's origin.`
+                )
             } else {
                 console.error(error)
-                throw new Error(`Failed to fetch ENACTS datasets from ${datasetsUrl}: ${error}`)
+                throw new Error(
+                    `Failed to fetch ENACTS datasets from ${datasetsUrl}: ${error}`
+                )
             }
         }
     }
 
-    const { data: queryData, isLoading: queryLoading, error: queryError } = useQuery({
+    const {
+        data: queryData,
+        isLoading: queryLoading,
+        error: queryError,
+    } = useQuery({
         queryKey: ['use-enacts-datasets'],
         queryFn: fetchDatasetsRaw,
         enabled: !!datasetsUrl && !!enactsInfo, // <-- only run query when URL is ready and server info has finished
@@ -124,24 +156,30 @@ const useEnactsDatasets = () => {
 
     // process results
     const processedData = useMemo(() => {
-        if (!queryData) return undefined
+        if (!queryData) {
+            return undefined
+        }
 
         console.log('processing list of enacts datasets', queryData)
 
         // convert nested structures to get flat list of datasets
-        const flatData = [];
+        const flatData = []
         Object.entries(queryData).forEach(([dataType, periodGroups]) => {
             // enacts has a separate dataset for each time period of each variable
             // instead only get the datasets/variables for a single period (daily)
             // and allow user to select period type in frontend (assumes all datasets
             // also exists at higher temporal aggregations)
-            Object.entries(periodGroups.daily).forEach(([variable, dataInfo]) => {
-                flatData.push(dataInfo)
-            })
-        });
+            Object.entries(periodGroups.daily).forEach(
+                ([variable, dataInfo]) => {
+                    flatData.push(dataInfo)
+                }
+            )
+        })
 
         // parse to expected dataset dict
-        const parsedData = flatData.map(d => parseEnactsDataset(d, enactsInfo) )
+        const parsedData = flatData.map((d) =>
+            parseEnactsDataset(d, enactsInfo)
+        )
 
         // filter to only supported/parseable period types
         return parsedData.filter((d) => d.periodType != undefined)
@@ -150,11 +188,14 @@ const useEnactsDatasets = () => {
     // return
     const error = routesError || enactsInfoError || queryError
 
-    const loading = enactsRoute && (routesLoading || enactsInfoLoading || queryLoading) && !error
+    const loading =
+        enactsRoute &&
+        (routesLoading || enactsInfoLoading || queryLoading) &&
+        !error
 
     console.log('useEnactsDatasets final', processedData, loading, error)
 
-    return {data: processedData, error, loading}
+    return { data: processedData, error, loading }
 }
 
-export default useEnactsDatasets;
+export default useEnactsDatasets

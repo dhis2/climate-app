@@ -1,8 +1,13 @@
-import React from 'react';
-import i18n from '@dhis2/d2-i18n';
-import { SingleSelectField, SingleSelectOption, CircularLoader, NoticeBox } from '@dhis2/ui';
-import PropTypes from 'prop-types';
-import useDatasets from '../../hooks/useDatasets.js';
+import i18n from '@dhis2/d2-i18n'
+import {
+    SingleSelectField,
+    SingleSelectOption,
+    CircularLoader,
+    NoticeBox,
+} from '@dhis2/ui'
+import PropTypes from 'prop-types'
+import React from 'react'
+import useDatasets from '../../hooks/useDatasets.js'
 
 const Dataset = ({
     title = i18n.t('Data'),
@@ -10,10 +15,18 @@ const Dataset = ({
     onChange,
     showDescription = true,
 }) => {
-    const { data: datasets, loading, error } = useDatasets();
+    const { data: datasets, loading, error } = useDatasets()
 
-    if (loading) return <CircularLoader large />;
-    if (false) return <NoticeBox title={i18n.t('Error')} error>{error}</NoticeBox>;
+    if (loading) {
+        return <CircularLoader large />
+    }
+    if (false) {
+        return (
+            <NoticeBox title={i18n.t('Error')} error>
+                {error}
+            </NoticeBox>
+        )
+    }
 
     return (
         <div>
@@ -27,17 +40,27 @@ const Dataset = ({
                 }
             >
                 {datasets.map((d) => (
-                    <SingleSelectOption key={d.id} value={d.id} label={`${d.provider.nameShort}: ${d.name}`} />
+                    <SingleSelectOption
+                        key={d.id}
+                        value={d.id}
+                        label={`${d.provider.nameShort}: ${d.name}`}
+                    />
                 ))}
             </SingleSelectField>
-            
+
             {selected && showDescription && <p>{selected.description}</p>}
 
-            {selected && showDescription && <p>Data is from {selected.source}. Accessed via {selected.provider.name}.</p>}
+            {selected && showDescription && (
+                <p>
+                    Data is from {selected.source}. Accessed via{' '}
+                    {selected.provider.name}.
+                </p>
+            )}
 
             {error && (
                 <NoticeBox title={i18n.t('Warning')} warning>
-                    Error fetching additional datasets from one or more local data providers:
+                    Error fetching additional datasets from one or more local
+                    data providers:
                     <ul>
                         {error.map((err) => (
                             <li>{err.message}</li>
@@ -56,4 +79,4 @@ Dataset.propTypes = {
     title: PropTypes.string,
 }
 
-export default Dataset;
+export default Dataset
