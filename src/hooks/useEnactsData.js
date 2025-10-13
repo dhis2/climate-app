@@ -81,8 +81,7 @@ const useEnactsData = (dataset, period, features) => {
                 credentials: 'include', // needed to pass on dhis2 login credentials
                 method: 'POST',
                 headers: {
-                    //'Content-Type': 'application/json',
-                    //'X-API-Key': '......',
+                    'Content-Type': 'application/json', // seems to be needed for some DHIS2/Routes API versions
                 },
                 body: JSON.stringify({
                     dataset: dataset.id.slice(0, 3), // ENACTS dataset type is stored as the first 3 characters of the dataset id
