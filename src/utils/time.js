@@ -196,10 +196,10 @@ export const getDefaultExplorePeriod = (lagDays = 10) => {
  * @returns {Number} Number of months between start and end month
  */
 export const getNumberOfMonths = (startTime, endTime) => {
-    const startYear = parseInt(startTime.substring(0, 4))
-    const start = parseInt(startTime.substring(5, 7))
-    const endYear = parseInt(endTime.substring(0, 4))
-    const end = parseInt(endTime.substring(5, 7))
+    const startYear = Number.parseInt(startTime.substring(0, 4))
+    const start = Number.parseInt(startTime.substring(5, 7))
+    const endYear = Number.parseInt(endTime.substring(0, 4))
+    const end = Number.parseInt(endTime.substring(5, 7))
     return (endYear - startYear) * 12 + (end - start) + 1
 }
 
@@ -236,9 +236,9 @@ export const formatDate = (date) => {
 export const toDateObject = (dateString) => {
     const [year, month, day] = dateString.split('-')
     return {
-        year: parseInt(year),
-        month: month ? parseInt(month) : 1,
-        day: day ? parseInt(day) : 1,
+        year: Number.parseInt(year),
+        month: month ? Number.parseInt(month) : 1,
+        day: day ? Number.parseInt(day) : 1,
     }
 }
 
@@ -247,7 +247,8 @@ export const toDateObject = (dateString) => {
  * @param {String} dateString Date string in the format YYYY-MM-DD
  * @returns {Number} Year
  */
-export const extractYear = (dateString) => parseInt(dateString.split('-')[0])
+export const extractYear = (dateString) =>
+    Number.parseInt(dateString.split('-')[0])
 
 /**
  * Translates a calendar date to a standard date string
@@ -291,14 +292,14 @@ export const getStandardPeriod = ({
     calendar,
     periodType,
 }) =>
-    periodType !== YEARLY
-        ? {
+    periodType === YEARLY
+        ? { startTime, endTime, calendar, periodType }
+        : {
               startTime: toStandardDate(startTime, calendar),
               endTime: toStandardDate(endTime, calendar),
               periodType,
               calendar, // Include original calendar to allow conversion back to DHIS2 date
           }
-        : { startTime, endTime, calendar, periodType }
 
 /**
  * Returns an array of period items for a given period object
@@ -338,13 +339,13 @@ export const getPeriods = (period) => {
                 periodType,
             })
                 .map((p) =>
-                    calendar !== 'iso8601'
-                        ? {
+                    calendar === 'iso8601'
+                        ? p
+                        : {
                               ...p,
                               startDate: toStandardDate(p.startDate, calendar),
                               endDate: toStandardDate(p.endDate, calendar),
                           }
-                        : p
                 )
                 .filter(
                     (p) => p.startDate <= endTime && p.endDate >= startTime // Filter out periods outside the range
@@ -437,8 +438,8 @@ export const normalizeIsoDate = (input) => {
     const weekMatch = input.match(/^(\d{4})-W(\d{2})$/)
     if (weekMatch) {
         const [, yearStr, weekStr] = weekMatch
-        const year = parseInt(yearStr, 10)
-        const week = parseInt(weekStr, 10)
+        const year = Number.parseInt(yearStr, 10)
+        const week = Number.parseInt(weekStr, 10)
 
         // ISO weeks: week 1 = first week with Thursday in it
         const simple = new Date(Date.UTC(year, 0, 4)) // Jan 4 is always in week 1

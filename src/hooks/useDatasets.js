@@ -8,7 +8,7 @@ const useDatasets = () => {
     // Combine hook results
     const loading = results.some((r) => r.loading)
     const errors = results.map((r) => r.error).filter(Boolean)
-    const allDatasets = results.map((r) => r.data || []).flat()
+    const allDatasets = results.flatMap((r) => r.data || [])
 
     return {
         data: allDatasets,

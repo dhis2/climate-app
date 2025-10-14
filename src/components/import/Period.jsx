@@ -27,19 +27,12 @@ const DEFAULT_DATASET = {}
 const Period = ({ calendar, period, dataset = DEFAULT_DATASET, onChange }) => {
     const result = useDataQuery(userSettingsQuery)
     const { data: { userSettings: { keyUiLocale: locale } = {} } = {} } = result
-    console.log('period', period)
     const {
         periodType: datasetPeriodType,
         supportedPeriodTypes: datasetSupportedPeriodTypes,
         periodRange: datasetPeriodRange,
         period: datasetPeriod,
     } = dataset
-    console.log(
-        'dataset period',
-        datasetPeriodType,
-        datasetSupportedPeriodTypes,
-        datasetPeriodRange
-    )
     const { periodType, startTime, endTime } = period
     const hasNoPeriod = datasetPeriodType === 'N/A'
     const isYearly = datasetPeriodType === YEARLY
@@ -77,7 +70,6 @@ const Period = ({ calendar, period, dataset = DEFAULT_DATASET, onChange }) => {
         minDate = normalizeIsoDate(datasetPeriodRange.start)
         maxDate = normalizeIsoDate(datasetPeriodRange.end)
     }
-    console.log('Calendar input min/max date', minDate, maxDate)
 
     return (
         <div className={styles.container}>
@@ -101,8 +93,8 @@ const Period = ({ calendar, period, dataset = DEFAULT_DATASET, onChange }) => {
                     />
                     <YearRange
                         period={period}
-                        minYear={parseInt(datasetPeriodRange.start)}
-                        maxYear={parseInt(datasetPeriodRange.end)}
+                        minYear={Number.parseInt(datasetPeriodRange.start)}
+                        maxYear={Number.parseInt(datasetPeriodRange.end)}
                         onChange={onChange}
                     />
                 </div>

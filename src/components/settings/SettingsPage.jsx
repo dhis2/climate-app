@@ -12,7 +12,6 @@ const SettingsPage = () => {
     const { settings, changeSetting } = useAppSettings()
 
     const { routes } = useRoutesAPI()
-    console.log('routes', routes)
 
     if (!settings) {
         return null
@@ -28,9 +27,8 @@ const SettingsPage = () => {
     // fill in data provider details based on route codes in routes api
     const dataProvidersUpdated = dataProviders.map((item) => ({
         ...item,
-        ...(routesLookup[item.routeCode] || {}),
+        ...routesLookup[item.routeCode],
     }))
-    console.log('data providers', dataProvidersUpdated)
 
     return (
         <div className={styles.container}>

@@ -18,7 +18,7 @@ const countMissing = (data) => {
     // ...to NaN in a previous step
     let missing = 0
     data.map((obj) => {
-        if (isNaN(obj.value)) {
+        if (Number.isNaN(obj.value)) {
             missing += 1
         }
     })
@@ -32,7 +32,7 @@ const ImportData = ({ data, dataElement, features }) => {
     useEffect(() => {
         mutate({
             dataValues: data
-                .filter((d) => !isNaN(d.value)) // NaN values are ignored before sending to DHIS2
+                .filter((d) => !Number.isNaN(d.value)) // NaN values are ignored before sending to DHIS2
                 .map((obj) => ({
                     value: obj.value,
                     orgUnit: obj.ou,

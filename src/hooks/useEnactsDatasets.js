@@ -148,17 +148,20 @@ const useEnactsDatasets = () => {
             return undefined
         }
 
+        console.log('JJ here', queryData)
+
         // convert nested structures to get flat list of datasets
         const flatData = []
-        Object.entries(queryData).forEach(([, periodGroups]) => {
-            // enacts has a separate dataset for each time period of each variable
-            // instead only get the datasets/variables for a single period (daily)
-            // and allow user to select period type in frontend (assumes all datasets
-            // also exist at higher temporal aggregations)
-            Object.entries(periodGroups.daily).forEach(([, dataInfo]) => {
+
+        // enacts has a separate dataset for each time period of each variable
+        // instead only get the datasets/variables for a single period (daily)
+        // and allow user to select period type in frontend (assumes all datasets
+        // also exist at higher temporal aggregations)
+        for (const [, periodGroups] of Object.entries(queryData)) {
+            for (const [, dataInfo] of Object.entries(periodGroups.daily)) {
                 flatData.push(dataInfo)
-            })
-        })
+            }
+        }
 
         // parse to expected dataset dict
         const parsedData = flatData.map((d) =>

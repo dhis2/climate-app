@@ -9,12 +9,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import useDatasets from '../../hooks/useDatasets.js'
 
-const Dataset = ({
-    title = i18n.t('Data'),
-    selected,
-    onChange,
-    showDescription = true,
-}) => {
+const Dataset = ({ title, selected, onChange, showDescription = true }) => {
     const { data: datasets, loading, error } = useDatasets()
 
     if (loading) {
@@ -68,8 +63,8 @@ const Dataset = ({
                         'Error fetching additional datasets from one or more local data providers'
                     )}
                     <ul>
-                        {error.map((err, index) => (
-                            <li key={`error-${index}`}>{err.message}</li>
+                        {error.map((err) => (
+                            <li key={`error-${err.message}`}>{err.message}</li>
                         ))}
                     </ul>
                 </NoticeBox>

@@ -21,7 +21,7 @@ const parseEnactsData = (results) => {
         const values = item.Values
         for (let i = 0; i < values.length; i++) {
             const period = dates[i]
-            const value = values[i] == missing ? NaN : values[i] // get value or NaN for missing
+            const value = values[i] == missing ? Number.NaN : values[i] // get value or NaN for missing
             // NOTE: NaN values are later filtered out and reported to the user
             parsed.push({ ou, period, value })
         }
@@ -47,7 +47,7 @@ const encodeDate = (date, periodType) => {
     } else if (periodType == YEARLY) {
         return date.slice(0, 5)
     } else {
-        throw Error(`Period type ${periodType} not yet supported`)
+        throw new Error(`Period type ${periodType} not yet supported`)
     }
 }
 

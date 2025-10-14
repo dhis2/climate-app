@@ -46,12 +46,12 @@ const DataProviderListItem = ({ dataProvider, index }) => {
             <TableCell>{dataProvider.name}</TableCell>
             <TableCell>{dataProvider.routeCode}</TableCell>
             <TableCell>
-                {dataProvider?.url !== undefined
-                    ? String(dataProvider.url)
-                    : i18n.t(
+                {dataProvider?.url === undefined
+                    ? i18n.t(
                           'Please go to the Routes API and register a Route with the code "{{code}}"',
                           { code: dataProvider.routeCode }
-                      )}
+                      )
+                    : String(dataProvider.url)}
             </TableCell>
             <TableCell>
                 <div className={`${styles.dataProviderStatusDiv}`}>

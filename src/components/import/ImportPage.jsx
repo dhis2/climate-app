@@ -69,6 +69,7 @@ const ImportPage = () => {
                 <Card className={styles.card}>
                     <div className={styles.container}>
                         <Dataset
+                            title={i18n.t('Data')}
                             selected={dataset}
                             onChange={(dataset) => {
                                 setDataset(dataset)
