@@ -65,8 +65,6 @@ const parseEnactsDataset = (d, enactsInfo) => {
         periodType: parsePeriodType(d.temporal_resolution),
         supportedPeriodTypes: [DAILY, MONTHLY],
         periodRange: parsePeriodRange(d.temporal_coverage),
-        temporalAggregation: 'mean', // TODO: how to determine, maybe not allowed?...
-        spatialAggregation: 'mean', // TODO: how to determine, maybe not allowed?...
         resolution: `${d.spatial_resolution.lon} degrees x ${d.spatial_resolution.lat} degrees`, // TODO - i18n?
         variable: d.variable_name,
         source: enactsInfo.owner, // retrieved from the enacts server metadata
