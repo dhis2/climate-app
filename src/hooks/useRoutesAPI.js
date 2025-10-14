@@ -11,9 +11,9 @@ const useRoutesAPI = () => {
         engine
             .query({
                 routes: {
-                    resource: 'routes', // hits /api/routes
+                    resource: 'routes',
                     params: {
-                        fields: 'id,code,displayName,url,href', // TODO also get authorities?
+                        fields: 'id,code,displayName,url,href',
                     },
                 },
             })

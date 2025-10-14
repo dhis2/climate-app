@@ -38,7 +38,6 @@ const DataProviderListItem = ({ dataProvider, index }) => {
     }
 
     const statusClass = statusClassMap[providerStatus]
-    console.log(statusClass)
 
     return (
         <TableRow>

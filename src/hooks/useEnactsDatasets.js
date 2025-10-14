@@ -148,8 +148,6 @@ const useEnactsDatasets = () => {
             return undefined
         }
 
-        console.log('JJ here', queryData)
-
         // convert nested structures to get flat list of datasets
         const flatData = []
 

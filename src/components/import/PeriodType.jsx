@@ -30,9 +30,7 @@ const PeriodType = ({ periodType, supportedPeriodTypes, onChange }) => {
         selectedPeriodType = supportedPeriodTypeObjects[0].id
         onChange(selectedPeriodType)
     }
-    //console.log('periodtype selected', selectedPeriodType)
 
-    // period type selector
     return (
         <SingleSelectField
             label={i18n.t('Period type')}
