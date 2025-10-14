@@ -21,6 +21,7 @@
         "@dhis2/multi-calendar-dates": "1.0.0-alpha.27",
         "@dhis2/ui": "^10.1.10",
         "@turf/area": "^6.5.0",
+        "classnames": "^2.5.1",
         "highcharts": "^10.3.3",
         "react-router-dom": "^6.26.1",
         "zustand": "^4.5.5"

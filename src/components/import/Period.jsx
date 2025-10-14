@@ -54,11 +54,7 @@ const Period = ({ calendar, period, dataset = DEFAULT_DATASET, onChange }) => {
     // When switching from yearly to other period types
     // convert start/end years to dates
     useEffect(() => {
-        if (
-            period &&
-            period.periodType != YEARLY &&
-            period.startTime.length == 4
-        ) {
+        if (period?.periodType !== YEARLY && period?.startTime.length === 4) {
             const startTime = period.startTime + '-01-01'
             const endTime = period.endTime + '-12-31'
             onChange({ ...period, startTime, endTime })

@@ -13,7 +13,7 @@ const useRoutesAPI = () => {
                 routes: {
                     resource: 'routes', // hits /api/routes
                     params: {
-                        fields: 'id,code,displayName,url,href',
+                        fields: 'id,code,displayName,url,href', // TODO also get authorities?
                     },
                 },
             })

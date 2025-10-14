@@ -1,13 +1,14 @@
 import { useQuery } from '@tanstack/react-query'
 import { useMemo } from 'react'
-import dataProviders from '../data/providers.js'
+import { dataProviders, PROVIDER_ENACTS } from '../data/providers.js'
 import { DAILY, MONTHLY, YEARLY } from '../utils/time.js'
 import useRoutesAPI from './useRoutesAPI.js'
 
-const routeCode = dataProviders.find((item) => item.id == 'enacts')['routeCode']
+const routeCode = dataProviders.find((item) => item.id == PROVIDER_ENACTS)[
+    'routeCode'
+]
 
 const parseEnactsData = (results) => {
-    console.log('parsing enacts data', results)
     // need to convert from original enacts results
     // eg: Data.Name ie orgunit, Data.Values array, Dates which maps to values array, and Missing which can be used to convert to NaN
     // to structure expected by the climate app
@@ -25,7 +26,6 @@ const parseEnactsData = (results) => {
             parsed.push({ ou, period, value })
         }
     })
-    console.log('parsed', parsed)
     return parsed
 }
 
@@ -52,18 +52,18 @@ const encodeDate = (date, periodType) => {
 }
 
 const useEnactsData = (dataset, period, features) => {
-    // check and get enacts url from route api
     const {
         routes,
         loading: routesLoading,
         error: routesError,
     } = useRoutesAPI()
+
     const enactsRoute =
         !routesLoading && !routesError
             ? routes.find((route) => route.code == routeCode)
             : null
+
     if (!routesLoading && !routesError && !enactsRoute) {
-        // means the route has not been set
         throw new Error(`Could not find a route with the code "${routeCode}"`)
     }
 
@@ -73,17 +73,10 @@ const useEnactsData = (dataset, period, features) => {
         : null
 
     const fetchDataRaw = async () => {
-        console.log('fetching enacts data', dataUrl)
-        console.log('dataset to import', dataset)
-        console.log('period', period)
         try {
             const resp = await fetch(dataUrl, {
-                credentials: 'include', // needed to pass on dhis2 login credentials
+                credentials: 'include',
                 method: 'POST',
-                headers: {
-                    //'Content-Type': 'application/json',
-                    //'X-API-Key': '......',
-                },
                 body: JSON.stringify({
                     dataset: dataset.id.slice(0, 3), // ENACTS dataset type is stored as the first 3 characters of the dataset id
                     variable: dataset.variable,
@@ -96,7 +89,7 @@ const useEnactsData = (dataset, period, features) => {
                         type: 'FeatureCollection',
                         features: features,
                     },
-                    geojsonField: 'id', // can we always expect this?
+                    geojsonField: 'id', // TODO can we always expect this?
                     outFormat: 'JSON-Format',
                 }),
             })
@@ -106,7 +99,6 @@ const useEnactsData = (dataset, period, features) => {
                 )
             }
             const rawData = await resp.json()
-            console.log('rawData', rawData)
             if (rawData?.status == -1) {
                 // server returns error message
                 throw new Error(
@@ -150,14 +142,10 @@ const useEnactsData = (dataset, period, features) => {
         return parseEnactsData(queryData)
     }, [queryData])
 
-    // return
     const error = routesError || queryError
-    console.log('error status', routesError, queryError, error)
 
     const loading = (routesLoading || queryLoading) && !error
-    console.log('loading status', routesLoading, queryLoading, loading)
 
-    console.log('useEnactsData final', processedData, loading, error)
     return { data: processedData, error, loading }
 }
 

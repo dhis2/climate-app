@@ -1,4 +1,6 @@
+import i18n from '@dhis2/d2-i18n'
 import { CircularLoader, TableRow, TableCell } from '@dhis2/ui'
+import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
 import styles from './styles/DataProviderListItem.module.css'
@@ -46,13 +48,19 @@ const DataProviderListItem = ({ dataProvider, index }) => {
             <TableCell>
                 {dataProvider?.url !== undefined
                     ? String(dataProvider.url)
-                    : `<Please go to the Routes API and register a Route with the code "${dataProvider.routeCode}">`}
+                    : i18n.t(
+                          'Please go to the Routes API and register a Route with the code "{{code}}"',
+                          { code: dataProvider.routeCode }
+                      )}
             </TableCell>
             <TableCell>
                 <div className={`${styles.dataProviderStatusDiv}`}>
                     {providerStatus && (
                         <div
-                            className={`${styles.dataProviderStatusIcon} ${statusClass}`}
+                            className={cx(
+                                styles.dataProviderStatusIcon,
+                                styles.statusClass
+                            )}
                         ></div>
                     )}
                     {providerStatus && <span>{providerStatus}</span>}

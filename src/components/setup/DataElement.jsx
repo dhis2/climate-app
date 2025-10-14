@@ -51,8 +51,9 @@ const DataElement = ({
                 <tr>
                     <th>{i18n.t('Aggregation type')}</th>
 
-                    {aggregationType && <td>{aggregationType}</td>}
-                    {!aggregationType && (
+                    {aggregationType ? (
+                        <td>{aggregationType}</td>
+                    ) : (
                         <td>
                             <em>
                                 {i18n.t(

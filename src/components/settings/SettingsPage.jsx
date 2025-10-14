@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import dataProviders from '../../data/providers.js'
+import { dataProviders } from '../../data/providers.js'
 import useAppSettings from '../../hooks/useAppSettings.js'
 import useRoutesAPI from '../../hooks/useRoutesAPI.js'
 import ChartSettings from './ChartSettings.jsx'

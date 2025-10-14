@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
 import { useMemo } from 'react'
 import { climateDataSet, climateGroup } from '../data/groupings.js'
-import dataProviders from '../data/providers.js'
+import { dataProviders, PROVIDER_ENACTS } from '../data/providers.js'
 import { DAILY, MONTHLY, YEARLY } from '../utils/time.js'
 import useEnactsInfo from './useEnactsInfo.js'
 import useRoutesAPI from './useRoutesAPI.js'
 
-const dataProvider = dataProviders.find((item) => item.id == 'enacts')
+const dataProvider = dataProviders.find((item) => item.id == PROVIDER_ENACTS)
 const routeCode = dataProvider['routeCode']
 
 const enactsDataCollections = {
@@ -54,7 +54,6 @@ const parseEnactsDataset = (d, enactsInfo) => {
     // Note: enacts uses different terminology
     // "dataset" for collections of datasets, eg All stations or Monitoring
     // and "variable" for dataset, eg precip
-    console.log('parsing enacts dataset', d)
     const collection = enactsDataCollections[d.dataset_name]
     const datasetName = parseVariableName(d.variable_longname)
     const parsed = {
@@ -68,7 +67,7 @@ const parseEnactsDataset = (d, enactsInfo) => {
         periodRange: parsePeriodRange(d.temporal_coverage),
         temporalAggregation: 'mean', // TODO: how to determine, maybe not allowed?...
         spatialAggregation: 'mean', // TODO: how to determine, maybe not allowed?...
-        resolution: `${d.spatial_resolution.lon} degrees x ${d.spatial_resolution.lat} degrees`,
+        resolution: `${d.spatial_resolution.lon} degrees x ${d.spatial_resolution.lat} degrees`, // TODO - i18n?
         variable: d.variable_name,
         source: enactsInfo.owner, // retrieved from the enacts server metadata
         dataElementCode: `ENACTS_${d.dataset_name.toUpperCase()}_${d.variable_name.toUpperCase()}`,
@@ -81,22 +80,20 @@ const parseEnactsDataset = (d, enactsInfo) => {
 }
 
 const useEnactsDatasets = () => {
-    // check and get enacts route from route api
     const {
         routes,
         loading: routesLoading,
         error: routesError,
     } = useRoutesAPI()
+
     const enactsRoute =
         !routesLoading && !routesError
             ? routes.find((route) => route.code == routeCode)
             : null
     if (!routesLoading && !routesError && !enactsRoute) {
-        // means the route has simply not been set, only silently warn in the console
         console.warn(`Could not find a route with the code "${routeCode}"`)
     }
 
-    // call enacts server info hook
     const {
         data: enactsInfo,
         loading: enactsInfoLoading,
@@ -109,7 +106,6 @@ const useEnactsDatasets = () => {
         : null
 
     const fetchDatasetsRaw = async () => {
-        console.log('fetching enacts datasets', datasetsUrl)
         try {
             const resp = await fetch(datasetsUrl, { credentials: 'include' }) // needed to pass on dhis2 login credentials
             if (!resp.ok) {
@@ -143,16 +139,14 @@ const useEnactsDatasets = () => {
     } = useQuery({
         queryKey: ['use-enacts-datasets'],
         queryFn: fetchDatasetsRaw,
-        enabled: !!datasetsUrl && !!enactsInfo, // <-- only run query when URL is ready and server info has finished
+        enabled: !!datasetsUrl && !!enactsInfo,
     })
 
     // process results
     const processedData = useMemo(() => {
-        if (!queryData) {
+        if (!queryData || !enactsInfo) {
             return undefined
         }
-
-        console.log('processing list of enacts datasets', queryData)
 
         // convert nested structures to get flat list of datasets
         const flatData = []
@@ -160,7 +154,7 @@ const useEnactsDatasets = () => {
             // enacts has a separate dataset for each time period of each variable
             // instead only get the datasets/variables for a single period (daily)
             // and allow user to select period type in frontend (assumes all datasets
-            // also exists at higher temporal aggregations)
+            // also exist at higher temporal aggregations)
             Object.entries(periodGroups.daily).forEach(([, dataInfo]) => {
                 flatData.push(dataInfo)
             })
@@ -175,15 +169,12 @@ const useEnactsDatasets = () => {
         return parsedData.filter((d) => d.periodType != undefined)
     }, [queryData, enactsInfo])
 
-    // return
     const error = routesError || enactsInfoError || queryError
 
     const loading =
         enactsRoute &&
         (routesLoading || enactsInfoLoading || queryLoading) &&
         !error
-
-    console.log('useEnactsDatasets final', processedData, loading, error)
 
     return { data: processedData, error, loading }
 }

@@ -23,10 +23,10 @@ import {
     landGroup,
 } from './groupings.js'
 import heatStressLegend from './heat-stress-legend.js'
-import dataProviders from './providers.js'
+import { PROVIDER_GEE, dataProviders } from './providers.js'
 
 // fetch provider metadata for GEE
-const dataProvider = dataProviders.find((item) => item.id == 'gee')
+const dataProvider = dataProviders.find((item) => item.id === PROVIDER_GEE)
 
 // kelvin to celsius with one decimal
 const temperatureParser = (v) => roundOneDecimal(kelvinToCelsius(v)).toString()

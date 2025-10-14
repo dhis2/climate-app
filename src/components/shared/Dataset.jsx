@@ -20,7 +20,7 @@ const Dataset = ({
     if (loading) {
         return <CircularLoader large />
     }
-    if (false) {
+    if (error) {
         return (
             <NoticeBox title={i18n.t('Error')} error>
                 {error}
@@ -52,15 +52,21 @@ const Dataset = ({
 
             {selected && showDescription && (
                 <p>
-                    Data is from {selected.source}. Accessed via{' '}
-                    {selected.provider.name}.
+                    {i18n.t(
+                        'Data is from {{source}}. Accessed via {{provider}}.',
+                        {
+                            source: selected.source,
+                            provider: selected.provider.name,
+                        }
+                    )}
                 </p>
             )}
 
             {error && (
                 <NoticeBox title={i18n.t('Warning')} warning>
-                    Error fetching additional datasets from one or more local
-                    data providers:
+                    {i18n.t(
+                        'Error fetching additional datasets from one or more local data providers'
+                    )}
                     <ul>
                         {error.map((err, index) => (
                             <li key={`error-${index}`}>{err.message}</li>

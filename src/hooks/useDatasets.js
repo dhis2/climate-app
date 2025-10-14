@@ -1,12 +1,8 @@
-import useEarthEngineDatasets from './useEarthEngineDatasets.js'
+import geeDatasets from '../data/earth-engine-datasets.js'
 import useEnactsDatasets from './useEnactsDatasets.js'
 
 const useDatasets = () => {
-    console.log('running useDatasets')
-
-    // Call all hooks for listing each provider's datasets
-    const results = []
-    results.push(useEarthEngineDatasets())
+    const results = [{ data: geeDatasets, error: false, loading: false }]
     results.push(useEnactsDatasets())
 
     // Combine hook results
@@ -14,7 +10,6 @@ const useDatasets = () => {
     const errors = results.map((r) => r.error).filter(Boolean)
     const allDatasets = results.map((r) => r.data || []).flat()
 
-    console.log('useDatasets final', allDatasets, loading, errors)
     return {
         data: allDatasets,
         loading,

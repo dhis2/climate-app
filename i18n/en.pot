@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-10-10T08:07:50.091Z\n"
-"PO-Revision-Date: 2025-10-10T08:07:50.091Z\n"
+"POT-Creation-Date: 2025-10-13T13:32:45.395Z\n"
+"PO-Revision-Date: 2025-10-13T13:32:45.396Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -644,6 +644,9 @@ msgstr ""
 msgid "Extracting data for {{orgUnitsCount}} org units"
 msgstr "Extracting data for {{orgUnitsCount}} org units"
 
+msgid "Dataset provider not recognized"
+msgstr "Dataset provider not recognized"
+
 msgid "Importing data to DHIS2"
 msgstr "Importing data to DHIS2"
 
@@ -837,6 +840,33 @@ msgstr "Heat stress upper category"
 msgid "Heat stress lower category"
 msgstr "Heat stress lower category"
 
+msgid "Additional Data Providers"
+msgstr "Additional Data Providers"
+
+msgid ""
+"In addition to the built-in Google Earth Engine datasets, you can connect "
+"to climate data APIs listed below. Use the Route Manager app to customize "
+"the API URL and user credentials."
+msgstr ""
+"In addition to the built-in Google Earth Engine datasets, you can connect "
+"to climate data APIs listed below. Use the Route Manager app to customize "
+"the API URL and user credentials."
+
+msgid "Provider Name"
+msgstr "Provider Name"
+
+msgid "Route Code"
+msgstr "Route Code"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Please go to the Routes API and register a Route with the code \"{{code}}\""
+msgstr "Please go to the Routes API and register a Route with the code \"{{code}}\""
+
 msgid "Calculate from data"
 msgstr "Calculate from data"
 
@@ -1024,8 +1054,14 @@ msgstr "Error"
 msgid "Select data to import"
 msgstr "Select data to import"
 
+msgid "Data is from {{source}}. Accessed via {{provider}}."
+msgstr "Data is from {{source}}. Accessed via {{provider}}."
+
 msgid "Warning"
 msgstr "Warning"
+
+msgid "Error fetching additional datasets from one or more local data providers"
+msgstr "Error fetching additional datasets from one or more local data providers"
 
 msgid "You need access to Google Earth Engine to use this app."
 msgstr "You need access to Google Earth Engine to use this app."
