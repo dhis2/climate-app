@@ -77,8 +77,11 @@ const useEnactsData = (dataset, period, features) => {
             const resp = await fetch(dataUrl, {
                 credentials: 'include',
                 method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json', // TODO: document which DHIS2 version this is needed for
+                },
                 body: JSON.stringify({
-                    dataset: dataset.id.slice(0, 3), // ENACTS dataset type is stored as the first 3 characters of the dataset id
+                    dataset: dataset.id.slice(0, 3), // TODO (improve): ENACTS dataset type is stored as the first 3 characters of the dataset id
                     variable: dataset.variable,
                     temporalRes: encodeTemporalRes(period.periodType),
                     startDate: encodeDate(period.startTime, period.periodType),
