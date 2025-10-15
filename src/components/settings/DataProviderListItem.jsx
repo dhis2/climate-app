@@ -5,7 +5,7 @@ import {
     TableRow,
     TableCell,
     Button,
-    IconInfo16,
+    IconInfo24,
     Modal,
     ModalTitle,
     ModalContent,
@@ -155,7 +155,7 @@ const DataProviderListItem = ({ dataProvider }) => {
         }
     }, [showInfo, docsVersion])
 
-    const openInfo = ({ value }) => setShowInfo(value)
+    const openInfo = (val) => setShowInfo(val)
     const closeInfo = () => setShowInfo(null)
 
     return (
@@ -184,11 +184,12 @@ const DataProviderListItem = ({ dataProvider }) => {
             </TableCell>
             <TableCell>
                 <div ref={buttonRef}>
-                    <Button
-                        value={dataProvider.name}
-                        icon={<IconInfo16 />}
-                        onClick={openInfo}
-                    ></Button>
+                    <button
+                        onClick={() => openInfo(dataProvider.name)}
+                        className={styles.infoButton}
+                    >
+                        <IconInfo24 />
+                    </button>
                 </div>
                 {!!showInfo && (
                     <Modal

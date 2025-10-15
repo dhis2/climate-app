@@ -27,9 +27,9 @@ const DataProviderList = ({ dataProviders = DEFAULT_DATA_PROVIDERS }) => {
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell>{i18n.t('Provider Name')}</TableCell>
+                            <TableCell>{i18n.t('Provider name')}</TableCell>
                             <TableCell>{i18n.t('Status')}</TableCell>
-                            <TableCell>{i18n.t('Info')}</TableCell>
+                            <TableCell>{i18n.t('Setup info')}</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>

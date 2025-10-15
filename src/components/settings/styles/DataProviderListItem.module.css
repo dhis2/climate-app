@@ -26,3 +26,15 @@
 .buttons {
     justify-content: end;
 }
+
+.infoButton {
+    border: none;
+    background: none;
+    color: #4a5768;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.infoButton:hover {
+    color: #a0adba;
+}
