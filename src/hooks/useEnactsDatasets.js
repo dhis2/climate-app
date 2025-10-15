@@ -51,6 +51,7 @@ const parseVariableName = (variableName) => {
 }
 
 const parseEnactsDataset = (d, enactsInfo) => {
+    console.log('jj parseEnactsDataset d', d)
     // Note: enacts uses different terminology
     // "dataset" for collections of datasets, eg All stations or Monitoring
     // and "variable" for dataset, eg precip
@@ -105,7 +106,7 @@ const useEnactsDatasets = () => {
 
     const fetchDatasetsRaw = async () => {
         try {
-            const resp = await fetch(datasetsUrl, { credentials: 'include' }) // needed to pass on dhis2 login credentials
+            const resp = await fetch(datasetsUrl, { credentials: 'include' })
             if (!resp.ok) {
                 throw new Error(
                     `ENACTS server returned HTTP error at ${datasetsUrl}: ${resp.status} - ${resp.statusText}`

@@ -4,7 +4,7 @@ import DataLoader from '../shared/DataLoader.jsx'
 import ErrorMessage from '../shared/ErrorMessage.jsx'
 import ImportData from './ImportData.jsx'
 
-const ExtractGeeData = ({
+const ExtractEnactsData = ({
     dataElement,
     dataset,
     period,
@@ -26,7 +26,7 @@ const ExtractGeeData = ({
     )
 }
 
-ExtractGeeData.propTypes = {
+ExtractEnactsData.propTypes = {
     dataElement: PropTypes.object.isRequired,
     dataset: PropTypes.object.isRequired,
     features: PropTypes.array.isRequired,
@@ -34,4 +34,4 @@ ExtractGeeData.propTypes = {
     extractingLabel: PropTypes.string,
 }
 
-export default ExtractGeeData
+export default ExtractEnactsData

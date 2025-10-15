@@ -1,3 +1,4 @@
+import { useConfig } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { dataProviders } from '../../data/providers.js'
 import useAppSettings from '../../hooks/useAppSettings.js'
@@ -10,8 +11,8 @@ import TimeZoneSelect from './TimeZoneSelect.jsx'
 
 const SettingsPage = () => {
     const { settings, changeSetting } = useAppSettings()
-
     const { routes } = useRoutesAPI()
+    const { serverVersion } = useConfig() // VERSION_TOGGLE
 
     if (!settings) {
         return null
@@ -38,9 +39,11 @@ const SettingsPage = () => {
                     'Changes made below will apply to all users of this app.'
                 )}
             </p>
+            {serverVersion.minor > 39 && (
+                <DataProviderList dataProviders={dataProvidersUpdated} />
+            )}
             <StartPageSelect startPage={startPage} onChange={changeSetting} />
             <TimeZoneSelect timeZone={timeZone} onChange={changeSetting} />
-            <DataProviderList dataProviders={dataProvidersUpdated} />
             <ChartSettings />
         </div>
     )
