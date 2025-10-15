@@ -42,6 +42,7 @@ const SettingsPage = () => {
             {serverVersion.minor > 39 && (
                 <DataProviderList dataProviders={dataProvidersUpdated} />
             )}
+            <h2>{i18n.t('General settings')}</h2>
             <StartPageSelect startPage={startPage} onChange={changeSetting} />
             <TimeZoneSelect timeZone={timeZone} onChange={changeSetting} />
             <ChartSettings />

@@ -1,5 +1,5 @@
 import { useConfig } from '@dhis2/app-runtime'
-// import i18n from '@dhis2/d2-i18n'
+import i18n from '@dhis2/d2-i18n'
 import {
     CircularLoader,
     TableRow,
@@ -17,6 +17,10 @@ import React, { useEffect, useState, useRef, useMemo } from 'react'
 import useEarthEngineToken from '../../hooks/useEarthEngineToken.js'
 import styles from './styles/DataProviderListItem.module.css'
 
+const ONLINE = 'Online'
+const OFFLINE = 'Offline'
+const NOT_CONFIGURED = 'Not configured'
+
 const DataProviderListItem = ({ dataProvider }) => {
     const [providerStatus, setProviderStatus] = useState(undefined)
     const [showInfo, setShowInfo] = useState(null)
@@ -33,45 +37,54 @@ const DataProviderListItem = ({ dataProvider }) => {
                     fetch(pingUrl, { credentials: 'include' })
                         .then((response) => {
                             if (response.ok) {
-                                setProviderStatus('Online')
+                                setProviderStatus(ONLINE)
                             } else {
-                                setProviderStatus('Offline')
+                                setProviderStatus(OFFLINE)
                             }
                         })
                         .catch(() => {
-                            setProviderStatus('Offline')
+                            setProviderStatus(OFFLINE)
                         })
                 } else {
-                    setProviderStatus('Not configured')
+                    setProviderStatus(NOT_CONFIGURED)
                 }
             } else if (dataProvider.statusCheck === 'geetoken') {
                 tokenPromise
                     .then((token) =>
-                        setProviderStatus(token ? 'Online' : 'Not configured')
+                        setProviderStatus(token ? ONLINE : NOT_CONFIGURED)
                     )
-                    .catch(() => setProviderStatus('Not configured'))
+                    .catch(() => setProviderStatus(NOT_CONFIGURED))
             }
         }
         pingDataProvider()
     }, [dataProvider, tokenPromise])
-
-    const openInfo = ({ value }) => {
-        setShowInfo(value)
-    }
-
-    const closeInfo = () => setShowInfo(null)
 
     const getInfo = useMemo(() => {
         if (!showInfo) {
             return null
         }
 
-        if (showInfo.name === 'Google Earth Engine') {
-            return 'Here is where the google earth engine instructions are'
+        if (showInfo === 'Google Earth Engine') {
+            return (
+                <section aria-labelledby="gee-setup-info">
+                    <p>
+                        To use Google Earth Engine, you must sign up and
+                        authorize access. Please follow the instructions in the
+                        official documentation:
+                        <br />
+                        <a
+                            href="https://docs.dhis2.org/en/topics/tutorials/google-earth-engine-sign-up.html"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Google Earth Engine Setup Guide
+                        </a>
+                    </p>
+                </section>
+            )
         } else {
             return (
-                <section aria-labelledby="enacts-setup-heading">
-                    <h3 id="enacts-setup-heading">ENACTS set up information</h3>
+                <section aria-labelledby="enacts-setup-info">
                     <p>
                         The ENACTS api is made available using a DHIS2 route.
                         Follow the{' '}
@@ -91,7 +104,10 @@ const DataProviderListItem = ({ dataProvider }) => {
                     </p>
                     <ul>
                         <li>
-                            <strong>name</strong>: <code>ENACTS API</code>
+                            <strong>name</strong>:{' '}
+                            <em>
+                                A short, descriptive name to identify the route
+                            </em>
                         </li>
                         <li>
                             <strong>code</strong>: <code>enacts</code>
@@ -99,8 +115,9 @@ const DataProviderListItem = ({ dataProvider }) => {
                         <li>
                             <strong>url</strong>:{' '}
                             <em>
-                                The url where your ENACTS DST is hosted. You
-                                must append &quot;/&#42;&#42;&quot; to the url
+                                The base url where your ENACTS DST API is
+                                hosted. You must append &quot;/&#42;&#42;&quot;
+                                to the url
                             </em>
                         </li>
                         <li>
@@ -112,7 +129,7 @@ const DataProviderListItem = ({ dataProvider }) => {
                                 </li>
                                 <li>
                                     <strong>X-API-Key</strong>:{' '}
-                                    <em>Your enacts api key here</em>
+                                    <em>Your ENACTS DST API key here</em>
                                 </li>
                             </ul>
                         </li>
@@ -123,12 +140,12 @@ const DataProviderListItem = ({ dataProvider }) => {
                     <p>Example configuration:</p>
                     <pre style={{ whiteSpace: 'pre-wrap' }}>
                         {`{
-    "name": "ENACTS API",
+    "name": "ENACTS Data Sharing Tool",
     "code": "enacts",
-    "url": "https://your-enacts-dst-url/**",
+    "url": "https://your-enacts-dst-base-url/**",
     "headers": {
         "Content-Type": "application/json",
-        "X-API-Key": "Your enacts api key here"
+        "X-API-Key": "Your ENACTS DST API key here"
     },
     "disabled": false
 }`}
@@ -137,6 +154,9 @@ const DataProviderListItem = ({ dataProvider }) => {
             )
         }
     }, [showInfo, docsVersion])
+
+    const openInfo = ({ value }) => setShowInfo(value)
+    const closeInfo = () => setShowInfo(null)
 
     return (
         <TableRow>
@@ -147,11 +167,11 @@ const DataProviderListItem = ({ dataProvider }) => {
                         <div
                             className={cx(styles.dataProviderStatusIcon, {
                                 [styles.dataProviderOnline]:
-                                    providerStatus === 'Online',
+                                    providerStatus === ONLINE,
                                 [styles.dataProviderOffline]:
-                                    providerStatus === 'Offline',
+                                    providerStatus === OFFLINE,
                                 [styles.dataProviderMissing]:
-                                    providerStatus === 'Missing',
+                                    providerStatus === NOT_CONFIGURED,
                             })}
                         ></div>
                     )}
@@ -165,7 +185,7 @@ const DataProviderListItem = ({ dataProvider }) => {
             <TableCell>
                 <div ref={buttonRef}>
                     <Button
-                        value={dataProvider}
+                        value={dataProvider.name}
                         icon={<IconInfo16 />}
                         onClick={openInfo}
                     ></Button>
@@ -177,11 +197,13 @@ const DataProviderListItem = ({ dataProvider }) => {
                         dataTest="data-provider-info-modal"
                         large
                     >
-                        <ModalTitle>{showInfo.name} Info</ModalTitle>
+                        <ModalTitle>
+                            {i18n.t(`${showInfo} configuration`)}
+                        </ModalTitle>
                         <ModalContent>{getInfo}</ModalContent>
                         <ModalActions>
                             <Button onClick={closeInfo} primary>
-                                Close
+                                {i18n.t('Close')}
                             </Button>
                         </ModalActions>
                     </Modal>

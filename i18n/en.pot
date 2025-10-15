@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-10-15T12:41:02.775Z\n"
-"PO-Revision-Date: 2025-10-15T12:41:02.776Z\n"
+"POT-Creation-Date: 2025-10-15T13:51:44.253Z\n"
+"PO-Revision-Date: 2025-10-15T13:51:44.254Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -807,6 +807,9 @@ msgstr "Start year"
 msgid "End year"
 msgstr "End year"
 
+msgid "Chart settings"
+msgstr "Chart settings"
+
 msgid ""
 "Set y-axis values for charts in the Explore data section to make it easier "
 "to compare different org units. Leave blank to calculate based on data "
@@ -859,6 +862,9 @@ msgstr "Status"
 msgid "Info"
 msgstr "Info"
 
+msgid "Close"
+msgstr "Close"
+
 msgid "Calculate from data"
 msgstr "Calculate from data"
 
@@ -867,6 +873,9 @@ msgstr "App settings"
 
 msgid "Changes made below will apply to all users of this app."
 msgstr "Changes made below will apply to all users of this app."
+
+msgid "General settings"
+msgstr "General settings"
 
 msgid "Default start page for users"
 msgstr "Default start page for users"
