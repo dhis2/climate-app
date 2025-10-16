@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import {
     extractYear,
     formatStandardDate,
@@ -18,6 +19,7 @@ import {
     DAILY,
     WEEKLY,
     MONTHLY,
+    formatPeriodString,
 } from '../time.js'
 
 const timestamp = 1722902400000 // 2024-08-06
@@ -286,5 +288,37 @@ describe('time utils', () => {
             periodType: MONTHLY,
         })
         expect(periods.length).toEqual(12)
+    })
+
+    it('it should format year, month and full date strings in a locale-aware way', () => {
+        const locale = i18n.language
+
+        // Year only
+        const year = '2024'
+        const expectedYear = new Intl.DateTimeFormat(locale, {
+            year: 'numeric',
+        }).format(new Date(2024, 0, 1))
+        expect(formatPeriodString(year)).toEqual(expectedYear)
+
+        // Year + month
+        const yearMonth = '2024-08'
+        const expectedYearMonth = new Intl.DateTimeFormat(locale, {
+            year: 'numeric',
+            month: 'long',
+        }).format(new Date(2024, 7, 1))
+        expect(formatPeriodString(yearMonth)).toEqual(expectedYearMonth)
+
+        // Full date
+        const fullDate = '2024-08-06'
+        const expectedFullDate = new Intl.DateTimeFormat(locale, {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+        }).format(new Date(fullDate))
+        expect(formatPeriodString(fullDate)).toEqual(expectedFullDate)
+
+        // Fallback (unknown format) should return input unchanged
+        const fallback = 'not-a-date'
+        expect(formatPeriodString(fallback)).toEqual(fallback)
     })
 })
