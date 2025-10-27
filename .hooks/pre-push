@@ -1,0 +1,10 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "Running Vitest tests"
+yarn test
+
+# echo "Running Cypress Component Tests"
+# https://github.com/cypress-io/cypress/issues/29723#issuecomment-2182931609
+# unset ELECTRON_RUN_AS_NODE
+# yarn cy:comp:run
