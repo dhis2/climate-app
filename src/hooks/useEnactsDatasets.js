@@ -51,7 +51,6 @@ const parseVariableName = (variableName) => {
 }
 
 const parseEnactsDataset = (d, enactsInfo) => {
-    console.log('jj parseEnactsDataset d', d)
     // Note: enacts uses different terminology
     // "dataset" for collections of datasets, eg All stations or Monitoring
     // and "variable" for dataset, eg precip
@@ -66,7 +65,7 @@ const parseEnactsDataset = (d, enactsInfo) => {
         periodType: parsePeriodType(d.temporal_resolution),
         supportedPeriodTypes: [DAILY, MONTHLY],
         periodRange: parsePeriodRange(d.temporal_coverage),
-        resolution: `${d.spatial_resolution.lon} degrees x ${d.spatial_resolution.lat} degrees`, // TODO - i18n?
+        resolution: `${d.spatial_resolution.lon} degrees x ${d.spatial_resolution.lat} degrees`,
         variable: d.variable_name,
         source: enactsInfo.owner, // retrieved from the enacts server metadata
         dataElementCode: `ENACTS_${d.dataset_name.toUpperCase()}_${d.variable_name.toUpperCase()}`,
