@@ -40,7 +40,7 @@ const ImportPage = () => {
         [period, hasNoPeriod]
     )
     const valueCount = orgUnitCount * periodCount
-    const periodType = periodTypes
+    const periodTypeName = periodTypes
         .find((type) => type.id === period.periodType)
         ?.name.toLowerCase()
 
@@ -86,13 +86,13 @@ const ImportPage = () => {
                         {valueCount > maxValues && (
                             <div className={styles.warning}>
                                 {i18n.t(
-                                    'You can maximum import {{maxValues}} data values in a single import, but you are trying to import {{valueCount}} values for {{orgUnitCount}} organisation units over {{periodCount}} {{periodType}} periods. Please select a shorter period or fewer organisation units. You can always import more data later.',
+                                    'You can maximum import {{maxValues}} data values in a single import, but you are trying to import {{valueCount}} values for {{orgUnitCount}} organisation units over {{periodCount}} {{periodTypeName}} periods. Please select a shorter period or fewer organisation units. You can always import more data later.',
                                     {
                                         maxValues,
                                         valueCount,
                                         orgUnitCount,
                                         periodCount,
-                                        periodType,
+                                        periodTypeName,
                                     }
                                 )}
                             </div>
