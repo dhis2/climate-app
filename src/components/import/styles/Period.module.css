@@ -13,3 +13,9 @@
 .pickers > div {
     width: 45%;
 }
+
+.periodError {
+    color: #bb470d;
+    font-weight: bold;
+    margin-top: 8px;
+}

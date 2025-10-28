@@ -84,6 +84,15 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
     const hasNoPeriod = datasetPeriodType === 'N/A'
     const isYearly = datasetPeriodType === YEARLY
 
+    const periodErrorMessage =
+        startDateError && endDateError
+            ? i18n.t('Start and end date are not within the valid range.')
+            : startDateError
+            ? i18n.t('Start date is not within the valid range.')
+            : endDateError
+            ? i18n.t('End date is not within the valid range.')
+            : null
+
     return (
         <div className={styles.container}>
             <h2>{i18n.t('Period')}</h2>
@@ -137,7 +146,6 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
                             onDateSelect={updateStartDate}
                             warning={!!startDateError}
                             valid={!startDateError}
-                            validationText={startDateError}
                         />
                         <CalendarInput
                             label={i18n.t('End date')}
@@ -149,7 +157,6 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
                             onDateSelect={updateEndDate}
                             warning={!!endDateError}
                             valid={!endDateError}
-                            validationText={endDateError}
                         />
                         <TimeZone period={period} onChange={onChange} />
                     </div>
@@ -174,6 +181,9 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
                         })}
                     </strong>
                 </p>
+            )}
+            {periodErrorMessage && (
+                <p className={styles.periodError}>{periodErrorMessage}</p>
             )}
         </div>
     )
