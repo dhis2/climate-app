@@ -9,6 +9,13 @@ import {
     isValidPeriod,
     getPeriods,
     periodTypes,
+    fromStandardDate,
+    toDateObject,
+    formatStandardDate,
+    DAILY,
+    MONTHLY,
+    YEARLY,
+    oneDayInMs,
 } from '../../utils/time.js'
 import Dataset from '../shared/Dataset.jsx'
 import GEETokenCheck from '../shared/GEETokenCheck.jsx'
@@ -24,7 +31,6 @@ const maxValues = 50000
 const ImportPage = () => {
     const { systemInfo = {} } = useConfig()
     const { calendar = 'gregory' } = systemInfo
-
     const [dataset, setDataset] = useState()
     const [period, setPeriod] = useState(getDefaultImportPeriod(calendar))
     const [orgUnits, setOrgUnits] = useState()
@@ -61,6 +67,81 @@ const ImportPage = () => {
         setStartExtract(false)
     }, [dataset, period, orgUnits, dataElement])
 
+    const updatePeriod = ({ periodRange, periodType }) => {
+        if (periodRange) {
+            // compute end and start depending on requested periodType
+            // endTime will generally be converted from standard -> calendar
+            // For YEARLY we keep year values (e.g. "2023") so downstream code
+            // that expects years for yearly periods continues to work
+            let endTime = fromStandardDate(periodRange.end, calendar)
+            let startTime
+
+            try {
+                if (periodType === DAILY) {
+                    // subtract 30 days from end
+                    const endStd = toDateObject(periodRange.end)
+                    const endDate = new Date(
+                        endStd.year,
+                        endStd.month - 1,
+                        endStd.day
+                    )
+                    const startDate = new Date(
+                        endDate.getTime() - 30 * oneDayInMs
+                    )
+                    startTime = fromStandardDate(
+                        formatStandardDate(startDate),
+                        calendar
+                    )
+                } else if (periodType === MONTHLY) {
+                    // subtract 6 months from end
+                    const endStd = toDateObject(periodRange.end)
+                    const endDate = new Date(
+                        endStd.year,
+                        endStd.month - 1,
+                        endStd.day
+                    )
+                    const startDate = new Date(
+                        endDate.getFullYear(),
+                        endDate.getMonth() - 6,
+                        endDate.getDate()
+                    )
+                    startTime = fromStandardDate(
+                        formatStandardDate(startDate),
+                        calendar
+                    )
+                } else if (periodType === YEARLY) {
+                    // for yearly, work with years (keep values like "2023")
+                    const endYear = toDateObject(periodRange.end).year
+                    startTime = String(endYear - 1)
+                    // keep endTime as year string as well
+                    endTime = String(endYear)
+                } else {
+                    // fallback to provided start
+                    startTime = fromStandardDate(periodRange.start, calendar)
+                }
+            } catch (e) {
+                // if anything goes wrong, fallback to original values
+                console.warn(
+                    'Failed to compute relative startTime, falling back',
+                    e
+                )
+                startTime = fromStandardDate(periodRange.start, calendar)
+                endTime = fromStandardDate(periodRange.end, calendar)
+            }
+
+            const newPeriod = {
+                periodType,
+                calendar,
+                locale: period.locale,
+                startTime,
+                endTime,
+            }
+            setPeriod(newPeriod)
+        } else {
+            setPeriod(getDefaultImportPeriod(calendar))
+        }
+    }
+
     return (
         <div className={styles.page}>
             <h1>{i18n.t('Import weather and climate data')}</h1>
@@ -74,10 +155,10 @@ const ImportPage = () => {
                             onChange={(dataset) => {
                                 setDataset(dataset)
                                 setDataElement(null)
+                                updatePeriod(dataset)
                             }}
                         />
                         <Period
-                            calendar={calendar}
                             period={period}
                             dataset={dataset}
                             onChange={setPeriod}

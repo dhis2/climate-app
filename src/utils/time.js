@@ -306,15 +306,13 @@ export const getStandardPeriod = ({
  * @param {Object} period Calendar period object
  * @returns {Array} Period items
  */
-export const getPeriods = (period) => {
-    const {
-        periodType,
-        startTime,
-        endTime,
-        calendar = 'gregory',
-        locale = 'en',
-    } = period
-
+export const getPeriods = ({
+    periodType,
+    startTime,
+    endTime,
+    calendar = 'gregory',
+    locale = 'en',
+}) => {
     if (periodType === YEARLY) {
         return generateFixedPeriods({
             year: endTime,
@@ -381,39 +379,105 @@ export const isValidPeriod = (period) =>
     )
 
 /**
- * Format period string to human readable string that respects local language
- * TODO: Not sure if these respect calendar...?
- * @param {Object} period Period object with start and end
+ * Format ISO date to human readable string that respects local language
+ * @param {Object} period ISO date
+ * @param {String} calendar Calendar used
  * @returns {string} human readable period string
  */
-export const formatPeriodString = (period) => {
-    const locale = i18n.language
-    if (/^\d{4}$/.test(period)) {
+export const getDateStringFromIsoDate = ({
+    iso8601Date,
+    calendar = 'gregory',
+    locale,
+}) => {
+    // For non-gregorian calendar, prefer deterministic labels from @dhis2/multi-calendar-dates
+    if (calendar !== 'gregory') {
+        try {
+            // Year only (calendar year)
+            if (/^\d{4}$/.test(iso8601Date)) {
+                const calYearStr = fromStandardDate(
+                    `${iso8601Date}-01-01`,
+                    calendar
+                ).split('-')[0]
+                const yearNum = Number.parseInt(calYearStr, 10)
+                const items = generateFixedPeriods({
+                    year: yearNum,
+                    calendar,
+                    locale,
+                    periodType: YEARLY,
+                    yearsCount: 1,
+                })
+                if (items && items.length) {
+                    return items[0].displayName || iso8601Date
+                }
+            }
+
+            // Year + month (monthly displayName)
+            if (/^\d{4}-\d{2}$/.test(iso8601Date)) {
+                const [year, month] = iso8601Date.split('-')
+                const calDate = fromStandardDate(
+                    `${year}-${month}-01`,
+                    calendar
+                )
+                const calYear = Number.parseInt(calDate.split('-')[0], 10)
+                const months = generateFixedPeriods({
+                    year: calYear,
+                    calendar,
+                    locale,
+                    periodType: MONTHLY,
+                })
+                const found = months.find((m) => m.startDate === calDate)
+                if (found) {
+                    return found.displayName || iso8601Date
+                }
+            }
+
+            // Full date (daily)
+            if (/^\d{4}-\d{2}-\d{2}$/.test(iso8601Date)) {
+                const calDate = fromStandardDate(iso8601Date, calendar)
+                const calYear = Number.parseInt(calDate.split('-')[0], 10)
+                const days = generateFixedPeriods({
+                    year: calYear,
+                    calendar,
+                    locale,
+                    periodType: DAILY,
+                })
+                const found = days.find((d) => d.startDate === calDate)
+                if (found) {
+                    return found.displayName || iso8601Date
+                }
+            }
+        } catch (e) {
+            // Fall through to Intl fallback on any error
+        }
+    }
+
+    // Fallback: use Intl (Gregorian)
+    if (/^\d{4}$/.test(iso8601Date)) {
         // Year only
         return new Intl.DateTimeFormat(locale, { year: 'numeric' }).format(
-            new Date(period, 0, 1)
+            new Date(iso8601Date, 0, 1)
         )
-    } else if (/^\d{4}-\d{2}$/.test(period)) {
+    } else if (/^\d{4}-\d{2}$/.test(iso8601Date)) {
         // Year + month
-        const [year, month] = period.split('-')
+        const [year, month] = iso8601Date.split('-')
         return new Intl.DateTimeFormat(locale, {
             year: 'numeric',
             month: 'long',
         }).format(new Date(year, month - 1, 1))
-    } else if (/^\d{4}-\d{2}-\d{2}$/.test(period)) {
+    } else if (/^\d{4}-\d{2}-\d{2}$/.test(iso8601Date)) {
         // Full date
         return new Intl.DateTimeFormat(locale, {
             year: 'numeric',
             month: 'long',
             day: 'numeric',
-        }).format(new Date(period))
+        }).format(new Date(iso8601Date))
     }
-    return period // fallback: return as-is
+
+    return iso8601Date // fallback: return as-is
 }
 
 /**
  * Normalize partial ISO strings into full ISO date strings (YYYY-MM-DD).
- * TODO: Not sure if these respect calendar...?
  * Supported inputs:
  *   - YYYY (year)
  *   - YYYY-MM (year + month)
@@ -424,6 +488,10 @@ export const formatPeriodString = (period) => {
  * @returns {string} Normalized ISO date string (YYYY-MM-DD)
  */
 export const normalizeIsoDate = (input) => {
+    if (!input || typeof input !== 'string') {
+        return null
+    }
+
     // Year only → first day of year
     if (/^\d{4}$/.test(input)) {
         return `${input}-01-01`
@@ -459,5 +527,5 @@ export const normalizeIsoDate = (input) => {
         return input
     }
 
-    throw new Error(`Unsupported ISO date format: ${input}`)
+    return null
 }

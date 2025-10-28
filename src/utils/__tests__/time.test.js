@@ -16,10 +16,11 @@ import {
     toStandardDate,
     getPeriods,
     oneDayInMs,
+    normalizeIsoDate,
     DAILY,
     WEEKLY,
     MONTHLY,
-    formatPeriodString,
+    getDateStringFromIsoDate,
 } from '../time.js'
 
 const timestamp = 1722902400000 // 2024-08-06
@@ -290,35 +291,92 @@ describe('time utils', () => {
         expect(periods.length).toEqual(12)
     })
 
-    it('it should format year, month and full date strings in a locale-aware way', () => {
-        const locale = i18n.language
-
+    it('it should format Gregorian year, month and full date strings in a locale-aware way', () => {
         // Year only
         const year = '2024'
-        const expectedYear = new Intl.DateTimeFormat(locale, {
-            year: 'numeric',
-        }).format(new Date(2024, 0, 1))
-        expect(formatPeriodString(year)).toEqual(expectedYear)
+        expect(getDateStringFromIsoDate({ iso8601Date: year })).toEqual('2024')
 
         // Year + month
         const yearMonth = '2024-08'
-        const expectedYearMonth = new Intl.DateTimeFormat(locale, {
-            year: 'numeric',
-            month: 'long',
-        }).format(new Date(2024, 7, 1))
-        expect(formatPeriodString(yearMonth)).toEqual(expectedYearMonth)
+        expect(getDateStringFromIsoDate({ iso8601Date: yearMonth })).toEqual(
+            'August 2024'
+        )
 
         // Full date
-        const fullDate = '2024-08-06'
-        const expectedFullDate = new Intl.DateTimeFormat(locale, {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-        }).format(new Date(fullDate))
-        expect(formatPeriodString(fullDate)).toEqual(expectedFullDate)
+        const yearMonthDay = '2024-08-06'
+        expect(getDateStringFromIsoDate({ iso8601Date: yearMonthDay })).toEqual(
+            'August 6, 2024'
+        )
 
         // Fallback (unknown format) should return input unchanged
         const fallback = 'not-a-date'
-        expect(formatPeriodString(fallback)).toEqual(fallback)
+        expect(getDateStringFromIsoDate({ iso8601Date: fallback })).toEqual(
+            fallback
+        )
+    })
+
+    it('it should format an Ethiopic full date', () => {
+        const iso8601Date = '2016-11-30'
+        const expected = 'Hedar 21, 2009 ERA0'
+        expect(
+            getDateStringFromIsoDate({ iso8601Date, calendar: 'ethiopic' })
+        ).toEqual(expected)
+    })
+
+    it('it should format a Nepali year-month', () => {
+        const input = '2023-08'
+        const expected = 'August 2023'
+        expect(
+            getDateStringFromIsoDate({ iso8601Date: input, calendar: 'nepali' })
+        ).toEqual(expected)
+    })
+
+    it('it should format strings using Gregorian Norwegian (nb) locale when i18n.language is nb', () => {
+        const prevLang = i18n.language
+        const locale = 'nb'
+        try {
+            // Year only
+            const year = '2024'
+            expect(
+                getDateStringFromIsoDate({ iso8601Date: year, locale })
+            ).toEqual('2024')
+
+            // Year + month
+            const yearMonth = '2024-08'
+            expect(
+                getDateStringFromIsoDate({ iso8601Date: yearMonth, locale })
+            ).toEqual('august 2024')
+
+            // Full date
+            const fullDate = '2024-08-06'
+            expect(
+                getDateStringFromIsoDate({ iso8601Date: fullDate, locale })
+            ).toEqual('6. august 2024')
+
+            // Fallback
+            const fallback = 'ikke-en-dato'
+            expect(
+                getDateStringFromIsoDate({ iso8601Date: fallback, locale })
+            ).toEqual(fallback)
+        } finally {
+            i18n.language = prevLang
+        }
+    })
+
+    it('it should normalize partial ISO dates', () => {
+        // Year only
+        expect(normalizeIsoDate('2024')).toEqual('2024-01-01')
+
+        // Year + month
+        expect(normalizeIsoDate('2024-08')).toEqual('2024-08-01')
+
+        // ISO week: week 1 of 2024 starts on 2024-01-01
+        expect(normalizeIsoDate('2024-W01')).toEqual('2024-01-01')
+
+        // Full date unchanged
+        expect(normalizeIsoDate('2024-08-06')).toEqual('2024-08-06')
+
+        // Invalid format -> throws
+        expect(() => normalizeIsoDate('not-a-date')).toThrow(Error)
     })
 })

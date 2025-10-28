@@ -554,7 +554,7 @@ export const era5HeatDaily = {
     datasetId: 'projects/climate-engine-pro/assets/ce-era5-heat',
     band: ['utci_mean', 'utci_min', 'utci_max'],
     reducer: ['mean', 'min', 'max'],
-    periodType: 'daily',
+    periodType: DAILY,
     resolution: era5Resolution,
 }
 
