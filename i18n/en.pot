@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-10-17T14:58:52.101Z\n"
-"PO-Revision-Date: 2025-10-17T14:58:52.101Z\n"
+"POT-Creation-Date: 2025-11-11T15:10:37.910Z\n"
+"PO-Revision-Date: 2025-11-11T15:10:37.911Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -619,14 +619,14 @@ msgstr "{{name}}: {{band}} vegetation index {{period}}"
 msgid "Value is only for 250 x 250 m where the facility is located"
 msgstr "Value is only for 250 x 250 m where the facility is located"
 
-msgid "Data element"
-msgstr "Data element"
+msgid "Dhis2 data element"
+msgstr "Dhis2 data element"
 
 msgid "No match found"
 msgstr "No match found"
 
-msgid "Data element to import data to"
-msgstr "Data element to import data to"
+msgid "Loading data elements..."
+msgstr "Loading data elements..."
 
 msgid "Loading org units"
 msgstr "Loading org units"
@@ -659,8 +659,11 @@ msgstr "One or more conflicts encountered"
 msgid "Import weather and climate data"
 msgstr "Import weather and climate data"
 
-msgid "Data"
-msgstr "Data"
+msgid "Choose data source"
+msgstr "Choose data source"
+
+msgid "Choose destination data element"
+msgstr "Choose destination data element"
 
 msgid ""
 "You can maximum import {{maxValues}} data values in a single import, but "
@@ -675,84 +678,20 @@ msgstr ""
 "select a shorter period or fewer organisation units. You can always import "
 "more data later."
 
-msgid "Instructions"
-msgstr "Instructions"
+msgid "Review and import"
+msgstr "Review and import"
 
-msgid ""
-"Before you can import data, you need to create the associated data elements "
-"in DHIS2. See our setup guide in the left menu."
-msgstr ""
-"Before you can import data, you need to create the associated data elements "
-"in DHIS2. See our setup guide in the left menu."
+msgid "Start import"
+msgstr "Start import"
 
-msgid ""
-"Data can be imported in batches. We recommend that you start with a few "
-"organisation units to make sure everything works as expected."
-msgstr ""
-"Data can be imported in batches. We recommend that you start with a few "
-"organisation units to make sure everything works as expected."
+msgid "For every {{periodNoun}} between {{startDate}} and {{endDate}}"
+msgstr "For every {{periodNoun}} between {{startDate}} and {{endDate}}"
 
-msgid "Select the variable you would like to import."
-msgstr "Select the variable you would like to import."
+msgid "To all organisation units at {{orgLevel}} level within {{orgUnit}}"
+msgstr "To all organisation units at {{orgLevel}} level within {{orgUnit}}"
 
-msgid "Period"
-msgstr "Period"
-
-msgid ""
-"Select the start and end dates for your import. We will import daily data "
-"for the selected period. You can aggregate data to other period types "
-"(weekly/monthly) in DHIS2. If your DHIS2 instance use a different timezone "
-"than UTC, we will calculate daily values based on this timezone."
-msgstr ""
-"Select the start and end dates for your import. We will import daily data "
-"for the selected period. You can aggregate data to other period types "
-"(weekly/monthly) in DHIS2. If your DHIS2 instance use a different timezone "
-"than UTC, we will calculate daily values based on this timezone."
-
-msgid "Parent organisation unit"
-msgstr "Parent organisation unit"
-
-msgid ""
-"Select a parent organisation unit for the import. We will import data for "
-"children that are below this organisation unit."
-msgstr ""
-"Select a parent organisation unit for the import. We will import data for "
-"children that are below this organisation unit."
-
-msgid "Organisation unit level"
-msgstr "Organisation unit level"
-
-msgid ""
-"Select the organisation unit level for the import. We will import data for "
-"this level that are below the parent organisation unit. If the parent "
-"organisation unit is on the same level, we will import data for this single "
-"organisation unit."
-msgstr ""
-"Select the organisation unit level for the import. We will import data for "
-"this level that are below the parent organisation unit. If the parent "
-"organisation unit is on the same level, we will import data for this single "
-"organisation unit."
-
-msgid ""
-"Select the DHIS2 data element you would like to import the data into. See "
-"the “Setup guide” for more information on how to configure this data "
-"element."
-msgstr ""
-"Select the DHIS2 data element you would like to import the data into. See "
-"the “Setup guide” for more information on how to configure this data "
-"element."
-
-msgid "Import summary"
-msgstr "Import summary"
-
-msgid ""
-"When data is imported, we will show a summary of the import. This includes "
-"the number of data values that were successfully imported or updated. If "
-"data values fail to import, we will show the reason for the failure."
-msgstr ""
-"When data is imported, we will show a summary of the import. This includes "
-"the number of data values that were successfully imported or updated. If "
-"data values fail to import, we will show the reason for the failure."
+msgid "To data element \"{{dataElement}}\""
+msgstr "To data element \"{{dataElement}}\""
 
 msgid "Data is imported"
 msgstr "Data is imported"
@@ -779,11 +718,33 @@ msgstr ""
 "ERA5-Land has limited data for costal areas. Values for other org units "
 "will be imported."
 
-msgid "Organisation unit level to import data to"
-msgstr "Organisation unit level to import data to"
+msgid "Loading organisation units..."
+msgstr "Loading organisation units..."
+
+msgid "Select organisation unit and level"
+msgstr "Select organisation unit and level"
+
+msgid ""
+"First choose an organisation unit. All units at the selected level within "
+"this org unit will be included"
+msgstr ""
+"First choose an organisation unit. All units at the selected level within "
+"this org unit will be included"
 
 msgid "Org unit parent needs to be above or equal to the org unit level"
 msgstr "Org unit parent needs to be above or equal to the org unit level"
+
+msgid "Next choose the organisation unit level that data will be imported to"
+msgstr "Next choose the organisation unit level that data will be imported to"
+
+msgid "Start and end date are not within the valid range."
+msgstr "Start and end date are not within the valid range."
+
+msgid "Start date is not within the valid range."
+msgstr "Start date is not within the valid range."
+
+msgid "End date is not within the valid range."
+msgstr "End date is not within the valid range."
 
 msgid ""
 "The data will be assigned a default yearly period that matches the year it "
@@ -792,14 +753,17 @@ msgstr ""
 "The data will be assigned a default yearly period that matches the year it "
 "was collected: {{datasetPeriod}}"
 
-msgid "Daily values will be imported between start and end dates"
-msgstr "Daily values will be imported between start and end dates"
-
 msgid "Valid range"
 msgstr "Valid range"
 
-msgid "Period type"
-msgstr "Period type"
+msgid "Daily values between start and end dates will be imported to DHIS2"
+msgstr "Daily values between start and end dates will be imported to DHIS2"
+
+msgid "Period type to import into"
+msgstr "Period type to import into"
+
+msgid "Choose year range:"
+msgstr "Choose year range:"
 
 msgid "Start year"
 msgstr "Start year"
@@ -977,6 +941,9 @@ msgstr ""
 msgid "Data set: \"{{-name}}\""
 msgstr "Data set: \"{{-name}}\""
 
+msgid "Period type"
+msgstr "Period type"
+
 msgid "Organisation units"
 msgstr "Organisation units"
 
@@ -1049,14 +1016,14 @@ msgstr ""
 msgid "Loading data"
 msgstr "Loading data"
 
-msgid "Error"
-msgstr "Error"
-
 msgid "Select data to import"
 msgstr "Select data to import"
 
-msgid "Data is from {{source}}. Accessed via {{provider}}."
-msgstr "Data is from {{source}}. Accessed via {{provider}}."
+msgid "Data is from"
+msgstr "Data is from"
+
+msgid "Accessed via"
+msgstr "Accessed via"
 
 msgid "Warning"
 msgstr "Warning"
@@ -1101,21 +1068,6 @@ msgstr ""
 
 msgid "Time zone"
 msgstr "Time zone"
-
-msgid "ERA5-Land / Copernicus Climate Change Service"
-msgstr "ERA5-Land / Copernicus Climate Change Service"
-
-msgid "ERA5-Heat / Copernicus Climate Change Service"
-msgstr "ERA5-Heat / Copernicus Climate Change Service"
-
-msgid "Climate Hazards Center / UCSB"
-msgstr "Climate Hazards Center / UCSB"
-
-msgid "NASA LP DAAC at the USGS EROS Center"
-msgstr "NASA LP DAAC at the USGS EROS Center"
-
-msgid "NASA / USGS / JPL-Caltech"
-msgstr "NASA / USGS / JPL-Caltech"
 
 msgid "Approximately 31 km (0.25°)"
 msgstr "Approximately 31 km (0.25°)"
@@ -1324,9 +1276,6 @@ msgstr "Weekly or Monthly"
 msgid "Land"
 msgstr "Land"
 
-msgid "Yearly"
-msgstr "Yearly"
-
 msgid "Heat/cold stress"
 msgstr "Heat/cold stress"
 
@@ -1407,3 +1356,18 @@ msgstr "NASA / USGS / JPL-Caltech / Google Earth Engine"
 
 msgid "No data found for the selected period"
 msgstr "No data found for the selected period"
+
+msgid "day"
+msgstr "day"
+
+msgid "week"
+msgstr "week"
+
+msgid "month"
+msgstr "month"
+
+msgid "Yearly"
+msgstr "Yearly"
+
+msgid "year"
+msgstr "year"

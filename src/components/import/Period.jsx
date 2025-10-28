@@ -8,6 +8,7 @@ import {
     normalizeIsoDate,
     getDateStringFromIsoDate,
 } from '../../utils/time.js'
+import SectionH2 from '../shared/SectionH2.jsx'
 import TimeZone from '../shared/TimeZone.jsx'
 import PeriodType from './PeriodType.jsx'
 import styles from './styles/Period.module.css'
@@ -84,9 +85,17 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
     const hasNoPeriod = datasetPeriodType === 'N/A'
     const isYearly = datasetPeriodType === YEARLY
 
+    const periodErrorMessage =
+        startDateError && endDateError
+            ? i18n.t('Start and end date are not within the valid range.')
+            : startDateError
+            ? i18n.t('Start date is not within the valid range.')
+            : endDateError
+            ? i18n.t('End date is not within the valid range.')
+            : null
+
     return (
         <div className={styles.container}>
-            <h2>{i18n.t('Period')}</h2>
             {hasNoPeriod && (
                 <p>
                     {i18n.t(
@@ -96,30 +105,38 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
                 </p>
             )}
             {isYearly && (
-                <div className={styles.pickers}>
-                    <PeriodType
-                        periodType={periodType}
-                        supportedPeriodTypes={datasetSupportedPeriodTypes}
-                        onChange={(periodType) =>
-                            onChange({ ...period, periodType })
-                        }
-                    />
-                    <YearRange
-                        period={period}
-                        minYear={Number.parseInt(datasetPeriodRange.start)}
-                        maxYear={Number.parseInt(datasetPeriodRange.end)}
-                        onChange={onChange}
-                    />
-                </div>
-            )}
-            {!hasNoPeriod && !isYearly && (
                 <>
-                    <p>
-                        {i18n.t(
-                            'Daily values will be imported between start and end dates'
+                    {' '}
+                    <SectionH2 number="2" title="Configure period" />
+                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                        <div className={styles.pickers}>
+                            <YearRange
+                                period={period}
+                                minYear={datasetPeriodRange.start}
+                                maxYear={datasetPeriodRange.end}
+                                onChange={onChange}
+                            />
+                        </div>
+                        {datasetPeriodRange && (
+                            <p>
+                                {i18n.t('Valid range')}:{' '}
+                                <strong>
+                                    {getDateStringFromIsoDate({
+                                        date: datasetPeriodRange.start,
+                                        calendar,
+                                        locale: period.locale,
+                                    })}
+                                </strong>{' '}
+                                -{' '}
+                                <strong>
+                                    {getDateStringFromIsoDate({
+                                        date: datasetPeriodRange.end,
+                                        calendar,
+                                        locale: period.locale,
+                                    })}
+                                </strong>
+                            </p>
                         )}
-                    </p>
-                    <div className={styles.pickers}>
                         <PeriodType
                             periodType={periodType}
                             supportedPeriodTypes={datasetSupportedPeriodTypes}
@@ -127,6 +144,18 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
                                 onChange({ ...period, periodType })
                             }
                         />
+                    </div>
+                </>
+            )}
+            {!hasNoPeriod && !isYearly && (
+                <>
+                    <SectionH2 number="2" title="Configure period" />
+                    <p>
+                        {i18n.t(
+                            'Daily values between start and end dates will be imported to DHIS2'
+                        )}
+                    </p>
+                    <div className={styles.pickers}>
                         <CalendarInput
                             label={i18n.t('Start date')}
                             date={startTime}
@@ -137,7 +166,6 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
                             onDateSelect={updateStartDate}
                             warning={!!startDateError}
                             valid={!startDateError}
-                            validationText={startDateError}
                         />
                         <CalendarInput
                             label={i18n.t('End date')}
@@ -149,31 +177,41 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
                             onDateSelect={updateEndDate}
                             warning={!!endDateError}
                             valid={!endDateError}
-                            validationText={endDateError}
                         />
                         <TimeZone period={period} onChange={onChange} />
                     </div>
+                    {datasetPeriodRange && (
+                        <p>
+                            {i18n.t('Valid range')}:{' '}
+                            <strong>
+                                {getDateStringFromIsoDate({
+                                    date: datasetPeriodRange.start,
+                                    calendar,
+                                    locale: period.locale,
+                                })}
+                            </strong>{' '}
+                            -{' '}
+                            <strong>
+                                {getDateStringFromIsoDate({
+                                    date: datasetPeriodRange.end,
+                                    calendar,
+                                    locale: period.locale,
+                                })}
+                            </strong>
+                        </p>
+                    )}
+                    <PeriodType
+                        periodType={periodType}
+                        supportedPeriodTypes={datasetSupportedPeriodTypes}
+                        onChange={(periodType) =>
+                            onChange({ ...period, periodType })
+                        }
+                    />
                 </>
             )}
-            {datasetPeriodRange && (
-                <p>
-                    {i18n.t('Valid range')}:{' '}
-                    <strong>
-                        {getDateStringFromIsoDate({
-                            iso8601Date: datasetPeriodRange.start,
-                            calendar,
-                            locale: period.locale,
-                        })}
-                    </strong>{' '}
-                    -{' '}
-                    <strong>
-                        {getDateStringFromIsoDate({
-                            iso8601Date: datasetPeriodRange.end,
-                            calendar,
-                            locale: period.locale,
-                        })}
-                    </strong>
-                </p>
+
+            {periodErrorMessage && (
+                <p className={styles.periodError}>{periodErrorMessage}</p>
             )}
         </div>
     )

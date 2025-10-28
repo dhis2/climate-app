@@ -1,17 +1,20 @@
 .page {
-    margin-right: 24px;
     margin-bottom: 30px;
+    inline-size: 800px;
 }
 
 .page h1 {
     color: var(--colors-grey900);
     font-size: 24px;
     font-weight: 500;
+    /* margin-inline-start: 16px; */
 }
 
 .page h2 {
     font-size: 16px;
-    margin: 20px 0 8px;
+    padding: 8px 0;
+    margin: 0 0 8px 0;
+    display: inline;
 }
 
 .page p {
@@ -20,7 +23,9 @@
 }
 
 .container {
-    padding: 0 20px 20px 20px;
+    padding-block-end: 20px;
+    padding-inline: 20px;
+    padding-block-start: 0;
     background-color: #fff;
     border: 1px solid #ccc;
 }
@@ -49,4 +54,14 @@
     color: red;
     font-size: 14px;
     margin-top: 6px;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+
+.formContainer {
+    padding: var(--spacers-dp16) var(--spacers-dp12);
+    background-color: var(--colors-grey050);
+    margin-block-end: var(--spacers-dp16);
 }

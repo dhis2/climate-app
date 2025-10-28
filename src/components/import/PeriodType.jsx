@@ -1,19 +1,15 @@
 import i18n from '@dhis2/d2-i18n'
-import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
+import { Radio, Field } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import { periodTypes } from '../../utils/time.js'
 
-const PeriodType = ({ periodType, supportedPeriodTypes, onChange }) => {
-    // wait for necessary information about supported period types
-    if (!supportedPeriodTypes) {
-        return null
-    }
+const defaultPeriodTypes = ['DAILY', 'WEEKLY', 'MONTHLY']
 
-    // get period type objects from supported period type ids
-    const supportedPeriodTypeObjects = periodTypes?.filter((type) =>
-        supportedPeriodTypes.includes(type.id)
-    )
-    //console.log('periodtype supported', supportedPeriodTypeObjects)
+const PeriodType = ({ periodType, supportedPeriodTypes, onChange }) => {
+    // get period type objects from supported period type ids, or use defaults
+    const supportedPeriodTypeObjects = supportedPeriodTypes
+        ? periodTypes?.filter((type) => supportedPeriodTypes.includes(type.id))
+        : periodTypes.filter((type) => defaultPeriodTypes.includes(type.id))
 
     // make sure selected period type is supported by dataset period type, or set to undefined
     let selectedPeriodType = supportedPeriodTypeObjects
@@ -32,19 +28,26 @@ const PeriodType = ({ periodType, supportedPeriodTypes, onChange }) => {
     }
 
     return (
-        <SingleSelectField
-            label={i18n.t('Period type')}
-            selected={selectedPeriodType}
-            onChange={({ selected }) => onChange(selected)}
-        >
-            {supportedPeriodTypeObjects.map((type) => (
-                <SingleSelectOption
-                    key={type.id}
-                    value={type.id}
-                    label={type.name}
-                />
-            ))}
-        </SingleSelectField>
+        <div style={{ display: 'flex' }}>
+            <Field label={i18n.t('Period type to import into')}>
+                <div style={{ display: 'flex', gap: '16px' }}>
+                    {supportedPeriodTypeObjects.map((type) => (
+                        <Radio
+                            key={type.id}
+                            name="periodType"
+                            value={type.id}
+                            label={type.name}
+                            disabled={
+                                !supportedPeriodTypes ||
+                                supportedPeriodTypes.length === 1
+                            }
+                            checked={selectedPeriodType === type.id}
+                            onChange={({ value }) => onChange(value)}
+                        />
+                    ))}
+                </div>
+            </Field>
+        </div>
     )
 }
 

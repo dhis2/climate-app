@@ -53,11 +53,11 @@ const vegetationIndexParser = (v) => roundTwoDecimals(v * 0.0001).toString()
 
 const twoDecimals = (v) => roundTwoDecimals(v).toString()
 
-const era5Source = i18n.t('ERA5-Land / Copernicus Climate Change Service')
-const era5HeatSource = i18n.t('ERA5-Heat / Copernicus Climate Change Service')
-const chirpsSource = i18n.t('Climate Hazards Center / UCSB')
-const modisSource = i18n.t('NASA LP DAAC at the USGS EROS Center')
-const demSource = i18n.t('NASA / USGS / JPL-Caltech')
+const era5Source = 'ERA5-Land / Copernicus Climate Change Service'
+const era5HeatSource = 'ERA5-Heat / Copernicus Climate Change Service'
+const chirpsSource = 'Climate Hazards Center / UCSB'
+const modisSource = 'NASA LP DAAC at the USGS EROS Center'
+const demSource = 'NASA / USGS / JPL-Caltech'
 
 export const era5Resolution = i18n.t('Approximately 31 km (0.25°)')
 export const era5LandResolution = i18n.t('Approximately 9 km (0.1°)')

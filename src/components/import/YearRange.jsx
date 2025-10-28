@@ -16,8 +16,8 @@ const YearRange = ({ period, minYear, maxYear, onChange }) => {
             onChange({
                 ...period,
                 periodType: YEARLY,
-                startTime: minYear.toString(),
-                endTime: maxYear.toString(),
+                startTime: minYear,
+                endTime: maxYear,
             })
         }
     }, [maxYear, minYear, period, onChange])
@@ -27,28 +27,31 @@ const YearRange = ({ period, minYear, maxYear, onChange }) => {
     }
 
     return (
-        <div className={styles.yearRange}>
-            <YearSelect
-                label={i18n.t('Start year')}
-                year={period.startTime}
-                minYear={minYear}
-                maxYear={maxYear}
-                onChange={onYearChange('startTime')}
-            />
-            <YearSelect
-                label={i18n.t('End year')}
-                year={period.endTime}
-                minYear={minYear}
-                maxYear={maxYear}
-                onChange={onYearChange('endTime')}
-            />
+        <div style={{ display: 'flex', flexDirection: 'row' }}>
+            <span>{i18n.t('Choose year range:', { nsSeparator: '^^' })}</span>
+            <div className={styles.yearRange}>
+                <YearSelect
+                    label={i18n.t('Start year')}
+                    year={period.startTime}
+                    minYear={minYear}
+                    maxYear={maxYear}
+                    onChange={onYearChange('startTime')}
+                />
+                <YearSelect
+                    label={i18n.t('End year')}
+                    year={period.endTime}
+                    minYear={minYear}
+                    maxYear={maxYear}
+                    onChange={onYearChange('endTime')}
+                />
+            </div>
         </div>
     )
 }
 
 YearRange.propTypes = {
-    maxYear: PropTypes.number.isRequired,
-    minYear: PropTypes.number.isRequired,
+    maxYear: PropTypes.string.isRequired,
+    minYear: PropTypes.string.isRequired,
     period: PropTypes.shape({
         endTime: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
             .isRequired,

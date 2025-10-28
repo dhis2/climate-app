@@ -8,6 +8,7 @@ import {
 import PropTypes from 'prop-types'
 import React from 'react'
 import useDatasets from '../../hooks/useDatasets.js'
+import SectionH2 from './SectionH2.jsx'
 
 const Dataset = ({ title, selected, onChange, showDescription = true }) => {
     const { data: datasets, loading, error } = useDatasets()
@@ -15,20 +16,13 @@ const Dataset = ({ title, selected, onChange, showDescription = true }) => {
     if (loading) {
         return <CircularLoader large />
     }
-    if (error) {
-        return (
-            <NoticeBox title={i18n.t('Error')} error>
-                {error}
-            </NoticeBox>
-        )
-    }
 
     return (
-        <div>
-            {title && <h2>{title}</h2>}
+        <>
+            {title && <SectionH2 number="1" title={title} />}
             <SingleSelectField
                 filterable
-                label={i18n.t('Select data to import')}
+                label={!title && i18n.t('Select data to import')}
                 selected={selected?.id}
                 onChange={({ selected }) =>
                     onChange(datasets.find((d) => d.id === selected))
@@ -44,16 +38,10 @@ const Dataset = ({ title, selected, onChange, showDescription = true }) => {
             </SingleSelectField>
 
             {selected && showDescription && <p>{selected.description}</p>}
-
             {selected && showDescription && (
                 <p>
-                    {i18n.t(
-                        'Data is from {{source}}. Accessed via {{provider}}.',
-                        {
-                            source: selected.source,
-                            provider: selected.provider.name,
-                        }
-                    )}
+                    {i18n.t('Data is from')} {selected.source}.{' '}
+                    {i18n.t('Accessed via')} {selected.provider.name}.
                 </p>
             )}
 
@@ -69,7 +57,7 @@ const Dataset = ({ title, selected, onChange, showDescription = true }) => {
                     </ul>
                 </NoticeBox>
             )}
-        </div>
+        </>
     )
 }
 
