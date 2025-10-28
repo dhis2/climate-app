@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-09-08T09:55:48.384Z\n"
-"PO-Revision-Date: 2025-09-08T09:55:48.384Z\n"
+"POT-Creation-Date: 2025-10-28T13:03:27.233Z\n"
+"PO-Revision-Date: 2025-10-28T13:03:27.234Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -644,6 +644,9 @@ msgstr ""
 msgid "Extracting data for {{orgUnitsCount}} org units"
 msgstr "Extracting data for {{orgUnitsCount}} org units"
 
+msgid "Dataset provider not recognized"
+msgstr "Dataset provider not recognized"
+
 msgid "Importing data to DHIS2"
 msgstr "Importing data to DHIS2"
 
@@ -656,16 +659,19 @@ msgstr "One or more conflicts encountered"
 msgid "Import weather and climate data"
 msgstr "Import weather and climate data"
 
+msgid "Data"
+msgstr "Data"
+
 msgid ""
 "You can maximum import {{maxValues}} data values in a single import, but "
 "you are trying to import {{valueCount}} values for {{orgUnitCount}} "
-"organisation units over {{periodCount}} {{periodType}} periods. Please "
+"organisation units over {{periodCount}} {{periodTypeName}} periods. Please "
 "select a shorter period or fewer organisation units. You can always import "
 "more data later."
 msgstr ""
 "You can maximum import {{maxValues}} data values in a single import, but "
 "you are trying to import {{valueCount}} values for {{orgUnitCount}} "
-"organisation units over {{periodCount}} {{periodType}} periods. Please "
+"organisation units over {{periodCount}} {{periodTypeName}} periods. Please "
 "select a shorter period or fewer organisation units. You can always import "
 "more data later."
 
@@ -685,9 +691,6 @@ msgid ""
 msgstr ""
 "Data can be imported in batches. We recommend that you start with a few "
 "organisation units to make sure everything works as expected."
-
-msgid "Data"
-msgstr "Data"
 
 msgid "Select the variable you would like to import."
 msgstr "Select the variable you would like to import."
@@ -763,6 +766,9 @@ msgstr "Updated"
 msgid "Ignored"
 msgstr "Ignored"
 
+msgid "Missing"
+msgstr "Missing"
+
 msgid "No data for the following org units"
 msgstr "No data for the following org units"
 
@@ -779,6 +785,15 @@ msgstr "Organisation unit level to import data to"
 msgid "Org unit parent needs to be above or equal to the org unit level"
 msgstr "Org unit parent needs to be above or equal to the org unit level"
 
+msgid "Start and end date are not within the valid range."
+msgstr "Start and end date are not within the valid range."
+
+msgid "Start date is not within the valid range."
+msgstr "Start date is not within the valid range."
+
+msgid "End date is not within the valid range."
+msgstr "End date is not within the valid range."
+
 msgid ""
 "The data will be assigned a default yearly period that matches the year it "
 "was collected: {{datasetPeriod}}"
@@ -789,6 +804,9 @@ msgstr ""
 msgid "Daily values will be imported between start and end dates"
 msgstr "Daily values will be imported between start and end dates"
 
+msgid "Valid range"
+msgstr "Valid range"
+
 msgid "Period type"
 msgstr "Period type"
 
@@ -797,6 +815,9 @@ msgstr "Start year"
 
 msgid "End year"
 msgstr "End year"
+
+msgid "Chart settings"
+msgstr "Chart settings"
 
 msgid ""
 "Set y-axis values for charts in the Explore data section to make it easier "
@@ -831,6 +852,28 @@ msgstr "Heat stress upper category"
 msgid "Heat stress lower category"
 msgstr "Heat stress lower category"
 
+msgid "Data Providers"
+msgstr "Data Providers"
+
+msgid ""
+"The following data providers can be configured and used in the Climate app. "
+"Contact your administrator to add or update data providers."
+msgstr ""
+"The following data providers can be configured and used in the Climate app. "
+"Contact your administrator to add or update data providers."
+
+msgid "Provider name"
+msgstr "Provider name"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Setup info"
+msgstr "Setup info"
+
+msgid "Close"
+msgstr "Close"
+
 msgid "Calculate from data"
 msgstr "Calculate from data"
 
@@ -839,6 +882,9 @@ msgstr "App settings"
 
 msgid "Changes made below will apply to all users of this app."
 msgstr "Changes made below will apply to all users of this app."
+
+msgid "General settings"
+msgstr "General settings"
 
 msgid "Default start page for users"
 msgstr "Default start page for users"
@@ -872,6 +918,9 @@ msgstr "Aggregate"
 
 msgid "Aggregation type"
 msgstr "Aggregation type"
+
+msgid "Use your domain knowledge to select the appropriate aggregation type"
+msgstr "Use your domain knowledge to select the appropriate aggregation type"
 
 msgid "Store zero data values"
 msgstr "Store zero data values"
@@ -1009,8 +1058,20 @@ msgstr ""
 msgid "Loading data"
 msgstr "Loading data"
 
+msgid "Error"
+msgstr "Error"
+
 msgid "Select data to import"
 msgstr "Select data to import"
+
+msgid "Data is from {{source}}. Accessed via {{provider}}."
+msgstr "Data is from {{source}}. Accessed via {{provider}}."
+
+msgid "Warning"
+msgstr "Warning"
+
+msgid "Error fetching additional datasets from one or more local data providers"
+msgstr "Error fetching additional datasets from one or more local data providers"
 
 msgid "You need access to Google Earth Engine to use this app."
 msgstr "You need access to Google Earth Engine to use this app."
@@ -1106,21 +1167,6 @@ msgstr ""
 msgid "Land cover types at yearly intervals"
 msgstr "Land cover types at yearly intervals"
 
-msgid "Climate/Weather"
-msgstr "Climate/Weather"
-
-msgid "Environment"
-msgstr "Environment"
-
-msgid "Weekly or Monthly"
-msgstr "Weekly or Monthly"
-
-msgid "Land"
-msgstr "Land"
-
-msgid "Yearly"
-msgstr "Yearly"
-
 msgid "Air temperature (ERA5-Land)"
 msgstr "Air temperature (ERA5-Land)"
 
@@ -1194,6 +1240,15 @@ msgstr ""
 "that can exist in the air at its current temperature. Calculated using air "
 "temperature and dewpoint temperature at 2 m above surface."
 
+msgid "Local Min Tempreture (Land)"
+msgstr "Local Min Tempreture (Land)"
+
+msgid "Local Max Tempreture (Land)"
+msgstr "Local Max Tempreture (Land)"
+
+msgid "Local Precipitation "
+msgstr "Local Precipitation "
+
 msgid "Heat stress (ERA5-HEAT)"
 msgstr "Heat stress (ERA5-HEAT)"
 
@@ -1265,6 +1320,21 @@ msgstr "Standard deviation of elevation in meters above sea level."
 
 msgid "Percentage of area with this land cover type."
 msgstr "Percentage of area with this land cover type."
+
+msgid "Climate/Weather"
+msgstr "Climate/Weather"
+
+msgid "Environment"
+msgstr "Environment"
+
+msgid "Weekly or Monthly"
+msgstr "Weekly or Monthly"
+
+msgid "Land"
+msgstr "Land"
+
+msgid "Yearly"
+msgstr "Yearly"
 
 msgid "Heat/cold stress"
 msgstr "Heat/cold stress"

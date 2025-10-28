@@ -1,38 +1,49 @@
 import i18n from '@dhis2/d2-i18n'
 import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import { periodTypes, DAILY, SIXTEEN_DAYS, YEARLY } from '../../utils/time.js'
+import { periodTypes } from '../../utils/time.js'
 
-const PeriodType = ({ periodType, datasetPeriodType, onChange }) => {
+const PeriodType = ({ periodType, supportedPeriodTypes, onChange }) => {
+    // wait for necessary information about supported period types
+    if (!supportedPeriodTypes) {
+        return null
+    }
+
+    // get period type objects from supported period type ids
+    const supportedPeriodTypeObjects = periodTypes?.filter((type) =>
+        supportedPeriodTypes.includes(type.id)
+    )
+    //console.log('periodtype supported', supportedPeriodTypeObjects)
+
+    // make sure selected period type is supported by dataset period type, or set to undefined
+    let selectedPeriodType = supportedPeriodTypeObjects
+        .map((type) => type.id)
+        .includes(periodType)
+        ? periodType
+        : undefined
+
+    // if period type is unsupported, set to first allowable type
+    if (
+        supportedPeriodTypeObjects.length > 0 &&
+        selectedPeriodType === undefined
+    ) {
+        selectedPeriodType = supportedPeriodTypeObjects[0].id
+        onChange(selectedPeriodType)
+    }
+
     return (
         <SingleSelectField
             label={i18n.t('Period type')}
-            selected={
-                (datasetPeriodType === SIXTEEN_DAYS && periodType === DAILY) ||
-                (datasetPeriodType === YEARLY && periodType !== YEARLY)
-                    ? undefined
-                    : periodType
-            }
+            selected={selectedPeriodType}
             onChange={({ selected }) => onChange(selected)}
         >
-            {periodTypes
-                ?.filter(
-                    (type) =>
-                        !(
-                            (datasetPeriodType === SIXTEEN_DAYS &&
-                                type.id === DAILY) ||
-                            (datasetPeriodType === YEARLY &&
-                                type.id !== YEARLY) ||
-                            type.id === YEARLY
-                        )
-                )
-                .map((type) => (
-                    <SingleSelectOption
-                        key={type.id}
-                        value={type.id}
-                        label={type.name}
-                    />
-                ))}
+            {supportedPeriodTypeObjects.map((type) => (
+                <SingleSelectOption
+                    key={type.id}
+                    value={type.id}
+                    label={type.name}
+                />
+            ))}
         </SingleSelectField>
     )
 }
@@ -40,7 +51,7 @@ const PeriodType = ({ periodType, datasetPeriodType, onChange }) => {
 PeriodType.propTypes = {
     periodType: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
-    datasetPeriodType: PropTypes.string,
+    supportedPeriodTypes: PropTypes.arrayOf(PropTypes.string),
 }
 
 export default PeriodType

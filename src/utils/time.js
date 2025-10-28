@@ -196,10 +196,10 @@ export const getDefaultExplorePeriod = (lagDays = 10) => {
  * @returns {Number} Number of months between start and end month
  */
 export const getNumberOfMonths = (startTime, endTime) => {
-    const startYear = parseInt(startTime.substring(0, 4))
-    const start = parseInt(startTime.substring(5, 7))
-    const endYear = parseInt(endTime.substring(0, 4))
-    const end = parseInt(endTime.substring(5, 7))
+    const startYear = Number.parseInt(startTime.substring(0, 4))
+    const start = Number.parseInt(startTime.substring(5, 7))
+    const endYear = Number.parseInt(endTime.substring(0, 4))
+    const end = Number.parseInt(endTime.substring(5, 7))
     return (endYear - startYear) * 12 + (end - start) + 1
 }
 
@@ -230,15 +230,15 @@ export const formatDate = (date) => {
 
 /**
  * Translates a date string to a date object
- * @param {String} dateString Date string in the format YYYY-MM-DD or YYYY-MM
+ * @param {String} dateString Date string in the format YYYY-MM-DD or YYYY-MM or YYYY
  * @returns {Object} Date object with year, month and day
  */
 export const toDateObject = (dateString) => {
     const [year, month, day] = dateString.split('-')
     return {
-        year: parseInt(year),
-        month: parseInt(month),
-        day: day ? parseInt(day) : 1,
+        year: Number.parseInt(year),
+        month: month ? Number.parseInt(month) : 1,
+        day: day ? Number.parseInt(day) : 1,
     }
 }
 
@@ -247,7 +247,8 @@ export const toDateObject = (dateString) => {
  * @param {String} dateString Date string in the format YYYY-MM-DD
  * @returns {Number} Year
  */
-export const extractYear = (dateString) => parseInt(dateString.split('-')[0])
+export const extractYear = (dateString) =>
+    Number.parseInt(dateString.split('-')[0])
 
 /**
  * Translates a calendar date to a standard date string
@@ -291,29 +292,27 @@ export const getStandardPeriod = ({
     calendar,
     periodType,
 }) =>
-    periodType !== YEARLY
-        ? {
+    periodType === YEARLY
+        ? { startTime, endTime, calendar, periodType }
+        : {
               startTime: toStandardDate(startTime, calendar),
               endTime: toStandardDate(endTime, calendar),
               periodType,
               calendar, // Include original calendar to allow conversion back to DHIS2 date
           }
-        : { startTime, endTime, calendar, periodType }
 
 /**
  * Returns an array of period items for a given period object
  * @param {Object} period Calendar period object
  * @returns {Array} Period items
  */
-export const getPeriods = (period) => {
-    const {
-        periodType,
-        startTime,
-        endTime,
-        calendar = 'gregory',
-        locale = 'en',
-    } = period
-
+export const getPeriods = ({
+    periodType,
+    startTime,
+    endTime,
+    calendar = 'gregory',
+    locale = 'en',
+}) => {
     if (periodType === YEARLY) {
         return generateFixedPeriods({
             year: endTime,
@@ -338,13 +337,13 @@ export const getPeriods = (period) => {
                 periodType,
             })
                 .map((p) =>
-                    calendar !== 'iso8601'
-                        ? {
+                    calendar === 'iso8601'
+                        ? p
+                        : {
                               ...p,
                               startDate: toStandardDate(p.startDate, calendar),
                               endDate: toStandardDate(p.endDate, calendar),
                           }
-                        : p
                 )
                 .filter(
                     (p) => p.startDate <= endTime && p.endDate >= startTime // Filter out periods outside the range
@@ -378,3 +377,153 @@ export const isValidPeriod = (period) =>
             period.endTime &&
             new Date(period.startTime) <= new Date(period.endTime)
     )
+
+/**
+ * Format ISO date to human readable string that respects local language
+ * @param {Object} period ISO date
+ * @param {String} calendar Calendar used
+ * @returns {string} human readable period string
+ */
+export const getDateStringFromIsoDate = ({
+    date,
+    calendar = 'gregory',
+    locale,
+}) => {
+    if (calendar !== 'gregory') {
+        try {
+            // Year only (calendar year)
+            if (/^\d{4}$/.test(date)) {
+                const calYearStr = fromStandardDate(
+                    `${date}-01-01`,
+                    calendar
+                ).split('-')[0]
+
+                const items = generateFixedPeriods({
+                    year: Number.parseInt(calYearStr, 10),
+                    calendar,
+                    locale,
+                    periodType: YEARLY,
+                    yearsCount: 1,
+                })
+
+                if (items?.length) {
+                    return items[0].displayName || date
+                }
+            }
+
+            // Year + month (monthly displayName)
+            if (/^\d{4}-\d{2}$/.test(date)) {
+                const [year, month] = date.split('-')
+                const calDate = fromStandardDate(
+                    `${year}-${month}-01`,
+                    calendar
+                )
+                const months = generateFixedPeriods({
+                    year: Number.parseInt(calDate.split('-')[0], 10),
+                    calendar,
+                    locale,
+                    periodType: MONTHLY,
+                })
+                const found = months.find((m) => m.startDate === calDate)
+                if (found) {
+                    return found.displayName || date
+                }
+            }
+
+            // Full date (daily)
+            if (/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+                const calDate = fromStandardDate(date, calendar)
+                const days = generateFixedPeriods({
+                    year: Number.parseInt(calDate.split('-')[0], 10),
+                    calendar,
+                    locale,
+                    periodType: DAILY,
+                })
+                const found = days.find((d) => d.startDate === calDate)
+                if (found) {
+                    return found.displayName || date
+                }
+            }
+        } catch (e) {
+            // Fall through to Intl fallback on any error
+        }
+    }
+
+    // Fallback: use Intl (Gregorian)
+    if (/^\d{4}$/.test(date)) {
+        // Year only
+        return new Intl.DateTimeFormat(locale, { year: 'numeric' }).format(
+            new Date(date, 0, 1)
+        )
+    } else if (/^\d{4}-\d{2}$/.test(date)) {
+        // Year + month
+        const [year, month] = date.split('-')
+        return new Intl.DateTimeFormat(locale, {
+            year: 'numeric',
+            month: 'long',
+        }).format(new Date(year, month - 1, 1))
+    } else if (/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+        // Full date
+        return new Intl.DateTimeFormat(locale, {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+        }).format(new Date(date))
+    }
+
+    return date // fallback: return as-is
+}
+
+/**
+ * Normalize partial ISO strings into full ISO date strings (YYYY-MM-DD).
+ * Supported inputs:
+ *   - YYYY (year)
+ *   - YYYY-MM (year + month)
+ *   - YYYY-Www (ISO week)
+ *   - YYYY-MM-DD (full date, unchanged)
+ *
+ * @param {string} input
+ * @returns {string} Normalized ISO date string (YYYY-MM-DD)
+ */
+export const normalizeIsoDate = (input) => {
+    if (!input || typeof input !== 'string') {
+        return null
+    }
+
+    // Year only → first day of year
+    if (/^\d{4}$/.test(input)) {
+        return `${input}-01-01`
+    }
+
+    // Year + month → first day of month
+    if (/^\d{4}-\d{2}$/.test(input)) {
+        return `${input}-01`
+    }
+
+    // ISO week: YYYY-Www
+    const weekMatch = input.match(/^(\d{4})-W(\d{2})$/)
+    if (weekMatch) {
+        const [, yearStr, weekStr] = weekMatch
+        const year = Number.parseInt(yearStr, 10)
+        const week = Number.parseInt(weekStr, 10)
+
+        // ISO weeks: week 1 = first week with Thursday in it
+        const simple = new Date(Date.UTC(year, 0, 4)) // Jan 4 is always in week 1
+        const dayOfWeek = simple.getUTCDay() || 7 // Sunday → 7
+        const isoWeek1Start = new Date(simple)
+        isoWeek1Start.setUTCDate(simple.getUTCDate() - dayOfWeek + 1)
+
+        // Add weeks
+        const date = new Date(isoWeek1Start)
+        date.setUTCDate(date.getUTCDate() + (week - 1) * 7)
+
+        return date.toISOString().slice(0, 10)
+    }
+
+    // Full ISO date → return as-is (after validation)
+    if (/^\d{4}-\d{2}-\d{2}$/.test(input)) {
+        return input
+    }
+
+    return null
+}
