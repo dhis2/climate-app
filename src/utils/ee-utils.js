@@ -16,7 +16,8 @@ const VALUE_LIMIT = 5000
 const DEFAULT_SCALE = 1000
 
 // Returns the linear scale in meters of the units of this projection
-export const getScale = (image) => image.select(0).projection().nominalScale().min(DEFAULT_SCALE)
+export const getScale = (image) =>
+    image.select(0).projection().nominalScale().min(DEFAULT_SCALE)
 
 // Makes evaluate a promise
 export const getInfo = (instance) =>
@@ -87,10 +88,10 @@ const createReducer = (ee, dataset) => {
                 i === 0
                     ? r[t]().unweighted()
                     : r.combine({
-                        reducer2: ee.Reducer[t]().unweighted(),
-                        outputPrefix: sharedInputs ? '' : String(i),
-                        sharedInputs,
-                    }),
+                          reducer2: ee.Reducer[t]().unweighted(),
+                          outputPrefix: sharedInputs ? '' : String(i),
+                          sharedInputs,
+                      }),
             ee.Reducer
         )
 
@@ -115,7 +116,7 @@ const getReducedCollection = ({
 }) =>
     collection
         .filter(ee.Filter.date(startDate, endDate))
-    [reducer]()
+        [reducer]()
         .set('system:index', startDate.format('YYYYMMdd'))
         .set('system:time_start', startDate.millis())
         .set('system:time_end', endDate.millis())
@@ -563,8 +564,8 @@ export const getImageData = async ({ ee, dataset, geometry }) => {
 const getKeyFromFilter = (filter) =>
     filter
         ? `-${filter
-            .map((f) => `${f.type}-${f.arguments.join('-')}`)
-            .join('-')}`
+              .map((f) => `${f.type}-${f.arguments.join('-')}`)
+              .join('-')}`
         : ''
 
 const getKeyFromPeriod = (period) =>
