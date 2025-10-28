@@ -122,6 +122,9 @@ const getChartConfig = ({ name, data, normals, referencePeriod }) => {
                 type: 'column',
                 data: monthMormals,
                 color: colors.blue200,
+                tooltip: {
+                    valueSuffix: '%',
+                },
                 pointPlacement: -0.2,
                 zIndex: 0,
             },
