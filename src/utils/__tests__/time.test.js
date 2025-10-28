@@ -376,7 +376,10 @@ describe('time utils', () => {
         // Full date unchanged
         expect(normalizeIsoDate('2024-08-06')).toEqual('2024-08-06')
 
-        // Invalid format -> throws
-        expect(() => normalizeIsoDate('not-a-date')).toThrow(Error)
+        // Invalid string returns null
+        expect(normalizeIsoDate('not a date')).toEqual(null)
+
+        // Undefined returns null
+        expect(normalizeIsoDate(undefined)).toEqual(null)
     })
 })
