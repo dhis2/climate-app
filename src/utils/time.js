@@ -389,7 +389,6 @@ export const getDateStringFromIsoDate = ({
     calendar = 'gregory',
     locale,
 }) => {
-    // For non-gregorian calendar, prefer deterministic labels from @dhis2/multi-calendar-dates
     if (calendar !== 'gregory') {
         try {
             // Year only (calendar year)
@@ -406,7 +405,7 @@ export const getDateStringFromIsoDate = ({
                     periodType: YEARLY,
                     yearsCount: 1,
                 })
-                if (items && items.length) {
+                if (items?.length) {
                     return items[0].displayName || iso8601Date
                 }
             }

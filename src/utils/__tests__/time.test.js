@@ -106,28 +106,22 @@ describe('time utils', () => {
         expect(formatCalendarDate(ethiopicDate)).toEqual(ethiopicDateString)
     })
 
-    it('it should convert a standard date to a calendar date', () => {
-        expect(
-            toStandardDate(formatCalendarDate(gregoryDate), gregoryCalendar)
-        ).toEqual(gregoryDateString)
-        expect(
-            toStandardDate(formatCalendarDate(nepaliDate), nepaliCalendar)
-        ).toEqual(gregoryDateString)
-        expect(
-            toStandardDate(formatCalendarDate(ethiopicDate), ethiopicCalendar)
-        ).toEqual(gregoryDateString)
-    })
+    it('it should convert calendar dates from different calendars to the standard (gregory) date', () => {
+        // Define inputs and expected output locally — do not call other helpers
+        const gregoryCalendarDate = '2024-08-06'
+        const nepaliCalendarDate = '2081-04-22'
+        const ethiopicCalendarDate = '2016-11-30'
+        const expectedStandardDate = '2024-08-06'
 
-    it('it should convert a calendar date to a standard date', () => {
-        expect(toStandardDate(gregoryDateString, gregoryCalendar)).toEqual(
-            gregoryDateString
+        expect(toStandardDate(gregoryCalendarDate, 'gregory')).toEqual(
+            expectedStandardDate
         )
-        expect(
-            toStandardDate(formatCalendarDate(nepaliDate), nepaliCalendar)
-        ).toEqual(gregoryDateString)
-        expect(
-            toStandardDate(formatCalendarDate(ethiopicDate), ethiopicCalendar)
-        ).toEqual(gregoryDateString)
+        expect(toStandardDate(nepaliCalendarDate, 'nepali')).toEqual(
+            expectedStandardDate
+        )
+        expect(toStandardDate(ethiopicCalendarDate, 'ethiopic')).toEqual(
+            expectedStandardDate
+        )
     })
 
     it('it should get the gregory calendar date', () => {
@@ -331,36 +325,31 @@ describe('time utils', () => {
         ).toEqual(expected)
     })
 
-    it('it should format strings using Gregorian Norwegian (nb) locale when i18n.language is nb', () => {
-        const prevLang = i18n.language
+    it('it should format strings using Gregorian Norwegian (nb) locale', () => {
         const locale = 'nb'
-        try {
-            // Year only
-            const year = '2024'
-            expect(
-                getDateStringFromIsoDate({ iso8601Date: year, locale })
-            ).toEqual('2024')
+        // Year only
+        const year = '2024'
+        expect(getDateStringFromIsoDate({ iso8601Date: year, locale })).toEqual(
+            '2024'
+        )
 
-            // Year + month
-            const yearMonth = '2024-08'
-            expect(
-                getDateStringFromIsoDate({ iso8601Date: yearMonth, locale })
-            ).toEqual('august 2024')
+        // Year + month
+        const yearMonth = '2024-08'
+        expect(
+            getDateStringFromIsoDate({ iso8601Date: yearMonth, locale })
+        ).toEqual('august 2024')
 
-            // Full date
-            const fullDate = '2024-08-06'
-            expect(
-                getDateStringFromIsoDate({ iso8601Date: fullDate, locale })
-            ).toEqual('6. august 2024')
+        // Full date
+        const fullDate = '2024-08-06'
+        expect(
+            getDateStringFromIsoDate({ iso8601Date: fullDate, locale })
+        ).toEqual('6. august 2024')
 
-            // Fallback
-            const fallback = 'ikke-en-dato'
-            expect(
-                getDateStringFromIsoDate({ iso8601Date: fallback, locale })
-            ).toEqual(fallback)
-        } finally {
-            i18n.language = prevLang
-        }
+        // Fallback
+        const fallback = 'ikke-en-dato'
+        expect(
+            getDateStringFromIsoDate({ iso8601Date: fallback, locale })
+        ).toEqual(fallback)
     })
 
     it('it should normalize partial ISO dates', () => {
