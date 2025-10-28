@@ -167,7 +167,7 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
                     {i18n.t('Valid range')}:{' '}
                     <strong>
                         {getDateStringFromIsoDate({
-                            iso8601Date: datasetPeriodRange.start,
+                            date: datasetPeriodRange.start,
                             calendar,
                             locale: period.locale,
                         })}
@@ -175,7 +175,7 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
                     -{' '}
                     <strong>
                         {getDateStringFromIsoDate({
-                            iso8601Date: datasetPeriodRange.end,
+                            date: datasetPeriodRange.end,
                             calendar,
                             locale: period.locale,
                         })}

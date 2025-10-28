@@ -1,4 +1,3 @@
-import i18n from '@dhis2/d2-i18n'
 import {
     extractYear,
     formatStandardDate,
@@ -288,32 +287,30 @@ describe('time utils', () => {
     it('it should format Gregorian year, month and full date strings in a locale-aware way', () => {
         // Year only
         const year = '2024'
-        expect(getDateStringFromIsoDate({ iso8601Date: year })).toEqual('2024')
+        expect(getDateStringFromIsoDate({ date: year })).toEqual('2024')
 
         // Year + month
         const yearMonth = '2024-08'
-        expect(getDateStringFromIsoDate({ iso8601Date: yearMonth })).toEqual(
+        expect(getDateStringFromIsoDate({ date: yearMonth })).toEqual(
             'August 2024'
         )
 
         // Full date
         const yearMonthDay = '2024-08-06'
-        expect(getDateStringFromIsoDate({ iso8601Date: yearMonthDay })).toEqual(
+        expect(getDateStringFromIsoDate({ date: yearMonthDay })).toEqual(
             'August 6, 2024'
         )
 
         // Fallback (unknown format) should return input unchanged
         const fallback = 'not-a-date'
-        expect(getDateStringFromIsoDate({ iso8601Date: fallback })).toEqual(
-            fallback
-        )
+        expect(getDateStringFromIsoDate({ date: fallback })).toEqual(fallback)
     })
 
     it('it should format an Ethiopic full date', () => {
-        const iso8601Date = '2016-11-30'
+        const date = '2016-11-30'
         const expected = 'Hedar 21, 2009 ERA0'
         expect(
-            getDateStringFromIsoDate({ iso8601Date, calendar: 'ethiopic' })
+            getDateStringFromIsoDate({ date, calendar: 'ethiopic' })
         ).toEqual(expected)
     })
 
@@ -321,7 +318,7 @@ describe('time utils', () => {
         const input = '2023-08'
         const expected = 'August 2023'
         expect(
-            getDateStringFromIsoDate({ iso8601Date: input, calendar: 'nepali' })
+            getDateStringFromIsoDate({ date: input, calendar: 'nepali' })
         ).toEqual(expected)
     })
 
@@ -329,27 +326,25 @@ describe('time utils', () => {
         const locale = 'nb'
         // Year only
         const year = '2024'
-        expect(getDateStringFromIsoDate({ iso8601Date: year, locale })).toEqual(
-            '2024'
-        )
+        expect(getDateStringFromIsoDate({ date: year, locale })).toEqual('2024')
 
         // Year + month
         const yearMonth = '2024-08'
-        expect(
-            getDateStringFromIsoDate({ iso8601Date: yearMonth, locale })
-        ).toEqual('august 2024')
+        expect(getDateStringFromIsoDate({ date: yearMonth, locale })).toEqual(
+            'august 2024'
+        )
 
         // Full date
         const fullDate = '2024-08-06'
-        expect(
-            getDateStringFromIsoDate({ iso8601Date: fullDate, locale })
-        ).toEqual('6. august 2024')
+        expect(getDateStringFromIsoDate({ date: fullDate, locale })).toEqual(
+            '6. august 2024'
+        )
 
         // Fallback
         const fallback = 'ikke-en-dato'
-        expect(
-            getDateStringFromIsoDate({ iso8601Date: fallback, locale })
-        ).toEqual(fallback)
+        expect(getDateStringFromIsoDate({ date: fallback, locale })).toEqual(
+            fallback
+        )
     })
 
     it('it should normalize partial ISO dates', () => {

@@ -385,64 +385,63 @@ export const isValidPeriod = (period) =>
  * @returns {string} human readable period string
  */
 export const getDateStringFromIsoDate = ({
-    iso8601Date,
+    date,
     calendar = 'gregory',
     locale,
 }) => {
     if (calendar !== 'gregory') {
         try {
             // Year only (calendar year)
-            if (/^\d{4}$/.test(iso8601Date)) {
+            if (/^\d{4}$/.test(date)) {
                 const calYearStr = fromStandardDate(
-                    `${iso8601Date}-01-01`,
+                    `${date}-01-01`,
                     calendar
                 ).split('-')[0]
-                const yearNum = Number.parseInt(calYearStr, 10)
+
                 const items = generateFixedPeriods({
-                    year: yearNum,
+                    year: Number.parseInt(calYearStr, 10),
                     calendar,
                     locale,
                     periodType: YEARLY,
                     yearsCount: 1,
                 })
+
                 if (items?.length) {
-                    return items[0].displayName || iso8601Date
+                    return items[0].displayName || date
                 }
             }
 
             // Year + month (monthly displayName)
-            if (/^\d{4}-\d{2}$/.test(iso8601Date)) {
-                const [year, month] = iso8601Date.split('-')
+            if (/^\d{4}-\d{2}$/.test(date)) {
+                const [year, month] = date.split('-')
                 const calDate = fromStandardDate(
                     `${year}-${month}-01`,
                     calendar
                 )
-                const calYear = Number.parseInt(calDate.split('-')[0], 10)
                 const months = generateFixedPeriods({
-                    year: calYear,
+                    year: Number.parseInt(calDate.split('-')[0], 10),
                     calendar,
                     locale,
                     periodType: MONTHLY,
                 })
                 const found = months.find((m) => m.startDate === calDate)
                 if (found) {
-                    return found.displayName || iso8601Date
+                    return found.displayName || date
                 }
             }
 
             // Full date (daily)
-            if (/^\d{4}-\d{2}-\d{2}$/.test(iso8601Date)) {
-                const calDate = fromStandardDate(iso8601Date, calendar)
-                const calYear = Number.parseInt(calDate.split('-')[0], 10)
+            if (/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+                const calDate = fromStandardDate(date, calendar)
                 const days = generateFixedPeriods({
-                    year: calYear,
+                    year: Number.parseInt(calDate.split('-')[0], 10),
                     calendar,
                     locale,
                     periodType: DAILY,
                 })
                 const found = days.find((d) => d.startDate === calDate)
                 if (found) {
-                    return found.displayName || iso8601Date
+                    return found.displayName || date
                 }
             }
         } catch (e) {
@@ -451,28 +450,28 @@ export const getDateStringFromIsoDate = ({
     }
 
     // Fallback: use Intl (Gregorian)
-    if (/^\d{4}$/.test(iso8601Date)) {
+    if (/^\d{4}$/.test(date)) {
         // Year only
         return new Intl.DateTimeFormat(locale, { year: 'numeric' }).format(
-            new Date(iso8601Date, 0, 1)
+            new Date(date, 0, 1)
         )
-    } else if (/^\d{4}-\d{2}$/.test(iso8601Date)) {
+    } else if (/^\d{4}-\d{2}$/.test(date)) {
         // Year + month
-        const [year, month] = iso8601Date.split('-')
+        const [year, month] = date.split('-')
         return new Intl.DateTimeFormat(locale, {
             year: 'numeric',
             month: 'long',
         }).format(new Date(year, month - 1, 1))
-    } else if (/^\d{4}-\d{2}-\d{2}$/.test(iso8601Date)) {
+    } else if (/^\d{4}-\d{2}-\d{2}$/.test(date)) {
         // Full date
         return new Intl.DateTimeFormat(locale, {
             year: 'numeric',
             month: 'long',
             day: 'numeric',
-        }).format(new Date(iso8601Date))
+        }).format(new Date(date))
     }
 
-    return iso8601Date // fallback: return as-is
+    return date // fallback: return as-is
 }
 
 /**
