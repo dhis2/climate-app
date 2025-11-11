@@ -1,15 +1,21 @@
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
-import { PROVIDER_GEE } from '../../data/providers.js'
+import useEarthEngineData from '../../hooks/useEarthEngineData.js'
 import useOrgUnits from '../../hooks/useOrgUnits.js'
 import { getPeriods, periodTypes } from '../../utils/time.js'
 import DataLoader from '../shared/DataLoader.jsx'
-import ExtractGeeData from './ExtractGeeData.jsx'
+import ErrorMessage from '../shared/ErrorMessage.jsx'
+import ImportData from './ImportData.jsx'
 import styles from './styles/ExtractData.module.css'
 
 const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
     const { parent, level } = orgUnits
     const { features } = useOrgUnits(parent.id, level)
+    const { data, error, loading } = useEarthEngineData(
+        dataset,
+        period,
+        features
+    )
 
     if (!features) {
         return <DataLoader label={i18n.t('Loading org units')} height={100} />
@@ -21,52 +27,41 @@ const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
         )
     }
 
-    const orgUnitsCount = features.length
-    let extractingLabel
+    if (loading) {
+        const orgUnitsCount = features.length
+        let label
 
-    if (period) {
-        const periodType = periodTypes
-            .find((type) => type.id === period.periodType)
-            ?.name.toLowerCase()
-        const periods = getPeriods(period)
-        const periodCount = periods.length
-        const valueCount = periodCount * orgUnitsCount
+        if (period) {
+            const periodType = periodTypes
+                .find((type) => type.id === period.periodType)
+                ?.name.toLowerCase()
+            const periods = getPeriods(period)
+            const periodCount = periods.length
+            const valueCount = periodCount * orgUnitsCount
 
-        extractingLabel = i18n.t(
-            'Extracting data for {{periodCount}} {{periodType}} periods and {{orgUnitsCount}} org units ({{valueCount}} values)',
-            {
-                periodCount,
-                periodType,
+            label = i18n.t(
+                'Extracting data for {{periodCount}} {{periodType}} periods and {{orgUnitsCount}} org units ({{valueCount}} values)',
+                {
+                    periodCount,
+                    periodType,
+                    orgUnitsCount,
+                    valueCount,
+                }
+            )
+        } else {
+            label = i18n.t('Extracting data for {{orgUnitsCount}} org units', {
                 orgUnitsCount,
-                valueCount,
-            }
-        )
-    } else {
-        extractingLabel = i18n.t(
-            'Extracting data for {{orgUnitsCount}} org units',
-            {
-                orgUnitsCount,
-            }
-        )
+            })
+        }
+
+        return <DataLoader label={label} height={100} />
     }
 
-    if (dataset?.provider.id == PROVIDER_GEE) {
-        return (
-            <ExtractGeeData
-                dataset={dataset}
-                period={period}
-                features={features}
-                dataElement={dataElement}
-                extractingLabel={extractingLabel}
-            />
-        )
-    } else {
-        return (
-            <div className={styles.container}>
-                {i18n.t('Dataset provider not recognized')}
-            </div>
-        )
-    }
+    return error ? (
+        <ErrorMessage error={error} />
+    ) : (
+        <ImportData data={data} dataElement={dataElement} features={features} />
+    )
 }
 
 ExtractData.propTypes = {
