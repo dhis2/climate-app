@@ -5,7 +5,7 @@ import {
     modisResolution,
     ndviDescription,
     eviDescription,
-} from '../../../data/earth-engine-datasets.js'
+} from '../../../data/datasets.js'
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
 import exploreStore from '../../../store/exploreStore.js'
 import DataLoader from '../../shared/DataLoader.jsx'

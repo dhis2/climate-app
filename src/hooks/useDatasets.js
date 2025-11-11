@@ -1,4 +1,4 @@
-import geeDatasets from '../data/earth-engine-datasets.js'
+import geeDatasets from '../data/datasets.js'
 
 const useDatasets = () => {
     const results = [{ data: geeDatasets, error: false, loading: false }]

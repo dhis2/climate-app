@@ -1,4 +1,4 @@
-import { era5Daily } from '../../../data/earth-engine-datasets.js'
+import { era5Daily } from '../../../data/datasets.js'
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
 import exploreStore from '../../../store/exploreStore.js'
 import DataLoader from '../../shared/DataLoader.jsx'

@@ -3,7 +3,7 @@ import { useMemo } from 'react'
 import {
     era5MonthlyTemperatures,
     era5MonthlyNormals,
-} from '../../../data/earth-engine-datasets.js'
+} from '../../../data/datasets.js'
 import useAppSettings from '../../../hooks/useAppSettings.js'
 import useEarthEngineClimateNormals from '../../../hooks/useEarthEngineClimateNormals.js'
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
