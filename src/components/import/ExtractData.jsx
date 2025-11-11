@@ -1,10 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
-import { PROVIDER_ENACTS, PROVIDER_GEE } from '../../data/providers.js'
+import { PROVIDER_GEE } from '../../data/providers.js'
 import useOrgUnits from '../../hooks/useOrgUnits.js'
 import { getPeriods, periodTypes } from '../../utils/time.js'
 import DataLoader from '../shared/DataLoader.jsx'
-import ExtractEnactsData from './ExtractEnactsData.jsx'
 import ExtractGeeData from './ExtractGeeData.jsx'
 import styles from './styles/ExtractData.module.css'
 
@@ -54,16 +53,6 @@ const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
     if (dataset?.provider.id == PROVIDER_GEE) {
         return (
             <ExtractGeeData
-                dataset={dataset}
-                period={period}
-                features={features}
-                dataElement={dataElement}
-                extractingLabel={extractingLabel}
-            />
-        )
-    } else if (dataset?.provider.id == PROVIDER_ENACTS) {
-        return (
-            <ExtractEnactsData
                 dataset={dataset}
                 period={period}
                 features={features}

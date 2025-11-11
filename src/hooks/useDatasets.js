@@ -1,9 +1,7 @@
 import geeDatasets from '../data/earth-engine-datasets.js'
-// import useEnactsDatasets from './useEnactsDatasets.js'
 
 const useDatasets = () => {
     const results = [{ data: geeDatasets, error: false, loading: false }]
-    // results.push(useEnactsDatasets())
 
     // Combine hook results
     const loading = results.some((r) => r.loading)

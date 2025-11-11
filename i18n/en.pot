@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-11-11T15:10:37.910Z\n"
-"PO-Revision-Date: 2025-11-11T15:10:37.911Z\n"
+"POT-Creation-Date: 2025-11-11T15:22:50.243Z\n"
+"PO-Revision-Date: 2025-11-11T15:22:50.244Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -806,28 +806,6 @@ msgstr "Heat stress upper category"
 
 msgid "Heat stress lower category"
 msgstr "Heat stress lower category"
-
-msgid "Data Providers"
-msgstr "Data Providers"
-
-msgid ""
-"The following data providers can be configured and used in the Climate app. "
-"Contact your administrator to add or update data providers."
-msgstr ""
-"The following data providers can be configured and used in the Climate app. "
-"Contact your administrator to add or update data providers."
-
-msgid "Provider name"
-msgstr "Provider name"
-
-msgid "Status"
-msgstr "Status"
-
-msgid "Setup info"
-msgstr "Setup info"
-
-msgid "Close"
-msgstr "Close"
 
 msgid "Calculate from data"
 msgstr "Calculate from data"
