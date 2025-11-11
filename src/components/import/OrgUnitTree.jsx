@@ -25,6 +25,9 @@ const OrgUnitTree = ({ orgUnit, onChange }) => {
         return <div>{i18n.t('Loading organisation units...')}</div>
     }
 
+    // The warnings "The query should be static, don't create it within the render loop!"
+    // comes from the OrganisationUnitTree component:
+    // https://dhis2.slack.com/archives/C0BP0RABF/p1641544953003000
     return (
         <div className={classes.container}>
             <OrganisationUnitTree

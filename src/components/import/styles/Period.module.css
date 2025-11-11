@@ -7,7 +7,7 @@
     flex-direction: row;
     justify-content: left;
     gap: 16px;
-    margin-bottom: 16px;
+    margin-block-end: var(--spacers-dp16);
 }
 
 .pickers > div {
@@ -17,5 +17,5 @@
 .periodError {
     color: #bb470d;
     font-weight: bold;
-    margin-top: 8px;
+    margin-block-end: var(--spacers-dp8);
 }
