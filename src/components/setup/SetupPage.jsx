@@ -17,6 +17,7 @@ const SetupPage = () => {
                 )}
             </p>
             <Dataset
+                title={null}
                 selected={dataset}
                 onChange={setDataset}
                 showDescription={false}

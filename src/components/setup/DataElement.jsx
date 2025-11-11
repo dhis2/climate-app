@@ -50,18 +50,7 @@ const DataElement = ({
                 </tr>
                 <tr>
                     <th>{i18n.t('Aggregation type')}</th>
-
-                    {aggregationType ? (
-                        <td>{aggregationType}</td>
-                    ) : (
-                        <td>
-                            <em>
-                                {i18n.t(
-                                    'Use your domain knowledge to select the appropriate aggregation type'
-                                )}
-                            </em>
-                        </td>
-                    )}
+                    <td>{aggregationType}</td>
                 </tr>
                 <tr>
                     <th>{i18n.t('Store zero data values')}</th>

@@ -23,10 +23,6 @@ import {
     landGroup,
 } from './groupings.js'
 import heatStressLegend from './heat-stress-legend.js'
-import { PROVIDER_GEE, dataProviders } from './providers.js'
-
-// fetch provider metadata for GEE
-const dataProvider = dataProviders.find((item) => item.id === PROVIDER_GEE)
 
 // kelvin to celsius with one decimal
 const temperatureParser = (v) => roundOneDecimal(kelvinToCelsius(v)).toString()
@@ -104,7 +100,6 @@ export default [
         dataElementCode: 'ERA5_LAND_TEMPERATURE',
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
-        provider: dataProvider,
     },
     {
         id: 'ECMWF/ERA5_LAND/DAILY_AGGR/temperature_2m_max',
@@ -131,7 +126,6 @@ export default [
         dataElementCode: 'ERA5_LAND_TEMPERATURE_MAX',
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
-        provider: dataProvider,
     },
     {
         id: 'ECMWF/ERA5_LAND/DAILY_AGGR/temperature_2m_min',
@@ -158,7 +152,6 @@ export default [
         dataElementCode: 'ERA5_LAND_TEMPERATURE_MIN',
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
-        provider: dataProvider,
     },
     {
         id: 'ECMWF/ERA5_LAND/DAILY_AGGR/total_precipitation_sum',
@@ -184,7 +177,6 @@ export default [
         dataElementCode: 'ERA5_LAND_PRECIPITATION',
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
-        provider: dataProvider,
     },
     {
         id: 'UCSB-CHG/CHIRPS/DAILY',
@@ -204,7 +196,6 @@ export default [
         dataElementCode: 'CHIRPS_PRECIPITATION',
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
-        provider: dataProvider,
     },
     {
         id: 'ECMWF/ERA5_LAND/DAILY_AGGR/dewpoint_temperature_2m',
@@ -231,7 +222,6 @@ export default [
         dataElementCode: 'ERA5_LAND_DEWPOINT_TEMPERATURE',
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
-        provider: dataProvider,
     },
     {
         id: 'ECMWF/ERA5_LAND/DAILY_AGGR/relative_humidity_2m',
@@ -272,44 +262,7 @@ export default [
         dataElementCode: 'ERA5_LAND_RELATIVE_HUMIDITY',
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
-        provider: dataProvider,
     },
-    // {
-    //   id: "Local Min Tempreture",
-    //   datasetId: "Local_Data",
-    //   tag : 'min temp',
-    //   name: i18n.t("Local Min Tempreture (Land)"),
-    //   shortName: i18n.t("Air temperature"),
-    //   description: i18n.t(
-    //     "Average local  max observed air temperature in °C"
-    //   ),
-    //   aggregationType: i18n.t("Min"),
-    //   dataElementCode: "LOCAL_TEMPERATURE_MAX",
-    // },
-    // {
-    //   id: "Local Max Tempreture",
-    //   datasetId: "Local_Data",
-    //   tag : 'max temp',
-    //   name: i18n.t("Local Max Tempreture (Land)"),
-    //   shortName: i18n.t("Air temperature"),
-    //   description: i18n.t(
-    //     "Average local min observed air temperature in °C"
-    //   ),
-    //   aggregationType: i18n.t("Min"),
-    //   dataElementCode: "LOCAL_TEMPERATURE_MIN",
-    //   },
-    //   {
-    //     id: "Local Precipitation",
-    //     datasetId: "Local_Data",
-    //     tag : 'Rainfall',
-    //     name: i18n.t("Local Precipitation "),
-    //     shortName: i18n.t("Precipitation"),
-    //     description: i18n.t(
-    //       "Precipitation received in mm"
-    //     ),
-    //     aggregationType: i18n.t("Average"),
-    //     dataElementCode: "LOCAL_TEMPERATURE_MAX",
-    //   },
     {
         id: 'projects/climate-engine-pro/assets/ce-era5-heat/utci_mean',
         datasetId: 'projects/climate-engine-pro/assets/ce-era5-heat',
@@ -328,7 +281,6 @@ export default [
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
         legend: heatStressLegend,
-        provider: dataProvider,
     },
     {
         id: 'projects/climate-engine-pro/assets/ce-era5-heat/utci_max',
@@ -348,7 +300,6 @@ export default [
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
         legend: heatStressLegend,
-        provider: dataProvider,
     },
     {
         id: 'projects/climate-engine-pro/assets/ce-era5-heat/utci_min',
@@ -368,7 +319,6 @@ export default [
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
         legend: heatStressLegend,
-        provider: dataProvider,
     },
     {
         id: 'MODIS/061/MOD13Q1/NDVI',
@@ -387,7 +337,6 @@ export default [
         dataElementCode: 'MODIS_NDVI',
         dataElementGroup: environmentGroup,
         dataSet: environmentDataSet,
-        provider: dataProvider,
     },
     {
         id: 'MODIS/061/MOD13Q1/EVI',
@@ -406,7 +355,6 @@ export default [
         dataElementCode: 'MODIS_EVI',
         dataElementGroup: environmentGroup,
         dataSet: environmentDataSet,
-        provider: dataProvider,
     },
     {
         id: 'USGS/SRTMGL1_003/mean',
@@ -425,7 +373,6 @@ export default [
         dataElementCode: 'SRTM_ELEVATION_MEAN',
         dataElementGroup: landGroup,
         dataSet: landDataSet,
-        provider: dataProvider,
     },
     {
         id: 'USGS/SRTMGL1_003/min',
@@ -444,7 +391,6 @@ export default [
         dataElementCode: 'SRTM_ELEVATION_MIN',
         dataElementGroup: landGroup,
         dataSet: landDataSet,
-        provider: dataProvider,
     },
     {
         id: 'USGS/SRTMGL1_003/max',
@@ -463,7 +409,6 @@ export default [
         dataElementCode: 'SRTM_ELEVATION_MAX',
         dataElementGroup: landGroup,
         dataSet: landDataSet,
-        provider: dataProvider,
     },
     {
         id: 'USGS/SRTMGL1_003/stddev',
@@ -484,7 +429,6 @@ export default [
         dataElementCode: 'SRTM_ELEVATION_STDDEV',
         dataElementGroup: landGroup,
         dataSet: landDataSet,
-        provider: dataProvider,
     },
     ...landcoverTypes.map(({ name, value }) => ({
         id: `MODIS/061/MCD12Q1/LC_Type1/${value}`,
@@ -508,7 +452,6 @@ export default [
         dataElementCode: `MODIS_LANDCOVER_${value}`,
         dataElementGroup: landGroup,
         dataSet: landDataSet,
-        provider: dataProvider,
     })),
 ]
 

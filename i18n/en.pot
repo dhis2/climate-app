@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-11-11T15:22:50.243Z\n"
-"PO-Revision-Date: 2025-11-11T15:22:50.244Z\n"
+"POT-Creation-Date: 2025-11-11T15:32:22.888Z\n"
+"PO-Revision-Date: 2025-11-11T15:32:22.888Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -816,9 +816,6 @@ msgstr "App settings"
 msgid "Changes made below will apply to all users of this app."
 msgstr "Changes made below will apply to all users of this app."
 
-msgid "General settings"
-msgstr "General settings"
-
 msgid "Default start page for users"
 msgstr "Default start page for users"
 
@@ -851,9 +848,6 @@ msgstr "Aggregate"
 
 msgid "Aggregation type"
 msgstr "Aggregation type"
-
-msgid "Use your domain knowledge to select the appropriate aggregation type"
-msgstr "Use your domain knowledge to select the appropriate aggregation type"
 
 msgid "Store zero data values"
 msgstr "Store zero data values"
@@ -1160,15 +1154,6 @@ msgstr ""
 "Percentage of water vapor in the air compared to the total amount of vapor "
 "that can exist in the air at its current temperature. Calculated using air "
 "temperature and dewpoint temperature at 2 m above surface."
-
-msgid "Local Min Tempreture (Land)"
-msgstr "Local Min Tempreture (Land)"
-
-msgid "Local Max Tempreture (Land)"
-msgstr "Local Max Tempreture (Land)"
-
-msgid "Local Precipitation "
-msgstr "Local Precipitation "
 
 msgid "Heat stress (ERA5-HEAT)"
 msgstr "Heat stress (ERA5-HEAT)"

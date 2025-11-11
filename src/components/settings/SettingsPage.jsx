@@ -14,7 +14,6 @@ const SettingsPage = () => {
 
     const { startPage, timeZone } = settings
 
-    // fill in data provider details based on route codes in routes api
     return (
         <div className={styles.container}>
             <h1>{i18n.t('App settings')}</h1>
@@ -23,7 +22,6 @@ const SettingsPage = () => {
                     'Changes made below will apply to all users of this app.'
                 )}
             </p>
-            <h2>{i18n.t('General settings')}</h2>
             <StartPageSelect startPage={startPage} onChange={changeSetting} />
             <TimeZoneSelect timeZone={timeZone} onChange={changeSetting} />
             <ChartSettings />
