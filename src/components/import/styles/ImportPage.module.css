@@ -55,7 +55,12 @@
 }
 
 .formContainer {
-    padding: var(--spacers-dp16) var(--spacers-dp12);
-    background-color: var(--colors-grey050);
-    margin-block-end: var(--spacers-dp16);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp16);
+}
+
+.formSection {
+    padding: var(--spacers-dp16);
+    background-color: var(--colors-grey200);
 }

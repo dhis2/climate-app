@@ -167,22 +167,22 @@ const ImportPage = () => {
         <div className={classes.page}>
             <h1>{i18n.t('Import weather and climate data')}</h1>
             <GEETokenCheck />
-            <div>
-                <div className={classes.formContainer}>
+            <div className={classes.formContainer}>
+                <div className={classes.formSection}>
                     <Dataset
                         title={i18n.t('Choose data source')}
                         selected={dataset}
                         onChange={updateDataset}
                     />
                 </div>
-                <div className={classes.formContainer}>
+                <div className={classes.formSection}>
                     <Period
                         period={period}
                         dataset={dataset}
                         onChange={(val) => updatePeriod(val)}
                     />
                 </div>
-                <div className={classes.formContainer}>
+                <div className={classes.formSection}>
                     <SectionH2
                         number="3"
                         title={i18n.t('Choose destination data element')}
@@ -194,7 +194,7 @@ const ImportPage = () => {
                         periodType={period.periodType}
                     />
                 </div>
-                <div className={classes.formContainer}>
+                <div className={classes.formSection}>
                     <OrgUnits selected={orgUnits} onChange={setOrgUnits} />
                     {dataset && (
                         <Resolution
@@ -203,7 +203,7 @@ const ImportPage = () => {
                         />
                     )}
                 </div>
-                <div className={classes.formContainer}>
+                <div className={classes.formSection}>
                     <SectionH2 number="5" title={i18n.t('Review and import')} />
                     {valueCount > maxValues && (
                         <div className={classes.warning}>
