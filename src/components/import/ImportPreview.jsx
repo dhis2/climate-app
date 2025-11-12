@@ -50,14 +50,12 @@ const ImportPreview = ({
                     })}
                 </li>
                 <li className={classes.listItem}>
-                    {totalValues === 1
-                        ? i18n.t('1 data value will be imported')
-                        : i18n.t(
-                              'A total of {{totalValues}} data values will be imported',
-                              {
-                                  totalValues,
-                              }
-                          )}
+                    {i18n.t('{{count}} data values will be imported', {
+                        count: totalValues,
+                        defaultValue: '{{count}} data value will be imported',
+                        defaultValue_plural:
+                            '{{count}} data values will be imported',
+                    })}
                 </li>
             </ul>
         </div>
