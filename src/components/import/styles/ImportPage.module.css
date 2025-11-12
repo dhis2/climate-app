@@ -7,14 +7,7 @@
     color: var(--colors-grey900);
     font-size: 24px;
     font-weight: 500;
-    /* margin-inline-start: 16px; */
-}
-
-.page h2 {
-    font-size: 16px;
-    padding: 8px 0;
-    margin: 0 0 8px 0;
-    display: inline;
+    margin-inline-start: 16px;
 }
 
 .page p {

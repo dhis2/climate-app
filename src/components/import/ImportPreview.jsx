@@ -2,6 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { periodTypes } from '../../utils/time.js'
+import classes from './ImportPreview.module.css'
 
 const ImportPreview = ({
     dataset,
@@ -22,7 +23,7 @@ const ImportPreview = ({
                 {i18n.t('source data will be imported:')}
             </p>
             <ul>
-                <li>
+                <li className={classes.listItem}>
                     {i18n.t(
                         'For every {{periodNoun}} between {{startDate}} and {{endDate}}',
                         {
@@ -32,7 +33,7 @@ const ImportPreview = ({
                         }
                     )}
                 </li>
-                <li>
+                <li className={classes.listItem}>
                     {i18n.t(
                         'To all organisation units at {{orgLevel}} level within {{orgUnit}}',
                         {
@@ -41,7 +42,7 @@ const ImportPreview = ({
                         }
                     )}
                 </li>
-                <li>
+                <li className={classes.listItem}>
                     {i18n.t('To data element "{{dataElement}}"', {
                         dataElement,
                     })}

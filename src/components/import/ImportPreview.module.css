@@ -1,0 +1,5 @@
+.listItem {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-block-end: var(--spacers-dp8);
+}

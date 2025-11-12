@@ -29,7 +29,7 @@ const PeriodType = ({ periodType, supportedPeriodTypes, onChange }) => {
 
     return (
         <div style={{ display: 'flex' }}>
-            <Field label={i18n.t('Period type to import into')}>
+            <Field label={i18n.t('Period aggregation level')}>
                 <div style={{ display: 'flex', gap: '16px' }}>
                     {supportedPeriodTypeObjects.map((type) => (
                         <Radio

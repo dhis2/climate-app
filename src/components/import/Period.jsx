@@ -106,7 +106,6 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
             )}
             {isYearly && (
                 <>
-                    {' '}
                     <SectionH2 number="2" title="Configure period" />
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
                         <div className={styles.pickers}>

@@ -1,45 +1,82 @@
+import { useDataQuery } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import { useEffect } from 'react'
 
-const EMPTY_DATA_ELEMENTS = []
+const DEFAULT_DATASETS = []
 
-const DataElement = ({
-    selected,
-    dataElements = EMPTY_DATA_ELEMENTS,
-    onChange,
-    datasetCode,
-}) => {
-    const selectableDEs = dataElements.map((d) => d.dataElement)
+const QUERY = {
+    dataSets: {
+        resource: 'dataSets',
+        params: {
+            paging: false,
+            fields: 'id,code,displayName,dataSetElements[dataElement[id,code,displayName]],periodType',
+        },
+    },
+}
+
+const DataElement = ({ selected, onChange, datasetCode, periodType }) => {
+    const { loading, error, data } = useDataQuery(QUERY)
+
+    const dataSets = data?.dataSets.dataSets || DEFAULT_DATASETS
+    const datasetsWithPeriodType = periodType
+        ? dataSets.filter(
+              (ds) => ds.periodType.toLowerCase() === periodType?.toLowerCase()
+          )
+        : dataSets
+    const dataElements = datasetsWithPeriodType.flatMap(
+        (ds) => ds.dataSetElements
+    )
+    const uniqueDataElements = Array.from(
+        dataElements
+            .reduce(
+                (map, d) => map.set(d.dataElement.id, d.dataElement),
+                new Map()
+            )
+            .values()
+    ).sort((a, b) => a.displayName.localeCompare(b.displayName))
 
     useEffect(() => {
-        if (selectableDEs.length && datasetCode) {
-            const matchingDataElements = selectableDEs.filter((dataElement) =>
-                dataElement.code?.startsWith(datasetCode)
+        if (uniqueDataElements.length && datasetCode) {
+            const matchingDataElements = uniqueDataElements.filter(
+                (dataElement) => dataElement.code?.startsWith(datasetCode)
             )
             if (matchingDataElements.length === 1) {
                 onChange(matchingDataElements[0])
             }
         }
-    }, [selectableDEs, onChange, datasetCode])
+    }, [uniqueDataElements, onChange, datasetCode])
+
+    if (loading) {
+        return <div>{i18n.t('Loading data elements...')}</div>
+    }
+
+    if (error) {
+        return (
+            <div>
+                {i18n.t('Error loading data elements:')} {error.message}
+            </div>
+        )
+    }
+
+    const periodTypeParenth = periodType ? ` (${periodType.toLowerCase()})` : ''
 
     return (
         <div>
             <SingleSelectField
                 filterable
-                label={i18n.t('Dhis2 data element')}
                 noMatchText={i18n.t('No match found')}
                 selected={selected?.id}
                 onChange={({ selected }) =>
-                    onChange(selectableDEs.find((d) => d.id === selected))
+                    onChange(uniqueDataElements.find((d) => d.id === selected))
                 }
             >
-                {selectableDEs.map((d) => (
+                {uniqueDataElements.map((d) => (
                     <SingleSelectOption
                         key={d.id}
                         value={d.id}
-                        label={d.displayName}
+                        label={`${d.displayName}${periodTypeParenth}`}
                     />
                 ))}
             </SingleSelectField>
@@ -49,8 +86,8 @@ const DataElement = ({
 
 DataElement.propTypes = {
     onChange: PropTypes.func.isRequired,
-    dataElements: PropTypes.array,
     datasetCode: PropTypes.string,
+    periodType: PropTypes.string,
     selected: PropTypes.object,
 }
 

@@ -5,30 +5,24 @@ import React from 'react'
 import datasets from '../../data/datasets.js'
 import SectionH2 from './SectionH2.jsx'
 
-const Dataset = ({ title, selected, onChange, showDescription = true }) => {
-    return (
-        <>
-            {title && <SectionH2 number="1" title={title} />}
-            <SingleSelectField
-                filterable
-                label={!title && i18n.t('Select data to import')}
-                selected={selected?.id}
-                onChange={({ selected }) =>
-                    onChange(datasets.find((d) => d.id === selected))
-                }
-            >
-                {datasets.map((d) => (
-                    <SingleSelectOption
-                        key={d.id}
-                        value={d.id}
-                        label={d.name}
-                    />
-                ))}
-            </SingleSelectField>
-            {selected && showDescription && <p>{selected.description}</p>}
-        </>
-    )
-}
+const Dataset = ({ title, selected, onChange, showDescription = true }) => (
+    <>
+        {title && <SectionH2 number="1" title={title} />}
+        <SingleSelectField
+            filterable
+            label={!title ? i18n.t('Select data to import') : null}
+            selected={selected?.id}
+            onChange={({ selected }) =>
+                onChange(datasets.find((d) => d.id === selected))
+            }
+        >
+            {datasets.map((d) => (
+                <SingleSelectOption key={d.id} value={d.id} label={d.name} />
+            ))}
+        </SingleSelectField>
+        {selected && showDescription && <p>{selected.description}</p>}
+    </>
+)
 
 Dataset.propTypes = {
     onChange: PropTypes.func.isRequired,

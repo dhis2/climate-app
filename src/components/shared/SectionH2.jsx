@@ -1,25 +1,12 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import classes from './styles/SectionH2.module.css'
 
-const SectionH2 = ({ title, number = 1 }) => {
+const SectionH2 = ({ title, number }) => {
     return (
-        <div style={{ display: 'block', marginBottom: '8px' }}>
-            <h2>
-                <span
-                    style={{
-                        backgroundColor: '#E8EDF2',
-                        borderRadius: '50%',
-                        width: '24px',
-                        height: '24px',
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        marginRight: '8px',
-                        fontSize: '14px',
-                    }}
-                >
-                    {number}
-                </span>
+        <div className={classes.container}>
+            <h2 className={classes.header}>
+                <span className={classes.number}>{number}</span>
                 {title}
             </h2>
         </div>
@@ -27,8 +14,8 @@ const SectionH2 = ({ title, number = 1 }) => {
 }
 
 SectionH2.propTypes = {
+    number: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    number: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 }
 
 export default SectionH2

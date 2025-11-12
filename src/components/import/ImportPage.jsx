@@ -22,7 +22,6 @@ import GEETokenCheck from '../shared/GEETokenCheck.jsx'
 import Resolution from '../shared/Resolution.jsx'
 import SectionH2 from '../shared/SectionH2.jsx'
 import DataElement from './DataElement.jsx'
-import Dhis2DataSet from './Dhis2DataSet.jsx'
 import ExtractData from './ExtractData.jsx'
 import ImportPreview from './ImportPreview.jsx'
 import OrgUnits from './OrgUnits.jsx'
@@ -38,7 +37,6 @@ const ImportPage = () => {
     const [period, setPeriod] = useState(getDefaultImportPeriod(calendar))
     const [orgUnits, setOrgUnits] = useState()
     const [dataElement, setDataElement] = useState()
-    const [dhis2DataSet, setDhis2DataSet] = useState()
     const standardPeriod = getStandardPeriod(period) // ISO 8601 used by GEE
     const [startExtract, setStartExtract] = useState(false)
 
@@ -71,14 +69,8 @@ const ImportPage = () => {
         setStartExtract(false)
     }, [dataset, period, orgUnits, dataElement])
 
-    const updateDhis2DSandDE = useCallback((ds) => {
-        setDhis2DataSet(ds)
-        setDataElement(null)
-    }, [])
-
     const updatePeriod = (val) => {
         if (val.periodType !== period.periodType) {
-            setDhis2DataSet(null)
             setDataElement(null)
             setPeriod(val)
         }
@@ -167,7 +159,6 @@ const ImportPage = () => {
             }
 
             setDataset(dataset)
-            setDhis2DataSet(null)
             setDataElement(null)
             updatePeriodSelector(dataset)
         },
@@ -198,17 +189,11 @@ const ImportPage = () => {
                         number="3"
                         title={i18n.t('Choose destination data element')}
                     />
-                    <Dhis2DataSet
-                        selected={dhis2DataSet}
-                        onChange={updateDhis2DSandDE}
-                        periodType={period.periodType}
-                        dataset={dataset}
-                    />
                     <DataElement
                         selected={dataElement}
-                        dataElements={dhis2DataSet?.dataSetElements}
                         onChange={setDataElement}
                         datasetCode={dataset?.dataElementCode}
+                        periodType={period.periodType}
                     />
                 </div>
                 <div className={classes.formContainer}>
