@@ -26,6 +26,13 @@ const userSettingsQuery = {
 
 const DEFAULT_DATASET = {}
 
+const getValidationState = (minCalendarDate, maxCalendarDate, dateError) => {
+    if (!minCalendarDate || !maxCalendarDate) {
+        return null
+    }
+    return dateError === null ? true : false
+}
+
 const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
     const result = useDataQuery(userSettingsQuery)
     const { data: { userSettings: { keyUiLocale: locale } = {} } = {} } = result
@@ -96,7 +103,8 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
             : null
 
     return (
-        <div className={styles.container}>
+        <>
+            <SectionH2 number="2" title="Configure period" />
             {hasNoPeriod && (
                 <p>
                     {i18n.t(
@@ -107,35 +115,34 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
             )}
             {isYearly && (
                 <>
-                    <SectionH2 number="2" title="Configure period" />
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
                         <div className={styles.pickers}>
                             <YearRange
                                 period={period}
-                                minYear={datasetPeriodRange.start}
-                                maxYear={datasetPeriodRange.end}
+                                minYear={datasetPeriodRange?.start}
+                                maxYear={datasetPeriodRange?.end}
                                 onChange={onChange}
                             />
                         </div>
                         {datasetPeriodRange && (
-                            <p>
-                                {i18n.t('Valid range')}:{' '}
-                                <strong>
-                                    {getDateStringFromIsoDate({
-                                        date: datasetPeriodRange.start,
-                                        calendar,
-                                        locale: period.locale,
-                                    })}
-                                </strong>{' '}
-                                -{' '}
-                                <strong>
-                                    {getDateStringFromIsoDate({
-                                        date: datasetPeriodRange.end,
-                                        calendar,
-                                        locale: period.locale,
-                                    })}
-                                </strong>
-                            </p>
+                            <div style={{ fontSize: '14px', marginTop: '8px' }}>
+                                {i18n.t(
+                                    'Valid range: {{startDate}} - {{endDate}}',
+                                    {
+                                        startDate: getDateStringFromIsoDate({
+                                            date: datasetPeriodRange.start,
+                                            calendar,
+                                            locale: period.locale,
+                                        }),
+                                        endDate: getDateStringFromIsoDate({
+                                            date: datasetPeriodRange.end,
+                                            calendar,
+                                            locale: period.locale,
+                                        }),
+                                        nsSeparator: ';',
+                                    }
+                                )}
+                            </div>
                         )}
                         <PeriodType
                             periodType={periodType}
@@ -149,7 +156,6 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
             )}
             {!hasNoPeriod && !isYearly && (
                 <>
-                    <SectionH2 number="2" title="Configure period" />
                     <div className={styles.pickers}>
                         <CalendarInput
                             label={i18n.t('Start date')}
@@ -160,8 +166,13 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
                             locale={locale || 'en'}
                             onDateSelect={updateStartDate}
                             warning={!!startDateError}
-                            valid={!startDateError}
+                            valid={getValidationState(
+                                minCalendarDate,
+                                maxCalendarDate,
+                                startDateError
+                            )}
                         />
+                        <span className={styles.separator}>—</span>
                         <CalendarInput
                             label={i18n.t('End date')}
                             date={endTime}
@@ -171,9 +182,15 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
                             locale={locale || 'en'}
                             onDateSelect={updateEndDate}
                             warning={!!endDateError}
-                            valid={!endDateError}
+                            valid={getValidationState(
+                                minCalendarDate,
+                                maxCalendarDate,
+                                endDateError
+                            )}
                         />
-                        <TimeZone period={period} onChange={onChange} />
+                        <div className={styles.timezone}>
+                            <TimeZone period={period} onChange={onChange} />
+                        </div>
                     </div>
                     {datasetPeriodRange && (
                         <p>
@@ -204,7 +221,7 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
                     />
                     <HelpfulInfo
                         text={i18n.t(
-                            'Daily data between start and end date will be calculated, and aggregated in DHIS2 to the selected period aggregation level. If the DHIS2 instance time zone is not UTC, then it is possible to choose the instance time zone or UTC for the calculations.'
+                            'Daily data between start and end date will be calculated, and aggregated in DHIS2 to the selected period aggregation level. If the DHIS2 instance time zone is not UTC, then it is possible to choose either the instance time zone or UTC for the calculations.'
                         )}
                     />
                 </>
@@ -213,7 +230,7 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
             {periodErrorMessage && (
                 <p className={styles.periodError}>{periodErrorMessage}</p>
             )}
-        </div>
+        </>
     )
 }
 

@@ -6,8 +6,17 @@
     display: flex;
     flex-direction: row;
     justify-content: left;
-    gap: 16px;
-    margin-block-end: var(--spacers-dp16);
+    gap: 12px;
+    margin-block-end: var(--spacers-dp8);
+}
+
+.separator {
+    align-self: flex-end;
+    margin-bottom: 8px;
+}
+
+.timezone {
+    margin-left: 16px;
 }
 
 .periodError {

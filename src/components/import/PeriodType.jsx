@@ -28,7 +28,7 @@ const PeriodType = ({ periodType, supportedPeriodTypes, onChange }) => {
     }
 
     return (
-        <div style={{ display: 'flex' }}>
+        <div style={{ display: 'flex', marginTop: '16px' }}>
             <Field label={i18n.t('Period aggregation level')}>
                 <div style={{ display: 'flex', gap: '16px' }}>
                     {supportedPeriodTypeObjects.map((type) => (

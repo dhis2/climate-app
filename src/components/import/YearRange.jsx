@@ -27,24 +27,22 @@ const YearRange = ({ period, minYear, maxYear, onChange }) => {
     }
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'row' }}>
-            <span>{i18n.t('Choose year range:', { nsSeparator: '^^' })}</span>
-            <div className={styles.yearRange}>
-                <YearSelect
-                    label={i18n.t('Start year')}
-                    year={period.startTime}
-                    minYear={minYear}
-                    maxYear={maxYear}
-                    onChange={onYearChange('startTime')}
-                />
-                <YearSelect
-                    label={i18n.t('End year')}
-                    year={period.endTime}
-                    minYear={minYear}
-                    maxYear={maxYear}
-                    onChange={onYearChange('endTime')}
-                />
-            </div>
+        <div className={styles.container}>
+            <YearSelect
+                label={i18n.t('Start year')}
+                year={period.startTime}
+                minYear={minYear}
+                maxYear={maxYear}
+                onChange={onYearChange('startTime')}
+            />
+            <span className={styles.separator}>—</span>
+            <YearSelect
+                label={i18n.t('End year')}
+                year={period.endTime}
+                minYear={minYear}
+                maxYear={maxYear}
+                onChange={onYearChange('endTime')}
+            />
         </div>
     )
 }

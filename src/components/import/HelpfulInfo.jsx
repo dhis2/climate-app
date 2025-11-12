@@ -1,10 +1,10 @@
 import { IconInfo16 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import styles from './styles/HelpfulInfo.module.css'
+import classes from './styles/HelpfulInfo.module.css'
 
 const HelpfulInfo = ({ text }) => {
     return (
-        <div className={styles.divider}>
+        <div className={classes.info}>
             <IconInfo16 />
             <p>{text}</p>
         </div>

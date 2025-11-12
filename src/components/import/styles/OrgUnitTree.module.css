@@ -1,5 +1,8 @@
 .container {
     overflow: auto;
-    max-height: 400px;
+    height: 320px;
     border: 1px solid #ccc;
+    padding: var(--spacers-dp8);
+    border-radius: 3px;
+    background-color: var(--colors-white);
 }

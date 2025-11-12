@@ -1,4 +1,4 @@
 .container {
-    margin: 1rem 0 1rem 0;
+    margin-block-start: var(--spacers-dp16);
     font-size: 14px;
 }

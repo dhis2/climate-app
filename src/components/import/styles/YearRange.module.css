@@ -1,11 +1,16 @@
 .container {
-    margin: 0 0 1rem 0;
-}
-
-.yearRange {
     display: flex;
+    align-items: center;
+    gap: 12px;
     flex-direction: row;
     justify-content: left;
-    align-items: center;
-    gap: 16px;
+}
+
+.label {
+    font-size: 14px;
+}
+
+.separator {
+    align-self: flex-end;
+    margin-bottom: 8px;
 }
