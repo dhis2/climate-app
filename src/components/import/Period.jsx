@@ -12,7 +12,7 @@ import SectionH2 from '../shared/SectionH2.jsx'
 import TimeZone from '../shared/TimeZone.jsx'
 import HelpfulInfo from './HelpfulInfo.jsx'
 import PeriodType from './PeriodType.jsx'
-import styles from './styles/Period.module.css'
+import classes from './styles/Period.module.css'
 import YearRange from './YearRange.jsx'
 
 const userSettingsQuery = {
@@ -114,49 +114,45 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
                 </p>
             )}
             {isYearly && (
-                <>
-                    <div style={{ display: 'flex', flexDirection: 'column' }}>
-                        <div className={styles.pickers}>
-                            <YearRange
-                                period={period}
-                                minYear={datasetPeriodRange?.start}
-                                maxYear={datasetPeriodRange?.end}
-                                onChange={onChange}
-                            />
+                <div className={classes.yearlyContainer}>
+                    <YearRange
+                        period={period}
+                        minYear={datasetPeriodRange?.start}
+                        maxYear={datasetPeriodRange?.end}
+                        onChange={onChange}
+                    />
+                    {datasetPeriodRange && (
+                        <div className={classes.yearlyValidRange}>
+                            {i18n.t(
+                                'Valid range: {{startDate}} - {{endDate}}',
+                                {
+                                    startDate: getDateStringFromIsoDate({
+                                        date: datasetPeriodRange.start,
+                                        calendar,
+                                        locale: period.locale,
+                                    }),
+                                    endDate: getDateStringFromIsoDate({
+                                        date: datasetPeriodRange.end,
+                                        calendar,
+                                        locale: period.locale,
+                                    }),
+                                    nsSeparator: ';',
+                                }
+                            )}
                         </div>
-                        {datasetPeriodRange && (
-                            <div style={{ fontSize: '14px', marginTop: '8px' }}>
-                                {i18n.t(
-                                    'Valid range: {{startDate}} - {{endDate}}',
-                                    {
-                                        startDate: getDateStringFromIsoDate({
-                                            date: datasetPeriodRange.start,
-                                            calendar,
-                                            locale: period.locale,
-                                        }),
-                                        endDate: getDateStringFromIsoDate({
-                                            date: datasetPeriodRange.end,
-                                            calendar,
-                                            locale: period.locale,
-                                        }),
-                                        nsSeparator: ';',
-                                    }
-                                )}
-                            </div>
-                        )}
-                        <PeriodType
-                            periodType={periodType}
-                            supportedPeriodTypes={datasetSupportedPeriodTypes}
-                            onChange={(periodType) =>
-                                onChange({ ...period, periodType })
-                            }
-                        />
-                    </div>
-                </>
+                    )}
+                    <PeriodType
+                        periodType={periodType}
+                        supportedPeriodTypes={datasetSupportedPeriodTypes}
+                        onChange={(periodType) =>
+                            onChange({ ...period, periodType })
+                        }
+                    />
+                </div>
             )}
             {!hasNoPeriod && !isYearly && (
                 <>
-                    <div className={styles.pickers}>
+                    <div className={classes.pickers}>
                         <CalendarInput
                             label={i18n.t('Start date')}
                             date={startTime}
@@ -172,7 +168,7 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
                                 startDateError
                             )}
                         />
-                        <span className={styles.separator}>—</span>
+                        <span className={classes.separator}>—</span>
                         <CalendarInput
                             label={i18n.t('End date')}
                             date={endTime}
@@ -188,7 +184,7 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
                                 endDateError
                             )}
                         />
-                        <div className={styles.timezone}>
+                        <div className={classes.timezone}>
                             <TimeZone period={period} onChange={onChange} />
                         </div>
                     </div>
@@ -228,7 +224,7 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
             )}
 
             {periodErrorMessage && (
-                <p className={styles.periodError}>{periodErrorMessage}</p>
+                <p className={classes.periodError}>{periodErrorMessage}</p>
             )}
         </>
     )

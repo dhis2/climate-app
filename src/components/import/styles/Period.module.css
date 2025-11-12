@@ -25,20 +25,12 @@
     margin-block-end: var(--spacers-dp8);
 }
 
-.divider {
+.yearlyContainer {
     display: flex;
-    align-items: center;
-    gap: var(--spacers-dp8);
-    margin-inline-start: var(--spacers-dp8);
-    margin-block-start: var(--spacers-dp12);
+    flex-direction: column;
 }
 
-.divider svg {
-    flex-shrink: 0;
-}
-
-.divider p {
-    margin: 0;
-    line-height: 16px;
-    padding-top: 0;
+.yearlyValidRange {
+    font-size: 14px;
+    margin-top: 8px;
 }

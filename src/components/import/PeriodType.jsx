@@ -27,6 +27,18 @@ const PeriodType = ({ periodType, supportedPeriodTypes, onChange }) => {
         onChange(selectedPeriodType)
     }
 
+    // If there's only one supported period type, show just the text
+    if (supportedPeriodTypeObjects.length === 1) {
+        return (
+            <div style={{ marginTop: '16px', fontSize: '14px' }}>
+                <div>
+                    {i18n.t('Period aggregation level')}:{' '}
+                    {supportedPeriodTypeObjects[0].name}
+                </div>
+            </div>
+        )
+    }
+
     return (
         <div style={{ display: 'flex', marginTop: '16px' }}>
             <Field label={i18n.t('Period aggregation level')}>
@@ -37,10 +49,6 @@ const PeriodType = ({ periodType, supportedPeriodTypes, onChange }) => {
                             name="periodType"
                             value={type.id}
                             label={type.name}
-                            disabled={
-                                !supportedPeriodTypes ||
-                                supportedPeriodTypes.length === 1
-                            }
                             checked={selectedPeriodType === type.id}
                             onChange={({ value }) => onChange(value)}
                         />
