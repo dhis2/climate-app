@@ -46,7 +46,8 @@
 .warning {
     color: red;
     font-size: 14px;
-    margin-top: 6px;
+    margin-block-start: var(--spacers-dp8);
+    margin-block-end: var(--spacers-dp8);
 }
 
 .capitalize {

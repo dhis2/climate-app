@@ -1,6 +1,6 @@
 import { useDataQuery } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { CalendarInput, IconInfo16 } from '@dhis2/ui'
+import { CalendarInput } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
 import {
@@ -10,6 +10,7 @@ import {
 } from '../../utils/time.js'
 import SectionH2 from '../shared/SectionH2.jsx'
 import TimeZone from '../shared/TimeZone.jsx'
+import HelpfulInfo from './HelpfulInfo.jsx'
 import PeriodType from './PeriodType.jsx'
 import styles from './styles/Period.module.css'
 import YearRange from './YearRange.jsx'
@@ -201,14 +202,11 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
                             onChange({ ...period, periodType })
                         }
                     />
-                    <div className={styles.divider}>
-                        <IconInfo16 />
-                        <p>
-                            {i18n.t(
-                                'Daily data between start and end date will be calculated, and aggregated in DHIS2 to the selected aggregation level. If the DHIS2 instance time zone is not UTC, then it is possible to choose the instance time zone or UTC for the calculations.'
-                            )}
-                        </p>
-                    </div>
+                    <HelpfulInfo
+                        text={i18n.t(
+                            'Daily data between start and end date will be calculated, and aggregated in DHIS2 to the selected period aggregation level. If the DHIS2 instance time zone is not UTC, then it is possible to choose the instance time zone or UTC for the calculations.'
+                        )}
+                    />
                 </>
             )}
 

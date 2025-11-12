@@ -1,0 +1,17 @@
+.divider {
+    display: flex;
+    align-items: center;
+    gap: var(--spacers-dp8);
+    margin-inline-start: var(--spacers-dp8);
+    margin-block-start: var(--spacers-dp12);
+}
+
+.divider svg {
+    flex-shrink: 0;
+}
+
+.divider p {
+    margin: 0;
+    line-height: 16px;
+    padding-top: 0;
+}

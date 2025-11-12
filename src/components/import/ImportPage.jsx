@@ -70,10 +70,8 @@ const ImportPage = () => {
     }, [dataset, period, orgUnits, dataElement])
 
     const updatePeriod = (val) => {
-        if (val.periodType !== period.periodType) {
-            setDataElement(null)
-            setPeriod(val)
-        }
+        setDataElement(null)
+        setPeriod(val)
     }
 
     const updateDataset = useCallback(
@@ -198,10 +196,19 @@ const ImportPage = () => {
                 </div>
                 <div className={classes.formContainer}>
                     <OrgUnits selected={orgUnits} onChange={setOrgUnits} />
+                    {dataset && (
+                        <Resolution
+                            resolution={dataset.resolution}
+                            isImport={true}
+                        />
+                    )}
+                </div>
+                <div className={classes.formContainer}>
+                    <SectionH2 number="5" title={i18n.t('Review and import')} />
                     {valueCount > maxValues && (
                         <div className={classes.warning}>
                             {i18n.t(
-                                'You can import a maximum of {{maxValues}} data values in a single import, but you are trying to import {{valueCount}} values for {{orgUnitCount}} organisation units over {{periodCount}} {{periodTypeName}} periods. Please select a shorter period or fewer organisation units. You can always import more data later.',
+                                'Import limit exceeded: {{valueCount}} values selected (maximum {{maxValues}}). Reduce your selection by choosing fewer organisation units or a shorter time period. Additional imports can be performed separately.',
                                 {
                                     maxValues,
                                     valueCount,
@@ -212,15 +219,6 @@ const ImportPage = () => {
                             )}
                         </div>
                     )}
-                    {dataset && (
-                        <Resolution
-                            resolution={dataset.resolution}
-                            isImport={true}
-                        />
-                    )}
-                </div>
-                <div className={classes.formContainer}>
-                    <SectionH2 number="5" title={i18n.t('Review and import')} />
                     {isValid && !startExtract && (
                         <ImportPreview
                             dataset={dataset.name || ''}
@@ -234,6 +232,7 @@ const ImportPage = () => {
                                 ''
                             }
                             dataElement={dataElement.displayName || ''}
+                            totalValues={valueCount}
                         />
                     )}
                     <div>

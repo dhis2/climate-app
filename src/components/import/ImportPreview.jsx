@@ -12,6 +12,7 @@ const ImportPreview = ({
     orgLevel,
     orgUnit,
     dataElement,
+    totalValues,
 }) => {
     const periodTypeData = periodTypes.find((type) => type.id === periodType)
     const periodNoun = periodTypeData?.noun || periodType
@@ -48,6 +49,16 @@ const ImportPreview = ({
                         dataElement,
                     })}
                 </li>
+                <li className={classes.listItem}>
+                    {totalValues === 1
+                        ? i18n.t('1 data value will be imported')
+                        : i18n.t(
+                              'A total of {{totalValues}} data values will be imported',
+                              {
+                                  totalValues,
+                              }
+                          )}
+                </li>
             </ul>
         </div>
     )
@@ -61,6 +72,7 @@ ImportPreview.propTypes = {
     orgUnit: PropTypes.string.isRequired,
     periodType: PropTypes.string.isRequired,
     startDate: PropTypes.string.isRequired,
+    totalValues: PropTypes.number.isRequired,
 }
 
 export default ImportPreview
