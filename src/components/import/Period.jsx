@@ -1,6 +1,6 @@
 import { useDataQuery } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { CalendarInput } from '@dhis2/ui'
+import { CalendarInput, IconInfo16 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
 import {
@@ -149,11 +149,6 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
             {!hasNoPeriod && !isYearly && (
                 <>
                     <SectionH2 number="2" title="Configure period" />
-                    <p>
-                        {i18n.t(
-                            'Daily values between start and end dates will be imported to DHIS2'
-                        )}
-                    </p>
                     <div className={styles.pickers}>
                         <CalendarInput
                             label={i18n.t('Start date')}
@@ -206,6 +201,14 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
                             onChange({ ...period, periodType })
                         }
                     />
+                    <div className={styles.divider}>
+                        <IconInfo16 />
+                        <p>
+                            {i18n.t(
+                                'Daily data between start and end date will be calculated, and aggregated in DHIS2 to the selected aggregation level. If the DHIS2 instance time zone is not UTC, then it is possible to choose the instance time zone or UTC for the calculations.'
+                            )}
+                        </p>
+                    </div>
                 </>
             )}
 

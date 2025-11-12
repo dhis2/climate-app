@@ -1,11 +1,12 @@
 .container {
-    margin-block-end: 8px;
+    margin-block-end: var(--spacers-dp12);
 }
 
 .header {
     font-size: 16px;
-    padding: var(--spacers-dp8) 0;
-    margin: 0 0 var(--spacers-dp8) 0;
+    font-weight: 500;
+    padding: 0;
+    margin: 0;
     display: inline;
 }
 

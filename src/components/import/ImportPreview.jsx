@@ -18,11 +18,12 @@ const ImportPreview = ({
 
     return (
         <div>
-            <p>
-                <strong>{dataset}</strong>{' '}
-                {i18n.t('source data will be imported:')}
-            </p>
-            <ul>
+            <div className={classes.datasetlead}>
+                {i18n.t('"{{dataset}}" source data will be imported:', {
+                    dataset,
+                })}
+            </div>
+            <ul className={classes.list}>
                 <li className={classes.listItem}>
                     {i18n.t(
                         'For every {{periodNoun}} between {{startDate}} and {{endDate}}',

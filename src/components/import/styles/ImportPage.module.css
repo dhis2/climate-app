@@ -7,12 +7,12 @@
     color: var(--colors-grey900);
     font-size: 24px;
     font-weight: 500;
-    margin-inline-start: 16px;
 }
 
 .page p {
     font-size: 14px;
-    margin: 6px 0 12px;
+    line-height: 18px;
+    margin: 6px 20px 12px 0;
 }
 
 .container {
