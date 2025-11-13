@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
+import { SingleSelectField, SingleSelectOption, InputField } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import { useEffect } from 'react'
 import useSystemInfo from '../../hooks/useSystemInfo.js'
@@ -21,8 +21,14 @@ const TimeZone = ({ period, onChange }) => {
         }
     }, [timeZone, onChange])
 
-    if (!timeZone || timeZone === utcTimeZone) {
+    if (!timeZone) {
         return null
+    }
+
+    if (timeZone === utcTimeZone) {
+        return (
+            <InputField label={i18n.t('Time zone')} value={timeZone} disabled />
+        )
     }
 
     return (

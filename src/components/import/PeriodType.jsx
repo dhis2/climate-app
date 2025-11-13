@@ -1,46 +1,68 @@
 import i18n from '@dhis2/d2-i18n'
-import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
+import { Radio, Field } from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import { periodTypes, DAILY, SIXTEEN_DAYS, YEARLY } from '../../utils/time.js'
+import { periodTypes } from '../../utils/time.js'
 
-const PeriodType = ({ periodType, datasetPeriodType, onChange }) => {
+const defaultPeriodTypes = ['DAILY', 'WEEKLY', 'MONTHLY']
+
+const PeriodType = ({ periodType, supportedPeriodTypes, onChange }) => {
+    // get period type objects from supported period type ids, or use defaults
+    const supportedPeriodTypeObjects = supportedPeriodTypes
+        ? periodTypes?.filter((type) => supportedPeriodTypes.includes(type.id))
+        : periodTypes.filter((type) => defaultPeriodTypes.includes(type.id))
+
+    // make sure selected period type is supported by dataset period type, or set to undefined
+    let selectedPeriodType = supportedPeriodTypeObjects
+        .map((type) => type.id)
+        .includes(periodType)
+        ? periodType
+        : undefined
+
+    // if period type is unsupported, set to first allowable type
+    if (
+        supportedPeriodTypeObjects.length > 0 &&
+        selectedPeriodType === undefined
+    ) {
+        selectedPeriodType = supportedPeriodTypeObjects[0].id
+        onChange(selectedPeriodType)
+    }
+
+    // If there's only one supported period type, show just the text
+    if (supportedPeriodTypeObjects.length === 1) {
+        return (
+            <div style={{ marginTop: '16px', fontSize: '14px' }}>
+                <div>
+                    {i18n.t('Period aggregation level')}:{' '}
+                    {supportedPeriodTypeObjects[0].name}
+                </div>
+            </div>
+        )
+    }
+
     return (
-        <SingleSelectField
-            label={i18n.t('Period type')}
-            selected={
-                (datasetPeriodType === SIXTEEN_DAYS && periodType === DAILY) ||
-                (datasetPeriodType === YEARLY && periodType !== YEARLY)
-                    ? undefined
-                    : periodType
-            }
-            onChange={({ selected }) => onChange(selected)}
-        >
-            {periodTypes
-                ?.filter(
-                    (type) =>
-                        !(
-                            (datasetPeriodType === SIXTEEN_DAYS &&
-                                type.id === DAILY) ||
-                            (datasetPeriodType === YEARLY &&
-                                type.id !== YEARLY) ||
-                            type.id === YEARLY
-                        )
-                )
-                .map((type) => (
-                    <SingleSelectOption
-                        key={type.id}
-                        value={type.id}
-                        label={type.name}
-                    />
-                ))}
-        </SingleSelectField>
+        <div style={{ display: 'flex', marginTop: '16px' }}>
+            <Field label={i18n.t('Period aggregation level')}>
+                <div style={{ display: 'flex', gap: '16px' }}>
+                    {supportedPeriodTypeObjects.map((type) => (
+                        <Radio
+                            key={type.id}
+                            name="periodType"
+                            value={type.id}
+                            label={type.name}
+                            checked={selectedPeriodType === type.id}
+                            onChange={({ value }) => onChange(value)}
+                        />
+                    ))}
+                </div>
+            </Field>
+        </div>
     )
 }
 
 PeriodType.propTypes = {
     periodType: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
-    datasetPeriodType: PropTypes.string,
+    supportedPeriodTypes: PropTypes.arrayOf(PropTypes.string),
 }
 
 export default PeriodType
