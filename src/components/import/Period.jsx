@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
 import {
     YEARLY,
+    DAILY,
     normalizeIsoDate,
     getDateStringFromIsoDate,
 } from '../../utils/time.js'
@@ -102,6 +103,19 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
             ? i18n.t('End date is not within the valid range.')
             : null
 
+    const helpText =
+        dataset.timeZone || dataset.bands?.[0]?.timeZone
+            ? periodType === DAILY
+                ? i18n.t(
+                      'Daily data between start and end date will be calculated from hourly data, with time zone adjustments applied if the selected time zone is not set to UTC.'
+                  )
+                : i18n.t(
+                      'Daily data between start and end date will be calculated from hourly data.'
+                  )
+            : i18n.t(
+                  'Daily data between start and end date will be calculated and then aggregated to the selected period type.'
+              )
+
     return (
         <>
             <SectionH2 number="2" title="Configure period" />
@@ -152,6 +166,13 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
             )}
             {!hasNoPeriod && !isYearly && (
                 <>
+                    <PeriodType
+                        periodType={periodType}
+                        supportedPeriodTypes={datasetSupportedPeriodTypes}
+                        onChange={(periodType) =>
+                            onChange({ ...period, periodType })
+                        }
+                    />
                     <div className={classes.pickers}>
                         <CalendarInput
                             label={i18n.t('Start date')}
@@ -184,9 +205,11 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
                                 endDateError
                             )}
                         />
-                        <div className={classes.timezone}>
-                            <TimeZone period={period} onChange={onChange} />
-                        </div>
+                        {(dataset.timeZone || dataset.bands?.[0]?.timeZone) && (
+                            <div className={classes.timezone}>
+                                <TimeZone period={period} onChange={onChange} />
+                            </div>
+                        )}
                     </div>
                     {datasetPeriodRange && (
                         <p>
@@ -208,18 +231,8 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
                             </strong>
                         </p>
                     )}
-                    <PeriodType
-                        periodType={periodType}
-                        supportedPeriodTypes={datasetSupportedPeriodTypes}
-                        onChange={(periodType) =>
-                            onChange({ ...period, periodType })
-                        }
-                    />
-                    <HelpfulInfo
-                        text={i18n.t(
-                            'Daily data between start and end date will be calculated, and aggregated in DHIS2 to the selected period aggregation level. If the DHIS2 instance time zone is not UTC, then it is possible to choose either the instance time zone or UTC for the calculations.'
-                        )}
-                    />
+
+                    <HelpfulInfo text={helpText} />
                 </>
             )}
 

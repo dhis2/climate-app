@@ -11,7 +11,8 @@
 }
 
 .info p {
-    margin: 0;
+    margin-block-start: 4px;
+    margin-block-end: 4px;
     line-height: 16px;
     padding-top: 0;
 }

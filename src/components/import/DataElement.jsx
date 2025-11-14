@@ -3,6 +3,8 @@ import i18n from '@dhis2/d2-i18n'
 import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import HelpfulInfo from '../import/HelpfulInfo.jsx'
 
 const DEFAULT_DATASETS = []
 
@@ -80,6 +82,14 @@ const DataElement = ({ selected, onChange, datasetCode, periodType }) => {
                     />
                 ))}
             </SingleSelectField>
+            <HelpfulInfo
+                text={
+                    <>
+                        Need help setting up data elements for import? Check out
+                        the <Link to="/setup">setup guide</Link>
+                    </>
+                }
+            />
         </div>
     )
 }

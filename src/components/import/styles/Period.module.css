@@ -7,7 +7,7 @@
     flex-direction: row;
     justify-content: left;
     gap: 12px;
-    margin-block-end: var(--spacers-dp8);
+    margin-block-start: var(--spacers-dp16);
 }
 
 .separator {

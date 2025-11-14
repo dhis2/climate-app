@@ -1,9 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
 import { Radio, Field } from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import { periodTypes } from '../../utils/time.js'
+import { periodTypes, DAILY, WEEKLY, MONTHLY } from '../../utils/time.js'
 
-const defaultPeriodTypes = ['DAILY', 'WEEKLY', 'MONTHLY']
+const defaultPeriodTypes = [DAILY, WEEKLY, MONTHLY]
 
 const PeriodType = ({ periodType, supportedPeriodTypes, onChange }) => {
     // get period type objects from supported period type ids, or use defaults
@@ -32,7 +32,7 @@ const PeriodType = ({ periodType, supportedPeriodTypes, onChange }) => {
         return (
             <div style={{ marginTop: '16px', fontSize: '14px' }}>
                 <div>
-                    {i18n.t('Period aggregation level')}:{' '}
+                    {i18n.t('Period type')}:{' '}
                     {supportedPeriodTypeObjects[0].name}
                 </div>
             </div>
@@ -41,7 +41,7 @@ const PeriodType = ({ periodType, supportedPeriodTypes, onChange }) => {
 
     return (
         <div style={{ display: 'flex', marginTop: '16px' }}>
-            <Field label={i18n.t('Period aggregation level')}>
+            <Field label={i18n.t('Period type')}>
                 <div style={{ display: 'flex', gap: '16px' }}>
                     {supportedPeriodTypeObjects.map((type) => (
                         <Radio
