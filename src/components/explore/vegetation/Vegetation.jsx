@@ -9,6 +9,7 @@ import {
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
 import exploreStore from '../../../store/exploreStore.js'
 import DataLoader from '../../shared/DataLoader.jsx'
+import OpenAsMapButton from '../../shared/OpenAsMapButton.jsx'
 import Resolution from '../../shared/Resolution.jsx'
 import Chart from '../Chart.jsx'
 import MonthlyPeriodSelect from '../MonthlyPeriodSelect.jsx'
@@ -77,6 +78,7 @@ const Vegetation = () => {
                 {band === NDVI ? ndviDescription : eviDescription}
             </div>
             <Resolution resolution={modisResolution} />
+            <OpenAsMapButton dataset={band} period={period} feature={feature} />
         </>
     )
 }

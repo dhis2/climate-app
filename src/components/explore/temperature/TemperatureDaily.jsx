@@ -3,6 +3,7 @@ import useAppSettings from '../../../hooks/useAppSettings.js'
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
 import exploreStore from '../../../store/exploreStore.js'
 import DataLoader from '../../shared/DataLoader.jsx'
+import OpenAsMapButton from '../../shared/OpenAsMapButton.jsx'
 import Resolution from '../../shared/Resolution.jsx'
 import Chart from '../Chart.jsx'
 import DailyPeriodSelect from '../DailyPeriodSelect.jsx'
@@ -36,6 +37,11 @@ const TemperatureDaily = () => {
             )}
             <DailyPeriodSelect />
             <Resolution resolution={era5Daily.resolution} />
+            <OpenAsMapButton
+                dataset={'temperatureDaily'}
+                period={period}
+                feature={orgUnit}
+            />
         </>
     )
 }
