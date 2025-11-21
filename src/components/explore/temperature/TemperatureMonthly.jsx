@@ -4,6 +4,7 @@ import useEarthEngineClimateNormals from '../../../hooks/useEarthEngineClimateNo
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
 import exploreStore from '../../../store/exploreStore.js'
 import DataLoader from '../../shared/DataLoader.jsx'
+import OpenAsMapButton from '../../shared/OpenAsMapButton.jsx'
 import Resolution from '../../shared/Resolution.jsx'
 import Chart from '../Chart.jsx'
 import MonthlyPeriodSelect from '../MonthlyPeriodSelect.jsx'
@@ -50,6 +51,11 @@ const TemperatureMonthly = () => {
             <MonthlyPeriodSelect />
             <ReferencePeriod />
             <Resolution resolution={era5Monthly.resolution} />
+            <OpenAsMapButton
+                dataset={'temperatureMonthly'}
+                period={period}
+                feature={orgUnit}
+            />
         </>
     )
 }

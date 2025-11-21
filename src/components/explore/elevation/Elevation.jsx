@@ -3,6 +3,7 @@ import { demResolution } from '../../../data/datasets.js'
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
 import exploreStore from '../../../store/exploreStore.js'
 import DataLoader from '../../shared/DataLoader.jsx'
+import OpenAsMapButton from '../../shared/OpenAsMapButton.jsx'
 import Resolution from '../../shared/Resolution.jsx'
 import Chart from '../Chart.jsx'
 import getChartConfig from './charts/elevation.js'
@@ -48,6 +49,7 @@ const Elevation = () => {
                 </>
             )}
             <Resolution resolution={demResolution} />
+            <OpenAsMapButton dataset={'elevation'} feature={feature} />
         </>
     )
 }

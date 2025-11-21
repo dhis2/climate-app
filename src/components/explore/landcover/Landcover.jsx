@@ -5,6 +5,7 @@ import {
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
 import exploreStore from '../../../store/exploreStore.js'
 import DataLoader from '../../shared/DataLoader.jsx'
+import OpenAsMapButton from '../../shared/OpenAsMapButton.jsx'
 import Resolution from '../../shared/Resolution.jsx'
 import Chart from '../Chart.jsx'
 import getChartConfig from './charts/landcover.js'
@@ -41,6 +42,11 @@ const Landcover = () => {
             <LandcoverSelect data={data} />
             <div className={styles.description}>{landcoverDescription}</div>
             <Resolution resolution={landcoverResolution} />
+            <OpenAsMapButton
+                dataset={dataset}
+                period={period}
+                feature={feature}
+            />
         </>
     )
 }
