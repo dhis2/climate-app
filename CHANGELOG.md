@@ -1,3 +1,10 @@
+## [1.12.1](https://github.com/dhis2/climate-app/compare/v1.12.0...v1.12.1) (2025-10-28)
+
+
+### Bug Fixes
+
+* update humidity unit in tooltip to % ([#88](https://github.com/dhis2/climate-app/issues/88)) ([f76ce70](https://github.com/dhis2/climate-app/commit/f76ce70ce4b635a30b988065a99f6729553faf57))
+
 # [1.12.0](https://github.com/dhis2/climate-app/compare/v1.11.2...v1.12.0) (2025-09-08)
 
 

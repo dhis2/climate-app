@@ -36,7 +36,7 @@ const getChart = (name, data) => {
         tooltip: {
             crosshairs: true,
             shared: true,
-            valueSuffix: '°C',
+            valueSuffix: '%',
         },
         plotOptions: {
             series: {
