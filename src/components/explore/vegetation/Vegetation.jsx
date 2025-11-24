@@ -78,7 +78,12 @@ const Vegetation = () => {
                 {band === NDVI ? ndviDescription : eviDescription}
             </div>
             <Resolution resolution={modisResolution} />
-            <OpenAsMapButton dataset={band} period={period} feature={feature} />
+            <OpenAsMapButton
+                dataset={band}
+                period={data?.length > 0 ? data[data.length - 1] : {}}
+                feature={feature}
+                loading={!(data?.length > 0)}
+            />
         </>
     )
 }

@@ -53,8 +53,9 @@ const PrecipitationMonthly = () => {
             <Resolution resolution={era5Monthly.resolution} />
             <OpenAsMapButton
                 dataset={'precipitationMonthly'}
-                period={monthlyPeriod}
+                period={data?.length > 0 ? data[data.length - 1] : {}}
                 feature={orgUnit}
+                loading={!(data?.length > 0)}
             />
         </>
     )

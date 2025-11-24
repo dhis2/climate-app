@@ -12,6 +12,7 @@ export const USER_DATASTORE_CURRENT_AO_KEY = 'currentAnalyticalObject'
 
 const EE_DATASETS_MAPPING = {
     ['elevation']: { layerId: 'USGS/SRTMGL1_003', band: 'elevation' },
+    ['landcover']: { layerId: 'MODIS/006/MCD12Q1', band: 'LC_Type1' },
     ['heatDaily']: {
         layerId: 'projects/climate-engine-pro/assets/ce-era5-heat/utci',
         band: 'utci_mean',
@@ -45,33 +46,78 @@ const EE_DATASETS_MAPPING = {
         band: 'relative_humidity_2m',
     },
     ['NDVI']: {
-        layerId: 'MODIS/061/MOD13Q1/VI/MONTHLY',
+        layerId: 'MODIS/061/MOD13Q1/VI/16DAY',
         band: 'NDVI',
     },
     ['EVI']: {
-        layerId: 'MODIS/061/MOD13Q1/VI/MONTHLY',
+        layerId: 'MODIS/061/MOD13Q1/VI/16DAY',
         band: 'EVI',
     },
 }
+
+const formatDate = (date, locale) =>
+    new Intl.DateTimeFormat(locale.replace('_', '-'), {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+    }).format(date)
 
 const thisYear = String(new Date().getFullYear())
 
 const OpenAsMapButton = ({
     dataset,
-    period = { endTime: thisYear },
+    period = { id: thisYear },
     feature,
+    loading,
 }) => {
+    console.log('🚀 ~ OpenAsMapButton ~ period:', period)
+    console.log('🚀 ~ OpenAsMapButton ~ dataset:', dataset)
     const [, /* actual value not used */ { set }] = useSetting(
         USER_DATASTORE_CURRENT_AO_KEY
     )
 
     const { baseUrl, systemInfo = {} } = useConfig()
     const { locale } = useUserLocale()
-    const fixedPeriod = createFixedPeriodFromPeriodId({
-        periodId: period.endTime.replaceAll('-', ''),
-        calendar: systemInfo.calendar,
-        locale,
-    })
+
+    if (loading) {
+        return (
+            <Button disabled={true} primary>
+                Open as Map&nbsp;
+                <IconLaunch16 />
+            </Button>
+        )
+    }
+
+    let periodId, periodName
+    switch (dataset) {
+        case 'elevation':
+            periodId = period.id.replaceAll('-', '_')
+            periodName = ''
+            break
+        case 'landcover':
+            periodId = period.id.replaceAll('-', '_')
+            periodName = period.id.split('-')[0]
+            break
+        case 'NDVI':
+        case 'EVI': {
+            periodId = period.id.replaceAll('-', '_')
+            const formattedStartDate = formatDate(period.startTime, locale)
+            const formattedEndDate = formatDate(period.endTime, locale)
+            periodName = `${formattedStartDate} - ${formattedEndDate}`
+            break
+        }
+        default: {
+            periodId = period.id.replaceAll('-', '')
+            const fixedPeriod = createFixedPeriodFromPeriodId({
+                periodId: periodId,
+                calendar: systemInfo.calendar,
+                locale,
+            })
+            periodName = fixedPeriod.name.replaceAll(/\b\w/g, (char) =>
+                char.toUpperCase()
+            )
+        }
+    }
 
     const handleOpenAsMapClick = async () => {
         const preparedAO = {
@@ -94,11 +140,8 @@ const OpenAsMapButton = ({
                     items: [
                         [
                             {
-                                id: fixedPeriod.id,
-                                name: fixedPeriod.name.replaceAll(
-                                    /\b\w/g,
-                                    (char) => char.toUpperCase()
-                                ),
+                                id: periodId,
+                                name: periodName,
                                 dimensionItemType: 'PERIOD',
                             },
                         ],
@@ -125,6 +168,7 @@ const OpenAsMapButton = ({
 OpenAsMapButton.propTypes = {
     dataset: PropTypes.string,
     feature: PropTypes.object,
+    loading: PropTypes.bool,
     period: PropTypes.object,
 }
 

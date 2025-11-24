@@ -43,9 +43,10 @@ const Landcover = () => {
             <div className={styles.description}>{landcoverDescription}</div>
             <Resolution resolution={landcoverResolution} />
             <OpenAsMapButton
-                dataset={dataset}
-                period={period}
+                dataset={'landcover'}
+                period={data?.length > 0 ? data[data.length - 1] : {}}
                 feature={feature}
+                loading={!(data?.length > 0)}
             />
         </>
     )

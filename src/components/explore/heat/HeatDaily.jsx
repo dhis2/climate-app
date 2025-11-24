@@ -41,8 +41,9 @@ const HeatDaily = () => {
             <Resolution resolution={era5HeatDaily.resolution} />
             <OpenAsMapButton
                 dataset={'heatDaily'}
-                period={period}
+                period={data?.length > 0 ? data[data.length - 1] : {}}
                 feature={orgUnit}
+                loading={!(data?.length > 0)}
             />
         </>
     )
