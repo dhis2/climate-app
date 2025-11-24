@@ -3,24 +3,15 @@ import i18n from '@dhis2/d2-i18n'
 import { CalendarInput } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import { useEffect } from 'react'
+import useUserLocale from '../../hooks/useUserLocale.js'
 import { DAILY, WEEKLY, SIXTEEN_DAYS, YEARLY } from '../../utils/time.js'
 import TimeZone from '../shared/TimeZone.jsx'
 import PeriodType from './PeriodType.jsx'
 import styles from './styles/Period.module.css'
 import YearRange from './YearRange.jsx'
 
-const userSettingsQuery = {
-    userSettings: {
-        resource: 'userSettings',
-        params: {
-            key: ['keyUiLocale'],
-        },
-    },
-}
-
 const Period = ({ calendar, period, dataset = {}, onChange }) => {
-    const result = useDataQuery(userSettingsQuery)
-    const { data: { userSettings: { keyUiLocale: locale } = {} } = {} } = result
+    const { locale } = useUserLocale()
     const {
         periodType: datasetPeriodType,
         period: datasetPeriod,
