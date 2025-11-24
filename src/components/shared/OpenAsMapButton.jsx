@@ -4,6 +4,7 @@ import { createFixedPeriodFromPeriodId } from '@dhis2/multi-calendar-dates'
 import { Button, IconLaunch16 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React from 'react'
+import useAppVersion from '../../hooks/useAppVersion.js'
 import useUserLocale from '../../hooks/useUserLocale.js'
 
 export const MAPS_APP_URL = 'dhis-web-maps'
@@ -70,16 +71,16 @@ const OpenAsMapButton = ({
     feature,
     loading,
 }) => {
-    console.log('🚀 ~ OpenAsMapButton ~ period:', period)
-    console.log('🚀 ~ OpenAsMapButton ~ dataset:', dataset)
     const [, /* actual value not used */ { set }] = useSetting(
         USER_DATASTORE_CURRENT_AO_KEY
     )
 
+    const { meetsVersion } = useAppVersion('maps', '101.5.0')
+
     const { baseUrl, systemInfo = {} } = useConfig()
     const { locale } = useUserLocale()
 
-    if (loading) {
+    if (loading || !meetsVersion) {
         return (
             <Button disabled={true} primary>
                 Open as Map&nbsp;
