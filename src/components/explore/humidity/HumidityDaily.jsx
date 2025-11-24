@@ -19,6 +19,7 @@ const HumidityDaily = () => {
         period,
         feature: orgUnit,
     })
+    const hasData = data?.length > 0
 
     return (
         <>
@@ -33,9 +34,9 @@ const HumidityDaily = () => {
             <Resolution resolution={era5Daily.resolution} />
             <OpenAsMapButton
                 dataset={'humidityDaily'}
-                period={data?.length > 0 ? data[data.length - 1] : {}}
+                period={hasData ? data[data.length - 1] : {}}
                 feature={orgUnit}
-                loading={!(data?.length > 0)}
+                loading={!hasData}
             />
         </>
     )

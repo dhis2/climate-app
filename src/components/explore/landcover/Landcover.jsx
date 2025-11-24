@@ -29,6 +29,7 @@ const Landcover = () => {
     const feature = exploreStore((state) => state.orgUnit)
     const type = exploreStore((state) => state.landcoverType)
     const data = useEarthEngineTimeSeries({ dataset, period, feature })
+    const hasData = data?.length > 0
 
     if (!data) {
         return <DataLoader />
@@ -44,9 +45,9 @@ const Landcover = () => {
             <Resolution resolution={landcoverResolution} />
             <OpenAsMapButton
                 dataset={'landcover'}
-                period={data?.length > 0 ? data[data.length - 1] : {}}
+                period={hasData ? data[data.length - 1] : {}}
                 feature={feature}
-                loading={!(data?.length > 0)}
+                loading={!hasData}
             />
         </>
     )

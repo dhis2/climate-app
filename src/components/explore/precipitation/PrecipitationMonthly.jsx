@@ -23,6 +23,7 @@ const PrecipitationMonthly = () => {
         period: monthlyPeriod,
         feature: orgUnit,
     })
+    const hasData = data?.length > 0
 
     const normals = useEarthEngineClimateNormals(
         era5MonthlyNormals,
@@ -53,9 +54,9 @@ const PrecipitationMonthly = () => {
             <Resolution resolution={era5Monthly.resolution} />
             <OpenAsMapButton
                 dataset={'precipitationMonthly'}
-                period={data?.length > 0 ? data[data.length - 1] : {}}
+                period={hasData ? data[data.length - 1] : {}}
                 feature={orgUnit}
-                loading={!(data?.length > 0)}
+                loading={!hasData}
             />
         </>
     )
