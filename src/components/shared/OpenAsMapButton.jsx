@@ -1,14 +1,16 @@
 import { useConfig } from '@dhis2/app-runtime'
 import { useSetting } from '@dhis2/app-service-datastore'
+import { createFixedPeriodFromPeriodId } from '@dhis2/multi-calendar-dates'
 import { Button, IconLaunch16 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React from 'react'
+import useUserLocale from '../../hooks/useUserLocale.js'
 
 export const MAPS_APP_URL = 'dhis-web-maps'
 export const USER_DATASTORE_NAMESPACE = 'analytics'
 export const USER_DATASTORE_CURRENT_AO_KEY = 'currentAnalyticalObject'
 
-const datasetMapping = {
+const EE_DATASETS_MAPPING = {
     ['elevation']: { layerId: 'USGS/SRTMGL1_003', band: 'elevation' },
     ['heatDaily']: {
         layerId: 'projects/climate-engine-pro/assets/ce-era5-heat/utci',
@@ -59,14 +61,21 @@ const OpenAsMapButton = ({
     period = { endTime: thisYear },
     feature,
 }) => {
-    const { baseUrl } = useConfig()
     const [, /* actual value not used */ { set }] = useSetting(
         USER_DATASTORE_CURRENT_AO_KEY
     )
 
-    const handleOpenAsMapClick = async (_) => {
+    const { baseUrl, systemInfo = {} } = useConfig()
+    const { locale } = useUserLocale()
+    const fixedPeriod = createFixedPeriodFromPeriodId({
+        periodId: period.endTime.replaceAll('-', ''),
+        calendar: systemInfo.calendar,
+        locale,
+    })
+
+    const handleOpenAsMapClick = async () => {
         const preparedAO = {
-            ...datasetMapping[dataset],
+            ...EE_DATASETS_MAPPING[dataset],
             type: 'earthEngine',
             rows: [
                 {
@@ -85,8 +94,11 @@ const OpenAsMapButton = ({
                     items: [
                         [
                             {
-                                id: period.endTime.replace(/-/g, ''),
-                                name: period.endTime,
+                                id: fixedPeriod.id,
+                                name: fixedPeriod.name.replace(
+                                    /\b\w/g,
+                                    (char) => char.toUpperCase()
+                                ),
                                 dimensionItemType: 'PERIOD',
                             },
                         ],
