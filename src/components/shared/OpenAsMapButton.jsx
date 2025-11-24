@@ -95,7 +95,7 @@ const OpenAsMapButton = ({
                         [
                             {
                                 id: fixedPeriod.id,
-                                name: fixedPeriod.name.replace(
+                                name: fixedPeriod.name.replaceAll(
                                     /\b\w/g,
                                     (char) => char.toUpperCase()
                                 ),
