@@ -1,9 +1,11 @@
+import { DataStoreProvider } from '@dhis2/app-service-datastore'
 import i18n from '@dhis2/d2-i18n'
 import { TabBar, Tab } from '@dhis2/ui'
 import { useEffect } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import useExploreUri from '../../hooks/useExploreUri.js'
 import exploreStore from '../../store/exploreStore.js'
+import { USER_DATASTORE_NAMESPACE } from '../shared/OpenAsMapButton.jsx'
 import styles from './styles/Tabs.module.css'
 
 const tabs = [
@@ -56,7 +58,9 @@ const Tabs = () => {
                     ))}
             </TabBar>
             <div className={styles.tabContent}>
-                <Outlet />
+                <DataStoreProvider namespace={USER_DATASTORE_NAMESPACE}>
+                    <Outlet />
+                </DataStoreProvider>
             </div>
         </>
     )
