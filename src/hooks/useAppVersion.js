@@ -59,15 +59,8 @@ const useAppVersion = (key, targetVersion) => {
 
     const fetchBundledApps = useCallback(async () => {
         try {
-            const url = new URL(
-                'dhis-web-apps/apps-bundle.json',
-                baseUrl === '..'
-                    ? window.location.href.split('dhis-web-dashboard/')[0]
-                    : `${baseUrl}/`
-            )
-
+            const url = new URL('dhis-web-apps/apps-bundle.json', `${baseUrl}/`)
             const response = await fetch(url.href, { credentials: 'include' })
-
             if (!response.ok) {
                 throw new Error('Failed to fetch bundled apps JSON')
             }
