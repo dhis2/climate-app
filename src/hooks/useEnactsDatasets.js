@@ -50,10 +50,27 @@ const parseVariableName = (variableName) => {
     return titleCased
 }
 
-const parseEnactsDataset = (d, enactsInfo) => {
+const parseEnactsDatasetGroup = (datasets, enactsInfo) => {
+    // Take an entire group of enacts dataset dicts, one for each period type.
+    // Parse them into a single dataset entry for all available period types (eg daily, monthly).
+
     // Note: enacts uses different terminology
     // "dataset" for collections of datasets, eg All stations or Monitoring
     // and "variable" for dataset, eg precip
+
+    // create list of available period types and time ranges based on each of the provided datasets
+    const supportedPeriodTypes = []
+    for (let dataset of datasets) {
+        let periodEntry = {
+            periodType: parsePeriodType(dataset.temporal_resolution),
+            periodRange: parsePeriodRange(dataset.temporal_coverage)
+        }
+        supportedPeriodTypes.push(periodEntry)
+    }
+    
+    // use the first dataset as the basis for all other dataset metadata
+    // ie should be the same for the different period types
+    const d = datasets[0]
     const collection = enactsDataCollections[d.dataset_name]
     const datasetName = parseVariableName(d.variable_longname)
     const parsed = {
@@ -62,10 +79,9 @@ const parseEnactsDataset = (d, enactsInfo) => {
         shortName: `${datasetName}`,
         description: `${datasetName} measured in ${d.variable_units}. ${collection.description}`,
         units: d.variable_units,
-        periodType: parsePeriodType(d.temporal_resolution),
-        supportedPeriodTypes: [DAILY, MONTHLY],
-        periodRange: parsePeriodRange(d.temporal_coverage),
-        resolution: `${d.spatial_resolution.lon} degrees x ${d.spatial_resolution.lat} degrees`,
+        periodType: parsePeriodType(d.temporal_resolution), // this is legacy for the native dataset period type, isn't actually used anymore, and should probably be removed
+        supportedPeriodTypes: supportedPeriodTypes, // list of period objects including time range, see further up
+        resolution: `Approximately ${d.spatial_resolution.lon} degrees`,
         variable: d.variable_name,
         source: enactsInfo.owner, // retrieved from the enacts server metadata
         dataElementCode: `ENACTS_${d.dataset_name.toUpperCase()}_${d.variable_name.toUpperCase()}`,
@@ -146,22 +162,32 @@ const useEnactsDatasets = () => {
             return undefined
         }
 
-        // convert nested structures to get flat list of datasets
-        const flatData = []
+        // convert nested structure to groups of datasets (multiple period types per group)
+        const datasetGroupLookup = {}
 
-        // enacts has a separate dataset for each time period of each variable
-        // instead only get the datasets/variables for a single period (daily)
-        // and allow user to select period type in frontend (assumes all datasets
-        // also exist at higher temporal aggregations)
+        // enacts returns datasets grouped by time period
+        // instead we create groups of unique datasets, that mixes together available time periods
         for (const [, periodGroups] of Object.entries(queryData)) {
-            for (const [, dataInfo] of Object.entries(periodGroups.daily)) {
-                flatData.push(dataInfo)
+            // here we specifically only process the daily and monthly dataset types
+            for (const periodType of ['daily', 'monthly']) {
+                for (const [, dataInfo] of Object.entries(periodGroups[periodType])) {
+                    // create group id to use for grouping datasets by dataset name and variable name
+                    let groupId = `${d.dataset_name}-${d.variable_name}`
+                    if (datasetGroupLookup.includes(groupId)) {
+                        // group id already exists, add to existing group
+                        datasetGroupLookup[groupId].push(dataInfo)
+                    } else {
+                        // first time we found this group id, create new group
+                        datasetGroupLookup[groupId] = [dataInfo]
+                    }
+                }
             }
         }
 
-        // parse to expected dataset dict
-        const parsedData = flatData.map((d) =>
-            parseEnactsDataset(d, enactsInfo)
+        // parse each group of datasets to expected dataset dict
+        const datasetListOfGroups = Object.values(datasetGroupLookup)
+        const parsedData = datasetListOfGroups.map((datasetGroup) =>
+            parseEnactsDatasetGroup(datasetGroup, enactsInfo)
         )
 
         // filter to only supported/parseable period types
