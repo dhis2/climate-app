@@ -1,5 +1,11 @@
+.container {
+    margin: 0 0 1rem 0;
+}
+
 .yearRange {
     display: flex;
     flex-direction: row;
+    justify-content: left;
+    align-items: center;
     gap: 16px;
 }

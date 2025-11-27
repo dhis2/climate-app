@@ -5,11 +5,17 @@
 .pickers {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: left;
     align-items: center;
     gap: 16px;
 }
 
 .pickers > div {
     width: 45%;
+}
+
+.periodError {
+    color: #bb470d;
+    font-weight: bold;
+    margin-top: 8px;
 }

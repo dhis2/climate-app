@@ -2,12 +2,18 @@ import { useDataQuery } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { CalendarInput } from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import { useEffect } from 'react'
-import { DAILY, WEEKLY, SIXTEEN_DAYS, YEARLY } from '../../utils/time.js'
+import { useEffect, useState } from 'react'
+import {
+    YEARLY,
+    normalizeIsoDate,
+    getDateStringFromIsoDate,
+} from '../../utils/time.js'
 import TimeZone from '../shared/TimeZone.jsx'
 import PeriodType from './PeriodType.jsx'
 import styles from './styles/Period.module.css'
 import YearRange from './YearRange.jsx'
+
+const DEFAULT_SUPPORTED_PERIOD_TYPES = []
 
 const userSettingsQuery = {
     userSettings: {
@@ -18,34 +24,95 @@ const userSettingsQuery = {
     },
 }
 
-const Period = ({ calendar, period, dataset = {}, onChange }) => {
+const DEFAULT_DATASET = {}
+
+const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
     const result = useDataQuery(userSettingsQuery)
     const { data: { userSettings: { keyUiLocale: locale } = {} } = {} } = result
-    const {
-        periodType: datasetPeriodType,
-        period: datasetPeriod,
-        minYear,
-        maxYear,
-    } = dataset
-    const { periodType, startTime, endTime } = period
-    const hasNoPeriod = datasetPeriodType === 'N/A'
-    const isYearly = datasetPeriodType === YEARLY
 
     // Set period locale from user settings
+    // TODO - should this be done higher up the chain?
     useEffect(() => {
-        if (period && locale && locale !== period.locale) {
+        if (locale && locale !== period.locale) {
             onChange({ ...period, locale })
         }
     }, [locale, onChange, period])
 
+    // When switching from yearly to other period types
+    // convert start/end years to dates
     useEffect(() => {
-        if (
-            datasetPeriodType === SIXTEEN_DAYS &&
-            [DAILY, YEARLY].includes(period.periodType)
-        ) {
-            onChange({ ...period, periodType: WEEKLY })
+        if (period?.periodType !== YEARLY && period?.startTime.length === 4) {
+            const startTime = period.startTime + '-01-01'
+            const endTime = period.endTime + '-12-31'
+            onChange({ ...period, startTime, endTime })
         }
-    }, [period, datasetPeriodType, onChange])
+    }, [onChange, period])
+
+    // Clear date errors when dataset changes
+    useEffect(() => {
+        setStartDateError(null)
+        setEndDateError(null)
+    }, [dataset])
+
+    const [startDateError, setStartDateError] = useState(null)
+    const [endDateError, setEndDateError] = useState(null)
+
+    const {
+        periodType: datasetPeriodType,
+        supportedPeriodTypes = DEFAULT_SUPPORTED_PERIOD_TYPES,
+        period: datasetPeriod,
+    } = dataset
+    const { periodType, startTime, endTime, calendar } = period
+
+    let datasetPeriodRange = dataset.periodRange || null
+    let normalizedSupportedPeriodTypes = supportedPeriodTypes
+
+    // supportedPeriodTypes may objects or strings
+    const firstItem = supportedPeriodTypes[0]
+    if (firstItem !== null && typeof firstItem === 'object') {
+        // Extract array of periodType strings
+        normalizedSupportedPeriodTypes = supportedPeriodTypes.map(
+            (item) => item.periodType
+        )
+        // Find matching period type object and get its periodRange
+        const matchingPeriodType = supportedPeriodTypes.find(
+            (item) => item.periodType === periodType
+        )
+        if (matchingPeriodType?.periodRange) {
+            datasetPeriodRange = matchingPeriodType.periodRange
+        }
+    }
+
+    const minCalendarDate = normalizeIsoDate(datasetPeriodRange?.start) || null
+    const maxCalendarDate = normalizeIsoDate(datasetPeriodRange?.end) || null
+
+    const updateStartDate = ({ calendarDateString, validation }) => {
+        setStartDateError(validation.valid ? null : validation.validationText)
+        onChange({
+            ...period,
+            startTime: calendarDateString,
+        })
+    }
+
+    const updateEndDate = ({ calendarDateString, validation }) => {
+        setEndDateError(validation.valid ? null : validation.validationText)
+        onChange({
+            ...period,
+            endTime: calendarDateString,
+        })
+    }
+
+    const hasNoPeriod = datasetPeriodType === 'N/A'
+    const isYearly = datasetPeriodType === YEARLY
+
+    const periodErrorMessage =
+        startDateError && endDateError
+            ? i18n.t('Start and end date are not within the valid range.')
+            : startDateError
+            ? i18n.t('Start date is not within the valid range.')
+            : endDateError
+            ? i18n.t('End date is not within the valid range.')
+            : null
 
     return (
         <div className={styles.container}>
@@ -59,12 +126,21 @@ const Period = ({ calendar, period, dataset = {}, onChange }) => {
                 </p>
             )}
             {isYearly && (
-                <YearRange
-                    period={period}
-                    minYear={minYear}
-                    maxYear={maxYear}
-                    onChange={onChange}
-                />
+                <div className={styles.pickers}>
+                    <PeriodType
+                        periodType={periodType}
+                        supportedPeriodTypes={normalizedSupportedPeriodTypes}
+                        onChange={(periodType) =>
+                            onChange({ ...period, periodType })
+                        }
+                    />
+                    <YearRange
+                        period={period}
+                        minYear={Number.parseInt(datasetPeriodRange.start)}
+                        maxYear={Number.parseInt(datasetPeriodRange.end)}
+                        onChange={onChange}
+                    />
+                </div>
             )}
             {!hasNoPeriod && !isYearly && (
                 <>
@@ -76,7 +152,9 @@ const Period = ({ calendar, period, dataset = {}, onChange }) => {
                     <div className={styles.pickers}>
                         <PeriodType
                             periodType={periodType}
-                            datasetPeriodType={datasetPeriodType}
+                            supportedPeriodTypes={
+                                normalizedSupportedPeriodTypes
+                            }
                             onChange={(periodType) =>
                                 onChange({ ...period, periodType })
                             }
@@ -84,42 +162,60 @@ const Period = ({ calendar, period, dataset = {}, onChange }) => {
                         <CalendarInput
                             label={i18n.t('Start date')}
                             date={startTime}
+                            minDate={minCalendarDate}
+                            maxDate={maxCalendarDate}
                             calendar={calendar}
                             locale={locale || 'en'}
-                            defaultVal={startTime}
-                            onDateSelect={({ calendarDateString }) =>
-                                onChange({
-                                    ...period,
-                                    startTime: calendarDateString,
-                                })
-                            }
+                            onDateSelect={updateStartDate}
+                            warning={!!startDateError}
+                            valid={!startDateError}
                         />
                         <CalendarInput
                             label={i18n.t('End date')}
                             date={endTime}
+                            minDate={minCalendarDate}
+                            maxDate={maxCalendarDate}
                             calendar={calendar}
                             locale={locale || 'en'}
-                            defaultVal={endTime}
-                            onDateSelect={({ calendarDateString }) =>
-                                onChange({
-                                    ...period,
-                                    endTime: calendarDateString,
-                                })
-                            }
+                            onDateSelect={updateEndDate}
+                            warning={!!endDateError}
+                            valid={!endDateError}
                         />
                         <TimeZone period={period} onChange={onChange} />
                     </div>
                 </>
+            )}
+            {datasetPeriodRange && (
+                <p>
+                    {i18n.t('Valid range')}:{' '}
+                    <strong>
+                        {getDateStringFromIsoDate({
+                            date: datasetPeriodRange.start,
+                            calendar,
+                            locale: period.locale,
+                        })}
+                    </strong>{' '}
+                    -{' '}
+                    <strong>
+                        {getDateStringFromIsoDate({
+                            date: datasetPeriodRange.end,
+                            calendar,
+                            locale: period.locale,
+                        })}
+                    </strong>
+                </p>
+            )}
+            {periodErrorMessage && (
+                <p className={styles.periodError}>{periodErrorMessage}</p>
             )}
         </div>
     )
 }
 
 Period.propTypes = {
+    period: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
-    calendar: PropTypes.string,
     dataset: PropTypes.object,
-    period: PropTypes.object,
 }
 
 export default Period
