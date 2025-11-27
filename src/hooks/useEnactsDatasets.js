@@ -60,14 +60,14 @@ const parseEnactsDatasetGroup = (datasets, enactsInfo) => {
 
     // create list of available period types and time ranges based on each of the provided datasets
     const supportedPeriodTypes = []
-    for (let dataset of datasets) {
-        let periodEntry = {
+    for (const dataset of datasets) {
+        const periodEntry = {
             periodType: parsePeriodType(dataset.temporal_resolution),
-            periodRange: parsePeriodRange(dataset.temporal_coverage)
+            periodRange: parsePeriodRange(dataset.temporal_coverage),
         }
         supportedPeriodTypes.push(periodEntry)
     }
-    
+
     // use the first dataset as the basis for all other dataset metadata
     // ie should be the same for the different period types
     const d = datasets[0]
@@ -163,29 +163,32 @@ const useEnactsDatasets = () => {
         }
 
         // convert nested structure to groups of datasets (multiple period types per group)
-        const datasetGroupLookup = {}
-
         // enacts returns datasets grouped by time period
         // instead we create groups of unique datasets, that mixes together available time periods
-        for (const [, periodGroups] of Object.entries(queryData)) {
-            // here we specifically only process the daily and monthly dataset types
-            for (const periodType of ['daily', 'monthly']) {
-                for (const [, dataInfo] of Object.entries(periodGroups[periodType])) {
-                    // create group id to use for grouping datasets by dataset name and variable name
-                    let groupId = `${d.dataset_name}-${d.variable_name}`
-                    if (datasetGroupLookup.includes(groupId)) {
-                        // group id already exists, add to existing group
-                        datasetGroupLookup[groupId].push(dataInfo)
-                    } else {
-                        // first time we found this group id, create new group
-                        datasetGroupLookup[groupId] = [dataInfo]
-                    }
-                }
-            }
-        }
+        const datasetGroupLookup = Object.values(queryData).reduce(
+            (lookup, periodGroups) => {
+                // here we specifically only process the daily and monthly dataset types
+                ;['daily', 'monthly'].forEach((periodType) => {
+                    Object.values(periodGroups[periodType]).forEach((d) => {
+                        // create group id to use for grouping datasets by dataset name and variable name
+                        const groupId = `${d.dataset_name}-${d.variable_name}`
+                        if (lookup[groupId]) {
+                            // group id already exists, add to existing group
+                            lookup[groupId].push(d)
+                        } else {
+                            // first time we found this group id, create new group
+                            lookup[groupId] = [d]
+                        }
+                    })
+                })
+                return lookup
+            },
+            {}
+        )
 
         // parse each group of datasets to expected dataset dict
         const datasetListOfGroups = Object.values(datasetGroupLookup)
+
         const parsedData = datasetListOfGroups.map((datasetGroup) =>
             parseEnactsDatasetGroup(datasetGroup, enactsInfo)
         )

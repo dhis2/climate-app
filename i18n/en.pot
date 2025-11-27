@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-11-26T10:31:55.663Z\n"
-"PO-Revision-Date: 2025-11-26T10:31:55.663Z\n"
+"POT-Creation-Date: 2025-11-27T15:27:24.606Z\n"
+"PO-Revision-Date: 2025-11-27T15:27:24.606Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -1416,11 +1416,3 @@ msgstr "NASA / USGS / JPL-Caltech / Google Earth Engine"
 
 msgid "No data found for the selected period"
 msgstr "No data found for the selected period"
-
-msgctxt "Application title"
-msgid "__MANIFEST_APP_TITLE"
-msgstr "DHIS2 Climate App"
-
-msgctxt "Application description"
-msgid "__MANIFEST_APP_DESCRIPTION"
-msgstr "Explore and import weather and climate data in DHIS2."
