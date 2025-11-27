@@ -1,0 +1,12 @@
+.datasetlead {
+    font-size: 14px;
+    margin-block-end: var(--spacers-dp8);
+}
+.list {
+    margin-block-start: 4px;
+}
+
+.listItem {
+    font-size: 14px;
+    line-height: 1.4;
+}

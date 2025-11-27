@@ -3,6 +3,7 @@ import { OrganisationUnitTree } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import { useEffect } from 'react'
 import useOrgUnitRoots from '../../hooks/useOrgUnitRoots.js'
+import classes from './styles/OrgUnitTree.module.css'
 
 const OrgUnitTree = ({ orgUnit, onChange }) => {
     const { roots, error } = useOrgUnitRoots()
@@ -15,12 +16,20 @@ const OrgUnitTree = ({ orgUnit, onChange }) => {
         }
     }, [roots, orgUnit, onChange])
 
+    if (error) {
+        console.error('Error loading org unit roots', error)
+        return <div>{error.message}</div>
+    }
+
+    if (!roots) {
+        return <div>{i18n.t('Loading organisation units...')}</div>
+    }
+
     // The warnings "The query should be static, don't create it within the render loop!"
     // comes from the OrganisationUnitTree component:
     // https://dhis2.slack.com/archives/C0BP0RABF/p1641544953003000
-    return roots ? (
-        <div>
-            <h2>{i18n.t('Parent organisation unit')}</h2>
+    return (
+        <div className={classes.container}>
             <OrganisationUnitTree
                 roots={roots.map((r) => r.id)}
                 selected={orgUnit?.selected}
@@ -29,9 +38,7 @@ const OrgUnitTree = ({ orgUnit, onChange }) => {
                 initiallyExpanded={roots.map((r) => r.path)}
             />
         </div>
-    ) : error ? (
-        <div>{error.message}</div>
-    ) : null
+    )
 }
 
 OrgUnitTree.propTypes = {

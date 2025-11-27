@@ -1,5 +1,16 @@
-.yearRange {
+.container {
     display: flex;
+    align-items: center;
+    gap: 12px;
     flex-direction: row;
-    gap: 16px;
+    justify-content: left;
+}
+
+.label {
+    font-size: 14px;
+}
+
+.separator {
+    align-self: flex-end;
+    margin-bottom: 8px;
 }
