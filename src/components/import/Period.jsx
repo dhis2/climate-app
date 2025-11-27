@@ -13,6 +13,8 @@ import PeriodType from './PeriodType.jsx'
 import styles from './styles/Period.module.css'
 import YearRange from './YearRange.jsx'
 
+const DEFAULT_SUPPORTED_PERIOD_TYPES = []
+
 const userSettingsQuery = {
     userSettings: {
         resource: 'userSettings',
@@ -29,6 +31,7 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
     const { data: { userSettings: { keyUiLocale: locale } = {} } = {} } = result
 
     // Set period locale from user settings
+    // TODO - should this be done higher up the chain?
     useEffect(() => {
         if (locale && locale !== period.locale) {
             onChange({ ...period, locale })
@@ -56,11 +59,29 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
 
     const {
         periodType: datasetPeriodType,
-        supportedPeriodTypes: datasetSupportedPeriodTypes,
-        periodRange: datasetPeriodRange,
+        supportedPeriodTypes = DEFAULT_SUPPORTED_PERIOD_TYPES,
         period: datasetPeriod,
     } = dataset
     const { periodType, startTime, endTime, calendar } = period
+
+    let datasetPeriodRange = dataset.periodRange || null
+    let normalizedSupportedPeriodTypes = supportedPeriodTypes
+
+    // supportedPeriodTypes may objects or strings
+    const firstItem = supportedPeriodTypes[0]
+    if (firstItem !== null && typeof firstItem === 'object') {
+        // Extract array of periodType strings
+        normalizedSupportedPeriodTypes = supportedPeriodTypes.map(
+            (item) => item.periodType
+        )
+        // Find matching period type object and get its periodRange
+        const matchingPeriodType = supportedPeriodTypes.find(
+            (item) => item.periodType === periodType
+        )
+        if (matchingPeriodType?.periodRange) {
+            datasetPeriodRange = matchingPeriodType.periodRange
+        }
+    }
 
     const minCalendarDate = normalizeIsoDate(datasetPeriodRange?.start) || null
     const maxCalendarDate = normalizeIsoDate(datasetPeriodRange?.end) || null
@@ -108,7 +129,7 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
                 <div className={styles.pickers}>
                     <PeriodType
                         periodType={periodType}
-                        supportedPeriodTypes={datasetSupportedPeriodTypes}
+                        supportedPeriodTypes={normalizedSupportedPeriodTypes}
                         onChange={(periodType) =>
                             onChange({ ...period, periodType })
                         }
@@ -131,7 +152,9 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
                     <div className={styles.pickers}>
                         <PeriodType
                             periodType={periodType}
-                            supportedPeriodTypes={datasetSupportedPeriodTypes}
+                            supportedPeriodTypes={
+                                normalizedSupportedPeriodTypes
+                            }
                             onChange={(periodType) =>
                                 onChange({ ...period, periodType })
                             }
