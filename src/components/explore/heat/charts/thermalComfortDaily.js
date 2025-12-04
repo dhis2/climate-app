@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { colors } from '@dhis2/ui'
-import legend from '../../../../data/heat-stress-legend.js'
+import { getLegend } from '../../../../data/heat-stress-legend.js'
 import { toCelcius } from '../../../../utils/calc.js'
 import {
     animation,
@@ -22,7 +22,7 @@ export const getPlotBands = (minMax, settings) => {
             ? heatMax
             : Math.ceil(Math.max(...minMax.map((d) => d[2])))
 
-    const plotBands = legend.items.filter(
+    const plotBands = getLegend().items.filter(
         (l) => l.to >= minValue && l.from <= maxValue
     )
     const firstBand = plotBands[0]

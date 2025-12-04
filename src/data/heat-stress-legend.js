@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 
 const opacity = 0.4
 
-export default {
+export const getLegend = () => ({
     name: i18n.t('Heat/cold stress'),
     description: i18n.t(
         'You only need to include categories that are relevant for your area.'
@@ -89,4 +89,4 @@ export default {
             to: 60,
         },
     ],
-}
+})
