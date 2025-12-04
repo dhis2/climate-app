@@ -34,7 +34,7 @@ const DailyPeriodSelect = () => {
                     disabled={days > maxDays}
                     onClick={() => setDailyPeriod(period)}
                 >
-                    Update
+                    {i18n.t('Update')}
                 </Button>
             </div>
             {days > maxDays && (

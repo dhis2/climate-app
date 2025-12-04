@@ -1,11 +1,12 @@
 import i18n from '@dhis2/d2-i18n'
 import { useState } from 'react'
-import datasets from '../../data/datasets.js'
+import getDatasets from '../../data/datasets.js'
 import Dataset from '../shared/Dataset.jsx'
 import DataElement from './DataElement.jsx'
 import styles from './styles/SetupPage.module.css'
 
 const SetupPage = () => {
+    const datasets = getDatasets()
     const [dataset, setDataset] = useState(datasets[0])
 
     return (

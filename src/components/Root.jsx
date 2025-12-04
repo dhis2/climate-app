@@ -7,7 +7,7 @@ import CheckOrgUnitTree from './check/OrgUnitTree.jsx'
 import OrgUnitTree from './explore/OrgUnitTree.jsx'
 import styles from './styles/Root.module.css'
 
-export const appPages = [
+export const getAppPages = () => [
     { path: '/', name: i18n.t('Home') },
     { path: '/explore', name: i18n.t('Explore data') },
     { path: '/import', name: i18n.t('Import data') },
@@ -33,7 +33,7 @@ const Root = () => {
             <div className={styles.container}>
                 <div className={styles.sidebar}>
                     <Menu>
-                        {appPages.map(({ path, name }) => (
+                        {getAppPages().map(({ path, name }) => (
                             <Fragment key={path}>
                                 <MenuItem
                                     label={name}

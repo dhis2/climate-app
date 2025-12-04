@@ -1,0 +1,1303 @@
+# 
+# Translators:
+# Jiří Podhorecký <jirka.p@volny.cz>, 2025
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2025-09-08T09:55:48.384Z\n"
+"PO-Revision-Date: 2025-02-05 13:11+0000\n"
+"Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2025\n"
+"Language-Team: Czech (https://app.transifex.com/hisp-uio/teams/100509/cs/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: cs\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
+
+msgid "About this app"
+msgstr "O této aplikaci"
+
+msgid ""
+"This pilot app is part of the ongoing “DHIS2 for Climate“ project. It will "
+"get frequent updates, so please make sure you have the latest version from "
+"the DHIS2 App Hub. The app is developed by the University of Oslo, but it is"
+" not a DHIS2 core app. Useful parts of this app might be incorporated into "
+"the DHIS2 core in the future, based on your feedback."
+msgstr ""
+"Tato pilotní aplikace je součástí probíhajícího projektu \"DHIS2 for "
+"Climate\". Bude často aktualizována, proto se ujistěte, že máte nejnovější "
+"verzi z DHIS2 App Hub. Aplikaci vyvinula Univerzita v Oslu, ale nejedná se o"
+" základní aplikaci DHIS2. Užitečné části této aplikace mohou být v budoucnu "
+"na základě vaší zpětné vazby začleněny do jádra DHIS2."
+
+msgid ""
+"The app allows you to explore and import temperature, precipitation, "
+"humidity and heat stress data in DHIS2. The main data source is ERA5-Land, "
+"which is considered the most accurate and complete global climate dataset "
+"available. The video below shows you how this dataset was created by "
+"combining weather observations with a weather model (climate reanalysis)."
+msgstr ""
+"Aplikace umožňuje zkoumat a importovat údaje o teplotě, srážkách, vlhkosti a"
+" tepelném stresu v systému DHIS2. Hlavním zdrojem dat je ERA5-Land, který je"
+" považován za nejpřesnější a nejúplnější dostupnou globální klimatickou "
+"datovou sadu. Níže uvedené video vám ukáže, jak byla tato datová sada "
+"vytvořena kombinací pozorování počasí s modelem počasí (klimatickou "
+"reanalýzou)."
+
+msgid "Read about ERA5-Land on Copernicus Climate Data Store"
+msgstr "Přečtěte si o ERA5-Land na stránkách Copernicus Climate Data Store"
+
+msgid ""
+"In additon to ERA5-Land, precipitation data can also be imported from the "
+"CHIRPS dataset. For heat stress we use data from ERA5-HEAT."
+msgstr ""
+"Kromě ERA5-Land lze data o srážkách importovat také z datové sady CHIRPS. "
+"Pro tepelný stres používáme data z ERA5-HEAT."
+
+msgid "Read about CHIRPS on Climate Hazards Center"
+msgstr "Přečtěte si o CHIRPS na stránkách Climate Hazards Center"
+
+msgid "Read about ERA5-HEAT on Copernicus Climate Data Store"
+msgstr "Přečtěte si o ERA5-HEAT na stránkách Copernicus Climate Data Store"
+
+msgid ""
+"If you just want to look at weather and climate data for your organisation "
+"units, click on “Explore data” in the left menu. No configuration is needed."
+msgstr ""
+"Pokud se chcete pouze podívat na údaje o počasí a klimatu pro své "
+"organizační jednotky, klikněte na \"Prozkoumat data\" v levém menu. Není "
+"potřeba žádná konfigurace."
+
+msgid ""
+"We recommend importing data into DHIS2 data elements. This will allow you to"
+" combine weather and climate data with your health data across all DHIS2 "
+"analytics apps. You need to configure your DHIS2 instance before you can "
+"import data. See our guide by clicking on “Setup guide”."
+msgstr ""
+"Doporučujeme importovat data do datových prvků DHIS2. To vám umožní "
+"kombinovat údaje o počasí a klimatu se zdravotními údaji ve všech "
+"analytických aplikacích DHIS2. Před importem dat je třeba nakonfigurovat "
+"instanci DHIS2. Podívejte se na našeho průvodce kliknutím na \"Průvodce "
+"nastavením\"."
+
+msgid ""
+"After the configuration is done, you can import temperature and "
+"precipitation data under “Import data”."
+msgstr ""
+"Po dokončení konfigurace můžete v části \"Import dat\" importovat údaje o "
+"teplotě a srážkách."
+
+msgid ""
+"After the data is imported, you should generate the analytics tables in the "
+"Data Administration app. This will allow you to see the data in the DHIS2 "
+"analytics apps."
+msgstr ""
+"Po importu dat byste měli v aplikaci Správa dat vygenerovat analytické "
+"tabulky. To vám umožní zobrazit data v analytických aplikacích DHIS2."
+
+msgid "How the data is calculated"
+msgstr "Jak se údaje vypočítávají"
+
+msgid ""
+"The data is calculated for your organsation units on Google Earth Engine. "
+"Pleace check the resolution of the data. If you select a health facility we "
+"use the value where the facility is located. If you select a district we "
+"automatically aggregate the values within that district. If two org units "
+"are close to each other (within the resolution), they will have the same "
+"data values."
+msgstr ""
+"Data jsou vypočítána pro vaše organizační jednotky v aplikaci Google Earth "
+"Engine. Zkontrolujte prosím rozlišení dat. Pokud vyberete zdravotnické "
+"zařízení, použijeme hodnotu, kde se zařízení nachází. Pokud vyberete okres, "
+"automaticky agregujeme hodnoty v rámci tohoto okresu. Pokud jsou dvě org. "
+"jednotky blízko sebe (v rámci rozlišení), budou mít stejné hodnoty dat."
+
+msgid "Home"
+msgstr "Domovská strana"
+
+msgid "Explore data"
+msgstr "Prozkoumat data"
+
+msgid "Import data"
+msgstr "Import dat"
+
+msgid "Setup guide"
+msgstr "Průvodce nastavením"
+
+msgid "Settings"
+msgstr "Nastavení"
+
+msgid "Check data"
+msgstr "Kontrola dat"
+
+msgid "Check weather and climate data"
+msgstr "Kontrola dat o počasí a klimatu"
+
+msgid "Select a location in the left panel"
+msgstr "Vyberte lokalitu na levém panelu"
+
+msgid "Start date"
+msgstr "Datum začátku"
+
+msgid "End date"
+msgstr "Datum ukončení"
+
+msgid "Maximum {{maxDays}} days allowed"
+msgstr "Povoleno maximálně {{maxDays}} dní"
+
+msgid "Explore weather and climate data"
+msgstr "Prozkoumejte data o počasí a klimatu"
+
+msgid "Select an organisation unit in the left panel"
+msgstr "V levém panelu vyberte organizační jednotku"
+
+msgid "January"
+msgstr "Leden"
+
+msgid "February"
+msgstr "únor"
+
+msgid "March"
+msgstr "Březen"
+
+msgid "April"
+msgstr "Duben"
+
+msgid "May"
+msgstr "Květen"
+
+msgid "June"
+msgstr "červen"
+
+msgid "July"
+msgstr "Červenec"
+
+msgid "August"
+msgstr "Srpen"
+
+msgid "September"
+msgstr "Září"
+
+msgid "October"
+msgstr "Říjen"
+
+msgid "November"
+msgstr "Listopad"
+
+msgid "December"
+msgstr "Prosinec"
+
+msgid "Month"
+msgstr "Měsíc"
+
+msgid "Start month"
+msgstr "Počáteční měsíc"
+
+msgid "End month"
+msgstr "Konečný měsíc"
+
+msgid "Maximum {{maxMonths}} months allowed"
+msgstr "Povoleno maximálně {{maxMonths}} měsíců "
+
+msgid "No geometry found"
+msgstr "Nenalezena žádná geometrie"
+
+msgid "Data for a location"
+msgstr "Data o lokalitě"
+
+msgid "Data for an area"
+msgstr "Data o oblasti"
+
+msgid "Monthly"
+msgstr "Měsíčně"
+
+msgid "Daily"
+msgstr "Denně"
+
+msgid "Reference period"
+msgstr "Referenční období"
+
+msgid "10 days forecast"
+msgstr "Předpověď na 10 dní"
+
+msgid "Temperature"
+msgstr "Teplota"
+
+msgid "Precipitation"
+msgstr "Srážky"
+
+msgid "Humidity"
+msgstr "Vlhkost"
+
+msgid "Heat"
+msgstr "Teplo"
+
+msgid "Climate change"
+msgstr "Změna klimatu"
+
+msgid "Vegetation"
+msgstr ""
+
+msgid "Land cover"
+msgstr ""
+
+msgid "Elevation"
+msgstr ""
+
+msgid ""
+"Temperature anomaly is the difference of a temperature from a reference "
+"value, calculated as the average temperature over a period of 30 years. Blue"
+" columns shows temperatures below the average, while red columns are above."
+msgstr ""
+"Teplotní anomálie je rozdíl teploty od referenční hodnoty, vypočtený jako "
+"průměrná teplota za období 30 let. Modré sloupce ukazují teploty pod "
+"průměrem, zatímco červené sloupce jsou nad průměrem."
+
+msgid "{{name}}: {{month}} temperature difference {{years}}"
+msgstr "{{name}}: {{month}} rozdíl teplot {{years}}"
+
+msgid "Reference period: {{period}}"
+msgstr "Referenční období: {{period}}"
+
+msgid "Temperature anomaly"
+msgstr "Teplotní anomálie"
+
+msgid "{{name}}: Elevation"
+msgstr ""
+
+msgid "{{value}} m"
+msgstr ""
+
+msgid ""
+"The chart shows the elevation distribution of the selected area, for each "
+"meter above sea level it shows the area with this elevation in hectares. The"
+" mean, minimum, and maximum elevation values are calculated from the "
+"elevation data."
+msgstr ""
+
+msgid "Elevation: {{value}} m"
+msgstr ""
+
+msgid "Area: {{value}} km²"
+msgstr ""
+
+msgid "Min elevation"
+msgstr ""
+
+msgid "Mean elevation"
+msgstr ""
+
+msgid "Max elevation"
+msgstr ""
+
+msgid "{{precip}} mm"
+msgstr "{{precip}} mm"
+
+msgid "Night"
+msgstr "Noc"
+
+msgid "Morning"
+msgstr "Ráno"
+
+msgid "Afternoon"
+msgstr "Odpoledne"
+
+msgid "Evening"
+msgstr "Večer"
+
+msgid "Max/min temp."
+msgstr "Max/min teplota"
+
+msgid "Precip."
+msgstr "Srážky"
+
+msgid "Rel. humidity"
+msgstr "Relativní vlhkost"
+
+msgid "Wind"
+msgstr "Vítr"
+
+msgid ""
+"The forecast is using the \"{{- timeZone}}\" time zone. You can change the "
+"time zone for your org units under \"Settings\"."
+msgstr ""
+"Předpověď používá časové pásmo \"{{- timeZone}}\". Časové pásmo můžete "
+"změnit pro své org. jednotky v části \"Nastavení\"."
+
+msgid ""
+"The forecast is using the time zone of your browser ({{- timeZone}}). You "
+"can set the time zone for your org units under \"Settings\"."
+msgstr ""
+"Předpověď používá časové pásmo vašeho prohlížeče ({{- timeZone}}). Časové "
+"pásmo můžete nastavit pro své org. jednotky v části \"Nastavení\"."
+
+msgid ""
+"The forecast is using the default \"{{- timeZone}}\" time zone. You can set "
+"the time zone for your org units under \"Settings\"."
+msgstr ""
+"Předpověď používá výchozí časové pásmo \"{{- timeZone}}\". Časové pásmo "
+"můžete nastavit pro své org. jednotky v části \"Nastavení\"."
+
+msgid "Clear sky"
+msgstr "Jasná obloha"
+
+msgid "Fair"
+msgstr "Příznivé počasí"
+
+msgid "Partly cloudy"
+msgstr "Částečně zataženo"
+
+msgid "Cloudy"
+msgstr "Oblačno"
+
+msgid "Light rain showers"
+msgstr "Lehké dešťové přeháňky"
+
+msgid "Rain showers"
+msgstr "Dešťové přeháňky"
+
+msgid "Heavy rain showers"
+msgstr "Silné dešťové přeháňky"
+
+msgid "Light rain showers and thunder"
+msgstr "Slabé dešťové přeháňky a bouřky"
+
+msgid "Rain showers and thunder"
+msgstr "Dešťové přeháňky a bouřky"
+
+msgid "Heavy rain showers and thunder"
+msgstr "Silné dešťové přeháňky a bouřky"
+
+msgid "Light sleet showers"
+msgstr "Slabé sněhové přeháňky"
+
+msgid "Sleet showers"
+msgstr "Sněhové přeháňky"
+
+msgid "Heavy sleet showers"
+msgstr "Silné sněhové přeháňky"
+
+msgid "Light sleet showers and thunder"
+msgstr "Slabé sněhové přeháňky a bouřky"
+
+msgid "Sleet showers and thunder"
+msgstr "Sněhové přeháňky a bouřky"
+
+msgid "Heavy sleet showers and thunder"
+msgstr "Silné sněhové přeháňky a bouřky"
+
+msgid "Light snow showers"
+msgstr "Slabé sněhové přeháňky"
+
+msgid "Snow showers"
+msgstr "Sněhové přeháňky"
+
+msgid "Heavy show showers"
+msgstr "Silné přeháňky"
+
+msgid "Light snow showers and thunder"
+msgstr "Slabé sněhové přeháňky a bouřky"
+
+msgid "Snow showers and thunder"
+msgstr "Sněhové přeháňky a bouřky"
+
+msgid "Heavy snow showers and thunder"
+msgstr "Silné sněhové přeháňky a bouřky"
+
+msgid "Light rain"
+msgstr "Slabý déšť"
+
+msgid "Rain"
+msgstr "Déšť"
+
+msgid "Heavy rain"
+msgstr "Silný déšť"
+
+msgid "Light rain and thunder"
+msgstr "Slabý déšť a bouřka"
+
+msgid "Rain and thunder"
+msgstr "Déšť a bouřka"
+
+msgid "Heavy rain and thunder"
+msgstr "Silný déšť a bouřka"
+
+msgid "Light sleet"
+msgstr "Lehký déšť se sněhem"
+
+msgid "Sleet"
+msgstr "Déšť se sněhem"
+
+msgid "Heavy sleet"
+msgstr "Silný déšť se sněhem"
+
+msgid "Light sleet and thunder"
+msgstr "Slabý déšť se sněhem a bouřka"
+
+msgid "Sleet and thunder"
+msgstr "Déšť se sněhem a bouřka"
+
+msgid "Heavy sleet and thunder"
+msgstr "Silný déšť se sněhem a bouřka"
+
+msgid "Light snow"
+msgstr "Lehké sněžení"
+
+msgid "Snow"
+msgstr "Sníh"
+
+msgid "Heavy snow"
+msgstr "Silné sněžení"
+
+msgid "Light snow and thunder"
+msgstr "Slabé sněžení a bouřka"
+
+msgid "Snow and thunder"
+msgstr "Sněžení a bouřka"
+
+msgid "Heavy snow and thunder"
+msgstr "Silné sněžení a bouřka"
+
+msgid "Fog"
+msgstr "Mlha"
+
+msgid ""
+"The Universal Thermal Climate Index (UTCI) is an index that combines the "
+"effects of air temperature, humidity, wind speed, and radiation on the human"
+" body. It is a measure of the thermal stress experienced by a person in a "
+"given environment."
+msgstr ""
+"Univerzální tepelně-klimatický index (UTCI) je index, který kombinuje účinky"
+" teploty vzduchu, vlhkosti, rychlosti větru a záření na lidský organismus. "
+"Je to míra tepelné zátěže, kterou člověk v daném prostředí zažívá."
+
+msgid "{{name}}: Thermal comfort {{period}}"
+msgstr "{{name}}: Tepelný komfort {{period}}"
+
+msgid "Average felt temperature"
+msgstr "Průměrná pocitová teplota"
+
+msgid "Felt temperature range"
+msgstr "Rozsah pocitové teploty"
+
+msgid "Average temperature"
+msgstr "Průměrná teplota"
+
+msgid ""
+"Relative humidity is the the amount of water vapour present in air expressed"
+" as a percentage of the amount needed for saturation at the same temperature"
+" (dewpoint)."
+msgstr ""
+"Relativní vlhkost je množství vodní páry přítomné ve vzduchu vyjádřené v "
+"procentech množství potřebného k nasycení při stejné teplotě (rosný bod)."
+
+msgid "{{name}}: Daily relative humidity {{period}}"
+msgstr "{{name}}: Denní relativní vlhkost {{period}}"
+
+msgid "Relative humidity"
+msgstr "Relativní vlhkost"
+
+msgid "{{name}}: Relative humidity {{period}}"
+msgstr "{{name}}: Relativní vlhkost {{period}}"
+
+msgid "Normals from reference period: {{period}}"
+msgstr "Normály z referenčního období: {{period}}"
+
+msgid "Normal relative humidity"
+msgstr "Normální relativní vlhkost"
+
+msgid "Dewpoint temperature"
+msgstr "Teplota rosného bodu"
+
+msgid "Air temperature"
+msgstr "Teplota vzduchu"
+
+msgid "Evergreen Needleleaf forest"
+msgstr "Stálezelený jehličnatý les"
+
+msgid "Evergreen Broadleaf forest"
+msgstr ""
+
+msgid "Deciduous Needleleaf forest"
+msgstr "Opadavý jehličnatý les"
+
+msgid "Deciduous Broadleaf forest"
+msgstr ""
+
+msgid "Mixed forest"
+msgstr ""
+
+msgid "Closed shrublands"
+msgstr "Uzavřené křoviny"
+
+msgid "Open shrublands"
+msgstr ""
+
+msgid "Woody savannas"
+msgstr ""
+
+msgid "Savannas"
+msgstr "Savany"
+
+msgid "Grasslands"
+msgstr "Louky a pastviny"
+
+msgid "Permanent wetlands"
+msgstr ""
+
+msgid "Croplands"
+msgstr ""
+
+msgid "Urban and built-up"
+msgstr ""
+
+msgid "Cropland/Natural vegetation mosaic"
+msgstr ""
+
+msgid "Snow and ice"
+msgstr "Sníh a led"
+
+msgid "Barren or sparsely vegetated"
+msgstr ""
+
+msgid "Water"
+msgstr ""
+
+msgid "Land cover type"
+msgstr ""
+
+msgid "{{name}}: Land cover changes {{years}}"
+msgstr ""
+
+msgid "{{name}}: Daily precipitation {{period}}"
+msgstr "{{name}}: Denní srážky {{period}}"
+
+msgid "Daily precipitation"
+msgstr "Denní srážky"
+
+msgid "{{name}}: Monthly precipitation {{period}}"
+msgstr "{{name}}: Měsíční srážky {{period}}"
+
+msgid "Monthly precipitation"
+msgstr "Měsíční srážky"
+
+msgid "Normal precipitation"
+msgstr "Normální srážky"
+
+msgid "{{name}}: Daily temperatures {{period}}"
+msgstr "{{name}}: Denní teploty {{period}}"
+
+msgid "Mean temperature"
+msgstr "Průměrná teplota"
+
+msgid "Temperature range"
+msgstr "Teplotní rozsah"
+
+msgid "{{name}}: Monthly temperatures {{period}}"
+msgstr "{{name}}: Měsíční teploty {{period}}"
+
+msgid "Normal temperature"
+msgstr "Normální teplota"
+
+msgid "Resample"
+msgstr ""
+
+msgid "Weekly"
+msgstr "Týdně"
+
+msgid ""
+"Change from 16-days to weekly or monthly periods using linear interpolation."
+" Weekly periods are recommended when importing to DHIS2."
+msgstr ""
+
+msgid "{{name}}: {{band}} vegetation index {{period}}"
+msgstr ""
+
+msgid "Value is only for 250 x 250 m where the facility is located"
+msgstr ""
+
+msgid "Data element"
+msgstr "Datový prvek"
+
+msgid "No match found"
+msgstr "Žádná shoda nenalezena"
+
+msgid "Data element to import data to"
+msgstr "Datový prvek, do kterého se data importují"
+
+msgid "Loading org units"
+msgstr "Načítání organizačních jednotek"
+
+msgid "No org units with geometry found for this level"
+msgstr ""
+"Pro tuto úroveň nebyly nalezeny žádné organizační jednotky s geometrií"
+
+msgid ""
+"Extracting data for {{periodCount}} {{periodType}} periods and "
+"{{orgUnitsCount}} org units ({{valueCount}} values)"
+msgstr ""
+
+msgid "Extracting data for {{orgUnitsCount}} org units"
+msgstr ""
+
+msgid "Importing data to DHIS2"
+msgstr "Import dat do DHIS2"
+
+msgid "Import failed"
+msgstr "Import se nezdařil"
+
+msgid "One or more conflicts encountered"
+msgstr "Jeden nebo více konfliktů"
+
+msgid "Import weather and climate data"
+msgstr "Import dat o počasí a klimatu"
+
+msgid ""
+"You can maximum import {{maxValues}} data values in a single import, but you"
+" are trying to import {{valueCount}} values for {{orgUnitCount}} "
+"organisation units over {{periodCount}} {{periodType}} periods. Please "
+"select a shorter period or fewer organisation units. You can always import "
+"more data later."
+msgstr ""
+
+msgid "Instructions"
+msgstr "Pokyny"
+
+msgid ""
+"Before you can import data, you need to create the associated data elements "
+"in DHIS2. See our setup guide in the left menu."
+msgstr ""
+
+msgid ""
+"Data can be imported in batches. We recommend that you start with a few "
+"organisation units to make sure everything works as expected."
+msgstr ""
+"Data lze importovat v dávkách. Doporučujeme začít s několika organizačními "
+"jednotkami, abyste se ujistili, že vše funguje podle očekávání."
+
+msgid "Data"
+msgstr "Data"
+
+msgid "Select the variable you would like to import."
+msgstr "Vyberte proměnnou, kterou chcete importovat."
+
+msgid "Period"
+msgstr "Období"
+
+msgid ""
+"Select the start and end dates for your import. We will import daily data "
+"for the selected period. You can aggregate data to other period types "
+"(weekly/monthly) in DHIS2. If your DHIS2 instance use a different timezone "
+"than UTC, we will calculate daily values based on this timezone."
+msgstr ""
+"Vyberte datum zahájení a ukončení importu. Pro vybrané období budeme "
+"importovat denní data. V DHIS2 můžete agregovat data do jiných typů období "
+"(týdenní/měsíční). Pokud vaše instance DHIS2 používá jiné časové pásmo než "
+"UTC, vypočítáme denní hodnoty na základě tohoto časového pásma."
+
+msgid "Parent organisation unit"
+msgstr "Nadřazená organizační jednotka"
+
+msgid ""
+"Select a parent organisation unit for the import. We will import data for "
+"children that are below this organisation unit."
+msgstr ""
+"Vyberte nadřazenou organizační jednotku pro import. Budeme importovat data "
+"dětí, které jsou pod touto organizační jednotkou."
+
+msgid "Organisation unit level"
+msgstr "Úroveň organizační jednotky"
+
+msgid ""
+"Select the organisation unit level for the import. We will import data for "
+"this level that are below the parent organisation unit. If the parent "
+"organisation unit is on the same level, we will import data for this single "
+"organisation unit."
+msgstr ""
+"Vyberte úroveň organizační jednotky pro import. Pro tuto úroveň budeme "
+"importovat data, která jsou pod nadřazenou organizační jednotkou. Pokud je "
+"nadřazená organizační jednotka na stejné úrovni, budeme importovat data pro "
+"tuto jedinou organizační jednotku."
+
+msgid ""
+"Select the DHIS2 data element you would like to import the data into. See "
+"the “Setup guide” for more information on how to configure this data "
+"element."
+msgstr ""
+"Vyberte datový prvek DHIS2, do kterého chcete data importovat. Další "
+"informace o konfiguraci tohoto datového prvku naleznete v \"Průvodci "
+"nastavením\"."
+
+msgid "Import summary"
+msgstr "Shrnutí importu"
+
+msgid ""
+"When data is imported, we will show a summary of the import. This includes "
+"the number of data values that were successfully imported or updated. If "
+"data values fail to import, we will show the reason for the failure."
+msgstr ""
+"Po importu dat se zobrazí shrnutí importu. Ten zahrnuje počet hodnot dat, "
+"které byly úspěšně importovány nebo aktualizovány. Pokud se hodnoty dat "
+"nepodaří importovat, zobrazíme důvod neúspěchu."
+
+msgid "Data is imported"
+msgstr "Data jsou importována"
+
+msgid "Imported"
+msgstr "Importováno"
+
+msgid "Updated"
+msgstr "Aktualizováno"
+
+msgid "Ignored"
+msgstr "Ignorováno"
+
+msgid "No data for the following org units"
+msgstr "Žádná data pro následující organizační jednotky"
+
+msgid ""
+"ERA5-Land has limited data for costal areas. Values for other org units will"
+" be imported."
+msgstr ""
+"ERA5-Land má omezené údaje pro pobřežní oblasti. Hodnoty pro ostatní org. "
+"jednotky budou importovány."
+
+msgid "Organisation unit level to import data to"
+msgstr "Úroveň organizační jednotky pro import dat"
+
+msgid "Org unit parent needs to be above or equal to the org unit level"
+msgstr ""
+"Nadřízená organizační jednotka musí být nad úrovní organizační jednotky nebo"
+" jí musí být rovna."
+
+msgid ""
+"The data will be assigned a default yearly period that matches the year it "
+"was collected: {{datasetPeriod}}"
+msgstr ""
+
+msgid "Daily values will be imported between start and end dates"
+msgstr "Denní hodnoty budou importovány mezi počátečním a koncovým datem."
+
+msgid "Period type"
+msgstr "Typ období"
+
+msgid "Start year"
+msgstr ""
+
+msgid "End year"
+msgstr ""
+
+msgid ""
+"Set y-axis values for charts in the Explore data section to make it easier "
+"to compare different org units. Leave blank to calculate based on data "
+"shown."
+msgstr ""
+"Nastavte hodnoty osy y pro grafy v části Prozkoumat data, abyste mohli "
+"snadněji porovnávat různé organizační jednotky. Pro výpočet na základě "
+"zobrazených dat ponechte prázdné."
+
+msgid "Max temperature in °C"
+msgstr "Maximální teplota ve °C"
+
+msgid "Min temperature in °C"
+msgstr "Minimální teplota ve °C"
+
+msgid "Min temperature must be less than max temperature"
+msgstr "Minimální teplota musí být nižší než maximální teplota"
+
+msgid "Max change in temperature in +/- °C"
+msgstr "Maximální změna teploty v +/- °C"
+
+msgid "Max monthly precipitation in mm"
+msgstr "Maximální měsíční srážky v mm"
+
+msgid "Max daily precipitation in mm"
+msgstr "Maximální denní úhrn srážek v mm"
+
+msgid "Heat stress upper category"
+msgstr "Tepelný stres vyšší kategorie"
+
+msgid "Heat stress lower category"
+msgstr "Tepelný stres nižší kategorie"
+
+msgid "Calculate from data"
+msgstr "Výpočet z dat"
+
+msgid "App settings"
+msgstr "Nastavení aplikace"
+
+msgid "Changes made below will apply to all users of this app."
+msgstr "Níže uvedené změny se budou týkat všech uživatelů této aplikace."
+
+msgid "Default start page for users"
+msgstr "Výchozí úvodní stránka pro uživatele"
+
+msgid "Time zone where your org units are located"
+msgstr "Časové pásmo, ve kterém se nachází vaše organizační jednotky"
+
+msgid "Data element: \"{{name}}\""
+msgstr "Datový prvek: \"{{name}}\""
+
+msgid "Name"
+msgstr "název"
+
+msgid "Short name"
+msgstr "Krátký název"
+
+msgid "Code"
+msgstr "Kód"
+
+msgid "Description"
+msgstr "Popis"
+
+msgid "Data source"
+msgstr "Zdroj dat"
+
+msgid "Domain type"
+msgstr "Typ domény"
+
+msgid "Aggregate"
+msgstr "Agregát"
+
+msgid "Aggregation type"
+msgstr "Typ agregace"
+
+msgid "Store zero data values"
+msgstr ""
+
+msgid "Make sure it is checked"
+msgstr ""
+
+msgid "Aggregation levels"
+msgstr "Úrovně agregace"
+
+msgid "Assign all org unit levels"
+msgstr "Přiřazení všech úrovní organizačních jednotek"
+
+msgid ""
+"You should now be able to import data with this app. Please reach out to us "
+"on climate-app@dhis2.org if you have any questions or need help with the "
+"setup."
+msgstr ""
+
+msgid "3. Assign to a data element group"
+msgstr ""
+
+msgid "Data element group: \"{{-name}}\""
+msgstr ""
+
+msgid "Data elements"
+msgstr "Datové prvky"
+
+msgid "Assign above data element"
+msgstr ""
+
+msgid "2. Assign to a data set"
+msgstr ""
+
+msgid ""
+"If you import daily data, you should assign the data elements to a daily "
+"data set (weather and climate). For weekly or monthly data, assign to a "
+"weekly or monthly data set (vegetation index). Assigning to a data set helps"
+" to maintain a quality metadata and data where integrity, consistency, "
+"approvals and protection are facilitated. How exactly to define such a data "
+"set depends on the available users and user groups. Similarly, which of the "
+"organisation units can collect this daily climate data set depends on "
+"situated contexts. However, since we can provide data for any administrative"
+" unit that has defined geographic boundaries we leave that decision to "
+"users. Most probable choice is all organisation units in your system."
+msgstr ""
+
+msgid "Data set: \"{{-name}}\""
+msgstr ""
+
+msgid "Organisation units"
+msgstr "Organizační jednotky"
+
+msgid "Select all organisation units in your system"
+msgstr "Vyberte všechny organizační jednotky v systému"
+
+msgid "4. Add a legend"
+msgstr ""
+
+msgid "Recommended legend for this data element."
+msgstr ""
+
+msgid "Legend: \"{{-name}}\""
+msgstr ""
+
+msgid "Start value"
+msgstr "Počáteční hodnota"
+
+msgid "End value"
+msgstr "Konečná hodnota"
+
+msgid "Color"
+msgstr "Barva"
+
+msgid "Configuring DHIS2 before importing data"
+msgstr ""
+
+msgid ""
+"Before you can import data, you need to make some configurations in the "
+"Maintenance app. For detailed instructions on how to configure DHIS2, choose"
+" which data you would like to import below."
+msgstr ""
+
+msgid "1. Create the data element"
+msgstr ""
+
+msgid ""
+"Create DHIS2 data elements only for the data you want to import. We "
+"recommend including the data source in the name to distinguish it from other"
+" sources (e.g. precepetation data is available from both ERA5-Land and "
+"CHIRPS, and there will be additional data providers in the future). If you "
+"use the same code specified below, we will preselect the data element in the"
+" import interface."
+msgstr ""
+
+msgid ""
+"When daily data is imported it can be aggregated to other period types in "
+"DHIS2. We don't recommend aggregating across organisation unit levels, "
+"especially when going from facility level to higher levels defined by a "
+"geographic boundary. To make sure the values remain at its own level, assign"
+" all org unit levels as Aggregation levels for each data element created."
+msgstr ""
+
+msgid "Loading data"
+msgstr "Načítání dat"
+
+msgid "Select data to import"
+msgstr "Výběr dat pro import"
+
+msgid "You need access to Google Earth Engine to use this app."
+msgstr ""
+"K použití této aplikace potřebujete přístup k aplikaci Google Earth Engine."
+
+msgid "How to get access?"
+msgstr "Jak získat přístup?"
+
+msgid ""
+"For a temporary period there is limited data available for 2024. This is due"
+" to modernization work impacting the Copernicus Climate Data Store (CDS) "
+"where the data originates."
+msgstr ""
+"Pro přechodné období jsou k dispozici jen omezené údaje pro rok 2024. "
+"Důvodem jsou modernizační práce, které mají dopad na úložiště klimatických "
+"dat Copernicus (CDS), odkud data pocházejí."
+
+msgid "Read more on the CDS user forum"
+msgstr "Více informací na uživatelském fóru CDS"
+
+msgid "Data resolution"
+msgstr "Rozlišení dat"
+
+msgid ""
+"You can import data for the lowest levels in your org unit hierarchy, but it"
+" won't improve the resolution of the data."
+msgstr ""
+"Můžete importovat data pro nejnižší úrovně v hierarchii organizačních "
+"jednotek, ale rozlišení dat se tím nezlepší."
+
+msgid ""
+"If two org units are close to each other (within the resolution), they will "
+"have the same data values."
+msgstr ""
+"Pokud jsou dvě jednotky org blízko sebe (v rámci rozlišení), budou mít "
+"stejné hodnoty dat."
+
+msgid "Time zone"
+msgstr "Časové pásmo"
+
+msgid "ERA5-Land / Copernicus Climate Change Service"
+msgstr ""
+
+msgid "ERA5-Heat / Copernicus Climate Change Service"
+msgstr ""
+
+msgid "Climate Hazards Center / UCSB"
+msgstr ""
+
+msgid "NASA LP DAAC at the USGS EROS Center"
+msgstr ""
+
+msgid "NASA / USGS / JPL-Caltech"
+msgstr ""
+
+msgid "Approximately 31 km (0.25°)"
+msgstr "Přibližně 31 km (0,25°)"
+
+msgid "Approximately 9 km (0.1°)"
+msgstr "Přibližně 9 km (0,1°)"
+
+msgid "Approximately 5 km (0.05°)"
+msgstr "Přibližně 5 km (0,05°)"
+
+msgid "Approximately 250 m"
+msgstr ""
+
+msgid "Approximately 500 m"
+msgstr ""
+
+msgid "Approximately 30 m"
+msgstr ""
+
+msgid ""
+"Landsat Normalized Difference Vegetation Index (NDVI) is used to quantify "
+"vegetation greenness and is useful in understanding vegetation density and "
+"assessing changes in plant health. NDVI values range from -1 to 1, with "
+"higher values indicating denser vegetation."
+msgstr ""
+
+msgid ""
+"Enhanced vegetation index (EVI) differs from NDVI by reducing the influence "
+"of atmospheric conditions and canopy background noise. EVI values range from"
+" -1 to 1, with higher values indicating denser vegetation."
+msgstr ""
+
+msgid "Land cover types at yearly intervals"
+msgstr ""
+
+msgid "Climate/Weather"
+msgstr "Klima/počasí"
+
+msgid "Environment"
+msgstr ""
+
+msgid "Weekly or Monthly"
+msgstr ""
+
+msgid "Land"
+msgstr ""
+
+msgid "Yearly"
+msgstr ""
+
+msgid "Air temperature (ERA5-Land)"
+msgstr "Teplota vzduchu (ERA5-Land)"
+
+msgid "Average air temperature in °C at 2 m above the surface."
+msgstr ""
+
+msgid "Average"
+msgstr "Průměr"
+
+msgid "Max air temperature (ERA5-Land)"
+msgstr "Maximální teplota vzduchu (ERA5-Land)"
+
+msgid "Max air temperature"
+msgstr "Maximální teplota vzduchu"
+
+msgid "Maximum air temperature in °C at 2 m above the surface."
+msgstr ""
+
+msgid "Max"
+msgstr "Max"
+
+msgid "Min temperature (ERA5-Land)"
+msgstr "Minimální teplota (ERA5-Land)"
+
+msgid "Min air temperature"
+msgstr "Minimální teplota vzduchu"
+
+msgid "Minimum air temperature in °C at 2 m above the surface."
+msgstr ""
+
+msgid "Min"
+msgstr "Min"
+
+msgid "Precipitation (ERA5-Land)"
+msgstr "Srážky (ERA5-Land)"
+
+msgid "Precipitation (ERA5)"
+msgstr "Srážky (ERA5)"
+
+msgid "Total precipitation in mm."
+msgstr ""
+
+msgid "Sum"
+msgstr "Součet"
+
+msgid "Precipitation (CHIRPS)"
+msgstr "Srážky (CHIRPS)"
+
+msgid "Precipitation in mm."
+msgstr ""
+
+msgid "Dewpoint temperature (ERA5-Land)"
+msgstr "Teplota rosného bodu (ERA5-Land)"
+
+msgid ""
+"Temperature in °C at 2 m above the surface to which the air would have to be"
+" cooled for saturation to occur."
+msgstr ""
+"Teplota ve °C ve výšce 2 m nad povrchem, na kterou by se musel vzduch "
+"ochladit, aby došlo k nasycení."
+
+msgid "Relative humidity (ERA5-Land)"
+msgstr "Relativní vlhkost (ERA5-Land)"
+
+msgid ""
+"Percentage of water vapor in the air compared to the total amount of vapor "
+"that can exist in the air at its current temperature. Calculated using air "
+"temperature and dewpoint temperature at 2 m above surface."
+msgstr ""
+"Procentuální podíl vodní páry ve vzduchu v porovnání s celkovým množstvím "
+"vodní páry, které se může vyskytovat ve vzduchu při jeho aktuální teplotě. "
+"Vypočítá se na základě teploty vzduchu a teploty rosného bodu ve výšce 2 m "
+"nad povrchem."
+
+msgid "Heat stress (ERA5-HEAT)"
+msgstr "Tepelný stres (ERA5-HEAT)"
+
+msgid "Heat stress"
+msgstr "Tepelný stres"
+
+msgid "Average felt temperature in °C."
+msgstr ""
+
+msgid "Max heat stress (ERA5-HEAT)"
+msgstr "Maximální tepelný stres (ERA5-HEAT)"
+
+msgid "Max heat stress"
+msgstr "Maximální tepelný stres"
+
+msgid "Maximum felt temperature in °C."
+msgstr ""
+
+msgid "Min heat stress (ERA5-HEAT)"
+msgstr "Minimální tepelný stres (ERA5-HEAT)"
+
+msgid "Min heat stress"
+msgstr "Minimální tepelný stres"
+
+msgid "Minimum felt temperature in °C."
+msgstr ""
+
+msgid "NDVI - Normalized difference vegetation index (MODIS)"
+msgstr ""
+
+msgid "NDVI"
+msgstr ""
+
+msgid "EVI - Enhanced vegetation index (MODIS)"
+msgstr ""
+
+msgid "EVI"
+msgstr ""
+
+msgid "Mean elevation (SRTM)"
+msgstr ""
+
+msgid "Mean elevation in meters above sea level."
+msgstr ""
+
+msgid "First value"
+msgstr ""
+
+msgid "Min elevation (SRTM)"
+msgstr ""
+
+msgid "Min elevation in meters above sea level."
+msgstr ""
+
+msgid "Max elevation (SRTM)"
+msgstr ""
+
+msgid "Max elevation in meters above sea level."
+msgstr ""
+
+msgid "Standard deviation of elevation (SRTM)"
+msgstr ""
+
+msgid "Std dev elevation"
+msgstr ""
+
+msgid "Standard deviation of elevation in meters above sea level."
+msgstr ""
+
+msgid "Percentage of area with this land cover type."
+msgstr ""
+
+msgid "Heat/cold stress"
+msgstr "Stres z horka/chladu"
+
+msgid "You only need to include categories that are relevant for your area."
+msgstr ""
+"Je třeba zahrnout pouze kategorie, které jsou relevantní pro vaši oblast."
+
+msgid "Extreme cold stress"
+msgstr "Extrémní chladový stres"
+
+msgid "Extreme<br>cold stress"
+msgstr "Extrémní<br>chladový stres"
+
+msgid "Very strong cold stress"
+msgstr "Velmi silný chladový stres"
+
+msgid "Very strong<br>cold stress"
+msgstr "Velmi silný<br>chladový stres"
+
+msgid "Strong cold stress"
+msgstr "Silný chladový stres"
+
+msgid "Strong<br>cold stress"
+msgstr "Silný<br>chladový stres"
+
+msgid "Moderate cold stress"
+msgstr "Mírný chladový stres"
+
+msgid "Moderate<br>cold stress"
+msgstr "Mírný<br>chladový stres"
+
+msgid "Slight cold stress"
+msgstr "Mírný chladový stres"
+
+msgid "Slight<br>cold stress"
+msgstr "Mírný<br>chladový stres"
+
+msgid "No thermal stress"
+msgstr "Žádný tepelný stres"
+
+msgid "No thermal<br>stress"
+msgstr "Žádný tepelný <br> stres"
+
+msgid "Moderate heat stress"
+msgstr "Mírný tepelný stres"
+
+msgid "Moderate<br>heat stress"
+msgstr "Mírný<br>tepelný stres"
+
+msgid "Strong heat stress"
+msgstr "Silný tepelný stres"
+
+msgid "Strong<br>heat stress"
+msgstr "Silný<br>tepelný stres"
+
+msgid "Very strong heat stress"
+msgstr "Velmi silný tepelný stres"
+
+msgid "Very strong<br>heat stress"
+msgstr "Velmi silný<br>tepelný stres"
+
+msgid "Extreme heat stress"
+msgstr "Extrémní tepelný stres"
+
+msgid "Extreme<br>heat stress"
+msgstr "Extrémní<br>tepelný stres"
+
+msgid "ERA5-Land / Copernicus Climate Change Service / Google Earth Engine"
+msgstr "ERA5-Land / Copernicus Climate Change Service / Google Earth Engine"
+
+msgid "ERA5-HEAT / Copernicus Climate Change Service / Google Earth Engine"
+msgstr "ERA5-HEAT / Copernicus Climate Change Service / Google Earth Engine"
+
+msgid "NASA LP DAAC at the USGS EROS Center / Google Earth Engine"
+msgstr ""
+
+msgid "NASA / USGS / JPL-Caltech / Google Earth Engine"
+msgstr ""
+
+msgid "No data found for the selected period"
+msgstr "Pro vybrané období nebyly nalezeny žádné údaje"

@@ -22,7 +22,7 @@ const ChartSettings = () => {
 
     return (
         <>
-            <h2>Chart settings</h2>
+            <h2>{i18n.t('Chart settings')}</h2>
             <p>
                 {i18n.t(
                     'Set y-axis values for charts in the Explore data section to make it easier to compare different org units. Leave blank to calculate based on data shown.'
