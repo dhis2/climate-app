@@ -34,7 +34,7 @@ const MonthlyPeriodSelect = () => {
                     disabled={months > maxMonths}
                     onClick={() => setMonthlyPeriod(period)}
                 >
-                    Update
+                    {i18n.t('Update')}
                 </Button>
             </div>
             {months > maxMonths && (

@@ -8,7 +8,7 @@ import {
     getStandardPeriod,
     isValidPeriod,
     getPeriods,
-    periodTypes,
+    getPeriodTypes,
 } from '../../utils/time.js'
 import Dataset from '../shared/Dataset.jsx'
 import GEETokenCheck from '../shared/GEETokenCheck.jsx'
@@ -40,7 +40,7 @@ const ImportPage = () => {
         [period, hasNoPeriod]
     )
     const valueCount = orgUnitCount * periodCount
-    const periodType = periodTypes
+    const periodType = getPeriodTypes()
         .find((type) => type.id === period.periodType)
         ?.name.toLowerCase()
 
@@ -113,7 +113,7 @@ const ImportPage = () => {
                                 disabled={!isValid || startExtract}
                                 onClick={() => setStartExtract(true)}
                             >
-                                Start import
+                                {i18n.t('Start import')}
                             </Button>
                             {startExtract && isValid && (
                                 <ExtractData
