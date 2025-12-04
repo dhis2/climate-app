@@ -1,0 +1,1331 @@
+# 
+# Translators:
+# David Júnior <davidjr.mondlane@gmail.com>, 2025
+# Emílio Luís Mosse <emosse@saudigitus.org>, 2025
+# Shelsea Chumaio, 2025
+# Edson Nhancale, 2025
+# Sheila André <sandre@saudigitus.org>, 2025
+# David Mondlane, 2025
+# António Fernando Macaringue, 2025
+# Philip Larsen Donnelly, 2025
+# Helton Dias, 2025
+# Ge Joao <gsimango@saudigitus.org>, 2025
+# Viktor Varland <viktor@dhis2.org>, 2025
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2025-09-08T09:55:48.384Z\n"
+"PO-Revision-Date: 2025-02-05 13:11+0000\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2025\n"
+"Language-Team: Portuguese (https://app.transifex.com/hisp-uio/teams/100509/pt/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pt\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+
+msgid "About this app"
+msgstr "Acerca deste aplicativo"
+
+msgid ""
+"This pilot app is part of the ongoing “DHIS2 for Climate“ project. It will "
+"get frequent updates, so please make sure you have the latest version from "
+"the DHIS2 App Hub. The app is developed by the University of Oslo, but it is"
+" not a DHIS2 core app. Useful parts of this app might be incorporated into "
+"the DHIS2 core in the future, based on your feedback."
+msgstr ""
+"Esta aplicação piloto faz parte do projecto em curso \"DHIS2 para o Clima\"."
+" Será actualizada com frequência, por isso, certifique-se de que tem a "
+"versão mais recente do DHIS2 App Hub. A aplicação foi desenvolvida pela "
+"Universidade de Oslo, mas não é uma aplicação padrão do DHIS2. Partes úteis "
+"desta aplicação poderão ser incorporadas no DHIS2 no futuro, com base no seu"
+" feedback."
+
+msgid ""
+"The app allows you to explore and import temperature, precipitation, "
+"humidity and heat stress data in DHIS2. The main data source is ERA5-Land, "
+"which is considered the most accurate and complete global climate dataset "
+"available. The video below shows you how this dataset was created by "
+"combining weather observations with a weather model (climate reanalysis)."
+msgstr ""
+"A aplicação permite-lhe explorar e importar dados de temperatura, "
+"precipitação, humidade e stress térmico no DHIS2. A principal fonte de dados"
+" é o ERA5-Land, que é considerado o conjunto de dados climáticos globais "
+"mais exacto e completo disponível. O vídeo abaixo mostra-lhe como este "
+"conjunto de dados foi criado através da combinação de observações "
+"meteorológicas com um modelo meteorológico (reanálise climática)."
+
+msgid "Read about ERA5-Land on Copernicus Climate Data Store"
+msgstr "Leia sobre o ERA5-Land no arquivo de dados climáticos do Copernicus"
+
+msgid ""
+"In additon to ERA5-Land, precipitation data can also be imported from the "
+"CHIRPS dataset. For heat stress we use data from ERA5-HEAT."
+msgstr ""
+"Para além do ERA5-Land, os dados de precipitação também podem ser importados"
+" do conjunto de dados CHIRPS. Para o stress térmico, utilizamos os dados do "
+"ERA5-HEAT."
+
+msgid "Read about CHIRPS on Climate Hazards Center"
+msgstr "Leia sobre o CHIRPS no Centro de Riscos Climáticos"
+
+msgid "Read about ERA5-HEAT on Copernicus Climate Data Store"
+msgstr "Leia sobre o ERA5-HEAT no arquivo de dados climáticos do Copernicus"
+
+msgid ""
+"If you just want to look at weather and climate data for your organisation "
+"units, click on “Explore data” in the left menu. No configuration is needed."
+msgstr ""
+"Se quiser apenas ver os dados meteorológicos e climáticos das suas unidades "
+"organizacionais, clique em \"Explorar dados\" no menu da esquerda. Não é "
+"necessária qualquer configuração."
+
+msgid ""
+"We recommend importing data into DHIS2 data elements. This will allow you to"
+" combine weather and climate data with your health data across all DHIS2 "
+"analytics apps. You need to configure your DHIS2 instance before you can "
+"import data. See our guide by clicking on “Setup guide”."
+msgstr ""
+"Recomendamos a importação de dados para os elementos de dados do DHIS2. Isto"
+" permitir-lhe-á combinar dados meteorológicos e climáticos com os seus dados"
+" de saúde em todas as aplicações analíticas do DHIS2. É necessário "
+"configurar a sua instância DHIS2 antes de poder importar dados. Consulte o "
+"nosso guia clicando em \"Guia de configuração\"."
+
+msgid ""
+"After the configuration is done, you can import temperature and "
+"precipitation data under “Import data”."
+msgstr ""
+"Depois de concluída a configuração, pode importar os dados de temperatura e "
+"precipitação em \"Importar dados\"."
+
+msgid ""
+"After the data is imported, you should generate the analytics tables in the "
+"Data Administration app. This will allow you to see the data in the DHIS2 "
+"analytics apps."
+msgstr ""
+"Depois de os dados serem importados, deve gerar as tabelas de análise na "
+"aplicação Administração de dados. Isto permitir-lhe-á ver os dados nas "
+"aplicações de análise DHIS2."
+
+msgid "How the data is calculated"
+msgstr "Como são calculados os dados"
+
+msgid ""
+"The data is calculated for your organsation units on Google Earth Engine. "
+"Pleace check the resolution of the data. If you select a health facility we "
+"use the value where the facility is located. If you select a district we "
+"automatically aggregate the values within that district. If two org units "
+"are close to each other (within the resolution), they will have the same "
+"data values."
+msgstr ""
+"Os dados são calculados para as suas unidades organizacionais no Google "
+"Earth Engine. Por favor, verifique a resolução dos dados. Se selecionar uma "
+"unidade sanitária, utilizamos o valor do local onde a unidade está "
+"localizada. Se selecionar um distrito, agregamos automaticamente os valores "
+"dentro desse distrito. Se duas unidades organizacionais estiverem próximas "
+"uma da outra (dentro da resolução), elas terão os mesmos valores de dados."
+
+msgid "Home"
+msgstr "Início"
+
+msgid "Explore data"
+msgstr "Explorar dados"
+
+msgid "Import data"
+msgstr "Importar valores"
+
+msgid "Setup guide"
+msgstr "Guia de configuração"
+
+msgid "Settings"
+msgstr "Configurações"
+
+msgid "Check data"
+msgstr "Verificar dados"
+
+msgid "Check weather and climate data"
+msgstr "Verificar os dados meteorológicos e climáticos"
+
+msgid "Select a location in the left panel"
+msgstr "Selecione uma localização no painel esquerdo"
+
+msgid "Start date"
+msgstr "Data de início"
+
+msgid "End date"
+msgstr "Data final"
+
+msgid "Maximum {{maxDays}} days allowed"
+msgstr "Máximo {{maxDays}} dias permitidos"
+
+msgid "Explore weather and climate data"
+msgstr "Explorar dados meteorológicos e climáticos"
+
+msgid "Select an organisation unit in the left panel"
+msgstr "Seleccionar uma unidade organizacional no painel esquerdo"
+
+msgid "January"
+msgstr "Janeiro"
+
+msgid "February"
+msgstr "Fevereiro"
+
+msgid "March"
+msgstr "Março"
+
+msgid "April"
+msgstr "Abril"
+
+msgid "May"
+msgstr "Maio"
+
+msgid "June"
+msgstr "Junho"
+
+msgid "July"
+msgstr "Julho"
+
+msgid "August"
+msgstr "Agosto"
+
+msgid "September"
+msgstr "Setembro"
+
+msgid "October"
+msgstr "Outubro"
+
+msgid "November"
+msgstr "Novembro"
+
+msgid "December"
+msgstr "Dezembro"
+
+msgid "Month"
+msgstr "Mês"
+
+msgid "Start month"
+msgstr "Mês de início"
+
+msgid "End month"
+msgstr "Fim do mês"
+
+msgid "Maximum {{maxMonths}} months allowed"
+msgstr "Máximo {{maxMonths}} meses permitidos"
+
+msgid "No geometry found"
+msgstr "Nenhuma geometria encontrada"
+
+msgid "Data for a location"
+msgstr "Dados para uma localização"
+
+msgid "Data for an area"
+msgstr "Dados para uma área"
+
+msgid "Monthly"
+msgstr "Mensal"
+
+msgid "Daily"
+msgstr "Diário"
+
+msgid "Reference period"
+msgstr "Período de referência"
+
+msgid "10 days forecast"
+msgstr "Previsão para 10 dias"
+
+msgid "Temperature"
+msgstr "Temperatura"
+
+msgid "Precipitation"
+msgstr "Precipitação"
+
+msgid "Humidity"
+msgstr "Humidade"
+
+msgid "Heat"
+msgstr "Calor"
+
+msgid "Climate change"
+msgstr "Alterações climáticas"
+
+msgid "Vegetation"
+msgstr ""
+
+msgid "Land cover"
+msgstr ""
+
+msgid "Elevation"
+msgstr "Elevação"
+
+msgid ""
+"Temperature anomaly is the difference of a temperature from a reference "
+"value, calculated as the average temperature over a period of 30 years. Blue"
+" columns shows temperatures below the average, while red columns are above."
+msgstr ""
+"A anomalia de temperatura é a diferença de uma temperatura em relação a um "
+"valor de referência, calculada como a temperatura média durante um período "
+"de 30 anos. As colunas azuis mostram temperaturas abaixo da média, enquanto "
+"as colunas vermelhas estão acima."
+
+msgid "{{name}}: {{month}} temperature difference {{years}}"
+msgstr "{{name}}: {{month}} diferença de temperatura {{years}}"
+
+msgid "Reference period: {{period}}"
+msgstr "Período de referência: {{period}}"
+
+msgid "Temperature anomaly"
+msgstr "Anomalia da temperatura"
+
+msgid "{{name}}: Elevation"
+msgstr ""
+
+msgid "{{value}} m"
+msgstr ""
+
+msgid ""
+"The chart shows the elevation distribution of the selected area, for each "
+"meter above sea level it shows the area with this elevation in hectares. The"
+" mean, minimum, and maximum elevation values are calculated from the "
+"elevation data."
+msgstr ""
+
+msgid "Elevation: {{value}} m"
+msgstr ""
+
+msgid "Area: {{value}} km²"
+msgstr ""
+
+msgid "Min elevation"
+msgstr ""
+
+msgid "Mean elevation"
+msgstr ""
+
+msgid "Max elevation"
+msgstr ""
+
+msgid "{{precip}} mm"
+msgstr "{{precip}} mm"
+
+msgid "Night"
+msgstr "Noite"
+
+msgid "Morning"
+msgstr "Manhã"
+
+msgid "Afternoon"
+msgstr "Tarde"
+
+msgid "Evening"
+msgstr "Noite"
+
+msgid "Max/min temp."
+msgstr "Temp. máx./min."
+
+msgid "Precip."
+msgstr "Precipitação."
+
+msgid "Rel. humidity"
+msgstr "Humidade rel."
+
+msgid "Wind"
+msgstr "Vento"
+
+msgid ""
+"The forecast is using the \"{{- timeZone}}\" time zone. You can change the "
+"time zone for your org units under \"Settings\"."
+msgstr ""
+"A previsão está a utilizar o fuso horário \"{{- timeZone}}\". Pode alterar o"
+" fuso horário das suas unidades organizacionais em \"Definições\"."
+
+msgid ""
+"The forecast is using the time zone of your browser ({{- timeZone}}). You "
+"can set the time zone for your org units under \"Settings\"."
+msgstr ""
+"A previsão está a utilizar o fuso horário do seu navegador ({{- timeZone}})."
+" Pode definir o fuso horário das suas unidades organizacionais em "
+"\"Definições\"."
+
+msgid ""
+"The forecast is using the default \"{{- timeZone}}\" time zone. You can set "
+"the time zone for your org units under \"Settings\"."
+msgstr ""
+"A previsão está a utilizar o fuso horário predefinido \"{{- timeZone}}\". "
+"Pode definir o fuso horário para as suas unidades organizacionais em "
+"\"Definições\"."
+
+msgid "Clear sky"
+msgstr "Céu limpo"
+
+msgid "Fair"
+msgstr ""
+
+msgid "Partly cloudy"
+msgstr "Parcialmente nublado"
+
+msgid "Cloudy"
+msgstr "Nublado"
+
+msgid "Light rain showers"
+msgstr "Aguaceiros ligeiros"
+
+msgid "Rain showers"
+msgstr "Aguaceiros"
+
+msgid "Heavy rain showers"
+msgstr "Aguaceiros fortes"
+
+msgid "Light rain showers and thunder"
+msgstr "Aguaceiros ligeiros e trovoada"
+
+msgid "Rain showers and thunder"
+msgstr "Aguaceiros e trovoadas"
+
+msgid "Heavy rain showers and thunder"
+msgstr "Aguaceiros fortes e trovoada"
+
+msgid "Light sleet showers"
+msgstr "Aguaceiros ligeiros de granizo"
+
+msgid "Sleet showers"
+msgstr "Aguaceiros de granizo"
+
+msgid "Heavy sleet showers"
+msgstr "Aguaceiros fortes de granizo"
+
+msgid "Light sleet showers and thunder"
+msgstr "Aguaceiros ligeiros de granizo e trovoada"
+
+msgid "Sleet showers and thunder"
+msgstr "Aguaceiros de granizo e trovoada"
+
+msgid "Heavy sleet showers and thunder"
+msgstr "Aguaceiros fortes de granizo e trovoada"
+
+msgid "Light snow showers"
+msgstr "Aguaceiros de neve ligeiros"
+
+msgid "Snow showers"
+msgstr "Aguaceiros de neve"
+
+msgid "Heavy show showers"
+msgstr "Aguaceiros fortes"
+
+msgid "Light snow showers and thunder"
+msgstr "Aguaceiros de neve ligeiros e trovoada"
+
+msgid "Snow showers and thunder"
+msgstr "Aguaceiros de neve e trovoada"
+
+msgid "Heavy snow showers and thunder"
+msgstr "Fortes aguaceiros de neve e trovoada"
+
+msgid "Light rain"
+msgstr "Chuva fraca"
+
+msgid "Rain"
+msgstr "Chuva"
+
+msgid "Heavy rain"
+msgstr "Chuva intensa"
+
+msgid "Light rain and thunder"
+msgstr "Chuva fraca e trovoada"
+
+msgid "Rain and thunder"
+msgstr "Chuva e trovoada"
+
+msgid "Heavy rain and thunder"
+msgstr "Chuva forte e trovoada"
+
+msgid "Light sleet"
+msgstr "Granizo ligeiro"
+
+msgid "Sleet"
+msgstr "Granizo"
+
+msgid "Heavy sleet"
+msgstr "Granizo intenso"
+
+msgid "Light sleet and thunder"
+msgstr "Granizo ligeiro e trovoada"
+
+msgid "Sleet and thunder"
+msgstr "Granizo e trovoada"
+
+msgid "Heavy sleet and thunder"
+msgstr "Granizo forte e trovoada"
+
+msgid "Light snow"
+msgstr "Neve ligeira"
+
+msgid "Snow"
+msgstr "Neve"
+
+msgid "Heavy snow"
+msgstr "Neve intensa"
+
+msgid "Light snow and thunder"
+msgstr "Neve ligeira e trovoada"
+
+msgid "Snow and thunder"
+msgstr "Neve e trovoada"
+
+msgid "Heavy snow and thunder"
+msgstr "Neve forte e trovoada"
+
+msgid "Fog"
+msgstr "Nevoeiro"
+
+msgid ""
+"The Universal Thermal Climate Index (UTCI) is an index that combines the "
+"effects of air temperature, humidity, wind speed, and radiation on the human"
+" body. It is a measure of the thermal stress experienced by a person in a "
+"given environment."
+msgstr ""
+"O Índice Universal de Clima Térmico (UTCI) é um índice que combina os "
+"efeitos da temperatura do ar, humidade, velocidade do vento e radiação no "
+"corpo humano. É uma medida do stress térmico sofrido por uma pessoa num "
+"determinado ambiente."
+
+msgid "{{name}}: Thermal comfort {{period}}"
+msgstr "{{name}}: Conforto térmico {{period}}"
+
+msgid "Average felt temperature"
+msgstr "Temperatura média sentida"
+
+msgid "Felt temperature range"
+msgstr "Intervalo de temperatura sentida"
+
+msgid "Average temperature"
+msgstr "Temperatura média"
+
+msgid ""
+"Relative humidity is the the amount of water vapour present in air expressed"
+" as a percentage of the amount needed for saturation at the same temperature"
+" (dewpoint)."
+msgstr ""
+"A humidade relativa é a quantidade de vapor de água presente no ar expressa "
+"em percentagem da quantidade necessária para a saturação à mesma temperatura"
+" (ponto de orvalho)."
+
+msgid "{{name}}: Daily relative humidity {{period}}"
+msgstr "{{name}}: Humidade relativa diária {{period}}"
+
+msgid "Relative humidity"
+msgstr "Humidade relativa"
+
+msgid "{{name}}: Relative humidity {{period}}"
+msgstr "{{name}}: Humidade relativa {{period}}"
+
+msgid "Normals from reference period: {{period}}"
+msgstr "Normais do período de referência: {{period}}"
+
+msgid "Normal relative humidity"
+msgstr "Humidade relativa normal"
+
+msgid "Dewpoint temperature"
+msgstr "Temperatura do ponto de orvalho"
+
+msgid "Air temperature"
+msgstr "Temperatura do ar"
+
+msgid "Evergreen Needleleaf forest"
+msgstr "Floresta de folhas aciculares sempre-verdes"
+
+msgid "Evergreen Broadleaf forest"
+msgstr "Floresta de folhas largas sempre-verdes"
+
+msgid "Deciduous Needleleaf forest"
+msgstr "Floresta de folhas de aciculares decíduas"
+
+msgid "Deciduous Broadleaf forest"
+msgstr "Floresta decídua de folhas largas"
+
+msgid "Mixed forest"
+msgstr "Floresta mista"
+
+msgid "Closed shrublands"
+msgstr "Arbustos fechados"
+
+msgid "Open shrublands"
+msgstr "Arbustos abertos"
+
+msgid "Woody savannas"
+msgstr "Savanas arborizadas"
+
+msgid "Savannas"
+msgstr "Savanas"
+
+msgid "Grasslands"
+msgstr "Área de Pastagem"
+
+msgid "Permanent wetlands"
+msgstr "Áreas úmidas permanentes"
+
+msgid "Croplands"
+msgstr ""
+
+msgid "Urban and built-up"
+msgstr "Urbano e construído"
+
+msgid "Cropland/Natural vegetation mosaic"
+msgstr "Área agrícola / Mosaico de vegetação natural"
+
+msgid "Snow and ice"
+msgstr "Neve e gelo"
+
+msgid "Barren or sparsely vegetated"
+msgstr "Estéril ou com pouca vegetação"
+
+msgid "Water"
+msgstr "Água"
+
+msgid "Land cover type"
+msgstr ""
+
+msgid "{{name}}: Land cover changes {{years}}"
+msgstr ""
+
+msgid "{{name}}: Daily precipitation {{period}}"
+msgstr "{{name}}: Precipitação diária {{period}}"
+
+msgid "Daily precipitation"
+msgstr "Precipitação diária"
+
+msgid "{{name}}: Monthly precipitation {{period}}"
+msgstr "{{name}}: Precipitação mensal {{period}}"
+
+msgid "Monthly precipitation"
+msgstr "Precipitação mensal"
+
+msgid "Normal precipitation"
+msgstr "Precipitação normal"
+
+msgid "{{name}}: Daily temperatures {{period}}"
+msgstr "{{name}}: Temperaturas diárias {{period}}"
+
+msgid "Mean temperature"
+msgstr "Temperatura média"
+
+msgid "Temperature range"
+msgstr "Intervalo de temperatura"
+
+msgid "{{name}}: Monthly temperatures {{period}}"
+msgstr "{{name}}: Temperaturas mensais {{period}}"
+
+msgid "Normal temperature"
+msgstr "Temperatura normal"
+
+msgid "Resample"
+msgstr ""
+
+msgid "Weekly"
+msgstr "Semanal"
+
+msgid ""
+"Change from 16-days to weekly or monthly periods using linear interpolation."
+" Weekly periods are recommended when importing to DHIS2."
+msgstr ""
+
+msgid "{{name}}: {{band}} vegetation index {{period}}"
+msgstr ""
+
+msgid "Value is only for 250 x 250 m where the facility is located"
+msgstr ""
+
+msgid "Data element"
+msgstr "Elemento de dado"
+
+msgid "No match found"
+msgstr "Nenhuma correspondência encontrada"
+
+msgid "Data element to import data to"
+msgstr "Elemento de dados para importar dados para"
+
+msgid "Loading org units"
+msgstr "Carregamento de unidades organizacionais"
+
+msgid "No org units with geometry found for this level"
+msgstr ""
+"Não foram encontradas unidades organizacionais com geometria para este nível"
+
+msgid ""
+"Extracting data for {{periodCount}} {{periodType}} periods and "
+"{{orgUnitsCount}} org units ({{valueCount}} values)"
+msgstr ""
+
+msgid "Extracting data for {{orgUnitsCount}} org units"
+msgstr ""
+
+msgid "Importing data to DHIS2"
+msgstr "Importação de dados para o DHIS2"
+
+msgid "Import failed"
+msgstr "A importação falhou"
+
+msgid "One or more conflicts encountered"
+msgstr "Um ou mais conflitos encontrados"
+
+msgid "Import weather and climate data"
+msgstr "Importar dados meteorológicos e climáticos"
+
+msgid ""
+"You can maximum import {{maxValues}} data values in a single import, but you"
+" are trying to import {{valueCount}} values for {{orgUnitCount}} "
+"organisation units over {{periodCount}} {{periodType}} periods. Please "
+"select a shorter period or fewer organisation units. You can always import "
+"more data later."
+msgstr ""
+
+msgid "Instructions"
+msgstr "Instruções"
+
+msgid ""
+"Before you can import data, you need to create the associated data elements "
+"in DHIS2. See our setup guide in the left menu."
+msgstr ""
+
+msgid ""
+"Data can be imported in batches. We recommend that you start with a few "
+"organisation units to make sure everything works as expected."
+msgstr ""
+"Os dados podem ser importados em lotes. Recomendamos que comece com algumas "
+"unidades organizacionais para se certificar de que tudo funciona como "
+"esperado."
+
+msgid "Data"
+msgstr "Dados"
+
+msgid "Select the variable you would like to import."
+msgstr "Selecione a variável que pretende importar."
+
+msgid "Period"
+msgstr "Período"
+
+msgid ""
+"Select the start and end dates for your import. We will import daily data "
+"for the selected period. You can aggregate data to other period types "
+"(weekly/monthly) in DHIS2. If your DHIS2 instance use a different timezone "
+"than UTC, we will calculate daily values based on this timezone."
+msgstr ""
+"Selecione as datas de início e de fim para a sua importação. Serão "
+"importados dados diários para o período selecionado. Pode agregar dados a "
+"outros tipos de períodos (semanal/mensal) no DHIS2. Se a sua instância DHIS2"
+" utilizar um fuso horário diferente do UTC, calcularemos os valores diários "
+"com base nesse fuso horário."
+
+msgid "Parent organisation unit"
+msgstr "Unidade organizacional pai"
+
+msgid ""
+"Select a parent organisation unit for the import. We will import data for "
+"children that are below this organisation unit."
+msgstr ""
+"Selecione uma unidade organizacional pai para a importação. Importaremos "
+"dados dos filhos  que se encontram abaixo desta unidade organizacional."
+
+msgid "Organisation unit level"
+msgstr "Nível de unidade organizacional"
+
+msgid ""
+"Select the organisation unit level for the import. We will import data for "
+"this level that are below the parent organisation unit. If the parent "
+"organisation unit is on the same level, we will import data for this single "
+"organisation unit."
+msgstr ""
+"Selecione o nível da unidade organizacional para a importação. Importaremos "
+"os dados para este nível que estão abaixo da unidade organizacional "
+"principal. Se a unidade organizacional principal estiver no mesmo nível, "
+"importaremos os dados para esta unidade organizacional única."
+
+msgid ""
+"Select the DHIS2 data element you would like to import the data into. See "
+"the “Setup guide” for more information on how to configure this data "
+"element."
+msgstr ""
+"Selecione o elemento de dados DHIS2 para o qual pretende importar os dados. "
+"Consulte o \"Guia de configuração\" para obter mais informações sobre como "
+"configurar este elemento de dados."
+
+msgid "Import summary"
+msgstr "Resumo da importação"
+
+msgid ""
+"When data is imported, we will show a summary of the import. This includes "
+"the number of data values that were successfully imported or updated. If "
+"data values fail to import, we will show the reason for the failure."
+msgstr ""
+"Quando os dados são importados, mostramos um resumo da importação. Isto "
+"inclui o número de valores de dados que foram importados ou actualizados com"
+" êxito. Se os valores de dados não forem importados, mostraremos o motivo da"
+" falha."
+
+msgid "Data is imported"
+msgstr "Os dados são importados"
+
+msgid "Imported"
+msgstr "Importado"
+
+msgid "Updated"
+msgstr "Actualizado"
+
+msgid "Ignored"
+msgstr "Ignorado"
+
+msgid "No data for the following org units"
+msgstr "Não há dados para as seguintes unidades organizacionais"
+
+msgid ""
+"ERA5-Land has limited data for costal areas. Values for other org units will"
+" be imported."
+msgstr ""
+"O ERA5-Land tem dados limitados para as zonas costeiras. Os valores para "
+"outras unidades organizacionais serão importados."
+
+msgid "Organisation unit level to import data to"
+msgstr "Nível da unidade organizacional para importar dados para"
+
+msgid "Org unit parent needs to be above or equal to the org unit level"
+msgstr ""
+"A unidade organizacional pai deve ser superior ou igual ao nível da unidade "
+"organizacional"
+
+msgid ""
+"The data will be assigned a default yearly period that matches the year it "
+"was collected: {{datasetPeriod}}"
+msgstr ""
+
+msgid "Daily values will be imported between start and end dates"
+msgstr "Os valores diários serão importados entre as datas de início e de fim"
+
+msgid "Period type"
+msgstr "Tipo de periodo"
+
+msgid "Start year"
+msgstr ""
+
+msgid "End year"
+msgstr ""
+
+msgid ""
+"Set y-axis values for charts in the Explore data section to make it easier "
+"to compare different org units. Leave blank to calculate based on data "
+"shown."
+msgstr ""
+"Defina os valores do eixo y para os gráficos na secção Explorar dados para "
+"facilitar a comparação de diferentes unidades organizacionais. Deixe em "
+"branco para calcular com base nos dados mostrados."
+
+msgid "Max temperature in °C"
+msgstr "Temperatura máxima em °C"
+
+msgid "Min temperature in °C"
+msgstr "Temperatura mínima em °C"
+
+msgid "Min temperature must be less than max temperature"
+msgstr "A temperatura mínima deve ser inferior à temperatura máxima"
+
+msgid "Max change in temperature in +/- °C"
+msgstr "Variação máxima da temperatura em +/- °C"
+
+msgid "Max monthly precipitation in mm"
+msgstr "Precipitação mensal máxima em mm"
+
+msgid "Max daily precipitation in mm"
+msgstr "Precipitação máxima diária em mm"
+
+msgid "Heat stress upper category"
+msgstr "Stress térmico categoria superior"
+
+msgid "Heat stress lower category"
+msgstr "Stress térmico categoria inferior"
+
+msgid "Calculate from data"
+msgstr "Calcular a partir dos dados"
+
+msgid "App settings"
+msgstr "Definições da aplicação"
+
+msgid "Changes made below will apply to all users of this app."
+msgstr ""
+"As alterações feitas abaixo aplicam-se a todos os utilizadores desta "
+"aplicação."
+
+msgid "Default start page for users"
+msgstr "Página inicial predefinida para os utilizadores"
+
+msgid "Time zone where your org units are located"
+msgstr "Fuso horário onde estão localizadas as unidades organizacionais"
+
+msgid "Data element: \"{{name}}\""
+msgstr "Elemento de dados: \"{{name}}\""
+
+msgid "Name"
+msgstr "Nome"
+
+msgid "Short name"
+msgstr "Nome curto"
+
+msgid "Code"
+msgstr "Código"
+
+msgid "Description"
+msgstr "Descrição"
+
+msgid "Data source"
+msgstr "Fonte de dados"
+
+msgid "Domain type"
+msgstr "Tipo de domínio"
+
+msgid "Aggregate"
+msgstr "Agregar"
+
+msgid "Aggregation type"
+msgstr "Tipo de agregação"
+
+msgid "Store zero data values"
+msgstr "Armazenar valor zero"
+
+msgid "Make sure it is checked"
+msgstr ""
+
+msgid "Aggregation levels"
+msgstr "Niveis de agregação"
+
+msgid "Assign all org unit levels"
+msgstr "Atribuir todos os níveis de unidades organizacionais"
+
+msgid ""
+"You should now be able to import data with this app. Please reach out to us "
+"on climate-app@dhis2.org if you have any questions or need help with the "
+"setup."
+msgstr ""
+
+msgid "3. Assign to a data element group"
+msgstr ""
+
+msgid "Data element group: \"{{-name}}\""
+msgstr ""
+
+msgid "Data elements"
+msgstr "Elementos de Dados"
+
+msgid "Assign above data element"
+msgstr ""
+
+msgid "2. Assign to a data set"
+msgstr ""
+
+msgid ""
+"If you import daily data, you should assign the data elements to a daily "
+"data set (weather and climate). For weekly or monthly data, assign to a "
+"weekly or monthly data set (vegetation index). Assigning to a data set helps"
+" to maintain a quality metadata and data where integrity, consistency, "
+"approvals and protection are facilitated. How exactly to define such a data "
+"set depends on the available users and user groups. Similarly, which of the "
+"organisation units can collect this daily climate data set depends on "
+"situated contexts. However, since we can provide data for any administrative"
+" unit that has defined geographic boundaries we leave that decision to "
+"users. Most probable choice is all organisation units in your system."
+msgstr ""
+
+msgid "Data set: \"{{-name}}\""
+msgstr ""
+
+msgid "Organisation units"
+msgstr "Unidades organizacionais"
+
+msgid "Select all organisation units in your system"
+msgstr "Selecionar todas as unidades organizacionais do seu sistema"
+
+msgid "4. Add a legend"
+msgstr ""
+
+msgid "Recommended legend for this data element."
+msgstr ""
+
+msgid "Legend: \"{{-name}}\""
+msgstr ""
+
+msgid "Start value"
+msgstr "Valor inicial"
+
+msgid "End value"
+msgstr "Valor final"
+
+msgid "Color"
+msgstr "Cor"
+
+msgid "Configuring DHIS2 before importing data"
+msgstr ""
+
+msgid ""
+"Before you can import data, you need to make some configurations in the "
+"Maintenance app. For detailed instructions on how to configure DHIS2, choose"
+" which data you would like to import below."
+msgstr ""
+
+msgid "1. Create the data element"
+msgstr ""
+
+msgid ""
+"Create DHIS2 data elements only for the data you want to import. We "
+"recommend including the data source in the name to distinguish it from other"
+" sources (e.g. precepetation data is available from both ERA5-Land and "
+"CHIRPS, and there will be additional data providers in the future). If you "
+"use the same code specified below, we will preselect the data element in the"
+" import interface."
+msgstr ""
+
+msgid ""
+"When daily data is imported it can be aggregated to other period types in "
+"DHIS2. We don't recommend aggregating across organisation unit levels, "
+"especially when going from facility level to higher levels defined by a "
+"geographic boundary. To make sure the values remain at its own level, assign"
+" all org unit levels as Aggregation levels for each data element created."
+msgstr ""
+
+msgid "Loading data"
+msgstr "Carregando dados"
+
+msgid "Select data to import"
+msgstr "Selecionar dados a importar"
+
+msgid "You need access to Google Earth Engine to use this app."
+msgstr ""
+"Para utilizar esta aplicação, é necessário ter acesso ao Google Earth "
+"Engine."
+
+msgid "How to get access?"
+msgstr "Como obter acesso?"
+
+msgid ""
+"For a temporary period there is limited data available for 2024. This is due"
+" to modernization work impacting the Copernicus Climate Data Store (CDS) "
+"where the data originates."
+msgstr ""
+"Durante um período temporário, os dados disponíveis para 2024 são limitados."
+" Tal deve-se a trabalhos de modernização que afectam o Armazenamento de "
+"Dados Climáticos do Copernicus (CDS), de onde provêm os dados."
+
+msgid "Read more on the CDS user forum"
+msgstr "Ler mais no fórum de utilizadores do CDS"
+
+msgid "Data resolution"
+msgstr "Resolução de dados"
+
+msgid ""
+"You can import data for the lowest levels in your org unit hierarchy, but it"
+" won't improve the resolution of the data."
+msgstr ""
+"É possível importar dados para os níveis mais baixos na hierarquia da "
+"unidade organizacional, mas isso não melhorará a resolução dos dados."
+
+msgid ""
+"If two org units are close to each other (within the resolution), they will "
+"have the same data values."
+msgstr ""
+"Se duas unidades organizacioanis estiverem próximas uma da outra (dentro da "
+"resolução), elas terão os mesmos valores de dados."
+
+msgid "Time zone"
+msgstr "Fuso horário"
+
+msgid "ERA5-Land / Copernicus Climate Change Service"
+msgstr ""
+
+msgid "ERA5-Heat / Copernicus Climate Change Service"
+msgstr ""
+
+msgid "Climate Hazards Center / UCSB"
+msgstr ""
+
+msgid "NASA LP DAAC at the USGS EROS Center"
+msgstr ""
+
+msgid "NASA / USGS / JPL-Caltech"
+msgstr ""
+
+msgid "Approximately 31 km (0.25°)"
+msgstr "Aproximadamente 31 km (0,25°)"
+
+msgid "Approximately 9 km (0.1°)"
+msgstr "Aproximadamente 9 km (0,1°)"
+
+msgid "Approximately 5 km (0.05°)"
+msgstr "Aproximadamente 5 km (0,05°)"
+
+msgid "Approximately 250 m"
+msgstr ""
+
+msgid "Approximately 500 m"
+msgstr ""
+
+msgid "Approximately 30 m"
+msgstr ""
+
+msgid ""
+"Landsat Normalized Difference Vegetation Index (NDVI) is used to quantify "
+"vegetation greenness and is useful in understanding vegetation density and "
+"assessing changes in plant health. NDVI values range from -1 to 1, with "
+"higher values indicating denser vegetation."
+msgstr ""
+
+msgid ""
+"Enhanced vegetation index (EVI) differs from NDVI by reducing the influence "
+"of atmospheric conditions and canopy background noise. EVI values range from"
+" -1 to 1, with higher values indicating denser vegetation."
+msgstr ""
+
+msgid "Land cover types at yearly intervals"
+msgstr ""
+
+msgid "Climate/Weather"
+msgstr "Clima/tempo"
+
+msgid "Environment"
+msgstr ""
+
+msgid "Weekly or Monthly"
+msgstr ""
+
+msgid "Land"
+msgstr ""
+
+msgid "Yearly"
+msgstr "Anualmente"
+
+msgid "Air temperature (ERA5-Land)"
+msgstr "Temperatura do ar (ERA5-Land)"
+
+msgid "Average air temperature in °C at 2 m above the surface."
+msgstr ""
+
+msgid "Average"
+msgstr "Média"
+
+msgid "Max air temperature (ERA5-Land)"
+msgstr "Temperatura máxima do ar (ERA5-Land)"
+
+msgid "Max air temperature"
+msgstr "Temperatura máxima do ar"
+
+msgid "Maximum air temperature in °C at 2 m above the surface."
+msgstr ""
+
+msgid "Max"
+msgstr "Máx."
+
+msgid "Min temperature (ERA5-Land)"
+msgstr "Temperatura mínima (ERA5-Terra)"
+
+msgid "Min air temperature"
+msgstr "Temperatura mínima do ar"
+
+msgid "Minimum air temperature in °C at 2 m above the surface."
+msgstr ""
+
+msgid "Min"
+msgstr "Mín."
+
+msgid "Precipitation (ERA5-Land)"
+msgstr "Precipitação (ERA5-Terra)"
+
+msgid "Precipitation (ERA5)"
+msgstr "Precipitação (ERA5)"
+
+msgid "Total precipitation in mm."
+msgstr ""
+
+msgid "Sum"
+msgstr "Soma"
+
+msgid "Precipitation (CHIRPS)"
+msgstr "Precipitação (CHIRPS)"
+
+msgid "Precipitation in mm."
+msgstr ""
+
+msgid "Dewpoint temperature (ERA5-Land)"
+msgstr "Temperatura do ponto de orvalho (ERA5-Land)"
+
+msgid ""
+"Temperature in °C at 2 m above the surface to which the air would have to be"
+" cooled for saturation to occur."
+msgstr ""
+"Temperatura em °C a 2 m acima da superfície à qual o ar teria de ser "
+"arrefecido para que ocorresse a saturação."
+
+msgid "Relative humidity (ERA5-Land)"
+msgstr "Humidade relativa (ERA5-Land)"
+
+msgid ""
+"Percentage of water vapor in the air compared to the total amount of vapor "
+"that can exist in the air at its current temperature. Calculated using air "
+"temperature and dewpoint temperature at 2 m above surface."
+msgstr ""
+"Percentagem de vapor de água no ar em comparação com a quantidade total de "
+"vapor que pode existir no ar à temperatura actual. Calculada utilizando a "
+"temperatura do ar e a temperatura do ponto de orvalho a 2 m acima da "
+"superfície."
+
+msgid "Heat stress (ERA5-HEAT)"
+msgstr "Stress térmico (ERA5-HEAT)"
+
+msgid "Heat stress"
+msgstr "Stress térmico"
+
+msgid "Average felt temperature in °C."
+msgstr ""
+
+msgid "Max heat stress (ERA5-HEAT)"
+msgstr "Estresse térmico máximo (ERA5-HEAT)"
+
+msgid "Max heat stress"
+msgstr "Stress térmico máximo"
+
+msgid "Maximum felt temperature in °C."
+msgstr ""
+
+msgid "Min heat stress (ERA5-HEAT)"
+msgstr "Stress térmico mínimo (ERA5-HEAT)"
+
+msgid "Min heat stress"
+msgstr "Stress térmico mínimo"
+
+msgid "Minimum felt temperature in °C."
+msgstr ""
+
+msgid "NDVI - Normalized difference vegetation index (MODIS)"
+msgstr ""
+
+msgid "NDVI"
+msgstr ""
+
+msgid "EVI - Enhanced vegetation index (MODIS)"
+msgstr ""
+
+msgid "EVI"
+msgstr ""
+
+msgid "Mean elevation (SRTM)"
+msgstr ""
+
+msgid "Mean elevation in meters above sea level."
+msgstr ""
+
+msgid "First value"
+msgstr ""
+
+msgid "Min elevation (SRTM)"
+msgstr ""
+
+msgid "Min elevation in meters above sea level."
+msgstr ""
+
+msgid "Max elevation (SRTM)"
+msgstr ""
+
+msgid "Max elevation in meters above sea level."
+msgstr ""
+
+msgid "Standard deviation of elevation (SRTM)"
+msgstr ""
+
+msgid "Std dev elevation"
+msgstr ""
+
+msgid "Standard deviation of elevation in meters above sea level."
+msgstr ""
+
+msgid "Percentage of area with this land cover type."
+msgstr ""
+
+msgid "Heat/cold stress"
+msgstr "Stress térmico/frio"
+
+msgid "You only need to include categories that are relevant for your area."
+msgstr "Só precisa incluir categorias que sejam relevantes para a sua área."
+
+msgid "Extreme cold stress"
+msgstr "Stress de frio extremo"
+
+msgid "Extreme<br>cold stress"
+msgstr "Extremo<br>stress do frio"
+
+msgid "Very strong cold stress"
+msgstr "Stress de frio muito forte"
+
+msgid "Very strong<br>cold stress"
+msgstr "Stress do frio<br>muito forte"
+
+msgid "Strong cold stress"
+msgstr "Forte stress do frio"
+
+msgid "Strong<br>cold stress"
+msgstr "Stress do frio<br>forte"
+
+msgid "Moderate cold stress"
+msgstr "Estresse por frio moderado"
+
+msgid "Moderate<br>cold stress"
+msgstr "Stress do frio<br>moderado"
+
+msgid "Slight cold stress"
+msgstr "Ligeiro stress pelo frio"
+
+msgid "Slight<br>cold stress"
+msgstr "Stress do frio <br>ligeiro"
+
+msgid "No thermal stress"
+msgstr "Sem stress térmico"
+
+msgid "No thermal<br>stress"
+msgstr "Sem stress térmico<br>"
+
+msgid "Moderate heat stress"
+msgstr "Stress térmico moderado"
+
+msgid "Moderate<br>heat stress"
+msgstr "Stress térmico<br>moderado"
+
+msgid "Strong heat stress"
+msgstr "Forte stress térmico"
+
+msgid "Strong<br>heat stress"
+msgstr "Forte<br>stress térmico"
+
+msgid "Very strong heat stress"
+msgstr "Stress térmico muito forte"
+
+msgid "Very strong<br>heat stress"
+msgstr "Muito forte<br>stress térmico"
+
+msgid "Extreme heat stress"
+msgstr "Stress térmico extremo"
+
+msgid "Extreme<br>heat stress"
+msgstr "Extremo<br>stress térmico"
+
+msgid "ERA5-Land / Copernicus Climate Change Service / Google Earth Engine"
+msgstr ""
+"ERA5-Land / Serviço de alterações climáticas de Copernicus / Google Earth "
+"Engine"
+
+msgid "ERA5-HEAT / Copernicus Climate Change Service / Google Earth Engine"
+msgstr ""
+"ERA5-HEAT / Serviço de alterações climáticas de Copernicus / Google Earth "
+"Engine"
+
+msgid "NASA LP DAAC at the USGS EROS Center / Google Earth Engine"
+msgstr ""
+
+msgid "NASA / USGS / JPL-Caltech / Google Earth Engine"
+msgstr ""
+
+msgid "No data found for the selected period"
+msgstr "Não foram encontrados dados para o período selecionado"
