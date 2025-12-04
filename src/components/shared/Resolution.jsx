@@ -1,11 +1,13 @@
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
+import { getResolutionText } from '../../data/datasets.js'
 import styles from './styles/Resolution.module.css'
 
 const Resolution = ({ resolution, isImport = false }) => (
     <div className={styles.container}>
         <div>
-            {i18n.t('Data resolution')}: <strong>{resolution}</strong>
+            {i18n.t('Data resolution')}:{' '}
+            <strong>{getResolutionText(resolution)}</strong>
         </div>
         <p>
             {isImport ? (

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-12-04T15:26:33.066Z\n"
-"PO-Revision-Date: 2025-12-04T15:26:33.067Z\n"
+"POT-Creation-Date: 2025-12-04T16:19:16.810Z\n"
+"PO-Revision-Date: 2025-12-04T16:19:16.811Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -1058,21 +1058,6 @@ msgstr ""
 
 msgid "Time zone"
 msgstr "Time zone"
-
-msgid "ERA5-Land / Copernicus Climate Change Service"
-msgstr "ERA5-Land / Copernicus Climate Change Service"
-
-msgid "ERA5-Heat / Copernicus Climate Change Service"
-msgstr "ERA5-Heat / Copernicus Climate Change Service"
-
-msgid "Climate Hazards Center / UCSB"
-msgstr "Climate Hazards Center / UCSB"
-
-msgid "NASA LP DAAC at the USGS EROS Center"
-msgstr "NASA LP DAAC at the USGS EROS Center"
-
-msgid "NASA / USGS / JPL-Caltech"
-msgstr "NASA / USGS / JPL-Caltech"
 
 msgid "Approximately 31 km (0.25°)"
 msgstr "Approximately 31 km (0.25°)"
