@@ -2,7 +2,8 @@ import i18n from '@dhis2/d2-i18n'
 import { Checkbox, Tooltip } from '@dhis2/ui'
 import { useState } from 'react'
 import {
-    modisResolution,
+    MODIS_RESOLUTION,
+    getResolutionText,
     ndviDescription,
     eviDescription,
 } from '../../../data/datasets.js'
@@ -76,7 +77,7 @@ const Vegetation = () => {
             <div className={styles.description}>
                 {band === NDVI ? ndviDescription : eviDescription}
             </div>
-            <Resolution resolution={modisResolution} />
+            <Resolution resolution={getResolutionText(MODIS_RESOLUTION)} />
         </>
     )
 }
