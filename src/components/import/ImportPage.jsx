@@ -210,6 +210,7 @@ const ImportPage = () => {
                             {i18n.t(
                                 'Import limit exceeded: {{valueCount}} values selected (maximum {{maxValues}}). Reduce your selection by choosing fewer organisation units or a shorter time period. Additional imports can be performed separately.',
                                 {
+                                    nsSeparator: ';',
                                     maxValues,
                                     valueCount,
                                     orgUnitCount,

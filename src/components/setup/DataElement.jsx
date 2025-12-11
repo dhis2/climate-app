@@ -14,68 +14,73 @@ const DataElement = ({
     dataElementGroup,
     dataSet,
     legend,
-}) => (
-    <>
-        <table>
-            <caption>
-                {i18n.t('Data element: "{{name}}"', {
-                    name,
-                    nsSeparator: '%',
-                })}
-            </caption>
-            <tbody>
-                <tr>
-                    <th>{i18n.t('Name')}</th>
-                    <td>{name}</td>
-                </tr>
-                <tr>
-                    <th>{i18n.t('Short name')}</th>
-                    <td>{shortName}</td>
-                </tr>
-                <tr>
-                    <th>{i18n.t('Code')}</th>
-                    <td>{dataElementCode}</td>
-                </tr>
-                <tr>
-                    <th>{i18n.t('Description')}</th>
-                    <td>
-                        {description}
-                        <br />
-                        {i18n.t('Data source')}: {source}
-                    </td>
-                </tr>
-                <tr>
-                    <th>{i18n.t('Domain type')}</th>
-                    <td>{i18n.t('Aggregate')}</td>
-                </tr>
-                <tr>
-                    <th>{i18n.t('Aggregation type')}</th>
-                    <td>{aggregationType}</td>
-                </tr>
-                <tr>
-                    <th>{i18n.t('Store zero data values')}</th>
-                    <td>
-                        <em>{i18n.t('Make sure it is checked')}</em>
-                    </td>
-                </tr>
-                <tr>
-                    <th>{i18n.t('Aggregation levels')}</th>
-                    <td>
-                        <em>{i18n.t('Assign all org unit levels')}</em>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <DataSet {...dataSet} />
-        <DataElementGroup {...dataElementGroup} />
-        {legend && <Legend {...legend} />}
-        <p>
-            {i18n.t(
-                'You should now be able to import data with this app. Please reach out to us on climate-app@dhis2.org if you have any questions or need help with the setup.'
-            )}
-        </p>
-    </>
-)
+    periodType,
+}) => {
+    const codeWithPeriodType = `${dataElementCode}_${periodType.toUpperCase()}`
+
+    return (
+        <>
+            <table>
+                <caption>
+                    {i18n.t('Data element: "{{name}}"', {
+                        name,
+                        nsSeparator: '%',
+                    })}
+                </caption>
+                <tbody>
+                    <tr>
+                        <th>{i18n.t('Name')}</th>
+                        <td>{name}</td>
+                    </tr>
+                    <tr>
+                        <th>{i18n.t('Short name')}</th>
+                        <td>{shortName}</td>
+                    </tr>
+                    <tr>
+                        <th>{i18n.t('Code')}</th>
+                        <td>{codeWithPeriodType}</td>
+                    </tr>
+                    <tr>
+                        <th>{i18n.t('Description')}</th>
+                        <td>
+                            {description}
+                            <br />
+                            {i18n.t('Data source')}: {source}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>{i18n.t('Domain type')}</th>
+                        <td>{i18n.t('Aggregate')}</td>
+                    </tr>
+                    <tr>
+                        <th>{i18n.t('Aggregation type')}</th>
+                        <td>{aggregationType}</td>
+                    </tr>
+                    <tr>
+                        <th>{i18n.t('Store zero data values')}</th>
+                        <td>
+                            <em>{i18n.t('Make sure it is checked')}</em>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>{i18n.t('Aggregation levels')}</th>
+                        <td>
+                            <em>{i18n.t('Assign all org unit levels')}</em>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <DataSet {...dataSet} periodType={periodType} />
+            <DataElementGroup {...dataElementGroup} />
+            {legend && <Legend {...legend} />}
+            <p>
+                {i18n.t(
+                    'You should now be able to import data with this app. Please reach out to us on climate-app@dhis2.org if you have any questions or need help with the setup.'
+                )}
+            </p>
+        </>
+    )
+}
 
 DataElement.propTypes = {
     aggregationType: PropTypes.string.isRequired,
@@ -84,6 +89,7 @@ DataElement.propTypes = {
     dataSet: PropTypes.object.isRequired,
     description: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
+    periodType: PropTypes.string.isRequired,
     shortName: PropTypes.string.isRequired,
     source: PropTypes.string.isRequired,
     legend: PropTypes.object,
