@@ -14,7 +14,6 @@ export const climateGroup = {
 export const environmentDataSet = {
     name: i18n.t('Environment'),
     shortName: i18n.t('Environment'),
-    periodType: i18n.t('Weekly or Monthly'),
     dhis2Code: 'ENVIRONMENT',
 }
 
