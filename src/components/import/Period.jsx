@@ -5,7 +5,6 @@ import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
 import {
     YEARLY,
-    DAILY,
     normalizeIsoDate,
     getDateStringFromIsoDate,
     periodTypes,
@@ -32,7 +31,7 @@ const getValidationState = (minCalendarDate, maxCalendarDate, dateError) => {
     if (!minCalendarDate || !maxCalendarDate) {
         return null
     }
-    return dateError === null ? true : false
+    return dateError === null
 }
 
 const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
@@ -95,14 +94,16 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
     const hasNoPeriod = datasetPeriodType === 'N/A'
     const isYearly = datasetPeriodType === YEARLY
 
-    const periodErrorMessage =
-        startDateError && endDateError
-            ? i18n.t('Start and end date are not within the valid range.')
-            : startDateError
-            ? i18n.t('Start date is not within the valid range.')
-            : endDateError
-            ? i18n.t('End date is not within the valid range.')
-            : null
+    let periodErrorMessage = null
+    if (startDateError && endDateError) {
+        periodErrorMessage = i18n.t(
+            'Start and end date are not within the valid range.'
+        )
+    } else if (startDateError) {
+        periodErrorMessage = i18n.t('Start date is not within the valid range.')
+    } else if (endDateError) {
+        periodErrorMessage = i18n.t('End date is not within the valid range.')
+    }
 
     const periodTypeName = periodTypes.find((pt) => pt.id === periodType)?.name
 

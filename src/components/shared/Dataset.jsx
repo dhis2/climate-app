@@ -10,7 +10,7 @@ const Dataset = ({ title, selected, onChange, showDescription = true }) => (
         {title && <SectionH2 number="1" title={title} />}
         <SingleSelectField
             filterable
-            label={!title ? i18n.t('Select data to import') : null}
+            label={title && i18n.t('Select data to import')}
             selected={selected?.id}
             onChange={({ selected }) =>
                 onChange(datasets.find((d) => d.id === selected))

@@ -42,8 +42,8 @@ const ImportPreview = ({
 
             if (periods.length > 0) {
                 // Show both the DHIS2 period ID and the date range
-                const firstPeriod = periods[0]
-                const lastPeriod = periods[periods.length - 1]
+                const firstPeriod = periods.at(0)
+                const lastPeriod = periods.at(-1)
 
                 periodInfo = {
                     firstPeriodId: firstPeriod.id,

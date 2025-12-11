@@ -3,13 +3,13 @@ import { Radio, Field } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import { periodTypes, DAILY, WEEKLY, MONTHLY } from '../../utils/time.js'
 
-const defaultPeriodTypes = [DAILY, WEEKLY, MONTHLY]
+const defaultPeriodTypes = new Set([DAILY, WEEKLY, MONTHLY])
 
 const PeriodType = ({ periodType, supportedPeriodTypes, onChange }) => {
     // get period type objects from supported period type ids, or use defaults
     const supportedPeriodTypeObjects = supportedPeriodTypes
         ? periodTypes?.filter((type) => supportedPeriodTypes.includes(type.id))
-        : periodTypes.filter((type) => defaultPeriodTypes.includes(type.id))
+        : periodTypes.filter((type) => defaultPeriodTypes.has(type.id))
 
     // make sure selected period type is supported by dataset period type, or set to undefined
     let selectedPeriodType = supportedPeriodTypeObjects
