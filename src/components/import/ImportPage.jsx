@@ -226,6 +226,7 @@ const ImportPage = () => {
                             periodType={period.periodType || ''}
                             startDate={period.startTime || ''}
                             endDate={period.endTime || ''}
+                            calendar={calendar}
                             orgLevel={orgUnits.levelName || ''}
                             orgUnit={
                                 orgUnits.parent.displayName ||
