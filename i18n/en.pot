@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-12-11T08:55:08.150Z\n"
-"PO-Revision-Date: 2025-12-11T08:55:08.151Z\n"
+"POT-Creation-Date: 2025-12-11T11:59:19.879Z\n"
+"PO-Revision-Date: 2025-12-11T11:59:19.880Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -815,9 +815,6 @@ msgstr "Start year"
 
 msgid "End year"
 msgstr "End year"
-
-msgid "Chart settings"
-msgstr "Chart settings"
 
 msgid ""
 "Set y-axis values for charts in the Explore data section to make it easier "

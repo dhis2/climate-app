@@ -13,7 +13,6 @@ const PeriodType = ({ periodType, supportedPeriodTypes, onChange }) => {
     const supportedPeriodTypeObjects = periodTypes?.filter((type) =>
         supportedPeriodTypes.includes(type.id)
     )
-    //console.log('periodtype supported', supportedPeriodTypeObjects)
 
     // make sure selected period type is supported by dataset period type, or set to undefined
     let selectedPeriodType = supportedPeriodTypeObjects
