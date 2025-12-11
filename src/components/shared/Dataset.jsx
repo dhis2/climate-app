@@ -20,7 +20,14 @@ const Dataset = ({ title, selected, onChange, showDescription = true }) => (
                 <SingleSelectOption key={d.id} value={d.id} label={d.name} />
             ))}
         </SingleSelectField>
-        {selected && showDescription && <p>{selected.description}</p>}
+        {selected && showDescription && (
+            <p>
+                {selected.description}{' '}
+                {i18n.t('Data resolution is {{resolution}}.', {
+                    resolution: selected.resolution?.toLowerCase(),
+                })}
+            </p>
+        )}
     </>
 )
 
