@@ -8,6 +8,7 @@ import {
     DAILY,
     normalizeIsoDate,
     getDateStringFromIsoDate,
+    periodTypes,
 } from '../../utils/time.js'
 import SectionH2 from '../shared/SectionH2.jsx'
 import TimeZone from '../shared/TimeZone.jsx'
@@ -103,18 +104,20 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
             ? i18n.t('End date is not within the valid range.')
             : null
 
-    const helpText =
-        dataset.timeZone || dataset.bands?.[0]?.timeZone
-            ? periodType === DAILY
-                ? i18n.t(
-                      'Daily data between start and end date will be calculated from hourly data, with time zone adjustments applied if the selected time zone is not set to UTC.'
-                  )
-                : i18n.t(
-                      'Daily data between start and end date will be calculated from hourly data.'
-                  )
-            : i18n.t(
-                  'Daily data between start and end date will be calculated and then aggregated to the selected period type.'
-              )
+    const periodTypeName = periodTypes.find((pt) => pt.id === periodType)?.name
+
+    let helpText
+    if (dataset.timeZone || dataset.bands?.[0]?.timeZone) {
+        helpText = i18n.t(
+            '{{periodTypeName}} data between start and end date will be calculated from hourly data, with time zone adjustments applied if the selected time zone is not set to UTC.',
+            { periodTypeName, nsSeparator: ';' }
+        )
+    } else {
+        helpText = i18n.t(
+            '{{periodTypeName}} data between start and end date will be calculated and then aggregated to the selected period type.',
+            { periodTypeName, nsSeparator: ';' }
+        )
+    }
 
     return (
         <>
