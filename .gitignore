@@ -5,3 +5,4 @@ src/locales
 build
 .DS_Store
 .vscode
+cypress.env.json
