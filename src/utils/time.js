@@ -383,6 +383,34 @@ export const isValidPeriod = (period) =>
     )
 
 /**
+ * Date format types
+ */
+const DATE_FORMATS = {
+    YEAR: 'year',
+    YEAR_MONTH: 'year-month',
+    FULL_DATE: 'full-date',
+    UNKNOWN: 'unknown',
+}
+
+/**
+ * Determine the format type of a date string
+ * @param {String} date Date string to check
+ * @returns {String} Format type constant
+ */
+const getDateFormat = (date) => {
+    if (/^\d{4}$/.test(date)) {
+        return DATE_FORMATS.YEAR
+    }
+    if (/^\d{4}-\d{2}$/.test(date)) {
+        return DATE_FORMATS.YEAR_MONTH
+    }
+    if (/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+        return DATE_FORMATS.FULL_DATE
+    }
+    return DATE_FORMATS.UNKNOWN
+}
+
+/**
  * Helper function to find and return display name from generated periods
  * @param {String} calDate Calendar date to find
  * @param {Array} periods Generated periods array
@@ -403,8 +431,9 @@ const findPeriodDisplayName = (calDate, periods, fallback) => {
  */
 const formatNonGregorianDate = (date, calendar, locale) => {
     try {
-        // Year only (calendar year)
-        if (/^\d{4}$/.test(date)) {
+        const format = getDateFormat(date)
+
+        if (format === DATE_FORMATS.YEAR) {
             const calYearStr = fromStandardDate(
                 `${date}-01-01`,
                 calendar
@@ -421,8 +450,7 @@ const formatNonGregorianDate = (date, calendar, locale) => {
             return items?.length ? items[0].displayName || date : date
         }
 
-        // Year + month (monthly displayName)
-        if (/^\d{4}-\d{2}$/.test(date)) {
+        if (format === DATE_FORMATS.YEAR_MONTH) {
             const [year, month] = date.split('-')
             const calDate = fromStandardDate(`${year}-${month}-01`, calendar)
             const months = generateFixedPeriods({
@@ -434,8 +462,7 @@ const formatNonGregorianDate = (date, calendar, locale) => {
             return findPeriodDisplayName(calDate, months, date)
         }
 
-        // Full date (daily)
-        if (/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+        if (format === DATE_FORMATS.FULL_DATE) {
             const calDate = fromStandardDate(date, calendar)
             const days = generateFixedPeriods({
                 year: Number.parseInt(calDate.split('-')[0], 10),
@@ -462,15 +489,15 @@ const formatNonGregorianDate = (date, calendar, locale) => {
  * @returns {String} Formatted date string or original date
  */
 const formatGregorianDate = (date, locale) => {
-    if (/^\d{4}$/.test(date)) {
-        // Year only
+    const format = getDateFormat(date)
+
+    if (format === DATE_FORMATS.YEAR) {
         return new Intl.DateTimeFormat(locale, { year: 'numeric' }).format(
             new Date(date, 0, 1)
         )
     }
 
-    if (/^\d{4}-\d{2}$/.test(date)) {
-        // Year + month
+    if (format === DATE_FORMATS.YEAR_MONTH) {
         const [year, month] = date.split('-')
         return new Intl.DateTimeFormat(locale, {
             year: 'numeric',
@@ -478,8 +505,7 @@ const formatGregorianDate = (date, locale) => {
         }).format(new Date(year, month - 1, 1))
     }
 
-    if (/^\d{4}-\d{2}-\d{2}$/.test(date)) {
-        // Full date
+    if (format === DATE_FORMATS.FULL_DATE) {
         return new Intl.DateTimeFormat(locale, {
             year: 'numeric',
             month: 'long',
