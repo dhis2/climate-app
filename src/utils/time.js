@@ -410,9 +410,7 @@ export const getDateStringFromIsoDate = ({
                     yearsCount: 1,
                 })
 
-                if (items?.length) {
-                    return items[0].displayName || date
-                }
+                return items?.length ? items[0].displayName || date : date
             }
 
             // Year + month (monthly displayName)
@@ -429,9 +427,7 @@ export const getDateStringFromIsoDate = ({
                     periodType: MONTHLY,
                 })
                 const found = months.find((m) => m.startDate === calDate)
-                if (found) {
-                    return found.displayName || date
-                }
+                return found ? found.displayName || date : date
             }
 
             // Full date (daily)
@@ -444,12 +440,11 @@ export const getDateStringFromIsoDate = ({
                     periodType: DAILY,
                 })
                 const found = days.find((d) => d.startDate === calDate)
-                if (found) {
-                    return found.displayName || date
-                }
+                return found ? found.displayName || date : date
             }
         } catch (e) {
-            // Fall through to Intl fallback on any error
+            // Return original date on any error
+            return date
         }
     }
 
