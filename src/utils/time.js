@@ -446,8 +446,10 @@ const formatNonGregorianDate = (date, calendar, locale) => {
             return findPeriodDisplayName(calDate, days, date)
         }
     } catch (e) {
-        // Return original date on any error
-        return date
+        console.error(
+            `Error formatting date "${date}" for calendar "${calendar}":`,
+            e
+        )
     }
 
     return date
