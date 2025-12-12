@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { Radio, Field } from '@dhis2/ui'
 import { useState } from 'react'
-import getDatasets from '../../data/datasets.js'
+import getEEDatasets from '../../data/earth-engine-datasets.js'
 import { DAILY, WEEKLY, MONTHLY, getPeriodTypes } from '../../utils/time.js'
 import Dataset from '../shared/Dataset.jsx'
 import DataElement from './DataElement.jsx'
@@ -10,7 +10,7 @@ import styles from './styles/SetupPage.module.css'
 const defaultPeriodTypes = [DAILY, WEEKLY, MONTHLY]
 
 const SetupPage = () => {
-    const datasets = getDatasets()
+    const datasets = getEEDatasets()
     const [dataset, setDataset] = useState(datasets[0])
     const [periodType, setPeriodType] = useState(DAILY)
 
@@ -42,7 +42,6 @@ const SetupPage = () => {
                 )}
             </p>
             <Dataset
-                title={null}
                 selected={dataset}
                 onChange={setDataset}
                 showDescription={false}

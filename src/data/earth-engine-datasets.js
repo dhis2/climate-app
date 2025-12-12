@@ -23,6 +23,10 @@ import {
     landGroup,
 } from './groupings.js'
 import { getLegend } from './heat-stress-legend.js'
+import { PROVIDER_GEE, dataProviders } from './providers.js'
+
+// fetch provider metadata for GEE
+const provider = dataProviders.find((item) => item.id === PROVIDER_GEE)
 
 // kelvin to celsius with one decimal
 const temperatureParser = (v) => roundOneDecimal(kelvinToCelsius(v)).toString()
@@ -112,6 +116,7 @@ const getEEDatasets = () => [
         dataElementCode: 'ERA5_LAND_TEMPERATURE',
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
+        provider,
     },
     {
         id: 'ECMWF/ERA5_LAND/DAILY_AGGR/temperature_2m_max',
@@ -138,6 +143,7 @@ const getEEDatasets = () => [
         dataElementCode: 'ERA5_LAND_TEMPERATURE_MAX',
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
+        provider,
     },
     {
         id: 'ECMWF/ERA5_LAND/DAILY_AGGR/temperature_2m_min',
@@ -164,6 +170,7 @@ const getEEDatasets = () => [
         dataElementCode: 'ERA5_LAND_TEMPERATURE_MIN',
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
+        provider,
     },
     {
         id: 'ECMWF/ERA5_LAND/DAILY_AGGR/total_precipitation_sum',
@@ -189,6 +196,7 @@ const getEEDatasets = () => [
         dataElementCode: 'ERA5_LAND_PRECIPITATION',
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
+        provider,
     },
     {
         id: 'UCSB-CHG/CHIRPS/DAILY',
@@ -208,6 +216,7 @@ const getEEDatasets = () => [
         dataElementCode: 'CHIRPS_PRECIPITATION',
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
+        provider,
     },
     {
         id: 'ECMWF/ERA5_LAND/DAILY_AGGR/dewpoint_temperature_2m',
@@ -234,6 +243,7 @@ const getEEDatasets = () => [
         dataElementCode: 'ERA5_LAND_DEWPOINT_TEMPERATURE',
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
+        provider,
     },
     {
         id: 'ECMWF/ERA5_LAND/DAILY_AGGR/relative_humidity_2m',
@@ -274,6 +284,7 @@ const getEEDatasets = () => [
         dataElementCode: 'ERA5_LAND_RELATIVE_HUMIDITY',
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
+        provider,
     },
     {
         id: 'projects/climate-engine-pro/assets/ce-era5-heat/utci_mean',
@@ -293,6 +304,7 @@ const getEEDatasets = () => [
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
         legend: getLegend,
+        provider,
     },
     {
         id: 'projects/climate-engine-pro/assets/ce-era5-heat/utci_max',
@@ -312,6 +324,7 @@ const getEEDatasets = () => [
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
         legend: getLegend,
+        provider,
     },
     {
         id: 'projects/climate-engine-pro/assets/ce-era5-heat/utci_min',
@@ -331,6 +344,7 @@ const getEEDatasets = () => [
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
         legend: getLegend,
+        provider,
     },
     {
         id: 'MODIS/061/MOD13Q1/NDVI',
@@ -349,6 +363,7 @@ const getEEDatasets = () => [
         dataElementCode: 'MODIS_NDVI',
         dataElementGroup: environmentGroup,
         dataSet: environmentDataSet,
+        provider,
     },
     {
         id: 'MODIS/061/MOD13Q1/EVI',
@@ -367,6 +382,7 @@ const getEEDatasets = () => [
         dataElementCode: 'MODIS_EVI',
         dataElementGroup: environmentGroup,
         dataSet: environmentDataSet,
+        provider,
     },
     {
         id: 'USGS/SRTMGL1_003/mean',
@@ -386,6 +402,7 @@ const getEEDatasets = () => [
         dataElementCode: 'SRTM_ELEVATION_MEAN',
         dataElementGroup: landGroup,
         dataSet: landDataSet,
+        provider,
     },
     {
         id: 'USGS/SRTMGL1_003/min',
@@ -405,6 +422,7 @@ const getEEDatasets = () => [
         dataElementCode: 'SRTM_ELEVATION_MIN',
         dataElementGroup: landGroup,
         dataSet: landDataSet,
+        provider,
     },
     {
         id: 'USGS/SRTMGL1_003/max',
@@ -424,6 +442,7 @@ const getEEDatasets = () => [
         dataElementCode: 'SRTM_ELEVATION_MAX',
         dataElementGroup: landGroup,
         dataSet: landDataSet,
+        provider,
     },
     {
         id: 'USGS/SRTMGL1_003/stddev',
@@ -445,6 +464,7 @@ const getEEDatasets = () => [
         dataElementCode: 'SRTM_ELEVATION_STDDEV',
         dataElementGroup: landGroup,
         dataSet: landDataSet,
+        provider,
     },
     ...landcoverTypes.map(({ name, value }) => ({
         id: `MODIS/061/MCD12Q1/LC_Type1/${value}`,
@@ -468,6 +488,7 @@ const getEEDatasets = () => [
         dataElementCode: `MODIS_LANDCOVER_${value}`,
         dataElementGroup: landGroup,
         dataSet: landDataSet,
+        provider,
     })),
 ]
 

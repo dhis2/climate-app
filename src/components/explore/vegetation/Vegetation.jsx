@@ -6,7 +6,7 @@ import {
     getResolutionText,
     ndviDescription,
     eviDescription,
-} from '../../../data/datasets.js'
+} from '../../../data/earth-engine-datasets.js'
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
 import exploreStore from '../../../store/exploreStore.js'
 import DataLoader from '../../shared/DataLoader.jsx'
