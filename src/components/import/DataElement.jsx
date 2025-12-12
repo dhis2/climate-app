@@ -67,6 +67,12 @@ const DataElement = ({ selected, onChange, datasetCode, periodType }) => {
     return (
         <div>
             <SingleSelectField
+                label={i18n.t(
+                    'Showing data elements from {{periodType}} data sets',
+                    {
+                        periodType: periodType.toLowerCase(),
+                    }
+                )}
                 filterable
                 noMatchText={i18n.t('No match found')}
                 selected={selected?.id}

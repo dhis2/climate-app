@@ -90,7 +90,7 @@ const ImportPreview = ({
                 </li>
                 <li className={classes.listItem}>
                     {i18n.t(
-                        'To all organisation units at {{orgLevel}} level within {{orgUnit}}',
+                        'To all organisation units at {{orgLevel}} within {{orgUnit}}',
                         {
                             orgLevel,
                             orgUnit,

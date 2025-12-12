@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-12-11T16:43:23.545Z\n"
-"PO-Revision-Date: 2025-12-11T16:43:23.546Z\n"
+"POT-Creation-Date: 2025-12-12T13:43:33.361Z\n"
+"PO-Revision-Date: 2025-12-12T13:43:33.361Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -622,6 +622,9 @@ msgstr "Value is only for 250 x 250 m where the facility is located"
 msgid "Loading data elements..."
 msgstr "Loading data elements..."
 
+msgid "Showing data elements from {{periodType}} data sets"
+msgstr "Showing data elements from {{periodType}} data sets"
+
 msgid "No match found"
 msgstr "No match found"
 
@@ -684,8 +687,8 @@ msgstr ""
 msgid "For every {{periodNoun}} between {{startDate}} and {{endDate}}"
 msgstr "For every {{periodNoun}} between {{startDate}} and {{endDate}}"
 
-msgid "To all organisation units at {{orgLevel}} level within {{orgUnit}}"
-msgstr "To all organisation units at {{orgLevel}} level within {{orgUnit}}"
+msgid "To all organisation units at {{orgLevel}} within {{orgUnit}}"
+msgstr "To all organisation units at {{orgLevel}} within {{orgUnit}}"
 
 msgid "To data element \"{{dataElement}}\""
 msgstr "To data element \"{{dataElement}}\""
