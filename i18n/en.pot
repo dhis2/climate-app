@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-12-12T13:43:33.361Z\n"
-"PO-Revision-Date: 2025-12-12T13:43:33.361Z\n"
+"POT-Creation-Date: 2025-12-12T19:05:01.685Z\n"
+"PO-Revision-Date: 2025-12-12T19:05:01.685Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -644,6 +644,9 @@ msgstr ""
 msgid "Extracting data for {{orgUnitsCount}} org units"
 msgstr "Extracting data for {{orgUnitsCount}} org units"
 
+msgid "Dataset provider not recognized"
+msgstr "Dataset provider not recognized"
+
 msgid "Importing data to DHIS2"
 msgstr "Importing data to DHIS2"
 
@@ -701,14 +704,17 @@ msgstr[1] "{{count}} data values will be imported"
 msgid "Data is imported"
 msgstr "Data is imported"
 
-msgid "Imported"
-msgstr "Imported"
+msgid "Imported: {{imported}}"
+msgstr "Imported: {{imported}}"
 
-msgid "Updated"
-msgstr "Updated"
+msgid "Updated: {{updated}}"
+msgstr "Updated: {{updated}}"
 
-msgid "Ignored"
-msgstr "Ignored"
+msgid "Ignored: {{ignored}}"
+msgstr "Ignored: {{ignored}}"
+
+msgid "Missing: {{missing}}"
+msgstr "Missing: {{missing}}"
 
 msgid "No data for the following org units"
 msgstr "No data for the following org units"
@@ -824,6 +830,28 @@ msgstr "Heat stress upper category"
 msgid "Heat stress lower category"
 msgstr "Heat stress lower category"
 
+msgid "Data Providers"
+msgstr "Data Providers"
+
+msgid ""
+"The following data providers can be configured and used in the Climate app. "
+"Contact your administrator to add or update data providers."
+msgstr ""
+"The following data providers can be configured and used in the Climate app. "
+"Contact your administrator to add or update data providers."
+
+msgid "Provider name"
+msgstr "Provider name"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Setup info"
+msgstr "Setup info"
+
+msgid "Close"
+msgstr "Close"
+
 msgid "Calculate from data"
 msgstr "Calculate from data"
 
@@ -832,6 +860,9 @@ msgstr "App settings"
 
 msgid "Changes made below will apply to all users of this app."
 msgstr "Changes made below will apply to all users of this app."
+
+msgid "General settings"
+msgstr "General settings"
 
 msgid "Default start page for users"
 msgstr "Default start page for users"
@@ -865,6 +896,9 @@ msgstr "Aggregate"
 
 msgid "Aggregation type"
 msgstr "Aggregation type"
+
+msgid "Use your domain knowledge to select the appropriate aggregation type"
+msgstr "Use your domain knowledge to select the appropriate aggregation type"
 
 msgid "Store zero data values"
 msgstr "Store zero data values"
@@ -1008,11 +1042,20 @@ msgstr ""
 msgid "Loading data"
 msgstr "Loading data"
 
+msgid "Error"
+msgstr "Error"
+
 msgid "Select data to import"
 msgstr "Select data to import"
 
-msgid "Data resolution is {{resolution}}."
-msgstr "Data resolution is {{resolution}}."
+msgid "Data is from {{source}}. Accessed via {{provider}}."
+msgstr "Data is from {{source}}. Accessed via {{provider}}."
+
+msgid "Warning"
+msgstr "Warning"
+
+msgid "Error fetching additional datasets from one or more local data providers"
+msgstr "Error fetching additional datasets from one or more local data providers"
 
 msgid "You need access to Google Earth Engine to use this app."
 msgstr "You need access to Google Earth Engine to use this app."

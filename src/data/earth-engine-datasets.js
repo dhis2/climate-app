@@ -23,6 +23,10 @@ import {
     landGroup,
 } from './groupings.js'
 import heatStressLegend from './heat-stress-legend.js'
+import { PROVIDER_GEE, dataProviders } from './providers.js'
+
+// fetch provider metadata for GEE
+const provider = dataProviders.find((item) => item.id === PROVIDER_GEE)
 
 // kelvin to celsius with one decimal
 const temperatureParser = (v) => roundOneDecimal(kelvinToCelsius(v)).toString()
@@ -100,6 +104,7 @@ export default [
         dataElementCode: 'ERA5_LAND_TEMPERATURE',
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
+        provider,
     },
     {
         id: 'ECMWF/ERA5_LAND/DAILY_AGGR/temperature_2m_max',
@@ -126,6 +131,7 @@ export default [
         dataElementCode: 'ERA5_LAND_TEMPERATURE_MAX',
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
+        provider,
     },
     {
         id: 'ECMWF/ERA5_LAND/DAILY_AGGR/temperature_2m_min',
@@ -152,6 +158,7 @@ export default [
         dataElementCode: 'ERA5_LAND_TEMPERATURE_MIN',
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
+        provider,
     },
     {
         id: 'ECMWF/ERA5_LAND/DAILY_AGGR/total_precipitation_sum',
@@ -177,6 +184,7 @@ export default [
         dataElementCode: 'ERA5_LAND_PRECIPITATION',
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
+        provider,
     },
     {
         id: 'UCSB-CHG/CHIRPS/DAILY',
@@ -196,6 +204,7 @@ export default [
         dataElementCode: 'CHIRPS_PRECIPITATION',
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
+        provider,
     },
     {
         id: 'ECMWF/ERA5_LAND/DAILY_AGGR/dewpoint_temperature_2m',
@@ -222,6 +231,7 @@ export default [
         dataElementCode: 'ERA5_LAND_DEWPOINT_TEMPERATURE',
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
+        provider,
     },
     {
         id: 'ECMWF/ERA5_LAND/DAILY_AGGR/relative_humidity_2m',
@@ -262,6 +272,7 @@ export default [
         dataElementCode: 'ERA5_LAND_RELATIVE_HUMIDITY',
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
+        provider,
     },
     {
         id: 'projects/climate-engine-pro/assets/ce-era5-heat/utci_mean',
@@ -281,6 +292,7 @@ export default [
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
         legend: heatStressLegend,
+        provider,
     },
     {
         id: 'projects/climate-engine-pro/assets/ce-era5-heat/utci_max',
@@ -300,6 +312,7 @@ export default [
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
         legend: heatStressLegend,
+        provider,
     },
     {
         id: 'projects/climate-engine-pro/assets/ce-era5-heat/utci_min',
@@ -319,6 +332,7 @@ export default [
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
         legend: heatStressLegend,
+        provider,
     },
     {
         id: 'MODIS/061/MOD13Q1/NDVI',
@@ -337,6 +351,7 @@ export default [
         dataElementCode: 'MODIS_NDVI',
         dataElementGroup: environmentGroup,
         dataSet: environmentDataSet,
+        provider,
     },
     {
         id: 'MODIS/061/MOD13Q1/EVI',
@@ -355,6 +370,7 @@ export default [
         dataElementCode: 'MODIS_EVI',
         dataElementGroup: environmentGroup,
         dataSet: environmentDataSet,
+        provider,
     },
     {
         id: 'USGS/SRTMGL1_003/mean',
@@ -374,6 +390,7 @@ export default [
         dataElementCode: 'SRTM_ELEVATION_MEAN',
         dataElementGroup: landGroup,
         dataSet: landDataSet,
+        provider,
     },
     {
         id: 'USGS/SRTMGL1_003/min',
@@ -393,6 +410,7 @@ export default [
         dataElementCode: 'SRTM_ELEVATION_MIN',
         dataElementGroup: landGroup,
         dataSet: landDataSet,
+        provider,
     },
     {
         id: 'USGS/SRTMGL1_003/max',
@@ -412,6 +430,7 @@ export default [
         dataElementCode: 'SRTM_ELEVATION_MAX',
         dataElementGroup: landGroup,
         dataSet: landDataSet,
+        provider,
     },
     {
         id: 'USGS/SRTMGL1_003/stddev',
@@ -433,6 +452,7 @@ export default [
         dataElementCode: 'SRTM_ELEVATION_STDDEV',
         dataElementGroup: landGroup,
         dataSet: landDataSet,
+        provider,
     },
     ...landcoverTypes.map(({ name, value }) => ({
         id: `MODIS/061/MCD12Q1/LC_Type1/${value}`,
@@ -456,6 +476,7 @@ export default [
         dataElementCode: `MODIS_LANDCOVER_${value}`,
         dataElementGroup: landGroup,
         dataSet: landDataSet,
+        provider,
     })),
 ]
 
