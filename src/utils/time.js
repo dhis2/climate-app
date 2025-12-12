@@ -412,13 +412,29 @@ const getDateFormat = (date) => {
 
 /**
  * Helper function to find and return display name from generated periods
- * @param {String} calDate Calendar date to find
- * @param {Array} periods Generated periods array
- * @param {String} fallback Fallback value if not found
+ * @param {Object} options Options object
+ * @param {String} options.calDate Calendar date to find
+ * @param {Array} options.periods Generated periods array
+ * @param {String} options.fallback Fallback value if not found
+ * @param {String} options.format Date format type to determine matching strategy
  * @returns {String} Display name or fallback
  */
-const findPeriodDisplayName = (calDate, periods, fallback) => {
-    const found = periods.find((p) => p.startDate === calDate)
+const findPeriodDisplayName = ({ calDate, periods, fallback, format }) => {
+    let found
+
+    if (
+        format === DATE_FORMATS.FULL_DATE ||
+        format === DATE_FORMATS.YEAR_MONTH
+    ) {
+        // For full dates and year-month, check if the date falls within the period range
+        found = periods.find(
+            (p) => p.startDate <= calDate && p.endDate >= calDate
+        )
+    } else {
+        // For year only, match exactly on startDate
+        found = periods.find((p) => p.startDate === calDate)
+    }
+
     return found ? found.displayName || fallback : fallback
 }
 
@@ -459,7 +475,12 @@ const formatNonGregorianDate = (date, calendar, locale) => {
                 locale,
                 periodType: MONTHLY,
             })
-            return findPeriodDisplayName(calDate, months, date)
+            return findPeriodDisplayName({
+                calDate,
+                periods: months,
+                fallback: date,
+                format,
+            })
         }
 
         if (format === DATE_FORMATS.FULL_DATE) {
@@ -470,7 +491,12 @@ const formatNonGregorianDate = (date, calendar, locale) => {
                 locale,
                 periodType: DAILY,
             })
-            return findPeriodDisplayName(calDate, days, date)
+            return findPeriodDisplayName({
+                calDate,
+                periods: days,
+                fallback: date,
+                format,
+            })
         }
     } catch (e) {
         console.error(

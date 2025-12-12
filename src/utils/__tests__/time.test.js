@@ -316,7 +316,6 @@ describe('time utils', () => {
 
     it('it should format a Nepali full date', () => {
         const input = '2024-08-06'
-        // Returns calendar date when displayName not found
         const expected = '2081-04-22'
         expect(
             getDateStringFromIsoDate({ date: input, calendar: 'nepali' })
@@ -331,18 +330,25 @@ describe('time utils', () => {
         ).toEqual(expected)
     })
 
+    it('it should format a Nepali year-only', () => {
+        const date = '2024'
+        const expected = '2080'
+        expect(getDateStringFromIsoDate({ date, calendar: 'nepali' })).toEqual(
+            expected
+        )
+    })
+
     it('it should format an Ethiopic year-month', () => {
         const date = '2016-11'
-        // Returns original date when period not found in generated months
-        const expected = '2016-11'
+        const expected = 'Tekemt 2009'
         expect(
             getDateStringFromIsoDate({ date, calendar: 'ethiopic' })
         ).toEqual(expected)
     })
 
-    it('it should return original date for non-matching year-month in Nepali calendar', () => {
+    it('it should format a Nepali year-month', () => {
         const date = '2023-08'
-        const expected = '2023-08'
+        const expected = 'Shrawan 2080'
         expect(getDateStringFromIsoDate({ date, calendar: 'nepali' })).toEqual(
             expected
         )

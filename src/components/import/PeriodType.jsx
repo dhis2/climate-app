@@ -2,6 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import { Radio, Field } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import { periodTypes, DAILY, WEEKLY, MONTHLY } from '../../utils/time.js'
+import classes from './styles/PeriodType.module.css'
 
 const defaultPeriodTypes = new Set([DAILY, WEEKLY, MONTHLY])
 
@@ -30,7 +31,7 @@ const PeriodType = ({ periodType, supportedPeriodTypes, onChange }) => {
     // If there's only one supported period type, show just the text
     if (supportedPeriodTypeObjects.length === 1) {
         return (
-            <div style={{ marginTop: '16px', fontSize: '14px' }}>
+            <div className={classes.singlePeriodTypeContainer}>
                 <div>
                     {i18n.t('Period type')}:{' '}
                     {supportedPeriodTypeObjects[0].name}
@@ -40,9 +41,9 @@ const PeriodType = ({ periodType, supportedPeriodTypes, onChange }) => {
     }
 
     return (
-        <div style={{ display: 'flex', marginTop: '16px' }}>
+        <div className={classes.container}>
             <Field label={i18n.t('Period type')}>
-                <div style={{ display: 'flex', gap: '16px' }}>
+                <div className={classes.radioGroup}>
                     {supportedPeriodTypeObjects.map((type) => (
                         <Radio
                             key={type.id}
