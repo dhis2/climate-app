@@ -383,6 +383,112 @@ export const isValidPeriod = (period) =>
     )
 
 /**
+ * Helper function to find and return display name from generated periods
+ * @param {String} calDate Calendar date to find
+ * @param {Array} periods Generated periods array
+ * @param {String} fallback Fallback value if not found
+ * @returns {String} Display name or fallback
+ */
+const findPeriodDisplayName = (calDate, periods, fallback) => {
+    const found = periods.find((p) => p.startDate === calDate)
+    return found ? found.displayName || fallback : fallback
+}
+
+/**
+ * Format non-gregorian calendar date to human readable string
+ * @param {String} date ISO date string
+ * @param {String} calendar Calendar system to use
+ * @param {String} locale Locale for formatting
+ * @returns {String} Formatted date string or original date
+ */
+const formatNonGregorianDate = (date, calendar, locale) => {
+    try {
+        // Year only (calendar year)
+        if (/^\d{4}$/.test(date)) {
+            const calYearStr = fromStandardDate(
+                `${date}-01-01`,
+                calendar
+            ).split('-')[0]
+
+            const items = generateFixedPeriods({
+                year: Number.parseInt(calYearStr, 10),
+                calendar,
+                locale,
+                periodType: YEARLY,
+                yearsCount: 1,
+            })
+
+            return items?.length ? items[0].displayName || date : date
+        }
+
+        // Year + month (monthly displayName)
+        if (/^\d{4}-\d{2}$/.test(date)) {
+            const [year, month] = date.split('-')
+            const calDate = fromStandardDate(`${year}-${month}-01`, calendar)
+            const months = generateFixedPeriods({
+                year: Number.parseInt(calDate.split('-')[0], 10),
+                calendar,
+                locale,
+                periodType: MONTHLY,
+            })
+            return findPeriodDisplayName(calDate, months, date)
+        }
+
+        // Full date (daily)
+        if (/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+            const calDate = fromStandardDate(date, calendar)
+            const days = generateFixedPeriods({
+                year: Number.parseInt(calDate.split('-')[0], 10),
+                calendar,
+                locale,
+                periodType: DAILY,
+            })
+            return findPeriodDisplayName(calDate, days, date)
+        }
+    } catch (e) {
+        // Return original date on any error
+        return date
+    }
+
+    return date
+}
+
+/**
+ * Format gregorian date using Intl.DateTimeFormat
+ * @param {String} date ISO date string
+ * @param {String} locale Locale for formatting
+ * @returns {String} Formatted date string or original date
+ */
+const formatGregorianDate = (date, locale) => {
+    if (/^\d{4}$/.test(date)) {
+        // Year only
+        return new Intl.DateTimeFormat(locale, { year: 'numeric' }).format(
+            new Date(date, 0, 1)
+        )
+    }
+
+    if (/^\d{4}-\d{2}$/.test(date)) {
+        // Year + month
+        const [year, month] = date.split('-')
+        return new Intl.DateTimeFormat(locale, {
+            year: 'numeric',
+            month: 'long',
+        }).format(new Date(year, month - 1, 1))
+    }
+
+    if (/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+        // Full date
+        return new Intl.DateTimeFormat(locale, {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+        }).format(new Date(date))
+    }
+
+    return date
+}
+
+/**
  * Format ISO date to human readable string that respects local language
  * @param {Object} period ISO date
  * @param {String} calendar Calendar used
@@ -394,83 +500,10 @@ export const getDateStringFromIsoDate = ({
     locale,
 }) => {
     if (calendar !== 'gregory') {
-        try {
-            // Year only (calendar year)
-            if (/^\d{4}$/.test(date)) {
-                const calYearStr = fromStandardDate(
-                    `${date}-01-01`,
-                    calendar
-                ).split('-')[0]
-
-                const items = generateFixedPeriods({
-                    year: Number.parseInt(calYearStr, 10),
-                    calendar,
-                    locale,
-                    periodType: YEARLY,
-                    yearsCount: 1,
-                })
-
-                return items?.length ? items[0].displayName || date : date
-            }
-
-            // Year + month (monthly displayName)
-            if (/^\d{4}-\d{2}$/.test(date)) {
-                const [year, month] = date.split('-')
-                const calDate = fromStandardDate(
-                    `${year}-${month}-01`,
-                    calendar
-                )
-                const months = generateFixedPeriods({
-                    year: Number.parseInt(calDate.split('-')[0], 10),
-                    calendar,
-                    locale,
-                    periodType: MONTHLY,
-                })
-                const found = months.find((m) => m.startDate === calDate)
-                return found ? found.displayName || date : date
-            }
-
-            // Full date (daily)
-            if (/^\d{4}-\d{2}-\d{2}$/.test(date)) {
-                const calDate = fromStandardDate(date, calendar)
-                const days = generateFixedPeriods({
-                    year: Number.parseInt(calDate.split('-')[0], 10),
-                    calendar,
-                    locale,
-                    periodType: DAILY,
-                })
-                const found = days.find((d) => d.startDate === calDate)
-                return found ? found.displayName || date : date
-            }
-        } catch (e) {
-            // Return original date on any error
-            return date
-        }
+        return formatNonGregorianDate(date, calendar, locale)
     }
 
-    // Fallback: use Intl (Gregorian)
-    if (/^\d{4}$/.test(date)) {
-        // Year only
-        return new Intl.DateTimeFormat(locale, { year: 'numeric' }).format(
-            new Date(date, 0, 1)
-        )
-    } else if (/^\d{4}-\d{2}$/.test(date)) {
-        // Year + month
-        const [year, month] = date.split('-')
-        return new Intl.DateTimeFormat(locale, {
-            year: 'numeric',
-            month: 'long',
-        }).format(new Date(year, month - 1, 1))
-    } else if (/^\d{4}-\d{2}-\d{2}$/.test(date)) {
-        // Full date
-        return new Intl.DateTimeFormat(locale, {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-        }).format(new Date(date))
-    }
-
-    return date // fallback: return as-is
+    return formatGregorianDate(date, locale)
 }
 
 /**
