@@ -6,7 +6,22 @@ import {
     roundOneDecimal,
     roundTwoDecimals,
 } from '../utils/calc.js'
-import { HOURLY, DAILY, MONTHLY, SIXTEEN_DAYS, YEARLY } from '../utils/time.js'
+import {
+    HOURLY,
+    DAILY,
+    WEEKLY,
+    MONTHLY,
+    SIXTEEN_DAYS,
+    YEARLY,
+} from '../utils/time.js'
+import {
+    climateDataSet,
+    climateGroup,
+    environmentDataSet,
+    environmentGroup,
+    landDataSet,
+    landGroup,
+} from './groupings.js'
 import heatStressLegend from './heat-stress-legend.js'
 
 // kelvin to celsius with one decimal
@@ -34,11 +49,11 @@ const vegetationIndexParser = (v) => roundTwoDecimals(v * 0.0001).toString()
 
 const twoDecimals = (v) => roundTwoDecimals(v).toString()
 
-const era5Source = i18n.t('ERA5-Land / Copernicus Climate Change Service')
-const era5HeatSource = i18n.t('ERA5-Heat / Copernicus Climate Change Service')
-const chirpsSource = i18n.t('Climate Hazards Center / UCSB')
-const modisSource = i18n.t('NASA LP DAAC at the USGS EROS Center')
-const demSource = i18n.t('NASA / USGS / JPL-Caltech')
+const era5Source = 'ERA5-Land / Copernicus Climate Change Service'
+const era5HeatSource = 'ERA5-Heat / Copernicus Climate Change Service'
+const chirpsSource = 'Climate Hazards Center / UCSB'
+const modisSource = 'NASA LP DAAC at the USGS EROS Center'
+const demSource = 'NASA / USGS / JPL-Caltech'
 
 export const era5Resolution = i18n.t('Approximately 31 km (0.25°)')
 export const era5LandResolution = i18n.t('Approximately 9 km (0.1°)')
@@ -59,39 +74,6 @@ export const landcoverDescription = i18n.t(
     'Land cover types at yearly intervals'
 )
 
-const climateDataSet = {
-    name: i18n.t('Climate/Weather'),
-    shortName: i18n.t('Climate/Weather'),
-    periodType: i18n.t('Daily'),
-}
-
-const environmentDataSet = {
-    name: i18n.t('Environment'),
-    shortName: i18n.t('Environment'),
-    periodType: i18n.t('Weekly or Monthly'),
-}
-
-const landDataSet = {
-    name: i18n.t('Land'),
-    shortName: i18n.t('Land'),
-    periodType: i18n.t('Yearly'),
-}
-
-const climateGroup = {
-    name: i18n.t('Climate/Weather'),
-    shortName: i18n.t('Climate/Weather'),
-}
-
-const environmentGroup = {
-    name: i18n.t('Environment'),
-    shortName: i18n.t('Environment'),
-}
-
-const landGroup = {
-    name: i18n.t('Land'),
-    shortName: i18n.t('Land'),
-}
-
 export default [
     {
         id: 'ECMWF/ERA5_LAND/DAILY_AGGR/temperature_2m',
@@ -104,6 +86,7 @@ export default [
         source: era5Source,
         resolution: era5LandResolution,
         periodType: DAILY,
+        supportedPeriodTypes: [DAILY, WEEKLY, MONTHLY],
         band: 'temperature_2m',
         reducer: 'mean',
         timeZone: {
@@ -129,6 +112,7 @@ export default [
         source: era5Source,
         resolution: era5LandResolution,
         periodType: DAILY,
+        supportedPeriodTypes: [DAILY, WEEKLY, MONTHLY],
         band: 'temperature_2m_max',
         reducer: 'max',
         timeZone: {
@@ -154,6 +138,7 @@ export default [
         source: era5Source,
         resolution: era5LandResolution,
         periodType: DAILY,
+        supportedPeriodTypes: [DAILY, WEEKLY, MONTHLY],
         band: 'temperature_2m_min',
         reducer: 'min',
         timeZone: {
@@ -177,6 +162,7 @@ export default [
         source: era5Source,
         resolution: era5LandResolution,
         periodType: DAILY,
+        supportedPeriodTypes: [DAILY, WEEKLY, MONTHLY],
         band: 'total_precipitation_sum',
         reducer: 'mean',
         periodReducer: 'sum',
@@ -201,6 +187,7 @@ export default [
         source: chirpsSource,
         resolution: chirpsResolution,
         periodType: DAILY,
+        supportedPeriodTypes: [DAILY, WEEKLY, MONTHLY],
         band: 'precipitation',
         reducer: 'mean',
         periodReducer: 'sum',
@@ -221,6 +208,7 @@ export default [
         source: era5Source,
         resolution: era5LandResolution,
         periodType: DAILY,
+        supportedPeriodTypes: [DAILY, WEEKLY, MONTHLY],
         band: 'dewpoint_temperature_2m',
         reducer: 'mean',
         timeZone: {
@@ -246,6 +234,7 @@ export default [
         source: era5Source,
         resolution: era5LandResolution,
         periodType: DAILY,
+        supportedPeriodTypes: [DAILY, WEEKLY, MONTHLY],
         bands: [
             {
                 band: 'dewpoint_temperature_2m',
@@ -283,6 +272,7 @@ export default [
         source: era5HeatSource,
         resolution: era5Resolution,
         periodType: DAILY,
+        supportedPeriodTypes: [DAILY, WEEKLY, MONTHLY],
         band: 'utci_mean',
         reducer: 'mean',
         valueParser: temperatureParser,
@@ -301,6 +291,7 @@ export default [
         source: era5HeatSource,
         resolution: era5Resolution,
         periodType: DAILY,
+        supportedPeriodTypes: [DAILY, WEEKLY, MONTHLY],
         band: 'utci_max',
         reducer: 'max',
         valueParser: temperatureParser,
@@ -319,6 +310,7 @@ export default [
         source: era5HeatSource,
         resolution: era5Resolution,
         periodType: DAILY,
+        supportedPeriodTypes: [DAILY, WEEKLY, MONTHLY],
         band: 'utci_min',
         reducer: 'min',
         valueParser: temperatureParser,
@@ -337,6 +329,7 @@ export default [
         source: modisSource,
         resolution: modisResolution,
         periodType: SIXTEEN_DAYS,
+        supportedPeriodTypes: [WEEKLY, MONTHLY],
         band: 'NDVI',
         reducer: 'mean',
         valueParser: vegetationIndexParser,
@@ -354,6 +347,7 @@ export default [
         source: modisSource,
         resolution: modisResolution,
         periodType: SIXTEEN_DAYS,
+        supportedPeriodTypes: [WEEKLY, MONTHLY],
         band: 'EVI',
         reducer: 'mean',
         valueParser: vegetationIndexParser,
@@ -371,6 +365,7 @@ export default [
         source: demSource,
         resolution: demResolution,
         periodType: 'N/A',
+        supportedPeriodTypes: [YEARLY],
         period: '2000',
         band: 'elevation',
         reducer: 'mean',
@@ -389,6 +384,7 @@ export default [
         source: demSource,
         resolution: demResolution,
         periodType: 'N/A',
+        supportedPeriodTypes: [YEARLY],
         period: '2000',
         band: 'elevation',
         reducer: 'min',
@@ -407,6 +403,7 @@ export default [
         source: demSource,
         resolution: demResolution,
         periodType: 'N/A',
+        supportedPeriodTypes: [YEARLY],
         period: '2000',
         band: 'elevation',
         reducer: 'max',
@@ -427,6 +424,7 @@ export default [
         source: demSource,
         resolution: demResolution,
         periodType: 'N/A',
+        supportedPeriodTypes: [YEARLY],
         period: '2000',
         band: 'elevation',
         reducer: 'stdDev',
@@ -445,8 +443,11 @@ export default [
         source: modisSource,
         resolution: landcoverResolution,
         periodType: YEARLY,
-        minYear: 2002,
-        maxYear: 2023,
+        supportedPeriodTypes: [YEARLY],
+        periodRange: {
+            start: '2002',
+            end: '2023',
+        },
         band: 'LC_Type1',
         reducer: 'frequencyHistogram',
         histogramKey: value,
@@ -500,7 +501,7 @@ export const era5HeatDaily = {
     datasetId: 'projects/climate-engine-pro/assets/ce-era5-heat',
     band: ['utci_mean', 'utci_min', 'utci_max'],
     reducer: ['mean', 'min', 'max'],
-    periodType: 'daily',
+    periodType: DAILY,
     resolution: era5Resolution,
 }
 

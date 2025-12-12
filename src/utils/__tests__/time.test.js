@@ -15,9 +15,11 @@ import {
     toStandardDate,
     getPeriods,
     oneDayInMs,
+    normalizeIsoDate,
     DAILY,
     WEEKLY,
     MONTHLY,
+    getDateStringFromIsoDate,
 } from '../time.js'
 
 const timestamp = 1722902400000 // 2024-08-06
@@ -103,28 +105,22 @@ describe('time utils', () => {
         expect(formatCalendarDate(ethiopicDate)).toEqual(ethiopicDateString)
     })
 
-    it('it should convert a standard date to a calendar date', () => {
-        expect(
-            toStandardDate(formatCalendarDate(gregoryDate), gregoryCalendar)
-        ).toEqual(gregoryDateString)
-        expect(
-            toStandardDate(formatCalendarDate(nepaliDate), nepaliCalendar)
-        ).toEqual(gregoryDateString)
-        expect(
-            toStandardDate(formatCalendarDate(ethiopicDate), ethiopicCalendar)
-        ).toEqual(gregoryDateString)
-    })
+    it('it should convert calendar dates from different calendars to the standard (gregory) date', () => {
+        // Define inputs and expected output locally — do not call other helpers
+        const gregoryCalendarDate = '2024-08-06'
+        const nepaliCalendarDate = '2081-04-22'
+        const ethiopicCalendarDate = '2016-11-30'
+        const expectedStandardDate = '2024-08-06'
 
-    it('it should convert a calendar date to a standard date', () => {
-        expect(toStandardDate(gregoryDateString, gregoryCalendar)).toEqual(
-            gregoryDateString
+        expect(toStandardDate(gregoryCalendarDate, 'gregory')).toEqual(
+            expectedStandardDate
         )
-        expect(
-            toStandardDate(formatCalendarDate(nepaliDate), nepaliCalendar)
-        ).toEqual(gregoryDateString)
-        expect(
-            toStandardDate(formatCalendarDate(ethiopicDate), ethiopicCalendar)
-        ).toEqual(gregoryDateString)
+        expect(toStandardDate(nepaliCalendarDate, 'nepali')).toEqual(
+            expectedStandardDate
+        )
+        expect(toStandardDate(ethiopicCalendarDate, 'ethiopic')).toEqual(
+            expectedStandardDate
+        )
     })
 
     it('it should get the gregory calendar date', () => {
@@ -286,5 +282,128 @@ describe('time utils', () => {
             periodType: MONTHLY,
         })
         expect(periods.length).toEqual(12)
+    })
+
+    it('it should format Gregorian year, month and full date strings in a locale-aware way', () => {
+        // Year only
+        const year = '2024'
+        expect(getDateStringFromIsoDate({ date: year })).toEqual('2024')
+
+        // Year + month
+        const yearMonth = '2024-08'
+        expect(getDateStringFromIsoDate({ date: yearMonth })).toEqual(
+            'August 2024'
+        )
+
+        // Full date
+        const yearMonthDay = '2024-08-06'
+        expect(getDateStringFromIsoDate({ date: yearMonthDay })).toEqual(
+            'August 6, 2024'
+        )
+
+        // Fallback (unknown format) should return input unchanged
+        const fallback = 'not-a-date'
+        expect(getDateStringFromIsoDate({ date: fallback })).toEqual(fallback)
+    })
+
+    it('it should format an Ethiopic full date', () => {
+        const date = '2016-11-30'
+        const expected = 'Hedar 21, 2009 ERA0'
+        expect(
+            getDateStringFromIsoDate({ date, calendar: 'ethiopic' })
+        ).toEqual(expected)
+    })
+
+    it('it should format a Nepali full date', () => {
+        const input = '2024-08-06'
+        const expected = '2081-04-22'
+        expect(
+            getDateStringFromIsoDate({ date: input, calendar: 'nepali' })
+        ).toEqual(expected)
+    })
+
+    it('it should format an Ethiopic year-only', () => {
+        const date = '2016'
+        const expected = '2008'
+        expect(
+            getDateStringFromIsoDate({ date, calendar: 'ethiopic' })
+        ).toEqual(expected)
+    })
+
+    it('it should format a Nepali year-only', () => {
+        const date = '2024'
+        const expected = '2080'
+        expect(getDateStringFromIsoDate({ date, calendar: 'nepali' })).toEqual(
+            expected
+        )
+    })
+
+    it('it should format an Ethiopic year-month', () => {
+        const date = '2016-11'
+        const expected = 'Tekemt 2009'
+        expect(
+            getDateStringFromIsoDate({ date, calendar: 'ethiopic' })
+        ).toEqual(expected)
+    })
+
+    it('it should format a Nepali year-month', () => {
+        const date = '2023-08'
+        const expected = 'Shrawan 2080'
+        expect(getDateStringFromIsoDate({ date, calendar: 'nepali' })).toEqual(
+            expected
+        )
+    })
+
+    it('it should return original date when calendar conversion throws an error', () => {
+        const date = 'invalid-date-format'
+        const expected = 'invalid-date-format'
+        expect(
+            getDateStringFromIsoDate({ date, calendar: 'ethiopic' })
+        ).toEqual(expected)
+    })
+
+    it('it should format strings using Gregorian Norwegian (nb) locale', () => {
+        const locale = 'nb'
+        // Year only
+        const year = '2024'
+        expect(getDateStringFromIsoDate({ date: year, locale })).toEqual('2024')
+
+        // Year + month
+        const yearMonth = '2024-08'
+        expect(getDateStringFromIsoDate({ date: yearMonth, locale })).toEqual(
+            'august 2024'
+        )
+
+        // Full date
+        const fullDate = '2024-08-06'
+        expect(getDateStringFromIsoDate({ date: fullDate, locale })).toEqual(
+            '6. august 2024'
+        )
+
+        // Fallback
+        const fallback = 'ikke-en-dato'
+        expect(getDateStringFromIsoDate({ date: fallback, locale })).toEqual(
+            fallback
+        )
+    })
+
+    it('it should normalize partial ISO dates', () => {
+        // Year only
+        expect(normalizeIsoDate('2024')).toEqual('2024-01-01')
+
+        // Year + month
+        expect(normalizeIsoDate('2024-08')).toEqual('2024-08-01')
+
+        // ISO week: week 1 of 2024 starts on 2024-01-01
+        expect(normalizeIsoDate('2024-W01')).toEqual('2024-01-01')
+
+        // Full date unchanged
+        expect(normalizeIsoDate('2024-08-06')).toEqual('2024-08-06')
+
+        // Invalid string returns null
+        expect(normalizeIsoDate('not a date')).toEqual(null)
+
+        // Undefined returns null
+        expect(normalizeIsoDate(undefined)).toEqual(null)
     })
 })
