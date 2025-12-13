@@ -28,6 +28,12 @@ msgid ""
 " not a DHIS2 core app. Useful parts of this app might be incorporated into "
 "the DHIS2 core in the future, based on your feedback."
 msgstr ""
+"Ứng dụng thử nghiệm này là một phần của dự án “DHIS2 for Climate“ đang được "
+"triển khai. Ứng dụng sẽ được cập nhật thường xuyên, vì vậy vui lòng đảm bảo "
+"bạn đang sử dụng phiên bản mới nhất từ DHIS2 App Hub. Ứng dụng được phát "
+"triển bởi Đại học Oslo, nhưng không phải là ứng dụng lõi của DHIS2. Những "
+"phần hữu ích của ứng dụng có thể được tích hợp vào lõi DHIS2 trong tương "
+"lai, dựa trên phản hồi của bạn."
 
 msgid ""
 "The app allows you to explore and import temperature, precipitation, "
@@ -36,25 +42,36 @@ msgid ""
 "available. The video below shows you how this dataset was created by "
 "combining weather observations with a weather model (climate reanalysis)."
 msgstr ""
+"Ứng dụng cho phép bạn khám phá và nhập dữ liệu về nhiệt độ, lượng mưa, độ ẩm"
+" và chỉ số căng thẳng nhiệt vào DHIS2. Nguồn dữ liệu chính là ERA5-Land, "
+"được xem là bộ dữ liệu khí hậu toàn cầu đầy đủ và chính xác nhất hiện nay. "
+"Video bên dưới cho thấy cách bộ dữ liệu này được tạo ra bằng cách kết hợp "
+"các quan sát thời tiết với một mô hình thời tiết (tái phân tích khí hậu)."
 
 msgid "Read about ERA5-Land on Copernicus Climate Data Store"
-msgstr ""
+msgstr "Đọc về ERA5-Land trên Copernicus Climate Data Store"
 
 msgid ""
 "In additon to ERA5-Land, precipitation data can also be imported from the "
 "CHIRPS dataset. For heat stress we use data from ERA5-HEAT."
 msgstr ""
+"Ngoài ERA5-Land, dữ liệu lượng mưa cũng có thể được nhập từ bộ dữ liệu "
+"CHIRPS. Đối với chỉ số căng thẳng nhiệt, chúng tôi sử dụng dữ liệu từ "
+"ERA5-HEAT."
 
 msgid "Read about CHIRPS on Climate Hazards Center"
-msgstr ""
+msgstr "Đọc về CHIRPS trên Climate Hazards Center"
 
 msgid "Read about ERA5-HEAT on Copernicus Climate Data Store"
-msgstr ""
+msgstr "Đọc về ERA5-HEAT trên Copernicus Climate Data Store"
 
 msgid ""
 "If you just want to look at weather and climate data for your organisation "
 "units, click on “Explore data” in the left menu. No configuration is needed."
 msgstr ""
+"Nếu bạn chỉ muốn xem dữ liệu thời tiết và khí hậu cho các đơn vị tổ chức của"
+" mình, hãy nhấp vào “Khám phá dữ liệu” trong menu bên trái. Không cần cấu "
+"hình thêm."
 
 msgid ""
 "We recommend importing data into DHIS2 data elements. This will allow you to"
@@ -62,20 +79,30 @@ msgid ""
 "analytics apps. You need to configure your DHIS2 instance before you can "
 "import data. See our guide by clicking on “Setup guide”."
 msgstr ""
+"Chúng tôi khuyến nghị nhập dữ liệu vào các phần tử dữ liệu trong DHIS2. Điều"
+" này sẽ cho phép bạn kết hợp dữ liệu thời tiết và khí hậu với dữ liệu y tế "
+"trên tất cả các ứng dụng phân tích của DHIS2. Bạn cần cấu hình hệ thống "
+"DHIS2 trước khi có thể nhập dữ liệu. Hãy xem hướng dẫn của chúng tôi bằng "
+"cách nhấp vào “Hướng dẫn thiết lập”."
 
 msgid ""
 "After the configuration is done, you can import temperature and "
 "precipitation data under “Import data”."
 msgstr ""
+"Sau khi cấu hình hoàn tất, bạn có thể tích hợp dữ liệu nhiệt độ và lượng mưa"
+" trong mục “Tích hợp dữ liệu”."
 
 msgid ""
 "After the data is imported, you should generate the analytics tables in the "
 "Data Administration app. This will allow you to see the data in the DHIS2 "
 "analytics apps."
 msgstr ""
+"Sau khi dữ liệu được tích hợp, bạn cần tạo lại các bảng phân tích trong ứng "
+"dụng Quản trị Dữ liệu. Điều này sẽ giúp bạn xem dữ liệu trong các ứng dụng "
+"phân tích của DHIS2."
 
 msgid "How the data is calculated"
-msgstr ""
+msgstr "Cách tính toán dữ liệu"
 
 msgid ""
 "The data is calculated for your organsation units on Google Earth Engine. "
@@ -85,30 +112,36 @@ msgid ""
 "are close to each other (within the resolution), they will have the same "
 "data values."
 msgstr ""
+"Dữ liệu được tính toán cho các đơn vị tổ chức của bạn trên Google Earth "
+"Engine. Vui lòng kiểm tra độ phân giải của dữ liệu. Nếu bạn chọn một cơ sở y"
+" tế, chúng tôi sử dụng giá trị tại vị trí cơ sở đó. Nếu bạn chọn một "
+"phường/xã, chúng tôi sẽ tự động tổng hợp các giá trị trong phạm vi phường/xã"
+" đó. Nếu hai đơn vị tổ chức nằm gần nhau (trong phạm vi độ phân giải), chúng"
+" sẽ có cùng giá trị dữ liệu."
 
 msgid "Home"
 msgstr "Trang chủ"
 
 msgid "Explore data"
-msgstr ""
+msgstr "Khám phá dữ liệu"
 
 msgid "Import data"
 msgstr "Nhập dữ liệu"
 
 msgid "Setup guide"
-msgstr ""
+msgstr "Hướng dẫn cài đặt"
 
 msgid "Settings"
 msgstr "Cài đặt"
 
 msgid "Check data"
-msgstr ""
+msgstr "Kiểm tra dữ liệu"
 
 msgid "Check weather and climate data"
-msgstr ""
+msgstr "Kiểm tra dữ liệu thời tiết và khí hậu."
 
 msgid "Select a location in the left panel"
-msgstr ""
+msgstr "Chọn vị trí trong bảng điều khiển bên trái."
 
 msgid "Start date"
 msgstr "Ngày bắt đầu"
@@ -117,13 +150,13 @@ msgid "End date"
 msgstr "Ngày kết thúc"
 
 msgid "Maximum {{maxDays}} days allowed"
-msgstr ""
+msgstr "Cho phép tối đa {{maxDays}} ngày"
 
 msgid "Explore weather and climate data"
-msgstr ""
+msgstr "Khám phá dữ liệu thời tiết và khí hậu"
 
 msgid "Select an organisation unit in the left panel"
-msgstr ""
+msgstr "Chọn một đơn vị trong bảng điều khiển bên trái."
 
 msgid "January"
 msgstr "Tháng Một"
@@ -165,22 +198,22 @@ msgid "Month"
 msgstr "Tháng"
 
 msgid "Start month"
-msgstr ""
+msgstr "Tháng bắt đầu"
 
 msgid "End month"
-msgstr ""
+msgstr "Tháng kết thúc"
 
 msgid "Maximum {{maxMonths}} months allowed"
-msgstr ""
+msgstr "Cho phép tối đa {{maxMonths}} tháng"
 
 msgid "No geometry found"
-msgstr ""
+msgstr "Không tìm thấy hình bản đồ nào"
 
 msgid "Data for a location"
-msgstr ""
+msgstr "Dữ liệu cho một vị trí"
 
 msgid "Data for an area"
-msgstr ""
+msgstr "Dữ liệu cho một khu vực"
 
 msgid "Monthly"
 msgstr "Hàng Tháng"
@@ -189,10 +222,10 @@ msgid "Daily"
 msgstr "Hàng Ngày"
 
 msgid "Reference period"
-msgstr ""
+msgstr "Thời kỳ tham chiếu"
 
 msgid "10 days forecast"
-msgstr ""
+msgstr "Dự báo 10 ngày"
 
 msgid "Temperature"
 msgstr "Nhiệt độ"
@@ -201,19 +234,19 @@ msgid "Precipitation"
 msgstr "Lượng mưa"
 
 msgid "Humidity"
-msgstr ""
+msgstr "Độ ẩm"
 
 msgid "Heat"
-msgstr ""
+msgstr "Nhiệt"
 
 msgid "Climate change"
-msgstr ""
+msgstr "Biến đổi khí hậu"
 
 msgid "Vegetation"
-msgstr ""
+msgstr "Thảm thực vật"
 
 msgid "Land cover"
-msgstr ""
+msgstr "Lớp phủ đất"
 
 msgid "Elevation"
 msgstr "Độ cao"
@@ -223,21 +256,25 @@ msgid ""
 "value, calculated as the average temperature over a period of 30 years. Blue"
 " columns shows temperatures below the average, while red columns are above."
 msgstr ""
+"Độ lệch nhiệt độ là phần chênh lệch giữa nhiệt độ đo được và giá trị tham "
+"chiếu, được tính dựa trên nhiệt độ trung bình của một giai đoạn 30 năm. Các "
+"cột màu xanh thể hiện nhiệt độ thấp hơn mức trung bình, trong khi các cột "
+"màu đỏ thể hiện nhiệt độ cao hơn mức trung bình."
 
 msgid "{{name}}: {{month}} temperature difference {{years}}"
-msgstr ""
+msgstr "{{name}}:{{month}} nhiệt độ khác {{years}}"
 
 msgid "Reference period: {{period}}"
-msgstr ""
+msgstr "Thời kỳ tham chiếu: {{period}}"
 
 msgid "Temperature anomaly"
-msgstr ""
+msgstr "Sự bất thường về nhiệt độ"
 
 msgid "{{name}}: Elevation"
-msgstr ""
+msgstr "{{name}}: Độ cao"
 
 msgid "{{value}} m"
-msgstr ""
+msgstr "{{value}} m"
 
 msgid ""
 "The chart shows the elevation distribution of the selected area, for each "
@@ -245,48 +282,52 @@ msgid ""
 " mean, minimum, and maximum elevation values are calculated from the "
 "elevation data."
 msgstr ""
+"Biểu đồ hiển thị phân bố độ cao của khu vực được chọn; với mỗi mét so với "
+"mực nước biển, biểu đồ cho thấy diện tích tương ứng ở độ cao đó tính theo "
+"hecta. Các giá trị độ cao trung bình, thấp nhất và cao nhất được tính dựa "
+"trên dữ liệu độ cao."
 
 msgid "Elevation: {{value}} m"
-msgstr ""
+msgstr "Độ cao: {{value}}m"
 
 msgid "Area: {{value}} km²"
-msgstr ""
+msgstr "Diện tích: {{value}} km²"
 
 msgid "Min elevation"
-msgstr ""
+msgstr "Độ cao tối thiểu"
 
 msgid "Mean elevation"
-msgstr ""
+msgstr "Độ cao trung bình"
 
 msgid "Max elevation"
-msgstr ""
+msgstr "Độ cao tối đa"
 
 msgid "{{precip}} mm"
-msgstr ""
+msgstr "{{precip}} mm"
 
 msgid "Night"
-msgstr ""
+msgstr "Ban đêm"
 
 msgid "Morning"
-msgstr ""
+msgstr "Buổi sáng"
 
 msgid "Afternoon"
-msgstr ""
+msgstr "Buổi chiều"
 
 msgid "Evening"
-msgstr ""
+msgstr "Buổi tối"
 
 msgid "Max/min temp."
-msgstr ""
+msgstr "Nhiệt độ cao nhất/thấp nhất."
 
 msgid "Precip."
-msgstr ""
+msgstr "Lượng mưa"
 
 msgid "Rel. humidity"
-msgstr ""
+msgstr "Độ ẩm tương đối"
 
 msgid "Wind"
-msgstr ""
+msgstr "Sức gió"
 
 msgid ""
 "The forecast is using the \"{{- timeZone}}\" time zone. You can change the "

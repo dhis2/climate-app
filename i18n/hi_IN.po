@@ -124,40 +124,40 @@ msgid "Select an organisation unit in the left panel"
 msgstr ""
 
 msgid "January"
-msgstr ""
+msgstr "जनवरी"
 
 msgid "February"
-msgstr ""
+msgstr "फ़रवरी"
 
 msgid "March"
-msgstr ""
+msgstr "मार्च"
 
 msgid "April"
-msgstr ""
+msgstr "अप्रैल"
 
 msgid "May"
-msgstr ""
+msgstr "मई"
 
 msgid "June"
-msgstr ""
+msgstr "जून"
 
 msgid "July"
-msgstr ""
+msgstr "जुलाई"
 
 msgid "August"
-msgstr ""
+msgstr "अगस्त"
 
 msgid "September"
-msgstr ""
+msgstr "सितंबर"
 
 msgid "October"
-msgstr ""
+msgstr "अक्टूबर"
 
 msgid "November"
-msgstr ""
+msgstr "नवंबर"
 
 msgid "December"
-msgstr ""
+msgstr "दिसंबर"
 
 msgid "Month"
 msgstr "महीना"
@@ -631,7 +631,7 @@ msgid ""
 msgstr ""
 
 msgid "Data"
-msgstr ""
+msgstr "डेटा"
 
 msgid "Select the variable you would like to import."
 msgstr ""
@@ -819,7 +819,7 @@ msgid "Data element group: \"{{-name}}\""
 msgstr ""
 
 msgid "Data elements"
-msgstr ""
+msgstr "डेटा एलिमेंट्स"
 
 msgid "Assign above data element"
 msgstr ""
@@ -995,7 +995,7 @@ msgid "Land"
 msgstr ""
 
 msgid "Yearly"
-msgstr ""
+msgstr "वार्षिक"
 
 msgid "Air temperature (ERA5-Land)"
 msgstr ""

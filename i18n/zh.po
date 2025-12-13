@@ -218,10 +218,10 @@ msgid "Climate change"
 msgstr "气候变化"
 
 msgid "Vegetation"
-msgstr ""
+msgstr "植被"
 
 msgid "Land cover"
-msgstr ""
+msgstr "土地覆被"
 
 msgid "Elevation"
 msgstr "高程"
@@ -242,10 +242,10 @@ msgid "Temperature anomaly"
 msgstr "温度异常"
 
 msgid "{{name}}: Elevation"
-msgstr ""
+msgstr "{{name}}:海拔"
 
 msgid "{{value}} m"
-msgstr ""
+msgstr "{{value}} m"
 
 msgid ""
 "The chart shows the elevation distribution of the selected area, for each "
@@ -253,21 +253,22 @@ msgid ""
 " mean, minimum, and maximum elevation values are calculated from the "
 "elevation data."
 msgstr ""
+"图表显示了所选区域的海拔分布，海拔每升高一米，就会显示出该海拔高度的区域面积（公顷）。根据海拔数据可计算出平均海拔值、最低海拔值和最高海拔值。"
 
 msgid "Elevation: {{value}} m"
-msgstr ""
+msgstr "海拔：{{value}} 米"
 
 msgid "Area: {{value}} km²"
-msgstr ""
+msgstr "面积：{{value}} 平方公里"
 
 msgid "Min elevation"
-msgstr ""
+msgstr "最低海拔"
 
 msgid "Mean elevation"
-msgstr ""
+msgstr "平均海拔"
 
 msgid "Max elevation"
-msgstr ""
+msgstr "最高海拔"
 
 msgid "{{precip}} mm"
 msgstr "{{precip}} 毫米"
@@ -532,10 +533,10 @@ msgid "Water"
 msgstr "水"
 
 msgid "Land cover type"
-msgstr ""
+msgstr "土地覆被类型"
 
 msgid "{{name}}: Land cover changes {{years}}"
-msgstr ""
+msgstr "{{name}}:土地覆被变化{{years}}"
 
 msgid "{{name}}: Daily precipitation {{period}}"
 msgstr "{{name}}:日降水量{{period}}"
@@ -568,7 +569,7 @@ msgid "Normal temperature"
 msgstr "正常温度"
 
 msgid "Resample"
-msgstr ""
+msgstr "重新采样"
 
 msgid "Weekly"
 msgstr "每周"
@@ -576,13 +577,13 @@ msgstr "每周"
 msgid ""
 "Change from 16-days to weekly or monthly periods using linear interpolation."
 " Weekly periods are recommended when importing to DHIS2."
-msgstr ""
+msgstr "使用线性插值法将 16 天改为每周或每月。建议在导入 DHIS2 时以周为周期。"
 
 msgid "{{name}}: {{band}} vegetation index {{period}}"
-msgstr ""
+msgstr "{{name}} {{band}} ：植被指数{{period}}"
 
 msgid "Value is only for 250 x 250 m where the facility is located"
-msgstr ""
+msgstr "仅适用于设施所在的 250 x 250 米区域"
 
 msgid "Data element"
 msgstr "数据元"
@@ -603,9 +604,11 @@ msgid ""
 "Extracting data for {{periodCount}} {{periodType}} periods and "
 "{{orgUnitsCount}} org units ({{valueCount}} values)"
 msgstr ""
+"提取{{periodCount}} {{periodType}} 期间和{{orgUnitsCount}} 组织单位的数据 "
+"({{valueCount}} 值)"
 
 msgid "Extracting data for {{orgUnitsCount}} org units"
-msgstr ""
+msgstr "提取{{orgUnitsCount}} org 单位的数据"
 
 msgid "Importing data to DHIS2"
 msgstr "将数据导入 DHIS2"
@@ -626,6 +629,8 @@ msgid ""
 "select a shorter period or fewer organisation units. You can always import "
 "more data later."
 msgstr ""
+"在一次导入中最多可导入{{maxValues}} 数据值，但您正试图导入{{orgUnitCount}} 组织单位在{{periodCount}} "
+"{{periodType}} 期间的{{valueCount}} 值。请选择更短的时间段或更少的组织单位。您可以稍后再导入更多数据。"
 
 msgid "Instructions"
 msgstr "说明"
@@ -633,7 +638,7 @@ msgstr "说明"
 msgid ""
 "Before you can import data, you need to create the associated data elements "
 "in DHIS2. See our setup guide in the left menu."
-msgstr ""
+msgstr "在导入数据之前，您需要在 DHIS2 中创建相关的数据元素。请参阅左侧菜单中的设置指南。"
 
 msgid ""
 "Data can be imported in batches. We recommend that you start with a few "
@@ -720,7 +725,7 @@ msgstr "组织单位父级必须高于或等于组织单位级别"
 msgid ""
 "The data will be assigned a default yearly period that matches the year it "
 "was collected: {{datasetPeriod}}"
-msgstr ""
+msgstr "数据将被指定一个与收集年份相符的默认年份：{{datasetPeriod}}"
 
 msgid "Daily values will be imported between start and end dates"
 msgstr "将在开始日期和结束日期之间导入每日数值"
@@ -729,10 +734,10 @@ msgid "Period type"
 msgstr "期间类型"
 
 msgid "Start year"
-msgstr ""
+msgstr "开始年份"
 
 msgid "End year"
-msgstr ""
+msgstr "年底"
 
 msgid ""
 "Set y-axis values for charts in the Explore data section to make it easier "
@@ -810,7 +815,7 @@ msgid "Store zero data values"
 msgstr "存储零数据值"
 
 msgid "Make sure it is checked"
-msgstr ""
+msgstr "确保已检查"
 
 msgid "Aggregation levels"
 msgstr "汇总等级"
@@ -823,21 +828,22 @@ msgid ""
 "on climate-app@dhis2.org if you have any questions or need help with the "
 "setup."
 msgstr ""
+"现在您应该可以使用此应用程序导入数据了。如果您在设置过程中有任何问题或需要帮助，请通过 climate-app@dhis2.org 联系我们。"
 
 msgid "3. Assign to a data element group"
-msgstr ""
+msgstr "3.分配到数据元素组"
 
 msgid "Data element group: \"{{-name}}\""
-msgstr ""
+msgstr "数据元素组：\"{{-name}}\""
 
 msgid "Data elements"
 msgstr "数据元"
 
 msgid "Assign above data element"
-msgstr ""
+msgstr "分配上述数据元素"
 
 msgid "2. Assign to a data set"
-msgstr ""
+msgstr "2.分配给数据集"
 
 msgid ""
 "If you import daily data, you should assign the data elements to a daily "
@@ -851,9 +857,10 @@ msgid ""
 " unit that has defined geographic boundaries we leave that decision to "
 "users. Most probable choice is all organisation units in your system."
 msgstr ""
+"如果导入的是日数据，则应将数据元素分配到日数据集（天气和气候）中。对于周数据或月数据，应将其分配到周数据集或月数据集（植被指数）。将数据分配到数据集有助于保持高质量的元数据和数据的完整性、一致性、批准和保护。如何准确定义这样的数据集取决于可用的用户和用户组。同样，哪些组织单位可以收集日常气候数据集也取决于具体情况。不过，由于我们可以为任何有明确地理边界的行政单位提供数据，因此我们将这一决定权留给用户。最有可能的选择是系统中的所有组织单位。"
 
 msgid "Data set: \"{{-name}}\""
-msgstr ""
+msgstr "数据集：\"{{-name}}\""
 
 msgid "Organisation units"
 msgstr "组织机构"
@@ -862,13 +869,13 @@ msgid "Select all organisation units in your system"
 msgstr "选择系统中的所有组织单位"
 
 msgid "4. Add a legend"
-msgstr ""
+msgstr "4.添加图例"
 
 msgid "Recommended legend for this data element."
-msgstr ""
+msgstr "该数据元素的建议图例。"
 
 msgid "Legend: \"{{-name}}\""
-msgstr ""
+msgstr "传奇：\"{{-name}}\""
 
 msgid "Start value"
 msgstr "开始值"
@@ -880,16 +887,16 @@ msgid "Color"
 msgstr "颜色"
 
 msgid "Configuring DHIS2 before importing data"
-msgstr ""
+msgstr "导入数据前配置 DHIS2"
 
 msgid ""
 "Before you can import data, you need to make some configurations in the "
 "Maintenance app. For detailed instructions on how to configure DHIS2, choose"
 " which data you would like to import below."
-msgstr ""
+msgstr "在导入数据之前，您需要在维护应用程序中进行一些配置。有关如何配置 DHIS2 的详细说明，请在下面选择要导入的数据。"
 
 msgid "1. Create the data element"
-msgstr ""
+msgstr "1.创建数据元素"
 
 msgid ""
 "Create DHIS2 data elements only for the data you want to import. We "
@@ -899,6 +906,8 @@ msgid ""
 "use the same code specified below, we will preselect the data element in the"
 " import interface."
 msgstr ""
+"只为您要导入的数据创建 DHIS2 数据元素。我们建议在名称中包含数据源，以便与其他数据源区分开来（例如，ERA5-Land 和 CHIRPS "
+"都提供预产期数据，将来还会有其他数据提供者）。如果您使用以下指定的相同代码，我们将在导入界面中预选数据元素。"
 
 msgid ""
 "When daily data is imported it can be aggregated to other period types in "
@@ -907,6 +916,8 @@ msgid ""
 "geographic boundary. To make sure the values remain at its own level, assign"
 " all org unit levels as Aggregation levels for each data element created."
 msgstr ""
+"导入每日数据后，可将其汇总到 DHIS2 "
+"中的其他时期类型。我们不建议跨组织单位级别进行汇总，尤其是从设施级别到由地理边界定义的更高级别时。为确保数值保持在各自的级别上，请为创建的每个数据元素指定所有组织单位级别作为聚合级别。"
 
 msgid "Loading data"
 msgstr "加载数据中"
@@ -946,19 +957,19 @@ msgid "Time zone"
 msgstr "时区"
 
 msgid "ERA5-Land / Copernicus Climate Change Service"
-msgstr ""
+msgstr "ERA5-陆地/哥白尼气候变化服务"
 
 msgid "ERA5-Heat / Copernicus Climate Change Service"
-msgstr ""
+msgstr "ERA5-Heat/哥白尼气候变化处"
 
 msgid "Climate Hazards Center / UCSB"
-msgstr ""
+msgstr "气候灾害中心/加州大学旧金山分校"
 
 msgid "NASA LP DAAC at the USGS EROS Center"
-msgstr ""
+msgstr "美国地质调查局 EROS 中心的 NASA LP DAAC"
 
 msgid "NASA / USGS / JPL-Caltech"
-msgstr ""
+msgstr "NASA / USGS / JPL-Caltech"
 
 msgid "Approximately 31 km (0.25°)"
 msgstr "约 31 千米 (0.25°)"
@@ -970,13 +981,13 @@ msgid "Approximately 5 km (0.05°)"
 msgstr "约 5 千米 (0.05°)"
 
 msgid "Approximately 250 m"
-msgstr ""
+msgstr "约 250 米"
 
 msgid "Approximately 500 m"
-msgstr ""
+msgstr "约 500 米"
 
 msgid "Approximately 30 m"
-msgstr ""
+msgstr "约 30 米"
 
 msgid ""
 "Landsat Normalized Difference Vegetation Index (NDVI) is used to quantify "
@@ -984,27 +995,29 @@ msgid ""
 "assessing changes in plant health. NDVI values range from -1 to 1, with "
 "higher values indicating denser vegetation."
 msgstr ""
+"陆地卫星归一化差异植被指数（NDVI）用于量化植被绿度，有助于了解植被密度和评估植物健康变化。归一化差异植被指数的数值范围为-1 到 "
+"1，数值越高植被越茂密。"
 
 msgid ""
 "Enhanced vegetation index (EVI) differs from NDVI by reducing the influence "
 "of atmospheric conditions and canopy background noise. EVI values range from"
 " -1 to 1, with higher values indicating denser vegetation."
-msgstr ""
+msgstr "增强植被指数（EVI）不同于 NDVI，它减少了大气条件和树冠背景噪声的影响。EVI 值范围从 -1 到 1，值越高植被越茂密。"
 
 msgid "Land cover types at yearly intervals"
-msgstr ""
+msgstr "每年的土地覆被类型"
 
 msgid "Climate/Weather"
 msgstr "气候/天气"
 
 msgid "Environment"
-msgstr ""
+msgstr "环境"
 
 msgid "Weekly or Monthly"
-msgstr ""
+msgstr "每周或每月"
 
 msgid "Land"
-msgstr ""
+msgstr "土地"
 
 msgid "Yearly"
 msgstr "每年"
@@ -1013,7 +1026,7 @@ msgid "Air temperature (ERA5-Land)"
 msgstr "气温（ERA5-陆地）"
 
 msgid "Average air temperature in °C at 2 m above the surface."
-msgstr ""
+msgstr "距地面 2 米处的平均气温（°C）。"
 
 msgid "Average"
 msgstr "平均"
@@ -1025,7 +1038,7 @@ msgid "Max air temperature"
 msgstr "最高气温"
 
 msgid "Maximum air temperature in °C at 2 m above the surface."
-msgstr ""
+msgstr "距地面 2 米处的最高气温（°C）。"
 
 msgid "Max"
 msgstr "最大"
@@ -1037,7 +1050,7 @@ msgid "Min air temperature"
 msgstr "最低气温"
 
 msgid "Minimum air temperature in °C at 2 m above the surface."
-msgstr ""
+msgstr "距地面 2 米处的最低气温（°C）。"
 
 msgid "Min"
 msgstr "最小"
@@ -1049,7 +1062,7 @@ msgid "Precipitation (ERA5)"
 msgstr "降水量（ERA5）"
 
 msgid "Total precipitation in mm."
-msgstr ""
+msgstr "总降水量（毫米）。"
 
 msgid "Sum"
 msgstr "求和"
@@ -1058,7 +1071,7 @@ msgid "Precipitation (CHIRPS)"
 msgstr "降水量（CHIRPS）"
 
 msgid "Precipitation in mm."
-msgstr ""
+msgstr "降水量（毫米）。"
 
 msgid "Dewpoint temperature (ERA5-Land)"
 msgstr "露点温度（ERA5-陆地）"
@@ -1084,7 +1097,7 @@ msgid "Heat stress"
 msgstr "热应激"
 
 msgid "Average felt temperature in °C."
-msgstr ""
+msgstr "平均毛毡温度（°C）。"
 
 msgid "Max heat stress (ERA5-HEAT)"
 msgstr "最大热应力（ERA5-HEAT）"
@@ -1093,7 +1106,7 @@ msgid "Max heat stress"
 msgstr "最大热应力"
 
 msgid "Maximum felt temperature in °C."
-msgstr ""
+msgstr "最高毛毡温度（°C）。"
 
 msgid "Min heat stress (ERA5-HEAT)"
 msgstr "最小热应力（ERA5-HEAT）"
@@ -1102,52 +1115,52 @@ msgid "Min heat stress"
 msgstr "最小热应激"
 
 msgid "Minimum felt temperature in °C."
-msgstr ""
+msgstr "最低毛毡温度（°C）。"
 
 msgid "NDVI - Normalized difference vegetation index (MODIS)"
-msgstr ""
+msgstr "NDVI - 归一化差异植被指数（MODIS）"
 
 msgid "NDVI"
-msgstr ""
+msgstr "NDVI"
 
 msgid "EVI - Enhanced vegetation index (MODIS)"
-msgstr ""
+msgstr "EVI - 增强植被指数（MODIS）"
 
 msgid "EVI"
-msgstr ""
+msgstr "EVI"
 
 msgid "Mean elevation (SRTM)"
-msgstr ""
+msgstr "平均海拔（SRTM）"
 
 msgid "Mean elevation in meters above sea level."
-msgstr ""
+msgstr "平均海拔（米）。"
 
 msgid "First value"
-msgstr ""
+msgstr "第一值"
 
 msgid "Min elevation (SRTM)"
-msgstr ""
+msgstr "最低海拔（SRTM）"
 
 msgid "Min elevation in meters above sea level."
-msgstr ""
+msgstr "最低海拔高度，单位为米。"
 
 msgid "Max elevation (SRTM)"
-msgstr ""
+msgstr "最大海拔高度（SRTM）"
 
 msgid "Max elevation in meters above sea level."
-msgstr ""
+msgstr "最高海拔高度，单位为米。"
 
 msgid "Standard deviation of elevation (SRTM)"
-msgstr ""
+msgstr "高程标准偏差（SRTM）"
 
 msgid "Std dev elevation"
-msgstr ""
+msgstr "标准偏差"
 
 msgid "Standard deviation of elevation in meters above sea level."
-msgstr ""
+msgstr "海拔高度的标准偏差，单位为米。"
 
 msgid "Percentage of area with this land cover type."
-msgstr ""
+msgstr "该土地覆被类型的面积百分比。"
 
 msgid "Heat/cold stress"
 msgstr "热/冷应激"
@@ -1222,10 +1235,10 @@ msgid "ERA5-HEAT / Copernicus Climate Change Service / Google Earth Engine"
 msgstr "ERA5-HEAT / 哥白尼气候变化服务 / 谷歌地球引擎"
 
 msgid "NASA LP DAAC at the USGS EROS Center / Google Earth Engine"
-msgstr ""
+msgstr "美国地质调查局 EROS 中心的 NASA LP DAAC / 谷歌地球引擎"
 
 msgid "NASA / USGS / JPL-Caltech / Google Earth Engine"
-msgstr ""
+msgstr "NASA / USGS / JPL-Caltech / Google 地球引擎"
 
 msgid "No data found for the selected period"
 msgstr "所选时期无数据"
