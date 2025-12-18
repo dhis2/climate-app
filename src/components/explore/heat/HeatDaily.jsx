@@ -21,7 +21,7 @@ const HeatDaily = () => {
         period,
         feature: orgUnit,
     })
-    const hasData = data?.length > 0
+    const lastPeriod = data?.[data.length - 1]
 
     return (
         <>
@@ -42,9 +42,9 @@ const HeatDaily = () => {
             <Resolution resolution={era5HeatDaily.resolution} />
             <OpenAsMapButton
                 dataset={'heatDaily'}
-                period={hasData > 0 ? data[data.length - 1] : {}}
+                period={lastPeriod}
                 feature={orgUnit}
-                loading={!hasData}
+                loading={!lastPeriod}
             />
         </>
     )

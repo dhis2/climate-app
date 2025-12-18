@@ -20,7 +20,7 @@ const PrecipitationDaily = () => {
         period,
         feature: orgUnit,
     })
-    const hasData = data?.length > 0
+    const lastPeriod = data?.[data.length - 1]
 
     return (
         <>
@@ -40,9 +40,9 @@ const PrecipitationDaily = () => {
             <Resolution resolution={era5Daily.resolution} />
             <OpenAsMapButton
                 dataset={'precipitationDaily'}
-                period={hasData ? data[data.length - 1] : {}}
+                period={lastPeriod}
                 feature={orgUnit}
-                loading={!hasData}
+                loading={!lastPeriod}
             />
         </>
     )

@@ -21,7 +21,7 @@ const HeatMonthly = () => {
         period,
         feature: orgUnit,
     })
-    const hasData = data?.length > 0
+    const lastPeriod = data?.[data.length - 1]
 
     return (
         <>
@@ -42,9 +42,9 @@ const HeatMonthly = () => {
             <Resolution resolution={era5HeatMonthly.resolution} />
             <OpenAsMapButton
                 dataset={'heatMonthly'}
-                period={hasData ? data[data.length - 1] : {}}
+                period={lastPeriod}
                 feature={orgUnit}
-                loading={!hasData}
+                loading={!lastPeriod}
             />
         </>
     )

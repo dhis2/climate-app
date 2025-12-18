@@ -22,7 +22,7 @@ const HumidityMonthly = () => {
         period,
         feature: orgUnit,
     })
-    const hasData = data?.length > 0
+    const lastPeriod = data?.[data.length - 1]
 
     const normals = useEarthEngineClimateNormals(
         era5MonthlyNormals,
@@ -53,9 +53,9 @@ const HumidityMonthly = () => {
             <Resolution resolution={era5Monthly.resolution} />
             <OpenAsMapButton
                 dataset={'humidityMonthly'}
-                period={hasData ? data[data.length - 1] : {}}
+                period={lastPeriod}
                 feature={orgUnit}
-                loading={!hasData}
+                loading={!lastPeriod}
             />
         </>
     )

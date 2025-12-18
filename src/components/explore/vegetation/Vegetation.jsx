@@ -30,7 +30,7 @@ const Vegetation = () => {
     const period = exploreStore((state) => state.monthlyPeriod)
 
     const data = useEarthEngineTimeSeries({ dataset, period, feature })
-    const hasData = data?.length > 0
+    const lastPeriod = data?.[data.length - 1]
 
     if (!data) {
         return <DataLoader />
@@ -81,9 +81,9 @@ const Vegetation = () => {
             <Resolution resolution={modisResolution} />
             <OpenAsMapButton
                 dataset={band}
-                period={hasData ? data[data.length - 1] : {}}
+                period={lastPeriod}
                 feature={feature}
-                loading={!hasData}
+                loading={!lastPeriod}
             />
         </>
     )
