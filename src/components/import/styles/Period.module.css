@@ -5,11 +5,32 @@
 .pickers {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: 16px;
+    justify-content: left;
+    gap: 12px;
+    margin-block-start: var(--spacers-dp16);
 }
 
-.pickers > div {
-    width: 45%;
+.separator {
+    align-self: flex-end;
+    margin-bottom: 8px;
+}
+
+.timezone {
+    margin-left: 16px;
+}
+
+.periodError {
+    color: #bb470d;
+    font-weight: bold;
+    margin-block-end: var(--spacers-dp8);
+}
+
+.yearlyContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.yearlyValidRange {
+    font-size: 14px;
+    margin-top: 8px;
 }

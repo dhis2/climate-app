@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 import ImportResponse from './ImportResponse.jsx'
 import styles from './styles/ImportError.module.css'
 
-const ImportError = ({ response = {} }) => {
+const DEFAULT_RESPONSE = {}
+
+const ImportError = ({ response = DEFAULT_RESPONSE }) => {
     const { conflicts, importCount } = response
     const conflict = conflicts?.[0]?.value
     const allFailed = importCount?.imported === 0 && importCount?.updated === 0

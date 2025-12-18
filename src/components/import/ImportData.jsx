@@ -20,7 +20,7 @@ const ImportData = ({ data, dataElement, features }) => {
     useEffect(() => {
         mutate({
             dataValues: data
-                .filter((d) => !isNaN(d.value))
+                .filter((d) => !Number.isNaN(d.value))
                 .map((obj) => ({
                     value: obj.value,
                     orgUnit: obj.ou,
