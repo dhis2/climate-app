@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import useAppVersion from '../../hooks/useAppVersion.js'
 import useUserLocale from '../../hooks/useUserLocale.js'
+import styles from './styles/OpenAsMapButton.module.css'
 
 export const MAPS_APP_URL = 'dhis-web-maps'
 export const USER_DATASTORE_NAMESPACE = 'analytics'
@@ -63,29 +64,37 @@ const formatDate = (date, locale) =>
         day: 'numeric',
     }).format(date)
 
-const thisYear = String(new Date().getFullYear())
+const THIS_YEAR = {
+    id: String(new Date().getFullYear()),
+}
 
-const OpenAsMapButton = ({
-    dataset,
-    period = { id: thisYear },
-    feature,
-    loading,
-}) => {
+const OpenAsMapButton = ({ dataset, period = THIS_YEAR, feature, loading }) => {
     const [, /* actual value not used */ { set }] = useSetting(
         USER_DATASTORE_CURRENT_AO_KEY
     )
 
-    const { meetsVersion } = useAppVersion('maps', '101.5.0')
+    const { meetsVersion, loading: loadingVersion } = useAppVersion(
+        'maps',
+        '101.5.0'
+    )
 
     const { baseUrl, systemInfo = {} } = useConfig()
     const { locale } = useUserLocale()
 
-    if (loading || !meetsVersion) {
+    if (loading || loadingVersion || !meetsVersion) {
         return (
-            <Button disabled={true} primary>
-                Open as Map&nbsp;
-                <IconLaunch16 />
-            </Button>
+            <div className={styles.container}>
+                <Button disabled={true} primary>
+                    Open as Map&nbsp;
+                    <IconLaunch16 />
+                </Button>
+                {!loadingVersion && !meetsVersion && (
+                    <span className={styles.text}>
+                        Install Maps app v101.5.0 or higher to enable this
+                        feature.
+                    </span>
+                )}
+            </div>
         )
     }
 
@@ -159,10 +168,12 @@ const OpenAsMapButton = ({
     }
 
     return (
-        <Button onClick={handleOpenAsMapClick} primary>
-            Open as Map&nbsp;
-            <IconLaunch16 />
-        </Button>
+        <div className={styles.container}>
+            <Button onClick={handleOpenAsMapClick} primary>
+                Open as Map&nbsp;
+                <IconLaunch16 />
+            </Button>
+        </div>
     )
 }
 

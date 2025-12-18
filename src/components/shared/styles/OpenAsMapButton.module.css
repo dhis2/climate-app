@@ -1,0 +1,10 @@
+.container {
+    margin-top: var(--spacers-dp32);
+}
+
+.text {
+    font-size: 14px;
+    color: var(--colors-grey600);
+    padding-left: var(--spacers-dp12);
+    cursor: not-allowed;
+}
