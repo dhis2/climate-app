@@ -1,5 +1,5 @@
 .container {
-    margin-top: var(--spacers-dp32);
+    margin: var(--spacers-dp32) 0;
 }
 
 .text {
