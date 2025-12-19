@@ -37,7 +37,22 @@ jobs:
             - name: Install dependencies
               run: yarn install --frozen-lockfile
             - name: Run Cypress e2e tests
-              run: yarn cy:run
+              uses: cypress-io/github-action@v6
+              with:
+                  start: yarn start
+                  wait-on: 'http://localhost:3000'
+                  wait-on-timeout: 300
+                  browser: chrome
+                  record: true
+              env:
+                  CI: true
+                  BROWSER: none
+                  CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+                  CYPRESS_dhis2BaseUrl: https://test.e2e.dhis2.org/anly-e2e-42
+                  CYPRESS_dhis2InstanceVersion: 42
+                  CYPRESS_dhis2Username: ${{ secrets.CYPRESS_DHIS2_USERNAME }}
+                  CYPRESS_dhis2Password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }}
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     release:
         needs: [lint-commits, lint, test, cypress-component, cypress-e2e]
