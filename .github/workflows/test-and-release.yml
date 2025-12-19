@@ -15,17 +15,47 @@ jobs:
     test:
         uses: dhis2/workflows-platform/.github/workflows/test.yml@v1
 
-    # -- e2e tests are currently not implemented
-    # e2e:
-    #     uses: dhis2/workflows-platform/.github/workflows/legacy-e2e.yml@v1
-    #     # Skips forks and dependabot PRs
-    #     if: '!github.event.push.repository.fork'
-    #     secrets: inherit
-    #     with:
-    #         api_version: 42
+    cypress-component:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+            - name: Install dependencies
+              run: yarn install --frozen-lockfile
+            - name: Run Cypress component tests
+              run: yarn cy:run:component
+
+    cypress-e2e:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+            - name: Install dependencies
+              run: yarn install --frozen-lockfile
+            - name: Run Cypress e2e tests
+              uses: cypress-io/github-action@v6
+              with:
+                  start: yarn start
+                  wait-on: 'http://localhost:3000'
+                  wait-on-timeout: 300
+                  browser: chrome
+                  record: true
+              env:
+                  CI: true
+                  BROWSER: none
+                  CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+                  CYPRESS_dhis2BaseUrl: https://test.e2e.dhis2.org/anly-e2e-42
+                  CYPRESS_dhis2InstanceVersion: 42
+                  CYPRESS_dhis2Username: ${{ secrets.CYPRESS_DHIS2_USERNAME }}
+                  CYPRESS_dhis2Password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }}
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     release:
-        needs: [lint-commits, lint, test] # Add e2e here when implemented
+        needs: [lint-commits, lint, test, cypress-component, cypress-e2e]
         uses: dhis2/workflows-platform/.github/workflows/release.yml@v1
         # Skips forks and dependabot PRs
         if: '!github.event.push.repository.fork'

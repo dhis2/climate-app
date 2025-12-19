@@ -1,0 +1,27 @@
+import { defineConfig } from 'cypress'
+import viteConfig from './vite-cypress.config.js'
+
+export default defineConfig({
+    projectId: 'itnqpp',
+    defaultCommandTimeout: 30000,
+    component: {
+        devServer: {
+            framework: 'react',
+            bundler: 'vite',
+            viteConfig,
+        },
+        specPattern: 'src/**/*.cy.{js,jsx,ts,tsx}',
+        supportFile: 'cypress/support/component.js',
+        indexHtmlFile: 'cypress/support/component-index.html',
+    },
+    e2e: {
+        baseUrl: 'http://localhost:3000',
+        setupNodeEvents(_on, _config) {
+            // implement node event listeners here
+        },
+        specPattern: 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}',
+        supportFile: 'cypress/support/e2e.js',
+    },
+    video: false,
+    screenshotOnRunFailure: false,
+})
