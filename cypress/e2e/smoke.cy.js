@@ -1,4 +1,4 @@
-describe('Home Page', () => {
+describe('Smoke test', () => {
     beforeEach(() => {
         cy.visit('/')
     })
