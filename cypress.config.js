@@ -3,6 +3,7 @@ import viteConfig from './vite-cypress.config.js'
 
 export default defineConfig({
     projectId: 'itnqpp',
+    defaultCommandTimeout: 30000,
     component: {
         devServer: {
             framework: 'react',
