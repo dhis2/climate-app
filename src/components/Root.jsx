@@ -31,7 +31,7 @@ const Root = () => {
             <CssReset />
             <CssVariables spacers colors />
             <div className={styles.container}>
-                <div className={styles.sidebar}>
+                <div className={styles.sidebar} data-test="sidebar">
                     <Menu>
                         {appPages.map(({ path, name }) => (
                             <Fragment key={path}>
@@ -43,6 +43,9 @@ const Root = () => {
                                         (path !== '/' &&
                                             pathname.startsWith(path))
                                     }
+                                    dataTest={`${name
+                                        .toLowerCase()
+                                        .replace(/\s+/g, '-')}-menu-item`}
                                 />
                                 {path === '/explore' &&
                                     pathname.startsWith('/explore') && (
