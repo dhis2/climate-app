@@ -15,6 +15,7 @@ const Dataset = ({ title, selected, onChange, showDescription = true }) => (
             onChange={({ selected }) =>
                 onChange(datasets.find((d) => d.id === selected))
             }
+            dataTest="dataset-selector"
         >
             {datasets.map((d) => (
                 <SingleSelectOption key={d.id} value={d.id} label={d.name} />
