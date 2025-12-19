@@ -45,7 +45,7 @@ const Root = () => {
                                     }
                                     dataTest={`${name
                                         .toLowerCase()
-                                        .replace(/\s+/g, '-')}-menu-item`}
+                                        .replaceAll(/\s+/g, '-')}-menu-item`}
                                 />
                                 {path === '/explore' &&
                                     pathname.startsWith('/explore') && (
