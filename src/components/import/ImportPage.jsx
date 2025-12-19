@@ -18,7 +18,6 @@ import {
     oneDayInMs,
 } from '../../utils/time.js'
 import Dataset from '../shared/Dataset.jsx'
-import GEETokenCheck from '../shared/GEETokenCheck.jsx'
 import Resolution from '../shared/Resolution.jsx'
 import SectionH2 from '../shared/SectionH2.jsx'
 import DataElement from './DataElement.jsx'
@@ -166,7 +165,6 @@ const ImportPage = () => {
     return (
         <div className={classes.page}>
             <h1>{i18n.t('Import weather and climate data')}</h1>
-            <GEETokenCheck />
             <div className={classes.formContainer}>
                 <div className={classes.formSection}>
                     <Dataset
