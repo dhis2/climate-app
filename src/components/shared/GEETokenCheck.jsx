@@ -25,7 +25,7 @@ const GEETokenCheck = () => {
         <div className={styles.container}>
             <NoticeBox warning>
                 {i18n.t(
-                    'You need access to Google Earth Engine to use this app.'
+                    'You need access to Google Earth Engine to explore data.'
                 )}{' '}
                 <a href="https://docs.dhis2.org/en/topics/tutorials/google-earth-engine-sign-up.html">
                     {i18n.t('How to get access?')}
