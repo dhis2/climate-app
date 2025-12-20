@@ -1,0 +1,1269 @@
+# 
+# Translators:
+# Philip Larsen Donnelly, 2025
+# Thuy Nguyen <thuynguyen@hispvietnam.org>, 2025
+# Viktor Varland <viktor@dhis2.org>, 2025
+# Em Le <em.hispvietnam@gmail.com>, 2025
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2025-09-08T09:55:48.384Z\n"
+"PO-Revision-Date: 2025-02-05 13:11+0000\n"
+"Last-Translator: Em Le <em.hispvietnam@gmail.com>, 2025\n"
+"Language-Team: Vietnamese (https://app.transifex.com/hisp-uio/teams/100509/vi/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: vi\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "About this app"
+msgstr "Về ứng dụng này"
+
+msgid ""
+"This pilot app is part of the ongoing “DHIS2 for Climate“ project. It will "
+"get frequent updates, so please make sure you have the latest version from "
+"the DHIS2 App Hub. The app is developed by the University of Oslo, but it is"
+" not a DHIS2 core app. Useful parts of this app might be incorporated into "
+"the DHIS2 core in the future, based on your feedback."
+msgstr ""
+"Ứng dụng thử nghiệm này là một phần của dự án “DHIS2 for Climate“ đang được "
+"triển khai. Ứng dụng sẽ được cập nhật thường xuyên, vì vậy vui lòng đảm bảo "
+"bạn đang sử dụng phiên bản mới nhất từ DHIS2 App Hub. Ứng dụng được phát "
+"triển bởi Đại học Oslo, nhưng không phải là ứng dụng lõi của DHIS2. Những "
+"phần hữu ích của ứng dụng có thể được tích hợp vào lõi DHIS2 trong tương "
+"lai, dựa trên phản hồi của bạn."
+
+msgid ""
+"The app allows you to explore and import temperature, precipitation, "
+"humidity and heat stress data in DHIS2. The main data source is ERA5-Land, "
+"which is considered the most accurate and complete global climate dataset "
+"available. The video below shows you how this dataset was created by "
+"combining weather observations with a weather model (climate reanalysis)."
+msgstr ""
+"Ứng dụng cho phép bạn khám phá và nhập dữ liệu về nhiệt độ, lượng mưa, độ ẩm"
+" và chỉ số căng thẳng nhiệt vào DHIS2. Nguồn dữ liệu chính là ERA5-Land, "
+"được xem là bộ dữ liệu khí hậu toàn cầu đầy đủ và chính xác nhất hiện nay. "
+"Video bên dưới cho thấy cách bộ dữ liệu này được tạo ra bằng cách kết hợp "
+"các quan sát thời tiết với một mô hình thời tiết (tái phân tích khí hậu)."
+
+msgid "Read about ERA5-Land on Copernicus Climate Data Store"
+msgstr "Đọc về ERA5-Land trên Copernicus Climate Data Store"
+
+msgid ""
+"In additon to ERA5-Land, precipitation data can also be imported from the "
+"CHIRPS dataset. For heat stress we use data from ERA5-HEAT."
+msgstr ""
+"Ngoài ERA5-Land, dữ liệu lượng mưa cũng có thể được nhập từ bộ dữ liệu "
+"CHIRPS. Đối với chỉ số căng thẳng nhiệt, chúng tôi sử dụng dữ liệu từ "
+"ERA5-HEAT."
+
+msgid "Read about CHIRPS on Climate Hazards Center"
+msgstr "Đọc về CHIRPS trên Climate Hazards Center"
+
+msgid "Read about ERA5-HEAT on Copernicus Climate Data Store"
+msgstr "Đọc về ERA5-HEAT trên Copernicus Climate Data Store"
+
+msgid ""
+"If you just want to look at weather and climate data for your organisation "
+"units, click on “Explore data” in the left menu. No configuration is needed."
+msgstr ""
+"Nếu bạn chỉ muốn xem dữ liệu thời tiết và khí hậu cho các đơn vị tổ chức của"
+" mình, hãy nhấp vào “Khám phá dữ liệu” trong menu bên trái. Không cần cấu "
+"hình thêm."
+
+msgid ""
+"We recommend importing data into DHIS2 data elements. This will allow you to"
+" combine weather and climate data with your health data across all DHIS2 "
+"analytics apps. You need to configure your DHIS2 instance before you can "
+"import data. See our guide by clicking on “Setup guide”."
+msgstr ""
+"Chúng tôi khuyến nghị nhập dữ liệu vào các phần tử dữ liệu trong DHIS2. Điều"
+" này sẽ cho phép bạn kết hợp dữ liệu thời tiết và khí hậu với dữ liệu y tế "
+"trên tất cả các ứng dụng phân tích của DHIS2. Bạn cần cấu hình hệ thống "
+"DHIS2 trước khi có thể nhập dữ liệu. Hãy xem hướng dẫn của chúng tôi bằng "
+"cách nhấp vào “Hướng dẫn thiết lập”."
+
+msgid ""
+"After the configuration is done, you can import temperature and "
+"precipitation data under “Import data”."
+msgstr ""
+"Sau khi cấu hình hoàn tất, bạn có thể tích hợp dữ liệu nhiệt độ và lượng mưa"
+" trong mục “Tích hợp dữ liệu”."
+
+msgid ""
+"After the data is imported, you should generate the analytics tables in the "
+"Data Administration app. This will allow you to see the data in the DHIS2 "
+"analytics apps."
+msgstr ""
+"Sau khi dữ liệu được tích hợp, bạn cần tạo lại các bảng phân tích trong ứng "
+"dụng Quản trị Dữ liệu. Điều này sẽ giúp bạn xem dữ liệu trong các ứng dụng "
+"phân tích của DHIS2."
+
+msgid "How the data is calculated"
+msgstr "Cách tính toán dữ liệu"
+
+msgid ""
+"The data is calculated for your organsation units on Google Earth Engine. "
+"Pleace check the resolution of the data. If you select a health facility we "
+"use the value where the facility is located. If you select a district we "
+"automatically aggregate the values within that district. If two org units "
+"are close to each other (within the resolution), they will have the same "
+"data values."
+msgstr ""
+"Dữ liệu được tính toán cho các đơn vị tổ chức của bạn trên Google Earth "
+"Engine. Vui lòng kiểm tra độ phân giải của dữ liệu. Nếu bạn chọn một cơ sở y"
+" tế, chúng tôi sử dụng giá trị tại vị trí cơ sở đó. Nếu bạn chọn một "
+"phường/xã, chúng tôi sẽ tự động tổng hợp các giá trị trong phạm vi phường/xã"
+" đó. Nếu hai đơn vị tổ chức nằm gần nhau (trong phạm vi độ phân giải), chúng"
+" sẽ có cùng giá trị dữ liệu."
+
+msgid "Home"
+msgstr "Trang chủ"
+
+msgid "Explore data"
+msgstr "Khám phá dữ liệu"
+
+msgid "Import data"
+msgstr "Nhập dữ liệu"
+
+msgid "Setup guide"
+msgstr "Hướng dẫn cài đặt"
+
+msgid "Settings"
+msgstr "Cài đặt"
+
+msgid "Check data"
+msgstr "Kiểm tra dữ liệu"
+
+msgid "Check weather and climate data"
+msgstr "Kiểm tra dữ liệu thời tiết và khí hậu."
+
+msgid "Select a location in the left panel"
+msgstr "Chọn vị trí trong bảng điều khiển bên trái."
+
+msgid "Start date"
+msgstr "Ngày bắt đầu"
+
+msgid "End date"
+msgstr "Ngày kết thúc"
+
+msgid "Maximum {{maxDays}} days allowed"
+msgstr "Cho phép tối đa {{maxDays}} ngày"
+
+msgid "Explore weather and climate data"
+msgstr "Khám phá dữ liệu thời tiết và khí hậu"
+
+msgid "Select an organisation unit in the left panel"
+msgstr "Chọn một đơn vị trong bảng điều khiển bên trái."
+
+msgid "January"
+msgstr "Tháng Một"
+
+msgid "February"
+msgstr "Tháng Hai"
+
+msgid "March"
+msgstr "Tháng Ba"
+
+msgid "April"
+msgstr "Tháng Tư"
+
+msgid "May"
+msgstr "Tháng Năm"
+
+msgid "June"
+msgstr "Tháng Sáu"
+
+msgid "July"
+msgstr "Tháng Bảy"
+
+msgid "August"
+msgstr "Tháng Tám"
+
+msgid "September"
+msgstr "Tháng Chín"
+
+msgid "October"
+msgstr "Tháng Mười"
+
+msgid "November"
+msgstr "Tháng Mười Một"
+
+msgid "December"
+msgstr "Tháng Mười Hai"
+
+msgid "Month"
+msgstr "Tháng"
+
+msgid "Start month"
+msgstr "Tháng bắt đầu"
+
+msgid "End month"
+msgstr "Tháng kết thúc"
+
+msgid "Maximum {{maxMonths}} months allowed"
+msgstr "Cho phép tối đa {{maxMonths}} tháng"
+
+msgid "No geometry found"
+msgstr "Không tìm thấy hình bản đồ nào"
+
+msgid "Data for a location"
+msgstr "Dữ liệu cho một vị trí"
+
+msgid "Data for an area"
+msgstr "Dữ liệu cho một khu vực"
+
+msgid "Monthly"
+msgstr "Hàng Tháng"
+
+msgid "Daily"
+msgstr "Hàng Ngày"
+
+msgid "Reference period"
+msgstr "Thời kỳ tham chiếu"
+
+msgid "10 days forecast"
+msgstr "Dự báo 10 ngày"
+
+msgid "Temperature"
+msgstr "Nhiệt độ"
+
+msgid "Precipitation"
+msgstr "Lượng mưa"
+
+msgid "Humidity"
+msgstr "Độ ẩm"
+
+msgid "Heat"
+msgstr "Nhiệt"
+
+msgid "Climate change"
+msgstr "Biến đổi khí hậu"
+
+msgid "Vegetation"
+msgstr "Thảm thực vật"
+
+msgid "Land cover"
+msgstr "Lớp phủ đất"
+
+msgid "Elevation"
+msgstr "Độ cao"
+
+msgid ""
+"Temperature anomaly is the difference of a temperature from a reference "
+"value, calculated as the average temperature over a period of 30 years. Blue"
+" columns shows temperatures below the average, while red columns are above."
+msgstr ""
+"Độ lệch nhiệt độ là phần chênh lệch giữa nhiệt độ đo được và giá trị tham "
+"chiếu, được tính dựa trên nhiệt độ trung bình của một giai đoạn 30 năm. Các "
+"cột màu xanh thể hiện nhiệt độ thấp hơn mức trung bình, trong khi các cột "
+"màu đỏ thể hiện nhiệt độ cao hơn mức trung bình."
+
+msgid "{{name}}: {{month}} temperature difference {{years}}"
+msgstr "{{name}}:{{month}} nhiệt độ khác {{years}}"
+
+msgid "Reference period: {{period}}"
+msgstr "Thời kỳ tham chiếu: {{period}}"
+
+msgid "Temperature anomaly"
+msgstr "Sự bất thường về nhiệt độ"
+
+msgid "{{name}}: Elevation"
+msgstr "{{name}}: Độ cao"
+
+msgid "{{value}} m"
+msgstr "{{value}} m"
+
+msgid ""
+"The chart shows the elevation distribution of the selected area, for each "
+"meter above sea level it shows the area with this elevation in hectares. The"
+" mean, minimum, and maximum elevation values are calculated from the "
+"elevation data."
+msgstr ""
+"Biểu đồ hiển thị phân bố độ cao của khu vực được chọn; với mỗi mét so với "
+"mực nước biển, biểu đồ cho thấy diện tích tương ứng ở độ cao đó tính theo "
+"hecta. Các giá trị độ cao trung bình, thấp nhất và cao nhất được tính dựa "
+"trên dữ liệu độ cao."
+
+msgid "Elevation: {{value}} m"
+msgstr "Độ cao: {{value}}m"
+
+msgid "Area: {{value}} km²"
+msgstr "Diện tích: {{value}} km²"
+
+msgid "Min elevation"
+msgstr "Độ cao tối thiểu"
+
+msgid "Mean elevation"
+msgstr "Độ cao trung bình"
+
+msgid "Max elevation"
+msgstr "Độ cao tối đa"
+
+msgid "{{precip}} mm"
+msgstr "{{precip}} mm"
+
+msgid "Night"
+msgstr "Ban đêm"
+
+msgid "Morning"
+msgstr "Buổi sáng"
+
+msgid "Afternoon"
+msgstr "Buổi chiều"
+
+msgid "Evening"
+msgstr "Buổi tối"
+
+msgid "Max/min temp."
+msgstr "Nhiệt độ cao nhất/thấp nhất."
+
+msgid "Precip."
+msgstr "Lượng mưa"
+
+msgid "Rel. humidity"
+msgstr "Độ ẩm tương đối"
+
+msgid "Wind"
+msgstr "Sức gió"
+
+msgid ""
+"The forecast is using the \"{{- timeZone}}\" time zone. You can change the "
+"time zone for your org units under \"Settings\"."
+msgstr ""
+"Dự báo đang sử dụng múi giờ \"{{- timeZone}}\". Bạn có thể thay đổi múi giờ "
+"cho các đơn vị trong tổ chức của mình trong mục \"Cài đặt\"."
+
+msgid ""
+"The forecast is using the time zone of your browser ({{- timeZone}}). You "
+"can set the time zone for your org units under \"Settings\"."
+msgstr ""
+"Dự báo này sử dụng múi giờ của trình duyệt của bạn ({{- timeZone}}). Bạn có "
+"thể thiết lập múi giờ cho các đơn vị trong tổ chức của mình trong mục \"Cài "
+"đặt\"."
+
+msgid ""
+"The forecast is using the default \"{{- timeZone}}\" time zone. You can set "
+"the time zone for your org units under \"Settings\"."
+msgstr ""
+"Dự báo đang sử dụng múi giờ mặc định \"{{- timeZone}}\". Bạn có thể thiết "
+"lập múi giờ cho các đơn vị trong tổ chức của mình trong mục \"Cài đặt\"."
+
+msgid "Clear sky"
+msgstr "Bầu trời trong xanh"
+
+msgid "Fair"
+msgstr "Bầu trời gần trong xanh"
+
+msgid "Partly cloudy"
+msgstr "Trời có mây"
+
+msgid "Cloudy"
+msgstr "Trời nhiều mây"
+
+msgid "Light rain showers"
+msgstr "Mưa nhẹ"
+
+msgid "Rain showers"
+msgstr "Mưa rào"
+
+msgid "Heavy rain showers"
+msgstr "Mưa lớn"
+
+msgid "Light rain showers and thunder"
+msgstr "Mưa nhẹ và sấm chớp"
+
+msgid "Rain showers and thunder"
+msgstr "Mưa rào và sấm sét"
+
+msgid "Heavy rain showers and thunder"
+msgstr "Mưa lớn kèm sấm sét"
+
+msgid "Light sleet showers"
+msgstr "Mưa tuyết nhẹ"
+
+msgid "Sleet showers"
+msgstr ""
+
+msgid "Heavy sleet showers"
+msgstr ""
+
+msgid "Light sleet showers and thunder"
+msgstr ""
+
+msgid "Sleet showers and thunder"
+msgstr ""
+
+msgid "Heavy sleet showers and thunder"
+msgstr ""
+
+msgid "Light snow showers"
+msgstr ""
+
+msgid "Snow showers"
+msgstr ""
+
+msgid "Heavy show showers"
+msgstr ""
+
+msgid "Light snow showers and thunder"
+msgstr ""
+
+msgid "Snow showers and thunder"
+msgstr ""
+
+msgid "Heavy snow showers and thunder"
+msgstr ""
+
+msgid "Light rain"
+msgstr ""
+
+msgid "Rain"
+msgstr ""
+
+msgid "Heavy rain"
+msgstr ""
+
+msgid "Light rain and thunder"
+msgstr ""
+
+msgid "Rain and thunder"
+msgstr ""
+
+msgid "Heavy rain and thunder"
+msgstr ""
+
+msgid "Light sleet"
+msgstr ""
+
+msgid "Sleet"
+msgstr ""
+
+msgid "Heavy sleet"
+msgstr ""
+
+msgid "Light sleet and thunder"
+msgstr ""
+
+msgid "Sleet and thunder"
+msgstr ""
+
+msgid "Heavy sleet and thunder"
+msgstr ""
+
+msgid "Light snow"
+msgstr ""
+
+msgid "Snow"
+msgstr ""
+
+msgid "Heavy snow"
+msgstr ""
+
+msgid "Light snow and thunder"
+msgstr ""
+
+msgid "Snow and thunder"
+msgstr ""
+
+msgid "Heavy snow and thunder"
+msgstr ""
+
+msgid "Fog"
+msgstr ""
+
+msgid ""
+"The Universal Thermal Climate Index (UTCI) is an index that combines the "
+"effects of air temperature, humidity, wind speed, and radiation on the human"
+" body. It is a measure of the thermal stress experienced by a person in a "
+"given environment."
+msgstr ""
+
+msgid "{{name}}: Thermal comfort {{period}}"
+msgstr ""
+
+msgid "Average felt temperature"
+msgstr ""
+
+msgid "Felt temperature range"
+msgstr ""
+
+msgid "Average temperature"
+msgstr ""
+
+msgid ""
+"Relative humidity is the the amount of water vapour present in air expressed"
+" as a percentage of the amount needed for saturation at the same temperature"
+" (dewpoint)."
+msgstr ""
+
+msgid "{{name}}: Daily relative humidity {{period}}"
+msgstr ""
+
+msgid "Relative humidity"
+msgstr ""
+
+msgid "{{name}}: Relative humidity {{period}}"
+msgstr ""
+
+msgid "Normals from reference period: {{period}}"
+msgstr ""
+
+msgid "Normal relative humidity"
+msgstr ""
+
+msgid "Dewpoint temperature"
+msgstr ""
+
+msgid "Air temperature"
+msgstr ""
+
+msgid "Evergreen Needleleaf forest"
+msgstr "Rừng lá kim thường xanh"
+
+msgid "Evergreen Broadleaf forest"
+msgstr "Rừng lá rộng thường xanh"
+
+msgid "Deciduous Needleleaf forest"
+msgstr "Rừng lá kim rụng lá"
+
+msgid "Deciduous Broadleaf forest"
+msgstr "Rừng lá rộng rụng lá"
+
+msgid "Mixed forest"
+msgstr "Rừng hỗn hợp"
+
+msgid "Closed shrublands"
+msgstr "Cây bụi khép kín"
+
+msgid "Open shrublands"
+msgstr "Cây bụi mở"
+
+msgid "Woody savannas"
+msgstr "Trảng cỏ có cây gỗ"
+
+msgid "Savannas"
+msgstr "Trảng cỏ"
+
+msgid "Grasslands"
+msgstr "Đồng cỏ"
+
+msgid "Permanent wetlands"
+msgstr "Đất ngập nước vĩnh cửu"
+
+msgid "Croplands"
+msgstr "Đất trồng trọt"
+
+msgid "Urban and built-up"
+msgstr "Đô thị và xây dựng"
+
+msgid "Cropland/Natural vegetation mosaic"
+msgstr "Đất trồng trọt/Khảm thảm thực vật tự nhiên"
+
+msgid "Snow and ice"
+msgstr "Tuyết và băng"
+
+msgid "Barren or sparsely vegetated"
+msgstr "Cằn cỗi hoặc ít cây cối"
+
+msgid "Water"
+msgstr "Nước"
+
+msgid "Land cover type"
+msgstr ""
+
+msgid "{{name}}: Land cover changes {{years}}"
+msgstr ""
+
+msgid "{{name}}: Daily precipitation {{period}}"
+msgstr ""
+
+msgid "Daily precipitation"
+msgstr ""
+
+msgid "{{name}}: Monthly precipitation {{period}}"
+msgstr ""
+
+msgid "Monthly precipitation"
+msgstr ""
+
+msgid "Normal precipitation"
+msgstr ""
+
+msgid "{{name}}: Daily temperatures {{period}}"
+msgstr ""
+
+msgid "Mean temperature"
+msgstr ""
+
+msgid "Temperature range"
+msgstr ""
+
+msgid "{{name}}: Monthly temperatures {{period}}"
+msgstr ""
+
+msgid "Normal temperature"
+msgstr ""
+
+msgid "Resample"
+msgstr ""
+
+msgid "Weekly"
+msgstr "Hàng Tuần"
+
+msgid ""
+"Change from 16-days to weekly or monthly periods using linear interpolation."
+" Weekly periods are recommended when importing to DHIS2."
+msgstr ""
+
+msgid "{{name}}: {{band}} vegetation index {{period}}"
+msgstr ""
+
+msgid "Value is only for 250 x 250 m where the facility is located"
+msgstr ""
+
+msgid "Data element"
+msgstr "Phần tử dữ liệu"
+
+msgid "No match found"
+msgstr "Không tìm thấy kết quả phù hợp"
+
+msgid "Data element to import data to"
+msgstr ""
+
+msgid "Loading org units"
+msgstr ""
+
+msgid "No org units with geometry found for this level"
+msgstr ""
+
+msgid ""
+"Extracting data for {{periodCount}} {{periodType}} periods and "
+"{{orgUnitsCount}} org units ({{valueCount}} values)"
+msgstr ""
+
+msgid "Extracting data for {{orgUnitsCount}} org units"
+msgstr ""
+
+msgid "Importing data to DHIS2"
+msgstr ""
+
+msgid "Import failed"
+msgstr ""
+
+msgid "One or more conflicts encountered"
+msgstr ""
+
+msgid "Import weather and climate data"
+msgstr ""
+
+msgid ""
+"You can maximum import {{maxValues}} data values in a single import, but you"
+" are trying to import {{valueCount}} values for {{orgUnitCount}} "
+"organisation units over {{periodCount}} {{periodType}} periods. Please "
+"select a shorter period or fewer organisation units. You can always import "
+"more data later."
+msgstr ""
+
+msgid "Instructions"
+msgstr ""
+
+msgid ""
+"Before you can import data, you need to create the associated data elements "
+"in DHIS2. See our setup guide in the left menu."
+msgstr ""
+
+msgid ""
+"Data can be imported in batches. We recommend that you start with a few "
+"organisation units to make sure everything works as expected."
+msgstr ""
+
+msgid "Data"
+msgstr "Dữ liệu"
+
+msgid "Select the variable you would like to import."
+msgstr ""
+
+msgid "Period"
+msgstr "Thời điểm"
+
+msgid ""
+"Select the start and end dates for your import. We will import daily data "
+"for the selected period. You can aggregate data to other period types "
+"(weekly/monthly) in DHIS2. If your DHIS2 instance use a different timezone "
+"than UTC, we will calculate daily values based on this timezone."
+msgstr ""
+
+msgid "Parent organisation unit"
+msgstr "Đơn vị tuyến trên"
+
+msgid ""
+"Select a parent organisation unit for the import. We will import data for "
+"children that are below this organisation unit."
+msgstr ""
+
+msgid "Organisation unit level"
+msgstr "Cấp đơn vị"
+
+msgid ""
+"Select the organisation unit level for the import. We will import data for "
+"this level that are below the parent organisation unit. If the parent "
+"organisation unit is on the same level, we will import data for this single "
+"organisation unit."
+msgstr ""
+
+msgid ""
+"Select the DHIS2 data element you would like to import the data into. See "
+"the “Setup guide” for more information on how to configure this data "
+"element."
+msgstr ""
+
+msgid "Import summary"
+msgstr ""
+
+msgid ""
+"When data is imported, we will show a summary of the import. This includes "
+"the number of data values that were successfully imported or updated. If "
+"data values fail to import, we will show the reason for the failure."
+msgstr ""
+
+msgid "Data is imported"
+msgstr ""
+
+msgid "Imported"
+msgstr ""
+
+msgid "Updated"
+msgstr "Đã cập nhật"
+
+msgid "Ignored"
+msgstr ""
+
+msgid "No data for the following org units"
+msgstr ""
+
+msgid ""
+"ERA5-Land has limited data for costal areas. Values for other org units will"
+" be imported."
+msgstr ""
+
+msgid "Organisation unit level to import data to"
+msgstr ""
+
+msgid "Org unit parent needs to be above or equal to the org unit level"
+msgstr ""
+
+msgid ""
+"The data will be assigned a default yearly period that matches the year it "
+"was collected: {{datasetPeriod}}"
+msgstr ""
+
+msgid "Daily values will be imported between start and end dates"
+msgstr ""
+
+msgid "Period type"
+msgstr "Kiểu thời điểm"
+
+msgid "Start year"
+msgstr ""
+
+msgid "End year"
+msgstr ""
+
+msgid ""
+"Set y-axis values for charts in the Explore data section to make it easier "
+"to compare different org units. Leave blank to calculate based on data "
+"shown."
+msgstr ""
+
+msgid "Max temperature in °C"
+msgstr ""
+
+msgid "Min temperature in °C"
+msgstr ""
+
+msgid "Min temperature must be less than max temperature"
+msgstr ""
+
+msgid "Max change in temperature in +/- °C"
+msgstr ""
+
+msgid "Max monthly precipitation in mm"
+msgstr ""
+
+msgid "Max daily precipitation in mm"
+msgstr ""
+
+msgid "Heat stress upper category"
+msgstr ""
+
+msgid "Heat stress lower category"
+msgstr ""
+
+msgid "Calculate from data"
+msgstr ""
+
+msgid "App settings"
+msgstr ""
+
+msgid "Changes made below will apply to all users of this app."
+msgstr ""
+
+msgid "Default start page for users"
+msgstr ""
+
+msgid "Time zone where your org units are located"
+msgstr ""
+
+msgid "Data element: \"{{name}}\""
+msgstr ""
+
+msgid "Name"
+msgstr "Tên"
+
+msgid "Short name"
+msgstr "Tên rút gọn"
+
+msgid "Code"
+msgstr "Mã"
+
+msgid "Description"
+msgstr "Mô tả"
+
+msgid "Data source"
+msgstr "Nguồn dữ liệu"
+
+msgid "Domain type"
+msgstr "Miền Dữ Liệu"
+
+msgid "Aggregate"
+msgstr "Tổng hợp"
+
+msgid "Aggregation type"
+msgstr "Kiểu tổng hợp"
+
+msgid "Store zero data values"
+msgstr "Lưu giá trị 0"
+
+msgid "Make sure it is checked"
+msgstr ""
+
+msgid "Aggregation levels"
+msgstr "Tuyến Tổng Hợp"
+
+msgid "Assign all org unit levels"
+msgstr ""
+
+msgid ""
+"You should now be able to import data with this app. Please reach out to us "
+"on climate-app@dhis2.org if you have any questions or need help with the "
+"setup."
+msgstr ""
+
+msgid "3. Assign to a data element group"
+msgstr ""
+
+msgid "Data element group: \"{{-name}}\""
+msgstr ""
+
+msgid "Data elements"
+msgstr "Phần tử dữ liệu"
+
+msgid "Assign above data element"
+msgstr ""
+
+msgid "2. Assign to a data set"
+msgstr ""
+
+msgid ""
+"If you import daily data, you should assign the data elements to a daily "
+"data set (weather and climate). For weekly or monthly data, assign to a "
+"weekly or monthly data set (vegetation index). Assigning to a data set helps"
+" to maintain a quality metadata and data where integrity, consistency, "
+"approvals and protection are facilitated. How exactly to define such a data "
+"set depends on the available users and user groups. Similarly, which of the "
+"organisation units can collect this daily climate data set depends on "
+"situated contexts. However, since we can provide data for any administrative"
+" unit that has defined geographic boundaries we leave that decision to "
+"users. Most probable choice is all organisation units in your system."
+msgstr ""
+
+msgid "Data set: \"{{-name}}\""
+msgstr ""
+
+msgid "Organisation units"
+msgstr "Đơn vị"
+
+msgid "Select all organisation units in your system"
+msgstr ""
+
+msgid "4. Add a legend"
+msgstr ""
+
+msgid "Recommended legend for this data element."
+msgstr ""
+
+msgid "Legend: \"{{-name}}\""
+msgstr ""
+
+msgid "Start value"
+msgstr "Giá trị bắt đầu"
+
+msgid "End value"
+msgstr "Giá trị cuối"
+
+msgid "Color"
+msgstr "Màu"
+
+msgid "Configuring DHIS2 before importing data"
+msgstr ""
+
+msgid ""
+"Before you can import data, you need to make some configurations in the "
+"Maintenance app. For detailed instructions on how to configure DHIS2, choose"
+" which data you would like to import below."
+msgstr ""
+
+msgid "1. Create the data element"
+msgstr ""
+
+msgid ""
+"Create DHIS2 data elements only for the data you want to import. We "
+"recommend including the data source in the name to distinguish it from other"
+" sources (e.g. precepetation data is available from both ERA5-Land and "
+"CHIRPS, and there will be additional data providers in the future). If you "
+"use the same code specified below, we will preselect the data element in the"
+" import interface."
+msgstr ""
+
+msgid ""
+"When daily data is imported it can be aggregated to other period types in "
+"DHIS2. We don't recommend aggregating across organisation unit levels, "
+"especially when going from facility level to higher levels defined by a "
+"geographic boundary. To make sure the values remain at its own level, assign"
+" all org unit levels as Aggregation levels for each data element created."
+msgstr ""
+
+msgid "Loading data"
+msgstr "Đang tải dữ liệu"
+
+msgid "Select data to import"
+msgstr ""
+
+msgid "You need access to Google Earth Engine to use this app."
+msgstr ""
+
+msgid "How to get access?"
+msgstr ""
+
+msgid ""
+"For a temporary period there is limited data available for 2024. This is due"
+" to modernization work impacting the Copernicus Climate Data Store (CDS) "
+"where the data originates."
+msgstr ""
+
+msgid "Read more on the CDS user forum"
+msgstr ""
+
+msgid "Data resolution"
+msgstr ""
+
+msgid ""
+"You can import data for the lowest levels in your org unit hierarchy, but it"
+" won't improve the resolution of the data."
+msgstr ""
+
+msgid ""
+"If two org units are close to each other (within the resolution), they will "
+"have the same data values."
+msgstr ""
+
+msgid "Time zone"
+msgstr ""
+
+msgid "ERA5-Land / Copernicus Climate Change Service"
+msgstr ""
+
+msgid "ERA5-Heat / Copernicus Climate Change Service"
+msgstr ""
+
+msgid "Climate Hazards Center / UCSB"
+msgstr ""
+
+msgid "NASA LP DAAC at the USGS EROS Center"
+msgstr ""
+
+msgid "NASA / USGS / JPL-Caltech"
+msgstr ""
+
+msgid "Approximately 31 km (0.25°)"
+msgstr ""
+
+msgid "Approximately 9 km (0.1°)"
+msgstr ""
+
+msgid "Approximately 5 km (0.05°)"
+msgstr ""
+
+msgid "Approximately 250 m"
+msgstr ""
+
+msgid "Approximately 500 m"
+msgstr ""
+
+msgid "Approximately 30 m"
+msgstr ""
+
+msgid ""
+"Landsat Normalized Difference Vegetation Index (NDVI) is used to quantify "
+"vegetation greenness and is useful in understanding vegetation density and "
+"assessing changes in plant health. NDVI values range from -1 to 1, with "
+"higher values indicating denser vegetation."
+msgstr ""
+
+msgid ""
+"Enhanced vegetation index (EVI) differs from NDVI by reducing the influence "
+"of atmospheric conditions and canopy background noise. EVI values range from"
+" -1 to 1, with higher values indicating denser vegetation."
+msgstr ""
+
+msgid "Land cover types at yearly intervals"
+msgstr ""
+
+msgid "Climate/Weather"
+msgstr ""
+
+msgid "Environment"
+msgstr ""
+
+msgid "Weekly or Monthly"
+msgstr ""
+
+msgid "Land"
+msgstr ""
+
+msgid "Yearly"
+msgstr "Hàng năm"
+
+msgid "Air temperature (ERA5-Land)"
+msgstr ""
+
+msgid "Average air temperature in °C at 2 m above the surface."
+msgstr ""
+
+msgid "Average"
+msgstr "Trung bình"
+
+msgid "Max air temperature (ERA5-Land)"
+msgstr ""
+
+msgid "Max air temperature"
+msgstr ""
+
+msgid "Maximum air temperature in °C at 2 m above the surface."
+msgstr ""
+
+msgid "Max"
+msgstr "Lớn nhất"
+
+msgid "Min temperature (ERA5-Land)"
+msgstr ""
+
+msgid "Min air temperature"
+msgstr ""
+
+msgid "Minimum air temperature in °C at 2 m above the surface."
+msgstr ""
+
+msgid "Min"
+msgstr "Nhỏ nhất"
+
+msgid "Precipitation (ERA5-Land)"
+msgstr ""
+
+msgid "Precipitation (ERA5)"
+msgstr ""
+
+msgid "Total precipitation in mm."
+msgstr ""
+
+msgid "Sum"
+msgstr "Tổng"
+
+msgid "Precipitation (CHIRPS)"
+msgstr ""
+
+msgid "Precipitation in mm."
+msgstr ""
+
+msgid "Dewpoint temperature (ERA5-Land)"
+msgstr ""
+
+msgid ""
+"Temperature in °C at 2 m above the surface to which the air would have to be"
+" cooled for saturation to occur."
+msgstr ""
+
+msgid "Relative humidity (ERA5-Land)"
+msgstr ""
+
+msgid ""
+"Percentage of water vapor in the air compared to the total amount of vapor "
+"that can exist in the air at its current temperature. Calculated using air "
+"temperature and dewpoint temperature at 2 m above surface."
+msgstr ""
+
+msgid "Heat stress (ERA5-HEAT)"
+msgstr ""
+
+msgid "Heat stress"
+msgstr ""
+
+msgid "Average felt temperature in °C."
+msgstr ""
+
+msgid "Max heat stress (ERA5-HEAT)"
+msgstr ""
+
+msgid "Max heat stress"
+msgstr ""
+
+msgid "Maximum felt temperature in °C."
+msgstr ""
+
+msgid "Min heat stress (ERA5-HEAT)"
+msgstr ""
+
+msgid "Min heat stress"
+msgstr ""
+
+msgid "Minimum felt temperature in °C."
+msgstr ""
+
+msgid "NDVI - Normalized difference vegetation index (MODIS)"
+msgstr ""
+
+msgid "NDVI"
+msgstr ""
+
+msgid "EVI - Enhanced vegetation index (MODIS)"
+msgstr ""
+
+msgid "EVI"
+msgstr ""
+
+msgid "Mean elevation (SRTM)"
+msgstr ""
+
+msgid "Mean elevation in meters above sea level."
+msgstr ""
+
+msgid "First value"
+msgstr ""
+
+msgid "Min elevation (SRTM)"
+msgstr ""
+
+msgid "Min elevation in meters above sea level."
+msgstr ""
+
+msgid "Max elevation (SRTM)"
+msgstr ""
+
+msgid "Max elevation in meters above sea level."
+msgstr ""
+
+msgid "Standard deviation of elevation (SRTM)"
+msgstr ""
+
+msgid "Std dev elevation"
+msgstr ""
+
+msgid "Standard deviation of elevation in meters above sea level."
+msgstr ""
+
+msgid "Percentage of area with this land cover type."
+msgstr ""
+
+msgid "Heat/cold stress"
+msgstr ""
+
+msgid "You only need to include categories that are relevant for your area."
+msgstr ""
+
+msgid "Extreme cold stress"
+msgstr ""
+
+msgid "Extreme<br>cold stress"
+msgstr ""
+
+msgid "Very strong cold stress"
+msgstr ""
+
+msgid "Very strong<br>cold stress"
+msgstr ""
+
+msgid "Strong cold stress"
+msgstr ""
+
+msgid "Strong<br>cold stress"
+msgstr ""
+
+msgid "Moderate cold stress"
+msgstr ""
+
+msgid "Moderate<br>cold stress"
+msgstr ""
+
+msgid "Slight cold stress"
+msgstr ""
+
+msgid "Slight<br>cold stress"
+msgstr ""
+
+msgid "No thermal stress"
+msgstr ""
+
+msgid "No thermal<br>stress"
+msgstr ""
+
+msgid "Moderate heat stress"
+msgstr ""
+
+msgid "Moderate<br>heat stress"
+msgstr ""
+
+msgid "Strong heat stress"
+msgstr ""
+
+msgid "Strong<br>heat stress"
+msgstr ""
+
+msgid "Very strong heat stress"
+msgstr ""
+
+msgid "Very strong<br>heat stress"
+msgstr ""
+
+msgid "Extreme heat stress"
+msgstr ""
+
+msgid "Extreme<br>heat stress"
+msgstr ""
+
+msgid "ERA5-Land / Copernicus Climate Change Service / Google Earth Engine"
+msgstr ""
+
+msgid "ERA5-HEAT / Copernicus Climate Change Service / Google Earth Engine"
+msgstr ""
+
+msgid "NASA LP DAAC at the USGS EROS Center / Google Earth Engine"
+msgstr ""
+
+msgid "NASA / USGS / JPL-Caltech / Google Earth Engine"
+msgstr ""
+
+msgid "No data found for the selected period"
+msgstr ""
