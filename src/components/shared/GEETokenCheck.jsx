@@ -6,15 +6,15 @@ import styles from './styles/GEETokenCheck.module.css'
 
 const GEETokenCheck = () => {
     const [isLoading, setIsLoading] = useState(true)
-    const { geeToken } = useDataSources()
+    const { hasGeeToken } = useDataSources()
 
     useEffect(() => {
-        if (geeToken !== undefined) {
+        if (hasGeeToken !== undefined) {
             setIsLoading(false)
         }
-    }, [geeToken])
+    }, [hasGeeToken])
 
-    return !isLoading && geeToken !== true ? (
+    return !isLoading && hasGeeToken !== true ? (
         <div className={styles.container}>
             <NoticeBox warning>
                 {i18n.t(
