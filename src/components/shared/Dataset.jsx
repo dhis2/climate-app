@@ -27,12 +27,15 @@ const Dataset = ({ title, selected, onChange, showDescription = true }) => {
         <div>
             {title && <h2>{title}</h2>}
             <SingleSelectField
-                filterable
+                filterable={datasets.length > 0}
                 label={i18n.t('Select data to import')}
                 selected={selected?.id}
                 onChange={({ selected }) =>
                     onChange(datasets.find((d) => d.id === selected))
                 }
+                empty={i18n.t(
+                    'No datasets are available. Go to the Settings page to learn how to configure data sources.'
+                )}
                 dataTest="dataset-selector"
             >
                 {datasets.map((d) => (

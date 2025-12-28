@@ -12,7 +12,7 @@ export const dataProviders = [
     },
     {
         id: PROVIDER_ENACTS,
-        routeCode: 'enacts',
+        routeCode: PROVIDER_ENACTS,
         name: 'ENACTS Data Sharing Tool (DST)',
         nameShort: 'ENACTS',
         statusCheck: 'routehref',

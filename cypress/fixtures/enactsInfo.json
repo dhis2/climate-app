@@ -1,0 +1,14 @@
+{
+    "name": "DST",
+    "version": 1.0,
+    "longname": "ENACTS Data Sharing Tool",
+    "description": "REST API for sharing ENACTS datasets from National Meteorological and Hydrological Service (NMHS).",
+    "service": "DCCMS ENACTS API",
+    "owner": "Department of Climate Change and Meteorological Services (DCCMS)",
+    "contact_name": "Fatsanawo Dzingomvera",
+    "contact_email": "fatsanawo@metmalawi.gov.mw",
+    "documentation": "http://168.253.224.242:9091/dst/api_documentation",
+    "status": "OK",
+    "environment": "production",
+    "server_time": "2025-12-26T07:42:06+00:00Z"
+}
