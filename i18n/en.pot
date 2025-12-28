@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-12-19T16:18:38.303Z\n"
-"PO-Revision-Date: 2025-12-19T16:18:38.304Z\n"
+"POT-Creation-Date: 2025-12-26T07:29:31.183Z\n"
+"PO-Revision-Date: 2025-12-26T07:29:31.183Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -104,6 +104,12 @@ msgstr ""
 "automatically aggregate the values within that district. If two org units "
 "are close to each other (within the resolution), they will have the same "
 "data values."
+
+msgid "This app could not retrieve required data."
+msgstr "This app could not retrieve required data."
+
+msgid "Network error"
+msgstr "Network error"
 
 msgid "Home"
 msgstr "Home"
@@ -1053,6 +1059,13 @@ msgstr "Error"
 
 msgid "Select data to import"
 msgstr "Select data to import"
+
+msgid ""
+"No datasets are available. Go to the Settings page to learn how to "
+"configure data sources."
+msgstr ""
+"No datasets are available. Go to the Settings page to learn how to "
+"configure data sources."
 
 msgid "Data is from {{source}}. Accessed via {{provider}}."
 msgstr "Data is from {{source}}. Accessed via {{provider}}."

@@ -1,9 +1,24 @@
+import { useState, useEffect } from 'react'
 import getEEDatasets from '../data/earth-engine-datasets.js'
+import useEarthEngineToken from './useEarthEngineToken.js'
 import useEnactsDatasets from './useEnactsDatasets.js'
 
 const useDatasets = () => {
-    const results = [{ data: getEEDatasets(), error: false, loading: false }]
-    results.push(useEnactsDatasets())
+    const [hasToken, setHasToken] = useState()
+    const tokenPromise = useEarthEngineToken()
+
+    useEffect(() => {
+        tokenPromise
+            .then((token) => setHasToken(!!token))
+            .catch(() => setHasToken(false))
+    }, [tokenPromise])
+
+    const results = [useEnactsDatasets()]
+
+    // Only include GEE datasets if token exists
+    if (hasToken) {
+        results.push({ data: getEEDatasets(), error: false, loading: false })
+    }
 
     // Combine hook results
     const loading = results.some((r) => r.loading)
