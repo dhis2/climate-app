@@ -1,27 +1,20 @@
 import i18n from '@dhis2/d2-i18n'
 import { NoticeBox } from '@dhis2/ui'
 import { useState, useEffect } from 'react'
-import useEarthEngineToken from '../../hooks/useEarthEngineToken.js'
+import { useDataSources } from '../DataSourcesProvider.jsx'
 import styles from './styles/GEETokenCheck.module.css'
 
 const GEETokenCheck = () => {
-    const [hasToken, setHasToken] = useState()
     const [isLoading, setIsLoading] = useState(true)
-    const tokenPromise = useEarthEngineToken()
+    const { geeToken } = useDataSources()
 
     useEffect(() => {
-        tokenPromise
-            .then((token) => setHasToken(!!token))
-            .catch(() => setHasToken(false))
-    }, [tokenPromise])
-
-    useEffect(() => {
-        if (hasToken !== undefined) {
+        if (geeToken !== undefined) {
             setIsLoading(false)
         }
-    }, [hasToken])
+    }, [geeToken])
 
-    return !isLoading && hasToken !== true ? (
+    return !isLoading && geeToken !== true ? (
         <div className={styles.container}>
             <NoticeBox warning>
                 {i18n.t(

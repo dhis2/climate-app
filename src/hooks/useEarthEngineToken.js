@@ -12,7 +12,6 @@ const useEarthEngineToken = () => {
     return engine
         .query(tokenQuery)
         .then((data) => ({ ...data.token, token_type: 'Bearer' }))
-        .catch(() => console.log('Google Earth Engine is not configured.'))
 }
 
 export default useEarthEngineToken

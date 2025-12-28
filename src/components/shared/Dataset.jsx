@@ -34,9 +34,10 @@ const Dataset = ({ title, selected, onChange, showDescription = true }) => {
                     onChange(datasets.find((d) => d.id === selected))
                 }
                 empty={i18n.t(
-                    'No datasets are available. Go to the Settings page to learn how to configure data sources.'
+                    'No datasets are available. Go to the Settings page to learn how to configure dataset sources.'
                 )}
                 dataTest="dataset-selector"
+                loading={loading}
             >
                 {datasets.map((d) => (
                     <SingleSelectOption

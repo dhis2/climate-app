@@ -3,7 +3,6 @@ import { useQuery } from '@tanstack/react-query'
 const useEnactsInfo = (enactsRoute) => {
     const infoUrl = enactsRoute ? `${enactsRoute.href}/run/info` : null
     const fetchInfo = async () => {
-        console.log('fetching enacts info', infoUrl)
         try {
             const resp = await fetch(infoUrl, { credentials: 'include' })
             if (!resp.ok) {
@@ -36,9 +35,7 @@ const useEnactsInfo = (enactsRoute) => {
         enabled: !!infoUrl,
     })
 
-    const loading = isLoading && !error
-
-    return { data, error, loading }
+    return { data, error, loading: infoUrl && isLoading && !error }
 }
 
 export default useEnactsInfo

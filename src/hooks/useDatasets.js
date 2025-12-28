@@ -1,27 +1,19 @@
-import { useState, useEffect } from 'react'
+import { useDataSources } from '../components/DataSourcesProvider.jsx'
 import geeDatasets from '../data/earth-engine-datasets.js'
-import useEarthEngineToken from './useEarthEngineToken.js'
 import useEnactsDatasets from './useEnactsDatasets.js'
 
+// TODO - handle loading state
+
 const useDatasets = () => {
-    const [hasToken, setHasToken] = useState()
-    const tokenPromise = useEarthEngineToken()
-
-    useEffect(() => {
-        tokenPromise
-            .then((token) => setHasToken(!!token))
-            .catch(() => setHasToken(false))
-    }, [tokenPromise])
-
     const results = [useEnactsDatasets()]
+    const { geeToken, loading: geeLoading } = useDataSources()
 
-    // Only include GEE datasets if token exists
-    if (hasToken) {
+    if (geeToken) {
         results.push({ data: geeDatasets, error: false, loading: false })
     }
 
     // Combine hook results
-    const loading = results.some((r) => r.loading)
+    const loading = geeLoading || results.some((r) => r.loading)
     const errors = results.map((r) => r.error).filter(Boolean)
     const allDatasets = results.flatMap((r) => r.data || [])
 
