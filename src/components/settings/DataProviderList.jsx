@@ -7,13 +7,42 @@ import {
     TableCell,
     TableBody,
 } from '@dhis2/ui'
-import PropTypes from 'prop-types'
 import React from 'react'
+import { dataProviders } from '../../data/providers.js'
+import { useDataSources } from '../DataSourcesProvider.jsx'
 import DataProviderListItem from './DataProviderListItem.jsx'
 
-const DEFAULT_DATA_PROVIDERS = []
+const DataProviderList = () => {
+    const { geeToken, enactsRoute, enactsInfo } = useDataSources()
+    // fill in data provider details based on route codes in routes api
+    const dataProvidersUpdated = dataProviders.map((item) => {
+        const name = item.name
+        let status = 'Not configured'
 
-const DataProviderList = ({ dataProviders = DEFAULT_DATA_PROVIDERS }) => {
+        if (item.id === 'gee') {
+            if (geeToken === null) {
+                status = 'Offline'
+            } else if (geeToken === false) {
+                status = 'Not configured'
+            } else {
+                status = 'Online'
+            }
+        } else if (item.id === 'enacts') {
+            if (!enactsRoute) {
+                status = 'Not configured'
+            } else if (enactsInfo && enactsInfo.status === 'OK') {
+                status = 'Online'
+            } else {
+                status = 'Offline'
+            }
+        }
+
+        return {
+            name,
+            status,
+        }
+    })
+
     return (
         <div>
             <h2>{i18n.t('Data Providers')}</h2>
@@ -33,10 +62,11 @@ const DataProviderList = ({ dataProviders = DEFAULT_DATA_PROVIDERS }) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {dataProviders.map((provider) => (
+                        {dataProvidersUpdated.map((provider) => (
                             <DataProviderListItem
                                 key={provider.name}
-                                dataProvider={provider}
+                                name={provider.name}
+                                status={provider.status}
                             />
                         ))}
                     </TableBody>
@@ -44,10 +74,6 @@ const DataProviderList = ({ dataProviders = DEFAULT_DATA_PROVIDERS }) => {
             </div>
         </div>
     )
-}
-
-DataProviderList.propTypes = {
-    dataProviders: PropTypes.array,
 }
 
 export default DataProviderList

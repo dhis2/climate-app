@@ -1,12 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { useMemo } from 'react'
-import { dataProviders, PROVIDER_ENACTS } from '../data/providers.js'
+import { useDataSources } from '../components/DataSourcesProvider.jsx'
 import { DAILY, MONTHLY, YEARLY } from '../utils/time.js'
-import useRoutesAPI from './useRoutesAPI.js'
-
-const routeCode = dataProviders.find((item) => item.id == PROVIDER_ENACTS)[
-    'routeCode'
-]
 
 const parseEnactsData = (results) => {
     // need to convert from original enacts results
@@ -52,20 +47,7 @@ const encodeDate = (date, periodType) => {
 }
 
 const useEnactsData = (dataset, period, features) => {
-    const {
-        routes,
-        loading: routesLoading,
-        error: routesError,
-    } = useRoutesAPI()
-
-    const enactsRoute =
-        !routesLoading && !routesError
-            ? routes.find((route) => route.code == routeCode)
-            : null
-
-    if (!routesLoading && !routesError && !enactsRoute) {
-        throw new Error(`Could not find a route with the code "${routeCode}"`)
-    }
+    const { enactsRoute } = useDataSources()
 
     // fetch raw data info from server
     const dataUrl = enactsRoute
@@ -129,8 +111,8 @@ const useEnactsData = (dataset, period, features) => {
 
     const {
         data: queryData,
-        isLoading: queryLoading,
-        error: queryError,
+        isLoading,
+        error,
     } = useQuery({
         queryKey: ['use-enacts-data', dataset, period, features],
         queryFn: fetchDataRaw,
@@ -145,9 +127,7 @@ const useEnactsData = (dataset, period, features) => {
         return parseEnactsData(queryData)
     }, [queryData])
 
-    const error = routesError || queryError
-
-    const loading = (routesLoading || queryLoading) && !error
+    const loading = isLoading && !error
 
     return { data: processedData, error, loading }
 }

@@ -1,7 +1,6 @@
 import { useConfig } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import {
-    CircularLoader,
     TableRow,
     TableCell,
     Button,
@@ -13,51 +12,18 @@ import {
 } from '@dhis2/ui'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
-import React, { useEffect, useState, useRef, useMemo } from 'react'
-import useEarthEngineToken from '../../hooks/useEarthEngineToken.js'
+import React, { useState, useRef, useMemo } from 'react'
 import styles from './styles/DataProviderListItem.module.css'
 
 const ONLINE = 'Online'
 const OFFLINE = 'Offline'
 const NOT_CONFIGURED = 'Not configured'
 
-const DataProviderListItem = ({ dataProvider }) => {
-    const [providerStatus, setProviderStatus] = useState(undefined)
+const DataProviderListItem = ({ name, status }) => {
     const [showInfo, setShowInfo] = useState(null)
-    const tokenPromise = useEarthEngineToken()
     const buttonRef = useRef()
     const { serverVersion } = useConfig()
     const docsVersion = `${serverVersion.major}${serverVersion.minor}`
-
-    useEffect(() => {
-        const pingDataProvider = async () => {
-            if (dataProvider.statusCheck === 'routehref') {
-                if (dataProvider?.href) {
-                    const pingUrl = `${dataProvider.href}/run` // TODO use 'info' when ENACTS api is implemented
-                    fetch(pingUrl, { credentials: 'include' })
-                        .then((response) => {
-                            if (response.ok) {
-                                setProviderStatus(ONLINE)
-                            } else {
-                                setProviderStatus(OFFLINE)
-                            }
-                        })
-                        .catch(() => {
-                            setProviderStatus(OFFLINE)
-                        })
-                } else {
-                    setProviderStatus(NOT_CONFIGURED)
-                }
-            } else if (dataProvider.statusCheck === 'geetoken') {
-                tokenPromise
-                    .then((token) =>
-                        setProviderStatus(token ? ONLINE : NOT_CONFIGURED)
-                    )
-                    .catch(() => setProviderStatus(NOT_CONFIGURED))
-            }
-        }
-        pingDataProvider()
-    }, [dataProvider, tokenPromise])
 
     const getInfo = useMemo(() => {
         if (!showInfo) {
@@ -160,32 +126,24 @@ const DataProviderListItem = ({ dataProvider }) => {
 
     return (
         <TableRow>
-            <TableCell>{dataProvider.name}</TableCell>
+            <TableCell>{name}</TableCell>
             <TableCell>
                 <div className={styles.dataProviderStatusDiv}>
-                    {providerStatus && (
-                        <div
-                            className={cx(styles.dataProviderStatusIcon, {
-                                [styles.dataProviderOnline]:
-                                    providerStatus === ONLINE,
-                                [styles.dataProviderOffline]:
-                                    providerStatus === OFFLINE,
-                                [styles.dataProviderMissing]:
-                                    providerStatus === NOT_CONFIGURED,
-                            })}
-                        ></div>
-                    )}
-                    {providerStatus ? (
-                        <span>{providerStatus}</span>
-                    ) : (
-                        <CircularLoader extrasmall={true} />
-                    )}
+                    <div
+                        className={cx(styles.dataProviderStatusIcon, {
+                            [styles.dataProviderOnline]: status === ONLINE,
+                            [styles.dataProviderOffline]: status === OFFLINE,
+                            [styles.dataProviderMissing]:
+                                status === NOT_CONFIGURED,
+                        })}
+                    ></div>
+                    <span>{status}</span>
                 </div>
             </TableCell>
             <TableCell>
                 <div ref={buttonRef}>
                     <button
-                        onClick={() => openInfo(dataProvider.name)}
+                        onClick={() => openInfo(name)}
                         className={styles.infoButton}
                     >
                         <IconInfo24 />
@@ -215,13 +173,8 @@ const DataProviderListItem = ({ dataProvider }) => {
 }
 
 DataProviderListItem.propTypes = {
-    dataProvider: PropTypes.shape({
-        href: PropTypes.string,
-        name: PropTypes.string,
-        routeCode: PropTypes.string,
-        statusCheck: PropTypes.string,
-        url: PropTypes.any,
-    }).isRequired,
+    name: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
 }
 
 export default DataProviderListItem

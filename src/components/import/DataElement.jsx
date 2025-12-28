@@ -64,6 +64,12 @@ const DataElement = ({ selected, onChange, datasetCode, periodType }) => {
 
     const periodTypeParenth = periodType ? ` (${periodType.toLowerCase()})` : ''
 
+    const emptyMessage = !datasetCode
+        ? i18n.t(
+              'No data elements found. You must first select a dataset to import.'
+          )
+        : i18n.t('No data elements found for the selected period type.')
+
     return (
         <div>
             <SingleSelectField
@@ -79,6 +85,7 @@ const DataElement = ({ selected, onChange, datasetCode, periodType }) => {
                 onChange={({ selected }) =>
                     onChange(uniqueDataElements.find((d) => d.id === selected))
                 }
+                empty={emptyMessage}
             >
                 {uniqueDataElements.map((d) => (
                     <SingleSelectOption

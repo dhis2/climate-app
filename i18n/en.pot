@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-12-26T07:29:31.183Z\n"
-"PO-Revision-Date: 2025-12-26T07:29:31.183Z\n"
+"POT-Creation-Date: 2025-12-28T15:35:01.928Z\n"
+"PO-Revision-Date: 2025-12-28T15:35:01.929Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -631,6 +631,12 @@ msgstr "Value is only for 250 x 250 m where the facility is located"
 msgid "Loading data elements..."
 msgstr "Loading data elements..."
 
+msgid "No data elements found. You must first select a dataset to import."
+msgstr "No data elements found. You must first select a dataset to import."
+
+msgid "No data elements found for the selected period type."
+msgstr "No data elements found for the selected period type."
+
 msgid "Showing data elements from {{periodType}} data sets"
 msgstr "Showing data elements from {{periodType}} data sets"
 
@@ -1062,10 +1068,10 @@ msgstr "Select data to import"
 
 msgid ""
 "No datasets are available. Go to the Settings page to learn how to "
-"configure data sources."
+"configure dataset sources."
 msgstr ""
 "No datasets are available. Go to the Settings page to learn how to "
-"configure data sources."
+"configure dataset sources."
 
 msgid "Data is from {{source}}. Accessed via {{provider}}."
 msgstr "Data is from {{source}}. Accessed via {{provider}}."

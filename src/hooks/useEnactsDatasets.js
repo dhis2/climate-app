@@ -1,13 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
 import { useMemo } from 'react'
+import { useDataSources } from '../components/DataSourcesProvider.jsx'
 import { climateDataSet, climateGroup } from '../data/groupings.js'
 import { dataProviders, PROVIDER_ENACTS } from '../data/providers.js'
 import { DAILY, MONTHLY, YEARLY } from '../utils/time.js'
-import useEnactsInfo from './useEnactsInfo.js'
-import useRoutesAPI from './useRoutesAPI.js'
 
 const dataProvider = dataProviders.find((item) => item.id == PROVIDER_ENACTS)
-const routeCode = dataProvider['routeCode']
 
 const enactsDataCollections = {
     ALL: {
@@ -94,26 +92,7 @@ const parseEnactsDatasetGroup = (datasets, enactsInfo) => {
 }
 
 const useEnactsDatasets = () => {
-    const {
-        routes,
-        loading: routesLoading,
-        error: routesError,
-    } = useRoutesAPI()
-
-    const enactsRoute =
-        !routesLoading && !routesError
-            ? routes.find((route) => route.code == routeCode)
-            : null
-    if (!routesLoading && !routesError && !enactsRoute) {
-        console.warn(`Could not find a route with the code "${routeCode}"`)
-    }
-
-    const {
-        data: enactsInfo,
-        loading: enactsInfoLoading,
-        error: enactsInfoError,
-    } = useEnactsInfo(enactsRoute)
-
+    const { enactsInfo, enactsRoute } = useDataSources()
     // fetch raw datasets info from server
     const datasetsUrl = enactsRoute
         ? `${enactsRoute.href}/run/dataset_info`
@@ -197,12 +176,9 @@ const useEnactsDatasets = () => {
         return parsedData.filter((d) => d.periodType != undefined)
     }, [queryData, enactsInfo])
 
-    const error = routesError || enactsInfoError || queryError
+    const error = queryError
 
-    const loading =
-        enactsRoute &&
-        (routesLoading || enactsInfoLoading || queryLoading) &&
-        !error
+    const loading = enactsRoute && queryLoading && !error
 
     return { data: processedData, error, loading }
 }
