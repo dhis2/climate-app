@@ -6,9 +6,9 @@ import useEnactsDatasets from './useEnactsDatasets.js'
 
 const useDatasets = () => {
     const results = [useEnactsDatasets()]
-    const { geeToken, loading: geeLoading } = useDataSources()
+    const { hasGeeToken, loading: geeLoading } = useDataSources()
 
-    if (geeToken) {
+    if (hasGeeToken) {
         results.push({ data: geeDatasets, error: false, loading: false })
     }
 

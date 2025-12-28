@@ -13,16 +13,16 @@ import { useDataSources } from '../DataSourcesProvider.jsx'
 import DataProviderListItem from './DataProviderListItem.jsx'
 
 const DataProviderList = () => {
-    const { geeToken, enactsRoute, enactsInfo } = useDataSources()
+    const { hasGeeToken, enactsRoute, enactsInfo } = useDataSources()
     // fill in data provider details based on route codes in routes api
     const dataProvidersUpdated = dataProviders.map((item) => {
         const name = item.name
         let status = 'Not configured'
 
         if (item.id === 'gee') {
-            if (geeToken === null) {
+            if (hasGeeToken === null) {
                 status = 'Offline'
-            } else if (geeToken === false) {
+            } else if (hasGeeToken === false) {
                 status = 'Not configured'
             } else {
                 status = 'Online'

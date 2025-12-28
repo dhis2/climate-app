@@ -16,7 +16,7 @@ const CachedDataQueryCtx = createContext({})
 // TODO - useMemo instead of useState/useEffect where possible
 
 const DataSourcesProvider = ({ children }) => {
-    const [geeToken, setGeeToken] = useState(null)
+    const [hasGeeToken, setHasGeeToken] = useState(null)
     const [enactsInfo, setEnactsInfo] = useState(false)
     const [enactsRoute, setEnactsRoute] = useState(null)
     const tokenPromise = useEarthEngineToken()
@@ -47,17 +47,17 @@ const DataSourcesProvider = ({ children }) => {
     } = useEnactsInfo(enactsRoute)
 
     useEffect(() => {
-        if (geeToken === false || geeToken?.access_token) {
+        if (hasGeeToken !== null) {
             return
         }
         tokenPromise
-            .then((token) => {
-                setGeeToken(token)
+            .then(() => {
+                setHasGeeToken(true)
             })
             .catch(() => {
-                setGeeToken(false)
+                setHasGeeToken(false)
             })
-    }, [tokenPromise, geeToken])
+    }, [tokenPromise, hasGeeToken])
 
     useEffect(() => {
         if (eInfo) {
@@ -76,10 +76,10 @@ const DataSourcesProvider = ({ children }) => {
     // }
 
     const data = {
-        geeToken,
+        hasGeeToken,
         enactsInfo,
         enactsRoute,
-        loading: geeToken === null || routesLoading || enactsInfoLoading,
+        loading: hasGeeToken === null || routesLoading || enactsInfoLoading,
     }
 
     return (
