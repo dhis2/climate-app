@@ -1,10 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import {
-    SingleSelectField,
-    SingleSelectOption,
-    CircularLoader,
-    NoticeBox,
-} from '@dhis2/ui'
+import { SingleSelectField, SingleSelectOption, NoticeBox } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React from 'react'
 import useDatasets from '../../hooks/useDatasets.js'
@@ -12,9 +7,6 @@ import useDatasets from '../../hooks/useDatasets.js'
 const Dataset = ({ title, selected, onChange, showDescription = true }) => {
     const { data: datasets, loading, error } = useDatasets()
 
-    if (loading) {
-        return <CircularLoader large />
-    }
     if (error) {
         return (
             <NoticeBox title={i18n.t('Error')} error>

@@ -7,6 +7,8 @@ import { DAILY, MONTHLY, YEARLY } from '../utils/time.js'
 
 const dataProvider = dataProviders.find((item) => item.id == PROVIDER_ENACTS)
 
+const EMPTY_ENACTS_DATASETS = []
+
 const enactsDataCollections = {
     ALL: {
         name: 'All stations',
@@ -138,7 +140,7 @@ const useEnactsDatasets = () => {
     // process results
     const processedData = useMemo(() => {
         if (!queryData || !enactsInfo) {
-            return undefined
+            return EMPTY_ENACTS_DATASETS
         }
 
         // convert nested structure to groups of datasets (multiple period types per group)
@@ -176,11 +178,11 @@ const useEnactsDatasets = () => {
         return parsedData.filter((d) => d.periodType != undefined)
     }, [queryData, enactsInfo])
 
-    const error = queryError
-
-    const loading = enactsRoute && queryLoading && !error
-
-    return { data: processedData, error, loading }
+    return {
+        data: processedData,
+        loading: enactsRoute && queryLoading && !queryError,
+        error: queryError,
+    }
 }
 
 export default useEnactsDatasets
