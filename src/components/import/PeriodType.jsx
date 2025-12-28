@@ -9,7 +9,9 @@ const defaultPeriodTypes = new Set([DAILY, WEEKLY, MONTHLY])
 const PeriodType = ({ periodType, supportedPeriodTypes, onChange }) => {
     // get period type objects from supported period type ids, or use defaults
     const supportedPeriodTypeObjects = supportedPeriodTypes
-        ? periodTypes?.filter((type) => supportedPeriodTypes.includes(type.id))
+        ? periodTypes?.filter((type) =>
+              supportedPeriodTypes.map((pt) => pt.periodType).includes(type.id)
+          )
         : periodTypes.filter((type) => defaultPeriodTypes.has(type.id))
 
     // make sure selected period type is supported by dataset period type, or set to undefined
@@ -63,7 +65,7 @@ const PeriodType = ({ periodType, supportedPeriodTypes, onChange }) => {
 PeriodType.propTypes = {
     periodType: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
-    supportedPeriodTypes: PropTypes.arrayOf(PropTypes.string),
+    supportedPeriodTypes: PropTypes.arrayOf(PropTypes.object),
 }
 
 export default PeriodType

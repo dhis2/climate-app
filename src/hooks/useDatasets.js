@@ -9,7 +9,17 @@ const useDatasets = () => {
     const { hasGeeToken, loading: geeLoading } = useDataSources()
 
     if (hasGeeToken) {
-        results.push({ data: geeDatasets, error: false, loading: false })
+        const normalizedGeeDatasets = geeDatasets.map((dataset) => ({
+            ...dataset,
+            supportedPeriodTypes: dataset.supportedPeriodTypes.map((pt) => ({
+                periodType: pt,
+            })),
+        }))
+        results.push({
+            data: normalizedGeeDatasets,
+            error: false,
+            loading: false,
+        })
     }
 
     // Combine hook results
