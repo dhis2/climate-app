@@ -1,6 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
-import { PROVIDER_ENACTS, PROVIDER_GEE } from '../../data/providers.js'
+import {
+    PROVIDER_ENACTS,
+    PROVIDER_GEE,
+} from '../../components/DataSourcesProvider.jsx'
 import useOrgUnits from '../../hooks/useOrgUnits.js'
 import { getPeriods, periodTypes } from '../../utils/time.js'
 import DataLoader from '../shared/DataLoader.jsx'

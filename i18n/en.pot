@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2025-12-29T08:54:15.088Z\n"
-"PO-Revision-Date: 2025-12-29T08:54:15.089Z\n"
+"POT-Creation-Date: 2025-12-29T10:58:10.799Z\n"
+"PO-Revision-Date: 2025-12-29T10:58:10.800Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -104,12 +104,6 @@ msgstr ""
 "automatically aggregate the values within that district. If two org units "
 "are close to each other (within the resolution), they will have the same "
 "data values."
-
-msgid "This app could not retrieve required data."
-msgstr "This app could not retrieve required data."
-
-msgid "Network error"
-msgstr "Network error"
 
 msgid "Home"
 msgstr "Home"
