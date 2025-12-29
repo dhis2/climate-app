@@ -1,19 +1,11 @@
 import i18n from '@dhis2/d2-i18n'
-import { SingleSelectField, SingleSelectOption, NoticeBox } from '@dhis2/ui'
+import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React from 'react'
 import useDatasets from '../../hooks/useDatasets.js'
 
 const Dataset = ({ title, selected, onChange, showDescription = true }) => {
     const { data: datasets, loading, error } = useDatasets()
-
-    if (error) {
-        return (
-            <NoticeBox title={i18n.t('Error')} error>
-                {error}
-            </NoticeBox>
-        )
-    }
 
     return (
         <div>
@@ -30,6 +22,10 @@ const Dataset = ({ title, selected, onChange, showDescription = true }) => {
                 )}
                 dataTest="dataset-selector"
                 loading={loading}
+                error={!!error}
+                validationText={
+                    !!error && i18n.t('ENACTS datasets could not be loaded')
+                }
             >
                 {datasets.map((d) => (
                     <SingleSelectOption
@@ -52,19 +48,6 @@ const Dataset = ({ title, selected, onChange, showDescription = true }) => {
                         }
                     )}
                 </p>
-            )}
-
-            {error && (
-                <NoticeBox title={i18n.t('Warning')} warning>
-                    {i18n.t(
-                        'Error fetching additional datasets from one or more local data providers'
-                    )}
-                    <ul>
-                        {error.map((err) => (
-                            <li key={`error-${err.message}`}>{err.message}</li>
-                        ))}
-                    </ul>
-                </NoticeBox>
             )}
         </div>
     )
