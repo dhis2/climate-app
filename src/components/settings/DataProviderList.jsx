@@ -8,32 +8,30 @@ import {
     TableBody,
 } from '@dhis2/ui'
 import React from 'react'
-import { dataProviders } from '../../data/providers.js'
 import { useDataSources } from '../DataSourcesProvider.jsx'
 import DataProviderListItem from './DataProviderListItem.jsx'
 
 const DataProviderList = () => {
-    const { gee, enacts } = useDataSources()
-    const hasGeeToken = gee.enabled
-    const enactsRoute = enacts.route
-    const enactsInfo = enacts.info
+    const sources = useDataSources()
 
-    const dataProvidersUpdated = dataProviders.map((item) => {
-        const name = item.name
-        let status = 'Not configured'
+    const { gee, enacts } = sources
 
-        if (item.id === 'gee') {
-            if (hasGeeToken === null) {
+    const dataProviders = Object.values(sources).map((item) => {
+        let status = ''
+
+        if (item.id === gee.id) {
+            if (gee.enabled === null) {
                 status = 'Offline'
-            } else if (hasGeeToken === false) {
+            } else if (gee.enabled === false) {
                 status = 'Not configured'
             } else {
                 status = 'Online'
             }
-        } else if (item.id === 'enacts') {
-            if (!enactsRoute) {
+        } else {
+            // enacts
+            if (!enacts.route) {
                 status = 'Not configured'
-            } else if (enactsInfo && enactsInfo.status === 'OK') {
+            } else if (enacts.info?.status === 'OK') {
                 status = 'Online'
             } else {
                 status = 'Offline'
@@ -41,7 +39,7 @@ const DataProviderList = () => {
         }
 
         return {
-            name,
+            name: item.name,
             status,
         }
     })
@@ -65,7 +63,7 @@ const DataProviderList = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {dataProvidersUpdated.map((provider) => (
+                        {dataProviders.map((provider) => (
                             <DataProviderListItem
                                 key={provider.name}
                                 name={provider.name}

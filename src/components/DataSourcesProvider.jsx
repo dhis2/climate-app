@@ -1,28 +1,35 @@
-// import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
-import React, { createContext, useContext, useState, useEffect } from 'react'
-import {
-    dataProviders,
-    PROVIDER_ENACTS,
-    PROVIDER_GEE,
-} from '../data/providers.js'
+import React, {
+    createContext,
+    useContext,
+    useState,
+    useEffect,
+    useMemo,
+} from 'react'
 import useEarthEngineToken from '../hooks/useEarthEngineToken.js'
 import useEnactsInfo from '../hooks/useEnactsInfo.js'
 import useRoutesAPI from '../hooks/useRoutesAPI.js'
 
-const dataProvider = dataProviders.find((item) => item.id == PROVIDER_ENACTS)
-const routeCode = dataProvider['routeCode']
+export const PROVIDER_GEE = 'gee'
+export const PROVIDER_ENACTS = 'enacts'
+const enactsRouteCode = PROVIDER_ENACTS
 
 const CachedDataQueryCtx = createContext({})
 
-// TODO = use version toggle for enacts
-// TODO = return list of providers and their status and token?
-// TODO - useMemo instead of useState/useEffect where possible
+export const geeProvider = {
+    id: PROVIDER_GEE,
+    name: 'Google Earth Engine',
+    nameShort: 'Earth Engine',
+}
+
+export const enactsProvider = {
+    id: PROVIDER_ENACTS,
+    name: 'ENACTS Data Sharing Tool (DST)',
+    nameShort: 'ENACTS',
+}
 
 const DataSourcesProvider = ({ children }) => {
     const [hasGeeToken, setHasGeeToken] = useState(null)
-    const [enactsInfo, setEnactsInfo] = useState(false)
-    const [enactsRoute, setEnactsRoute] = useState(null)
     const tokenPromise = useEarthEngineToken()
 
     const {
@@ -34,21 +41,17 @@ const DataSourcesProvider = ({ children }) => {
     const eroute =
         !routesLoading &&
         !routesError &&
-        routes?.find((route) => route.code == routeCode)
+        routes?.find((route) => route.code == enactsRouteCode)
 
-    if (!routesLoading && !routesError && !eroute) {
-        console.warn(`Could not find a route with the code "${routeCode}"`)
-    }
-
-    useEffect(() => {
-        setEnactsRoute(eroute)
-    }, [eroute])
+    const enactsRoute = useMemo(() => eroute, [eroute])
 
     const {
         data: eInfo,
         loading: enactsInfoLoading,
-        // error: enactsInfoError,
+        error: enactsInfoError,
     } = useEnactsInfo(enactsRoute)
+
+    const enactsInfo = useMemo(() => eInfo, [eInfo])
 
     useEffect(() => {
         if (hasGeeToken !== null) {
@@ -63,30 +66,28 @@ const DataSourcesProvider = ({ children }) => {
             })
     }, [tokenPromise, hasGeeToken])
 
-    useEffect(() => {
-        if (eInfo) {
-            setEnactsInfo(eInfo)
-        }
-    }, [eInfo])
-
-    // if (error) {
-    //     const fallbackMsg = i18n.t('This app could not retrieve required data.')
-
-    //     return (
-    //         <NoticeBox error title={i18n.t('Network error')}>
-    //             {error.message || fallbackMsg}
-    //         </NoticeBox>
-    //     )
-    // }
-
     const data = {
-        [PROVIDER_GEE]: { enabled: hasGeeToken, loading: hasGeeToken === null },
+        [PROVIDER_GEE]: {
+            ...geeProvider,
+            enabled: hasGeeToken,
+            loading: hasGeeToken === null,
+        },
         [PROVIDER_ENACTS]: {
+            ...enactsProvider,
             enabled: enactsInfo?.enabled || false,
             loading: routesLoading || enactsInfoLoading,
             route: enactsRoute,
             info: enactsInfo,
+            error: enactsInfoError,
         },
+    }
+
+    console.log('jj DataSourcesProvider data:', data)
+
+    if (!routesLoading && !routesError && !eroute) {
+        console.warn(
+            `Could not find a route with the code "${enactsRouteCode}"`
+        )
     }
 
     return (

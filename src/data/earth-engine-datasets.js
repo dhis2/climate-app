@@ -1,4 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
+import { geeProvider as provider } from '../components/DataSourcesProvider.jsx'
 import { landcoverTypes } from '../components/explore/landcover/LandcoverSelect.jsx'
 import {
     kelvinToCelsius,
@@ -23,10 +24,6 @@ import {
     landGroup,
 } from './groupings.js'
 import { getLegend } from './heat-stress-legend.js'
-import { PROVIDER_GEE, dataProviders } from './providers.js'
-
-// fetch provider metadata for GEE
-const provider = dataProviders.find((item) => item.id === PROVIDER_GEE)
 
 // kelvin to celsius with one decimal
 const temperatureParser = (v) => roundOneDecimal(kelvinToCelsius(v)).toString()

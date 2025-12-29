@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
 import { useMemo } from 'react'
-import { useDataSources } from '../components/DataSourcesProvider.jsx'
+import {
+    useDataSources,
+    enactsProvider,
+} from '../components/DataSourcesProvider.jsx'
 import { climateDataSet, climateGroup } from '../data/groupings.js'
-import { dataProviders, PROVIDER_ENACTS } from '../data/providers.js'
 import { DAILY, MONTHLY, YEARLY } from '../utils/time.js'
-
-const dataProvider = dataProviders.find((item) => item.id == PROVIDER_ENACTS)
 
 const EMPTY_ENACTS_DATASETS = []
 
@@ -88,7 +88,7 @@ const parseEnactsDatasetGroup = (datasets, enactsInfo) => {
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
         aggregationType: null, // we don't know which datasets will be returned so can't map or assume any aggregation types
-        provider: dataProvider, // nested dict
+        provider: enactsProvider, // nested dict
     }
     return parsed
 }
