@@ -94,7 +94,10 @@ const parseEnactsDatasetGroup = (datasets, enactsInfo) => {
 }
 
 const useEnactsDatasets = () => {
-    const { enactsInfo, enactsRoute } = useDataSources()
+    const { enacts } = useDataSources()
+    const enactsInfo = enacts.info
+    const enactsRoute = enacts.route
+
     // fetch raw datasets info from server
     const datasetsUrl = enactsRoute
         ? `${enactsRoute.href}/run/dataset_info`

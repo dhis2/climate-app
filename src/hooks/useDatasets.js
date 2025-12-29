@@ -9,7 +9,7 @@ const useDatasets = () => {
         loading: enactsLoading,
     } = useEnactsDatasets()
 
-    const { hasGeeToken, loading: geeLoading } = useDataSources()
+    const { gee } = useDataSources()
 
     const normalizedGeeDatasets = getEEDatasets().map((dataset) => ({
         ...dataset,
@@ -18,13 +18,13 @@ const useDatasets = () => {
         })),
     }))
 
-    const data = hasGeeToken
+    const data = gee.enabled
         ? enactsDatasets.concat(normalizedGeeDatasets)
         : enactsDatasets
 
     return {
         data,
-        loading: geeLoading || enactsLoading,
+        loading: gee.loading || enactsLoading,
         error: enactsError,
     }
 }

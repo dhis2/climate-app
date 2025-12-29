@@ -4,21 +4,22 @@ import { useState, useEffect } from 'react'
 import { useDataSources } from '../DataSourcesProvider.jsx'
 import styles from './styles/GEETokenCheck.module.css'
 
-const GEETokenCheck = () => {
+export const GEETokenCheck = () => {
     const [isLoading, setIsLoading] = useState(true)
-    const { hasGeeToken } = useDataSources()
+    const { gee } = useDataSources()
+    const hasGeeToken = gee.enabled
 
     useEffect(() => {
-        if (hasGeeToken !== undefined) {
+        if (!hasGeeToken) {
             setIsLoading(false)
         }
     }, [hasGeeToken])
 
-    return !isLoading && hasGeeToken !== true ? (
+    return !isLoading && !hasGeeToken ? (
         <div className={styles.container}>
             <NoticeBox warning>
                 {i18n.t(
-                    'You need access to Google Earth Engine to explore data.'
+                    'You need access to Google Earth Engine to explore this data.'
                 )}{' '}
                 <a href="https://docs.dhis2.org/en/topics/tutorials/google-earth-engine-sign-up.html">
                     {i18n.t('How to get access?')}
@@ -27,5 +28,3 @@ const GEETokenCheck = () => {
         </div>
     ) : null
 }
-
-export default GEETokenCheck

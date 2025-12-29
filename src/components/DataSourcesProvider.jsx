@@ -1,7 +1,11 @@
 // import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
 import React, { createContext, useContext, useState, useEffect } from 'react'
-import { dataProviders, PROVIDER_ENACTS } from '../data/providers.js'
+import {
+    dataProviders,
+    PROVIDER_ENACTS,
+    PROVIDER_GEE,
+} from '../data/providers.js'
 import useEarthEngineToken from '../hooks/useEarthEngineToken.js'
 import useEnactsInfo from '../hooks/useEnactsInfo.js'
 import useRoutesAPI from '../hooks/useRoutesAPI.js'
@@ -76,10 +80,13 @@ const DataSourcesProvider = ({ children }) => {
     // }
 
     const data = {
-        hasGeeToken,
-        enactsInfo,
-        enactsRoute,
-        loading: hasGeeToken === null || routesLoading || enactsInfoLoading,
+        [PROVIDER_GEE]: { enabled: hasGeeToken, loading: hasGeeToken === null },
+        [PROVIDER_ENACTS]: {
+            enabled: enactsInfo?.enabled || false,
+            loading: routesLoading || enactsInfoLoading,
+            route: enactsRoute,
+            info: enactsInfo,
+        },
     }
 
     return (
