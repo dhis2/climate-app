@@ -13,8 +13,11 @@ import { useDataSources } from '../DataSourcesProvider.jsx'
 import DataProviderListItem from './DataProviderListItem.jsx'
 
 const DataProviderList = () => {
-    const { hasGeeToken, enactsRoute, enactsInfo } = useDataSources()
-    // fill in data provider details based on route codes in routes api
+    const { gee, enacts } = useDataSources()
+    const hasGeeToken = gee.enabled
+    const enactsRoute = enacts.route
+    const enactsInfo = enacts.info
+
     const dataProvidersUpdated = dataProviders.map((item) => {
         const name = item.name
         let status = 'Not configured'
@@ -48,7 +51,7 @@ const DataProviderList = () => {
             <h2>{i18n.t('Data Providers')}</h2>
             <Field
                 label={i18n.t(
-                    'The following data providers can be configured and used in the Climate app. Contact your administrator to add or update data providers.'
+                    'The following data providers can be configured and used in the Climate app. Contact your administrator to configure these data providers.'
                 )}
             ></Field>
 

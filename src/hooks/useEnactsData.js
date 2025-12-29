@@ -47,7 +47,8 @@ const encodeDate = (date, periodType) => {
 }
 
 const useEnactsData = (dataset, period, features) => {
-    const { enactsRoute } = useDataSources()
+    const { enacts } = useDataSources()
+    const enactsRoute = enacts.route
 
     // fetch raw data info from server
     const dataUrl = enactsRoute
