@@ -82,8 +82,6 @@ const DataSourcesProvider = ({ children }) => {
         },
     }
 
-    console.log('jj DataSourcesProvider data:', data)
-
     if (!routesLoading && !routesError && !eroute) {
         console.warn(
             `Could not find a route with the code "${enactsRouteCode}"`

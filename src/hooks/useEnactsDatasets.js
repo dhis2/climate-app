@@ -181,10 +181,12 @@ const useEnactsDatasets = () => {
         return parsedData.filter((d) => d.periodType != undefined)
     }, [queryData, enactsInfo])
 
+    const error = !!enacts.error || !!queryError
+
     return {
         data: processedData,
-        loading: enactsRoute && queryLoading && !queryError,
-        error: queryError,
+        loading: enactsRoute && queryLoading && !error,
+        error,
     }
 }
 

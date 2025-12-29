@@ -42,7 +42,7 @@ describe('Import', () => {
         cy.getByDataTest('dhis2-uicore-select-menu-menuwrapper')
             .children()
             .should('have.length', 1)
-        cy.contains('No datasets are available.')
+        cy.contains('No datasets are available.').should('be.visible')
     })
 
     it('should show only GEE datasets when GEE is configured and Enacts is not', () => {
@@ -142,5 +142,43 @@ describe('Import', () => {
             'bottom'
         )
         cy.contains('Earth Engine: Water (MODIS)').should('be.visible')
+    })
+
+    it('should handle 500 error from Enacts endpoint', () => {
+        cy.intercept('**/api/*/tokens/google', geeResponse500).as('getGeeToken')
+        cy.intercept(
+            'GET',
+            '**/api/*/routes?fields=id*',
+            getRoutesFixture()
+        ).as('getRoutes')
+
+        cy.intercept('GET', '**/api/routes/*/run/info', {
+            httpStatus: 'Internal Server Error',
+            statusCode: 500,
+            httpStatusCode: 500,
+            status: 'ERROR',
+            message: 'Something went wrong while fetching Enacts info',
+        }).as('getEnactsInfo')
+
+        cy.visit('#/import')
+
+        cy.wait('@getGeeToken')
+        cy.wait('@getRoutes')
+        cy.wait('@getEnactsInfo')
+
+        cy.contains('Select data to import').should('be.visible')
+        cy.getByDataTest('dataset-selector-content')
+            .should('be.visible')
+            .click()
+        cy.contains('Earth Engine: Air temperature (ERA5-Land)').should(
+            'not.exist'
+        )
+        cy.contains('ENACTS: All stations - Rainfall').should('not.exist')
+        cy.getByDataTest('dhis2-uicore-select-menu-menuwrapper')
+            .children()
+            .should('have.length', 1)
+        cy.contains('No datasets are available.').should('be.visible')
+
+        cy.contains('ENACTS datasets could not be loaded').should('be.visible')
     })
 })
