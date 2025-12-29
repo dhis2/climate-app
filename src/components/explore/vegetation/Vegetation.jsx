@@ -9,7 +9,9 @@ import {
 } from '../../../data/earth-engine-datasets.js'
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
 import exploreStore from '../../../store/exploreStore.js'
+import { useDataSources } from '../../DataSourcesProvider.jsx'
 import DataLoader from '../../shared/DataLoader.jsx'
+import { GEETokenWarning } from '../../shared/GEETokenWarning.jsx'
 import Resolution from '../../shared/Resolution.jsx'
 import Chart from '../Chart.jsx'
 import MonthlyPeriodSelect from '../MonthlyPeriodSelect.jsx'
@@ -28,8 +30,13 @@ const Vegetation = () => {
     const feature = exploreStore((state) => state.orgUnit)
     const band = exploreStore((state) => state.vegetationIndex)
     const period = exploreStore((state) => state.monthlyPeriod)
+    const { gee } = useDataSources()
 
     const data = useEarthEngineTimeSeries({ dataset, period, feature })
+
+    if (!gee.enabled) {
+        return <GEETokenWarning />
+    }
 
     if (!data) {
         return <DataLoader />

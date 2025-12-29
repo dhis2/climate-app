@@ -6,7 +6,9 @@ import useAppSettings from '../../../hooks/useAppSettings.js'
 import useEarthEngineClimateNormals from '../../../hooks/useEarthEngineClimateNormals.js'
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
 import exploreStore from '../../../store/exploreStore.js'
+import { useDataSources } from '../../DataSourcesProvider.jsx'
 import DataLoader from '../../shared/DataLoader.jsx'
+import { GEETokenWarning } from '../../shared/GEETokenWarning.jsx'
 import Resolution from '../../shared/Resolution.jsx'
 import Chart from '../Chart.jsx'
 import MonthlyPeriodSelect from '../MonthlyPeriodSelect.jsx'
@@ -19,6 +21,7 @@ const TemperatureMonthly = () => {
     const period = exploreStore((state) => state.monthlyPeriod)
     const referencePeriod = exploreStore((state) => state.referencePeriod)
     const { settings } = useAppSettings()
+    const { gee } = useDataSources()
 
     const data = useEarthEngineTimeSeries({
         dataset: era5Monthly,
@@ -34,10 +37,13 @@ const TemperatureMonthly = () => {
 
     const { name } = orgUnit.properties
 
-    return (
-        <>
-            <PeriodTypeSelect />
-            {data && normals && settings ? (
+    const getContent = () => {
+        if (!gee.enabled) {
+            return <GEETokenWarning />
+        }
+
+        if (data && normals && settings) {
+            return (
                 <Chart
                     config={getMonthlyConfig({
                         name,
@@ -47,10 +53,17 @@ const TemperatureMonthly = () => {
                         settings,
                     })}
                 />
-            ) : (
-                <DataLoader />
-            )}
-            <MonthlyPeriodSelect />
+            )
+        }
+
+        return <DataLoader />
+    }
+
+    return (
+        <>
+            <PeriodTypeSelect />
+            {getContent()}
+            <MonthlyPeriodSelect disabled={!gee.enabled} />
             <ReferencePeriod />
             <Resolution resolution={era5Monthly.resolution} />
         </>

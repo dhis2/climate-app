@@ -5,7 +5,9 @@ import {
 } from '../../../data/earth-engine-datasets.js'
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
 import exploreStore from '../../../store/exploreStore.js'
+import { useDataSources } from '../../DataSourcesProvider.jsx'
 import DataLoader from '../../shared/DataLoader.jsx'
+import { GEETokenWarning } from '../../shared/GEETokenWarning.jsx'
 import Resolution from '../../shared/Resolution.jsx'
 import Chart from '../Chart.jsx'
 import getChartConfig from './charts/elevation.js'
@@ -21,6 +23,11 @@ const dataset = {
 const Elevation = () => {
     const feature = exploreStore((state) => state.orgUnit)
     const data = useEarthEngineTimeSeries({ dataset, feature })
+    const { gee } = useDataSources()
+
+    if (!gee.enabled) {
+        return <GEETokenWarning />
+    }
 
     if (!data) {
         return <DataLoader />
