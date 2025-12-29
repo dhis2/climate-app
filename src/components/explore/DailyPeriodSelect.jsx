@@ -1,5 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
+import propTypes from 'prop-types'
 import { useState } from 'react'
 import exploreStore from '../../store/exploreStore.js'
 import { getNumberOfDays } from '../../utils/time.js'
@@ -8,7 +9,7 @@ import styles from './styles/Period.module.css'
 
 const maxDays = 1000
 
-const DailyPeriodSelect = () => {
+const DailyPeriodSelect = ({ disabled = false }) => {
     const { dailyPeriod, setDailyPeriod } = exploreStore()
     const [period, setPeriod] = useState(dailyPeriod)
 
@@ -31,7 +32,7 @@ const DailyPeriodSelect = () => {
                     onChange={(endTime) => setPeriod({ ...period, endTime })}
                 />
                 <Button
-                    disabled={days > maxDays}
+                    disabled={days > maxDays || disabled}
                     onClick={() => setDailyPeriod(period)}
                 >
                     Update
@@ -44,6 +45,10 @@ const DailyPeriodSelect = () => {
             )}
         </div>
     )
+}
+
+DailyPeriodSelect.propTypes = {
+    disabled: propTypes.bool,
 }
 
 export default DailyPeriodSelect

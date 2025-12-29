@@ -5,7 +5,9 @@ import {
 import useEarthEngineClimateNormals from '../../../hooks/useEarthEngineClimateNormals.js'
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
 import exploreStore from '../../../store/exploreStore.js'
+import { useDataSources } from '../../DataSourcesProvider.jsx'
 import DataLoader from '../../shared/DataLoader.jsx'
+import { GEETokenWarning } from '../../shared/GEETokenWarning.jsx'
 import Resolution from '../../shared/Resolution.jsx'
 import Chart from '../Chart.jsx'
 import MonthlyPeriodSelect from '../MonthlyPeriodSelect.jsx'
@@ -18,6 +20,7 @@ const HumidityMonthly = () => {
     const orgUnit = exploreStore((state) => state.orgUnit)
     const period = exploreStore((state) => state.monthlyPeriod)
     const referencePeriod = exploreStore((state) => state.referencePeriod)
+    const { gee } = useDataSources()
 
     const data = useEarthEngineTimeSeries({
         dataset: era5Monthly,
@@ -33,10 +36,13 @@ const HumidityMonthly = () => {
 
     const { name } = orgUnit.properties
 
-    return (
-        <>
-            <PeriodTypeSelect />
-            {data && normals ? (
+    const getContent = () => {
+        if (!gee.enabled) {
+            return <GEETokenWarning />
+        }
+
+        if (data && normals) {
+            return (
                 <Chart
                     config={getMonthlyConfig({
                         name,
@@ -45,10 +51,17 @@ const HumidityMonthly = () => {
                         referencePeriod,
                     })}
                 />
-            ) : (
-                <DataLoader />
-            )}
-            <MonthlyPeriodSelect />
+            )
+        }
+
+        return <DataLoader />
+    }
+
+    return (
+        <>
+            <PeriodTypeSelect />
+            {getContent()}
+            <MonthlyPeriodSelect disabled={!gee.enabled} />
             <ReferencePeriod />
             <HumidityDescription />
             <Resolution resolution={era5Monthly.resolution} />

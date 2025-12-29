@@ -9,7 +9,9 @@ import useEarthEngineClimateNormals from '../../../hooks/useEarthEngineClimateNo
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
 import exploreStore from '../../../store/exploreStore.js'
 import { getCurrentYear } from '../../../utils/time.js'
+import { useDataSources } from '../../DataSourcesProvider.jsx'
 import DataLoader from '../../shared/DataLoader.jsx'
+import { GEETokenWarning } from '../../shared/GEETokenWarning.jsx'
 import Resolution from '../../shared/Resolution.jsx'
 import Chart from '../Chart.jsx'
 import MonthSelect from '../MonthSelect.jsx'
@@ -25,6 +27,7 @@ const ClimateChange = () => {
     const month = exploreStore((state) => state.month)
     const referencePeriod = exploreStore((state) => state.referencePeriod)
     const { settings } = useAppSettings()
+    const { gee } = useDataSources()
 
     const filter = useMemo(
         () => [
@@ -48,6 +51,10 @@ const ClimateChange = () => {
         referencePeriod,
         orgUnit
     )
+
+    if (!gee.enabled) {
+        return <GEETokenWarning />
+    }
 
     if (!data || !normals || !settings) {
         return <DataLoader />
