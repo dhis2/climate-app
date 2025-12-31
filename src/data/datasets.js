@@ -22,7 +22,7 @@ import {
     landDataSet,
     landGroup,
 } from './groupings.js'
-import { getLegend } from './heat-stress-legend.js
+import { getLegend } from './heat-stress-legend.js'
 
 // kelvin to celsius with one decimal
 const temperatureParser = (v) => roundOneDecimal(kelvinToCelsius(v)).toString()

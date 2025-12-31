@@ -4,7 +4,7 @@ import React from 'react'
 import {
     WEEKLY,
     MONTHLY,
-    periodTypes,
+    getPeriodTypes,
     getPeriods,
     getStandardPeriod,
 } from '../../utils/time.js'
@@ -21,7 +21,9 @@ const ImportPreview = ({
     totalValues,
     calendar = 'gregory',
 }) => {
-    const periodTypeData = periodTypes.find((type) => type.id === periodType)
+    const periodTypeData = getPeriodTypes().find(
+        (type) => type.id === periodType
+    )
     const periodNoun = periodTypeData?.noun || periodType
 
     // Format start and end based on period type
