@@ -153,6 +153,10 @@ const Routes = () => {
                     element: <AboutPage />,
                 },
                 {
+                    path: 'home',
+                    element: <AboutPage />,
+                },
+                {
                     path: 'explore',
                     children: [
                         {

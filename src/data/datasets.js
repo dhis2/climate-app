@@ -6,8 +6,23 @@ import {
     roundOneDecimal,
     roundTwoDecimals,
 } from '../utils/calc.js'
-import { HOURLY, DAILY, MONTHLY, SIXTEEN_DAYS, YEARLY } from '../utils/time.js'
-import { getLegend } from './heat-stress-legend.js'
+import {
+    HOURLY,
+    DAILY,
+    WEEKLY,
+    MONTHLY,
+    SIXTEEN_DAYS,
+    YEARLY,
+} from '../utils/time.js'
+import {
+    climateDataSet,
+    climateGroup,
+    environmentDataSet,
+    environmentGroup,
+    landDataSet,
+    landGroup,
+} from './groupings.js'
+import { getLegend } from './heat-stress-legend.js
 
 // kelvin to celsius with one decimal
 const temperatureParser = (v) => roundOneDecimal(kelvinToCelsius(v)).toString()
@@ -71,40 +86,6 @@ export const landcoverDescription = i18n.t(
     'Land cover types at yearly intervals'
 )
 
-const climateDataSet = {
-    name: i18n.t('Climate/Weather'),
-    shortName: i18n.t('Climate/Weather'),
-    periodType: i18n.t('Daily'),
-}
-
-const environmentDataSet = {
-    name: i18n.t('Environment'),
-    shortName: i18n.t('Environment'),
-    periodType: i18n.t('Weekly or Monthly'),
-}
-
-const landDataSet = {
-    name: i18n.t('Land'),
-    shortName: i18n.t('Land'),
-    periodType: i18n.t('Yearly'),
-}
-
-const climateGroup = {
-    name: i18n.t('Climate/Weather'),
-    shortName: i18n.t('Climate/Weather'),
-}
-
-const environmentGroup = {
-    name: i18n.t('Environment'),
-    shortName: i18n.t('Environment'),
-}
-
-const landGroup = {
-    name: i18n.t('Land'),
-    shortName: i18n.t('Land'),
-}
-
-// datasets
 const getEEDatasets = () => [
     {
         id: 'ECMWF/ERA5_LAND/DAILY_AGGR/temperature_2m',
@@ -117,6 +98,7 @@ const getEEDatasets = () => [
         source: era5Source,
         resolution: ERA5_LAND_RESOLUTION,
         periodType: DAILY,
+        supportedPeriodTypes: [DAILY, WEEKLY, MONTHLY],
         band: 'temperature_2m',
         reducer: 'mean',
         timeZone: {
@@ -142,6 +124,7 @@ const getEEDatasets = () => [
         source: era5Source,
         resolution: ERA5_LAND_RESOLUTION,
         periodType: DAILY,
+        supportedPeriodTypes: [DAILY, WEEKLY, MONTHLY],
         band: 'temperature_2m_max',
         reducer: 'max',
         timeZone: {
@@ -167,6 +150,7 @@ const getEEDatasets = () => [
         source: era5Source,
         resolution: ERA5_LAND_RESOLUTION,
         periodType: DAILY,
+        supportedPeriodTypes: [DAILY, WEEKLY, MONTHLY],
         band: 'temperature_2m_min',
         reducer: 'min',
         timeZone: {
@@ -190,6 +174,7 @@ const getEEDatasets = () => [
         source: era5Source,
         resolution: ERA5_LAND_RESOLUTION,
         periodType: DAILY,
+        supportedPeriodTypes: [DAILY, WEEKLY, MONTHLY],
         band: 'total_precipitation_sum',
         reducer: 'mean',
         periodReducer: 'sum',
@@ -214,6 +199,7 @@ const getEEDatasets = () => [
         source: chirpsSource,
         resolution: CHIRPS_RESOLUTION,
         periodType: DAILY,
+        supportedPeriodTypes: [DAILY, WEEKLY, MONTHLY],
         band: 'precipitation',
         reducer: 'mean',
         periodReducer: 'sum',
@@ -234,6 +220,7 @@ const getEEDatasets = () => [
         source: era5Source,
         resolution: ERA5_LAND_RESOLUTION,
         periodType: DAILY,
+        supportedPeriodTypes: [DAILY, WEEKLY, MONTHLY],
         band: 'dewpoint_temperature_2m',
         reducer: 'mean',
         timeZone: {
@@ -259,6 +246,7 @@ const getEEDatasets = () => [
         source: era5Source,
         resolution: ERA5_LAND_RESOLUTION,
         periodType: DAILY,
+        supportedPeriodTypes: [DAILY, WEEKLY, MONTHLY],
         bands: [
             {
                 band: 'dewpoint_temperature_2m',
@@ -296,6 +284,7 @@ const getEEDatasets = () => [
         source: era5HeatSource,
         resolution: ERA5_RESOLUTION,
         periodType: DAILY,
+        supportedPeriodTypes: [DAILY, WEEKLY, MONTHLY],
         band: 'utci_mean',
         reducer: 'mean',
         valueParser: temperatureParser,
@@ -314,6 +303,7 @@ const getEEDatasets = () => [
         source: era5HeatSource,
         resolution: ERA5_RESOLUTION,
         periodType: DAILY,
+        supportedPeriodTypes: [DAILY, WEEKLY, MONTHLY],
         band: 'utci_max',
         reducer: 'max',
         valueParser: temperatureParser,
@@ -332,6 +322,7 @@ const getEEDatasets = () => [
         source: era5HeatSource,
         resolution: ERA5_RESOLUTION,
         periodType: DAILY,
+        supportedPeriodTypes: [DAILY, WEEKLY, MONTHLY],
         band: 'utci_min',
         reducer: 'min',
         valueParser: temperatureParser,
@@ -350,6 +341,7 @@ const getEEDatasets = () => [
         source: modisSource,
         resolution: MODIS_RESOLUTION,
         periodType: SIXTEEN_DAYS,
+        supportedPeriodTypes: [WEEKLY, MONTHLY],
         band: 'NDVI',
         reducer: 'mean',
         valueParser: vegetationIndexParser,
@@ -367,6 +359,7 @@ const getEEDatasets = () => [
         source: modisSource,
         resolution: MODIS_RESOLUTION,
         periodType: SIXTEEN_DAYS,
+        supportedPeriodTypes: [WEEKLY, MONTHLY],
         band: 'EVI',
         reducer: 'mean',
         valueParser: vegetationIndexParser,
@@ -384,6 +377,7 @@ const getEEDatasets = () => [
         source: demSource,
         resolution: DEM_RESOLUTION,
         periodType: 'N/A',
+        supportedPeriodTypes: [YEARLY],
         period: '2000',
         band: 'elevation',
         reducer: 'mean',
@@ -402,6 +396,7 @@ const getEEDatasets = () => [
         source: demSource,
         resolution: DEM_RESOLUTION,
         periodType: 'N/A',
+        supportedPeriodTypes: [YEARLY],
         period: '2000',
         band: 'elevation',
         reducer: 'min',
@@ -420,6 +415,7 @@ const getEEDatasets = () => [
         source: demSource,
         resolution: DEM_RESOLUTION,
         periodType: 'N/A',
+        supportedPeriodTypes: [YEARLY],
         period: '2000',
         band: 'elevation',
         reducer: 'max',
@@ -440,6 +436,7 @@ const getEEDatasets = () => [
         source: demSource,
         resolution: DEM_RESOLUTION,
         periodType: 'N/A',
+        supportedPeriodTypes: [YEARLY],
         period: '2000',
         band: 'elevation',
         reducer: 'stdDev',
@@ -458,8 +455,11 @@ const getEEDatasets = () => [
         source: modisSource,
         resolution: LANDCOVER_RESOLUTION,
         periodType: YEARLY,
-        minYear: 2002,
-        maxYear: 2023,
+        supportedPeriodTypes: [YEARLY],
+        periodRange: {
+            start: '2002',
+            end: '2023',
+        },
         band: 'LC_Type1',
         reducer: 'frequencyHistogram',
         histogramKey: value,
@@ -513,7 +513,7 @@ export const era5HeatDaily = {
     datasetId: 'projects/climate-engine-pro/assets/ce-era5-heat',
     band: ['utci_mean', 'utci_min', 'utci_max'],
     reducer: ['mean', 'min', 'max'],
-    periodType: 'daily',
+    periodType: DAILY,
     resolution: ERA5_RESOLUTION,
 }
 

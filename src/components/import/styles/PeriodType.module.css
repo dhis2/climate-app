@@ -1,0 +1,14 @@
+.singlePeriodTypeContainer {
+    margin-top: 16px;
+    font-size: 14px;
+}
+
+.container {
+    display: flex;
+    margin-top: 16px;
+}
+
+.radioGroup {
+    display: flex;
+    gap: 16px;
+}

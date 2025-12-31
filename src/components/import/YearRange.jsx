@@ -7,7 +7,7 @@ import YearSelect from './YearSelect.jsx'
 
 const YearRange = ({ period, minYear, maxYear, onChange }) => {
     const onYearChange = useCallback(
-        (key) => (year) => onChange({ ...period, [key]: year }),
+        (key) => (year) => onChange({ ...period, [key]: year.toString() }),
         [period, onChange]
     )
 
@@ -27,7 +27,7 @@ const YearRange = ({ period, minYear, maxYear, onChange }) => {
     }
 
     return (
-        <div className={styles.yearRange}>
+        <div className={styles.container}>
             <YearSelect
                 label={i18n.t('Start year')}
                 year={period.startTime}
@@ -35,6 +35,7 @@ const YearRange = ({ period, minYear, maxYear, onChange }) => {
                 maxYear={maxYear}
                 onChange={onYearChange('startTime')}
             />
+            <span className={styles.separator}>—</span>
             <YearSelect
                 label={i18n.t('End year')}
                 year={period.endTime}
@@ -47,8 +48,8 @@ const YearRange = ({ period, minYear, maxYear, onChange }) => {
 }
 
 YearRange.propTypes = {
-    maxYear: PropTypes.number.isRequired,
-    minYear: PropTypes.number.isRequired,
+    maxYear: PropTypes.string.isRequired,
+    minYear: PropTypes.string.isRequired,
     period: PropTypes.shape({
         endTime: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
             .isRequired,

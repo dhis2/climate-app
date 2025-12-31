@@ -1,6 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
 import { getResolutionText } from '../../data/datasets.js'
+import HelpfulInfo from '../import/HelpfulInfo.jsx'
 import styles from './styles/Resolution.module.css'
 
 const Resolution = ({ resolution, isImport = false }) => (
@@ -9,18 +10,22 @@ const Resolution = ({ resolution, isImport = false }) => (
             {i18n.t('Data resolution')}:{' '}
             <strong>{getResolutionText(resolution)}</strong>
         </div>
-        <p>
-            {isImport ? (
+        <HelpfulInfo
+            text={
                 <>
+                    {isImport ? (
+                        <>
+                            {i18n.t(
+                                "You can import data for the lowest levels in your org unit hierarchy, but it won't improve the resolution of the data."
+                            )}{' '}
+                        </>
+                    ) : null}
                     {i18n.t(
-                        "You can import data for the lowest levels in your org unit hierarchy, but it won't improve the resolution of the data."
-                    )}{' '}
+                        'If two org units are close to each other (within the resolution), they will have the same data values.'
+                    )}
                 </>
-            ) : null}
-            {i18n.t(
-                'If two org units are close to each other (within the resolution), they will have the same data values.'
-            )}
-        </p>
+            }
+        />
     </div>
 )
 
