@@ -253,28 +253,6 @@ const ImportPage = () => {
                                 dataElement={dataElement}
                             />
                         )}
-                        <DataElement
-                            selected={dataElement}
-                            dataset={dataset}
-                            onChange={setDataElement}
-                        />
-                        <div className={styles.import}>
-                            <Button
-                                primary
-                                disabled={!isValid || startExtract}
-                                onClick={() => setStartExtract(true)}
-                            >
-                                {i18n.t('Start import')}
-                            </Button>
-                            {startExtract && isValid && (
-                                <ExtractData
-                                    dataset={dataset}
-                                    period={hasNoPeriod ? null : standardPeriod}
-                                    orgUnits={orgUnits}
-                                    dataElement={dataElement}
-                                />
-                            )}
-                        </div>
                     </div>
                 </div>
             </div>
