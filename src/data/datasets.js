@@ -105,7 +105,7 @@ const landGroup = {
 }
 
 // datasets
-export default () => [
+const getEEDatasets = () => [
     {
         id: 'ECMWF/ERA5_LAND/DAILY_AGGR/temperature_2m',
         datasetId: 'ECMWF/ERA5_LAND/DAILY_AGGR',
@@ -521,3 +521,5 @@ export const era5HeatMonthly = {
     ...era5HeatDaily,
     aggregationPeriod: MONTHLY,
 }
+
+export default getEEDatasets
