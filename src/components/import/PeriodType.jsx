@@ -9,8 +9,10 @@ const defaultPeriodTypes = new Set([DAILY, WEEKLY, MONTHLY])
 const PeriodType = ({ periodType, supportedPeriodTypes, onChange }) => {
     // get period type objects from supported period type ids, or use defaults
     const supportedPeriodTypeObjects = supportedPeriodTypes
-        ? periodTypes?.filter((type) => supportedPeriodTypes.includes(type.id))
-        : periodTypes.filter((type) => defaultPeriodTypes.has(type.id))
+        ? getPeriodTypes().filter((type) =>
+              supportedPeriodTypes.includes(type.id)
+          )
+        : getPeriodTypes().filter((type) => defaultPeriodTypes.has(type.id))
 
     // make sure selected period type is supported by dataset period type, or set to undefined
     let selectedPeriodType = supportedPeriodTypeObjects

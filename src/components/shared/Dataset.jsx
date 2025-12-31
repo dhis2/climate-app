@@ -13,7 +13,7 @@ const Dataset = ({ title, selected, onChange, showDescription = true }) => (
             label={title && i18n.t('Select data to import')}
             selected={selected?.id}
             onChange={({ selected }) =>
-                onChange(datasets.find((d) => d.id === selected))
+                onChange(getDatasets().find((d) => d.id === selected))
             }
             dataTest="dataset-selector"
         >
