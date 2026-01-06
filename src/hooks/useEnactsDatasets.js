@@ -79,7 +79,6 @@ const parseEnactsDatasetGroup = (datasets, enactsInfo) => {
         shortName: `${datasetName}`,
         description: `${datasetName} measured in ${d.variable_units}. ${collection.description}`,
         units: d.variable_units,
-        periodType: parsePeriodType(d.temporal_resolution), // this is legacy for the native dataset period type, isn't actually used anymore, and should probably be removed
         supportedPeriodTypes: supportedPeriodTypes, // list of period objects including time range, see further up
         resolution: `Approximately ${d.spatial_resolution.lon} degrees`,
         variable: d.variable_name,
@@ -90,6 +89,7 @@ const parseEnactsDatasetGroup = (datasets, enactsInfo) => {
         aggregationType: null, // we don't know which datasets will be returned so can't map or assume any aggregation types
         provider: enactsProvider, // nested dict
     }
+    console.log('jj parsed', parsed)
     return parsed
 }
 
@@ -146,29 +146,23 @@ const useEnactsDatasets = () => {
             return EMPTY_ENACTS_DATASETS
         }
 
-        // convert nested structure to groups of datasets (multiple period types per group)
-        // enacts returns datasets grouped by time period
-        // instead we create groups of unique datasets, that mixes together available time periods
-        const datasetGroupLookup = Object.values(queryData).reduce(
-            (lookup, periodGroups) => {
-                // here we specifically only process the daily and monthly dataset types
-                ;['daily', 'monthly'].forEach((periodType) => {
-                    Object.values(periodGroups[periodType]).forEach((d) => {
-                        // create group id to use for grouping datasets by dataset name and variable name
-                        const groupId = `${d.dataset_name}-${d.variable_name}`
-                        if (lookup[groupId]) {
-                            // group id already exists, add to existing group
-                            lookup[groupId].push(d)
-                        } else {
-                            // first time we found this group id, create new group
-                            lookup[groupId] = [d]
-                        }
-                    })
-                })
-                return lookup
-            },
-            {}
+        // Flatten daily and monthly datasets into a single array
+        const allDatasets = Object.values(queryData).flatMap((periodGroups) =>
+            ['daily', 'monthly'].flatMap((periodType) =>
+                Object.values(periodGroups[periodType])
+            )
         )
+
+        // Group datasets by groupId
+        const datasetGroupLookup = allDatasets.reduce((lookup, d) => {
+            const groupId = `${d.dataset_name}-${d.variable_name}`
+            if (lookup[groupId]) {
+                lookup[groupId].push(d)
+            } else {
+                lookup[groupId] = [d]
+            }
+            return lookup
+        }, {})
 
         // parse each group of datasets to expected dataset dict
         const datasetListOfGroups = Object.values(datasetGroupLookup)
@@ -178,7 +172,11 @@ const useEnactsDatasets = () => {
         )
 
         // filter to only supported/parseable period types
-        return parsedData.filter((d) => d.periodType != undefined)
+        return parsedData.filter(
+            (d) =>
+                Array.isArray(d.supportedPeriodTypes) &&
+                d.supportedPeriodTypes.some((pt) => pt.periodType !== undefined)
+        )
     }, [queryData, enactsInfo])
 
     const error = !!enacts.error || !!queryError

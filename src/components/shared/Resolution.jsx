@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
-import { getResolutionText } from '../../data/datasets.js'
+import { getResolutionText } from '../../data/earth-engine-datasets.js'
 import HelpfulInfo from '../import/HelpfulInfo.jsx'
 import styles from './styles/Resolution.module.css'
 

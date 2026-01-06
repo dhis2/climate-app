@@ -65,12 +65,17 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
     const [endDateError, setEndDateError] = useState(null)
 
     const {
-        periodType: datasetPeriodType,
         supportedPeriodTypes: datasetSupportedPeriodTypes,
-        periodRange: datasetPeriodRange,
         period: datasetPeriod,
     } = dataset
     const { periodType, startTime, endTime, calendar } = period
+
+    // Find the supported period type object that matches the current periodType
+    const matchedPeriodTypeObj = datasetSupportedPeriodTypes?.find(
+        (pt) => pt.periodType === periodType
+    )
+    const datasetPeriodType = matchedPeriodTypeObj?.periodType
+    const datasetPeriodRange = matchedPeriodTypeObj?.periodRange
 
     const minCalendarDate = normalizeIsoDate(datasetPeriodRange?.start) || null
     const maxCalendarDate = normalizeIsoDate(datasetPeriodRange?.end) || null
