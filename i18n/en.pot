@@ -135,6 +135,9 @@ msgstr "Start date"
 msgid "End date"
 msgstr "End date"
 
+msgid "Update"
+msgstr "Update"
+
 msgid "Maximum {{maxDays}} days allowed"
 msgstr "Maximum {{maxDays}} days allowed"
 
@@ -790,6 +793,9 @@ msgstr "Start year"
 
 msgid "End year"
 msgstr "End year"
+
+msgid "Chart settings"
+msgstr "Chart settings"
 
 msgid ""
 "Set y-axis values for charts in the Explore data section to make it easier "

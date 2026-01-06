@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { demResolution } from '../../../data/datasets.js'
+import { DEM_RESOLUTION, getResolutionText } from '../../../data/datasets.js'
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
 import exploreStore from '../../../store/exploreStore.js'
 import DataLoader from '../../shared/DataLoader.jsx'
@@ -47,7 +47,7 @@ const Elevation = () => {
                     </div>
                 </>
             )}
-            <Resolution resolution={demResolution} />
+            <Resolution resolution={getResolutionText(DEM_RESOLUTION)} />
         </>
     )
 }

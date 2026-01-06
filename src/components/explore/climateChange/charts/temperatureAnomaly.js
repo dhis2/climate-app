@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import { colors } from '@dhis2/ui'
 import { roundOneDecimal } from '../../../../utils/calc.js'
 import { animation, credits } from '../../../../utils/chart.js'
-import { months } from '../../MonthSelect.jsx'
+import { getMonths } from '../../MonthSelect.jsx'
 
 const band = 'temperature_2m'
 
@@ -16,7 +16,7 @@ const getChartConfig = ({
 }) => {
     const normal = normals.find((n) => n.id === month)[band]
     const years = data.map((d) => d.id.substring(0, 4))
-    const monthName = months.find((m) => m.id === month).name
+    const monthName = getMonths().find((m) => m.id === month).name
     const series = data.map((d) => roundOneDecimal(d[band] - normal))
     const { tempChange } = settings
 

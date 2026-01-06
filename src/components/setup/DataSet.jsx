@@ -1,10 +1,10 @@
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
-import { periodTypes } from '../../utils/time.js'
+import { getPeriodTypes } from '../../utils/time.js'
 
 const DataSet = ({ name, shortName, periodType }) => {
     const periodTypeName =
-        periodTypes.find((pt) => pt.id === periodType)?.name || periodType
+        getPeriodTypes().find((pt) => pt.id === periodType)?.name || periodType
 
     return (
         <>

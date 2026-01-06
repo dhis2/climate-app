@@ -15,7 +15,7 @@ export const YEARLY = 'YEARLY'
 
 export const oneDayInMs = 1000 * 60 * 60 * 24
 
-export const periodTypes = [
+export const getPeriodTypes = () => [
     {
         id: DAILY,
         name: i18n.t('Daily'),
