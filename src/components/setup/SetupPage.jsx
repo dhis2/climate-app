@@ -1,8 +1,8 @@
 import i18n from '@dhis2/d2-i18n'
 import { Radio, Field } from '@dhis2/ui'
 import { useState } from 'react'
-import datasets from '../../data/datasets.js'
-import { DAILY, WEEKLY, MONTHLY, periodTypes } from '../../utils/time.js'
+import getDatasets from '../../data/datasets.js'
+import { DAILY, WEEKLY, MONTHLY, getPeriodTypes } from '../../utils/time.js'
 import Dataset from '../shared/Dataset.jsx'
 import DataElement from './DataElement.jsx'
 import styles from './styles/SetupPage.module.css'
@@ -10,13 +10,14 @@ import styles from './styles/SetupPage.module.css'
 const defaultPeriodTypes = [DAILY, WEEKLY, MONTHLY]
 
 const SetupPage = () => {
+    const datasets = getDatasets()
     const [dataset, setDataset] = useState(datasets[0])
     const [periodType, setPeriodType] = useState(DAILY)
 
     // Get supported period types from dataset, or use defaults
     const supportedPeriodTypes =
         dataset?.supportedPeriodTypes || defaultPeriodTypes
-    const supportedPeriodTypeObjects = periodTypes.filter((type) =>
+    const supportedPeriodTypeObjects = getPeriodTypes().filter((type) =>
         supportedPeriodTypes.includes(type.id)
     )
 

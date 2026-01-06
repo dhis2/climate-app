@@ -8,7 +8,7 @@ import {
     getStandardPeriod,
     isValidPeriod,
     getPeriods,
-    periodTypes,
+    getPeriodTypes,
     fromStandardDate,
     toDateObject,
     formatStandardDate,
@@ -48,7 +48,7 @@ const ImportPage = () => {
         [period, hasNoPeriod]
     )
     const valueCount = orgUnitCount * periodCount
-    const periodTypeName = periodTypes
+    const periodTypeName = getPeriodTypes()
         .find((type) => type.id === period.periodType)
         ?.name.toLowerCase()
 
