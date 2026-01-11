@@ -89,7 +89,6 @@ const parseEnactsDatasetGroup = (datasets, enactsInfo) => {
         aggregationType: null, // we don't know which datasets will be returned so can't map or assume any aggregation types
         provider: enactsProvider, // nested dict
     }
-    console.log('jj parsed', parsed)
     return parsed
 }
 
