@@ -8,7 +8,6 @@ import {
     getStandardPeriod,
     isValidPeriod,
     getPeriods,
-    getPeriodTypes,
     fromStandardDate,
     toDateObject,
     formatStandardDate,
@@ -39,17 +38,9 @@ const ImportPage = () => {
     const standardPeriod = getStandardPeriod(period) // ISO 8601 used by GEE
     const [startExtract, setStartExtract] = useState(false)
 
-    const hasNoPeriod = dataset?.periodType === 'N/A'
-
     const orgUnitCount = useOrgUnitCount(orgUnits?.parent?.id, orgUnits?.level)
-    const periodCount = useMemo(
-        () => (hasNoPeriod ? 0 : getPeriods(period).length),
-        [period, hasNoPeriod]
-    )
+    const periodCount = useMemo(() => getPeriods(period).length, [period])
     const valueCount = orgUnitCount * periodCount
-    const periodTypeName = getPeriodTypes()
-        .find((type) => type.id === period.periodType)
-        ?.name.toLowerCase()
 
     const isValidOrgUnits =
         orgUnits?.parent &&
@@ -58,7 +49,7 @@ const ImportPage = () => {
 
     const isValid = !!(
         dataset &&
-        (hasNoPeriod || isValidPeriod(standardPeriod)) &&
+        isValidPeriod(standardPeriod) &&
         isValidOrgUnits &&
         dataElement &&
         valueCount <= maxValues
@@ -74,8 +65,16 @@ const ImportPage = () => {
     }
 
     const updateDataset = useCallback(
-        (dataset) => {
-            const updatePeriodSelector = ({ periodRange, periodType }) => {
+        (ds) => {
+            const updatePeriodSelector = ({
+                periodType,
+                supportedPeriodTypes,
+            }) => {
+                const periodRange =
+                    supportedPeriodTypes.find(
+                        (pt) => pt.periodType === periodType
+                    )?.periodRange || undefined
+
                 if (periodRange) {
                     // compute end and start depending on requested periodType
                     // endTime will generally be converted from standard -> calendar
@@ -155,11 +154,11 @@ const ImportPage = () => {
                 }
             }
 
-            setDataset(dataset)
+            setDataset(ds)
             setDataElement(null)
-            updatePeriodSelector(dataset)
+            updatePeriodSelector(ds)
         },
-        [calendar, period.locale]
+        [calendar, period]
     )
 
     return (
@@ -177,7 +176,7 @@ const ImportPage = () => {
                     <Period
                         period={period}
                         dataset={dataset}
-                        onChange={(val) => updatePeriod(val)}
+                        onChange={updatePeriod}
                     />
                 </div>
                 <div className={classes.formSection}>
@@ -209,11 +208,8 @@ const ImportPage = () => {
                                 'Import limit exceeded: {{valueCount}} values selected (maximum {{maxValues}}). Reduce your selection by choosing fewer organisation units or a shorter time period. Additional imports can be performed separately.',
                                 {
                                     nsSeparator: ';',
-                                    maxValues,
                                     valueCount,
-                                    orgUnitCount,
-                                    periodCount,
-                                    periodTypeName,
+                                    maxValues,
                                 }
                             )}
                         </div>
@@ -246,7 +242,7 @@ const ImportPage = () => {
                         {startExtract && isValid && (
                             <ExtractData
                                 dataset={dataset}
-                                period={hasNoPeriod ? null : standardPeriod}
+                                period={standardPeriod}
                                 orgUnits={orgUnits}
                                 dataElement={dataElement}
                             />

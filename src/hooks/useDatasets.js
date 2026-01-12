@@ -11,12 +11,19 @@ const useDatasets = () => {
 
     const { gee } = useDataSources()
 
-    const normalizedGeeDatasets = getEEDatasets().map((dataset) => ({
-        ...dataset,
-        supportedPeriodTypes: dataset.supportedPeriodTypes.map((pt) => ({
-            periodType: pt,
-        })),
-    }))
+    const normalizedGeeDatasets = getEEDatasets().map((dataset) => {
+        const { periodRange, ...rest } = dataset
+        return {
+            ...rest,
+            supportedPeriodTypes: dataset.supportedPeriodTypes.map((pt) => {
+                const obj = { periodType: pt }
+                if (periodRange) {
+                    obj.periodRange = periodRange
+                }
+                return obj
+            }),
+        }
+    })
 
     const data = gee.enabled
         ? enactsDatasets.concat(normalizedGeeDatasets)

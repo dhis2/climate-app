@@ -96,7 +96,6 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
         })
     }
 
-    const hasNoPeriod = datasetPeriodType === 'N/A'
     const isYearly = datasetPeriodType === YEARLY
 
     let periodErrorMessage = null
@@ -127,19 +126,32 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
         )
     }
 
-    return (
-        <>
-            <SectionH2 number="2" title="Configure period" />
-            {hasNoPeriod && (
+    if (datasetPeriod) {
+        return (
+            <>
+                <SectionH2 number="2" title="Configure period" />
                 <p>
                     {i18n.t(
-                        'The data will be assigned a default yearly period that matches the year it was collected: {{datasetPeriod}}',
+                        'The data will be assigned a yearly period type that matches the year it was collected: {{datasetPeriod}}',
                         { datasetPeriod, nsSeparator: ';' }
                     )}
                 </p>
-            )}
-            {isYearly && (
+            </>
+        )
+    }
+
+    return (
+        <>
+            <SectionH2 number="2" title="Configure period" />
+            {isYearly ? (
                 <div className={classes.yearlyContainer}>
+                    <PeriodType
+                        periodType={periodType}
+                        supportedPeriodTypes={datasetSupportedPeriodTypes}
+                        onChange={(periodType) =>
+                            onChange({ ...period, periodType })
+                        }
+                    />
                     <YearRange
                         period={period}
                         minYear={datasetPeriodRange?.start}
@@ -166,16 +178,8 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
                             )}
                         </div>
                     )}
-                    <PeriodType
-                        periodType={periodType}
-                        supportedPeriodTypes={datasetSupportedPeriodTypes}
-                        onChange={(periodType) =>
-                            onChange({ ...period, periodType })
-                        }
-                    />
                 </div>
-            )}
-            {!hasNoPeriod && !isYearly && (
+            ) : (
                 <>
                     <PeriodType
                         periodType={periodType}
