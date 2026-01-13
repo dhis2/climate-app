@@ -2,8 +2,8 @@ import i18n from '@dhis2/d2-i18n'
 import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { getResolutionText } from '../../data/earth-engine-datasets.js'
 import useDatasets from '../../hooks/useDatasets.js'
+import SectionH2 from '../shared/SectionH2.jsx'
 import classes from './styles/Dataset.module.css'
 
 const Dataset = ({ title, selected, onChange, showDescription = true }) => {
@@ -11,7 +11,7 @@ const Dataset = ({ title, selected, onChange, showDescription = true }) => {
 
     return (
         <div>
-            {title && <h2>{title}</h2>}
+            <SectionH2 number="1" title={title} />
             <SingleSelectField
                 filterable={datasets.length > 0}
                 label={i18n.t('Select data to import')}
