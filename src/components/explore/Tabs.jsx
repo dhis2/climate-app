@@ -8,7 +8,7 @@ import exploreStore from '../../store/exploreStore.js'
 import { USER_DATASTORE_NAMESPACE } from '../shared/OpenAsMapButton.jsx'
 import styles from './styles/Tabs.module.css'
 
-const tabs = [
+const getTabs = () => [
     {
         id: 'forecast10days',
         label: i18n.t('10 days forecast'),
@@ -45,7 +45,7 @@ const Tabs = () => {
     return (
         <>
             <TabBar fixed scrollable>
-                {tabs
+                {getTabs()
                     .filter((t) => !t.pointOnly || t.pointOnly === isPoint)
                     .map(({ id, label }) => (
                         <Tab

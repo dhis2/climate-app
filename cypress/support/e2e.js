@@ -16,6 +16,12 @@
 // Import commands.js using ES2015 syntax:
 import './commands.js'
 
+Cypress.on('uncaught:exception', () => {
+    // args are err, runnable
+    // This can be fine-tuned to only ignore specific errors
+    return false
+})
+
 const SESSION_COOKIE_NAME = 'JSESSIONID'
 const LOCAL_STORAGE_KEY = 'DHIS2_BASE_URL'
 

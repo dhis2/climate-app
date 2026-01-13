@@ -26,11 +26,61 @@ describe('Smoke test', () => {
         cy.getByDataTest('settings-menu-item').should('contain', 'Settings')
     })
 
-    // This test is currently skipped because the navigation is using MenuItem href
-    // which cypress seems to interpret as leaving the page
-    it.skip('should navigate to Settings page when clicked', () => {
+    it('should navigate to all the pages from the sidebar menu', () => {
+        // navigate to Setup page
+        cy.getByDataTest('setup-guide-menu-item').click()
+
+        cy.location().should((loc) => {
+            expect(loc.hash).to.eq('#/setup')
+        })
+        cy.get('h1')
+            .contains('Configuring DHIS2 before importing data')
+            .scrollIntoView()
+        cy.get('h1')
+            .contains('Configuring DHIS2 before importing data')
+            .should('be.visible')
+        cy.getByDataTest('dataset-selector').should('be.visible')
+
+        // navigate to Explore page
+        cy.getByDataTest('explore-data-menu-item').click()
+        cy.location().should((loc) => {
+            expect(loc.hash).to.eq('#/explore')
+        })
+        cy.get('h1')
+            .contains('Explore weather and climate data')
+            .scrollIntoView()
+        cy.get('h1')
+            .contains('Explore weather and climate data')
+            .should('be.visible')
+        cy.getByDataTest('dataset-selector').should('not.exist')
+
+        // navigate to Import data page
+        cy.getByDataTest('import-data-menu-item').click()
+        cy.location().should((loc) => {
+            expect(loc.hash).to.eq('#/import')
+        })
+        cy.get('h1')
+            .contains('Import weather and climate data')
+            .scrollIntoView()
+        cy.get('h1')
+            .contains('Import weather and climate data')
+            .should('be.visible')
+        cy.getByDataTest('dataset-selector').should('be.visible')
+
+        // navigate to Settings page
         cy.getByDataTest('settings-menu-item').click()
-        // cy.location('hash').should('eq', '#/setup')
+        cy.location().should((loc) => {
+            expect(loc.hash).to.eq('#/settings')
+        })
+        cy.get('h1').contains('App settings').scrollIntoView()
         cy.get('h1').contains('App settings').should('be.visible')
+
+        // navigate to Home page
+        cy.getByDataTest('home-menu-item').click()
+        cy.location().should((loc) => {
+            expect(loc.hash).to.eq('#/home')
+        })
+        cy.get('h1').contains('About this app').scrollIntoView()
+        cy.get('h1').contains('About this app').should('be.visible')
     })
 })

@@ -3,7 +3,7 @@ import viteConfig from './vite-cypress.config.js'
 
 export default defineConfig({
     projectId: 'itnqpp',
-    defaultCommandTimeout: 30000,
+    defaultCommandTimeout: 15000,
     component: {
         devServer: {
             framework: 'react',
@@ -16,7 +16,8 @@ export default defineConfig({
     },
     e2e: {
         baseUrl: 'http://localhost:3000',
-        setupNodeEvents(_on, _config) {
+        setupNodeEvents() {
+            // args are _on, _config
             // implement node event listeners here
         },
         specPattern: 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}',

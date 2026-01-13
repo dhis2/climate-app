@@ -7,7 +7,7 @@ import {
     YEARLY,
     normalizeIsoDate,
     getDateStringFromIsoDate,
-    periodTypes,
+    getPeriodTypes,
 } from '../../utils/time.js'
 import SectionH2 from '../shared/SectionH2.jsx'
 import TimeZone from '../shared/TimeZone.jsx'
@@ -95,7 +95,9 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
         periodErrorMessage = i18n.t('End date is not within the valid range.')
     }
 
-    const periodTypeName = periodTypes.find((pt) => pt.id === periodType)?.name
+    const periodTypeName = getPeriodTypes().find(
+        (pt) => pt.id === periodType
+    )?.name
 
     let helpText
     if (dataset.timeZone || dataset.bands?.[0]?.timeZone) {

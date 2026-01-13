@@ -1,5 +1,6 @@
 import {
-    landcoverResolution,
+    LANDCOVER_RESOLUTION,
+    getResolutionText,
     landcoverDescription,
 } from '../../../data/datasets.js'
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
@@ -42,7 +43,7 @@ const Landcover = () => {
             />
             <LandcoverSelect data={data} />
             <div className={styles.description}>{landcoverDescription}</div>
-            <Resolution resolution={landcoverResolution} />
+            <Resolution resolution={getResolutionText(LANDCOVER_RESOLUTION)} />
             <OpenAsMapButton
                 dataset={'landcover'}
                 period={lastPeriod}
