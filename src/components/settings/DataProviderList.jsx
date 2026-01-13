@@ -16,7 +16,12 @@ const DataProviderList = () => {
 
     const { gee, enacts } = sources
 
-    const dataProviders = Object.values(sources).map((item) => {
+    // TODO: Re-enable Enacts when the API is stable
+    const sourcesWithoutEnacts = Object.values(sources).filter(
+        (source) => source.id !== enacts.id
+    )
+
+    const dataProviders = Object.values(sourcesWithoutEnacts).map((item) => {
         let status = ''
 
         if (item.id === gee.id) {
