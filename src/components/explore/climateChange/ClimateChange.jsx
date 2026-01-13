@@ -3,6 +3,7 @@ import { useMemo } from 'react'
 import {
     era5MonthlyTemperatures,
     era5MonthlyNormals,
+    getResolutionText,
 } from '../../../data/earth-engine-datasets.js'
 import useAppSettings from '../../../hooks/useAppSettings.js'
 import useEarthEngineClimateNormals from '../../../hooks/useEarthEngineClimateNormals.js'
@@ -83,7 +84,11 @@ const ClimateChange = () => {
                     'Temperature anomaly is the difference of a temperature from a reference value, calculated as the average temperature over a period of 30 years. Blue columns shows temperatures below the average, while red columns are above.'
                 )}
             </div>
-            <Resolution resolution={era5MonthlyTemperatures.resolution} />
+            <Resolution
+                resolution={getResolutionText(
+                    era5MonthlyTemperatures.resolution
+                )}
+            />
         </>
     )
 }

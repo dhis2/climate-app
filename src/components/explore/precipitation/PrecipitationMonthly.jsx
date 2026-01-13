@@ -1,6 +1,7 @@
 import {
     era5Monthly,
     era5MonthlyNormals,
+    getResolutionText,
 } from '../../../data/earth-engine-datasets.js'
 import useAppSettings from '../../../hooks/useAppSettings.js'
 import useEarthEngineClimateNormals from '../../../hooks/useEarthEngineClimateNormals.js'
@@ -65,7 +66,9 @@ const PrecipitationMonthly = () => {
             {getContent()}
             <MonthlyPeriodSelect disabled={!gee.enabled} />
             <ReferencePeriod />
-            <Resolution resolution={era5Monthly.resolution} />
+            <Resolution
+                resolution={getResolutionText(era5Monthly.resolution)}
+            />
         </>
     )
 }

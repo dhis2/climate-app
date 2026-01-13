@@ -195,7 +195,7 @@ const ImportPage = () => {
                     <OrgUnits selected={orgUnits} onChange={setOrgUnits} />
                     {dataset && (
                         <Resolution
-                            resolution={dataset.resolution}
+                            resolutionText={dataset.resolutionText}
                             isImport={true}
                         />
                     )}

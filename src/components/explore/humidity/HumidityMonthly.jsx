@@ -1,6 +1,7 @@
 import {
     era5Monthly,
     era5MonthlyNormals,
+    getResolutionText,
 } from '../../../data/earth-engine-datasets.js'
 import useEarthEngineClimateNormals from '../../../hooks/useEarthEngineClimateNormals.js'
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
@@ -64,7 +65,9 @@ const HumidityMonthly = () => {
             <MonthlyPeriodSelect disabled={!gee.enabled} />
             <ReferencePeriod />
             <HumidityDescription />
-            <Resolution resolution={era5Monthly.resolution} />
+            <Resolution
+                resolution={getResolutionText(era5Monthly.resolution)}
+            />
         </>
     )
 }

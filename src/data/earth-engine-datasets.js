@@ -56,24 +56,17 @@ const chirpsSource = 'Climate Hazards Center / UCSB'
 const modisSource = 'NASA LP DAAC at the USGS EROS Center'
 const demSource = 'NASA / USGS / JPL-Caltech'
 
-export const ERA5_RESOLUTION = 'ERA5_RESOLUTION'
-export const ERA5_LAND_RESOLUTION = 'ERA5_LAND_RESOLUTION'
-export const CHIRPS_RESOLUTION = 'CHIRPS_RESOLUTION'
-export const MODIS_RESOLUTION = 'MODIS_RESOLUTION'
-export const LANDCOVER_RESOLUTION = 'LANDCOVER_RESOLUTION'
-export const DEM_RESOLUTION = 'DEM_RESOLUTION'
+export const ERA5_RESOLUTION = '31 km (0.25°)'
+export const ERA5_LAND_RESOLUTION = '9 km (0.1°)'
+export const CHIRPS_RESOLUTION = '5 km (0.05°)'
+export const MODIS_RESOLUTION = '250 m'
+export const LANDCOVER_RESOLUTION = '500 m'
+export const DEM_RESOLUTION = '30 m'
 
-export const getResolutionText = (resolution) => {
-    const resolutions = {
-        [ERA5_RESOLUTION]: i18n.t('Approximately 31 km (0.25°)'),
-        [ERA5_LAND_RESOLUTION]: i18n.t('Approximately 9 km (0.1°)'),
-        [CHIRPS_RESOLUTION]: i18n.t('Approximately 5 km (0.05°)'),
-        [MODIS_RESOLUTION]: i18n.t('Approximately 250 m'),
-        [LANDCOVER_RESOLUTION]: i18n.t('Approximately 500 m'),
-        [DEM_RESOLUTION]: i18n.t('Approximately 30 m'),
-    }
-    return resolutions[resolution]
-}
+export const getResolutionText = (resolution) =>
+    i18n.t('Data resolution is approximately {{resolution}}.', {
+        resolution,
+    })
 
 export const ndviDescription = i18n.t(
     'Landsat Normalized Difference Vegetation Index (NDVI) is used to quantify vegetation greenness and is useful in understanding vegetation density and assessing changes in plant health. NDVI values range from -1 to 1, with higher values indicating denser vegetation.'

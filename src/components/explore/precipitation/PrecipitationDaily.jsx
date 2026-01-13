@@ -1,4 +1,7 @@
-import { era5Daily } from '../../../data/earth-engine-datasets.js'
+import {
+    era5Daily,
+    getResolutionText,
+} from '../../../data/earth-engine-datasets.js'
 import useAppSettings from '../../../hooks/useAppSettings.js'
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
 import exploreStore from '../../../store/exploreStore.js'
@@ -48,7 +51,7 @@ const PrecipitationDaily = () => {
             <PeriodTypeSelect />
             {getContent()}
             <DailyPeriodSelect disabled={!gee.enabled} />
-            <Resolution resolution={era5Daily.resolution} />
+            <Resolution resolution={getResolutionText(era5Daily.resolution)} />
         </>
     )
 }

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-12T15:34:08.794Z\n"
-"PO-Revision-Date: 2026-01-12T15:34:08.794Z\n"
+"POT-Creation-Date: 2026-01-13T13:04:00.445Z\n"
+"PO-Revision-Date: 2026-01-13T13:04:00.446Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -1067,8 +1067,11 @@ msgstr ""
 msgid "ENACTS datasets could not be loaded"
 msgstr "ENACTS datasets could not be loaded"
 
-msgid "Data is from {{source}}. Accessed via {{provider}}."
-msgstr "Data is from {{source}}. Accessed via {{provider}}."
+msgid "Data is from "
+msgstr "Data is from "
+
+msgid ". Provider: "
+msgstr ". Provider: "
 
 msgid "You need access to Google Earth Engine to explore this data."
 msgstr "You need access to Google Earth Engine to explore this data."
@@ -1088,9 +1091,6 @@ msgstr ""
 msgid "Read more on the CDS user forum"
 msgstr "Read more on the CDS user forum"
 
-msgid "Data resolution"
-msgstr "Data resolution"
-
 msgid ""
 "You can import data for the lowest levels in your org unit hierarchy, but "
 "it won't improve the resolution of the data."
@@ -1108,23 +1108,8 @@ msgstr ""
 msgid "Time zone"
 msgstr "Time zone"
 
-msgid "Approximately 31 km (0.25°)"
-msgstr "Approximately 31 km (0.25°)"
-
-msgid "Approximately 9 km (0.1°)"
-msgstr "Approximately 9 km (0.1°)"
-
-msgid "Approximately 5 km (0.05°)"
-msgstr "Approximately 5 km (0.05°)"
-
-msgid "Approximately 250 m"
-msgstr "Approximately 250 m"
-
-msgid "Approximately 500 m"
-msgstr "Approximately 500 m"
-
-msgid "Approximately 30 m"
-msgstr "Approximately 30 m"
+msgid "Data resolution is approximately {{resolution}}."
+msgstr "Data resolution is approximately {{resolution}}."
 
 msgid ""
 "Landsat Normalized Difference Vegetation Index (NDVI) is used to quantify "
@@ -1368,6 +1353,9 @@ msgstr "Extreme heat stress"
 
 msgid "Extreme<br>heat stress"
 msgstr "Extreme<br>heat stress"
+
+msgid "Data resolution is approximately {{resolution}} degrees."
+msgstr "Data resolution is approximately {{resolution}} degrees."
 
 msgid "ERA5-Land / Copernicus Climate Change Service / Google Earth Engine"
 msgstr "ERA5-Land / Copernicus Climate Change Service / Google Earth Engine"

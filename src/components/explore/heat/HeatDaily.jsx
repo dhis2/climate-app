@@ -1,4 +1,7 @@
-import { era5HeatDaily } from '../../../data/earth-engine-datasets.js'
+import {
+    era5HeatDaily,
+    getResolutionText,
+} from '../../../data/earth-engine-datasets.js'
 import useAppSettings from '../../../hooks/useAppSettings.js'
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
 import exploreStore from '../../../store/exploreStore.js'
@@ -50,7 +53,9 @@ const HeatDaily = () => {
             {getContent()}
             <DailyPeriodSelect disabled={!gee.enabled} />
             <HeatDescription />
-            <Resolution resolution={era5HeatDaily.resolution} />
+            <Resolution
+                resolution={getResolutionText(era5HeatDaily.resolution)}
+            />
         </>
     )
 }

@@ -2,7 +2,9 @@ import i18n from '@dhis2/d2-i18n'
 import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React from 'react'
+import { getResolutionText } from '../../data/earth-engine-datasets.js'
 import useDatasets from '../../hooks/useDatasets.js'
+import classes from './styles/Dataset.module.css'
 
 const Dataset = ({ title, selected, onChange, showDescription = true }) => {
     const { data: datasets, loading, error } = useDatasets()
@@ -36,17 +38,21 @@ const Dataset = ({ title, selected, onChange, showDescription = true }) => {
                 ))}
             </SingleSelectField>
 
-            {selected && showDescription && <p>{selected.description}</p>}
-
             {selected && showDescription && (
                 <p>
-                    {i18n.t(
-                        'Data is from {{source}}. Accessed via {{provider}}.',
-                        {
-                            source: selected.source,
-                            provider: selected.provider.name,
-                        }
+                    {selected.description}
+                    {selected.resolutionText && (
+                        <span> {selected.resolutionText}</span>
                     )}
+                </p>
+            )}
+
+            {selected && showDescription && (
+                <p className={classes.provider}>
+                    {i18n.t('Data is from ')}
+                    {selected.source}
+                    {i18n.t('. Provider: ', { nsSeparator: ';' })}
+                    {selected.provider.name}
                 </p>
             )}
         </div>

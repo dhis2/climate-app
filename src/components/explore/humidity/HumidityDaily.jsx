@@ -1,4 +1,7 @@
-import { era5Daily } from '../../../data/earth-engine-datasets.js'
+import {
+    era5Daily,
+    getResolutionText,
+} from '../../../data/earth-engine-datasets.js'
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
 import exploreStore from '../../../store/exploreStore.js'
 import { useDataSources } from '../../DataSourcesProvider.jsx'
@@ -42,7 +45,7 @@ const HumidityDaily = () => {
             {getContent()}
             <DailyPeriodSelect disabled={!gee.enabled} />
             <HumidityDescription />
-            <Resolution resolution={era5Daily.resolution} />
+            <Resolution resolution={getResolutionText(era5Daily.resolution)} />
         </>
     )
 }

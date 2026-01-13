@@ -1,5 +1,7 @@
 import { useDataSources } from '../components/DataSourcesProvider.jsx'
-import getEEDatasets from '../data/earth-engine-datasets.js'
+import getEEDatasets, {
+    getResolutionText,
+} from '../data/earth-engine-datasets.js'
 import useEnactsDatasets from './useEnactsDatasets.js'
 
 const useDatasets = () => {
@@ -15,6 +17,7 @@ const useDatasets = () => {
         const { periodRange, ...rest } = dataset
         return {
             ...rest,
+            resolutionText: getResolutionText(dataset.resolution),
             supportedPeriodTypes: dataset.supportedPeriodTypes.map((pt) => {
                 const obj = { periodType: pt }
                 if (periodRange) {

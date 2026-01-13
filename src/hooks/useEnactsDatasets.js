@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import { useQuery } from '@tanstack/react-query'
 import { useMemo } from 'react'
 import {
@@ -80,7 +81,13 @@ const parseEnactsDatasetGroup = (datasets, enactsInfo) => {
         description: `${datasetName} measured in ${d.variable_units}. ${collection.description}`,
         units: d.variable_units,
         supportedPeriodTypes: supportedPeriodTypes, // list of period objects including time range, see further up
-        resolution: `Approximately ${d.spatial_resolution.lon} degrees`,
+        resolution: d.spatial_resolution.lon,
+        resolutionText: i18n.t(
+            'Data resolution is approximately {{resolution}} degrees.',
+            {
+                resolution: d.spatial_resolution.lon,
+            }
+        ),
         variable: d.variable_name,
         source: enactsInfo.owner, // retrieved from the enacts server metadata
         dataElementCode: `ENACTS_${d.dataset_name.toUpperCase()}_${d.variable_name.toUpperCase()}`,
