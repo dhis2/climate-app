@@ -10,6 +10,7 @@ import exploreStore from '../../../store/exploreStore.js'
 import { useDataSources } from '../../DataSourcesProvider.jsx'
 import DataLoader from '../../shared/DataLoader.jsx'
 import { GEETokenWarning } from '../../shared/GEETokenWarning.jsx'
+import OpenAsMapButton from '../../shared/OpenAsMapButton.jsx'
 import Resolution from '../../shared/Resolution.jsx'
 import Chart from '../Chart.jsx'
 import MonthlyPeriodSelect from '../MonthlyPeriodSelect.jsx'
@@ -29,6 +30,7 @@ const TemperatureMonthly = () => {
         period,
         feature: orgUnit,
     })
+    const lastPeriod = data?.[data.length - 1]
 
     const normals = useEarthEngineClimateNormals(
         era5MonthlyNormals,
@@ -68,6 +70,12 @@ const TemperatureMonthly = () => {
             <ReferencePeriod />
             <Resolution
                 resolution={getResolutionText(era5Monthly.resolution)}
+            />
+            <OpenAsMapButton
+                dataset={'temperatureMonthly'}
+                period={lastPeriod}
+                feature={orgUnit}
+                loading={!lastPeriod}
             />
         </>
     )

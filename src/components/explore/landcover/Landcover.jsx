@@ -8,6 +8,7 @@ import exploreStore from '../../../store/exploreStore.js'
 import { useDataSources } from '../../DataSourcesProvider.jsx'
 import DataLoader from '../../shared/DataLoader.jsx'
 import { GEETokenWarning } from '../../shared/GEETokenWarning.jsx'
+import OpenAsMapButton from '../../shared/OpenAsMapButton.jsx'
 import Resolution from '../../shared/Resolution.jsx'
 import Chart from '../Chart.jsx'
 import getChartConfig from './charts/landcover.js'
@@ -36,6 +37,7 @@ const Landcover = () => {
     if (!gee.enabled) {
         return <GEETokenWarning />
     }
+    const lastPeriod = data?.[data.length - 1]
 
     if (!data) {
         return <DataLoader />
@@ -49,6 +51,12 @@ const Landcover = () => {
             <LandcoverSelect data={data} />
             <div className={styles.description}>{landcoverDescription}</div>
             <Resolution resolution={getResolutionText(LANDCOVER_RESOLUTION)} />
+            <OpenAsMapButton
+                dataset={'landcover'}
+                period={lastPeriod}
+                feature={feature}
+                loading={!lastPeriod}
+            />
         </>
     )
 }

@@ -8,6 +8,7 @@ import exploreStore from '../../../store/exploreStore.js'
 import { useDataSources } from '../../DataSourcesProvider.jsx'
 import DataLoader from '../../shared/DataLoader.jsx'
 import { GEETokenWarning } from '../../shared/GEETokenWarning.jsx'
+import OpenAsMapButton from '../../shared/OpenAsMapButton.jsx'
 import Resolution from '../../shared/Resolution.jsx'
 import Chart from '../Chart.jsx'
 import getChartConfig from './charts/elevation.js'
@@ -58,6 +59,7 @@ const Elevation = () => {
                 </>
             )}
             <Resolution resolution={getResolutionText(DEM_RESOLUTION)} />
+            <OpenAsMapButton dataset={'elevation'} feature={feature} />
         </>
     )
 }

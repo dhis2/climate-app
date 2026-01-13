@@ -8,6 +8,7 @@ import exploreStore from '../../../store/exploreStore.js'
 import { useDataSources } from '../../DataSourcesProvider.jsx'
 import DataLoader from '../../shared/DataLoader.jsx'
 import { GEETokenWarning } from '../../shared/GEETokenWarning.jsx'
+import OpenAsMapButton from '../../shared/OpenAsMapButton.jsx'
 import Resolution from '../../shared/Resolution.jsx'
 import Chart from '../Chart.jsx'
 import DailyPeriodSelect from '../DailyPeriodSelect.jsx'
@@ -25,6 +26,7 @@ const TemperatureDaily = () => {
         period,
         feature: orgUnit,
     })
+    const lastPeriod = data?.[data.length - 1]
 
     const getContent = () => {
         if (!gee.enabled) {
@@ -52,6 +54,12 @@ const TemperatureDaily = () => {
             {getContent()}
             <DailyPeriodSelect disabled={!gee.enabled} />
             <Resolution resolution={getResolutionText(era5Daily.resolution)} />
+            <OpenAsMapButton
+                dataset={'temperatureDaily'}
+                period={lastPeriod}
+                feature={orgUnit}
+                loading={!lastPeriod}
+            />
         </>
     )
 }

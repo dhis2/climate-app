@@ -29,6 +29,7 @@
     },
     "dependencies": {
         "@dhis2/app-runtime": "^3.14.7",
+        "@dhis2/app-service-datastore": "^1.0.0-beta.3",
         "@dhis2/multi-calendar-dates": "^2.1.2",
         "@dhis2/ui": "^10.10.2",
         "@turf/area": "^6.5.0",

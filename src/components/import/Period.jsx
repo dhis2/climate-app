@@ -1,8 +1,8 @@
-import { useDataQuery } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { CalendarInput } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
+import useUserLocale from '../../hooks/useUserLocale.js'
 import {
     YEARLY,
     normalizeIsoDate,
@@ -16,15 +16,6 @@ import PeriodType from './PeriodType.jsx'
 import classes from './styles/Period.module.css'
 import YearRange from './YearRange.jsx'
 
-const userSettingsQuery = {
-    userSettings: {
-        resource: 'userSettings',
-        params: {
-            key: ['keyUiLocale'],
-        },
-    },
-}
-
 const DEFAULT_DATASET = {}
 
 const getValidationState = (minCalendarDate, maxCalendarDate, dateError) => {
@@ -35,8 +26,7 @@ const getValidationState = (minCalendarDate, maxCalendarDate, dateError) => {
 }
 
 const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
-    const result = useDataQuery(userSettingsQuery)
-    const { data: { userSettings: { keyUiLocale: locale } = {} } = {} } = result
+    const { locale } = useUserLocale()
 
     // Set period locale from user settings
     useEffect(() => {
