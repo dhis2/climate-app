@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "About this app"
-msgstr "Om denne appen"
+msgstr ""
 
 msgid ""
 "This pilot app is part of the ongoing “DHIS2 for Climate“ project. It will "
@@ -26,10 +26,6 @@ msgid ""
 " not a DHIS2 core app. Useful parts of this app might be incorporated into "
 "the DHIS2 core in the future, based on your feedback."
 msgstr ""
-"Denne pilotappen er en del av det pågående prosjektet \"DHIS2 for Climate\". Den vil "
-"få hyppige oppdateringer, så vennligst sørg for at du har den nyeste versjonen fra "
-"DHIS2 App Hub. Appen er utviklet av Universitetet i Oslo, men det er ikke en DHIS2-kjerneapp. "
-"Nyttige deler av denne appen kan bli innlemmet i DHIS2-kjernen i fremtiden, basert på din tilbakemelding."
 
 msgid ""
 "The app allows you to explore and import temperature, precipitation, "
@@ -38,61 +34,46 @@ msgid ""
 "available. The video below shows you how this dataset was created by "
 "combining weather observations with a weather model (climate reanalysis)."
 msgstr ""
-"Appen lar deg utforske og importere data om temperatur, nedbør, "
-"luftfuktighet og varmestress i DHIS2. Hovedkilden for data er ERA5-Land, "
-"som anses som det mest nøyaktige og fullstendige globale klimadatasettet "
-"tilgjengelig. Videoen nedenfor viser deg hvordan dette datasettet ble opprettet ved "
-"å kombinere værobservasjoner med en værmodell (klimareanalyse)."
 
 msgid "Read about ERA5-Land on Copernicus Climate Data Store"
-msgstr "Les om ERA5-Land på Copernicus Climate Data Store"
-
-msgid "Data resolution is approximately {{resolution}} degrees."
-msgstr "Dataoppløsningen er omtrent {{resolution}} grader."
-
-msgid "Data resolution is approximately {{resolution}}."
-msgstr "Dataoppløsningen er omtrent {{resolution}}."
-
+msgstr ""
 
 msgid ""
 "In additon to ERA5-Land, precipitation data can also be imported from the "
 "CHIRPS dataset. For heat stress we use data from ERA5-HEAT."
-msgstr "I tillegg til ERA5-LAND, nedbør data kan bli importert fra CHIRPS. For heatstress"
-"bruker vi data fra ERA5-HEAT"
+msgstr ""
 
 msgid "Read about CHIRPS on Climate Hazards Center"
-msgstr "Les om CHIRPS på Climate Hazards Center"
+msgstr ""
 
 msgid "Read about ERA5-HEAT on Copernicus Climate Data Store"
-msgstr "Les om ERA5-HEAT på Copernicus Climate Data Store"
+msgstr ""
 
 msgid ""
 "If you just want to look at weather and climate data for your organisation "
 "units, click on “Explore data” in the left menu. No configuration is needed."
-msgstr "Hvis du vil se på vær og klima data for ditt org unit, click Utforsk."
+msgstr ""
 
 msgid ""
 "We recommend importing data into DHIS2 data elements. This will allow you to"
 " combine weather and climate data with your health data across all DHIS2 "
 "analytics apps. You need to configure your DHIS2 instance before you can "
 "import data. See our guide by clicking on “Setup guide”."
-msgstr "Anbefaler noe her"
+msgstr ""
 
 msgid ""
 "After the configuration is done, you can import temperature and "
 "precipitation data under “Import data”."
-msgstr "Når konfig er gjort kan du importere temp og nedbøre under \"Importer\""
+msgstr ""
 
 msgid ""
 "After the data is imported, you should generate the analytics tables in the "
 "Data Administration app. This will allow you to see the data in the DHIS2 "
 "analytics apps."
 msgstr ""
-"Etter at dataene er importert, bør du generere analysetabellene i Dataadministrasjonsappen. "
-"Dette vil la deg se dataene i DHIS2 analyseappene."
 
 msgid "How the data is calculated"
-msgstr "Hvordan dataene beregnes"
+msgstr ""
 
 msgid ""
 "The data is calculated for your organsation units on Google Earth Engine. "
@@ -101,32 +82,31 @@ msgid ""
 "automatically aggregate the values within that district. If two org units "
 "are close to each other (within the resolution), they will have the same "
 "data values."
-msgstr "Data er regnet for ditt org unit på Google Earth Engine."
-"Vennligst sjekk data res blablablbablabla"
+msgstr ""
 
 msgid "Home"
 msgstr "Hjem"
 
 msgid "Explore data"
-msgstr "Utforsk data"
+msgstr ""
 
 msgid "Import data"
 msgstr "Importer data"
 
 msgid "Setup guide"
-msgstr "Oppsettveiledning"
+msgstr ""
 
 msgid "Settings"
 msgstr "Innstillinger"
 
 msgid "Check data"
-msgstr "Sjekk data"
+msgstr ""
 
 msgid "Check weather and climate data"
-msgstr "Sjekk vær- og klimadata"
+msgstr ""
 
 msgid "Select a location in the left panel"
-msgstr "Velg en plassering i venstre panel"
+msgstr ""
 
 msgid "Start date"
 msgstr "Startdato"
@@ -135,13 +115,13 @@ msgid "End date"
 msgstr "Sluttdato"
 
 msgid "Maximum {{maxDays}} days allowed"
-msgstr "Maksimalt {{maxDays}} dager tillatt"
+msgstr ""
 
 msgid "Explore weather and climate data"
-msgstr "Utforsk vær- og klimadata"
+msgstr ""
 
 msgid "Select an organisation unit in the left panel"
-msgstr "Velg en organisasjonsenhet i venstre panel"
+msgstr ""
 
 msgid "January"
 msgstr "Januar"
@@ -183,22 +163,22 @@ msgid "Month"
 msgstr "Måned"
 
 msgid "Start month"
-msgstr "Startmåned"
+msgstr ""
 
 msgid "End month"
-msgstr "Sluttmåned"
+msgstr ""
 
 msgid "Maximum {{maxMonths}} months allowed"
-msgstr "Maksimalt {{maxMonths}} måneder tillatt"
+msgstr ""
 
 msgid "No geometry found"
-msgstr "Ingen geometri funnet"
+msgstr ""
 
 msgid "Data for a location"
-msgstr "Data for en plassering"
+msgstr ""
 
 msgid "Data for an area"
-msgstr "Data for et område"
+msgstr ""
 
 msgid "Monthly"
 msgstr "Månedlig"
@@ -207,10 +187,10 @@ msgid "Daily"
 msgstr "Daglig"
 
 msgid "Reference period"
-msgstr "Referanseperiode"
+msgstr ""
 
 msgid "10 days forecast"
-msgstr "10 dagers varsel"
+msgstr ""
 
 msgid "Temperature"
 msgstr "Temperatur"
@@ -219,19 +199,19 @@ msgid "Precipitation"
 msgstr "Nedbør"
 
 msgid "Humidity"
-msgstr "Luftfuktighet"
+msgstr ""
 
 msgid "Heat"
-msgstr "Varme"
+msgstr ""
 
 msgid "Climate change"
-msgstr "Klimaendring"
+msgstr ""
 
 msgid "Vegetation"
-msgstr "Vegetasjon"
+msgstr ""
 
 msgid "Land cover"
-msgstr "Markslagdekning"
+msgstr ""
 
 msgid "Elevation"
 msgstr "Høyde"
@@ -243,19 +223,19 @@ msgid ""
 msgstr ""
 
 msgid "{{name}}: {{month}} temperature difference {{years}}"
-msgstr "{{name}}: {{month}} temperaturforskjell {{years}}"
+msgstr ""
 
 msgid "Reference period: {{period}}"
-msgstr "Referanseperiode: {{period}}"
+msgstr ""
 
 msgid "Temperature anomaly"
-msgstr "Temperaturavvik"
+msgstr ""
 
 msgid "{{name}}: Elevation"
-msgstr "{{name}}: Høyde"
+msgstr ""
 
 msgid "{{value}} m"
-msgstr "{{value}} m"
+msgstr ""
 
 msgid ""
 "The chart shows the elevation distribution of the selected area, for each "
@@ -265,46 +245,46 @@ msgid ""
 msgstr ""
 
 msgid "Elevation: {{value}} m"
-msgstr "Høyde: {{value}} m"
+msgstr ""
 
 msgid "Area: {{value}} km²"
-msgstr "Areal: {{value}} km²"
+msgstr ""
 
 msgid "Min elevation"
-msgstr "Min høyde"
+msgstr ""
 
 msgid "Mean elevation"
-msgstr "Gjennomsnittlig høyde"
+msgstr ""
 
 msgid "Max elevation"
-msgstr "Maks høyde"
+msgstr ""
 
 msgid "{{precip}} mm"
-msgstr "{{precip}} mm"
+msgstr ""
 
 msgid "Night"
-msgstr "Natt"
+msgstr ""
 
 msgid "Morning"
-msgstr "Morgen"
+msgstr ""
 
 msgid "Afternoon"
-msgstr "Ettermiddag"
+msgstr ""
 
 msgid "Evening"
-msgstr "Kveld"
+msgstr ""
 
 msgid "Max/min temp."
-msgstr "Maks/min temp."
+msgstr ""
 
 msgid "Precip."
-msgstr "Nedbør"
+msgstr ""
 
 msgid "Rel. humidity"
-msgstr "Rel. luftfuktighet"
+msgstr ""
 
 msgid "Wind"
-msgstr "Vind"
+msgstr ""
 
 msgid ""
 "The forecast is using the \"{{- timeZone}}\" time zone. You can change the "
@@ -322,127 +302,127 @@ msgid ""
 msgstr ""
 
 msgid "Clear sky"
-msgstr "Klar himmel"
+msgstr ""
 
 msgid "Fair"
-msgstr "Lettskyet"
+msgstr ""
 
 msgid "Partly cloudy"
-msgstr "Delvis skyet"
+msgstr ""
 
 msgid "Cloudy"
-msgstr "Overskyet"
+msgstr ""
 
 msgid "Light rain showers"
-msgstr "Lette regnbyger"
+msgstr ""
 
 msgid "Rain showers"
-msgstr "Regnbyger"
+msgstr ""
 
 msgid "Heavy rain showers"
-msgstr "Kraftige regnbyger"
+msgstr ""
 
 msgid "Light rain showers and thunder"
-msgstr "Lette regnbyger og torden"
+msgstr ""
 
 msgid "Rain showers and thunder"
-msgstr "Regnbyger og torden"
+msgstr ""
 
 msgid "Heavy rain showers and thunder"
-msgstr "Kraftige regnbyger og torden"
+msgstr ""
 
 msgid "Light sleet showers"
-msgstr "Lette sluddbyger"
+msgstr ""
 
 msgid "Sleet showers"
-msgstr "Sluddbyger"
+msgstr ""
 
 msgid "Heavy sleet showers"
-msgstr "Kraftige sluddbyger"
+msgstr ""
 
 msgid "Light sleet showers and thunder"
-msgstr "Lette sluddbyger og torden"
+msgstr ""
 
 msgid "Sleet showers and thunder"
-msgstr "Sluddbyger og torden"
+msgstr ""
 
 msgid "Heavy sleet showers and thunder"
-msgstr "Kraftige sluddbyger og torden"
+msgstr ""
 
 msgid "Light snow showers"
-msgstr "Lette snøbyger"
+msgstr ""
 
 msgid "Snow showers"
-msgstr "Snøbyger"
+msgstr ""
 
 msgid "Heavy show showers"
-msgstr "Kraftige snøbyger"
+msgstr ""
 
 msgid "Light snow showers and thunder"
-msgstr "Lette snøbyger og torden"
+msgstr ""
 
 msgid "Snow showers and thunder"
-msgstr "Snøbyger og torden"
+msgstr ""
 
 msgid "Heavy snow showers and thunder"
-msgstr "Kraftige snøbyger og torden"
+msgstr ""
 
 msgid "Light rain"
-msgstr "Lett regn"
+msgstr ""
 
 msgid "Rain"
-msgstr "Regn"
+msgstr ""
 
 msgid "Heavy rain"
-msgstr "Kraftig regn"
+msgstr ""
 
 msgid "Light rain and thunder"
-msgstr "Lett regn og torden"
+msgstr ""
 
 msgid "Rain and thunder"
-msgstr "Regn og torden"
+msgstr ""
 
 msgid "Heavy rain and thunder"
-msgstr "Kraftig regn og torden"
+msgstr ""
 
 msgid "Light sleet"
-msgstr "Lett sludd"
+msgstr ""
 
 msgid "Sleet"
-msgstr "Sludd"
+msgstr ""
 
 msgid "Heavy sleet"
-msgstr "Kraftig sludd"
+msgstr ""
 
 msgid "Light sleet and thunder"
-msgstr "Lett sludd og torden"
+msgstr ""
 
 msgid "Sleet and thunder"
-msgstr "Sludd og torden"
+msgstr ""
 
 msgid "Heavy sleet and thunder"
-msgstr "Kraftig sludd og torden"
+msgstr ""
 
 msgid "Light snow"
-msgstr "Lett snø"
+msgstr ""
 
 msgid "Snow"
-msgstr "Snø"
+msgstr ""
 
 msgid "Heavy snow"
-msgstr "Kraftig snø"
+msgstr ""
 
 msgid "Light snow and thunder"
-msgstr "Lett snø og torden"
+msgstr ""
 
 msgid "Snow and thunder"
-msgstr "Snø og torden"
+msgstr ""
 
 msgid "Heavy snow and thunder"
-msgstr "Kraftig snø og torden"
+msgstr ""
 
 msgid "Fog"
-msgstr "Tåke"
+msgstr ""
 
 msgid ""
 "The Universal Thermal Climate Index (UTCI) is an index that combines the "
@@ -452,16 +432,16 @@ msgid ""
 msgstr ""
 
 msgid "{{name}}: Thermal comfort {{period}}"
-msgstr "{{name}}: Termisk komfort {{period}}"
+msgstr ""
 
 msgid "Average felt temperature"
-msgstr "Gjennomsnittlig følt temperatur"
+msgstr ""
 
 msgid "Felt temperature range"
-msgstr "Rekkevidde for følt temperatur"
+msgstr ""
 
 msgid "Average temperature"
-msgstr "Gjennomsnittlig temperatur"
+msgstr ""
 
 msgid ""
 "Relative humidity is the the amount of water vapour present in air expressed"
@@ -470,25 +450,25 @@ msgid ""
 msgstr ""
 
 msgid "{{name}}: Daily relative humidity {{period}}"
-msgstr "{{name}}: Daglig relativ luftfuktighet {{period}}"
+msgstr ""
 
 msgid "Relative humidity"
-msgstr "Relativ luftfuktighet"
+msgstr ""
 
 msgid "{{name}}: Relative humidity {{period}}"
-msgstr "{{name}}: Relativ luftfuktighet {{period}}"
+msgstr ""
 
 msgid "Normals from reference period: {{period}}"
-msgstr "Normaler fra referanseperiode: {{period}}"
+msgstr ""
 
 msgid "Normal relative humidity"
-msgstr "Normal relativ luftfuktighet"
+msgstr ""
 
 msgid "Dewpoint temperature"
-msgstr "Duggpunktstemperatur"
+msgstr ""
 
 msgid "Air temperature"
-msgstr "Lufttemperatur"
+msgstr ""
 
 msgid "Evergreen Needleleaf forest"
 msgstr "Eviggrønn nålskog"
@@ -542,43 +522,43 @@ msgid "Water"
 msgstr "Vann"
 
 msgid "Land cover type"
-msgstr "Markslagsdekkingstype"
+msgstr ""
 
 msgid "{{name}}: Land cover changes {{years}}"
-msgstr "{{name}}: Endringer i markslagdekning {{years}}"
+msgstr ""
 
 msgid "{{name}}: Daily precipitation {{period}}"
-msgstr "{{name}}: Daglig nedbør {{period}}"
+msgstr ""
 
 msgid "Daily precipitation"
-msgstr "Daglig nedbør"
+msgstr ""
 
 msgid "{{name}}: Monthly precipitation {{period}}"
-msgstr "{{name}}: Månedlig nedbør {{period}}"
+msgstr ""
 
 msgid "Monthly precipitation"
-msgstr "Månedlig nedbør"
+msgstr ""
 
 msgid "Normal precipitation"
-msgstr "Normal nedbør"
+msgstr ""
 
 msgid "{{name}}: Daily temperatures {{period}}"
-msgstr "{{name}}: Daglige temperaturer {{period}}"
+msgstr ""
 
 msgid "Mean temperature"
-msgstr "Gjennomsnittlig temperatur"
+msgstr ""
 
 msgid "Temperature range"
-msgstr "Temperaturrekkevidde"
+msgstr ""
 
 msgid "{{name}}: Monthly temperatures {{period}}"
-msgstr "{{name}}: Månedlige temperaturer {{period}}"
+msgstr ""
 
 msgid "Normal temperature"
-msgstr "Normal temperatur"
+msgstr ""
 
 msgid "Resample"
-msgstr "Resample"
+msgstr ""
 
 msgid "Weekly"
 msgstr "Ukentlig"
@@ -589,10 +569,10 @@ msgid ""
 msgstr ""
 
 msgid "{{name}}: {{band}} vegetation index {{period}}"
-msgstr "{{name}}: {{band}} vegetasjonsindeks {{period}}"
+msgstr ""
 
 msgid "Value is only for 250 x 250 m where the facility is located"
-msgstr "Verdien gjelder kun for 250 x 250 m der fasiliteten er lokalisert"
+msgstr ""
 
 msgid "Data element"
 msgstr "Dataelement"
@@ -601,35 +581,33 @@ msgid "No match found"
 msgstr "Ingen treff funnet"
 
 msgid "Data element to import data to"
-msgstr "Dataelement å importere data til"
+msgstr ""
 
 msgid "Loading org units"
-msgstr "Laster organisasjonsenheter"
+msgstr ""
 
 msgid "No org units with geometry found for this level"
-msgstr "Ingen organisasjonsenheter med geometri funnet for dette nivået"
+msgstr ""
 
 msgid ""
 "Extracting data for {{periodCount}} {{periodType}} periods and "
 "{{orgUnitsCount}} org units ({{valueCount}} values)"
 msgstr ""
-"Henter ut data for {{periodCount}} {{periodType}} perioder og "
-"{{orgUnitsCount}} organisasjonsenheter ({{valueCount}} verdier)"
 
 msgid "Extracting data for {{orgUnitsCount}} org units"
-msgstr "Henter ut data for {{orgUnitsCount}} organisasjonsenheter"
+msgstr ""
 
 msgid "Importing data to DHIS2"
-msgstr "Importerer data til DHIS2"
+msgstr ""
 
 msgid "Import failed"
-msgstr "Import mislyktes"
+msgstr ""
 
 msgid "One or more conflicts encountered"
-msgstr "En eller flere konflikter oppstod"
+msgstr ""
 
 msgid "Import weather and climate data"
-msgstr "Importer vær- og klimadata"
+msgstr ""
 
 msgid ""
 "You can maximum import {{maxValues}} data values in a single import, but you"
@@ -640,7 +618,7 @@ msgid ""
 msgstr ""
 
 msgid "Instructions"
-msgstr "Instruksjoner"
+msgstr ""
 
 msgid ""
 "Before you can import data, you need to create the associated data elements "
@@ -656,7 +634,7 @@ msgid "Data"
 msgstr "Data"
 
 msgid "Select the variable you would like to import."
-msgstr "Velg variabelen du vil importere."
+msgstr ""
 
 msgid "Period"
 msgstr "Periode"
@@ -693,7 +671,7 @@ msgid ""
 msgstr ""
 
 msgid "Import summary"
-msgstr "Importsammendrag"
+msgstr ""
 
 msgid ""
 "When data is imported, we will show a summary of the import. This includes "
@@ -702,10 +680,10 @@ msgid ""
 msgstr ""
 
 msgid "Data is imported"
-msgstr "Data er importert"
+msgstr ""
 
 msgid "Imported"
-msgstr "Importert"
+msgstr ""
 
 msgid "Updated"
 msgstr "Oppdatert"
@@ -714,7 +692,7 @@ msgid "Ignored"
 msgstr "Ignorert"
 
 msgid "No data for the following org units"
-msgstr "Ingen data for følgende organisasjonsenheter"
+msgstr ""
 
 msgid ""
 "ERA5-Land has limited data for costal areas. Values for other org units will"
@@ -722,7 +700,7 @@ msgid ""
 msgstr ""
 
 msgid "Organisation unit level to import data to"
-msgstr "Organisasjonsenhetnivå å importere data til"
+msgstr ""
 
 msgid "Org unit parent needs to be above or equal to the org unit level"
 msgstr ""
@@ -733,16 +711,16 @@ msgid ""
 msgstr ""
 
 msgid "Daily values will be imported between start and end dates"
-msgstr "Daglige verdier vil bli importert mellom start- og sluttdato"
+msgstr ""
 
 msgid "Period type"
 msgstr "Periodetype"
 
 msgid "Start year"
-msgstr "År"
+msgstr ""
 
 msgid "End year"
-msgstr "Sluttår"
+msgstr ""
 
 msgid ""
 "Set y-axis values for charts in the Explore data section to make it easier "
@@ -751,43 +729,43 @@ msgid ""
 msgstr ""
 
 msgid "Max temperature in °C"
-msgstr "Maks temperatur i °C"
+msgstr ""
 
 msgid "Min temperature in °C"
-msgstr "Min temperatur i °C"
+msgstr ""
 
 msgid "Min temperature must be less than max temperature"
-msgstr "Minimumtemperatur må være lavere enn maksimumstemperatur"
+msgstr ""
 
 msgid "Max change in temperature in +/- °C"
-msgstr "Maks endring i temperatur i +/- °C"
+msgstr ""
 
 msgid "Max monthly precipitation in mm"
-msgstr "Maks månedlig nedbør i mm"
+msgstr ""
 
 msgid "Max daily precipitation in mm"
-msgstr "Maks daglig nedbør i mm"
+msgstr ""
 
 msgid "Heat stress upper category"
-msgstr "Øvre varmestress-kategori"
+msgstr ""
 
 msgid "Heat stress lower category"
-msgstr "Nedre varmestress-kategori"
+msgstr ""
 
 msgid "Calculate from data"
-msgstr "Beregn fra data"
+msgstr ""
 
 msgid "App settings"
-msgstr "Appinnstillinger"
+msgstr ""
 
 msgid "Changes made below will apply to all users of this app."
-msgstr "Endringer som gjøres nedenfor vil gjelde for alle brukere av denne appen."
+msgstr ""
 
 msgid "Default start page for users"
-msgstr "Standard startside for brukere"
+msgstr ""
 
 msgid "Time zone where your org units are located"
-msgstr "Tidssone der organisasjonsenhetene dine er lokalisert"
+msgstr ""
 
 msgid "Data element: \"{{name}}\""
 msgstr ""
@@ -820,13 +798,13 @@ msgid "Store zero data values"
 msgstr "Lagre null dataverdier"
 
 msgid "Make sure it is checked"
-msgstr "Sørg for at den er avkrysset"
+msgstr ""
 
 msgid "Aggregation levels"
 msgstr "Aggregasjonsnivåer"
 
 msgid "Assign all org unit levels"
-msgstr "Tildel alle organisasjonsenhetsnivåer"
+msgstr ""
 
 msgid ""
 "You should now be able to import data with this app. Please reach out to us "
@@ -835,7 +813,7 @@ msgid ""
 msgstr ""
 
 msgid "3. Assign to a data element group"
-msgstr "3. Tildel til en dataelementgruppe"
+msgstr ""
 
 msgid "Data element group: \"{{-name}}\""
 msgstr ""
@@ -844,10 +822,10 @@ msgid "Data elements"
 msgstr "Dataelementer"
 
 msgid "Assign above data element"
-msgstr "Tildel dataelementet ovenfor"
+msgstr ""
 
 msgid "2. Assign to a data set"
-msgstr "2. Tildel til et datasett"
+msgstr ""
 
 msgid ""
 "If you import daily data, you should assign the data elements to a daily "
@@ -869,13 +847,13 @@ msgid "Organisation units"
 msgstr "Organisasjonsenheter"
 
 msgid "Select all organisation units in your system"
-msgstr "Velg alle organisasjonsenheter i systemet ditt"
+msgstr ""
 
 msgid "4. Add a legend"
-msgstr "4. Legg til en forklaring"
+msgstr ""
 
 msgid "Recommended legend for this data element."
-msgstr "Anbefalt forklaring for dette dataelementet."
+msgstr ""
 
 msgid "Legend: \"{{-name}}\""
 msgstr ""
@@ -890,7 +868,7 @@ msgid "Color"
 msgstr "Farge"
 
 msgid "Configuring DHIS2 before importing data"
-msgstr "Konfigurere DHIS2 før import av data"
+msgstr ""
 
 msgid ""
 "Before you can import data, you need to make some configurations in the "
@@ -899,7 +877,7 @@ msgid ""
 msgstr ""
 
 msgid "1. Create the data element"
-msgstr "1. Opprett dataelementet"
+msgstr ""
 
 msgid ""
 "Create DHIS2 data elements only for the data you want to import. We "
@@ -919,16 +897,16 @@ msgid ""
 msgstr ""
 
 msgid "Loading data"
-msgstr "Laster data"
+msgstr ""
 
 msgid "Select data to import"
-msgstr "Velg data å importere"
+msgstr ""
 
 msgid "You need access to Google Earth Engine to use this app."
-msgstr "Du trenger tilgang til Google Earth Engine for å bruke denne appen."
+msgstr ""
 
 msgid "How to get access?"
-msgstr "Hvordan få tilgang?"
+msgstr ""
 
 msgid ""
 "For a temporary period there is limited data available for 2024. This is due"
@@ -937,10 +915,10 @@ msgid ""
 msgstr ""
 
 msgid "Read more on the CDS user forum"
-msgstr "Les mer på CDS-brukerforumet"
+msgstr ""
 
 msgid "Data resolution"
-msgstr "Dataoppløsning"
+msgstr ""
 
 msgid ""
 "You can import data for the lowest levels in your org unit hierarchy, but it"
@@ -953,40 +931,40 @@ msgid ""
 msgstr ""
 
 msgid "Time zone"
-msgstr "Tidssone"
+msgstr ""
 
 msgid "ERA5-Land / Copernicus Climate Change Service"
-msgstr "ERA5-Land / Copernicus Climate Change Service"
+msgstr ""
 
 msgid "ERA5-Heat / Copernicus Climate Change Service"
-msgstr "ERA5-Heat / Copernicus Climate Change Service"
+msgstr ""
 
 msgid "Climate Hazards Center / UCSB"
-msgstr "Climate Hazards Center / UCSB"
+msgstr ""
 
 msgid "NASA LP DAAC at the USGS EROS Center"
-msgstr "NASA LP DAAC ved USGS EROS Center"
+msgstr ""
 
 msgid "NASA / USGS / JPL-Caltech"
-msgstr "NASA / USGS / JPL-Caltech"
+msgstr ""
 
 msgid "Approximately 31 km (0.25°)"
-msgstr "Omtrent 31 km (0,25°)"
+msgstr ""
 
 msgid "Approximately 9 km (0.1°)"
-msgstr "Omtrent 9 km (0,1°)"
+msgstr ""
 
 msgid "Approximately 5 km (0.05°)"
-msgstr "Omtrent 5 km (0,05°)"
+msgstr ""
 
 msgid "Approximately 250 m"
-msgstr "Omtrent 250 m"
+msgstr ""
 
 msgid "Approximately 500 m"
-msgstr "Omtrent 500 m"
+msgstr ""
 
 msgid "Approximately 30 m"
-msgstr "Omtrent 30 m"
+msgstr ""
 
 msgid ""
 "Landsat Normalized Difference Vegetation Index (NDVI) is used to quantify "
@@ -1002,76 +980,76 @@ msgid ""
 msgstr ""
 
 msgid "Land cover types at yearly intervals"
-msgstr "Markslagsdekkingstyper med årlige intervaller"
+msgstr ""
 
 msgid "Climate/Weather"
-msgstr "Klima/Vær"
+msgstr ""
 
 msgid "Environment"
-msgstr "Miljø"
+msgstr ""
 
 msgid "Weekly or Monthly"
-msgstr "Ukentlig eller månedlig"
+msgstr ""
 
 msgid "Land"
-msgstr "Land"
+msgstr ""
 
 msgid "Yearly"
 msgstr "Årlig"
 
 msgid "Air temperature (ERA5-Land)"
-msgstr "Lufttemperatur (ERA5-Land)"
+msgstr ""
 
 msgid "Average air temperature in °C at 2 m above the surface."
-msgstr "Gjennomsnittlig lufttemperatur i °C 2 m over overflaten."
+msgstr ""
 
 msgid "Average"
 msgstr "Gjennomsnitt"
 
 msgid "Max air temperature (ERA5-Land)"
-msgstr "Maks lufttemperatur (ERA5-Land)"
+msgstr ""
 
 msgid "Max air temperature"
-msgstr "Maks lufttemperatur"
+msgstr ""
 
 msgid "Maximum air temperature in °C at 2 m above the surface."
-msgstr "Maksimal lufttemperatur i °C 2 m over overflaten."
+msgstr ""
 
 msgid "Max"
 msgstr "Max"
 
 msgid "Min temperature (ERA5-Land)"
-msgstr "Min temperatur (ERA5-Land)"
+msgstr ""
 
 msgid "Min air temperature"
-msgstr "Min lufttemperatur"
+msgstr ""
 
 msgid "Minimum air temperature in °C at 2 m above the surface."
-msgstr "Minimal lufttemperatur i °C 2 m over overflaten."
+msgstr ""
 
 msgid "Min"
 msgstr "Min"
 
 msgid "Precipitation (ERA5-Land)"
-msgstr "Nedbør (ERA5-Land)"
+msgstr ""
 
 msgid "Precipitation (ERA5)"
-msgstr "Nedbør (ERA5)"
+msgstr ""
 
 msgid "Total precipitation in mm."
-msgstr "Total nedbør i mm."
+msgstr ""
 
 msgid "Sum"
 msgstr "Sum"
 
 msgid "Precipitation (CHIRPS)"
-msgstr "Nedbør (CHIRPS)"
+msgstr ""
 
 msgid "Precipitation in mm."
-msgstr "Nedbør i mm."
+msgstr ""
 
 msgid "Dewpoint temperature (ERA5-Land)"
-msgstr "Duggpunktstemperatur (ERA5-Land)"
+msgstr ""
 
 msgid ""
 "Temperature in °C at 2 m above the surface to which the air would have to be"
@@ -1079,7 +1057,7 @@ msgid ""
 msgstr ""
 
 msgid "Relative humidity (ERA5-Land)"
-msgstr "Relativ luftfuktighet (ERA5-Land)"
+msgstr ""
 
 msgid ""
 "Percentage of water vapor in the air compared to the total amount of vapor "
@@ -1088,142 +1066,142 @@ msgid ""
 msgstr ""
 
 msgid "Heat stress (ERA5-HEAT)"
-msgstr "Varmestress (ERA5-HEAT)"
+msgstr ""
 
 msgid "Heat stress"
-msgstr "Varmestress"
+msgstr ""
 
 msgid "Average felt temperature in °C."
-msgstr "Gjennomsnittlig følt temperatur i °C."
+msgstr ""
 
 msgid "Max heat stress (ERA5-HEAT)"
-msgstr "Maks varmestress (ERA5-HEAT)"
+msgstr ""
 
 msgid "Max heat stress"
-msgstr "Maks varmestress"
+msgstr ""
 
 msgid "Maximum felt temperature in °C."
-msgstr "Maksimal følt temperatur i °C."
+msgstr ""
 
 msgid "Min heat stress (ERA5-HEAT)"
-msgstr "Min varmestress (ERA5-HEAT)"
+msgstr ""
 
 msgid "Min heat stress"
-msgstr "Min varmestress"
+msgstr ""
 
 msgid "Minimum felt temperature in °C."
-msgstr "Minimal følt temperatur i °C."
+msgstr ""
 
 msgid "NDVI - Normalized difference vegetation index (MODIS)"
-msgstr "NDVI - Normalisert differensiell vegetasjonsindeks (MODIS)"
+msgstr ""
 
 msgid "NDVI"
-msgstr "NDVI"
+msgstr ""
 
 msgid "EVI - Enhanced vegetation index (MODIS)"
-msgstr "EVI - Forbedret vegetasjonsindeks (MODIS)"
+msgstr ""
 
 msgid "EVI"
-msgstr "EVI"
+msgstr ""
 
 msgid "Mean elevation (SRTM)"
-msgstr "Gjennomsnittlig høyde (SRTM)"
+msgstr ""
 
 msgid "Mean elevation in meters above sea level."
-msgstr "Gjennomsnittlig høyde i meter over havet."
+msgstr ""
 
 msgid "First value"
-msgstr "Første verdi"
+msgstr ""
 
 msgid "Min elevation (SRTM)"
-msgstr "Min høyde (SRTM)"
+msgstr ""
 
 msgid "Min elevation in meters above sea level."
-msgstr "Minimum høyde i meter over havet."
+msgstr ""
 
 msgid "Max elevation (SRTM)"
-msgstr "Maks høyde (SRTM)"
+msgstr ""
 
 msgid "Max elevation in meters above sea level."
-msgstr "Maksimal høyde i meter over havet."
+msgstr ""
 
 msgid "Standard deviation of elevation (SRTM)"
-msgstr "Standardavvik for høyde (SRTM)"
+msgstr ""
 
 msgid "Std dev elevation"
-msgstr "Std avvik høyde"
+msgstr ""
 
 msgid "Standard deviation of elevation in meters above sea level."
-msgstr "Standardavvik for høyde i meter over havet."
+msgstr ""
 
 msgid "Percentage of area with this land cover type."
-msgstr "Prosentandel av området med denne markslagsdekkingstypen."
+msgstr ""
 
 msgid "Heat/cold stress"
-msgstr "Varme-/kuldestress"
+msgstr ""
 
 msgid "You only need to include categories that are relevant for your area."
-msgstr "Du trenger bare å inkludere kategorier som er relevante for ditt område."
+msgstr ""
 
 msgid "Extreme cold stress"
-msgstr "Ekstrem kuldestress"
+msgstr ""
 
 msgid "Extreme<br>cold stress"
-msgstr "Ekstrem<br>kuldestress"
+msgstr ""
 
 msgid "Very strong cold stress"
-msgstr "Meget sterk kuldestress"
+msgstr ""
 
 msgid "Very strong<br>cold stress"
-msgstr "Meget sterk<br>kuldestress"
+msgstr ""
 
 msgid "Strong cold stress"
-msgstr "Sterk kuldestress"
+msgstr ""
 
 msgid "Strong<br>cold stress"
-msgstr "Sterk<br>kuldestress"
+msgstr ""
 
 msgid "Moderate cold stress"
-msgstr "Moderat kuldestress"
+msgstr ""
 
 msgid "Moderate<br>cold stress"
-msgstr "Moderat<br>kuldestress"
+msgstr ""
 
 msgid "Slight cold stress"
-msgstr "Svak kuldestress"
+msgstr ""
 
 msgid "Slight<br>cold stress"
-msgstr "Svak<br>kuldestress"
+msgstr ""
 
 msgid "No thermal stress"
-msgstr "Ingen termisk stress"
+msgstr ""
 
 msgid "No thermal<br>stress"
-msgstr "Ingen termisk<br>stress"
+msgstr ""
 
 msgid "Moderate heat stress"
-msgstr "Moderat varmestress"
+msgstr ""
 
 msgid "Moderate<br>heat stress"
-msgstr "Moderat<br>varmestress"
+msgstr ""
 
 msgid "Strong heat stress"
-msgstr "Sterk varmestress"
+msgstr ""
 
 msgid "Strong<br>heat stress"
-msgstr "Sterk<br>varmestress"
+msgstr ""
 
 msgid "Very strong heat stress"
-msgstr "Meget sterk varmestress"
+msgstr ""
 
 msgid "Very strong<br>heat stress"
-msgstr "Meget sterk<br>varmestress"
+msgstr ""
 
 msgid "Extreme heat stress"
-msgstr "Ekstrem varmestress"
+msgstr ""
 
 msgid "Extreme<br>heat stress"
-msgstr "Ekstrem<br>varmestress"
+msgstr ""
 
 msgid "ERA5-Land / Copernicus Climate Change Service / Google Earth Engine"
 msgstr ""
