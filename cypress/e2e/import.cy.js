@@ -20,6 +20,17 @@ const getRoutesFixture = () => ({
     ],
 })
 
+const assertOrgUnitSection = (level = 'District') => {
+    cy.contains('Select organisation unit and level').should('be.visible')
+    cy.getByDataTest('dhis2-uiwidgets-orgunittree-node').should('be.visible')
+    cy.contains('Bombali').should('be.visible')
+    cy.contains('Organisation unit level').should('be.visible')
+    cy.getByDataTest('org-unit-level-select').scrollIntoView()
+    cy.getByDataTest('org-unit-level-select')
+        .contains(level)
+        .should('be.visible')
+}
+
 describe('Import', () => {
     it('should inform no datasets available when Enacts and GEE are not configured', () => {
         cy.intercept('**/api/*/tokens/google', geeResponse500).as('getGeeToken')
@@ -43,6 +54,7 @@ describe('Import', () => {
             .children()
             .should('have.length', 1)
         cy.contains('No datasets are available.').should('be.visible')
+        assertOrgUnitSection()
     })
 
     it('should show only GEE datasets when GEE is configured and Enacts is not', () => {
@@ -180,5 +192,110 @@ describe('Import', () => {
         cy.contains('No datasets are available.').should('be.visible')
 
         cy.contains('ENACTS datasets could not be loaded').should('be.visible')
+    })
+
+    it('configure import for GEE ERA5-Land weekly dataset', () => {
+        cy.visit('#/import')
+
+        cy.getByDataTest('dataset-selector-content').click()
+        cy.contains('Earth Engine: Precipitation (ERA5-Land)').should(
+            'be.visible'
+        )
+        cy.getByDataTest('dhis2-uicore-select-menu-menuwrapper')
+            .children()
+            .should('have.length.greaterThan', 1)
+            .contains('Earth Engine: Precipitation (ERA5-Land)')
+            .click()
+
+        // Check the dataset info
+        cy.contains(
+            'Total precipitation in mm. Data resolution is approximately 9 km (0.1°).'
+        ).should('be.visible')
+        cy.contains(
+            'Data is from ERA5-Land / Copernicus Climate Change Service. Provider: Google Earth Engine'
+        ).should('be.visible')
+
+        // Check the period section
+
+        cy.getByDataTest('period-type-selector')
+            .find('input[type="radio"]')
+            .should('have.length', 3)
+
+        cy.getByDataTest('period-type-selector')
+            .contains('Weekly')
+            .find('input[type="radio"]')
+            .should('not.be.checked')
+
+        cy.contains('Start date').should('be.visible')
+        cy.getByDataTest('start-date-input').should('be.visible')
+
+        cy.contains('End date').should('be.visible')
+        cy.getByDataTest('end-date-input').should('be.visible')
+
+        cy.contains(
+            'Daily data between start and end date will be calculated from hourly data, with time zone adjustments applied if the selected time zone is not set to UTC.'
+        ).should('be.visible')
+
+        // Check the data element section
+        cy.getByDataTest('data-element-select').click()
+        cy.getByDataTest('dhis2-uicore-select-menu-menuwrapper')
+            .children()
+            .should('have.length', 2)
+        cy.contains(
+            'No data elements found for the selected period type.'
+        ).should('be.visible')
+        cy.getByDataTest('dhis2-uicore-popper').closePopper()
+
+        // Check organisation unit section
+        assertOrgUnitSection()
+
+        // Check review and import section
+        cy.contains('Review and import').should('be.visible')
+        cy.get('button').contains('Start import').scrollIntoView()
+        cy.get('button').contains('Start import').should('be.disabled')
+
+        // Change the period type to weekly
+        cy.getByDataTest('period-type-selector').containsExact('Weekly').click()
+        cy.getByDataTest('period-type-selector')
+            .containsExact('Weekly')
+            .find('input[type="radio"]')
+            .should('be.checked')
+
+        // Check that data elements are now available
+        cy.getByDataTest('data-element-select').click()
+        cy.getByDataTest('dhis2-uicore-select-menu-menuwrapper')
+            .children()
+            .should('have.length.greaterThan', 1)
+        cy.contains(
+            'No data elements found for the selected period type.'
+        ).should('not.exist')
+
+        // Select a weekly data element
+
+        cy.getByDataTest('dhis2-uicore-select-menu-menuwrapper')
+            .children()
+            .contains('IDSR Malaria (weekly)')
+            .click()
+
+        cy.getByDataTest('import-preview').scrollIntoView()
+        cy.getByDataTest('import-preview')
+            .contains('Precipitation (ERA5-Land)" source data will be imported')
+            .should('be.visible')
+
+        cy.getByDataTest('import-preview')
+            .contains('For every week between')
+            .should('be.visible')
+        cy.getByDataTest('import-preview')
+            .contains(
+                'To all organisation units at District within Sierra Leone'
+            )
+            .should('be.visible')
+        cy.getByDataTest('import-preview')
+            .contains('To data element "IDSR Malaria"')
+            .should('be.visible')
+
+        cy.getByDataTest('import-preview')
+            .contains('351 data values will be imported')
+            .should('be.visible')
     })
 })

@@ -203,6 +203,7 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
                                 maxCalendarDate,
                                 startDateError
                             )}
+                            dataTest="start-date-input"
                         />
                         <span className={classes.separator}>—</span>
                         <CalendarInput
@@ -219,6 +220,7 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
                                 maxCalendarDate,
                                 endDateError
                             )}
+                            dataTest="end-date-input"
                         />
                         {(dataset.timeZone || dataset.bands?.[0]?.timeZone) && (
                             <div className={classes.timezone}>

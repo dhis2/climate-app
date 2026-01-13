@@ -86,6 +86,7 @@ const DataElement = ({ selected, onChange, datasetCode, periodType }) => {
                     onChange(uniqueDataElements.find((d) => d.id === selected))
                 }
                 empty={emptyMessage}
+                dataTest="data-element-select"
             >
                 {uniqueDataElements.map((d) => (
                     <SingleSelectOption

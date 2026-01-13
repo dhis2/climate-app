@@ -29,6 +29,7 @@ const OrgUnitLevel = ({ level, onChange }) => {
                         name,
                     })
                 }}
+                dataTest="org-unit-level-select"
             >
                 {levels.map((l) => (
                     <SingleSelectOption

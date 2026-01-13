@@ -61,7 +61,7 @@ const ImportPreview = ({
     }
 
     return (
-        <div>
+        <div data-test="import-preview">
             <div className={classes.datasetlead}>
                 {i18n.t('"{{dataset}}" source data will be imported:', {
                     dataset,

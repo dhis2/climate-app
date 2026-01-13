@@ -43,7 +43,7 @@ const PeriodType = ({ periodType, supportedPeriodTypes, onChange }) => {
     }
 
     return (
-        <div className={classes.container}>
+        <div className={classes.container} data-test="period-type-selector">
             <Field label={i18n.t('Period type')}>
                 <div className={classes.radioGroup}>
                     {supportedPeriodTypeObjects.map((type) => (
