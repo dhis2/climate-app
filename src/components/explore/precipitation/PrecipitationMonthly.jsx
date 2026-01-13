@@ -4,6 +4,7 @@ import useEarthEngineClimateNormals from '../../../hooks/useEarthEngineClimateNo
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
 import exploreStore from '../../../store/exploreStore.js'
 import DataLoader from '../../shared/DataLoader.jsx'
+import OpenAsMapButton from '../../shared/OpenAsMapButton.jsx'
 import Resolution from '../../shared/Resolution.jsx'
 import Chart from '../Chart.jsx'
 import MonthlyPeriodSelect from '../MonthlyPeriodSelect.jsx'
@@ -22,6 +23,7 @@ const PrecipitationMonthly = () => {
         period: monthlyPeriod,
         feature: orgUnit,
     })
+    const lastPeriod = data?.[data.length - 1]
 
     const normals = useEarthEngineClimateNormals(
         era5MonthlyNormals,
@@ -50,6 +52,12 @@ const PrecipitationMonthly = () => {
             <MonthlyPeriodSelect />
             <ReferencePeriod />
             <Resolution resolution={era5Monthly.resolution} />
+            <OpenAsMapButton
+                dataset={'precipitationMonthly'}
+                period={lastPeriod}
+                feature={orgUnit}
+                loading={!lastPeriod}
+            />
         </>
     )
 }

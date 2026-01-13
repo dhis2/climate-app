@@ -3,6 +3,7 @@ import useEarthEngineClimateNormals from '../../../hooks/useEarthEngineClimateNo
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
 import exploreStore from '../../../store/exploreStore.js'
 import DataLoader from '../../shared/DataLoader.jsx'
+import OpenAsMapButton from '../../shared/OpenAsMapButton.jsx'
 import Resolution from '../../shared/Resolution.jsx'
 import Chart from '../Chart.jsx'
 import MonthlyPeriodSelect from '../MonthlyPeriodSelect.jsx'
@@ -21,6 +22,7 @@ const HumidityMonthly = () => {
         period,
         feature: orgUnit,
     })
+    const lastPeriod = data?.[data.length - 1]
 
     const normals = useEarthEngineClimateNormals(
         era5MonthlyNormals,
@@ -49,6 +51,12 @@ const HumidityMonthly = () => {
             <ReferencePeriod />
             <HumidityDescription />
             <Resolution resolution={era5Monthly.resolution} />
+            <OpenAsMapButton
+                dataset={'humidityMonthly'}
+                period={lastPeriod}
+                feature={orgUnit}
+                loading={!lastPeriod}
+            />
         </>
     )
 }

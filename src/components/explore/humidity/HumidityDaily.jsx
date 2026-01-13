@@ -2,6 +2,7 @@ import { era5Daily } from '../../../data/datasets.js'
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
 import exploreStore from '../../../store/exploreStore.js'
 import DataLoader from '../../shared/DataLoader.jsx'
+import OpenAsMapButton from '../../shared/OpenAsMapButton.jsx'
 import Resolution from '../../shared/Resolution.jsx'
 import Chart from '../Chart.jsx'
 import DailyPeriodSelect from '../DailyPeriodSelect.jsx'
@@ -18,6 +19,7 @@ const HumidityDaily = () => {
         period,
         feature: orgUnit,
     })
+    const lastPeriod = data?.[data.length - 1]
 
     return (
         <>
@@ -30,6 +32,12 @@ const HumidityDaily = () => {
             <DailyPeriodSelect />
             <HumidityDescription />
             <Resolution resolution={era5Daily.resolution} />
+            <OpenAsMapButton
+                dataset={'humidityDaily'}
+                period={lastPeriod}
+                feature={orgUnit}
+                loading={!lastPeriod}
+            />
         </>
     )
 }

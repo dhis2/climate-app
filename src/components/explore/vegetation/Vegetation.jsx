@@ -10,6 +10,7 @@ import {
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
 import exploreStore from '../../../store/exploreStore.js'
 import DataLoader from '../../shared/DataLoader.jsx'
+import OpenAsMapButton from '../../shared/OpenAsMapButton.jsx'
 import Resolution from '../../shared/Resolution.jsx'
 import Chart from '../Chart.jsx'
 import MonthlyPeriodSelect from '../MonthlyPeriodSelect.jsx'
@@ -30,6 +31,7 @@ const Vegetation = () => {
     const period = exploreStore((state) => state.monthlyPeriod)
 
     const data = useEarthEngineTimeSeries({ dataset, period, feature })
+    const lastPeriod = data?.[data.length - 1]
 
     if (!data) {
         return <DataLoader />
@@ -78,6 +80,12 @@ const Vegetation = () => {
                 {band === NDVI ? ndviDescription : eviDescription}
             </div>
             <Resolution resolution={getResolutionText(MODIS_RESOLUTION)} />
+            <OpenAsMapButton
+                dataset={band}
+                period={lastPeriod}
+                feature={feature}
+                loading={!lastPeriod}
+            />
         </>
     )
 }
