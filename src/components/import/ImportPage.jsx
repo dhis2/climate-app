@@ -245,7 +245,7 @@ const ImportPage = () => {
                         {startExtract && isValid && (
                             <ExtractData
                                 dataset={dataset}
-                                period={standardPeriod}
+                                period={dataset.period ? null : standardPeriod}
                                 orgUnits={orgUnits}
                                 dataElement={dataElement}
                             />
