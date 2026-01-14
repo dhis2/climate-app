@@ -69,6 +69,7 @@ const ImportPage = () => {
             const updatePeriodSelector = ({
                 periodType,
                 supportedPeriodTypes,
+                period: dsPeriod,
             }) => {
                 const periodRange =
                     supportedPeriodTypes.find(
@@ -150,7 +151,9 @@ const ImportPage = () => {
                         endTime,
                     })
                 } else {
-                    setPeriod(getDefaultImportPeriod(calendar))
+                    setPeriod(
+                        getDefaultImportPeriod(calendar, periodType, dsPeriod)
+                    )
                 }
             }
 

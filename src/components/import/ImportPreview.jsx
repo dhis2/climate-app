@@ -60,6 +60,37 @@ const ImportPreview = ({
         }
     }
 
+    const getPeriodInfo = () => {
+        if (periodInfo) {
+            return i18n.t(
+                'For every {{periodNoun}} between {{firstStartDate}} ({{firstPeriodId}}) and {{lastEndDate}} ({{lastPeriodId}})',
+                {
+                    periodNoun,
+                    firstStartDate: periodInfo.firstStartDate,
+                    firstPeriodId: periodInfo.firstPeriodId,
+                    lastEndDate: periodInfo.lastEndDate,
+                    lastPeriodId: periodInfo.lastPeriodId,
+                }
+            )
+        }
+
+        if (endDate === startDate) {
+            return i18n.t('For the {{periodNoun}} {{date}}', {
+                periodNoun,
+                date: formattedStart,
+            })
+        }
+
+        return i18n.t(
+            'For every {{periodNoun}} between {{startDate}} and {{endDate}}',
+            {
+                periodNoun,
+                startDate: formattedStart,
+                endDate: formattedEnd,
+            }
+        )
+    }
+
     return (
         <div data-test="import-preview">
             <div className={classes.datasetlead}>
@@ -69,27 +100,7 @@ const ImportPreview = ({
                 })}
             </div>
             <ul className={classes.list}>
-                <li className={classes.listItem}>
-                    {periodInfo
-                        ? i18n.t(
-                              'For every {{periodNoun}} between {{firstStartDate}} ({{firstPeriodId}}) and {{lastEndDate}} ({{lastPeriodId}})',
-                              {
-                                  periodNoun,
-                                  firstStartDate: periodInfo.firstStartDate,
-                                  firstPeriodId: periodInfo.firstPeriodId,
-                                  lastEndDate: periodInfo.lastEndDate,
-                                  lastPeriodId: periodInfo.lastPeriodId,
-                              }
-                          )
-                        : i18n.t(
-                              'For every {{periodNoun}} between {{startDate}} and {{endDate}}',
-                              {
-                                  periodNoun,
-                                  startDate: formattedStart,
-                                  endDate: formattedEnd,
-                              }
-                          )}
-                </li>
+                <li className={classes.listItem}>{getPeriodInfo()}</li>
                 <li className={classes.listItem}>
                     {i18n.t(
                         'To all organisation units at {{orgLevel}} within {{orgUnit}}',

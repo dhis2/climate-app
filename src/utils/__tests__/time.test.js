@@ -19,7 +19,9 @@ import {
     DAILY,
     WEEKLY,
     MONTHLY,
+    YEARLY,
     getDateStringFromIsoDate,
+    getDefaultImportPeriod,
 } from '../time.js'
 
 const timestamp = 1722902400000 // 2024-08-06
@@ -405,5 +407,105 @@ describe('time utils', () => {
 
         // Undefined returns null
         expect(normalizeIsoDate(undefined)).toEqual(null)
+    })
+
+    describe('getDefaultImportPeriod', () => {
+        it('should return DAILY period with 6 months back', () => {
+            const result = getDefaultImportPeriod(gregoryCalendar, DAILY)
+
+            expect(result.periodType).toEqual(DAILY)
+            expect(result.calendar).toEqual(gregoryCalendar)
+            expect(result.startTime).toBeDefined()
+            expect(result.endTime).toBeDefined()
+            expect(new Date(result.startTime) < new Date(result.endTime)).toBe(
+                true
+            )
+
+            // Verify approximately 6 months difference
+            const startDate = new Date(result.startTime)
+            const endDate = new Date(result.endTime)
+            const monthsDiff = Math.round(
+                (endDate - startDate) / (1000 * 60 * 60 * 24 * 30)
+            )
+            expect(monthsDiff).toBeGreaterThanOrEqual(5)
+            expect(monthsDiff).toBeLessThanOrEqual(7)
+        })
+
+        it('should return WEEKLY period with 6 months back', () => {
+            const result = getDefaultImportPeriod(gregoryCalendar, WEEKLY)
+
+            expect(result.periodType).toEqual(WEEKLY)
+            expect(result.calendar).toEqual(gregoryCalendar)
+            expect(result.startTime).toBeDefined()
+            expect(result.endTime).toBeDefined()
+            expect(new Date(result.startTime) < new Date(result.endTime)).toBe(
+                true
+            )
+
+            // Verify approximately 6 months difference
+            const startDate = new Date(result.startTime)
+            const endDate = new Date(result.endTime)
+            const monthsDiff = Math.round(
+                (endDate - startDate) / (1000 * 60 * 60 * 24 * 30)
+            )
+            expect(monthsDiff).toBeGreaterThanOrEqual(5)
+            expect(monthsDiff).toBeLessThanOrEqual(7)
+        })
+
+        it('should return MONTHLY period with 1 year back', () => {
+            const result = getDefaultImportPeriod(gregoryCalendar, MONTHLY)
+
+            expect(result.periodType).toEqual(MONTHLY)
+            expect(result.calendar).toEqual(gregoryCalendar)
+            expect(result.startTime).toBeDefined()
+            expect(result.endTime).toBeDefined()
+            expect(new Date(result.startTime) < new Date(result.endTime)).toBe(
+                true
+            )
+
+            // Verify approximately 12 months difference
+            const startDate = new Date(result.startTime)
+            const endDate = new Date(result.endTime)
+            const monthsDiff = Math.round(
+                (endDate - startDate) / (1000 * 60 * 60 * 24 * 30)
+            )
+            expect(monthsDiff).toBeGreaterThanOrEqual(11)
+            expect(monthsDiff).toBeLessThanOrEqual(13)
+        })
+
+        it('should return YEARLY period with 1 year back', () => {
+            const result = getDefaultImportPeriod(gregoryCalendar, YEARLY)
+
+            expect(result.periodType).toEqual(YEARLY)
+            expect(result.calendar).toEqual(gregoryCalendar)
+            expect(result.startTime).toBeDefined()
+            expect(result.endTime).toBeDefined()
+
+            // Verify that startTime and endTime are 4-digit years
+            expect(result.startTime).toMatch(/^\d{4}$/)
+            expect(result.endTime).toMatch(/^\d{4}$/)
+
+            expect(new Date(result.startTime) < new Date(result.endTime)).toBe(
+                true
+            )
+
+            // Verify approximately 12 months difference
+            const startDate = new Date(result.startTime)
+            const endDate = new Date(result.endTime)
+            const monthsDiff = Math.round(
+                (endDate - startDate) / (1000 * 60 * 60 * 24 * 30)
+            )
+            expect(monthsDiff).toBeGreaterThanOrEqual(11)
+            expect(monthsDiff).toBeLessThanOrEqual(13)
+        })
+
+        it('should work with different calendars', () => {
+            const result = getDefaultImportPeriod(nepaliCalendar, MONTHLY)
+
+            expect(result.periodType).toEqual(MONTHLY)
+            expect(result.calendar).toEqual(nepaliCalendar)
+            expect(result.startTime).toBeDefined()
+            expect(result.endTime).toBeDefined()
+        })
     })
 })
