@@ -151,9 +151,14 @@ const ImportPage = () => {
                         endTime,
                     })
                 } else {
-                    setPeriod(
-                        getDefaultImportPeriod(calendar, periodType, dsPeriod)
+                    // Handle GEE dataseets with periodType SIXTEEN_DAYS
+                    const pt = !supportedPeriodTypes.find(
+                        (pt) => pt.periodType === periodType
                     )
+                        ? supportedPeriodTypes[0].periodType
+                        : periodType
+
+                    setPeriod(getDefaultImportPeriod(calendar, pt, dsPeriod))
                 }
             }
 
