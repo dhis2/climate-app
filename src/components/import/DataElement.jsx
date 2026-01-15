@@ -99,8 +99,10 @@ const DataElement = ({ selected, onChange, datasetCode, periodType }) => {
             <HelpfulInfo
                 text={
                     <>
-                        Need help setting up data elements for import? Check out
-                        the <Link to="/setup">setup guide</Link>
+                        {i18n.t(
+                            'Need help setting up data elements for import? Check out the '
+                        )}
+                        <Link to="/setup">{i18n.t('setup guide')}</Link>
                     </>
                 }
             />

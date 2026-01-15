@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-14T13:19:54.667Z\n"
-"PO-Revision-Date: 2026-01-14T13:19:54.668Z\n"
+"POT-Creation-Date: 2026-01-15T09:56:40.743Z\n"
+"PO-Revision-Date: 2026-01-15T09:56:40.744Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -636,6 +636,12 @@ msgstr "Showing data elements from {{periodType}} data sets"
 
 msgid "No match found"
 msgstr "No match found"
+
+msgid "Need help setting up data elements for import? Check out the "
+msgstr "Need help setting up data elements for import? Check out the "
+
+msgid "setup guide"
+msgstr "setup guide"
 
 msgid "Loading org units"
 msgstr "Loading org units"
