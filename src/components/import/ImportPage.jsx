@@ -59,10 +59,10 @@ const ImportPage = () => {
         setStartExtract(false)
     }, [dataset, period, orgUnits, dataElement])
 
-    const updatePeriod = (val) => {
+    const updatePeriod = useCallback((val) => {
         setDataElement(null)
         setPeriod(val)
-    }
+    }, [])
 
     const updateDataset = useCallback(
         (ds) => {
