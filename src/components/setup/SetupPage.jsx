@@ -1,7 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { Radio, Field } from '@dhis2/ui'
 import { useState } from 'react'
-// import datasets from '../../data/earth-engine-datasets.js'
 import { DAILY, WEEKLY, MONTHLY, getPeriodTypes } from '../../utils/time.js'
 import Dataset from '../shared/Dataset.jsx'
 import DataElement from './DataElement.jsx'

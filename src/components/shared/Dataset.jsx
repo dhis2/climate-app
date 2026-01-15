@@ -6,12 +6,12 @@ import useDatasets from '../../hooks/useDatasets.js'
 import SectionH2 from '../shared/SectionH2.jsx'
 import classes from './styles/Dataset.module.css'
 
-const Dataset = ({ title, selected, onChange, showDescription = true }) => {
+const Dataset = ({ title, selected, onChange, showDescription }) => {
     const { data: datasets, loading, error } = useDatasets()
 
     return (
         <div>
-            <SectionH2 number="1" title={title} />
+            {showDescription && <SectionH2 number="1" title={title} />}
             <SingleSelectField
                 filterable={datasets.length > 0}
                 label={i18n.t('Select data to import')}

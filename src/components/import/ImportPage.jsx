@@ -173,6 +173,7 @@ const ImportPage = () => {
                         title={i18n.t('Choose data source')}
                         selected={dataset}
                         onChange={updateDataset}
+                        showDescription={true}
                     />
                 </div>
                 <div className={classes.formSection}>
