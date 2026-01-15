@@ -26,7 +26,9 @@ const Dataset = ({ title, selected, onChange, showDescription = true }) => {
                 loading={loading}
                 error={!!error}
                 validationText={
-                    !!error && i18n.t('ENACTS datasets could not be loaded')
+                    error
+                        ? i18n.t('ENACTS datasets could not be loaded')
+                        : undefined
                 }
             >
                 {datasets.map((d) => (

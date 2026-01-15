@@ -196,9 +196,9 @@ const ImportPage = () => {
                 </div>
                 <div className={classes.formSection}>
                     <OrgUnits selected={orgUnits} onChange={setOrgUnits} />
-                    {dataset && (
+                    {dataset?.resolutionText && (
                         <Resolution
-                            resolutionText={dataset.resolutionText}
+                            resolution={dataset.resolutionText}
                             isImport={true}
                         />
                     )}
