@@ -6,19 +6,19 @@
 # Jason Pickering <jason@dhis2.org>, 2025
 # Edem Kossi <ekossi@hispwca.org>, 2025
 # Philip Larsen Donnelly, 2025
-# Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2025
 # Viktor Varland <viktor@dhis2.org>, 2025
 # tx_e2f_frfr r6 <tx_e2f_frfr_r661@ate2f.com>, 2025
 # Esther Tokouli, 2025
-# Cyrille Kabrane, 2025
 # tx_e2f_fr r25 <tx_e2f_fr_r25@ate2f.com>, 2025
+# Cyrille Kabrane, 2026
+# Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2025-09-08T09:55:48.384Z\n"
 "PO-Revision-Date: 2025-02-05 13:11+0000\n"
-"Last-Translator: tx_e2f_fr r25 <tx_e2f_fr_r25@ate2f.com>, 2025\n"
+"Last-Translator: Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2026\n"
 "Language-Team: French (https://app.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -260,7 +260,7 @@ msgid "Climate change"
 msgstr "Changement climatique"
 
 msgid "Vegetation"
-msgstr ""
+msgstr "Végétation"
 
 msgid "Land cover"
 msgstr ""
@@ -292,7 +292,7 @@ msgid "{{name}}: Elevation"
 msgstr ""
 
 msgid "{{value}} m"
-msgstr ""
+msgstr "{{value}} m"
 
 msgid ""
 "The chart shows the elevation distribution of the selected area, for each "
@@ -1063,10 +1063,10 @@ msgid "Climate Hazards Center / UCSB"
 msgstr ""
 
 msgid "NASA LP DAAC at the USGS EROS Center"
-msgstr ""
+msgstr "NASA LP DAAC au centre EROS de l'USGS"
 
 msgid "NASA / USGS / JPL-Caltech"
-msgstr ""
+msgstr "NASA / USGS / JPL-Caltech"
 
 msgid "Approximately 31 km (0.25°)"
 msgstr "Environ 31 km (0,25°)"
@@ -1222,13 +1222,13 @@ msgid "NDVI - Normalized difference vegetation index (MODIS)"
 msgstr ""
 
 msgid "NDVI"
-msgstr ""
+msgstr "NDVI"
 
 msgid "EVI - Enhanced vegetation index (MODIS)"
 msgstr ""
 
 msgid "EVI"
-msgstr ""
+msgstr "EVI"
 
 msgid "Mean elevation (SRTM)"
 msgstr ""
