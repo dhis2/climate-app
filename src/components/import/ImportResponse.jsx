@@ -20,7 +20,7 @@ const ImportResponse = ({ importCount }) => {
                 })}
             </div>
             <div>
-                {i18n.t('Ignored: {{ignored}}', {
+                {i18n.t('Ignored (already exists): {{ignored}}', {
                     ignored,
                     nsSeparator: ';',
                 })}
