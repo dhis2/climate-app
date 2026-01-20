@@ -13,6 +13,8 @@ export const MONTHLY = 'MONTHLY'
 export const SIXTEEN_DAYS = 'SIXTEEN_DAYS'
 export const YEARLY = 'YEARLY'
 
+export const UTC_TIME_ZONE = 'Etc/UTC'
+
 export const oneDayInMs = 1000 * 60 * 60 * 24
 
 export const getPeriodTypes = () => [

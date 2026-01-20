@@ -2,12 +2,14 @@ import i18n from '@dhis2/d2-i18n'
 import { CalendarInput } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
+import useSystemInfo from '../../hooks/useSystemInfo.js'
 import useUserLocale from '../../hooks/useUserLocale.js'
 import {
     YEARLY,
     normalizeIsoDate,
     getDateStringFromIsoDate,
     getPeriodTypes,
+    UTC_TIME_ZONE,
 } from '../../utils/time.js'
 import SectionH2 from '../shared/SectionH2.jsx'
 import TimeZone from '../shared/TimeZone.jsx'
@@ -27,6 +29,9 @@ const getValidationState = (minCalendarDate, maxCalendarDate, dateError) => {
 
 const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
     const { locale } = useUserLocale()
+    const { system } = useSystemInfo()
+
+    const timeZone = system?.systemInfo?.serverTimeZoneId
 
     // Set period locale from user settings
     useEffect(() => {
@@ -105,10 +110,17 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
 
     let helpText
     if (dataset.timeZone || dataset.bands?.[0]?.timeZone) {
-        helpText = i18n.t(
-            '{{periodTypeName}} data between start and end date will be calculated from hourly data, with time zone adjustments applied if the selected time zone is not set to UTC.',
-            { periodTypeName, nsSeparator: ';' }
-        )
+        if (timeZone !== UTC_TIME_ZONE) {
+            helpText = i18n.t(
+                '{{periodTypeName}} data between start and end date will be calculated from hourly data, with time zone adjustments applied if the selected time zone is not set to UTC.',
+                { periodTypeName, nsSeparator: ';' }
+            )
+        } else {
+            helpText = i18n.t(
+                '{{periodTypeName}} data between start and end date will be calculated from hourly data.',
+                { periodTypeName, nsSeparator: ';' }
+            )
+        }
     } else {
         helpText = i18n.t(
             '{{periodTypeName}} data between start and end date will be calculated and then aggregated to the selected period type.',
