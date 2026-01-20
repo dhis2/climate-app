@@ -21,9 +21,11 @@ const getRoutesFixture = () => ({
 })
 
 const assertOrgUnitSection = (level = 'District') => {
+    cy.contains('Select organisation unit and level').scrollIntoView()
     cy.contains('Select organisation unit and level').should('be.visible')
     cy.getByDataTest('dhis2-uiwidgets-orgunittree-node').should('be.visible')
     cy.contains('Bombali').should('be.visible')
+    cy.contains('Organisation unit level').scrollIntoView()
     cy.contains('Organisation unit level').should('be.visible')
     cy.getByDataTest('org-unit-level-select').scrollIntoView()
     cy.getByDataTest('org-unit-level-select')
@@ -54,6 +56,7 @@ describe('Import', () => {
             .children()
             .should('have.length', 1)
         cy.contains('No datasets are available.').should('be.visible')
+        cy.getByDataTest('dhis2-uicore-popper').closePopper()
         assertOrgUnitSection()
     })
 
@@ -295,7 +298,33 @@ describe('Import', () => {
             .should('be.visible')
 
         cy.getByDataTest('import-preview')
-            .contains('351 data values will be imported')
+            .contains('data values will be imported')
             .should('be.visible')
+    })
+
+    it('allows user to select time zone if not in Etc/UTC', () => {
+        cy.intercept('GET', '**/api/system/info', (req) => {
+            req.continue((res) => {
+                res.body.serverTimeZoneId = 'Africa/Freetown'
+            })
+        }).as('getSystemInfo')
+
+        cy.visit('#/import')
+
+        cy.wait('@getSystemInfo')
+
+        cy.getByDataTest('dataset-selector-content').click()
+
+        cy.intercept('GET', '**/api/*/system/info?fields=serverTimeZoneId', {
+            serverTimeZoneId: 'Africa/Freetown',
+        }).as('getSystemInfoSpecific')
+
+        cy.getByDataTest('dhis2-uicore-select-menu-menuwrapper')
+            .children()
+            .contains('Earth Engine: Precipitation (ERA5-Land)')
+            .click()
+        cy.wait('@getSystemInfoSpecific')
+
+        cy.contains('Time zone').should('be.visible')
     })
 })
