@@ -15,8 +15,7 @@ const ImportPreview = ({
     periodType,
     startDate,
     endDate,
-    orgLevel,
-    orgUnit,
+    orgUnits,
     dataElement,
     totalValues,
     calendar = 'gregory',
@@ -91,6 +90,24 @@ const ImportPreview = ({
         )
     }
 
+    const { parent: orgUnitParent, levelName: orgLevelName, level } = orgUnits
+
+    const orgUnitInfo =
+        orgUnitParent.level !== Number(level)
+            ? i18n.t(
+                  'For all organisation units at {{orgLevelName}} level within {{orgUnitParent}}',
+                  {
+                      orgLevelName: orgLevelName.toLowerCase(),
+                      orgUnitParent: orgUnitParent.displayName,
+                      interpolation: { escapeValue: false },
+                  }
+              )
+            : i18n.t('For {{orgUnitParent}} {{orgLevelName}}', {
+                  orgUnitParent: orgUnitParent.displayName,
+                  orgLevelName: orgLevelName.toLowerCase(),
+                  interpolation: { escapeValue: false },
+              })
+
     return (
         <div data-test="import-preview">
             <div className={classes.datasetlead}>
@@ -101,16 +118,7 @@ const ImportPreview = ({
             </div>
             <ul className={classes.list}>
                 <li className={classes.listItem}>{getPeriodInfo()}</li>
-                <li className={classes.listItem}>
-                    {i18n.t(
-                        'For all organisation units at {{orgLevel}} level within {{orgUnit}}',
-                        {
-                            orgLevel,
-                            orgUnit,
-                            interpolation: { escapeValue: false },
-                        }
-                    )}
-                </li>
+                <li className={classes.listItem}>{orgUnitInfo}</li>
                 <li className={classes.listItem}>
                     {i18n.t('To data element "{{dataElement}}"', {
                         dataElement,
@@ -134,8 +142,15 @@ ImportPreview.propTypes = {
     dataElement: PropTypes.string.isRequired,
     dataset: PropTypes.string.isRequired,
     endDate: PropTypes.string.isRequired,
-    orgLevel: PropTypes.string.isRequired,
-    orgUnit: PropTypes.string.isRequired,
+    orgUnits: PropTypes.shape({
+        level: PropTypes.string,
+        levelName: PropTypes.string,
+        parent: PropTypes.shape({
+            displayName: PropTypes.string,
+            level: PropTypes.number,
+            path: PropTypes.string,
+        }),
+    }).isRequired,
     periodType: PropTypes.string.isRequired,
     startDate: PropTypes.string.isRequired,
     totalValues: PropTypes.number.isRequired,

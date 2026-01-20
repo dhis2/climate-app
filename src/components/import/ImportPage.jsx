@@ -230,12 +230,7 @@ const ImportPage = () => {
                             startDate={period.startTime || ''}
                             endDate={period.endTime || ''}
                             calendar={calendar}
-                            orgLevel={orgUnits.levelName || ''}
-                            orgUnit={
-                                orgUnits.parent.displayName ||
-                                orgUnits.parent.name ||
-                                ''
-                            }
+                            orgUnits={orgUnits}
                             dataElement={dataElement.displayName || ''}
                             totalValues={valueCount}
                         />
