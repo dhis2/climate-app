@@ -103,7 +103,7 @@ const ImportPreview = ({
                 <li className={classes.listItem}>{getPeriodInfo()}</li>
                 <li className={classes.listItem}>
                     {i18n.t(
-                        'To all organisation units at {{orgLevel}} within {{orgUnit}}',
+                        'For all organisation units at {{orgLevel}} level within {{orgUnit}}',
                         {
                             orgLevel,
                             orgUnit,
