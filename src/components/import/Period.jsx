@@ -27,7 +27,12 @@ const getValidationState = (minCalendarDate, maxCalendarDate, dateError) => {
     return dateError === null
 }
 
-const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
+const Period = ({
+    period,
+    dataset = DEFAULT_DATASET,
+    onChange,
+    onChangeType,
+}) => {
     const { locale } = useUserLocale()
     const { system } = useSystemInfo()
 
@@ -150,9 +155,7 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
                     <PeriodType
                         periodType={periodType}
                         supportedPeriodTypes={datasetSupportedPeriodTypes}
-                        onChange={(periodType) =>
-                            onChange({ ...period, periodType })
-                        }
+                        onChange={onChangeType}
                     />
                     <YearRange
                         period={period}
@@ -186,9 +189,7 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
                     <PeriodType
                         periodType={periodType}
                         supportedPeriodTypes={datasetSupportedPeriodTypes}
-                        onChange={(periodType) =>
-                            onChange({ ...period, periodType })
-                        }
+                        onChange={onChangeType}
                     />
                     <div className={classes.pickers}>
                         <CalendarInput
@@ -265,6 +266,7 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
 Period.propTypes = {
     period: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
+    onChangeType: PropTypes.func.isRequired,
     dataset: PropTypes.object,
 }
 

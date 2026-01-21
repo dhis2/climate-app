@@ -60,8 +60,19 @@ const ImportPage = () => {
     }, [dataset, period, orgUnits, dataElement])
 
     const updatePeriod = useCallback((val) => {
+        setPeriod((prev) => ({
+            ...prev,
+            ...val,
+        }))
+    }, [])
+
+    // When periodType changes then dataElement selection must be cleared
+    const updatePeriodType = useCallback((val) => {
         setDataElement(null)
-        setPeriod(val)
+        setPeriod((prev) => ({
+            ...prev,
+            periodType: val,
+        }))
     }, [])
 
     const updateDataset = useCallback(
@@ -186,6 +197,7 @@ const ImportPage = () => {
                         period={period}
                         dataset={dataset}
                         onChange={updatePeriod}
+                        onChangeType={updatePeriodType}
                     />
                 </div>
                 <div className={classes.formSection}>
