@@ -98,12 +98,14 @@ const ImportPreview = ({
                   'For all organisation units at {{orgLevelName}} level within {{orgUnitParent}}',
                   {
                       orgLevelName: orgLevelName.toLowerCase(),
-                      orgUnitParent: orgUnitParent.displayName,
+                      orgUnitParent:
+                          orgUnitParent.displayName || orgUnitParent.name,
                       interpolation: { escapeValue: false },
                   }
               )
             : i18n.t('For {{orgUnitParent}} {{orgLevelName}}', {
-                  orgUnitParent: orgUnitParent.displayName,
+                  orgUnitParent:
+                      orgUnitParent.displayName || orgUnitParent.name,
                   orgLevelName: orgLevelName.toLowerCase(),
                   interpolation: { escapeValue: false },
               })
@@ -148,6 +150,7 @@ ImportPreview.propTypes = {
         parent: PropTypes.shape({
             displayName: PropTypes.string,
             level: PropTypes.number,
+            name: PropTypes.string,
             path: PropTypes.string,
         }),
     }).isRequired,
