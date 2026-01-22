@@ -411,7 +411,10 @@ describe('time utils', () => {
 
     describe('getDefaultImportPeriod', () => {
         it('should return DAILY period with 6 months back', () => {
-            const result = getDefaultImportPeriod(gregoryCalendar, DAILY)
+            const result = getDefaultImportPeriod({
+                calendar: gregoryCalendar,
+                periodType: DAILY,
+            })
 
             expect(result.periodType).toEqual(DAILY)
             expect(result.calendar).toEqual(gregoryCalendar)
@@ -432,7 +435,10 @@ describe('time utils', () => {
         })
 
         it('should return WEEKLY period with 6 months back', () => {
-            const result = getDefaultImportPeriod(gregoryCalendar, WEEKLY)
+            const result = getDefaultImportPeriod({
+                calendar: gregoryCalendar,
+                periodType: WEEKLY,
+            })
 
             expect(result.periodType).toEqual(WEEKLY)
             expect(result.calendar).toEqual(gregoryCalendar)
@@ -453,7 +459,10 @@ describe('time utils', () => {
         })
 
         it('should return MONTHLY period with 1 year back', () => {
-            const result = getDefaultImportPeriod(gregoryCalendar, MONTHLY)
+            const result = getDefaultImportPeriod({
+                calendar: gregoryCalendar,
+                periodType: MONTHLY,
+            })
 
             expect(result.periodType).toEqual(MONTHLY)
             expect(result.calendar).toEqual(gregoryCalendar)
@@ -474,7 +483,10 @@ describe('time utils', () => {
         })
 
         it('should return YEARLY period with 1 year back', () => {
-            const result = getDefaultImportPeriod(gregoryCalendar, YEARLY)
+            const result = getDefaultImportPeriod({
+                calendar: gregoryCalendar,
+                periodType: YEARLY,
+            })
 
             expect(result.periodType).toEqual(YEARLY)
             expect(result.calendar).toEqual(gregoryCalendar)
@@ -500,7 +512,10 @@ describe('time utils', () => {
         })
 
         it('should work with different calendars', () => {
-            const result = getDefaultImportPeriod(nepaliCalendar, MONTHLY)
+            const result = getDefaultImportPeriod({
+                calendar: nepaliCalendar,
+                periodType: MONTHLY,
+            })
 
             expect(result.periodType).toEqual(MONTHLY)
             expect(result.calendar).toEqual(nepaliCalendar)

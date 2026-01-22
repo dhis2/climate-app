@@ -5,7 +5,6 @@ import { useEffect } from 'react'
 import useSystemInfo from '../../hooks/useSystemInfo.js'
 import { UTC_TIME_ZONE } from '../../utils/time.js'
 
-// TODO: Use daylight saving time?
 const TimeZone = ({ period, onChange }) => {
     const { system } = useSystemInfo()
 

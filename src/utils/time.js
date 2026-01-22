@@ -165,11 +165,11 @@ export const getDefaultMonthlyPeriod = (lagDays) => {
  * @param {String} periodType Period type (DAILY, WEEKLY, MONTHLY, YEARLY)
  * @returns {Object} Default import data period with calendar date strings
  */
-export const getDefaultImportPeriod = (
+export const getDefaultImportPeriod = ({
     calendar,
     periodType = DAILY,
-    period
-) => {
+    period,
+}) => {
     if (periodType === YEARLY) {
         const startTime = period
             ? period

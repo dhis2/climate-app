@@ -28,11 +28,70 @@ import classes from './styles/ImportPage.module.css'
 
 const maxValues = 50000
 
+const getPeriodRange = ({ calendar, periodType, range }) => {
+    const getDefaultRange = () => {
+        const defaultPeriod = getDefaultImportPeriod({ calendar, periodType })
+        return { start: defaultPeriod.startTime, end: defaultPeriod.endTime }
+    }
+    const validRange = range || getDefaultRange()
+    // compute end and start depending on requested periodType
+    // endTime will generally be converted from standard -> calendar
+    // For YEARLY we keep year values (e.g. "2023") so downstream code
+    // that expects years for yearly periods continues to work
+    let endTime = fromStandardDate(validRange.end, calendar)
+    let startTime
+
+    try {
+        if (periodType === DAILY) {
+            // subtract 30 days from end
+            const endStd = toDateObject(validRange.end)
+            const endDate = new Date(endStd.year, endStd.month - 1, endStd.day)
+            const startDate = new Date(endDate.getTime() - 30 * oneDayInMs)
+            startTime = fromStandardDate(
+                formatStandardDate(startDate),
+                calendar
+            )
+        } else if (periodType === MONTHLY) {
+            // subtract 6 months from end
+            const endStd = toDateObject(validRange.end)
+            const endDate = new Date(endStd.year, endStd.month - 1, endStd.day)
+            const startDate = new Date(
+                endDate.getFullYear(),
+                endDate.getMonth() - 6,
+                endDate.getDate()
+            )
+            startTime = fromStandardDate(
+                formatStandardDate(startDate),
+                calendar
+            )
+        } else if (periodType === YEARLY) {
+            // for yearly, work with years (keep values like "2023")
+            const endYear = toDateObject(validRange.end).year
+            startTime =
+                validRange.end === validRange.start
+                    ? String(endYear)
+                    : String(endYear - 1)
+            // keep endTime as year string as well
+            endTime = String(endYear)
+        } else {
+            // fallback to provided start
+            startTime = fromStandardDate(validRange.start, calendar)
+        }
+    } catch (e) {
+        // if anything goes wrong, fallback to original values
+        console.warn('Failed to compute relative startTime, falling back', e)
+        startTime = fromStandardDate(validRange.start, calendar)
+        endTime = fromStandardDate(validRange.end, calendar)
+    }
+
+    return { startTime, endTime }
+}
+
 const ImportPage = () => {
     const { systemInfo = {} } = useConfig()
     const { calendar = 'gregory' } = systemInfo
     const [dataset, setDataset] = useState()
-    const [period, setPeriod] = useState(getDefaultImportPeriod(calendar))
+    const [period, setPeriod] = useState(getDefaultImportPeriod({ calendar }))
     const [orgUnits, setOrgUnits] = useState()
     const [dataElement, setDataElement] = useState()
     const standardPeriod = getStandardPeriod(period) // ISO 8601 used by GEE
@@ -67,117 +126,56 @@ const ImportPage = () => {
     }, [])
 
     // When periodType changes then dataElement selection must be cleared
-    const updatePeriodType = useCallback((val) => {
-        setDataElement(null)
-        setPeriod((prev) => ({
-            ...prev,
-            periodType: val,
-        }))
-    }, [])
+    const updatePeriodType = useCallback(
+        (val) => {
+            setDataElement(null)
+            updatePeriod({ periodType: val })
+        },
+        [updatePeriod]
+    )
 
     const updateDataset = useCallback(
         (ds) => {
-            const updatePeriodSelector = ({
-                periodType,
-                supportedPeriodTypes,
-                period: dsPeriod,
-            }) => {
-                const periodRange =
-                    supportedPeriodTypes.find(
+            setDataset((prev) => {
+                const prevHasRangeOrPeriod = !!(
+                    prev &&
+                    (prev.period ||
+                        prev.supportedPeriodTypes.some((pt) => pt.periodRange))
+                )
+
+                const periodType = ds.supportedPeriodTypes.includes(
+                    period.periodType
+                )
+                    ? period.periodType
+                    : ds.supportedPeriodTypes[0].periodType
+
+                const range =
+                    ds.supportedPeriodTypes.find(
                         (pt) => pt.periodType === periodType
-                    )?.periodRange || undefined
+                    )?.periodRange ||
+                    (ds.period
+                        ? { start: ds.period, end: ds.period }
+                        : undefined)
 
-                if (periodRange) {
-                    // compute end and start depending on requested periodType
-                    // endTime will generally be converted from standard -> calendar
-                    // For YEARLY we keep year values (e.g. "2023") so downstream code
-                    // that expects years for yearly periods continues to work
-                    let endTime = fromStandardDate(periodRange.end, calendar)
-                    let startTime
-
-                    try {
-                        if (periodType === DAILY) {
-                            // subtract 30 days from end
-                            const endStd = toDateObject(periodRange.end)
-                            const endDate = new Date(
-                                endStd.year,
-                                endStd.month - 1,
-                                endStd.day
-                            )
-                            const startDate = new Date(
-                                endDate.getTime() - 30 * oneDayInMs
-                            )
-                            startTime = fromStandardDate(
-                                formatStandardDate(startDate),
-                                calendar
-                            )
-                        } else if (periodType === MONTHLY) {
-                            // subtract 6 months from end
-                            const endStd = toDateObject(periodRange.end)
-                            const endDate = new Date(
-                                endStd.year,
-                                endStd.month - 1,
-                                endStd.day
-                            )
-                            const startDate = new Date(
-                                endDate.getFullYear(),
-                                endDate.getMonth() - 6,
-                                endDate.getDate()
-                            )
-                            startTime = fromStandardDate(
-                                formatStandardDate(startDate),
-                                calendar
-                            )
-                        } else if (periodType === YEARLY) {
-                            // for yearly, work with years (keep values like "2023")
-                            const endYear = toDateObject(periodRange.end).year
-                            startTime = String(endYear - 1)
-                            // keep endTime as year string as well
-                            endTime = String(endYear)
-                        } else {
-                            // fallback to provided start
-                            startTime = fromStandardDate(
-                                periodRange.start,
-                                calendar
-                            )
-                        }
-                    } catch (e) {
-                        // if anything goes wrong, fallback to original values
-                        console.warn(
-                            'Failed to compute relative startTime, falling back',
-                            e
-                        )
-                        startTime = fromStandardDate(
-                            periodRange.start,
-                            calendar
-                        )
-                        endTime = fromStandardDate(periodRange.end, calendar)
-                    }
-
-                    setPeriod({
-                        periodType,
+                if (range || prevHasRangeOrPeriod) {
+                    const { startTime, endTime } = getPeriodRange({
+                        range,
                         calendar,
-                        locale: period.locale,
+                        periodType,
+                    })
+
+                    updatePeriod({
+                        periodType,
                         startTime,
                         endTime,
                     })
-                } else {
-                    // Handle GEE dataseets with periodType SIXTEEN_DAYS
-                    const pt = !supportedPeriodTypes.find(
-                        (pt) => pt.periodType === periodType
-                    )
-                        ? supportedPeriodTypes[0].periodType
-                        : periodType
-
-                    setPeriod(getDefaultImportPeriod(calendar, pt, dsPeriod))
                 }
-            }
+                return ds
+            })
 
-            setDataset(ds)
             setDataElement(null)
-            updatePeriodSelector(ds)
         },
-        [calendar, period]
+        [period, updatePeriod, calendar]
     )
 
     return (
