@@ -22,21 +22,25 @@ export const getPeriodTypes = () => [
         id: DAILY,
         name: i18n.t('Daily'),
         noun: i18n.t('day'),
+        nounPlural: i18n.t('days'),
     },
     {
         id: WEEKLY,
         name: i18n.t('Weekly'),
         noun: i18n.t('week'),
+        nounPlural: i18n.t('weeks'),
     },
     {
         id: MONTHLY,
         name: i18n.t('Monthly'),
         noun: i18n.t('month'),
+        nounPlural: i18n.t('months'),
     },
     {
         id: YEARLY,
         name: i18n.t('Yearly'),
         noun: i18n.t('year'),
+        nounPlural: i18n.t('years'),
     },
 ]
 

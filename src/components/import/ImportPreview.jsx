@@ -24,6 +24,7 @@ const ImportPreview = ({
         (type) => type.id === periodType
     )
     const periodNoun = periodTypeData?.noun || periodType
+    const periodNounPlural = periodTypeData?.nounPlural
 
     // Format start and end based on period type
     // Get the actual periods that will be generated to show accurate start/end
@@ -46,11 +47,16 @@ const ImportPreview = ({
                 const firstPeriod = periods.at(0)
                 const lastPeriod = periods.at(-1)
 
+                // Check if we have partial periods by comparing the actual period boundaries
+                // with the requested date range
+                const hasPartialPeriods =
+                    firstPeriod.startDate !== startDate ||
+                    lastPeriod.endDate !== endDate
+
                 periodInfo = {
-                    firstPeriodId: firstPeriod.id,
-                    lastPeriodId: lastPeriod.id,
-                    firstStartDate: startDate,
-                    lastEndDate: endDate,
+                    startDate,
+                    endDate,
+                    hasPartialPeriods,
                 }
             }
         } catch (e) {
@@ -61,16 +67,16 @@ const ImportPreview = ({
 
     const getPeriodInfo = () => {
         if (periodInfo) {
-            return i18n.t(
-                'For every {{periodNoun}} between {{firstStartDate}} ({{firstPeriodId}}) and {{lastEndDate}} ({{lastPeriodId}})',
-                {
-                    periodNoun,
-                    firstStartDate: periodInfo.firstStartDate,
-                    firstPeriodId: periodInfo.firstPeriodId,
-                    lastEndDate: periodInfo.lastEndDate,
-                    lastPeriodId: periodInfo.lastPeriodId,
-                }
-            )
+            const translationKey = periodInfo.hasPartialPeriods
+                ? 'For every {{periodNoun}} between {{startDate}} and {{endDate}} (includes partial {{periodNownPlural}})'
+                : 'For every {{periodNoun}} between {{startDate}} and {{endDate}}'
+
+            return i18n.t(translationKey, {
+                periodNoun,
+                startDate: periodInfo.startDate,
+                endDate: periodInfo.endDate,
+                periodNownPlural: periodNounPlural,
+            })
         }
 
         if (endDate === startDate) {
