@@ -22,16 +22,19 @@ describe('ImportPreview', () => {
         calendar: 'gregory',
     }
 
+    it('shows 4 main pieces of information', () => {
+        cy.mount(<ImportPreview {...defaultProps} />)
+        cy.getByDataTest('import-preview').within(() => {
+            cy.get('div').should('have.length', 1)
+            cy.get('li').should('have.length', 4)
+        })
+    })
+
     it('renders the dataset name', () => {
         cy.mount(<ImportPreview {...defaultProps} />)
         cy.contains(
             '"Test my data element" source data will be imported:'
         ).should('be.visible')
-    })
-
-    it('renders period information for date range', () => {
-        cy.mount(<ImportPreview {...defaultProps} />)
-        cy.contains('between 2025-01-01 and 2025-12-31').should('be.visible')
     })
 
     it('renders organization unit information when parent level differs from selected level', () => {
@@ -64,9 +67,9 @@ describe('ImportPreview', () => {
         cy.contains('To data element "Temperature"').should('be.visible')
     })
 
-    it.skip('renders total values count', () => {
+    it('renders total values count', () => {
         cy.mount(<ImportPreview {...defaultProps} />)
-        cy.contains('120 data values will be imported').should('be.visible')
+        cy.contains('120 data value').should('be.visible')
     })
 
     it('renders singular form when totalValues is 1', () => {
@@ -75,62 +78,85 @@ describe('ImportPreview', () => {
         cy.contains('1 data value will be imported').should('be.visible')
     })
 
-    it('shows single period information when start and end dates are the same', () => {
-        const props = {
-            ...defaultProps,
-            startDate: '2025-01-15',
-            endDate: '2025-01-15',
-        }
-        cy.mount(<ImportPreview {...props} />)
-        cy.contains('For every month between 2025-01-15 and 2025-01-15').should(
-            'be.visible'
-        )
+    describe('MONTHLY period type', () => {
+        it('renders period information for monthly data', () => {
+            const props = {
+                ...defaultProps,
+                periodType: 'MONTHLY',
+                startDate: '2025-01-01',
+                endDate: '2025-12-31',
+            }
+            cy.mount(<ImportPreview {...props} />)
+            cy.contains(
+                'Monthly values between 2025-01-01 and 2025-12-31'
+            ).should('be.visible')
+        })
     })
 
-    it('shows "includes partial" text when dates land mid-month', () => {
-        const props = {
-            ...defaultProps,
-            periodType: 'MONTHLY',
-            startDate: '2025-01-15',
-            endDate: '2025-03-20',
-        }
-        cy.mount(<ImportPreview {...props} />)
-        cy.contains('includes partial').should('be.visible')
+    describe('DAILY period type', () => {
+        it('renders period information for daily data', () => {
+            const props = {
+                ...defaultProps,
+                periodType: 'DAILY',
+                startDate: '2025-01-01',
+                endDate: '2025-01-31',
+            }
+            cy.mount(<ImportPreview {...props} />)
+            cy.contains(
+                'Daily values between 2025-01-01 and 2025-01-31'
+            ).should('be.visible')
+        })
+
+        it('renders single day information when start and end are the same', () => {
+            const props = {
+                ...defaultProps,
+                periodType: 'DAILY',
+                startDate: '2025-01-15',
+                endDate: '2025-01-15',
+            }
+            cy.mount(<ImportPreview {...props} />)
+            cy.contains('For the day 2025-01-15').should('be.visible')
+        })
     })
 
-    it('does not show "includes partial" text for complete months', () => {
-        const props = {
-            ...defaultProps,
-            periodType: 'MONTHLY',
-            startDate: '2025-01-01',
-            endDate: '2025-03-31',
-        }
-        cy.mount(<ImportPreview {...props} />)
-        cy.contains('includes partial').should('not.exist')
+    describe('WEEKLY period type', () => {
+        it('renders period information for weekly data', () => {
+            const props = {
+                ...defaultProps,
+                periodType: 'WEEKLY',
+                startDate: '2025-01-06',
+                endDate: '2025-01-26',
+            }
+            cy.mount(<ImportPreview {...props} />)
+            cy.contains(
+                'Weekly values between 2025-01-06 and 2025-01-26'
+            ).should('be.visible')
+        })
     })
 
-    it('shows "includes partial" text when dates land mid-week', () => {
-        const props = {
-            ...defaultProps,
-            periodType: 'WEEKLY',
-            startDate: '2025-01-15',
-            endDate: '2025-02-18',
-        }
-        cy.mount(<ImportPreview {...props} />)
-        cy.contains('includes partial').should('be.visible')
-    })
+    describe('YEARLY period type', () => {
+        it('renders period information for yearly data', () => {
+            const props = {
+                ...defaultProps,
+                periodType: 'YEARLY',
+                startDate: '2020',
+                endDate: '2025',
+            }
+            cy.mount(<ImportPreview {...props} />)
+            cy.contains('Yearly values between 2020 and 2025').should(
+                'be.visible'
+            )
+        })
 
-    it('works with different calendar systems', () => {
-        const props = {
-            ...defaultProps,
-            calendar: 'ethiopian',
-        }
-        cy.mount(<ImportPreview {...props} />)
-        cy.get('[data-test="import-preview"]').should('be.visible')
-    })
-
-    it('renders all list items', () => {
-        cy.mount(<ImportPreview {...defaultProps} />)
-        cy.get('li').should('have.length', 4)
+        it('renders single year information when start and end are the same', () => {
+            const props = {
+                ...defaultProps,
+                periodType: 'YEARLY',
+                startDate: '2025',
+                endDate: '2025',
+            }
+            cy.mount(<ImportPreview {...props} />)
+            cy.contains('For the year 2025').should('be.visible')
+        })
     })
 })

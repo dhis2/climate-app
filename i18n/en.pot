@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-22T16:12:27.411Z\n"
-"PO-Revision-Date: 2026-01-22T16:12:27.412Z\n"
+"POT-Creation-Date: 2026-01-23T11:06:07.919Z\n"
+"PO-Revision-Date: 2026-01-23T11:06:07.919Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -695,11 +695,11 @@ msgstr ""
 msgid "Start import"
 msgstr "Start import"
 
-msgid "For the {{periodNoun}} {{date}}"
-msgstr "For the {{periodNoun}} {{date}}"
+msgid "For the {{periodTypeNoun}} {{date}}"
+msgstr "For the {{periodTypeNoun}} {{date}}"
 
-msgid "For every {{periodNoun}} between {{startDate}} and {{endDate}}"
-msgstr "For every {{periodNoun}} between {{startDate}} and {{endDate}}"
+msgid "{{periodTypeName}} values between {{startDate}} and {{endDate}}"
+msgstr "{{periodTypeName}} values between {{startDate}} and {{endDate}}"
 
 msgid ""
 "For all organisation units at {{orgLevelName}} level within "
@@ -1391,26 +1391,14 @@ msgstr "No data found for the selected period"
 msgid "day"
 msgstr "day"
 
-msgid "days"
-msgstr "days"
-
 msgid "week"
 msgstr "week"
 
-msgid "weeks"
-msgstr "weeks"
-
 msgid "month"
 msgstr "month"
-
-msgid "months"
-msgstr "months"
 
 msgid "Yearly"
 msgstr "Yearly"
 
 msgid "year"
 msgstr "year"
-
-msgid "years"
-msgstr "years"

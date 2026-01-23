@@ -1,13 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
 import React from 'react'
-import {
-    WEEKLY,
-    MONTHLY,
-    getPeriodTypes,
-    getPeriods,
-    getStandardPeriod,
-} from '../../utils/time.js'
+import { DAILY, YEARLY, getPeriodTypes } from '../../utils/time.js'
 import classes from './ImportPreview.module.css'
 
 const ImportPreview = ({
@@ -18,83 +12,27 @@ const ImportPreview = ({
     orgUnits,
     dataElement,
     totalValues,
-    calendar = 'gregory',
 }) => {
-    const periodTypeData = getPeriodTypes().find(
+    const periodTypeObj = getPeriodTypes().find(
         (type) => type.id === periodType
     )
-    const periodNoun = periodTypeData?.noun || periodType
-    const periodNounPlural = periodTypeData?.nounPlural
 
-    // Format start and end based on period type
-    // Get the actual periods that will be generated to show accurate start/end
-    const formattedStart = startDate
-    const formattedEnd = endDate
-    let periodInfo = null
+    const { name: periodTypeName, noun: periodTypeNoun } = periodTypeObj
 
-    if (periodType === WEEKLY || periodType === MONTHLY) {
-        try {
-            const standardPeriod = getStandardPeriod({
-                startTime: startDate,
-                endTime: endDate,
-                calendar,
-                periodType,
-            })
-            const periods = getPeriods(standardPeriod)
-
-            if (periods.length > 0) {
-                // Show both the DHIS2 period ID and the date range
-                const firstPeriod = periods.at(0)
-                const lastPeriod = periods.at(-1)
-
-                // Check if we have partial periods by comparing the actual period boundaries
-                // with the requested date range
-                const hasPartialPeriods =
-                    firstPeriod.startDate !== startDate ||
-                    lastPeriod.endDate !== endDate
-
-                periodInfo = {
-                    startDate,
-                    endDate,
-                    hasPartialPeriods,
-                }
-            }
-        } catch (e) {
-            // Fallback to original dates if period generation fails
-            console.warn('Failed to generate periods for preview', e)
-        }
-    }
-
-    const getPeriodInfo = () => {
-        if (periodInfo) {
-            const translationKey = periodInfo.hasPartialPeriods
-                ? 'For every {{periodNoun}} between {{startDate}} and {{endDate}} (includes partial {{periodNownPlural}})'
-                : 'For every {{periodNoun}} between {{startDate}} and {{endDate}}'
-
-            return i18n.t(translationKey, {
-                periodNoun,
-                startDate: periodInfo.startDate,
-                endDate: periodInfo.endDate,
-                periodNownPlural: periodNounPlural,
-            })
-        }
-
-        if (endDate === startDate) {
-            return i18n.t('For the {{periodNoun}} {{date}}', {
-                periodNoun,
-                date: formattedStart,
-            })
-        }
-
-        return i18n.t(
-            'For every {{periodNoun}} between {{startDate}} and {{endDate}}',
-            {
-                periodNoun,
-                startDate: formattedStart,
-                endDate: formattedEnd,
-            }
-        )
-    }
+    const periodInfo =
+        (periodType === DAILY || periodType === YEARLY) && endDate === startDate
+            ? i18n.t('For the {{periodTypeNoun}} {{date}}', {
+                  periodTypeNoun,
+                  date: startDate,
+              })
+            : i18n.t(
+                  '{{periodTypeName}} values between {{startDate}} and {{endDate}}',
+                  {
+                      periodTypeName,
+                      startDate: startDate,
+                      endDate: endDate,
+                  }
+              )
 
     const { parent: orgUnitParent, levelName: orgLevelName, level } = orgUnits
 
@@ -125,7 +63,7 @@ const ImportPreview = ({
                 })}
             </div>
             <ul className={classes.list}>
-                <li className={classes.listItem}>{getPeriodInfo()}</li>
+                <li className={classes.listItem}>{periodInfo}</li>
                 <li className={classes.listItem}>{orgUnitInfo}</li>
                 <li className={classes.listItem}>
                     {i18n.t('To data element "{{dataElement}}"', {
@@ -163,7 +101,6 @@ ImportPreview.propTypes = {
     periodType: PropTypes.string.isRequired,
     startDate: PropTypes.string.isRequired,
     totalValues: PropTypes.number.isRequired,
-    calendar: PropTypes.string,
 }
 
 export default ImportPreview
