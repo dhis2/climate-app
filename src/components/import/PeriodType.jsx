@@ -10,7 +10,7 @@ const PeriodType = ({ periodType, supportedPeriodTypes, onChange }) => {
     // get period type objects from supported period type ids, or use defaults
     const supportedPeriodTypeObjects = supportedPeriodTypes
         ? getPeriodTypes().filter((type) =>
-              supportedPeriodTypes.includes(type.id)
+              supportedPeriodTypes.map((pt) => pt.periodType).includes(type.id)
           )
         : getPeriodTypes().filter((type) => defaultPeriodTypes.has(type.id))
 
@@ -43,7 +43,7 @@ const PeriodType = ({ periodType, supportedPeriodTypes, onChange }) => {
     }
 
     return (
-        <div className={classes.container}>
+        <div className={classes.container} data-test="period-type-selector">
             <Field label={i18n.t('Period type')}>
                 <div className={classes.radioGroup}>
                     {supportedPeriodTypeObjects.map((type) => (
@@ -65,7 +65,7 @@ const PeriodType = ({ periodType, supportedPeriodTypes, onChange }) => {
 PeriodType.propTypes = {
     periodType: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
-    supportedPeriodTypes: PropTypes.arrayOf(PropTypes.string),
+    supportedPeriodTypes: PropTypes.arrayOf(PropTypes.object),
 }
 
 export default PeriodType

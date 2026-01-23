@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { OrganisationUnitTree } from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import { useEffect } from 'react'
+import { useEffect, useCallback } from 'react'
 import useOrgUnitRoots from '../../hooks/useOrgUnitRoots.js'
 import classes from './styles/OrgUnitTree.module.css'
 
@@ -15,6 +15,14 @@ const OrgUnitTree = ({ orgUnit, onChange }) => {
             onChange({ ...root, selected: [root.path] })
         }
     }, [roots, orgUnit, onChange])
+
+    const onChangeOU = useCallback(
+        (ou) => {
+            const level = ou.path.split('/').filter(Boolean).length
+            onChange({ ...ou, level })
+        },
+        [onChange]
+    )
 
     if (error) {
         console.error('Error loading org unit roots', error)
@@ -33,7 +41,7 @@ const OrgUnitTree = ({ orgUnit, onChange }) => {
             <OrganisationUnitTree
                 roots={roots.map((r) => r.id)}
                 selected={orgUnit?.selected}
-                onChange={onChange}
+                onChange={onChangeOU}
                 singleSelection={true}
                 initiallyExpanded={roots.map((r) => r.path)}
             />

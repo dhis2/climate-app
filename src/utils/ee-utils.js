@@ -141,7 +141,6 @@ export const getEarthEngineImageValues = ({ ee, dataset, features }) => {
             })
         )
 
-    // TODO: Make function
     return getInfo(data).then(({ features }) =>
         features.map((feature) => {
             const props = getFeatureProperties(feature)
@@ -335,7 +334,7 @@ export const getEarthEngineValues = ({
                     .map((feature) =>
                         ee.Feature(null, {
                             ou: feature.get('id'),
-                            period: image.date().format('YYYY-MM-dd'), // TODO: Change?
+                            period: image.date().format('YYYY-MM-dd'),
                             startTime: image.get('system:time_start'),
                             endTime: image.get('system:time_end'),
                             value: feature.get(reducer),

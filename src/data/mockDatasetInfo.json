@@ -1,0 +1,402 @@
+{
+    "ALL": {
+        "daily": {
+            "precip": {
+                "dataset_name": "ALL",
+                "dataset_longname": "Analysis datasets",
+                "variable_name": "precip",
+                "variable_longname": "Daily rainfall",
+                "variable_units": "mm",
+                "missing_value": -99,
+                "temporal_resolution": "daily",
+                "temporal_coverage": {
+                    "start": "1981-01-01",
+                    "end": "2020-12-31"
+                },
+                "spatial_resolution": { "lon": 0.0375, "lat": 0.0375 },
+                "spatial_coverage": {
+                    "minlon": 32.625,
+                    "maxlon": 36.0,
+                    "minlat": -17.2875,
+                    "maxlat": -9.3375
+                }
+            },
+            "tmax": {
+                "dataset_name": "ALL",
+                "dataset_longname": "Analysis datasets",
+                "variable_name": "tmax",
+                "variable_longname": "Daily maximum temperature",
+                "variable_units": "\u00b0C",
+                "missing_value": -99,
+                "temporal_resolution": "daily",
+                "temporal_coverage": {
+                    "start": "1961-01-01",
+                    "end": "2020-12-31"
+                },
+                "spatial_resolution": { "lon": 0.0375, "lat": 0.0375 },
+                "spatial_coverage": {
+                    "minlon": 32.625,
+                    "maxlon": 36.0,
+                    "minlat": -17.2875,
+                    "maxlat": -9.3375
+                }
+            },
+            "tmin": {
+                "dataset_name": "ALL",
+                "dataset_longname": "Analysis datasets",
+                "variable_name": "tmin",
+                "variable_longname": "Daily minimum temperature",
+                "variable_units": "\u00b0C",
+                "missing_value": -99,
+                "temporal_resolution": "daily",
+                "temporal_coverage": {
+                    "start": "1961-01-01",
+                    "end": "2020-12-31"
+                },
+                "spatial_resolution": { "lon": 0.0375, "lat": 0.0375 },
+                "spatial_coverage": {
+                    "minlon": 32.625,
+                    "maxlon": 36.0,
+                    "minlat": -17.2875,
+                    "maxlat": -9.3375
+                }
+            }
+        },
+        "dekadal": {
+            "precip": {
+                "dataset_name": "ALL",
+                "dataset_longname": "Analysis datasets",
+                "variable_name": "precip",
+                "variable_longname": "Dekadal rainfall",
+                "variable_units": "mm",
+                "missing_value": -99,
+                "temporal_resolution": "dekadal",
+                "temporal_coverage": {
+                    "start": "1981-01-1",
+                    "end": "2020-12-3"
+                },
+                "spatial_resolution": { "lon": 0.0375, "lat": 0.0375 },
+                "spatial_coverage": {
+                    "minlon": 32.625,
+                    "maxlon": 36.0,
+                    "minlat": -17.2875,
+                    "maxlat": -9.3375
+                }
+            },
+            "tmax": {
+                "dataset_name": "ALL",
+                "dataset_longname": "Analysis datasets",
+                "variable_name": "tmax",
+                "variable_longname": "Dekadal maximum temperature",
+                "variable_units": "\u00b0C",
+                "missing_value": -99,
+                "temporal_resolution": "dekadal",
+                "temporal_coverage": {
+                    "start": "1961-01-1",
+                    "end": "2020-12-3"
+                },
+                "spatial_resolution": { "lon": 0.0375, "lat": 0.0375 },
+                "spatial_coverage": {
+                    "minlon": 32.625,
+                    "maxlon": 36.0,
+                    "minlat": -17.2875,
+                    "maxlat": -9.3375
+                }
+            },
+            "tmin": {
+                "dataset_name": "ALL",
+                "dataset_longname": "Analysis datasets",
+                "variable_name": "tmin",
+                "variable_longname": "Dekadal minimum temperature",
+                "variable_units": "\u00b0C",
+                "missing_value": -99,
+                "temporal_resolution": "dekadal",
+                "temporal_coverage": {
+                    "start": "1961-01-1",
+                    "end": "2020-12-3"
+                },
+                "spatial_resolution": { "lon": 0.0375, "lat": 0.0375 },
+                "spatial_coverage": {
+                    "minlon": 32.625,
+                    "maxlon": 36.0,
+                    "minlat": -17.2875,
+                    "maxlat": -9.3375
+                }
+            }
+        },
+        "monthly": {
+            "precip": {
+                "dataset_name": "ALL",
+                "dataset_longname": "Analysis datasets",
+                "variable_name": "precip",
+                "variable_longname": "Monthly rainfall",
+                "variable_units": "mm",
+                "missing_value": -99,
+                "temporal_resolution": "monthly",
+                "temporal_coverage": { "start": "1981-01", "end": "2020-12" },
+                "spatial_resolution": { "lon": 0.0375, "lat": 0.0375 },
+                "spatial_coverage": {
+                    "minlon": 32.625,
+                    "maxlon": 36.0,
+                    "minlat": -17.2875,
+                    "maxlat": -9.3375
+                },
+                "computed_from": "ALL dekadal precip data"
+            },
+            "tmax": {
+                "dataset_name": "ALL",
+                "dataset_longname": "Analysis datasets",
+                "variable_name": "tmax",
+                "variable_longname": "Monthly maximum temperature",
+                "variable_units": "\u00b0C",
+                "missing_value": -99,
+                "temporal_resolution": "monthly",
+                "temporal_coverage": { "start": "1961-01", "end": "2020-12" },
+                "spatial_resolution": { "lon": 0.0375, "lat": 0.0375 },
+                "spatial_coverage": {
+                    "minlon": 32.625,
+                    "maxlon": 36.0,
+                    "minlat": -17.2875,
+                    "maxlat": -9.3375
+                },
+                "computed_from": "ALL dekadal tmax data"
+            },
+            "tmin": {
+                "dataset_name": "ALL",
+                "dataset_longname": "Analysis datasets",
+                "variable_name": "tmin",
+                "variable_longname": "Monthly minimum temperature",
+                "variable_units": "\u00b0C",
+                "missing_value": -99,
+                "temporal_resolution": "monthly",
+                "temporal_coverage": { "start": "1961-01", "end": "2020-12" },
+                "spatial_resolution": { "lon": 0.0375, "lat": 0.0375 },
+                "spatial_coverage": {
+                    "minlon": 32.625,
+                    "maxlon": 36.0,
+                    "minlat": -17.2875,
+                    "maxlat": -9.3375
+                },
+                "computed_from": "ALL dekadal tmin data"
+            }
+        },
+        "seasonal": {
+            "precip": {
+                "dataset_name": "ALL",
+                "dataset_longname": "Analysis datasets",
+                "variable_name": "precip",
+                "variable_longname": "Seasonal rainfall",
+                "variable_units": "mm",
+                "missing_value": -99,
+                "temporal_resolution": "seasonal",
+                "temporal_coverage": { "start": "1981-01", "end": "2020-12" },
+                "spatial_resolution": { "lon": 0.0375, "lat": 0.0375 },
+                "spatial_coverage": {
+                    "minlon": 32.625,
+                    "maxlon": 36.0,
+                    "minlat": -17.2875,
+                    "maxlat": -9.3375
+                },
+                "computed_from": "ALL dekadal precip data"
+            },
+            "tmax": {
+                "dataset_name": "ALL",
+                "dataset_longname": "Analysis datasets",
+                "variable_name": "tmax",
+                "variable_longname": "Seasonal maximum temperature",
+                "variable_units": "\u00b0C",
+                "missing_value": -99,
+                "temporal_resolution": "seasonal",
+                "temporal_coverage": { "start": "1961-01", "end": "2020-12" },
+                "spatial_resolution": { "lon": 0.0375, "lat": 0.0375 },
+                "spatial_coverage": {
+                    "minlon": 32.625,
+                    "maxlon": 36.0,
+                    "minlat": -17.2875,
+                    "maxlat": -9.3375
+                },
+                "computed_from": "ALL dekadal tmax data"
+            },
+            "tmin": {
+                "dataset_name": "ALL",
+                "dataset_longname": "Analysis datasets",
+                "variable_name": "tmin",
+                "variable_longname": "Seasonal minimum temperature",
+                "variable_units": "\u00b0C",
+                "missing_value": -99,
+                "temporal_resolution": "seasonal",
+                "temporal_coverage": { "start": "1961-01", "end": "2020-12" },
+                "spatial_resolution": { "lon": 0.0375, "lat": 0.0375 },
+                "spatial_coverage": {
+                    "minlon": 32.625,
+                    "maxlon": 36.0,
+                    "minlat": -17.2875,
+                    "maxlat": -9.3375
+                },
+                "computed_from": "ALL dekadal tmin data"
+            }
+        },
+        "annual": {
+            "precip": {
+                "dataset_name": "ALL",
+                "dataset_longname": "Analysis datasets",
+                "variable_name": "precip",
+                "variable_longname": "Annual rainfall",
+                "variable_units": "mm",
+                "missing_value": -99,
+                "temporal_resolution": "annual",
+                "temporal_coverage": { "start": "1981", "end": "2020" },
+                "spatial_resolution": { "lon": 0.0375, "lat": 0.0375 },
+                "spatial_coverage": {
+                    "minlon": 32.625,
+                    "maxlon": 36.0,
+                    "minlat": -17.2875,
+                    "maxlat": -9.3375
+                },
+                "computed_from": "ALL dekadal precip data"
+            },
+            "tmax": {
+                "dataset_name": "ALL",
+                "dataset_longname": "Analysis datasets",
+                "variable_name": "tmax",
+                "variable_longname": "Annual maximum temperature",
+                "variable_units": "\u00b0C",
+                "missing_value": -99,
+                "temporal_resolution": "annual",
+                "temporal_coverage": { "start": "1961", "end": "2020" },
+                "spatial_resolution": { "lon": 0.0375, "lat": 0.0375 },
+                "spatial_coverage": {
+                    "minlon": 32.625,
+                    "maxlon": 36.0,
+                    "minlat": -17.2875,
+                    "maxlat": -9.3375
+                },
+                "computed_from": "ALL dekadal tmax data"
+            },
+            "tmin": {
+                "dataset_name": "ALL",
+                "dataset_longname": "Analysis datasets",
+                "variable_name": "tmin",
+                "variable_longname": "Annual minimum temperature",
+                "variable_units": "\u00b0C",
+                "missing_value": -99,
+                "temporal_resolution": "annual",
+                "temporal_coverage": { "start": "1961", "end": "2020" },
+                "spatial_resolution": { "lon": 0.0375, "lat": 0.0375 },
+                "spatial_coverage": {
+                    "minlon": 32.625,
+                    "maxlon": 36.0,
+                    "minlat": -17.2875,
+                    "maxlat": -9.3375
+                },
+                "computed_from": "ALL dekadal tmin data"
+            }
+        }
+    },
+    "MON": {
+        "daily": {
+            "precip": {
+                "dataset_name": "MON",
+                "dataset_longname": "Monitoring datasets",
+                "variable_name": "precip",
+                "variable_longname": "Daily rainfall",
+                "variable_units": "mm",
+                "missing_value": -99,
+                "temporal_resolution": "daily",
+                "temporal_coverage": {
+                    "start": "1983-01-01",
+                    "end": "2019-12-31"
+                },
+                "spatial_resolution": { "lon": 0.0375, "lat": 0.0375 },
+                "spatial_coverage": {
+                    "minlon": 32.625,
+                    "maxlon": 36.0,
+                    "minlat": -17.2875,
+                    "maxlat": -9.3375
+                }
+            }
+        },
+        "dekadal": {
+            "precip": {
+                "dataset_name": "MON",
+                "dataset_longname": "Monitoring datasets",
+                "variable_name": "precip",
+                "variable_longname": "Dekadal rainfall",
+                "variable_units": "mm",
+                "missing_value": -99,
+                "temporal_resolution": "dekadal",
+                "temporal_coverage": {
+                    "start": "1981-01-1",
+                    "end": "2024-01-3"
+                },
+                "spatial_resolution": { "lon": 0.0375, "lat": 0.0375 },
+                "spatial_coverage": {
+                    "minlon": 32.625,
+                    "maxlon": 36.0,
+                    "minlat": -17.2875,
+                    "maxlat": -9.3375
+                }
+            }
+        },
+        "monthly": {
+            "precip": {
+                "dataset_name": "MON",
+                "dataset_longname": "Monitoring datasets",
+                "variable_name": "precip",
+                "variable_longname": "Monthly rainfall",
+                "variable_units": "mm",
+                "missing_value": -99,
+                "temporal_resolution": "monthly",
+                "temporal_coverage": { "start": "1981-01", "end": "2024-01" },
+                "spatial_resolution": { "lon": 0.0375, "lat": 0.0375 },
+                "spatial_coverage": {
+                    "minlon": 32.625,
+                    "maxlon": 36.0,
+                    "minlat": -17.2875,
+                    "maxlat": -9.3375
+                },
+                "computed_from": "MON dekadal precip data"
+            }
+        },
+        "seasonal": {
+            "precip": {
+                "dataset_name": "MON",
+                "dataset_longname": "Monitoring datasets",
+                "variable_name": "precip",
+                "variable_longname": "Seasonal rainfall",
+                "variable_units": "mm",
+                "missing_value": -99,
+                "temporal_resolution": "seasonal",
+                "temporal_coverage": { "start": "1981-01", "end": "2024-01" },
+                "spatial_resolution": { "lon": 0.0375, "lat": 0.0375 },
+                "spatial_coverage": {
+                    "minlon": 32.625,
+                    "maxlon": 36.0,
+                    "minlat": -17.2875,
+                    "maxlat": -9.3375
+                },
+                "computed_from": "MON dekadal precip data"
+            }
+        },
+        "annual": {
+            "precip": {
+                "dataset_name": "MON",
+                "dataset_longname": "Monitoring datasets",
+                "variable_name": "precip",
+                "variable_longname": "Annual rainfall",
+                "variable_units": "mm",
+                "missing_value": -99,
+                "temporal_resolution": "annual",
+                "temporal_coverage": { "start": "1981", "end": "2024" },
+                "spatial_resolution": { "lon": 0.0375, "lat": 0.0375 },
+                "spatial_coverage": {
+                    "minlon": 32.625,
+                    "maxlon": 36.0,
+                    "minlat": -17.2875,
+                    "maxlat": -9.3375
+                },
+                "computed_from": "MON dekadal precip data"
+            }
+        }
+    }
+}

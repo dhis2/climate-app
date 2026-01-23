@@ -2,12 +2,14 @@ import i18n from '@dhis2/d2-i18n'
 import { CalendarInput } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
+import useSystemInfo from '../../hooks/useSystemInfo.js'
 import useUserLocale from '../../hooks/useUserLocale.js'
 import {
     YEARLY,
     normalizeIsoDate,
     getDateStringFromIsoDate,
     getPeriodTypes,
+    UTC_TIME_ZONE,
 } from '../../utils/time.js'
 import SectionH2 from '../shared/SectionH2.jsx'
 import TimeZone from '../shared/TimeZone.jsx'
@@ -25,8 +27,16 @@ const getValidationState = (minCalendarDate, maxCalendarDate, dateError) => {
     return dateError === null
 }
 
-const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
+const Period = ({
+    period,
+    dataset = DEFAULT_DATASET,
+    onChange,
+    onChangeType,
+}) => {
     const { locale } = useUserLocale()
+    const { system } = useSystemInfo()
+
+    const timeZone = system?.systemInfo?.serverTimeZoneId
 
     // Set period locale from user settings
     useEffect(() => {
@@ -55,12 +65,17 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
     const [endDateError, setEndDateError] = useState(null)
 
     const {
-        periodType: datasetPeriodType,
         supportedPeriodTypes: datasetSupportedPeriodTypes,
-        periodRange: datasetPeriodRange,
         period: datasetPeriod,
     } = dataset
     const { periodType, startTime, endTime, calendar } = period
+
+    // Find the supported period type object that matches the current periodType
+    const matchedPeriodTypeObj = datasetSupportedPeriodTypes?.find(
+        (pt) => pt.periodType === periodType
+    )
+    const datasetPeriodType = matchedPeriodTypeObj?.periodType
+    const datasetPeriodRange = matchedPeriodTypeObj?.periodRange
 
     const minCalendarDate = normalizeIsoDate(datasetPeriodRange?.start) || null
     const maxCalendarDate = normalizeIsoDate(datasetPeriodRange?.end) || null
@@ -81,7 +96,6 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
         })
     }
 
-    const hasNoPeriod = datasetPeriodType === 'N/A'
     const isYearly = datasetPeriodType === YEARLY
 
     let periodErrorMessage = null
@@ -101,10 +115,17 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
 
     let helpText
     if (dataset.timeZone || dataset.bands?.[0]?.timeZone) {
-        helpText = i18n.t(
-            '{{periodTypeName}} data between start and end date will be calculated from hourly data, with time zone adjustments applied if the selected time zone is not set to UTC.',
-            { periodTypeName, nsSeparator: ';' }
-        )
+        if (timeZone === UTC_TIME_ZONE) {
+            helpText = i18n.t(
+                '{{periodTypeName}} data between start and end date will be calculated from hourly data.',
+                { periodTypeName, nsSeparator: ';' }
+            )
+        } else {
+            helpText = i18n.t(
+                '{{periodTypeName}} data between start and end date will be calculated from hourly data, with time zone adjustments applied if the selected time zone is not set to UTC.',
+                { periodTypeName, nsSeparator: ';' }
+            )
+        }
     } else {
         helpText = i18n.t(
             '{{periodTypeName}} data between start and end date will be calculated and then aggregated to the selected period type.',
@@ -112,19 +133,30 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
         )
     }
 
-    return (
-        <>
-            <SectionH2 number="2" title="Configure period" />
-            {hasNoPeriod && (
+    if (datasetPeriod) {
+        return (
+            <>
+                <SectionH2 number="2" title="Configure period" />
                 <p>
                     {i18n.t(
-                        'The data will be assigned a default yearly period that matches the year it was collected: {{datasetPeriod}}',
+                        'The data will be assigned a yearly period type that matches the year it was collected: {{datasetPeriod}}',
                         { datasetPeriod, nsSeparator: ';' }
                     )}
                 </p>
-            )}
-            {isYearly && (
+            </>
+        )
+    }
+
+    return (
+        <>
+            <SectionH2 number="2" title="Configure period" />
+            {isYearly ? (
                 <div className={classes.yearlyContainer}>
+                    <PeriodType
+                        periodType={periodType}
+                        supportedPeriodTypes={datasetSupportedPeriodTypes}
+                        onChange={onChangeType}
+                    />
                     <YearRange
                         period={period}
                         minYear={datasetPeriodRange?.start}
@@ -151,23 +183,13 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
                             )}
                         </div>
                     )}
-                    <PeriodType
-                        periodType={periodType}
-                        supportedPeriodTypes={datasetSupportedPeriodTypes}
-                        onChange={(periodType) =>
-                            onChange({ ...period, periodType })
-                        }
-                    />
                 </div>
-            )}
-            {!hasNoPeriod && !isYearly && (
+            ) : (
                 <>
                     <PeriodType
                         periodType={periodType}
                         supportedPeriodTypes={datasetSupportedPeriodTypes}
-                        onChange={(periodType) =>
-                            onChange({ ...period, periodType })
-                        }
+                        onChange={onChangeType}
                     />
                     <div className={classes.pickers}>
                         <CalendarInput
@@ -184,6 +206,7 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
                                 maxCalendarDate,
                                 startDateError
                             )}
+                            dataTest="start-date-input"
                         />
                         <span className={classes.separator}>—</span>
                         <CalendarInput
@@ -200,6 +223,7 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
                                 maxCalendarDate,
                                 endDateError
                             )}
+                            dataTest="end-date-input"
                         />
                         {(dataset.timeZone || dataset.bands?.[0]?.timeZone) && (
                             <div className={classes.timezone}>
@@ -242,6 +266,7 @@ const Period = ({ period, dataset = DEFAULT_DATASET, onChange }) => {
 Period.propTypes = {
     period: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
+    onChangeType: PropTypes.func.isRequired,
     dataset: PropTypes.object,
 }
 

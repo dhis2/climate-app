@@ -8,7 +8,6 @@ import {
     getStandardPeriod,
     isValidPeriod,
     getPeriods,
-    getPeriodTypes,
     fromStandardDate,
     toDateObject,
     formatStandardDate,
@@ -18,7 +17,6 @@ import {
     oneDayInMs,
 } from '../../utils/time.js'
 import Dataset from '../shared/Dataset.jsx'
-import GEETokenCheck from '../shared/GEETokenCheck.jsx'
 import Resolution from '../shared/Resolution.jsx'
 import SectionH2 from '../shared/SectionH2.jsx'
 import DataElement from './DataElement.jsx'
@@ -30,27 +28,78 @@ import classes from './styles/ImportPage.module.css'
 
 const maxValues = 50000
 
+const getPeriodRange = ({ calendar, periodType, range }) => {
+    const getDefaultRange = () => {
+        const defaultPeriod = getDefaultImportPeriod({ calendar, periodType })
+        return { start: defaultPeriod.startTime, end: defaultPeriod.endTime }
+    }
+    const validRange = range || getDefaultRange()
+    // compute end and start depending on requested periodType
+    // endTime will generally be converted from standard -> calendar
+    // For YEARLY we keep year values (e.g. "2023") so downstream code
+    // that expects years for yearly periods continues to work
+    let endTime = fromStandardDate(validRange.end, calendar)
+    let startTime
+
+    try {
+        if (periodType === DAILY) {
+            // subtract 30 days from end
+            const endStd = toDateObject(validRange.end)
+            const endDate = new Date(endStd.year, endStd.month - 1, endStd.day)
+            const startDate = new Date(endDate.getTime() - 30 * oneDayInMs)
+            startTime = fromStandardDate(
+                formatStandardDate(startDate),
+                calendar
+            )
+        } else if (periodType === MONTHLY) {
+            // subtract 6 months from end
+            const endStd = toDateObject(validRange.end)
+            const endDate = new Date(endStd.year, endStd.month - 1, endStd.day)
+            const startDate = new Date(
+                endDate.getFullYear(),
+                endDate.getMonth() - 6,
+                endDate.getDate()
+            )
+            startTime = fromStandardDate(
+                formatStandardDate(startDate),
+                calendar
+            )
+        } else if (periodType === YEARLY) {
+            // for yearly, work with years (keep values like "2023")
+            const endYear = toDateObject(validRange.end).year
+            startTime =
+                validRange.end === validRange.start
+                    ? String(endYear)
+                    : String(endYear - 1)
+            // keep endTime as year string as well
+            endTime = String(endYear)
+        } else {
+            // fallback to provided start
+            startTime = fromStandardDate(validRange.start, calendar)
+        }
+    } catch (e) {
+        // if anything goes wrong, fallback to original values
+        console.warn('Failed to compute relative startTime, falling back', e)
+        startTime = fromStandardDate(validRange.start, calendar)
+        endTime = fromStandardDate(validRange.end, calendar)
+    }
+
+    return { startTime, endTime }
+}
+
 const ImportPage = () => {
     const { systemInfo = {} } = useConfig()
     const { calendar = 'gregory' } = systemInfo
     const [dataset, setDataset] = useState()
-    const [period, setPeriod] = useState(getDefaultImportPeriod(calendar))
+    const [period, setPeriod] = useState(getDefaultImportPeriod({ calendar }))
     const [orgUnits, setOrgUnits] = useState()
     const [dataElement, setDataElement] = useState()
     const standardPeriod = getStandardPeriod(period) // ISO 8601 used by GEE
     const [startExtract, setStartExtract] = useState(false)
 
-    const hasNoPeriod = dataset?.periodType === 'N/A'
-
     const orgUnitCount = useOrgUnitCount(orgUnits?.parent?.id, orgUnits?.level)
-    const periodCount = useMemo(
-        () => (hasNoPeriod ? 0 : getPeriods(period).length),
-        [period, hasNoPeriod]
-    )
+    const periodCount = useMemo(() => getPeriods(period).length, [period])
     const valueCount = orgUnitCount * periodCount
-    const periodTypeName = getPeriodTypes()
-        .find((type) => type.id === period.periodType)
-        ?.name.toLowerCase()
 
     const isValidOrgUnits =
         orgUnits?.parent &&
@@ -59,7 +108,7 @@ const ImportPage = () => {
 
     const isValid = !!(
         dataset &&
-        (hasNoPeriod || isValidPeriod(standardPeriod)) &&
+        isValidPeriod(standardPeriod) &&
         isValidOrgUnits &&
         dataElement &&
         valueCount <= maxValues
@@ -69,117 +118,84 @@ const ImportPage = () => {
         setStartExtract(false)
     }, [dataset, period, orgUnits, dataElement])
 
-    const updatePeriod = (val) => {
-        setDataElement(null)
-        setPeriod(val)
-    }
+    const updatePeriod = useCallback((val) => {
+        setPeriod((prev) => ({
+            ...prev,
+            ...val,
+        }))
+    }, [])
+
+    // When periodType changes then dataElement selection must be cleared
+    const updatePeriodType = useCallback(
+        (val) => {
+            setDataElement(null)
+            updatePeriod({ periodType: val })
+        },
+        [updatePeriod]
+    )
 
     const updateDataset = useCallback(
-        (dataset) => {
-            const updatePeriodSelector = ({ periodRange, periodType }) => {
-                if (periodRange) {
-                    // compute end and start depending on requested periodType
-                    // endTime will generally be converted from standard -> calendar
-                    // For YEARLY we keep year values (e.g. "2023") so downstream code
-                    // that expects years for yearly periods continues to work
-                    let endTime = fromStandardDate(periodRange.end, calendar)
-                    let startTime
+        (ds) => {
+            setDataset((prev) => {
+                const prevHasRangeOrPeriod = !!(
+                    prev &&
+                    (prev.period ||
+                        prev.supportedPeriodTypes.some((pt) => pt.periodRange))
+                )
 
-                    try {
-                        if (periodType === DAILY) {
-                            // subtract 30 days from end
-                            const endStd = toDateObject(periodRange.end)
-                            const endDate = new Date(
-                                endStd.year,
-                                endStd.month - 1,
-                                endStd.day
-                            )
-                            const startDate = new Date(
-                                endDate.getTime() - 30 * oneDayInMs
-                            )
-                            startTime = fromStandardDate(
-                                formatStandardDate(startDate),
-                                calendar
-                            )
-                        } else if (periodType === MONTHLY) {
-                            // subtract 6 months from end
-                            const endStd = toDateObject(periodRange.end)
-                            const endDate = new Date(
-                                endStd.year,
-                                endStd.month - 1,
-                                endStd.day
-                            )
-                            const startDate = new Date(
-                                endDate.getFullYear(),
-                                endDate.getMonth() - 6,
-                                endDate.getDate()
-                            )
-                            startTime = fromStandardDate(
-                                formatStandardDate(startDate),
-                                calendar
-                            )
-                        } else if (periodType === YEARLY) {
-                            // for yearly, work with years (keep values like "2023")
-                            const endYear = toDateObject(periodRange.end).year
-                            startTime = String(endYear - 1)
-                            // keep endTime as year string as well
-                            endTime = String(endYear)
-                        } else {
-                            // fallback to provided start
-                            startTime = fromStandardDate(
-                                periodRange.start,
-                                calendar
-                            )
-                        }
-                    } catch (e) {
-                        // if anything goes wrong, fallback to original values
-                        console.warn(
-                            'Failed to compute relative startTime, falling back',
-                            e
-                        )
-                        startTime = fromStandardDate(
-                            periodRange.start,
-                            calendar
-                        )
-                        endTime = fromStandardDate(periodRange.end, calendar)
-                    }
+                const periodType = ds.supportedPeriodTypes.includes(
+                    period.periodType
+                )
+                    ? period.periodType
+                    : ds.supportedPeriodTypes[0].periodType
 
-                    setPeriod({
-                        periodType,
+                const range =
+                    ds.supportedPeriodTypes.find(
+                        (pt) => pt.periodType === periodType
+                    )?.periodRange ||
+                    (ds.period
+                        ? { start: ds.period, end: ds.period }
+                        : undefined)
+
+                if (range || prevHasRangeOrPeriod) {
+                    const { startTime, endTime } = getPeriodRange({
+                        range,
                         calendar,
-                        locale: period.locale,
+                        periodType,
+                    })
+
+                    updatePeriod({
+                        periodType,
                         startTime,
                         endTime,
                     })
-                } else {
-                    setPeriod(getDefaultImportPeriod(calendar))
                 }
-            }
+                return ds
+            })
 
-            setDataset(dataset)
             setDataElement(null)
-            updatePeriodSelector(dataset)
         },
-        [calendar, period.locale]
+        [period, updatePeriod, calendar]
     )
 
     return (
         <div className={classes.page}>
             <h1>{i18n.t('Import weather and climate data')}</h1>
-            <GEETokenCheck />
             <div className={classes.formContainer}>
                 <div className={classes.formSection}>
                     <Dataset
                         title={i18n.t('Choose data source')}
                         selected={dataset}
                         onChange={updateDataset}
+                        showDescription={true}
                     />
                 </div>
                 <div className={classes.formSection}>
                     <Period
                         period={period}
                         dataset={dataset}
-                        onChange={(val) => updatePeriod(val)}
+                        onChange={updatePeriod}
+                        onChangeType={updatePeriodType}
                     />
                 </div>
                 <div className={classes.formSection}>
@@ -196,9 +212,9 @@ const ImportPage = () => {
                 </div>
                 <div className={classes.formSection}>
                     <OrgUnits selected={orgUnits} onChange={setOrgUnits} />
-                    {dataset && (
+                    {dataset?.resolutionText && (
                         <Resolution
-                            resolution={dataset.resolution}
+                            resolution={dataset.resolutionText}
                             isImport={true}
                         />
                     )}
@@ -211,11 +227,8 @@ const ImportPage = () => {
                                 'Import limit exceeded: {{valueCount}} values selected (maximum {{maxValues}}). Reduce your selection by choosing fewer organisation units or a shorter time period. Additional imports can be performed separately.',
                                 {
                                     nsSeparator: ';',
-                                    maxValues,
                                     valueCount,
-                                    orgUnitCount,
-                                    periodCount,
-                                    periodTypeName,
+                                    maxValues,
                                 }
                             )}
                         </div>
@@ -227,12 +240,7 @@ const ImportPage = () => {
                             startDate={period.startTime || ''}
                             endDate={period.endTime || ''}
                             calendar={calendar}
-                            orgLevel={orgUnits.levelName || ''}
-                            orgUnit={
-                                orgUnits.parent.displayName ||
-                                orgUnits.parent.name ||
-                                ''
-                            }
+                            orgUnits={orgUnits}
                             dataElement={dataElement.displayName || ''}
                             totalValues={valueCount}
                         />
@@ -248,7 +256,7 @@ const ImportPage = () => {
                         {startExtract && isValid && (
                             <ExtractData
                                 dataset={dataset}
-                                period={hasNoPeriod ? null : standardPeriod}
+                                period={dataset.period ? null : standardPeriod}
                                 orgUnits={orgUnits}
                                 dataElement={dataElement}
                             />

@@ -1,4 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
+import { geeProvider as provider } from '../components/DataSourcesProvider.jsx'
 import { landcoverTypes } from '../components/explore/landcover/LandcoverSelect.jsx'
 import {
     kelvinToCelsius,
@@ -55,24 +56,17 @@ const chirpsSource = 'Climate Hazards Center / UCSB'
 const modisSource = 'NASA LP DAAC at the USGS EROS Center'
 const demSource = 'NASA / USGS / JPL-Caltech'
 
-export const ERA5_RESOLUTION = 'ERA5_RESOLUTION'
-export const ERA5_LAND_RESOLUTION = 'ERA5_LAND_RESOLUTION'
-export const CHIRPS_RESOLUTION = 'CHIRPS_RESOLUTION'
-export const MODIS_RESOLUTION = 'MODIS_RESOLUTION'
-export const LANDCOVER_RESOLUTION = 'LANDCOVER_RESOLUTION'
-export const DEM_RESOLUTION = 'DEM_RESOLUTION'
+export const ERA5_RESOLUTION = '31 km (0.25°)'
+export const ERA5_LAND_RESOLUTION = '9 km (0.1°)'
+export const CHIRPS_RESOLUTION = '5 km (0.05°)'
+export const MODIS_RESOLUTION = '250 m'
+export const LANDCOVER_RESOLUTION = '500 m'
+export const DEM_RESOLUTION = '30 m'
 
-export const getResolutionText = (resolution) => {
-    const resolutions = {
-        [ERA5_RESOLUTION]: i18n.t('Approximately 31 km (0.25°)'),
-        [ERA5_LAND_RESOLUTION]: i18n.t('Approximately 9 km (0.1°)'),
-        [CHIRPS_RESOLUTION]: i18n.t('Approximately 5 km (0.05°)'),
-        [MODIS_RESOLUTION]: i18n.t('Approximately 250 m'),
-        [LANDCOVER_RESOLUTION]: i18n.t('Approximately 500 m'),
-        [DEM_RESOLUTION]: i18n.t('Approximately 30 m'),
-    }
-    return resolutions[resolution]
-}
+export const getResolutionText = (resolution) =>
+    i18n.t('Data resolution is approximately {{resolution}}.', {
+        resolution,
+    })
 
 export const ndviDescription = i18n.t(
     'Landsat Normalized Difference Vegetation Index (NDVI) is used to quantify vegetation greenness and is useful in understanding vegetation density and assessing changes in plant health. NDVI values range from -1 to 1, with higher values indicating denser vegetation.'
@@ -112,6 +106,7 @@ const getEEDatasets = () => [
         dataElementCode: 'ERA5_LAND_TEMPERATURE',
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
+        provider,
     },
     {
         id: 'ECMWF/ERA5_LAND/DAILY_AGGR/temperature_2m_max',
@@ -130,7 +125,7 @@ const getEEDatasets = () => [
         timeZone: {
             datasetId: 'ECMWF/ERA5_LAND/HOURLY',
             band: 'temperature_2m',
-            periodType: 'hourly',
+            periodType: HOURLY,
             periodReducer: 'max',
         },
         valueParser: temperatureParser,
@@ -138,6 +133,7 @@ const getEEDatasets = () => [
         dataElementCode: 'ERA5_LAND_TEMPERATURE_MAX',
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
+        provider,
     },
     {
         id: 'ECMWF/ERA5_LAND/DAILY_AGGR/temperature_2m_min',
@@ -164,6 +160,7 @@ const getEEDatasets = () => [
         dataElementCode: 'ERA5_LAND_TEMPERATURE_MIN',
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
+        provider,
     },
     {
         id: 'ECMWF/ERA5_LAND/DAILY_AGGR/total_precipitation_sum',
@@ -189,6 +186,7 @@ const getEEDatasets = () => [
         dataElementCode: 'ERA5_LAND_PRECIPITATION',
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
+        provider,
     },
     {
         id: 'UCSB-CHG/CHIRPS/DAILY',
@@ -208,6 +206,7 @@ const getEEDatasets = () => [
         dataElementCode: 'CHIRPS_PRECIPITATION',
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
+        provider,
     },
     {
         id: 'ECMWF/ERA5_LAND/DAILY_AGGR/dewpoint_temperature_2m',
@@ -234,6 +233,7 @@ const getEEDatasets = () => [
         dataElementCode: 'ERA5_LAND_DEWPOINT_TEMPERATURE',
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
+        provider,
     },
     {
         id: 'ECMWF/ERA5_LAND/DAILY_AGGR/relative_humidity_2m',
@@ -274,6 +274,7 @@ const getEEDatasets = () => [
         dataElementCode: 'ERA5_LAND_RELATIVE_HUMIDITY',
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
+        provider,
     },
     {
         id: 'projects/climate-engine-pro/assets/ce-era5-heat/utci_mean',
@@ -293,6 +294,7 @@ const getEEDatasets = () => [
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
         legend: getLegend,
+        provider,
     },
     {
         id: 'projects/climate-engine-pro/assets/ce-era5-heat/utci_max',
@@ -312,6 +314,7 @@ const getEEDatasets = () => [
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
         legend: getLegend,
+        provider,
     },
     {
         id: 'projects/climate-engine-pro/assets/ce-era5-heat/utci_min',
@@ -331,6 +334,7 @@ const getEEDatasets = () => [
         dataElementGroup: climateGroup,
         dataSet: climateDataSet,
         legend: getLegend,
+        provider,
     },
     {
         id: 'MODIS/061/MOD13Q1/NDVI',
@@ -349,6 +353,7 @@ const getEEDatasets = () => [
         dataElementCode: 'MODIS_NDVI',
         dataElementGroup: environmentGroup,
         dataSet: environmentDataSet,
+        provider,
     },
     {
         id: 'MODIS/061/MOD13Q1/EVI',
@@ -367,6 +372,7 @@ const getEEDatasets = () => [
         dataElementCode: 'MODIS_EVI',
         dataElementGroup: environmentGroup,
         dataSet: environmentDataSet,
+        provider,
     },
     {
         id: 'USGS/SRTMGL1_003/mean',
@@ -376,7 +382,7 @@ const getEEDatasets = () => [
         description: i18n.t('Mean elevation in meters above sea level.'),
         source: demSource,
         resolution: DEM_RESOLUTION,
-        periodType: 'N/A',
+        periodType: YEARLY,
         supportedPeriodTypes: [YEARLY],
         period: '2000',
         band: 'elevation',
@@ -386,6 +392,7 @@ const getEEDatasets = () => [
         dataElementCode: 'SRTM_ELEVATION_MEAN',
         dataElementGroup: landGroup,
         dataSet: landDataSet,
+        provider,
     },
     {
         id: 'USGS/SRTMGL1_003/min',
@@ -395,7 +402,7 @@ const getEEDatasets = () => [
         description: i18n.t('Min elevation in meters above sea level.'),
         source: demSource,
         resolution: DEM_RESOLUTION,
-        periodType: 'N/A',
+        periodType: YEARLY,
         supportedPeriodTypes: [YEARLY],
         period: '2000',
         band: 'elevation',
@@ -405,6 +412,7 @@ const getEEDatasets = () => [
         dataElementCode: 'SRTM_ELEVATION_MIN',
         dataElementGroup: landGroup,
         dataSet: landDataSet,
+        provider,
     },
     {
         id: 'USGS/SRTMGL1_003/max',
@@ -414,7 +422,7 @@ const getEEDatasets = () => [
         description: i18n.t('Max elevation in meters above sea level.'),
         source: demSource,
         resolution: DEM_RESOLUTION,
-        periodType: 'N/A',
+        periodType: YEARLY,
         supportedPeriodTypes: [YEARLY],
         period: '2000',
         band: 'elevation',
@@ -424,6 +432,7 @@ const getEEDatasets = () => [
         dataElementCode: 'SRTM_ELEVATION_MAX',
         dataElementGroup: landGroup,
         dataSet: landDataSet,
+        provider,
     },
     {
         id: 'USGS/SRTMGL1_003/stddev',
@@ -435,7 +444,7 @@ const getEEDatasets = () => [
         ),
         source: demSource,
         resolution: DEM_RESOLUTION,
-        periodType: 'N/A',
+        periodType: YEARLY,
         supportedPeriodTypes: [YEARLY],
         period: '2000',
         band: 'elevation',
@@ -445,6 +454,7 @@ const getEEDatasets = () => [
         dataElementCode: 'SRTM_ELEVATION_STDDEV',
         dataElementGroup: landGroup,
         dataSet: landDataSet,
+        provider,
     },
     ...landcoverTypes.map(({ name, value }) => ({
         id: `MODIS/061/MCD12Q1/LC_Type1/${value}`,
@@ -468,6 +478,7 @@ const getEEDatasets = () => [
         dataElementCode: `MODIS_LANDCOVER_${value}`,
         dataElementGroup: landGroup,
         dataSet: landDataSet,
+        provider,
     })),
 ]
 

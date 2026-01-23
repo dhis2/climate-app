@@ -2,35 +2,64 @@ import i18n from '@dhis2/d2-i18n'
 import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React from 'react'
-import getDatasets from '../../data/datasets.js'
-import SectionH2 from './SectionH2.jsx'
+import useDatasets from '../../hooks/useDatasets.js'
+import SectionH2 from '../shared/SectionH2.jsx'
+import classes from './styles/Dataset.module.css'
 
-const Dataset = ({ title, selected, onChange, showDescription = true }) => (
-    <>
-        {title && <SectionH2 number="1" title={title} />}
-        <SingleSelectField
-            filterable
-            label={title && i18n.t('Select data to import')}
-            selected={selected?.id}
-            onChange={({ selected }) =>
-                onChange(getDatasets().find((d) => d.id === selected))
-            }
-            dataTest="dataset-selector"
-        >
-            {getDatasets().map((d) => (
-                <SingleSelectOption key={d.id} value={d.id} label={d.name} />
-            ))}
-        </SingleSelectField>
-        {selected && showDescription && (
-            <p>
-                {selected.description}{' '}
-                {i18n.t('Data resolution is {{resolution}}.', {
-                    resolution: selected.resolution?.toLowerCase(),
-                })}
-            </p>
-        )}
-    </>
-)
+const Dataset = ({ title, selected, onChange, showDescription }) => {
+    const { data: datasets, loading, error } = useDatasets()
+
+    return (
+        <div>
+            {showDescription && <SectionH2 number="1" title={title} />}
+            <SingleSelectField
+                filterable={datasets.length > 0}
+                label={i18n.t('Select data to import')}
+                selected={selected?.id}
+                onChange={({ selected }) =>
+                    onChange(datasets.find((d) => d.id === selected))
+                }
+                empty={i18n.t(
+                    'No datasets are available. Go to the Settings page to learn how to configure dataset sources.'
+                )}
+                dataTest="dataset-selector"
+                loading={loading}
+                error={!!error}
+                validationText={
+                    error
+                        ? i18n.t('ENACTS datasets could not be loaded')
+                        : undefined
+                }
+            >
+                {datasets.map((d) => (
+                    <SingleSelectOption
+                        key={d.id}
+                        value={d.id}
+                        label={`${d.provider.nameShort}: ${d.name}`}
+                    />
+                ))}
+            </SingleSelectField>
+
+            {selected && showDescription && (
+                <p>
+                    {selected.description}
+                    {selected.resolutionText && (
+                        <span> {selected.resolutionText}</span>
+                    )}
+                </p>
+            )}
+
+            {selected && showDescription && (
+                <p className={classes.provider}>
+                    {i18n.t('Data is from ')}
+                    {selected.source}
+                    {i18n.t('. Provider: ', { nsSeparator: ';' })}
+                    {selected.provider.name}
+                </p>
+            )}
+        </div>
+    )
+}
 
 Dataset.propTypes = {
     onChange: PropTypes.func.isRequired,

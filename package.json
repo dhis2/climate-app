@@ -18,7 +18,7 @@
     },
     "devDependencies": {
         "@cypress/vite-dev-server": "^7.0.1",
-        "@dhis2/cli-app-scripts": "^12.8.0",
+        "@dhis2/cli-app-scripts": "^12.9.2",
         "@dhis2/cli-style": "^10.7.9",
         "@dhis2/cypress-commands": "^10.1.0",
         "@vitejs/plugin-react": "^4.1.0",

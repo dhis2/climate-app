@@ -16,19 +16,24 @@ const DataSet = ({ name, shortName, periodType }) => {
             </p>
             <table>
                 <caption>
-                    {i18n.t('Data set: "{{-name}}"', {
+                    {i18n.t('Data set: "{{-name}} {{-periodType}}"', {
                         name,
+                        periodType: periodTypeName,
                         nsSeparator: '%',
                     })}
                 </caption>
                 <tbody>
                     <tr>
                         <th>{i18n.t('Name')}</th>
-                        <td>{name}</td>
+                        <td>
+                            {name} {periodTypeName}
+                        </td>
                     </tr>
                     <tr>
                         <th>{i18n.t('Short name')}</th>
-                        <td>{shortName}</td>
+                        <td>
+                            {shortName} {periodTypeName}
+                        </td>
                     </tr>
                     <tr>
                         <th>{i18n.t('Period type')}</th>

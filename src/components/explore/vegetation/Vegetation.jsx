@@ -6,10 +6,12 @@ import {
     getResolutionText,
     ndviDescription,
     eviDescription,
-} from '../../../data/datasets.js'
+} from '../../../data/earth-engine-datasets.js'
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
 import exploreStore from '../../../store/exploreStore.js'
+import { useDataSources } from '../../DataSourcesProvider.jsx'
 import DataLoader from '../../shared/DataLoader.jsx'
+import { GEETokenWarning } from '../../shared/GEETokenWarning.jsx'
 import OpenAsMapButton from '../../shared/OpenAsMapButton.jsx'
 import Resolution from '../../shared/Resolution.jsx'
 import Chart from '../Chart.jsx'
@@ -29,9 +31,14 @@ const Vegetation = () => {
     const feature = exploreStore((state) => state.orgUnit)
     const band = exploreStore((state) => state.vegetationIndex)
     const period = exploreStore((state) => state.monthlyPeriod)
+    const { gee } = useDataSources()
 
     const data = useEarthEngineTimeSeries({ dataset, period, feature })
     const lastPeriod = data?.[data.length - 1]
+
+    if (!gee.enabled) {
+        return <GEETokenWarning />
+    }
 
     if (!data) {
         return <DataLoader />

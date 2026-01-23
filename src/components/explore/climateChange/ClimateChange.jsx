@@ -3,13 +3,16 @@ import { useMemo } from 'react'
 import {
     era5MonthlyTemperatures,
     era5MonthlyNormals,
-} from '../../../data/datasets.js'
+    getResolutionText,
+} from '../../../data/earth-engine-datasets.js'
 import useAppSettings from '../../../hooks/useAppSettings.js'
 import useEarthEngineClimateNormals from '../../../hooks/useEarthEngineClimateNormals.js'
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
 import exploreStore from '../../../store/exploreStore.js'
 import { getCurrentYear } from '../../../utils/time.js'
+import { useDataSources } from '../../DataSourcesProvider.jsx'
 import DataLoader from '../../shared/DataLoader.jsx'
+import { GEETokenWarning } from '../../shared/GEETokenWarning.jsx'
 import Resolution from '../../shared/Resolution.jsx'
 import Chart from '../Chart.jsx'
 import MonthSelect from '../MonthSelect.jsx'
@@ -25,6 +28,7 @@ const ClimateChange = () => {
     const month = exploreStore((state) => state.month)
     const referencePeriod = exploreStore((state) => state.referencePeriod)
     const { settings } = useAppSettings()
+    const { gee } = useDataSources()
 
     const filter = useMemo(
         () => [
@@ -48,6 +52,10 @@ const ClimateChange = () => {
         referencePeriod,
         orgUnit
     )
+
+    if (!gee.enabled) {
+        return <GEETokenWarning />
+    }
 
     if (!data || !normals || !settings) {
         return <DataLoader />
@@ -76,7 +84,11 @@ const ClimateChange = () => {
                     'Temperature anomaly is the difference of a temperature from a reference value, calculated as the average temperature over a period of 30 years. Blue columns shows temperatures below the average, while red columns are above.'
                 )}
             </div>
-            <Resolution resolution={era5MonthlyTemperatures.resolution} />
+            <Resolution
+                resolution={getResolutionText(
+                    era5MonthlyTemperatures.resolution
+                )}
+            />
         </>
     )
 }

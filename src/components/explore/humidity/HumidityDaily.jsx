@@ -1,7 +1,12 @@
-import { era5Daily } from '../../../data/datasets.js'
+import {
+    era5Daily,
+    getResolutionText,
+} from '../../../data/earth-engine-datasets.js'
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
 import exploreStore from '../../../store/exploreStore.js'
+import { useDataSources } from '../../DataSourcesProvider.jsx'
 import DataLoader from '../../shared/DataLoader.jsx'
+import { GEETokenWarning } from '../../shared/GEETokenWarning.jsx'
 import OpenAsMapButton from '../../shared/OpenAsMapButton.jsx'
 import Resolution from '../../shared/Resolution.jsx'
 import Chart from '../Chart.jsx'
@@ -13,6 +18,7 @@ import HumidityDescription from './HumidityDescription.jsx'
 const HumidityDaily = () => {
     const orgUnit = exploreStore((state) => state.orgUnit)
     const period = exploreStore((state) => state.dailyPeriod)
+    const { gee } = useDataSources()
 
     const data = useEarthEngineTimeSeries({
         dataset: era5Daily,
@@ -21,17 +27,27 @@ const HumidityDaily = () => {
     })
     const lastPeriod = data?.[data.length - 1]
 
+    const getContent = () => {
+        if (!gee.enabled) {
+            return <GEETokenWarning />
+        }
+
+        if (data) {
+            return (
+                <Chart config={getDailyConfig(orgUnit.properties.name, data)} />
+            )
+        }
+
+        return <DataLoader />
+    }
+
     return (
         <>
             <PeriodTypeSelect />
-            {data ? (
-                <Chart config={getDailyConfig(orgUnit.properties.name, data)} />
-            ) : (
-                <DataLoader />
-            )}
-            <DailyPeriodSelect />
+            {getContent()}
+            <DailyPeriodSelect disabled={!gee.enabled} />
             <HumidityDescription />
-            <Resolution resolution={era5Daily.resolution} />
+            <Resolution resolution={getResolutionText(era5Daily.resolution)} />
             <OpenAsMapButton
                 dataset={'humidityDaily'}
                 period={lastPeriod}

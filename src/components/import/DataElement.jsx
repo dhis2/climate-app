@@ -2,7 +2,7 @@ import { useDataQuery } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import HelpfulInfo from '../import/HelpfulInfo.jsx'
 
@@ -21,29 +21,33 @@ const QUERY = {
 const DataElement = ({ selected, onChange, datasetCode, periodType }) => {
     const { loading, error, data } = useDataQuery(QUERY)
 
-    const dataSets = data?.dataSets.dataSets || DEFAULT_DATASETS
-    const datasetsWithPeriodType = periodType
-        ? dataSets.filter(
-              (ds) => ds.periodType.toLowerCase() === periodType?.toLowerCase()
-          )
-        : dataSets
-    const dataElements = datasetsWithPeriodType.flatMap(
-        (ds) => ds.dataSetElements
-    )
-    const uniqueDataElements = Array.from(
-        dataElements
-            .reduce(
-                (map, d) => map.set(d.dataElement.id, d.dataElement),
-                new Map()
-            )
-            .values()
-    ).sort((a, b) => a.displayName.localeCompare(b.displayName))
+    const uniqueDataElements = useMemo(() => {
+        const dataSets = data?.dataSets.dataSets || DEFAULT_DATASETS
+        const datasetsWithPeriodType = periodType
+            ? dataSets.filter(
+                  (ds) =>
+                      ds.periodType.toLowerCase() === periodType?.toLowerCase()
+              )
+            : dataSets
+        const dataElements = datasetsWithPeriodType.flatMap(
+            (ds) => ds.dataSetElements
+        )
+        return Array.from(
+            dataElements
+                .reduce(
+                    (map, d) => map.set(d.dataElement.id, d.dataElement),
+                    new Map()
+                )
+                .values()
+        ).sort((a, b) => a.displayName.localeCompare(b.displayName))
+    }, [data, periodType])
 
     useEffect(() => {
         if (uniqueDataElements.length && datasetCode) {
             const matchingDataElements = uniqueDataElements.filter(
                 (dataElement) => dataElement.code?.startsWith(datasetCode)
             )
+
             if (matchingDataElements.length === 1) {
                 onChange(matchingDataElements[0])
             }
@@ -64,6 +68,12 @@ const DataElement = ({ selected, onChange, datasetCode, periodType }) => {
 
     const periodTypeParenth = periodType ? ` (${periodType.toLowerCase()})` : ''
 
+    const emptyMessage = !datasetCode
+        ? i18n.t(
+              'No data elements found. You must first select a dataset to import.'
+          )
+        : i18n.t('No data elements found for the selected period type.')
+
     return (
         <div>
             <SingleSelectField
@@ -79,6 +89,8 @@ const DataElement = ({ selected, onChange, datasetCode, periodType }) => {
                 onChange={({ selected }) =>
                     onChange(uniqueDataElements.find((d) => d.id === selected))
                 }
+                empty={emptyMessage}
+                dataTest="data-element-select"
             >
                 {uniqueDataElements.map((d) => (
                     <SingleSelectOption
@@ -91,8 +103,10 @@ const DataElement = ({ selected, onChange, datasetCode, periodType }) => {
             <HelpfulInfo
                 text={
                     <>
-                        Need help setting up data elements for import? Check out
-                        the <Link to="/setup">setup guide</Link>
+                        {i18n.t(
+                            'Need help setting up data elements for import? Check out the '
+                        )}
+                        <Link to="/setup">{i18n.t('setup guide')}</Link>
                     </>
                 }
             />

@@ -1,6 +1,8 @@
 .page {
-    margin-bottom: 30px;
-    inline-size: 800px;
+    margin-block-end: 24px;
+    margin-inline-end: 24px;
+    max-inline-size: 800px;
+    min-inline-size: 400px;
 }
 
 .page h1 {

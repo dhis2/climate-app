@@ -1,8 +1,13 @@
-import { era5HeatDaily } from '../../../data/datasets.js'
+import {
+    era5HeatDaily,
+    getResolutionText,
+} from '../../../data/earth-engine-datasets.js'
 import useAppSettings from '../../../hooks/useAppSettings.js'
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
 import exploreStore from '../../../store/exploreStore.js'
+import { useDataSources } from '../../DataSourcesProvider.jsx'
 import DataLoader from '../../shared/DataLoader.jsx'
+import { GEETokenWarning } from '../../shared/GEETokenWarning.jsx'
 import OpenAsMapButton from '../../shared/OpenAsMapButton.jsx'
 import Resolution from '../../shared/Resolution.jsx'
 import Chart from '../Chart.jsx'
@@ -15,6 +20,7 @@ const HeatDaily = () => {
     const orgUnit = exploreStore((state) => state.orgUnit)
     const period = exploreStore((state) => state.dailyPeriod)
     const { settings } = useAppSettings()
+    const { gee } = useDataSources()
 
     const data = useEarthEngineTimeSeries({
         dataset: era5HeatDaily,
@@ -23,10 +29,13 @@ const HeatDaily = () => {
     })
     const lastPeriod = data?.[data.length - 1]
 
-    return (
-        <>
-            <PeriodTypeSelect />
-            {data && settings ? (
+    const getContent = () => {
+        if (!gee.enabled) {
+            return <GEETokenWarning />
+        }
+
+        if (data && settings) {
+            return (
                 <Chart
                     config={getDailyConfig(
                         orgUnit.properties.name,
@@ -34,12 +43,21 @@ const HeatDaily = () => {
                         settings
                     )}
                 />
-            ) : (
-                <DataLoader />
-            )}
-            <DailyPeriodSelect />
+            )
+        }
+
+        return <DataLoader />
+    }
+
+    return (
+        <>
+            <PeriodTypeSelect />
+            {getContent()}
+            <DailyPeriodSelect disabled={!gee.enabled} />
             <HeatDescription />
-            <Resolution resolution={era5HeatDaily.resolution} />
+            <Resolution
+                resolution={getResolutionText(era5HeatDaily.resolution)}
+            />
             <OpenAsMapButton
                 dataset={'heatDaily'}
                 period={lastPeriod}

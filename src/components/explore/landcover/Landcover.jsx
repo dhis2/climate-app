@@ -2,10 +2,12 @@ import {
     LANDCOVER_RESOLUTION,
     getResolutionText,
     landcoverDescription,
-} from '../../../data/datasets.js'
+} from '../../../data/earth-engine-datasets.js'
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
 import exploreStore from '../../../store/exploreStore.js'
+import { useDataSources } from '../../DataSourcesProvider.jsx'
 import DataLoader from '../../shared/DataLoader.jsx'
+import { GEETokenWarning } from '../../shared/GEETokenWarning.jsx'
 import OpenAsMapButton from '../../shared/OpenAsMapButton.jsx'
 import Resolution from '../../shared/Resolution.jsx'
 import Chart from '../Chart.jsx'
@@ -30,6 +32,11 @@ const Landcover = () => {
     const feature = exploreStore((state) => state.orgUnit)
     const type = exploreStore((state) => state.landcoverType)
     const data = useEarthEngineTimeSeries({ dataset, period, feature })
+    const { gee } = useDataSources()
+
+    if (!gee.enabled) {
+        return <GEETokenWarning />
+    }
     const lastPeriod = data?.[data.length - 1]
 
     if (!data) {

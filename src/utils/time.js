@@ -13,6 +13,8 @@ export const MONTHLY = 'MONTHLY'
 export const SIXTEEN_DAYS = 'SIXTEEN_DAYS'
 export const YEARLY = 'YEARLY'
 
+export const UTC_TIME_ZONE = 'Etc/UTC'
+
 export const oneDayInMs = 1000 * 60 * 60 * 24
 
 export const getPeriodTypes = () => [
@@ -160,14 +162,39 @@ export const getDefaultMonthlyPeriod = (lagDays) => {
 /**
  * Returns the default import data period
  * @param {String} calendar Calendar used
+ * @param {String} periodType Period type (DAILY, WEEKLY, MONTHLY, YEARLY)
  * @returns {Object} Default import data period with calendar date strings
  */
-export const getDefaultImportPeriod = (calendar) => ({
-    periodType: DAILY,
-    startTime: getCalendarDate(calendar, { months: -7 }),
-    endTime: getCalendarDate(calendar, { months: -1 }),
+export const getDefaultImportPeriod = ({
     calendar,
-})
+    periodType = DAILY,
+    period,
+}) => {
+    if (periodType === YEARLY) {
+        const startTime =
+            period ||
+            extractYear(getCalendarDate(calendar, { years: -2 })).toString()
+        const endTime =
+            period ||
+            extractYear(getCalendarDate(calendar, { years: -1 })).toString()
+
+        return {
+            periodType,
+            startTime,
+            endTime,
+            calendar,
+        }
+    }
+
+    const startMonthsBack = periodType === MONTHLY ? 12 : 6
+
+    return {
+        periodType,
+        startTime: getCalendarDate(calendar, { months: -startMonthsBack }),
+        endTime: getCalendarDate(calendar, { months: -1 }),
+        calendar,
+    }
+}
 
 /**
  * Returns the default explore data period (12 months back)
