@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-23T11:06:07.919Z\n"
-"PO-Revision-Date: 2026-01-23T11:06:07.919Z\n"
+"POT-Creation-Date: 2026-01-23T12:45:10.232Z\n"
+"PO-Revision-Date: 2026-01-23T12:45:10.233Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -1094,6 +1094,15 @@ msgstr "You need access to Google Earth Engine to explore this data."
 
 msgid "How to get access?"
 msgstr "How to get access?"
+
+msgid "Install Maps app v101.5.0 or higher to enable this feature."
+msgstr "Install Maps app v101.5.0 or higher to enable this feature."
+
+msgid "Latest period will be selected."
+msgstr "Latest period will be selected."
+
+msgid "Open as Map"
+msgstr "Open as Map"
 
 msgid ""
 "For a temporary period there is limited data available for 2024. This is "

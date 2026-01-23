@@ -1,7 +1,8 @@
 import { useConfig } from '@dhis2/app-runtime'
 import { useSetting } from '@dhis2/app-service-datastore'
+import i18n from '@dhis2/d2-i18n'
 import { createFixedPeriodFromPeriodId } from '@dhis2/multi-calendar-dates'
-import { Button, IconLaunch16 } from '@dhis2/ui'
+import { Button, IconLaunch16, Tooltip } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import React from 'react'
 import useAppVersion from '../../hooks/useAppVersion.js'
@@ -90,8 +91,9 @@ const OpenAsMapButton = ({ dataset, period = THIS_YEAR, feature, loading }) => {
                 </Button>
                 {!loadingVersion && !meetsVersion && (
                     <span className={styles.text}>
-                        Install Maps app v101.5.0 or higher to enable this
-                        feature.
+                        {i18n.t(
+                            'Install Maps app v101.5.0 or higher to enable this feature.'
+                        )}
                     </span>
                 )}
             </div>
@@ -169,10 +171,12 @@ const OpenAsMapButton = ({ dataset, period = THIS_YEAR, feature, loading }) => {
 
     return (
         <div className={styles.container}>
-            <Button onClick={handleOpenAsMapClick} primary>
-                Open as Map&nbsp;
-                <IconLaunch16 />
-            </Button>
+            <Tooltip content={i18n.t('Latest period will be selected.')}>
+                <Button onClick={handleOpenAsMapClick} primary>
+                    {i18n.t('Open as Map')}&nbsp;
+                    <IconLaunch16 />
+                </Button>
+            </Tooltip>
         </div>
     )
 }
