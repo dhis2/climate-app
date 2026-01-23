@@ -11,47 +11,8 @@ This app allows you to explore and import climate/weather data into DHIS2.
 ### Data Sources
 
 -   **ERA5-Land**: By default, the app uses ERA5-Land, a highly accurate and complete global climate dataset.
--   **ENACTS**: If ENACTS is configured (see Admin Documentation), the app can also use ENACTS DST as a data source for local climate data.
 
 > ![Screenshot](public/images/explore.png)
-
----
-
-## Admin Documentation
-
-### ENACTS Setup Instructions
-
-The ENACTS API is made available to this app using a DHIS2 route. To set up ENACTS integration, follow these steps:
-
-1. **Follow the [DHIS2 Routes documentation](https://docs.dhis2.org/en/develop/using-the-api/dhis-core-version-master/route.html)** to set up the route. Make sure to use the documentation specific to your DHIS2 version, as there are some differences between versions.
-
-2. **Route configuration fields:**
-
-    - The following fields must be set in the route configuration. Note that the `code` must be `enacts`.
-    - **name**: Choose a name that indicates this route is to ENACTS DST
-    - **code**: `enacts`
-    - **url**: The URL where your ENACTS DST is hosted. You must append `/**` to the URL.
-    - **headers**:
-        - `Content-Type`: `application/json`
-        - `X-API-Key`: _Your ENACTS API key here_
-    - **disabled**: `false`
-
-3. **Example configuration:**
-
-```json
-{
-    "name": "ENACTS API",
-    "code": "enacts",
-    "url": "https://your-enacts-dst-url/**",
-    "headers": {
-        "Content-Type": "application/json",
-        "X-API-Key": "Your enacts api key here"
-    },
-    "disabled": false
-}
-```
-
-After configuring the route, the ENACTS API will be available for use in the Climate app.
 
 ---
 
