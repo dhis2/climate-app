@@ -66,21 +66,31 @@ const DataSourcesProvider = ({ children }) => {
             })
     }, [tokenPromise, hasGeeToken])
 
-    const data = {
-        [PROVIDER_GEE]: {
-            ...geeProvider,
-            enabled: hasGeeToken,
-            loading: hasGeeToken === null,
-        },
-        [PROVIDER_ENACTS]: {
-            ...enactsProvider,
-            enabled: enactsInfo?.enabled || false,
-            loading: routesLoading || enactsInfoLoading,
-            route: enactsRoute,
-            info: enactsInfo,
-            error: enactsInfoError,
-        },
-    }
+    const data = useMemo(
+        () => ({
+            [PROVIDER_GEE]: {
+                ...geeProvider,
+                enabled: hasGeeToken,
+                loading: hasGeeToken === null,
+            },
+            [PROVIDER_ENACTS]: {
+                ...enactsProvider,
+                enabled: enactsInfo?.enabled || false,
+                loading: routesLoading || enactsInfoLoading,
+                route: enactsRoute,
+                info: enactsInfo,
+                error: enactsInfoError,
+            },
+        }),
+        [
+            hasGeeToken,
+            enactsInfo,
+            enactsInfoError,
+            routesLoading,
+            enactsInfoLoading,
+            enactsRoute,
+        ]
+    )
 
     if (!routesLoading && !routesError && !eroute) {
         console.warn(

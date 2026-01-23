@@ -115,14 +115,14 @@ const Period = ({
 
     let helpText
     if (dataset.timeZone || dataset.bands?.[0]?.timeZone) {
-        if (timeZone !== UTC_TIME_ZONE) {
+        if (timeZone === UTC_TIME_ZONE) {
             helpText = i18n.t(
-                '{{periodTypeName}} data between start and end date will be calculated from hourly data, with time zone adjustments applied if the selected time zone is not set to UTC.',
+                '{{periodTypeName}} data between start and end date will be calculated from hourly data.',
                 { periodTypeName, nsSeparator: ';' }
             )
         } else {
             helpText = i18n.t(
-                '{{periodTypeName}} data between start and end date will be calculated from hourly data.',
+                '{{periodTypeName}} data between start and end date will be calculated from hourly data, with time zone adjustments applied if the selected time zone is not set to UTC.',
                 { periodTypeName, nsSeparator: ';' }
             )
         }

@@ -171,12 +171,12 @@ export const getDefaultImportPeriod = ({
     period,
 }) => {
     if (periodType === YEARLY) {
-        const startTime = period
-            ? period
-            : extractYear(getCalendarDate(calendar, { years: -2 })).toString()
-        const endTime = period
-            ? period
-            : extractYear(getCalendarDate(calendar, { years: -1 })).toString()
+        const startTime =
+            period ||
+            extractYear(getCalendarDate(calendar, { years: -2 })).toString()
+        const endTime =
+            period ||
+            extractYear(getCalendarDate(calendar, { years: -1 })).toString()
 
         return {
             periodType,

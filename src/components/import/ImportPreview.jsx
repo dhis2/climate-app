@@ -37,8 +37,14 @@ const ImportPreview = ({
     const { parent: orgUnitParent, levelName: orgLevelName, level } = orgUnits
 
     const orgUnitInfo =
-        orgUnitParent.level !== Number(level)
-            ? i18n.t(
+        orgUnitParent.level === Number(level)
+            ? i18n.t('For {{orgUnitParent}} {{orgLevelName}}', {
+                  orgUnitParent:
+                      orgUnitParent.displayName || orgUnitParent.name,
+                  orgLevelName: orgLevelName.toLowerCase(),
+                  interpolation: { escapeValue: false },
+              })
+            : i18n.t(
                   'For all organisation units at {{orgLevelName}} level within {{orgUnitParent}}',
                   {
                       orgLevelName: orgLevelName.toLowerCase(),
@@ -47,12 +53,6 @@ const ImportPreview = ({
                       interpolation: { escapeValue: false },
                   }
               )
-            : i18n.t('For {{orgUnitParent}} {{orgLevelName}}', {
-                  orgUnitParent:
-                      orgUnitParent.displayName || orgUnitParent.name,
-                  orgLevelName: orgLevelName.toLowerCase(),
-                  interpolation: { escapeValue: false },
-              })
 
     return (
         <div data-test="import-preview">
