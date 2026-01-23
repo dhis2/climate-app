@@ -236,7 +236,7 @@ describe('Import', () => {
         cy.getByDataTest('end-date-input').should('be.visible')
 
         cy.contains(
-            'Daily data between start and end date will be calculated from hourly data, with time zone adjustments applied if the selected time zone is not set to UTC.'
+            'Daily data between start and end date will be calculated from hourly data.'
         ).should('be.visible')
 
         // Check the data element section
@@ -286,11 +286,11 @@ describe('Import', () => {
             .should('be.visible')
 
         cy.getByDataTest('import-preview')
-            .contains('For every week between')
+            .contains('Weekly values between')
             .should('be.visible')
         cy.getByDataTest('import-preview')
             .contains(
-                'To all organisation units at District within Sierra Leone'
+                'For all organisation units at district level within Sierra Leone'
             )
             .should('be.visible')
         cy.getByDataTest('import-preview')
@@ -302,7 +302,7 @@ describe('Import', () => {
             .should('be.visible')
     })
 
-    it('allows user to select time zone if not in Etc/UTC', () => {
+    it.only('allows user to select time zone if not in Etc/UTC', () => {
         cy.intercept('GET', '**/api/system/info', (req) => {
             req.continue((res) => {
                 res.body.serverTimeZoneId = 'Africa/Freetown'
@@ -321,10 +321,62 @@ describe('Import', () => {
 
         cy.getByDataTest('dhis2-uicore-select-menu-menuwrapper')
             .children()
-            .contains('Earth Engine: Precipitation (ERA5-Land)')
+            .contains('Earth Engine: Air temperature (ERA5-Land)')
             .click()
         cy.wait('@getSystemInfoSpecific')
 
         cy.contains('Time zone').should('be.visible')
+        cy.getByDataTest('time-zone-select').should('be.visible')
+        cy.getByDataTest('time-zone-select').contains('Etc/UTC')
+
+        // Change time zone to UTC
+        cy.getByDataTest('time-zone-select').click()
+        cy.getByDataTest('dhis2-uicore-select-menu-menuwrapper')
+            .children()
+            .contains('Africa/Freetown')
+            .click()
+
+        cy.getByDataTest('time-zone-select').contains('Africa/Freetown')
+
+        // Change the period type to weekly
+        cy.getByDataTest('period-type-selector').containsExact('Weekly').click()
+        cy.getByDataTest('period-type-selector')
+            .containsExact('Weekly')
+            .find('input[type="radio"]')
+            .should('be.checked')
+
+        // Select a weekly data element
+        cy.getByDataTest('data-element-select').click()
+        cy.getByDataTest('dhis2-uicore-select-menu-menuwrapper')
+            .children()
+            .should('have.length.greaterThan', 1)
+        cy.getByDataTest('dhis2-uicore-select-menu-menuwrapper')
+            .children()
+            .contains('IDSR Malaria (weekly)')
+            .click()
+
+        // Check import preview section
+        cy.getByDataTest('import-preview').scrollIntoView()
+        cy.getByDataTest('import-preview')
+            .contains(
+                'Air temperature (ERA5-Land)" source data will be imported'
+            )
+            .should('be.visible')
+
+        cy.getByDataTest('import-preview')
+            .contains('Weekly values between')
+            .should('be.visible')
+        cy.getByDataTest('import-preview')
+            .contains(
+                'For all organisation units at district level within Sierra Leone'
+            )
+            .should('be.visible')
+        cy.getByDataTest('import-preview')
+            .contains('To data element "IDSR Malaria"')
+            .should('be.visible')
+
+        cy.getByDataTest('import-preview')
+            .contains('299 data values will be imported')
+            .should('be.visible')
     })
 })

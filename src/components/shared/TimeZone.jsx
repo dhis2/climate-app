@@ -33,6 +33,7 @@ const TimeZone = ({ period, onChange }) => {
                     timeZone: selected !== UTC_TIME_ZONE ? selected : undefined,
                 })
             }
+            dataTest={'time-zone-select'}
         >
             <SingleSelectOption value={timeZone} label={timeZone} />
             <SingleSelectOption value={UTC_TIME_ZONE} label={UTC_TIME_ZONE} />
