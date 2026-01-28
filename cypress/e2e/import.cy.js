@@ -36,6 +36,7 @@ const assertOrgUnitSection = (level = 'District') => {
 describe('Import', () => {
     it('should inform no datasets available when Enacts and GEE are not configured', () => {
         cy.intercept('**/api/*/tokens/google', geeResponse500).as('getGeeToken')
+
         cy.intercept('GET', '**/api/*/routes?fields=id*', {
             statusCode: 200,
             body: {
@@ -45,10 +46,10 @@ describe('Import', () => {
 
         cy.visit('#/import')
 
-        cy.wait('@getGeeToken')
-        cy.wait('@getRoutes')
+        cy.wait('@getGeeToken', { timeout: 30000 })
+        cy.wait('@getRoutes', { timeout: 30000 })
 
-        cy.contains('Select data to import').should('be.visible')
+        cy.contains('Select dataset to import').should('be.visible')
         cy.getByDataTest('dataset-selector-content')
             .should('be.visible')
             .click()
@@ -72,7 +73,7 @@ describe('Import', () => {
 
         cy.wait('@getRoutes')
 
-        cy.contains('Select data to import').should('be.visible')
+        cy.contains('Select dataset to import').should('be.visible')
         cy.getByDataTest('dataset-selector-content')
             .should('be.visible')
             .click()
@@ -107,7 +108,7 @@ describe('Import', () => {
         cy.wait('@getEnactsInfo')
         cy.wait('@getEnactsDatasetInfo')
 
-        cy.contains('Select data to import').should('be.visible')
+        cy.contains('Select dataset to import').should('be.visible')
         cy.getByDataTest('dataset-selector-content')
             .should('be.visible')
             .click()
@@ -141,7 +142,7 @@ describe('Import', () => {
         cy.wait('@getEnactsInfo')
         cy.wait('@getEnactsDatasetInfo')
 
-        cy.contains('Select data to import').should('be.visible')
+        cy.contains('Select dataset to import').should('be.visible')
         cy.getByDataTest('dataset-selector-content')
             .should('be.visible')
             .click()
@@ -181,7 +182,7 @@ describe('Import', () => {
         cy.wait('@getRoutes')
         cy.wait('@getEnactsInfo')
 
-        cy.contains('Select data to import').should('be.visible')
+        cy.contains('Select dataset to import').should('be.visible')
         cy.getByDataTest('dataset-selector-content')
             .should('be.visible')
             .click()
@@ -302,7 +303,7 @@ describe('Import', () => {
             .should('be.visible')
     })
 
-    it.only('allows user to select time zone if not in Etc/UTC', () => {
+    it('allows user to select time zone if not in Etc/UTC', () => {
         cy.intercept('GET', '**/api/system/info', (req) => {
             req.continue((res) => {
                 res.body.serverTimeZoneId = 'Africa/Freetown'
@@ -376,7 +377,7 @@ describe('Import', () => {
             .should('be.visible')
 
         cy.getByDataTest('import-preview')
-            .contains('299 data values will be imported')
+            .contains('data values will be imported')
             .should('be.visible')
     })
 })

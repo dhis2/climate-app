@@ -34,10 +34,10 @@ describe('Smoke test', () => {
             expect(loc.hash).to.eq('#/setup')
         })
         cy.get('h1')
-            .contains('Configuring DHIS2 before importing data')
+            .contains('Configure DHIS2 in order to import data')
             .scrollIntoView()
         cy.get('h1')
-            .contains('Configuring DHIS2 before importing data')
+            .contains('Configure DHIS2 in order to import data')
             .should('be.visible')
         cy.getByDataTest('dataset-selector').should('be.visible')
 
