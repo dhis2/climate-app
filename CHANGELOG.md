@@ -1,3 +1,10 @@
+# [1.13.0](https://github.com/dhis2/climate-app/compare/v1.12.4...v1.13.0) (2026-01-30)
+
+
+### Features
+
+* import page improvements and ability to open explore visualizations in maps ([7223efe](https://github.com/dhis2/climate-app/commit/7223efe10aebc6be4f19cea56a63b30f7d420565))
+
 ## [1.12.4](https://github.com/dhis2/climate-app/compare/v1.12.3...v1.12.4) (2026-01-18)
 
 
