@@ -13,9 +13,11 @@ import {
 } from './time.js'
 
 const VALUE_LIMIT = 5000
+const DEFAULT_SCALE = 1000
 
 // Returns the linear scale in meters of the units of this projection
-export const getScale = (image) => image.select(0).projection().nominalScale()
+export const getScale = (image) =>
+    image.select(0).projection().nominalScale().min(DEFAULT_SCALE)
 
 // Makes evaluate a promise
 export const getInfo = (instance) =>
