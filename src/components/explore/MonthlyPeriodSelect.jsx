@@ -1,5 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
+import propTypes from 'prop-types'
 import { useState } from 'react'
 import exploreStore from '../../store/exploreStore.js'
 import { getNumberOfMonths } from '../../utils/time.js'
@@ -8,7 +9,7 @@ import styles from './styles/Period.module.css'
 
 const maxMonths = 60
 
-const MonthlyPeriodSelect = () => {
+const MonthlyPeriodSelect = ({ disabled = false }) => {
     const { monthlyPeriod, setMonthlyPeriod } = exploreStore()
     const [period, setPeriod] = useState(monthlyPeriod)
 
@@ -31,10 +32,10 @@ const MonthlyPeriodSelect = () => {
                     onChange={(endTime) => setPeriod({ ...period, endTime })}
                 />
                 <Button
-                    disabled={months > maxMonths}
+                    disabled={months > maxMonths || disabled}
                     onClick={() => setMonthlyPeriod(period)}
                 >
-                    Update
+                    {i18n.t('Update')}
                 </Button>
             </div>
             {months > maxMonths && (
@@ -46,6 +47,10 @@ const MonthlyPeriodSelect = () => {
             )}
         </div>
     )
+}
+
+MonthlyPeriodSelect.propTypes = {
+    disabled: propTypes.bool,
 }
 
 export default MonthlyPeriodSelect

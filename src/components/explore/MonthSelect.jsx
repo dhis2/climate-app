@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
 import exploreStore from '../../store/exploreStore.js'
 
-export const months = [
+export const getMonths = () => [
     {
         id: 1,
         name: i18n.t('January'),
@@ -62,7 +62,7 @@ const MonthSelect = () => {
             selected={String(month)}
             onChange={({ selected }) => setMonth(Number(selected))}
         >
-            {months.map((d) => (
+            {getMonths().map((d) => (
                 <SingleSelectOption
                     key={d.id}
                     value={String(d.id)}

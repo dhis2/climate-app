@@ -1,5 +1,11 @@
+.subheader {
+    font-size: 14px;
+    font-weight: 500;
+    margin-block: var(--spacers-dp16) var(--spacers-dp8);
+}
+
 .warning {
-    padding-top: 16px;
+    padding-block-start: var(--spacers-dp16);
     font-size: 14px;
     color: red;
 }

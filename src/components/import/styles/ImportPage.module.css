@@ -1,6 +1,8 @@
 .page {
-    margin-right: 24px;
-    margin-bottom: 30px;
+    margin-block-end: 24px;
+    margin-inline-end: 24px;
+    max-inline-size: 800px;
+    min-inline-size: 400px;
 }
 
 .page h1 {
@@ -9,18 +11,15 @@
     font-weight: 500;
 }
 
-.page h2 {
-    font-size: 16px;
-    margin: 20px 0 8px;
-}
-
 .page p {
     font-size: 14px;
-    margin: 6px 0 12px;
+    line-height: 18px;
 }
 
 .container {
-    padding: 0 20px 20px 20px;
+    padding-block-end: 20px;
+    padding-inline: 20px;
+    padding-block-start: 0;
     background-color: #fff;
     border: 1px solid #ccc;
 }
@@ -48,5 +47,21 @@
 .warning {
     color: red;
     font-size: 14px;
-    margin-top: 6px;
+    margin-block-start: var(--spacers-dp8);
+    margin-block-end: var(--spacers-dp8);
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp16);
+}
+
+.formSection {
+    padding: var(--spacers-dp16);
+    background-color: var(--colors-grey050);
 }

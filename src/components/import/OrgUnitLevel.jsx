@@ -1,4 +1,3 @@
-import i18n from '@dhis2/d2-i18n'
 import { SingleSelectField, SingleSelectOption } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import { useEffect } from 'react'
@@ -10,25 +9,32 @@ const OrgUnitLevel = ({ level, onChange }) => {
     // Set second level as default
     useEffect(() => {
         if (levels?.length > 1 && !level) {
-            onChange(String(levels[1].level))
+            onChange({ level: String(levels[1].level), name: levels[1].name })
         }
     }, [levels, level, onChange])
 
     return levels ? (
         <div>
-            <h2>{i18n.t('Organisation unit level')}</h2>
             <SingleSelectField
-                label={i18n.t('Organisation unit level to import data to')}
                 selected={level}
                 loading={loading}
                 error={!!error}
                 validationText={error?.message}
-                onChange={({ selected }) => onChange(selected)}
+                onChange={({ selected }) => {
+                    const name = levels.find(
+                        (l) => String(l.level) === selected
+                    )?.name
+                    return onChange({
+                        level: selected,
+                        name,
+                    })
+                }}
+                dataTest="org-unit-level-select"
             >
-                {levels.map((l, i) => (
+                {levels.map((l) => (
                     <SingleSelectOption
                         key={l.id}
-                        value={String(i + 1)}
+                        value={String(l.level)}
                         label={l.name}
                     />
                 ))}
