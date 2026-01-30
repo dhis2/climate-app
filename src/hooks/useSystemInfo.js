@@ -1,6 +1,5 @@
 import { useDataQuery } from '@dhis2/app-runtime'
 
-// TODO: Check if user has necessary authorities
 const SYSTEM_QUERY = {
     currentUser: {
         resource: 'me',

@@ -1,18 +1,15 @@
+import { useConfig } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import useAppSettings from '../../hooks/useAppSettings.js'
 import ChartSettings from './ChartSettings.jsx'
+import DataProviderList from './DataProviderList.jsx'
 import StartPageSelect from './StartPageSelect.jsx'
 import styles from './styles/SettingsPage.module.css'
 import TimeZoneSelect from './TimeZoneSelect.jsx'
 
 const SettingsPage = () => {
     const { settings, changeSetting } = useAppSettings()
-
-    if (!settings) {
-        return null
-    }
-
-    const { startPage, timeZone } = settings
+    const { serverVersion } = useConfig() // VERSION_TOGGLE
 
     return (
         <div className={styles.container}>
@@ -22,8 +19,20 @@ const SettingsPage = () => {
                     'Changes made below will apply to all users of this app.'
                 )}
             </p>
-            <StartPageSelect startPage={startPage} onChange={changeSetting} />
-            <TimeZoneSelect timeZone={timeZone} onChange={changeSetting} />
+            {serverVersion.minor > 39 && <DataProviderList />}
+            <h2>{i18n.t('General settings')}</h2>
+            {settings && (
+                <>
+                    <StartPageSelect
+                        startPage={settings.startPage}
+                        onChange={changeSetting}
+                    />
+                    <TimeZoneSelect
+                        timeZone={settings.timeZone}
+                        onChange={changeSetting}
+                    />
+                </>
+            )}
             <ChartSettings />
         </div>
     )

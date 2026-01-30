@@ -1,12 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
-import GEETokenCheck from './shared/GEETokenCheck.jsx'
 import styles from './styles/AboutPage.module.css'
 
-// TODO: How to combine links and i18n.t?
 const AboutPage = () => (
     <div className={styles.container}>
         <h1>{i18n.t('About this app')}</h1>
-        <GEETokenCheck />
         <p>
             {i18n.t(
                 'This pilot app is part of the ongoing “DHIS2 for Climate“ project. It will get frequent updates, so please make sure you have the latest version from the DHIS2 App Hub. The app is developed by the University of Oslo, but it is not a DHIS2 core app. Useful parts of this app might be incorporated into the DHIS2 core in the future, based on your feedback.'

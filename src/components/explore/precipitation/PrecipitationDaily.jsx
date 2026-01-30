@@ -1,8 +1,14 @@
-import { era5Daily } from '../../../data/datasets.js'
+import {
+    era5Daily,
+    getResolutionText,
+} from '../../../data/earth-engine-datasets.js'
 import useAppSettings from '../../../hooks/useAppSettings.js'
 import useEarthEngineTimeSeries from '../../../hooks/useEarthEngineTimeSeries.js'
 import exploreStore from '../../../store/exploreStore.js'
+import { useDataSources } from '../../DataSourcesProvider.jsx'
 import DataLoader from '../../shared/DataLoader.jsx'
+import { GEETokenWarning } from '../../shared/GEETokenWarning.jsx'
+import OpenAsMapButton from '../../shared/OpenAsMapButton.jsx'
 import Resolution from '../../shared/Resolution.jsx'
 import Chart from '../Chart.jsx'
 import DailyPeriodSelect from '../DailyPeriodSelect.jsx'
@@ -13,17 +19,22 @@ const PrecipitationDaily = () => {
     const orgUnit = exploreStore((state) => state.orgUnit)
     const period = exploreStore((state) => state.dailyPeriod)
     const { settings } = useAppSettings()
+    const { gee } = useDataSources()
 
     const data = useEarthEngineTimeSeries({
         dataset: era5Daily,
         period,
         feature: orgUnit,
     })
+    const lastPeriod = data?.[data.length - 1]
 
-    return (
-        <>
-            <PeriodTypeSelect />
-            {data && settings ? (
+    const getContent = () => {
+        if (!gee.enabled) {
+            return <GEETokenWarning />
+        }
+
+        if (data && settings) {
+            return (
                 <Chart
                     config={getDailyConfig(
                         orgUnit.properties.name,
@@ -31,11 +42,24 @@ const PrecipitationDaily = () => {
                         settings
                     )}
                 />
-            ) : (
-                <DataLoader />
-            )}
-            <DailyPeriodSelect />
-            <Resolution resolution={era5Daily.resolution} />
+            )
+        }
+
+        return <DataLoader />
+    }
+
+    return (
+        <>
+            <PeriodTypeSelect />
+            {getContent()}
+            <DailyPeriodSelect disabled={!gee.enabled} />
+            <Resolution resolution={getResolutionText(era5Daily.resolution)} />
+            <OpenAsMapButton
+                dataset={'precipitationDaily'}
+                period={lastPeriod}
+                feature={orgUnit}
+                loading={!lastPeriod}
+            />
         </>
     )
 }

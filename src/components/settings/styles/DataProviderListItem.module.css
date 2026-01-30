@@ -1,0 +1,40 @@
+.dataProviderStatusDiv {
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    gap: 5px;
+}
+
+.dataProviderStatusIcon {
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+}
+
+.dataProviderOnline {
+    background-color: green;
+}
+
+.dataProviderOffline {
+    background-color: red;
+}
+
+.dataProviderMissing {
+    background-color: gray;
+}
+
+.buttons {
+    justify-content: end;
+}
+
+.infoButton {
+    border: none;
+    background: none;
+    color: #4a5768;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.infoButton:hover {
+    color: #6c7787;
+}

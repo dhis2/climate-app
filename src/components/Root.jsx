@@ -7,8 +7,8 @@ import CheckOrgUnitTree from './check/OrgUnitTree.jsx'
 import OrgUnitTree from './explore/OrgUnitTree.jsx'
 import styles from './styles/Root.module.css'
 
-export const appPages = [
-    { path: '/', name: i18n.t('Home') },
+export const getAppPages = () => [
+    { path: '/home', name: i18n.t('Home') },
     { path: '/explore', name: i18n.t('Explore data') },
     { path: '/import', name: i18n.t('Import data') },
     { path: '/setup', name: i18n.t('Setup guide') },
@@ -23,6 +23,8 @@ const Root = () => {
     useEffect(() => {
         if (pathname === '/' && settings?.startPage) {
             navigate(settings.startPage)
+        } else if (pathname === '/') {
+            navigate('/home')
         }
     }, [settings, pathname, navigate])
 
@@ -31,18 +33,21 @@ const Root = () => {
             <CssReset />
             <CssVariables spacers colors />
             <div className={styles.container}>
-                <div className={styles.sidebar}>
+                <div className={styles.sidebar} data-test="sidebar">
                     <Menu>
-                        {appPages.map(({ path, name }) => (
+                        {getAppPages().map(({ path, name }) => (
                             <Fragment key={path}>
                                 <MenuItem
                                     label={name}
-                                    href={`#${path}`}
+                                    onClick={() => navigate(path)}
                                     active={
                                         pathname === path ||
                                         (path !== '/' &&
                                             pathname.startsWith(path))
                                     }
+                                    dataTest={`${name
+                                        .toLowerCase()
+                                        .replaceAll(/\s+/g, '-')}-menu-item`}
                                 />
                                 {path === '/explore' &&
                                     pathname.startsWith('/explore') && (
