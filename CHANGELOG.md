@@ -1,3 +1,10 @@
+## [1.13.1](https://github.com/dhis2/climate-app/compare/v1.13.0...v1.13.1) (2026-02-01)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (main) ([a67ac35](https://github.com/dhis2/climate-app/commit/a67ac35b6f38f3a58208364790ad9b28256d4cc7))
+
 # [1.13.0](https://github.com/dhis2/climate-app/compare/v1.12.4...v1.13.0) (2026-01-30)
 
 
