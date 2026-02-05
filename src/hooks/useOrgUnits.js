@@ -1,5 +1,5 @@
 import { useDataQuery } from '@dhis2/app-runtime'
-import { useState } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { toGeoJson } from '../utils/toGeoJson.js'
 import useSystemInfo from './useSystemInfo.js'
 
@@ -36,15 +36,13 @@ const useOrgUnits = ({
     const keyAnalysisDisplayProperty =
         system?.currentUser?.settings?.keyAnalysisDisplayProperty
 
-    const orgUnitIds = orgUnits.map((item) => item.id)
+    const orgUnitIds = useMemo(
+        () => orgUnits.map((item) => item.id),
+        [orgUnits]
+    )
 
-    const { error, loading } = useDataQuery(GEOFEATURES_QUERY, {
-        lazy: !userId || !keyAnalysisDisplayProperty,
-        variables: {
-            orgUnitIds,
-            keyAnalysisDisplayProperty,
-            userId,
-        },
+    const { error, loading, refetch } = useDataQuery(GEOFEATURES_QUERY, {
+        lazy: true,
         onComplete: (data) => {
             setCount(data.geoFeatures.length)
             if (!skipFeatures) {
@@ -52,6 +50,20 @@ const useOrgUnits = ({
             }
         },
     })
+
+    useEffect(() => {
+        if (userId && keyAnalysisDisplayProperty && orgUnitIds.length > 0) {
+            refetch({
+                orgUnitIds,
+                keyAnalysisDisplayProperty,
+                userId,
+            })
+        } else {
+            // Reset when conditions aren't met
+            setCount(0)
+            setFeatures(undefined)
+        }
+    }, [userId, keyAnalysisDisplayProperty, orgUnitIds, refetch, skipFeatures])
 
     return {
         features,

@@ -20,17 +20,13 @@ const getRoutesFixture = () => ({
     ],
 })
 
-const assertOrgUnitSection = (level = 'District') => {
+const assertOrgUnitSection = () => {
     cy.contains('Select organisation unit and level').scrollIntoView()
     cy.contains('Select organisation unit and level').should('be.visible')
-    cy.getByDataTest('dhis2-uiwidgets-orgunittree-node').should('be.visible')
-    cy.contains('Bombali').should('be.visible')
-    cy.contains('Organisation unit level').scrollIntoView()
-    cy.contains('Organisation unit level').should('be.visible')
-    cy.getByDataTest('org-unit-level-select').scrollIntoView()
-    cy.getByDataTest('org-unit-level-select')
-        .contains(level)
-        .should('be.visible')
+    cy.contains('Parent organisation unit').should('be.visible')
+    cy.contains(
+        'All organisation units at the selected level within the parent org unit will be included'
+    ).should('be.visible')
 }
 
 describe('Import', () => {
@@ -290,9 +286,7 @@ describe('Import', () => {
             .contains('Weekly values between')
             .should('be.visible')
         cy.getByDataTest('import-preview')
-            .contains(
-                'For all organisation units at district level within Sierra Leone'
-            )
+            .contains('For 13 organisation units')
             .should('be.visible')
         cy.getByDataTest('import-preview')
             .contains('To data element "IDSR Malaria"')
@@ -368,9 +362,7 @@ describe('Import', () => {
             .contains('Weekly values between')
             .should('be.visible')
         cy.getByDataTest('import-preview')
-            .contains(
-                'For all organisation units at district level within Sierra Leone'
-            )
+            .contains('For 13 organisation units')
             .should('be.visible')
         cy.getByDataTest('import-preview')
             .contains('To data element "IDSR Malaria"')
