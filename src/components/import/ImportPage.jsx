@@ -100,12 +100,11 @@ const ImportPage = () => {
     const orgUnitCount = useOrgUnitCount(orgUnits)
     const periodCount = useMemo(() => getPeriods(period).length, [period])
     const valueCount = orgUnitCount * periodCount
-    const isValidOrgUnits = orgUnits && orgUnitCount > 0
 
     const isValid = !!(
         dataset &&
         isValidPeriod(standardPeriod) &&
-        isValidOrgUnits &&
+        orgUnitCount > 0 &&
         dataElement &&
         valueCount <= maxValues
     )
