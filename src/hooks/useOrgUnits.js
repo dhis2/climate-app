@@ -3,16 +3,6 @@ import { useState } from 'react'
 import { toGeoJson } from '../utils/toGeoJson.js'
 import useSystemInfo from './useSystemInfo.js'
 
-export const ORG_UNITS_QUERY = {
-    geojson: {
-        resource: 'organisationUnits.geojson',
-        params: ({ parent, level }) => ({
-            parent,
-            level,
-        }),
-    },
-}
-
 export const GEOFEATURES_QUERY = {
     geoFeatures: {
         resource: 'geoFeatures',
