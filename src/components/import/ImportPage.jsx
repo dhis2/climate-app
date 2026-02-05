@@ -87,18 +87,22 @@ const getPeriodRange = ({ calendar, periodType, range }) => {
     return { startTime, endTime }
 }
 
+const DEFAULT_ORG_UNITS = []
+
 const ImportPage = () => {
     const { systemInfo = {} } = useConfig()
     const { calendar = 'gregory' } = systemInfo
     const [dataset, setDataset] = useState()
     const [period, setPeriod] = useState(getDefaultImportPeriod({ calendar }))
-    const [orgUnits, setOrgUnits] = useState()
+    const [orgUnits, setOrgUnits] = useState(DEFAULT_ORG_UNITS)
     const [dataElement, setDataElement] = useState()
     const standardPeriod = getStandardPeriod(period) // ISO 8601 used by GEE
     const [startExtract, setStartExtract] = useState(false)
 
-    const { features } = useOrgUnits(orgUnits || [])
-    const orgUnitCount = features?.length || 0
+    const { count: orgUnitCount } = useOrgUnits({
+        orgUnits,
+        skipFeatures: true,
+    })
     const periodCount = useMemo(() => getPeriods(period).length, [period])
     const valueCount = orgUnitCount * periodCount
 
