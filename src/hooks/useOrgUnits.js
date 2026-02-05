@@ -1,5 +1,7 @@
 import { useDataQuery } from '@dhis2/app-runtime'
 import { useState } from 'react'
+import { toGeoJson } from '../utils/toGeoJson.js'
+import useSystemInfo from './useSystemInfo.js'
 
 export const ORG_UNITS_QUERY = {
     geojson: {
@@ -11,20 +13,43 @@ export const ORG_UNITS_QUERY = {
     },
 }
 
-const parseOrgUnits = (data) =>
-    data.geojson.features.map(({ type, id, geometry, properties }) => ({
-        type,
-        id,
-        properties: { id, name: properties.name },
-        geometry,
-    }))
+export const GEOFEATURES_QUERY = {
+    geoFeatures: {
+        resource: 'geoFeatures',
+        params: ({
+            orgUnitIds,
+            keyAnalysisDisplayProperty,
+            includeGroupSets,
+            coordinateField,
+            userId,
+        }) => ({
+            ou: `ou:${orgUnitIds.join(';')}`,
+            displayProperty: keyAnalysisDisplayProperty,
+            includeGroupSets,
+            coordinateField,
+            _: userId,
+        }),
+    },
+}
 
-const useOrgUnits = (parent, level) => {
+const useOrgUnits = (orgUnits) => {
     const [features, setFeatures] = useState()
+    const { system } = useSystemInfo()
 
-    const { loading, error } = useDataQuery(ORG_UNITS_QUERY, {
-        variables: { parent, level },
-        onComplete: (data) => setFeatures(parseOrgUnits(data)),
+    const userId = system?.currentUser?.id
+    const keyAnalysisDisplayProperty =
+        system?.currentUser?.settings?.keyAnalysisDisplayProperty
+
+    const orgUnitIds = orgUnits.map((item) => item.id)
+
+    const { error, loading } = useDataQuery(GEOFEATURES_QUERY, {
+        lazy: !userId || !keyAnalysisDisplayProperty,
+        variables: {
+            orgUnitIds,
+            keyAnalysisDisplayProperty,
+            userId,
+        },
+        onComplete: (data) => setFeatures(toGeoJson(data.geoFeatures)),
     })
 
     return {
