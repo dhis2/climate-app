@@ -2,7 +2,7 @@ import { useConfig } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
 import { useState, useMemo, useEffect, useCallback } from 'react'
-import useOrgUnitCount from '../../hooks/useOrgUnitCount.js'
+import useOrgUnits from '../../hooks/useOrgUnits.js'
 import {
     getDefaultImportPeriod,
     getStandardPeriod,
@@ -87,29 +87,29 @@ const getPeriodRange = ({ calendar, periodType, range }) => {
     return { startTime, endTime }
 }
 
+const DEFAULT_ORG_UNITS = []
+
 const ImportPage = () => {
     const { systemInfo = {} } = useConfig()
     const { calendar = 'gregory' } = systemInfo
     const [dataset, setDataset] = useState()
     const [period, setPeriod] = useState(getDefaultImportPeriod({ calendar }))
-    const [orgUnits, setOrgUnits] = useState()
+    const [orgUnits, setOrgUnits] = useState(DEFAULT_ORG_UNITS)
     const [dataElement, setDataElement] = useState()
     const standardPeriod = getStandardPeriod(period) // ISO 8601 used by GEE
     const [startExtract, setStartExtract] = useState(false)
 
-    const orgUnitCount = useOrgUnitCount(orgUnits?.parent?.id, orgUnits?.level)
+    const { count: orgUnitCount } = useOrgUnits({
+        orgUnits,
+        skipFeatures: true,
+    })
     const periodCount = useMemo(() => getPeriods(period).length, [period])
     const valueCount = orgUnitCount * periodCount
-
-    const isValidOrgUnits =
-        orgUnits?.parent &&
-        orgUnits.level &&
-        orgUnits.parent.path.split('/').length - 1 <= Number(orgUnits.level)
 
     const isValid = !!(
         dataset &&
         isValidPeriod(standardPeriod) &&
-        isValidOrgUnits &&
+        orgUnitCount > 0 &&
         dataElement &&
         valueCount <= maxValues
     )
@@ -239,8 +239,7 @@ const ImportPage = () => {
                             periodType={period.periodType || ''}
                             startDate={period.startTime || ''}
                             endDate={period.endTime || ''}
-                            calendar={calendar}
-                            orgUnits={orgUnits}
+                            orgUnitCount={orgUnitCount}
                             dataElement={dataElement.displayName || ''}
                             totalValues={valueCount}
                         />

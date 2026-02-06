@@ -1,34 +1,73 @@
 import { useDataQuery } from '@dhis2/app-runtime'
-import { useState } from 'react'
+import { useState, useEffect, useMemo } from 'react'
+import { toGeoJson } from '../utils/toGeoJson.js'
+import useSystemInfo from './useSystemInfo.js'
 
-export const ORG_UNITS_QUERY = {
-    geojson: {
-        resource: 'organisationUnits.geojson',
-        params: ({ parent, level }) => ({
-            parent,
-            level,
+export const GEOFEATURES_QUERY = {
+    geoFeatures: {
+        resource: 'geoFeatures',
+        params: ({
+            orgUnitIds,
+            keyAnalysisDisplayProperty,
+            includeGroupSets,
+            coordinateField,
+            userId,
+        }) => ({
+            ou: `ou:${orgUnitIds.join(';')}`,
+            displayProperty: keyAnalysisDisplayProperty,
+            includeGroupSets,
+            coordinateField,
+            _: userId,
         }),
     },
 }
 
-const parseOrgUnits = (data) =>
-    data.geojson.features.map(({ type, id, geometry, properties }) => ({
-        type,
-        id,
-        properties: { id, name: properties.name },
-        geometry,
-    }))
+const DEFAULT_ORG_UNITS = []
 
-const useOrgUnits = (parent, level) => {
+const useOrgUnits = ({
+    orgUnits = DEFAULT_ORG_UNITS,
+    skipFeatures = false,
+}) => {
     const [features, setFeatures] = useState()
+    const [count, setCount] = useState(0)
+    const { system } = useSystemInfo()
 
-    const { loading, error } = useDataQuery(ORG_UNITS_QUERY, {
-        variables: { parent, level },
-        onComplete: (data) => setFeatures(parseOrgUnits(data)),
+    const userId = system?.currentUser?.id
+    const keyAnalysisDisplayProperty =
+        system?.currentUser?.settings?.keyAnalysisDisplayProperty
+
+    const orgUnitIds = useMemo(
+        () => orgUnits.map((item) => item.id),
+        [orgUnits]
+    )
+
+    const { error, loading, refetch } = useDataQuery(GEOFEATURES_QUERY, {
+        lazy: true,
+        onComplete: (data) => {
+            setCount(data.geoFeatures.length)
+            if (!skipFeatures) {
+                setFeatures(toGeoJson(data.geoFeatures))
+            }
+        },
     })
+
+    useEffect(() => {
+        if (userId && keyAnalysisDisplayProperty && orgUnitIds.length > 0) {
+            refetch({
+                orgUnitIds,
+                keyAnalysisDisplayProperty,
+                userId,
+            })
+        } else {
+            // Reset when conditions aren't met
+            setCount(0)
+            setFeatures(undefined)
+        }
+    }, [userId, keyAnalysisDisplayProperty, orgUnitIds, refetch, skipFeatures])
 
     return {
         features,
+        count,
         error,
         loading,
     }

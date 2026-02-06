@@ -12,8 +12,7 @@ import ExtractGeeData from './ExtractGeeData.jsx'
 import styles from './styles/ExtractData.module.css'
 
 const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
-    const { parent, level } = orgUnits
-    const { features } = useOrgUnits(parent.id, level)
+    const { features } = useOrgUnits({ orgUnits })
 
     if (!features) {
         return <DataLoader label={i18n.t('Loading org units')} height={100} />

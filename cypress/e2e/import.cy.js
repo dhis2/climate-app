@@ -20,17 +20,71 @@ const getRoutesFixture = () => ({
     ],
 })
 
-const assertOrgUnitSection = (level = 'District') => {
-    cy.contains('Select organisation unit and level').scrollIntoView()
-    cy.contains('Select organisation unit and level').should('be.visible')
-    cy.getByDataTest('dhis2-uiwidgets-orgunittree-node').should('be.visible')
-    cy.contains('Bombali').should('be.visible')
-    cy.contains('Organisation unit level').scrollIntoView()
-    cy.contains('Organisation unit level').should('be.visible')
-    cy.getByDataTest('org-unit-level-select').scrollIntoView()
-    cy.getByDataTest('org-unit-level-select')
-        .contains(level)
-        .should('be.visible')
+const assertOrgUnitSection = () => {
+    cy.contains('Select organisation units').scrollIntoView()
+    cy.contains('Select organisation units').should('be.visible')
+    cy.getByDataTest('org-unit-tree').should('be.visible')
+}
+
+const selectDataset = (datasetName) => {
+    cy.getByDataTest('dataset-selector-content').click()
+    cy.contains(datasetName).should('be.visible')
+    cy.getByDataTest('dhis2-uicore-select-menu-menuwrapper')
+        .children()
+        .should('have.length.greaterThan', 1)
+        .contains(datasetName)
+        .click()
+}
+
+const selectPeriodType = (periodType) => {
+    cy.getByDataTest('period-type-selector').containsExact(periodType).click()
+    cy.getByDataTest('period-type-selector')
+        .containsExact(periodType)
+        .find('input[type="radio"]')
+        .should('be.checked')
+}
+
+const selectOrgUnitGroup = (groupName) => {
+    cy.getByDataTest('org-unit-group-select').click()
+    cy.getByDataTest('dhis2-uicore-select-menu-menuwrapper')
+        .children()
+        .should('have.length.greaterThan', 1)
+    cy.getByDataTest('dhis2-uicore-select-menu-menuwrapper')
+        .children()
+        .contains(groupName)
+        .click()
+    cy.getByDataTest('dhis2-uicore-popper').closePopper()
+}
+
+const selectTargetDataElement = (dataElementName) => {
+    // Check that data elements are now available
+    cy.getByDataTest('data-element-select').click()
+    cy.getByDataTest('dhis2-uicore-select-menu-menuwrapper')
+        .children()
+        .should('have.length.greaterThan', 1)
+    cy.contains('No data elements found for the selected period type.').should(
+        'not.exist'
+    )
+
+    // Select the data element
+    cy.getByDataTest('dhis2-uicore-select-menu-menuwrapper')
+        .children()
+        .contains(dataElementName)
+        .scrollIntoView()
+    cy.getByDataTest('dhis2-uicore-select-menu-menuwrapper')
+        .children()
+        .contains(dataElementName)
+        .click()
+}
+
+const typeStartAndEndDates = (startDate, endDate) => {
+    // Type the start date directly into the input, ignoring the calendar popup
+    cy.getByDataTest('start-date-input-content').find('input').clear()
+    cy.getByDataTest('start-date-input-content').find('input').type(startDate)
+
+    // Type the end date directly into the input, ignoring the calendar popup
+    cy.getByDataTest('end-date-input-content').find('input').clear()
+    cy.getByDataTest('end-date-input-content').find('input').type(endDate)
 }
 
 describe('Import', () => {
@@ -201,15 +255,7 @@ describe('Import', () => {
     it('configure import for GEE ERA5-Land weekly dataset', () => {
         cy.visit('#/import')
 
-        cy.getByDataTest('dataset-selector-content').click()
-        cy.contains('Earth Engine: Precipitation (ERA5-Land)').should(
-            'be.visible'
-        )
-        cy.getByDataTest('dhis2-uicore-select-menu-menuwrapper')
-            .children()
-            .should('have.length.greaterThan', 1)
-            .contains('Earth Engine: Precipitation (ERA5-Land)')
-            .click()
+        selectDataset('Earth Engine: Precipitation (ERA5-Land)')
 
         // Check the dataset info
         cy.contains(
@@ -220,7 +266,6 @@ describe('Import', () => {
         ).should('be.visible')
 
         // Check the period section
-
         cy.getByDataTest('period-type-selector')
             .find('input[type="radio"]')
             .should('have.length', 3)
@@ -254,32 +299,15 @@ describe('Import', () => {
         assertOrgUnitSection()
 
         // Check review and import section
+        cy.contains('Review and import').scrollIntoView()
         cy.contains('Review and import').should('be.visible')
         cy.get('button').contains('Start import').scrollIntoView()
         cy.get('button').contains('Start import').should('be.disabled')
 
         // Change the period type to weekly
-        cy.getByDataTest('period-type-selector').containsExact('Weekly').click()
-        cy.getByDataTest('period-type-selector')
-            .containsExact('Weekly')
-            .find('input[type="radio"]')
-            .should('be.checked')
+        selectPeriodType('Weekly')
 
-        // Check that data elements are now available
-        cy.getByDataTest('data-element-select').click()
-        cy.getByDataTest('dhis2-uicore-select-menu-menuwrapper')
-            .children()
-            .should('have.length.greaterThan', 1)
-        cy.contains(
-            'No data elements found for the selected period type.'
-        ).should('not.exist')
-
-        // Select a weekly data element
-
-        cy.getByDataTest('dhis2-uicore-select-menu-menuwrapper')
-            .children()
-            .contains('IDSR Malaria (weekly)')
-            .click()
+        selectTargetDataElement('IDSR Malaria (weekly)')
 
         cy.getByDataTest('import-preview').scrollIntoView()
         cy.getByDataTest('import-preview')
@@ -290,9 +318,7 @@ describe('Import', () => {
             .contains('Weekly values between')
             .should('be.visible')
         cy.getByDataTest('import-preview')
-            .contains(
-                'For all organisation units at district level within Sierra Leone'
-            )
+            .contains('For 13 organisation units')
             .should('be.visible')
         cy.getByDataTest('import-preview')
             .contains('To data element "IDSR Malaria"')
@@ -320,9 +346,13 @@ describe('Import', () => {
             serverTimeZoneId: 'Africa/Freetown',
         }).as('getSystemInfoSpecific')
 
+        cy.contains('Earth Engine: Precipitation (ERA5-Land)').should(
+            'be.visible'
+        )
         cy.getByDataTest('dhis2-uicore-select-menu-menuwrapper')
             .children()
-            .contains('Earth Engine: Air temperature (ERA5-Land)')
+            .should('have.length.greaterThan', 1)
+            .contains('Earth Engine: Precipitation (ERA5-Land)')
             .click()
         cy.wait('@getSystemInfoSpecific')
 
@@ -360,7 +390,7 @@ describe('Import', () => {
         cy.getByDataTest('import-preview').scrollIntoView()
         cy.getByDataTest('import-preview')
             .contains(
-                'Air temperature (ERA5-Land)" source data will be imported'
+                '"Precipitation (ERA5-Land)" source data will be imported'
             )
             .should('be.visible')
 
@@ -368,9 +398,7 @@ describe('Import', () => {
             .contains('Weekly values between')
             .should('be.visible')
         cy.getByDataTest('import-preview')
-            .contains(
-                'For all organisation units at district level within Sierra Leone'
-            )
+            .contains('For 13 organisation units')
             .should('be.visible')
         cy.getByDataTest('import-preview')
             .contains('To data element "IDSR Malaria"')
@@ -379,5 +407,79 @@ describe('Import', () => {
         cy.getByDataTest('import-preview')
             .contains('data values will be imported')
             .should('be.visible')
+    })
+
+    it('select the correct org unit groups and import the correct values', () => {
+        cy.visit('#/import')
+
+        selectDataset('Earth Engine: Precipitation (ERA5-Land)')
+        selectPeriodType('Weekly')
+        typeStartAndEndDates('2025-08-18', '2025-08-24')
+        selectTargetDataElement('IDSR Malaria (weekly)')
+        selectOrgUnitGroup('Mission')
+
+        // confirm the import details
+        cy.getByDataTest('import-preview').scrollIntoView()
+        cy.getByDataTest('import-preview')
+            .contains('Precipitation (ERA5-Land)" source data will be imported')
+            .should('be.visible')
+
+        cy.getByDataTest('import-preview')
+            .contains('For 15 organisation units')
+            .should('be.visible')
+
+        selectOrgUnitGroup('Rural')
+
+        cy.getByDataTest('import-preview').scrollIntoView()
+        cy.getByDataTest('import-preview')
+            .contains('For 257 organisation units')
+            .should('be.visible')
+
+        // Remove Rural selection
+        cy.getByDataTest('dhis2-uicore-chip')
+            .contains('Rural')
+            .parent()
+            .within(() => {
+                cy.getByDataTest('dhis2-uicore-chip-remove').click()
+            })
+
+        // Remove the Distrct selection for level
+        cy.getByDataTest('dhis2-uicore-chip')
+            .contains('District')
+            .parent()
+            .within(() => {
+                cy.getByDataTest('dhis2-uicore-chip-remove').click()
+            })
+
+        cy.getByDataTest('import-preview').scrollIntoView()
+        cy.getByDataTest('import-preview')
+            .contains('For 2 organisation units')
+            .should('be.visible')
+
+        cy.intercept('POST', '**/api/*/dataValueSets*', {
+            statusCode: 200,
+            body: { status: 'SUCCESS', importCount: { imported: 2 } },
+        }).as('postDataValueSets')
+        cy.contains('Start import').click()
+
+        // Wait for and verify the intercepted request
+        cy.wait('@postDataValueSets').then((interception) => {
+            expect(interception.request.body).to.deep.equal({
+                dataValues: [
+                    {
+                        value: '97.117',
+                        orgUnit: 'Z9ny6QeqsgX',
+                        dataElement: 'vq2qO3eTrNi',
+                        period: '2025W34',
+                    },
+                    {
+                        value: '94.236',
+                        orgUnit: 'jCnyQOKQBFX',
+                        dataElement: 'vq2qO3eTrNi',
+                        period: '2025W34',
+                    },
+                ],
+            })
+        })
     })
 })
