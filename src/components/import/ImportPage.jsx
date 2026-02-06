@@ -239,7 +239,6 @@ const ImportPage = () => {
                             periodType={period.periodType || ''}
                             startDate={period.startTime || ''}
                             endDate={period.endTime || ''}
-                            calendar={calendar}
                             orgUnitCount={orgUnitCount}
                             dataElement={dataElement.displayName || ''}
                             totalValues={valueCount}

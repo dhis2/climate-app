@@ -9,17 +9,7 @@ describe('ImportPreview', () => {
         endDate: '2025-12-31',
         dataElement: 'Temperature',
         totalValues: 120,
-        orgUnits: {
-            level: '3',
-            levelName: 'Chiefdom',
-            parent: {
-                displayName: 'Test Province',
-                level: 2,
-                name: 'Test Province',
-                path: '/province/test',
-            },
-        },
-        calendar: 'gregory',
+        orgUnitCount: 5,
     }
 
     it('shows 4 main pieces of information', () => {
@@ -37,29 +27,18 @@ describe('ImportPreview', () => {
         ).should('be.visible')
     })
 
-    it('renders organization unit information when parent level differs from selected level', () => {
+    it('renders organization unit information with plural form', () => {
         cy.mount(<ImportPreview {...defaultProps} />)
-        cy.contains(
-            'For all organisation units at chiefdom level within Test Province'
-        ).should('be.visible')
+        cy.contains('For 5 organisation unit').should('be.visible')
     })
 
-    it('renders organization unit information when parent level equals selected level', () => {
+    it('renders organization unit information with singular form', () => {
         const props = {
             ...defaultProps,
-            orgUnits: {
-                level: '2',
-                levelName: 'Province',
-                parent: {
-                    displayName: 'Test Province',
-                    level: 2,
-                    name: 'Test Province',
-                    path: '/province/test',
-                },
-            },
+            orgUnitCount: 1,
         }
         cy.mount(<ImportPreview {...props} />)
-        cy.contains('For Test Province province').should('be.visible')
+        cy.contains('For 1 organisation unit').should('be.visible')
     })
 
     it('renders data element information', () => {
