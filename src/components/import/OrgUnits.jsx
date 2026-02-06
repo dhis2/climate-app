@@ -73,7 +73,7 @@ const OrgUnits = ({ selected = DEFAULT_SELECTED, onChange }) => {
                 selected={selected}
                 onSelect={onChangeOrgUnits}
                 hideUserOrgUnits={true}
-                warning={!hasOrgUnits ? warning : null}
+                warning={hasOrgUnits ? null : warning}
                 displayNameProp={displayNameProp}
             />
         </>
