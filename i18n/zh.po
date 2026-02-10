@@ -1,19 +1,19 @@
 # 
 # Translators:
-# 晓东 林 <13981924470@126.com>, 2025
-# Philip Larsen Donnelly, 2025
-# Viktor Varland <viktor@dhis2.org>, 2025
-# easylin <lin_xd@126.com>, 2025
+# Viktor Varland <viktor@dhis2.org>, 2026
+# 晓东 林 <13981924470@126.com>, 2026
+# easylin <lin_xd@126.com>, 2026
+# Philip Larsen Donnelly, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-09-08T09:55:48.384Z\n"
+"POT-Creation-Date: 2026-01-30T12:52:50.606Z\n"
 "PO-Revision-Date: 2025-02-05 13:11+0000\n"
-"Last-Translator: easylin <lin_xd@126.com>, 2025\n"
+"Last-Translator: Philip Larsen Donnelly, 2026\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: zh\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -123,6 +123,9 @@ msgstr "开始日期"
 
 msgid "End date"
 msgstr "结束日期"
+
+msgid "Update"
+msgstr "更新"
 
 msgid "Maximum {{maxDays}} days allowed"
 msgstr "最多允许{{maxDays}} 天"
@@ -585,14 +588,26 @@ msgstr "{{name}} {{band}} ：植被指数{{period}}"
 msgid "Value is only for 250 x 250 m where the facility is located"
 msgstr "仅适用于设施所在的 250 x 250 米区域"
 
-msgid "Data element"
-msgstr "数据元"
+msgid "Loading data elements..."
+msgstr ""
+
+msgid "No data elements found. You must first select a dataset to import."
+msgstr ""
+
+msgid "No data elements found for the selected period type."
+msgstr ""
+
+msgid "Showing data elements from {{periodType}} data sets"
+msgstr ""
 
 msgid "No match found"
 msgstr "未找到匹配项"
 
-msgid "Data element to import data to"
-msgstr "导入数据的数据元素"
+msgid "Need help setting up data elements for import? Check out the "
+msgstr ""
+
+msgid "setup guide"
+msgstr ""
 
 msgid "Loading org units"
 msgstr "装载组织单位"
@@ -610,6 +625,9 @@ msgstr ""
 msgid "Extracting data for {{orgUnitsCount}} org units"
 msgstr "提取{{orgUnitsCount}} org 单位的数据"
 
+msgid "Dataset provider not recognized"
+msgstr ""
+
 msgid "Importing data to DHIS2"
 msgstr "将数据导入 DHIS2"
 
@@ -622,91 +640,59 @@ msgstr "遇到一个或多个冲突"
 msgid "Import weather and climate data"
 msgstr "导入天气和气候数据"
 
-msgid ""
-"You can maximum import {{maxValues}} data values in a single import, but you"
-" are trying to import {{valueCount}} values for {{orgUnitCount}} "
-"organisation units over {{periodCount}} {{periodType}} periods. Please "
-"select a shorter period or fewer organisation units. You can always import "
-"more data later."
+msgid "Choose data source"
 msgstr ""
-"在一次导入中最多可导入{{maxValues}} 数据值，但您正试图导入{{orgUnitCount}} 组织单位在{{periodCount}} "
-"{{periodType}} 期间的{{valueCount}} 值。请选择更短的时间段或更少的组织单位。您可以稍后再导入更多数据。"
 
-msgid "Instructions"
-msgstr "说明"
-
-msgid ""
-"Before you can import data, you need to create the associated data elements "
-"in DHIS2. See our setup guide in the left menu."
-msgstr "在导入数据之前，您需要在 DHIS2 中创建相关的数据元素。请参阅左侧菜单中的设置指南。"
-
-msgid ""
-"Data can be imported in batches. We recommend that you start with a few "
-"organisation units to make sure everything works as expected."
-msgstr "数据可以分批导入。我们建议您先从几个组织单位开始，以确保一切按预期运行。"
-
-msgid "Data"
-msgstr "数据"
-
-msgid "Select the variable you would like to import."
-msgstr "选择要导入的变量。"
-
-msgid "Period"
-msgstr "期间"
-
-msgid ""
-"Select the start and end dates for your import. We will import daily data "
-"for the selected period. You can aggregate data to other period types "
-"(weekly/monthly) in DHIS2. If your DHIS2 instance use a different timezone "
-"than UTC, we will calculate daily values based on this timezone."
+msgid "Choose destination data element"
 msgstr ""
-"选择导入的开始和结束日期。我们将导入所选期间的每日数据。您可以将数据汇总到 DHIS2 中的其他时期类型（周/月）。如果您的 DHIS2 实例使用不同于"
-" UTC 的时区，我们将根据该时区计算每日值。"
 
-msgid "Parent organisation unit"
-msgstr "上级组织机构"
+msgid "Review and import"
+msgstr ""
 
 msgid ""
-"Select a parent organisation unit for the import. We will import data for "
-"children that are below this organisation unit."
-msgstr "为导入选择一个上级组织单位。我们将导入该组织单位下的子女数据。"
+"Import limit exceeded: {{valueCount}} values selected (maximum "
+"{{maxValues}}). Reduce your selection by choosing fewer organisation units "
+"or a shorter time period. Additional imports can be performed separately."
+msgstr ""
 
-msgid "Organisation unit level"
-msgstr "组织机构等级"
+msgid "Start import"
+msgstr "开始导入"
 
-msgid ""
-"Select the organisation unit level for the import. We will import data for "
-"this level that are below the parent organisation unit. If the parent "
-"organisation unit is on the same level, we will import data for this single "
-"organisation unit."
-msgstr "选择导入的组织单位级别。我们将导入父组织单位下该层级的数据。如果上级组织单位在同一层级，我们将导入该单一组织单位的数据。"
+msgid "For the {{periodTypeNoun}} {{date}}"
+msgstr ""
 
-msgid ""
-"Select the DHIS2 data element you would like to import the data into. See "
-"the “Setup guide” for more information on how to configure this data "
-"element."
-msgstr "选择要将数据导入的 DHIS2 数据元素。有关如何配置该数据元素的详细信息，请参阅 \"设置指南\"。"
+msgid "{{periodTypeName}} values between {{startDate}} and {{endDate}}"
+msgstr ""
 
-msgid "Import summary"
-msgstr "进口摘要"
+msgid "For {{orgUnitParent}} {{orgLevelName}}"
+msgstr ""
 
 msgid ""
-"When data is imported, we will show a summary of the import. This includes "
-"the number of data values that were successfully imported or updated. If "
-"data values fail to import, we will show the reason for the failure."
-msgstr "数据导入后，我们将显示导入摘要。其中包括成功导入或更新的数据值数量。如果数据值导入失败，我们将显示失败原因。"
+"For all organisation units at {{orgLevelName}} level within "
+"{{orgUnitParent}}"
+msgstr ""
+
+msgid "To data element \"{{dataElement}}\""
+msgstr ""
+
+msgid "{{count}} data values will be imported"
+msgid_plural "{{count}} data values will be imported"
+msgstr[0] ""
 
 msgid "Data is imported"
 msgstr "数据已导入"
 
-msgid "Imported"
-msgstr "导入"
+msgid "Imported: {{imported}}"
+msgstr ""
 
-msgid "Updated"
-msgstr "更新"
+msgid "Updated: {{updated}}"
+msgstr ""
 
-msgid "Ignored"
-msgstr "被忽略"
+msgid "Ignored (already exists): {{ignored}}"
+msgstr ""
+
+msgid "Missing: {{missing}}"
+msgstr ""
 
 msgid "No data for the following org units"
 msgstr "下列组织单位无数据"
@@ -716,19 +702,62 @@ msgid ""
 " be imported."
 msgstr "ERA5-Land 的沿海地区数据有限。其他 org 单位的数值将被导入。"
 
-msgid "Organisation unit level to import data to"
-msgstr "将数据导入的组织单位级别"
+msgid "Loading organisation units..."
+msgstr ""
+
+msgid "Select organisation unit and level"
+msgstr ""
+
+msgid ""
+"All organisation units at the selected level within the parent org unit will"
+" be included. If the selected parent is on the selected level, then data "
+"will be imported for this single org unit only."
+msgstr ""
+
+msgid "Parent organisation unit"
+msgstr "上级组织机构"
 
 msgid "Org unit parent needs to be above or equal to the org unit level"
 msgstr "组织单位父级必须高于或等于组织单位级别"
 
-msgid ""
-"The data will be assigned a default yearly period that matches the year it "
-"was collected: {{datasetPeriod}}"
-msgstr "数据将被指定一个与收集年份相符的默认年份：{{datasetPeriod}}"
+msgid "Organisation unit level"
+msgstr "组织机构等级"
 
-msgid "Daily values will be imported between start and end dates"
-msgstr "将在开始日期和结束日期之间导入每日数值"
+msgid "Start and end date are not within the valid range."
+msgstr ""
+
+msgid "Start date is not within the valid range."
+msgstr ""
+
+msgid "End date is not within the valid range."
+msgstr ""
+
+msgid ""
+"{{periodTypeName}} data between start and end date will be calculated from "
+"hourly data."
+msgstr ""
+
+msgid ""
+"{{periodTypeName}} data between start and end date will be calculated from "
+"hourly data, with time zone adjustments applied if the selected time zone is"
+" not set to UTC."
+msgstr ""
+
+msgid ""
+"{{periodTypeName}} data between start and end date will be calculated and "
+"then aggregated to the selected period type."
+msgstr ""
+
+msgid ""
+"The data will be assigned a yearly period type that matches the year it was "
+"collected: {{datasetPeriod}}"
+msgstr ""
+
+msgid "Valid range: {{startDate}} - {{endDate}}"
+msgstr ""
+
+msgid "Valid range"
+msgstr ""
 
 msgid "Period type"
 msgstr "期间类型"
@@ -738,6 +767,9 @@ msgstr "开始年份"
 
 msgid "End year"
 msgstr "年底"
+
+msgid "Chart settings"
+msgstr ""
 
 msgid ""
 "Set y-axis values for charts in the Explore data section to make it easier "
@@ -769,6 +801,26 @@ msgstr "热应力上限类别"
 msgid "Heat stress lower category"
 msgstr "热应力较低类别"
 
+msgid "Data Providers"
+msgstr ""
+
+msgid ""
+"The following data providers can be configured and used in the Climate app. "
+"Contact your administrator to configure these data providers."
+msgstr ""
+
+msgid "Provider name"
+msgstr ""
+
+msgid "Status"
+msgstr "状态"
+
+msgid "Setup info"
+msgstr ""
+
+msgid "Close"
+msgstr "关闭"
+
 msgid "Calculate from data"
 msgstr "根据数据计算"
 
@@ -778,23 +830,42 @@ msgstr "应用程序设置"
 msgid "Changes made below will apply to all users of this app."
 msgstr "以下更改将适用于本应用程序的所有用户。"
 
+msgid "General settings"
+msgstr "常规设置"
+
 msgid "Default start page for users"
 msgstr "用户的默认启动页面"
 
 msgid "Time zone where your org units are located"
 msgstr "您的组织单位所在的时区"
 
-msgid "Data element: \"{{name}}\""
-msgstr "数据元素：\"{{name}}\""
+msgid "Data element field"
+msgstr ""
+
+msgid "Value"
+msgstr "数值"
+
+msgid "Note"
+msgstr ""
 
 msgid "Name"
 msgstr "名称"
+
+msgid ""
+"Include the data source in the name to distinguish it from other sources "
+"(e.g. precipitation data is available from both ERA5-Land and CHIRPS)."
+msgstr ""
 
 msgid "Short name"
 msgstr "缩写名"
 
 msgid "Code"
 msgstr "代码"
+
+msgid ""
+"If you use this code, this data element will be autoselected in the import "
+"form when choosing the \"{{-name}}\" dataset."
+msgstr ""
 
 msgid "Description"
 msgstr "描述"
@@ -811,6 +882,9 @@ msgstr "汇总统计"
 msgid "Aggregation type"
 msgstr "汇总类型"
 
+msgid "Use your domain knowledge to select the appropriate aggregation type"
+msgstr ""
+
 msgid "Store zero data values"
 msgstr "存储零数据值"
 
@@ -824,17 +898,22 @@ msgid "Assign all org unit levels"
 msgstr "分配所有组织单位级别"
 
 msgid ""
+"Assign all to prevent aggregation across organisation unit levels, "
+"especially from facility to higher levels defined by a geographic boundary."
+msgstr ""
+
+msgid ""
 "You should now be able to import data with this app. Please reach out to us "
 "on climate-app@dhis2.org if you have any questions or need help with the "
 "setup."
 msgstr ""
 "现在您应该可以使用此应用程序导入数据了。如果您在设置过程中有任何问题或需要帮助，请通过 climate-app@dhis2.org 联系我们。"
 
-msgid "3. Assign to a data element group"
-msgstr "3.分配到数据元素组"
+msgid "4. Assign to a DHIS2 data element group"
+msgstr ""
 
-msgid "Data element group: \"{{-name}}\""
-msgstr "数据元素组：\"{{-name}}\""
+msgid "Data element group field"
+msgstr ""
 
 msgid "Data elements"
 msgstr "数据元"
@@ -842,31 +921,27 @@ msgstr "数据元"
 msgid "Assign above data element"
 msgstr "分配上述数据元素"
 
-msgid "2. Assign to a data set"
-msgstr "2.分配给数据集"
+msgid "3. Assign to a DHIS2 data set"
+msgstr ""
+
+msgid "Data set field"
+msgstr ""
 
 msgid ""
-"If you import daily data, you should assign the data elements to a daily "
-"data set (weather and climate). For weekly or monthly data, assign to a "
-"weekly or monthly data set (vegetation index). Assigning to a data set helps"
-" to maintain a quality metadata and data where integrity, consistency, "
-"approvals and protection are facilitated. How exactly to define such a data "
-"set depends on the available users and user groups. Similarly, which of the "
-"organisation units can collect this daily climate data set depends on "
-"situated contexts. However, since we can provide data for any administrative"
-" unit that has defined geographic boundaries we leave that decision to "
-"users. Most probable choice is all organisation units in your system."
+"The same DHIS2 data set can be used for all the \"{{-name}} "
+"{{-periodTypeName}}\" related data elements"
 msgstr ""
-"如果导入的是日数据，则应将数据元素分配到日数据集（天气和气候）中。对于周数据或月数据，应将其分配到周数据集或月数据集（植被指数）。将数据分配到数据集有助于保持高质量的元数据和数据的完整性、一致性、批准和保护。如何准确定义这样的数据集取决于可用的用户和用户组。同样，哪些组织单位可以收集日常气候数据集也取决于具体情况。不过，由于我们可以为任何有明确地理边界的行政单位提供数据，因此我们将这一决定权留给用户。最有可能的选择是系统中的所有组织单位。"
-
-msgid "Data set: \"{{-name}}\""
-msgstr "数据集：\"{{-name}}\""
 
 msgid "Organisation units"
 msgstr "组织机构"
 
 msgid "Select all organisation units in your system"
 msgstr "选择系统中的所有组织单位"
+
+msgid ""
+"Assign all organisation units since data can be provided for any unit with "
+"defined geographic boundaries."
+msgstr ""
 
 msgid "4. Add a legend"
 msgstr "4.添加图例"
@@ -886,50 +961,60 @@ msgstr "结束值"
 msgid "Color"
 msgstr "颜色"
 
-msgid "Configuring DHIS2 before importing data"
-msgstr "导入数据前配置 DHIS2"
-
-msgid ""
-"Before you can import data, you need to make some configurations in the "
-"Maintenance app. For detailed instructions on how to configure DHIS2, choose"
-" which data you would like to import below."
-msgstr "在导入数据之前，您需要在维护应用程序中进行一些配置。有关如何配置 DHIS2 的详细说明，请在下面选择要导入的数据。"
-
-msgid "1. Create the data element"
-msgstr "1.创建数据元素"
-
-msgid ""
-"Create DHIS2 data elements only for the data you want to import. We "
-"recommend including the data source in the name to distinguish it from other"
-" sources (e.g. precepetation data is available from both ERA5-Land and "
-"CHIRPS, and there will be additional data providers in the future). If you "
-"use the same code specified below, we will preselect the data element in the"
-" import interface."
+msgid "Configure DHIS2 in order to import data"
 msgstr ""
-"只为您要导入的数据创建 DHIS2 数据元素。我们建议在名称中包含数据源，以便与其他数据源区分开来（例如，ERA5-Land 和 CHIRPS "
-"都提供预产期数据，将来还会有其他数据提供者）。如果您使用以下指定的相同代码，我们将在导入界面中预选数据元素。"
 
 msgid ""
-"When daily data is imported it can be aggregated to other period types in "
-"DHIS2. We don't recommend aggregating across organisation unit levels, "
-"especially when going from facility level to higher levels defined by a "
-"geographic boundary. To make sure the values remain at its own level, assign"
-" all org unit levels as Aggregation levels for each data element created."
+"Create only one DHIS2 data element per dataset, using the lowest period type"
+" needed for analysis, to avoid duplicating data."
 msgstr ""
-"导入每日数据后，可将其汇总到 DHIS2 "
-"中的其他时期类型。我们不建议跨组织单位级别进行汇总，尤其是从设施级别到由地理边界定义的更高级别时。为确保数值保持在各自的级别上，请为创建的每个数据元素指定所有组织单位级别作为聚合级别。"
+
+msgid "1. Select the period type"
+msgstr ""
+
+msgid ""
+"Select the lowest period type needed for analysis. Data can then be "
+"aggregated to other period types in DHIS2 during analysis in Maps, Data "
+"Visualizer, and other apps."
+msgstr ""
+
+msgid "2. Create the DHIS2 data element"
+msgstr ""
 
 msgid "Loading data"
 msgstr "加载数据中"
 
-msgid "Select data to import"
-msgstr "选择要导入的数据"
+msgid "Select dataset to import"
+msgstr ""
 
-msgid "You need access to Google Earth Engine to use this app."
-msgstr "您需要访问 Google 地球引擎才能使用此应用程序。"
+msgid ""
+"No datasets are available. Go to the Settings page to learn how to configure"
+" dataset sources."
+msgstr ""
+
+msgid "ENACTS datasets could not be loaded"
+msgstr ""
+
+msgid "Data is from "
+msgstr ""
+
+msgid ". Provider: "
+msgstr ""
+
+msgid "You need access to Google Earth Engine to explore this data."
+msgstr ""
 
 msgid "How to get access?"
 msgstr "如何进入？"
+
+msgid "Install Maps app v101.5.0 or higher to enable this feature."
+msgstr ""
+
+msgid "Latest period will be selected."
+msgstr ""
+
+msgid "Open as Map"
+msgstr "打开为地图"
 
 msgid ""
 "For a temporary period there is limited data available for 2024. This is due"
@@ -939,9 +1024,6 @@ msgstr "2024 年的数据暂时有限。这是由于哥白尼气候数据存储�
 
 msgid "Read more on the CDS user forum"
 msgstr "了解更多信息，请访问 CDS 用户论坛"
-
-msgid "Data resolution"
-msgstr "数据分辨率"
 
 msgid ""
 "You can import data for the lowest levels in your org unit hierarchy, but it"
@@ -956,38 +1038,8 @@ msgstr "如果两个 org 单元相距很近（在分辨率范围内），它们�
 msgid "Time zone"
 msgstr "时区"
 
-msgid "ERA5-Land / Copernicus Climate Change Service"
-msgstr "ERA5-陆地/哥白尼气候变化服务"
-
-msgid "ERA5-Heat / Copernicus Climate Change Service"
-msgstr "ERA5-Heat/哥白尼气候变化处"
-
-msgid "Climate Hazards Center / UCSB"
-msgstr "气候灾害中心/加州大学旧金山分校"
-
-msgid "NASA LP DAAC at the USGS EROS Center"
-msgstr "美国地质调查局 EROS 中心的 NASA LP DAAC"
-
-msgid "NASA / USGS / JPL-Caltech"
-msgstr "NASA / USGS / JPL-Caltech"
-
-msgid "Approximately 31 km (0.25°)"
-msgstr "约 31 千米 (0.25°)"
-
-msgid "Approximately 9 km (0.1°)"
-msgstr "约 9 千米 (0.1°)"
-
-msgid "Approximately 5 km (0.05°)"
-msgstr "约 5 千米 (0.05°)"
-
-msgid "Approximately 250 m"
-msgstr "约 250 米"
-
-msgid "Approximately 500 m"
-msgstr "约 500 米"
-
-msgid "Approximately 30 m"
-msgstr "约 30 米"
+msgid "Data resolution is approximately {{resolution}}."
+msgstr ""
 
 msgid ""
 "Landsat Normalized Difference Vegetation Index (NDVI) is used to quantify "
@@ -1006,21 +1058,6 @@ msgstr "增强植被指数（EVI）不同于 NDVI，它减少了大气条件和�
 
 msgid "Land cover types at yearly intervals"
 msgstr "每年的土地覆被类型"
-
-msgid "Climate/Weather"
-msgstr "气候/天气"
-
-msgid "Environment"
-msgstr "环境"
-
-msgid "Weekly or Monthly"
-msgstr "每周或每月"
-
-msgid "Land"
-msgstr "土地"
-
-msgid "Yearly"
-msgstr "每年"
 
 msgid "Air temperature (ERA5-Land)"
 msgstr "气温（ERA5-陆地）"
@@ -1162,6 +1199,15 @@ msgstr "海拔高度的标准偏差，单位为米。"
 msgid "Percentage of area with this land cover type."
 msgstr "该土地覆被类型的面积百分比。"
 
+msgid "Climate/Weather"
+msgstr "气候/天气"
+
+msgid "Environment"
+msgstr "环境"
+
+msgid "Land"
+msgstr "土地"
+
 msgid "Heat/cold stress"
 msgstr "热/冷应激"
 
@@ -1228,6 +1274,9 @@ msgstr "极端高温应激"
 msgid "Extreme<br>heat stress"
 msgstr "极端<br>热应激"
 
+msgid "Data resolution is approximately {{resolution}} degrees."
+msgstr ""
+
 msgid "ERA5-Land / Copernicus Climate Change Service / Google Earth Engine"
 msgstr "ERA5-Land / 哥白尼气候变化服务 / 谷歌地球引擎"
 
@@ -1242,3 +1291,18 @@ msgstr "NASA / USGS / JPL-Caltech / Google 地球引擎"
 
 msgid "No data found for the selected period"
 msgstr "所选时期无数据"
+
+msgid "day"
+msgstr "日"
+
+msgid "week"
+msgstr "周"
+
+msgid "month"
+msgstr "月"
+
+msgid "Yearly"
+msgstr "每年"
+
+msgid "year"
+msgstr "年"

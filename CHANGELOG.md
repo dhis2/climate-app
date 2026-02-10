@@ -1,3 +1,24 @@
+## [1.13.2](https://github.com/dhis2/climate-app/compare/v1.13.1...v1.13.2) (2026-02-08)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (main) ([1e9b345](https://github.com/dhis2/climate-app/commit/1e9b345c52041d82dcf155c5efc0d59acfc898ec))
+
+## [1.13.1](https://github.com/dhis2/climate-app/compare/v1.13.0...v1.13.1) (2026-02-01)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (main) ([a67ac35](https://github.com/dhis2/climate-app/commit/a67ac35b6f38f3a58208364790ad9b28256d4cc7))
+
+# [1.13.0](https://github.com/dhis2/climate-app/compare/v1.12.4...v1.13.0) (2026-01-30)
+
+
+### Features
+
+* import page improvements and ability to open explore visualizations in maps ([7223efe](https://github.com/dhis2/climate-app/commit/7223efe10aebc6be4f19cea56a63b30f7d420565))
+
 ## [1.12.4](https://github.com/dhis2/climate-app/compare/v1.12.3...v1.12.4) (2026-01-18)
 
 

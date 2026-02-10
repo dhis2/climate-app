@@ -5,12 +5,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2025-09-08T09:55:48.384Z\n"
+"POT-Creation-Date: 2026-01-30T12:52:50.606Z\n"
 "PO-Revision-Date: 2025-02-05 13:11+0000\n"
 "Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2025\n"
 "Language-Team: Czech (https://app.transifex.com/hisp-uio/teams/100509/cs/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: cs\n"
 "Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
@@ -142,6 +142,9 @@ msgstr "Datum začátku"
 
 msgid "End date"
 msgstr "Datum ukončení"
+
+msgid "Update"
+msgstr ""
 
 msgid "Maximum {{maxDays}} days allowed"
 msgstr "Povoleno maximálně {{maxDays}} dní"
@@ -623,14 +626,26 @@ msgstr "{{name}}: {{band}} vegetační index {{period}}"
 msgid "Value is only for 250 x 250 m where the facility is located"
 msgstr "Hodnota platí pouze pro 250 x 250 m, kde se zařízení nachází."
 
-msgid "Data element"
-msgstr "Datový prvek"
+msgid "Loading data elements..."
+msgstr ""
+
+msgid "No data elements found. You must first select a dataset to import."
+msgstr ""
+
+msgid "No data elements found for the selected period type."
+msgstr ""
+
+msgid "Showing data elements from {{periodType}} data sets"
+msgstr ""
 
 msgid "No match found"
 msgstr "Žádná shoda nenalezena"
 
-msgid "Data element to import data to"
-msgstr "Datový prvek, do kterého se data importují"
+msgid "Need help setting up data elements for import? Check out the "
+msgstr ""
+
+msgid "setup guide"
+msgstr ""
 
 msgid "Loading org units"
 msgstr "Načítání organizačních jednotek"
@@ -649,6 +664,9 @@ msgstr ""
 msgid "Extracting data for {{orgUnitsCount}} org units"
 msgstr "Extrakce dat pro jednotky {{orgUnitsCount}} org"
 
+msgid "Dataset provider not recognized"
+msgstr ""
+
 msgid "Importing data to DHIS2"
 msgstr "Import dat do DHIS2"
 
@@ -661,112 +679,62 @@ msgstr "Jeden nebo více konfliktů"
 msgid "Import weather and climate data"
 msgstr "Import dat o počasí a klimatu"
 
-msgid ""
-"You can maximum import {{maxValues}} data values in a single import, but you"
-" are trying to import {{valueCount}} values for {{orgUnitCount}} "
-"organisation units over {{periodCount}} {{periodType}} periods. Please "
-"select a shorter period or fewer organisation units. You can always import "
-"more data later."
+msgid "Choose data source"
 msgstr ""
-"V rámci jednoho importu můžete importovat maximálně hodnoty dat "
-"{{maxValues}}, ale vy se snažíte importovat hodnoty {{valueCount}} pro "
-"organizační jednotky {{orgUnitCount}} za období {{periodCount}} "
-"{{periodType}} . Zvolte prosím kratší období nebo menší počet organizačních "
-"jednotek. Později můžete vždy importovat více dat."
 
-msgid "Instructions"
-msgstr "Pokyny"
+msgid "Choose destination data element"
+msgstr ""
+
+msgid "Review and import"
+msgstr ""
 
 msgid ""
-"Before you can import data, you need to create the associated data elements "
-"in DHIS2. See our setup guide in the left menu."
+"Import limit exceeded: {{valueCount}} values selected (maximum "
+"{{maxValues}}). Reduce your selection by choosing fewer organisation units "
+"or a shorter time period. Additional imports can be performed separately."
 msgstr ""
-"Před importem dat je třeba v DHIS2 vytvořit související datové prvky. Viz "
-"náš průvodce nastavením v levém menu."
+
+msgid "Start import"
+msgstr ""
+
+msgid "For the {{periodTypeNoun}} {{date}}"
+msgstr ""
+
+msgid "{{periodTypeName}} values between {{startDate}} and {{endDate}}"
+msgstr ""
+
+msgid "For {{orgUnitParent}} {{orgLevelName}}"
+msgstr ""
 
 msgid ""
-"Data can be imported in batches. We recommend that you start with a few "
-"organisation units to make sure everything works as expected."
+"For all organisation units at {{orgLevelName}} level within "
+"{{orgUnitParent}}"
 msgstr ""
-"Data lze importovat v dávkách. Doporučujeme začít s několika organizačními "
-"jednotkami, abyste se ujistili, že vše funguje podle očekávání."
 
-msgid "Data"
-msgstr "Data"
-
-msgid "Select the variable you would like to import."
-msgstr "Vyberte proměnnou, kterou chcete importovat."
-
-msgid "Period"
-msgstr "Období"
-
-msgid ""
-"Select the start and end dates for your import. We will import daily data "
-"for the selected period. You can aggregate data to other period types "
-"(weekly/monthly) in DHIS2. If your DHIS2 instance use a different timezone "
-"than UTC, we will calculate daily values based on this timezone."
+msgid "To data element \"{{dataElement}}\""
 msgstr ""
-"Vyberte datum zahájení a ukončení importu. Pro vybrané období budeme "
-"importovat denní data. V DHIS2 můžete agregovat data do jiných typů období "
-"(týdenní/měsíční). Pokud vaše instance DHIS2 používá jiné časové pásmo než "
-"UTC, vypočítáme denní hodnoty na základě tohoto časového pásma."
 
-msgid "Parent organisation unit"
-msgstr "Nadřazená organizační jednotka"
-
-msgid ""
-"Select a parent organisation unit for the import. We will import data for "
-"children that are below this organisation unit."
-msgstr ""
-"Vyberte nadřazenou organizační jednotku pro import. Budeme importovat data "
-"dětí, které jsou pod touto organizační jednotkou."
-
-msgid "Organisation unit level"
-msgstr "Úroveň organizační jednotky"
-
-msgid ""
-"Select the organisation unit level for the import. We will import data for "
-"this level that are below the parent organisation unit. If the parent "
-"organisation unit is on the same level, we will import data for this single "
-"organisation unit."
-msgstr ""
-"Vyberte úroveň organizační jednotky pro import. Pro tuto úroveň budeme "
-"importovat data, která jsou pod nadřazenou organizační jednotkou. Pokud je "
-"nadřazená organizační jednotka na stejné úrovni, budeme importovat data pro "
-"tuto jedinou organizační jednotku."
-
-msgid ""
-"Select the DHIS2 data element you would like to import the data into. See "
-"the “Setup guide” for more information on how to configure this data "
-"element."
-msgstr ""
-"Vyberte datový prvek DHIS2, do kterého chcete data importovat. Další "
-"informace o konfiguraci tohoto datového prvku naleznete v \"Průvodci "
-"nastavením\"."
-
-msgid "Import summary"
-msgstr "Shrnutí importu"
-
-msgid ""
-"When data is imported, we will show a summary of the import. This includes "
-"the number of data values that were successfully imported or updated. If "
-"data values fail to import, we will show the reason for the failure."
-msgstr ""
-"Po importu dat se zobrazí shrnutí importu. Ten zahrnuje počet hodnot dat, "
-"které byly úspěšně importovány nebo aktualizovány. Pokud se hodnoty dat "
-"nepodaří importovat, zobrazíme důvod neúspěchu."
+msgid "{{count}} data values will be imported"
+msgid_plural "{{count}} data values will be imported"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 msgid "Data is imported"
 msgstr "Data jsou importována"
 
-msgid "Imported"
-msgstr "Importováno"
+msgid "Imported: {{imported}}"
+msgstr ""
 
-msgid "Updated"
-msgstr "Aktualizováno"
+msgid "Updated: {{updated}}"
+msgstr ""
 
-msgid "Ignored"
-msgstr "Ignorováno"
+msgid "Ignored (already exists): {{ignored}}"
+msgstr ""
+
+msgid "Missing: {{missing}}"
+msgstr ""
 
 msgid "No data for the following org units"
 msgstr "Žádná data pro následující organizační jednotky"
@@ -778,23 +746,64 @@ msgstr ""
 "ERA5-Land má omezené údaje pro pobřežní oblasti. Hodnoty pro ostatní org. "
 "jednotky budou importovány."
 
-msgid "Organisation unit level to import data to"
-msgstr "Úroveň organizační jednotky pro import dat"
+msgid "Loading organisation units..."
+msgstr ""
+
+msgid "Select organisation unit and level"
+msgstr ""
+
+msgid ""
+"All organisation units at the selected level within the parent org unit will"
+" be included. If the selected parent is on the selected level, then data "
+"will be imported for this single org unit only."
+msgstr ""
+
+msgid "Parent organisation unit"
+msgstr "Nadřazená organizační jednotka"
 
 msgid "Org unit parent needs to be above or equal to the org unit level"
 msgstr ""
 "Nadřízená organizační jednotka musí být nad úrovní organizační jednotky nebo"
 " jí musí být rovna."
 
-msgid ""
-"The data will be assigned a default yearly period that matches the year it "
-"was collected: {{datasetPeriod}}"
-msgstr ""
-"Datům bude přiřazeno výchozí roční období, které odpovídá roku, v němž byla "
-"shromážděna: {{datasetPeriod}}"
+msgid "Organisation unit level"
+msgstr "Úroveň organizační jednotky"
 
-msgid "Daily values will be imported between start and end dates"
-msgstr "Denní hodnoty budou importovány mezi počátečním a koncovým datem."
+msgid "Start and end date are not within the valid range."
+msgstr ""
+
+msgid "Start date is not within the valid range."
+msgstr ""
+
+msgid "End date is not within the valid range."
+msgstr ""
+
+msgid ""
+"{{periodTypeName}} data between start and end date will be calculated from "
+"hourly data."
+msgstr ""
+
+msgid ""
+"{{periodTypeName}} data between start and end date will be calculated from "
+"hourly data, with time zone adjustments applied if the selected time zone is"
+" not set to UTC."
+msgstr ""
+
+msgid ""
+"{{periodTypeName}} data between start and end date will be calculated and "
+"then aggregated to the selected period type."
+msgstr ""
+
+msgid ""
+"The data will be assigned a yearly period type that matches the year it was "
+"collected: {{datasetPeriod}}"
+msgstr ""
+
+msgid "Valid range: {{startDate}} - {{endDate}}"
+msgstr ""
+
+msgid "Valid range"
+msgstr ""
 
 msgid "Period type"
 msgstr "Typ období"
@@ -804,6 +813,9 @@ msgstr "Počáteční rok"
 
 msgid "End year"
 msgstr "Konečný rok"
+
+msgid "Chart settings"
+msgstr ""
 
 msgid ""
 "Set y-axis values for charts in the Explore data section to make it easier "
@@ -838,6 +850,26 @@ msgstr "Tepelný stres vyšší kategorie"
 msgid "Heat stress lower category"
 msgstr "Tepelný stres nižší kategorie"
 
+msgid "Data Providers"
+msgstr ""
+
+msgid ""
+"The following data providers can be configured and used in the Climate app. "
+"Contact your administrator to configure these data providers."
+msgstr ""
+
+msgid "Provider name"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Setup info"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
 msgid "Calculate from data"
 msgstr "Výpočet z dat"
 
@@ -847,23 +879,42 @@ msgstr "Nastavení aplikace"
 msgid "Changes made below will apply to all users of this app."
 msgstr "Níže uvedené změny se budou týkat všech uživatelů této aplikace."
 
+msgid "General settings"
+msgstr ""
+
 msgid "Default start page for users"
 msgstr "Výchozí úvodní stránka pro uživatele"
 
 msgid "Time zone where your org units are located"
 msgstr "Časové pásmo, ve kterém se nachází vaše organizační jednotky"
 
-msgid "Data element: \"{{name}}\""
-msgstr "Datový prvek: \"{{name}}\""
+msgid "Data element field"
+msgstr ""
+
+msgid "Value"
+msgstr ""
+
+msgid "Note"
+msgstr ""
 
 msgid "Name"
 msgstr "název"
+
+msgid ""
+"Include the data source in the name to distinguish it from other sources "
+"(e.g. precipitation data is available from both ERA5-Land and CHIRPS)."
+msgstr ""
 
 msgid "Short name"
 msgstr "Krátký název"
 
 msgid "Code"
 msgstr "Kód"
+
+msgid ""
+"If you use this code, this data element will be autoselected in the import "
+"form when choosing the \"{{-name}}\" dataset."
+msgstr ""
 
 msgid "Description"
 msgstr "Popis"
@@ -880,6 +931,9 @@ msgstr "Agregát"
 msgid "Aggregation type"
 msgstr "Typ agregace"
 
+msgid "Use your domain knowledge to select the appropriate aggregation type"
+msgstr ""
+
 msgid "Store zero data values"
 msgstr "Uložit nulové hodnoty dat"
 
@@ -893,6 +947,11 @@ msgid "Assign all org unit levels"
 msgstr "Přiřazení všech úrovní organizačních jednotek"
 
 msgid ""
+"Assign all to prevent aggregation across organisation unit levels, "
+"especially from facility to higher levels defined by a geographic boundary."
+msgstr ""
+
+msgid ""
 "You should now be able to import data with this app. Please reach out to us "
 "on climate-app@dhis2.org if you have any questions or need help with the "
 "setup."
@@ -901,11 +960,11 @@ msgstr ""
 "jakýchkoli dotazů nebo potřeby pomoci s nastavením se na nás obraťte na "
 "adrese climate-app@dhis2.org."
 
-msgid "3. Assign to a data element group"
-msgstr "3. Přiřazení do skupiny datových prvků"
+msgid "4. Assign to a DHIS2 data element group"
+msgstr ""
 
-msgid "Data element group: \"{{-name}}\""
-msgstr "Skupina datových prvků: \"{{-name}}\""
+msgid "Data element group field"
+msgstr ""
 
 msgid "Data elements"
 msgstr "Datové prvky"
@@ -913,42 +972,27 @@ msgstr "Datové prvky"
 msgid "Assign above data element"
 msgstr "Přiřazení výše uvedeného datového prvku"
 
-msgid "2. Assign to a data set"
-msgstr "2. Přiřazení k datové sadě"
+msgid "3. Assign to a DHIS2 data set"
+msgstr ""
+
+msgid "Data set field"
+msgstr ""
 
 msgid ""
-"If you import daily data, you should assign the data elements to a daily "
-"data set (weather and climate). For weekly or monthly data, assign to a "
-"weekly or monthly data set (vegetation index). Assigning to a data set helps"
-" to maintain a quality metadata and data where integrity, consistency, "
-"approvals and protection are facilitated. How exactly to define such a data "
-"set depends on the available users and user groups. Similarly, which of the "
-"organisation units can collect this daily climate data set depends on "
-"situated contexts. However, since we can provide data for any administrative"
-" unit that has defined geographic boundaries we leave that decision to "
-"users. Most probable choice is all organisation units in your system."
+"The same DHIS2 data set can be used for all the \"{{-name}} "
+"{{-periodTypeName}}\" related data elements"
 msgstr ""
-"Pokud importujete denní data, měli byste datové prvky přiřadit k denní "
-"datové sadě (počasí a klima). V případě týdenních nebo měsíčních dat je "
-"třeba přiřadit k týdenní nebo měsíční datové sadě (vegetační index). "
-"Přiřazení k datové sadě pomáhá udržovat kvalitní metadata a data, u nichž je"
-" usnadněna integrita, konzistence, schvalování a ochrana. Jak přesně takovou"
-" datovou sadu definovat, závisí na dostupných uživatelích a skupinách "
-"uživatelů. Stejně tak to, která z organizačních jednotek může tento soubor "
-"denních klimatických dat shromažďovat, závisí na situovaných souvislostech. "
-"Protože však můžeme poskytovat data pro jakoukoli administrativní jednotku, "
-"která má definované geografické hranice, ponecháváme toto rozhodnutí na "
-"uživatelích. Nejpravděpodobnější volbou jsou všechny organizační jednotky v "
-"systému."
-
-msgid "Data set: \"{{-name}}\""
-msgstr "Datová sada: \"{{-name}}\""
 
 msgid "Organisation units"
 msgstr "Organizační jednotky"
 
 msgid "Select all organisation units in your system"
 msgstr "Vyberte všechny organizační jednotky v systému"
+
+msgid ""
+"Assign all organisation units since data can be provided for any unit with "
+"defined geographic boundaries."
+msgstr ""
 
 msgid "4. Add a legend"
 msgstr "4. Přidání legendy"
@@ -968,61 +1012,60 @@ msgstr "Konečná hodnota"
 msgid "Color"
 msgstr "Barva"
 
-msgid "Configuring DHIS2 before importing data"
-msgstr "Konfigurace DHIS2 před importem dat"
+msgid "Configure DHIS2 in order to import data"
+msgstr ""
 
 msgid ""
-"Before you can import data, you need to make some configurations in the "
-"Maintenance app. For detailed instructions on how to configure DHIS2, choose"
-" which data you would like to import below."
+"Create only one DHIS2 data element per dataset, using the lowest period type"
+" needed for analysis, to avoid duplicating data."
 msgstr ""
-"Před importem dat je třeba provést několik konfigurací v aplikaci Údržba. "
-"Podrobné pokyny ke konfiguraci DHIS2 naleznete níže, kde si vyberete, která "
-"data chcete importovat."
 
-msgid "1. Create the data element"
-msgstr "1. Vytvoření datového prvku"
+msgid "1. Select the period type"
+msgstr ""
 
 msgid ""
-"Create DHIS2 data elements only for the data you want to import. We "
-"recommend including the data source in the name to distinguish it from other"
-" sources (e.g. precepetation data is available from both ERA5-Land and "
-"CHIRPS, and there will be additional data providers in the future). If you "
-"use the same code specified below, we will preselect the data element in the"
-" import interface."
+"Select the lowest period type needed for analysis. Data can then be "
+"aggregated to other period types in DHIS2 during analysis in Maps, Data "
+"Visualizer, and other apps."
 msgstr ""
-"Vytvořte datové prvky DHIS2 pouze pro data, která chcete importovat. "
-"Doporučujeme uvést v názvu zdroj dat, abyste je odlišili od jiných zdrojů "
-"(např. data o precepci jsou k dispozici z ERA5-Land i CHIRPS a v budoucnu "
-"přibudou další poskytovatelé dat). Pokud použijete stejný kód, který je "
-"uveden níže, předvybere se datový prvek v rozhraní pro import."
 
-msgid ""
-"When daily data is imported it can be aggregated to other period types in "
-"DHIS2. We don't recommend aggregating across organisation unit levels, "
-"especially when going from facility level to higher levels defined by a "
-"geographic boundary. To make sure the values remain at its own level, assign"
-" all org unit levels as Aggregation levels for each data element created."
+msgid "2. Create the DHIS2 data element"
 msgstr ""
-"Po importu denních dat je lze v DHIS2 agregovat na jiné typy období. "
-"Nedoporučujeme agregovat napříč úrovněmi organizačních jednotek, zejména "
-"pokud přecházíte z úrovně zařízení na vyšší úrovně definované geografickou "
-"hranicí. Chcete-li mít jistotu, že hodnoty zůstanou na své vlastní úrovni, "
-"přiřaďte všechny úrovně organizačních jednotek jako Agregační úrovně pro "
-"každý vytvořený datový prvek."
 
 msgid "Loading data"
 msgstr "Načítání dat"
 
-msgid "Select data to import"
-msgstr "Výběr dat pro import"
-
-msgid "You need access to Google Earth Engine to use this app."
+msgid "Select dataset to import"
 msgstr ""
-"K použití této aplikace potřebujete přístup k aplikaci Google Earth Engine."
+
+msgid ""
+"No datasets are available. Go to the Settings page to learn how to configure"
+" dataset sources."
+msgstr ""
+
+msgid "ENACTS datasets could not be loaded"
+msgstr ""
+
+msgid "Data is from "
+msgstr ""
+
+msgid ". Provider: "
+msgstr ""
+
+msgid "You need access to Google Earth Engine to explore this data."
+msgstr ""
 
 msgid "How to get access?"
 msgstr "Jak získat přístup?"
+
+msgid "Install Maps app v101.5.0 or higher to enable this feature."
+msgstr ""
+
+msgid "Latest period will be selected."
+msgstr ""
+
+msgid "Open as Map"
+msgstr ""
 
 msgid ""
 "For a temporary period there is limited data available for 2024. This is due"
@@ -1035,9 +1078,6 @@ msgstr ""
 
 msgid "Read more on the CDS user forum"
 msgstr "Více informací na uživatelském fóru CDS"
-
-msgid "Data resolution"
-msgstr "Rozlišení dat"
 
 msgid ""
 "You can import data for the lowest levels in your org unit hierarchy, but it"
@@ -1056,38 +1096,8 @@ msgstr ""
 msgid "Time zone"
 msgstr "Časové pásmo"
 
-msgid "ERA5-Land / Copernicus Climate Change Service"
-msgstr "ERA5-Land / Copernicus Climate Change Service"
-
-msgid "ERA5-Heat / Copernicus Climate Change Service"
-msgstr "ERA5-Heat / Copernicus Climate Change Service"
-
-msgid "Climate Hazards Center / UCSB"
-msgstr "Climate Hazards Center / UCSB"
-
-msgid "NASA LP DAAC at the USGS EROS Center"
-msgstr "NASA LP DAAC v centru USGS EROS"
-
-msgid "NASA / USGS / JPL-Caltech"
-msgstr "NASA / USGS / JPL-Caltech"
-
-msgid "Approximately 31 km (0.25°)"
-msgstr "Přibližně 31 km (0,25°)"
-
-msgid "Approximately 9 km (0.1°)"
-msgstr "Přibližně 9 km (0,1°)"
-
-msgid "Approximately 5 km (0.05°)"
-msgstr "Přibližně 5 km (0,05°)"
-
-msgid "Approximately 250 m"
-msgstr "Přibližně 250 m"
-
-msgid "Approximately 500 m"
-msgstr "Přibližně 500 m"
-
-msgid "Approximately 30 m"
-msgstr "Přibližně 30 m"
+msgid "Data resolution is approximately {{resolution}}."
+msgstr ""
 
 msgid ""
 "Landsat Normalized Difference Vegetation Index (NDVI) is used to quantify "
@@ -1112,21 +1122,6 @@ msgstr ""
 
 msgid "Land cover types at yearly intervals"
 msgstr "Typy půdního pokryvu v ročních intervalech"
-
-msgid "Climate/Weather"
-msgstr "Klima/počasí"
-
-msgid "Environment"
-msgstr "Prostředí"
-
-msgid "Weekly or Monthly"
-msgstr "Týdenní nebo měsíční"
-
-msgid "Land"
-msgstr "Pevnina"
-
-msgid "Yearly"
-msgstr "Ročně"
 
 msgid "Air temperature (ERA5-Land)"
 msgstr "Teplota vzduchu (ERA5-Land)"
@@ -1274,6 +1269,15 @@ msgstr "Směrodatná odchylka nadmořské výšky v metrech nad mořem."
 msgid "Percentage of area with this land cover type."
 msgstr "Procento plochy s tímto typem půdního pokryvu."
 
+msgid "Climate/Weather"
+msgstr "Klima/počasí"
+
+msgid "Environment"
+msgstr "Prostředí"
+
+msgid "Land"
+msgstr "Pevnina"
+
 msgid "Heat/cold stress"
 msgstr "Stres z horka/chladu"
 
@@ -1341,6 +1345,9 @@ msgstr "Extrémní tepelný stres"
 msgid "Extreme<br>heat stress"
 msgstr "Extrémní<br>tepelný stres"
 
+msgid "Data resolution is approximately {{resolution}} degrees."
+msgstr ""
+
 msgid "ERA5-Land / Copernicus Climate Change Service / Google Earth Engine"
 msgstr "ERA5-Land / Copernicus Climate Change Service / Google Earth Engine"
 
@@ -1355,3 +1362,18 @@ msgstr "NASA / USGS / JPL-Caltech / Google Earth Engine"
 
 msgid "No data found for the selected period"
 msgstr "Pro vybrané období nebyly nalezeny žádné údaje"
+
+msgid "day"
+msgstr ""
+
+msgid "week"
+msgstr ""
+
+msgid "month"
+msgstr ""
+
+msgid "Yearly"
+msgstr "Ročně"
+
+msgid "year"
+msgstr ""
