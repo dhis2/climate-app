@@ -1,6 +1,6 @@
 {
     "name": "climate-data",
-    "version": "1.13.1",
+    "version": "1.13.2",
     "description": "Explore and import weather and climate data in DHIS2.",
     "license": "BSD-3-Clause",
     "private": true,
