@@ -34,7 +34,7 @@ describe('ImportPreview', () => {
     it('shows 4 main pieces of information', () => {
         cy.mount(<ImportPreview {...defaultProps} />)
         cy.getByDataTest('import-preview').within(() => {
-            cy.get('div').should('have.length', 2)
+            cy.get('div').should('have.length', 1)
             cy.get('li').should('have.length', 4)
         })
     })
@@ -46,19 +46,22 @@ describe('ImportPreview', () => {
         ).should('be.visible')
     })
 
-    it('renders organization unit information with plural form', () => {
-        cy.mount(<ImportPreview {...defaultProps} />)
-        cy.contains('5 organisation units').should('be.visible')
-    })
-
     it('renders organization unit information with singular form', () => {
         const props = {
             ...defaultProps,
             featureCount: 1,
+            orgUnits: [
+                {
+                    id: 'KKkLOTpMXGV',
+                    path: '/ImspTQPwCqd/fdc6uOvgoji/KKkLOTpMXGV',
+                    name: 'Bombali & Sebora',
+                },
+            ],
         }
         cy.mount(<ImportPreview {...props} />)
-        cy.contains('1 organisation unit').should('be.visible')
-        cy.getByDataTest('import-preview').should('not.contain', 'units')
+        cy.contains('For Bombali & Sebora (1 organisation unit)').should(
+            'be.visible'
+        )
     })
 
     it('renders orgUnits text without HTML encoding special characters', () => {
