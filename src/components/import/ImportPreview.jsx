@@ -15,6 +15,7 @@ const ImportPreview = ({
     totalValues,
     orgUnits,
 }) => {
+    console.log('jj orgUnits', orgUnits)
     const periodTypeObj = getPeriodTypes().find(
         (type) => type.id === periodType
     )
@@ -46,6 +47,7 @@ const ImportPreview = ({
             defaultValue: 'For {{ouText}} ({{count}} organisation unit)',
             defaultValue_plural:
                 'For {{ouText}} ({{count}} organisation units)',
+            interpolation: { escapeValue: false },
         }
     )
 
