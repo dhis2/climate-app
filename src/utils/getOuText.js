@@ -113,18 +113,16 @@ const getLevelAndGroupText = (items, isLevel) => {
                 }
             )
         }
+    } else if (isLevel) {
+        ouLevelAndGroupText = i18n.t('{{allDynamicOuNames}} levels', {
+            allDynamicOuNames,
+            interpolation: { escapeValue: false },
+        })
     } else {
-        if (isLevel) {
-            ouLevelAndGroupText = i18n.t('{{allDynamicOuNames}} levels', {
-                allDynamicOuNames,
-                interpolation: { escapeValue: false },
-            })
-        } else {
-            ouLevelAndGroupText = i18n.t('{{allDynamicOuNames}} groups', {
-                allDynamicOuNames,
-                interpolation: { escapeValue: false },
-            })
-        }
+        ouLevelAndGroupText = i18n.t('{{allDynamicOuNames}} groups', {
+            allDynamicOuNames,
+            interpolation: { escapeValue: false },
+        })
     }
 
     return ouLevelAndGroupText
