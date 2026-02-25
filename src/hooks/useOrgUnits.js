@@ -17,12 +17,8 @@ export const GEOFEATURES_QUERY = {
 const DEFAULT_ORG_UNITS = []
 const EMPTY_FEATURES = []
 
-const useOrgUnits = ({
-    orgUnits = DEFAULT_ORG_UNITS,
-    skipToGeojson = false,
-}) => {
+const useOrgUnits = ({ orgUnits = DEFAULT_ORG_UNITS }) => {
     const [features, setFeatures] = useState(EMPTY_FEATURES)
-    const [count, setCount] = useState(EMPTY_FEATURES.length)
     const { system } = useSystemInfo()
 
     const userId = system?.currentUser?.id
@@ -36,10 +32,7 @@ const useOrgUnits = ({
 
     const { error, loading, refetch } = useDataQuery(GEOFEATURES_QUERY, {
         lazy: true,
-        onComplete: (data) => {
-            setCount(data.geoFeatures.length)
-            !skipToGeojson && setFeatures(toGeoJson(data.geoFeatures))
-        },
+        onComplete: (data) => setFeatures(toGeoJson(data.geoFeatures)),
     })
 
     useEffect(() => {
@@ -50,14 +43,12 @@ const useOrgUnits = ({
                 userId,
             })
         } else {
-            setCount(EMPTY_FEATURES.length)
             setFeatures(EMPTY_FEATURES)
         }
-    }, [userId, keyAnalysisDisplayProperty, orgUnitIds, refetch, skipToGeojson])
+    }, [userId, keyAnalysisDisplayProperty, orgUnitIds, refetch])
 
     return {
         features,
-        count,
         error,
         loading,
     }

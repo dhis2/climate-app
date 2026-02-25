@@ -99,16 +99,24 @@ const ImportPage = () => {
     const standardPeriod = getStandardPeriod(period) // ISO 8601 used by GEE
     const [startExtract, setStartExtract] = useState(false)
 
-    const { count: featureCount } = useOrgUnits({
+    const {
+        features,
+        loading: featuresLoading,
+        error: featuresError,
+    } = useOrgUnits({
         orgUnits,
-        skipToGeojson: true,
     })
+
+    const featureCount = features.length
+
     const periodCount = useMemo(() => getPeriods(period).length, [period])
     const valueCount = featureCount * periodCount
 
     const isValid = !!(
         dataset &&
         isValidPeriod(standardPeriod) &&
+        !featuresLoading &&
+        !featuresError &&
         featureCount > 0 &&
         dataElement &&
         valueCount <= maxValues
@@ -211,7 +219,13 @@ const ImportPage = () => {
                     />
                 </div>
                 <div className={classes.formSection}>
-                    <OrgUnits selected={orgUnits} onChange={setOrgUnits} />
+                    <OrgUnits
+                        selected={orgUnits}
+                        onChange={setOrgUnits}
+                        featureCount={featureCount}
+                        featuresLoading={featuresLoading}
+                        featuresError={featuresError}
+                    />
                     {dataset?.resolutionText && (
                         <Resolution
                             resolution={dataset.resolutionText}

@@ -10,7 +10,26 @@ import SectionH2 from '../shared/SectionH2.jsx'
 
 const DEFAULT_SELECTED = []
 
-const OrgUnits = ({ selected = DEFAULT_SELECTED, onChange }) => {
+const getOrgUnitsWarning = (featuresLoading, featuresError, featureCount) => {
+    if (featuresLoading) {
+        return null
+    }
+    if (featuresError?.message) {
+        return featuresError.message
+    }
+    if (featureCount === 0) {
+        return i18n.t('No org units geometries found')
+    }
+    return null
+}
+
+const OrgUnits = ({
+    selected = DEFAULT_SELECTED,
+    onChange,
+    featureCount,
+    featuresLoading,
+    featuresError,
+}) => {
     const { roots, loading, error } = useOrgUnitRoots()
     const { levels, loading: levelsLoading } = useOrgUnitLevels()
     const { system } = useSystemInfo()
@@ -46,8 +65,11 @@ const OrgUnits = ({ selected = DEFAULT_SELECTED, onChange }) => {
         [onChange]
     )
 
-    const hasOrgUnits = selected?.length > 0
-    const warning = i18n.t('At least one organisation unit must be selected.')
+    const warning = getOrgUnitsWarning(
+        featuresLoading,
+        featuresError,
+        featureCount
+    )
 
     if (error?.message) {
         return (
@@ -73,7 +95,7 @@ const OrgUnits = ({ selected = DEFAULT_SELECTED, onChange }) => {
                 selected={selected}
                 onSelect={onChangeOrgUnits}
                 hideUserOrgUnits={true}
-                warning={hasOrgUnits ? null : warning}
+                warning={warning}
                 displayNameProp={displayNameProp}
             />
         </>
@@ -82,6 +104,9 @@ const OrgUnits = ({ selected = DEFAULT_SELECTED, onChange }) => {
 
 OrgUnits.propTypes = {
     onChange: PropTypes.func.isRequired,
+    featureCount: PropTypes.number,
+    featuresError: PropTypes.object,
+    featuresLoading: PropTypes.bool,
     selected: PropTypes.array,
 }
 

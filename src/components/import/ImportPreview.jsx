@@ -15,7 +15,6 @@ const ImportPreview = ({
     totalValues,
     orgUnits,
 }) => {
-    console.log('jj orgUnits', orgUnits)
     const periodTypeObj = getPeriodTypes().find(
         (type) => type.id === periodType
     )
