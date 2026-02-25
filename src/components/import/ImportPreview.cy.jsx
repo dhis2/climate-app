@@ -9,13 +9,14 @@ describe('ImportPreview', () => {
         endDate: '2025-12-31',
         dataElement: 'Temperature',
         totalValues: 120,
-        orgUnitCount: 5,
+        featureCount: 5,
+        orgUnits: [],
     }
 
     it('shows 4 main pieces of information', () => {
         cy.mount(<ImportPreview {...defaultProps} />)
         cy.getByDataTest('import-preview').within(() => {
-            cy.get('div').should('have.length', 1)
+            cy.get('div').should('have.length', 2)
             cy.get('li').should('have.length', 4)
         })
     })
@@ -29,16 +30,16 @@ describe('ImportPreview', () => {
 
     it('renders organization unit information with plural form', () => {
         cy.mount(<ImportPreview {...defaultProps} />)
-        cy.contains('For 5 organisation unit').should('be.visible')
+        cy.contains('5 organisation units').should('be.visible')
     })
 
     it('renders organization unit information with singular form', () => {
         const props = {
             ...defaultProps,
-            orgUnitCount: 1,
+            featureCount: 1,
         }
         cy.mount(<ImportPreview {...props} />)
-        cy.contains('For 1 organisation unit').should('be.visible')
+        cy.contains('1 organisation unit').should('be.visible')
     })
 
     it('renders data element information', () => {
@@ -48,7 +49,7 @@ describe('ImportPreview', () => {
 
     it('renders total values count', () => {
         cy.mount(<ImportPreview {...defaultProps} />)
-        cy.contains('120 data value').should('be.visible')
+        cy.contains('120 data values will be imported').should('be.visible')
     })
 
     it('renders singular form when totalValues is 1', () => {
