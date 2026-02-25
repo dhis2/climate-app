@@ -1,16 +1,15 @@
-# 
 # Translators:
 # Viktor Varland <viktor@dhis2.org>, 2026
 # 晓东 林 <13981924470@126.com>, 2026
-# easylin <lin_xd@126.com>, 2026
 # Philip Larsen Donnelly, 2026
+# easylin <lin_xd@126.com>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2026-01-30T12:52:50.606Z\n"
 "PO-Revision-Date: 2025-02-05 13:11+0000\n"
-"Last-Translator: Philip Larsen Donnelly, 2026\n"
+"Last-Translator: easylin <lin_xd@126.com>, 2026\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -589,25 +588,25 @@ msgid "Value is only for 250 x 250 m where the facility is located"
 msgstr "仅适用于设施所在的 250 x 250 米区域"
 
 msgid "Loading data elements..."
-msgstr ""
+msgstr "加载数据元素..."
 
 msgid "No data elements found. You must first select a dataset to import."
-msgstr ""
+msgstr "未找到数据元素。您必须首先选择要导入的数据集。"
 
 msgid "No data elements found for the selected period type."
-msgstr ""
+msgstr "所选时期类型未找到数据元素。"
 
 msgid "Showing data elements from {{periodType}} data sets"
-msgstr ""
+msgstr "显示来自{{periodType}} 数据集的数据元素"
 
 msgid "No match found"
 msgstr "未找到匹配项"
 
 msgid "Need help setting up data elements for import? Check out the "
-msgstr ""
+msgstr "需要帮助设置导入数据元素吗？查看 "
 
 msgid "setup guide"
-msgstr ""
+msgstr "设置指南"
 
 msgid "Loading org units"
 msgstr "装载组织单位"
@@ -626,7 +625,7 @@ msgid "Extracting data for {{orgUnitsCount}} org units"
 msgstr "提取{{orgUnitsCount}} org 单位的数据"
 
 msgid "Dataset provider not recognized"
-msgstr ""
+msgstr "未识别数据集提供者"
 
 msgid "Importing data to DHIS2"
 msgstr "将数据导入 DHIS2"
@@ -641,58 +640,60 @@ msgid "Import weather and climate data"
 msgstr "导入天气和气候数据"
 
 msgid "Choose data source"
-msgstr ""
+msgstr "选择数据源"
 
 msgid "Choose destination data element"
-msgstr ""
+msgstr "选择目的地数据元素"
 
 msgid "Review and import"
-msgstr ""
+msgstr "审查和导入"
 
 msgid ""
 "Import limit exceeded: {{valueCount}} values selected (maximum "
 "{{maxValues}}). Reduce your selection by choosing fewer organisation units "
 "or a shorter time period. Additional imports can be performed separately."
 msgstr ""
+"超过导入限制：已选择{{valueCount}} 值（最多{{maxValues}} "
+"）。通过选择更少的组织单位或更短的时间段来减少您的选择。其他导入可单独进行。"
 
 msgid "Start import"
 msgstr "开始导入"
 
 msgid "For the {{periodTypeNoun}} {{date}}"
-msgstr ""
+msgstr "{{periodTypeNoun}} {{date}}"
 
 msgid "{{periodTypeName}} values between {{startDate}} and {{endDate}}"
-msgstr ""
+msgstr "{{periodTypeName}} {{startDate}} 和{{endDate}}"
 
 msgid "For {{orgUnitParent}} {{orgLevelName}}"
-msgstr ""
+msgstr "用于{{orgUnitParent}} {{orgLevelName}}"
 
 msgid ""
 "For all organisation units at {{orgLevelName}} level within "
 "{{orgUnitParent}}"
-msgstr ""
+msgstr "{{orgLevelName}} 级别的所有组织单位。{{orgUnitParent}}"
 
 msgid "To data element \"{{dataElement}}\""
-msgstr ""
+msgstr "至数据元素 \"{{dataElement}}\""
 
 msgid "{{count}} data values will be imported"
 msgid_plural "{{count}} data values will be imported"
-msgstr[0] ""
+msgstr[0] "{{count}} 数据值将被导入"
 
 msgid "Data is imported"
 msgstr "数据已导入"
 
 msgid "Imported: {{imported}}"
-msgstr ""
+msgstr "进口：{{imported}}"
 
 msgid "Updated: {{updated}}"
-msgstr ""
+msgstr "已更新：{{updated}}"
 
 msgid "Ignored (already exists): {{ignored}}"
-msgstr ""
+msgstr "忽略（已存在）：{{ignored}}"
 
 msgid "Missing: {{missing}}"
-msgstr ""
+msgstr "失踪：{{missing}}"
 
 msgid "No data for the following org units"
 msgstr "下列组织单位无数据"
@@ -703,16 +704,16 @@ msgid ""
 msgstr "ERA5-Land 的沿海地区数据有限。其他 org 单位的数值将被导入。"
 
 msgid "Loading organisation units..."
-msgstr ""
+msgstr "加载组织单位..."
 
 msgid "Select organisation unit and level"
-msgstr ""
+msgstr "选择组织单位和级别"
 
 msgid ""
 "All organisation units at the selected level within the parent org unit will"
 " be included. If the selected parent is on the selected level, then data "
 "will be imported for this single org unit only."
-msgstr ""
+msgstr "将包括父组织单位内所选级别的所有组织单位。如果所选父组织单位位于所选层级，则只导入该单一组织单位的数据。"
 
 msgid "Parent organisation unit"
 msgstr "上级组织机构"
@@ -724,40 +725,40 @@ msgid "Organisation unit level"
 msgstr "组织机构等级"
 
 msgid "Start and end date are not within the valid range."
-msgstr ""
+msgstr "开始和结束日期不在有效范围内。"
 
 msgid "Start date is not within the valid range."
-msgstr ""
+msgstr "开始日期不在有效范围内。"
 
 msgid "End date is not within the valid range."
-msgstr ""
+msgstr "结束日期不在有效范围内。"
 
 msgid ""
 "{{periodTypeName}} data between start and end date will be calculated from "
 "hourly data."
-msgstr ""
+msgstr "{{periodTypeName}} 开始日期和结束日期之间的数据将按小时计算。"
 
 msgid ""
 "{{periodTypeName}} data between start and end date will be calculated from "
 "hourly data, with time zone adjustments applied if the selected time zone is"
 " not set to UTC."
-msgstr ""
+msgstr "{{periodTypeName}} 开始日期和结束日期之间的数据将根据每小时数据计算，如果所选时区未设置为 UTC，则会应用时区调整。"
 
 msgid ""
 "{{periodTypeName}} data between start and end date will be calculated and "
 "then aggregated to the selected period type."
-msgstr ""
+msgstr "{{periodTypeName}} 将计算开始日期和结束日期之间的数据，然后汇总到所选的期间类型。"
 
 msgid ""
 "The data will be assigned a yearly period type that matches the year it was "
 "collected: {{datasetPeriod}}"
-msgstr ""
+msgstr "数据将被分配一个与收集年份相匹配的年度周期类型：{{datasetPeriod}}"
 
 msgid "Valid range: {{startDate}} - {{endDate}}"
-msgstr ""
+msgstr "有效范围：{{startDate}} -{{endDate}}"
 
 msgid "Valid range"
-msgstr ""
+msgstr "有效范围"
 
 msgid "Period type"
 msgstr "期间类型"
@@ -769,7 +770,7 @@ msgid "End year"
 msgstr "年底"
 
 msgid "Chart settings"
-msgstr ""
+msgstr "图表设置"
 
 msgid ""
 "Set y-axis values for charts in the Explore data section to make it easier "
@@ -802,21 +803,21 @@ msgid "Heat stress lower category"
 msgstr "热应力较低类别"
 
 msgid "Data Providers"
-msgstr ""
+msgstr "数据提供者"
 
 msgid ""
 "The following data providers can be configured and used in the Climate app. "
 "Contact your administrator to configure these data providers."
-msgstr ""
+msgstr "气候应用程序可配置和使用以下数据提供程序。请联系您的管理员配置这些数据提供程序。"
 
 msgid "Provider name"
-msgstr ""
+msgstr "提供方名称"
 
 msgid "Status"
 msgstr "状态"
 
 msgid "Setup info"
-msgstr ""
+msgstr "设置信息"
 
 msgid "Close"
 msgstr "关闭"
@@ -840,13 +841,13 @@ msgid "Time zone where your org units are located"
 msgstr "您的组织单位所在的时区"
 
 msgid "Data element field"
-msgstr ""
+msgstr "数据元素字段"
 
 msgid "Value"
 msgstr "数值"
 
 msgid "Note"
-msgstr ""
+msgstr "备注"
 
 msgid "Name"
 msgstr "名称"
@@ -854,7 +855,7 @@ msgstr "名称"
 msgid ""
 "Include the data source in the name to distinguish it from other sources "
 "(e.g. precipitation data is available from both ERA5-Land and CHIRPS)."
-msgstr ""
+msgstr "在名称中包含数据源，以区别于其他数据源（例如，ERA5-Land 和 CHIRPS 均提供降水数据）。"
 
 msgid "Short name"
 msgstr "缩写名"
@@ -865,7 +866,7 @@ msgstr "代码"
 msgid ""
 "If you use this code, this data element will be autoselected in the import "
 "form when choosing the \"{{-name}}\" dataset."
-msgstr ""
+msgstr "如果使用此代码，则在导入表格中选择 \"{{-name}}\"数据集时将自动选择该数据元素。"
 
 msgid "Description"
 msgstr "描述"
@@ -883,7 +884,7 @@ msgid "Aggregation type"
 msgstr "汇总类型"
 
 msgid "Use your domain knowledge to select the appropriate aggregation type"
-msgstr ""
+msgstr "利用领域知识选择合适的聚合类型"
 
 msgid "Store zero data values"
 msgstr "存储零数据值"
@@ -900,7 +901,7 @@ msgstr "分配所有组织单位级别"
 msgid ""
 "Assign all to prevent aggregation across organisation unit levels, "
 "especially from facility to higher levels defined by a geographic boundary."
-msgstr ""
+msgstr "全部分配以防止跨组织单位级别的汇总，特别是从设施到由地理边界定义的更高级别。"
 
 msgid ""
 "You should now be able to import data with this app. Please reach out to us "
@@ -910,10 +911,10 @@ msgstr ""
 "现在您应该可以使用此应用程序导入数据了。如果您在设置过程中有任何问题或需要帮助，请通过 climate-app@dhis2.org 联系我们。"
 
 msgid "4. Assign to a DHIS2 data element group"
-msgstr ""
+msgstr "4.分配给 DHIS2 数据元素组"
 
 msgid "Data element group field"
-msgstr ""
+msgstr "数据元素组字段"
 
 msgid "Data elements"
 msgstr "数据元"
@@ -922,15 +923,15 @@ msgid "Assign above data element"
 msgstr "分配上述数据元素"
 
 msgid "3. Assign to a DHIS2 data set"
-msgstr ""
+msgstr "3.分配给 DHIS2 数据集"
 
 msgid "Data set field"
-msgstr ""
+msgstr "数据集字段"
 
 msgid ""
 "The same DHIS2 data set can be used for all the \"{{-name}} "
 "{{-periodTypeName}}\" related data elements"
-msgstr ""
+msgstr "同一 DHIS2 数据集可用于所有与 \"{{-name}} {{-periodTypeName}} \"相关的数据元素"
 
 msgid "Organisation units"
 msgstr "组织机构"
@@ -941,7 +942,7 @@ msgstr "选择系统中的所有组织单位"
 msgid ""
 "Assign all organisation units since data can be provided for any unit with "
 "defined geographic boundaries."
-msgstr ""
+msgstr "指定所有组织单位，因为可以为任何有明确地理边界的单位提供数据。"
 
 msgid "4. Add a legend"
 msgstr "4.添加图例"
@@ -962,56 +963,56 @@ msgid "Color"
 msgstr "颜色"
 
 msgid "Configure DHIS2 in order to import data"
-msgstr ""
+msgstr "配置 DHIS2 以导入数据"
 
 msgid ""
 "Create only one DHIS2 data element per dataset, using the lowest period type"
 " needed for analysis, to avoid duplicating data."
-msgstr ""
+msgstr "每个数据集只创建一个 DHIS2 数据元素，使用分析所需的最低周期类型，以避免重复数据。"
 
 msgid "1. Select the period type"
-msgstr ""
+msgstr "1.选择周期类型"
 
 msgid ""
 "Select the lowest period type needed for analysis. Data can then be "
 "aggregated to other period types in DHIS2 during analysis in Maps, Data "
 "Visualizer, and other apps."
-msgstr ""
+msgstr "选择分析所需的最低时段类型。然后，在地图、数据展示台和其他应用程序中进行分析时，可将数据汇总到 DHIS2 中的其他时期类型。"
 
 msgid "2. Create the DHIS2 data element"
-msgstr ""
+msgstr "2.创建 DHIS2 数据元素"
 
 msgid "Loading data"
 msgstr "加载数据中"
 
 msgid "Select dataset to import"
-msgstr ""
+msgstr "选择要导入的数据集"
 
 msgid ""
 "No datasets are available. Go to the Settings page to learn how to configure"
 " dataset sources."
-msgstr ""
+msgstr "没有可用的数据集。转到设置页面了解如何配置数据集来源。"
 
 msgid "ENACTS datasets could not be loaded"
-msgstr ""
+msgstr "无法加载 ENACTS 数据集"
 
 msgid "Data is from "
-msgstr ""
+msgstr "数据来自 "
 
 msgid ". Provider: "
-msgstr ""
+msgstr ".提供商 "
 
 msgid "You need access to Google Earth Engine to explore this data."
-msgstr ""
+msgstr "您需要访问谷歌地球引擎才能浏览这些数据。"
 
 msgid "How to get access?"
 msgstr "如何进入？"
 
 msgid "Install Maps app v101.5.0 or higher to enable this feature."
-msgstr ""
+msgstr "安装地图应用程序 v101.5.0 或更高版本以启用此功能。"
 
 msgid "Latest period will be selected."
-msgstr ""
+msgstr "将选择最近的时段。"
 
 msgid "Open as Map"
 msgstr "打开为地图"
@@ -1039,7 +1040,7 @@ msgid "Time zone"
 msgstr "时区"
 
 msgid "Data resolution is approximately {{resolution}}."
-msgstr ""
+msgstr "数据分辨率约为{{resolution}} 。"
 
 msgid ""
 "Landsat Normalized Difference Vegetation Index (NDVI) is used to quantify "
@@ -1275,7 +1276,7 @@ msgid "Extreme<br>heat stress"
 msgstr "极端<br>热应激"
 
 msgid "Data resolution is approximately {{resolution}} degrees."
-msgstr ""
+msgstr "数据分辨率约为{{resolution}} 度。"
 
 msgid "ERA5-Land / Copernicus Climate Change Service / Google Earth Engine"
 msgstr "ERA5-Land / 哥白尼气候变化服务 / 谷歌地球引擎"
