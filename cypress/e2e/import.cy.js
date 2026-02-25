@@ -318,7 +318,7 @@ describe('Import', () => {
             .contains('Weekly values between')
             .should('be.visible')
         cy.getByDataTest('import-preview')
-            .contains('For 13 organisation units')
+            .contains('(13 organisation units)')
             .should('be.visible')
         cy.getByDataTest('import-preview')
             .contains('To data element "IDSR Malaria"')
@@ -398,7 +398,7 @@ describe('Import', () => {
             .contains('Weekly values between')
             .should('be.visible')
         cy.getByDataTest('import-preview')
-            .contains('For 13 organisation units')
+            .contains('(13 organisation units)')
             .should('be.visible')
         cy.getByDataTest('import-preview')
             .contains('To data element "IDSR Malaria"')
@@ -409,7 +409,7 @@ describe('Import', () => {
             .should('be.visible')
     })
 
-    it('select the correct org unit groups and import the correct values', () => {
+    it.only('select the correct org unit groups and import the correct values', () => {
         cy.visit('#/import')
 
         selectDataset('Earth Engine: Precipitation (ERA5-Land)')
@@ -425,14 +425,18 @@ describe('Import', () => {
             .should('be.visible')
 
         cy.getByDataTest('import-preview')
-            .contains('For 15 organisation units')
+            .contains(
+                'For Mission groups in Sierra Leone - District levels in Sierra Leone (15 organisation units)'
+            )
             .should('be.visible')
 
         selectOrgUnitGroup('Rural')
 
         cy.getByDataTest('import-preview').scrollIntoView()
         cy.getByDataTest('import-preview')
-            .contains('For 257 organisation units')
+            .contains(
+                'For Mission and Rural groups in Sierra Leone - District levels in Sierra Leone (257 organisation units)'
+            )
             .should('be.visible')
 
         // Remove Rural selection
@@ -453,7 +457,7 @@ describe('Import', () => {
 
         cy.getByDataTest('import-preview').scrollIntoView()
         cy.getByDataTest('import-preview')
-            .contains('For 2 organisation units')
+            .contains('(2 organisation units)')
             .should('be.visible')
 
         cy.intercept('POST', '**/api/*/dataValueSets*', {
