@@ -42,7 +42,7 @@ const OrgUnits = ({ selected = DEFAULT_SELECTED, onChange }) => {
     }, [roots, levels, onChange])
 
     const onChangeOrgUnits = useCallback(
-        () => (orgUnits) => onChange(orgUnits.items),
+        (orgUnits) => onChange(orgUnits.items),
         [onChange]
     )
 
