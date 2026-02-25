@@ -2,7 +2,7 @@ import { OrgUnitDimension } from '@dhis2/analytics'
 import i18n from '@dhis2/d2-i18n'
 import { CircularLoader, CenteredContent, Help } from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import { useMemo, useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 import useOrgUnitLevels from '../../hooks/useOrgUnitLevels.js'
 import useOrgUnitRoots from '../../hooks/useOrgUnitRoots.js'
 import useSystemInfo from '../../hooks/useSystemInfo.js'
@@ -24,7 +24,7 @@ const OrgUnits = ({ selected = DEFAULT_SELECTED, onChange }) => {
 
     // Set for root node as default
     useEffect(() => {
-        if (roots && levels) {
+        if (roots?.length > 0 && levels?.length > 0) {
             const [root] = roots
             const levelUnderRoot = levels[1]
 
@@ -41,7 +41,7 @@ const OrgUnits = ({ selected = DEFAULT_SELECTED, onChange }) => {
         }
     }, [roots, levels, onChange])
 
-    const onChangeOrgUnits = useMemo(
+    const onChangeOrgUnits = useCallback(
         () => (orgUnits) => onChange(orgUnits.items),
         [onChange]
     )
