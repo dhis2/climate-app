@@ -242,6 +242,7 @@ const ImportPage = () => {
                             orgUnitCount={orgUnitCount}
                             dataElement={dataElement.displayName || ''}
                             totalValues={valueCount}
+                            orgUnits={orgUnits}
                         />
                     )}
                     <div>

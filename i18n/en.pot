@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-02-05T17:21:58.475Z\n"
-"PO-Revision-Date: 2026-02-05T17:21:58.475Z\n"
+"POT-Creation-Date: 2026-02-25T09:48:25.901Z\n"
+"PO-Revision-Date: 2026-02-25T09:48:25.902Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -701,10 +701,10 @@ msgstr "For the {{periodTypeNoun}} {{date}}"
 msgid "{{periodTypeName}} values between {{startDate}} and {{endDate}}"
 msgstr "{{periodTypeName}} values between {{startDate}} and {{endDate}}"
 
-msgid "For {{count}} organisation unit"
-msgid_plural "For {{count}} organisation unit"
-msgstr[0] "For {{count}} organisation unit"
-msgstr[1] "For {{count}} organisation units"
+msgid "For {{ouText}} ({{count}} organisation units)"
+msgid_plural "For {{ouText}} ({{count}} organisation units)"
+msgstr[0] "For {{ouText}} ({{count}} organisation unit)"
+msgstr[1] "For {{ouText}} ({{count}} organisation units)"
 
 msgid "To data element \"{{dataElement}}\""
 msgstr "To data element \"{{dataElement}}\""
@@ -1363,6 +1363,21 @@ msgstr "NASA / USGS / JPL-Caltech / Google Earth Engine"
 
 msgid "No data found for the selected period"
 msgstr "No data found for the selected period"
+
+msgid "{{dynamicOuNames}} and {{lastOuName}}"
+msgstr "{{dynamicOuNames}} and {{lastOuName}}"
+
+msgid "{{allDynamicOuNames}} levels"
+msgstr "{{allDynamicOuNames}} levels"
+
+msgid "{{allDynamicOuNames}} groups"
+msgstr "{{allDynamicOuNames}} groups"
+
+msgid "{{allDynamicOuNames}} levels in {{staticOuNames}}"
+msgstr "{{allDynamicOuNames}} levels in {{staticOuNames}}"
+
+msgid "{{allDynamicOuNames}} groups in {{staticOuNames}}"
+msgstr "{{allDynamicOuNames}} groups in {{staticOuNames}}"
 
 msgid "day"
 msgstr "day"

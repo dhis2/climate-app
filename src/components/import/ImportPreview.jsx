@@ -1,6 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
 import React from 'react'
+import { getOuLevelAndGroupText } from '../../utils/getOuLevelAndGroupText.js'
 import { DAILY, YEARLY, getPeriodTypes } from '../../utils/time.js'
 import classes from './ImportPreview.module.css'
 
@@ -12,6 +13,7 @@ const ImportPreview = ({
     orgUnitCount,
     dataElement,
     totalValues,
+    orgUnits,
 }) => {
     const periodTypeObj = getPeriodTypes().find(
         (type) => type.id === periodType
@@ -34,11 +36,18 @@ const ImportPreview = ({
                   }
               )
 
-    const orgUnitInfo = i18n.t('For {{count}} organisation unit', {
-        count: orgUnitCount,
-        defaultValue: 'For {{count}} organisation unit',
-        defaultValue_plural: 'For {{count}} organisation units',
-    })
+    const ouText = getOuLevelAndGroupText(orgUnits)
+
+    const orgUnitInfo = i18n.t(
+        'For {{ouText}} ({{count}} organisation units)',
+        {
+            ouText,
+            count: orgUnitCount,
+            defaultValue: 'For {{ouText}} ({{count}} organisation unit)',
+            defaultValue_plural:
+                'For {{ouText}} ({{count}} organisation units)',
+        }
+    )
 
     return (
         <div data-test="import-preview">
@@ -78,6 +87,7 @@ ImportPreview.propTypes = {
     periodType: PropTypes.string.isRequired,
     startDate: PropTypes.string.isRequired,
     totalValues: PropTypes.number.isRequired,
+    orgUnits: PropTypes.array,
 }
 
 export default ImportPreview
