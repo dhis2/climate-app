@@ -1,8 +1,8 @@
-import { getOuLevelAndGroupText } from '../getOuLevelAndGroupText.js'
+import { getOuText } from '../getOuText.js'
 
-describe('getOuLevelAndGroupText', () => {
+describe('getOuText', () => {
     it('should handle empty items array', () => {
-        expect(getOuLevelAndGroupText([])).toBe('')
+        expect(getOuText([])).toBe('')
     })
 
     it('should handle only org unit collections', () => {
@@ -10,17 +10,17 @@ describe('getOuLevelAndGroupText', () => {
             { id: 'ou1', name: 'District 1' },
             { id: 'ou2', name: 'District 2' },
         ]
-        expect(getOuLevelAndGroupText(items)).toBe('')
+        expect(getOuText(items)).toBe('District 1, District 2')
     })
 
     it('should handle single level', () => {
         const items = [{ id: 'LEVEL-2', name: 'Region' }]
-        expect(getOuLevelAndGroupText(items)).toBe('Region levels')
+        expect(getOuText(items)).toBe('Region levels')
     })
 
     it('should handle single group', () => {
         const items = [{ id: 'OU_GROUP-1', name: 'Urban' }]
-        expect(getOuLevelAndGroupText(items)).toBe('Urban groups')
+        expect(getOuText(items)).toBe('Urban groups')
     })
 
     it('should handle multiple levels with "and" conjunction', () => {
@@ -28,7 +28,7 @@ describe('getOuLevelAndGroupText', () => {
             { id: 'LEVEL-2', name: 'Region' },
             { id: 'LEVEL-3', name: 'District' },
         ]
-        expect(getOuLevelAndGroupText(items)).toBe('Region and District levels')
+        expect(getOuText(items)).toBe('Region and District levels')
     })
 
     it('should handle multiple groups with "and" conjunction', () => {
@@ -36,7 +36,7 @@ describe('getOuLevelAndGroupText', () => {
             { id: 'OU_GROUP-1', name: 'Urban' },
             { id: 'OU_GROUP-2', name: 'Rural' },
         ]
-        expect(getOuLevelAndGroupText(items)).toBe('Urban and Rural groups')
+        expect(getOuText(items)).toBe('Urban and Rural groups')
     })
 
     it('should handle three levels with "and" for the last item', () => {
@@ -45,9 +45,7 @@ describe('getOuLevelAndGroupText', () => {
             { id: 'LEVEL-2', name: 'Region' },
             { id: 'LEVEL-3', name: 'District' },
         ]
-        expect(getOuLevelAndGroupText(items)).toBe(
-            'National, Region and District levels'
-        )
+        expect(getOuText(items)).toBe('National, Region and District levels')
     })
 
     it('should handle levels in an org unit', () => {
@@ -55,7 +53,7 @@ describe('getOuLevelAndGroupText', () => {
             { id: 'LEVEL-2', name: 'Region' },
             { id: 'ou1', name: 'Country A' },
         ]
-        expect(getOuLevelAndGroupText(items)).toBe('Region levels in Country A')
+        expect(getOuText(items)).toBe('Region levels in Country A')
     })
 
     it('should handle groups in an org unit', () => {
@@ -63,7 +61,7 @@ describe('getOuLevelAndGroupText', () => {
             { id: 'OU_GROUP-1', name: 'Urban' },
             { id: 'ou1', name: 'Country A' },
         ]
-        expect(getOuLevelAndGroupText(items)).toBe('Urban groups in Country A')
+        expect(getOuText(items)).toBe('Urban groups in Country A')
     })
 
     it('should handle level in multiple org units', () => {
@@ -72,9 +70,7 @@ describe('getOuLevelAndGroupText', () => {
             { id: 'ou1', name: 'Country A' },
             { id: 'ou2', name: 'Country B' },
         ]
-        expect(getOuLevelAndGroupText(items)).toBe(
-            'Region levels in Country A, Country B'
-        )
+        expect(getOuText(items)).toBe('Region levels in Country A, Country B')
     })
 
     it('should handle both levels and groups', () => {
@@ -82,7 +78,7 @@ describe('getOuLevelAndGroupText', () => {
             { id: 'LEVEL-2', name: 'Region' },
             { id: 'OU_GROUP-1', name: 'Urban' },
         ]
-        const result = getOuLevelAndGroupText(items)
+        const result = getOuText(items)
         expect(result).toContain('Urban groups')
         expect(result).toContain('Region levels')
         expect(result).toContain(' - ')
@@ -94,7 +90,7 @@ describe('getOuLevelAndGroupText', () => {
             { id: 'OU_GROUP-1', name: 'Urban' },
             { id: 'ou1', name: 'Country A' },
         ]
-        const result = getOuLevelAndGroupText(items)
+        const result = getOuText(items)
         expect(result).toContain(
             'Urban groups in Country A - Region levels in Country A'
         )
@@ -108,7 +104,7 @@ describe('getOuLevelAndGroupText', () => {
             { id: 'OU_GROUP-2', name: 'Rural' },
             { id: 'ou1', name: 'Country A' },
         ]
-        const result = getOuLevelAndGroupText(items)
+        const result = getOuText(items)
         expect(result).toContain(
             'Urban and Rural groups in Country A - Region and District levels in Country A'
         )
@@ -119,9 +115,7 @@ describe('getOuLevelAndGroupText', () => {
             { id: 'LEVEL-2', name: 'Region & District' },
             { id: 'ou1', name: 'Country (A)' },
         ]
-        expect(getOuLevelAndGroupText(items)).toBe(
-            'Region & District levels in Country (A)'
-        )
+        expect(getOuText(items)).toBe('Region & District levels in Country (A)')
     })
 
     it('should respect order: groups first, then levels', () => {
@@ -129,7 +123,7 @@ describe('getOuLevelAndGroupText', () => {
             { id: 'LEVEL-2', name: 'Region' },
             { id: 'OU_GROUP-1', name: 'Urban' },
         ]
-        const result = getOuLevelAndGroupText(items)
+        const result = getOuText(items)
         const groupIndex = result.indexOf('Urban')
         const levelIndex = result.indexOf('Region')
         expect(groupIndex).toBeLessThan(levelIndex)

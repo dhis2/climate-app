@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { getOuLevelAndGroupText } from '../../utils/getOuLevelAndGroupText.js'
+import { getOuText } from '../../utils/getOuText.js'
 import { DAILY, YEARLY, getPeriodTypes } from '../../utils/time.js'
 import classes from './ImportPreview.module.css'
 
@@ -36,12 +36,10 @@ const ImportPreview = ({
                   }
               )
 
-    const ouText = getOuLevelAndGroupText(orgUnits)
-
     const orgUnitInfo = i18n.t(
         'For {{ouText}} ({{count}} organisation units)',
         {
-            ouText,
+            ouText: getOuText(orgUnits),
             count: featureCount,
             defaultValue: 'For {{ouText}} ({{count}} organisation unit)',
             defaultValue_plural:

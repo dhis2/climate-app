@@ -27,7 +27,23 @@ const ouIdHelper = Object.freeze({
     hasLevelPrefix,
 })
 
-export const getOuLevelAndGroupText = (items) => {
+export const getOuText = (items) => {
+    if (
+        items.some(
+            ({ id }) =>
+                ouIdHelper.hasGroupPrefix(id) || ouIdHelper.hasLevelPrefix(id)
+        )
+    ) {
+        return getOuLevelAndGroupText(items)
+    }
+
+    return items
+        .map((item) => item.name)
+        .filter(Boolean)
+        .join(', ')
+}
+
+const getOuLevelAndGroupText = (items) => {
     const hasOuLevel = items.some((item) => ouIdHelper.hasLevelPrefix(item.id))
     const hasOuGroup = items.some((item) => ouIdHelper.hasGroupPrefix(item.id))
 
