@@ -6,30 +6,23 @@ import useSystemInfo from './useSystemInfo.js'
 export const GEOFEATURES_QUERY = {
     geoFeatures: {
         resource: 'geoFeatures',
-        params: ({
-            orgUnitIds,
-            keyAnalysisDisplayProperty,
-            includeGroupSets,
-            coordinateField,
-            userId,
-        }) => ({
+        params: ({ orgUnitIds, keyAnalysisDisplayProperty, userId }) => ({
             ou: `ou:${orgUnitIds.join(';')}`,
             displayProperty: keyAnalysisDisplayProperty,
-            includeGroupSets,
-            coordinateField,
             _: userId,
         }),
     },
 }
 
 const DEFAULT_ORG_UNITS = []
+const EMPTY_FEATURES = []
 
 const useOrgUnits = ({
     orgUnits = DEFAULT_ORG_UNITS,
-    skipFeatures = false,
+    skipToGeojson = false,
 }) => {
-    const [features, setFeatures] = useState()
-    const [count, setCount] = useState(0)
+    const [features, setFeatures] = useState(EMPTY_FEATURES)
+    const [count, setCount] = useState(EMPTY_FEATURES.length)
     const { system } = useSystemInfo()
 
     const userId = system?.currentUser?.id
@@ -45,9 +38,7 @@ const useOrgUnits = ({
         lazy: true,
         onComplete: (data) => {
             setCount(data.geoFeatures.length)
-            if (!skipFeatures) {
-                setFeatures(toGeoJson(data.geoFeatures))
-            }
+            !skipToGeojson && setFeatures(toGeoJson(data.geoFeatures))
         },
     })
 
@@ -59,11 +50,10 @@ const useOrgUnits = ({
                 userId,
             })
         } else {
-            // Reset when conditions aren't met
-            setCount(0)
-            setFeatures(undefined)
+            setCount(EMPTY_FEATURES.length)
+            setFeatures(EMPTY_FEATURES)
         }
-    }, [userId, keyAnalysisDisplayProperty, orgUnitIds, refetch, skipFeatures])
+    }, [userId, keyAnalysisDisplayProperty, orgUnitIds, refetch, skipToGeojson])
 
     return {
         features,

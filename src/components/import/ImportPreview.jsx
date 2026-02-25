@@ -10,7 +10,7 @@ const ImportPreview = ({
     periodType,
     startDate,
     endDate,
-    orgUnitCount,
+    featureCount,
     dataElement,
     totalValues,
     orgUnits,
@@ -42,7 +42,7 @@ const ImportPreview = ({
         'For {{ouText}} ({{count}} organisation units)',
         {
             ouText,
-            count: orgUnitCount,
+            count: featureCount,
             defaultValue: 'For {{ouText}} ({{count}} organisation unit)',
             defaultValue_plural:
                 'For {{ouText}} ({{count}} organisation units)',
@@ -83,7 +83,7 @@ ImportPreview.propTypes = {
     dataElement: PropTypes.string.isRequired,
     dataset: PropTypes.string.isRequired,
     endDate: PropTypes.string.isRequired,
-    orgUnitCount: PropTypes.number.isRequired,
+    featureCount: PropTypes.number.isRequired,
     periodType: PropTypes.string.isRequired,
     startDate: PropTypes.string.isRequired,
     totalValues: PropTypes.number.isRequired,
