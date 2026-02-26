@@ -87,13 +87,13 @@ const typeStartAndEndDates = (startDate, endDate) => {
     cy.getByDataTest('end-date-input-content').find('input').type(endDate)
 }
 
-const verifyImportPreview = (
+const verifyImportPreview = ({
     datasetName,
     startDate,
     endDate,
     locationInfo,
-    dataElementName
-) => {
+    dataElementName,
+}) => {
     cy.getByDataTest('import-preview').scrollIntoView()
     cy.getByDataTest('import-preview')
         .contains(`${datasetName}" source data will be imported`)
@@ -112,12 +112,7 @@ const verifyImportPreview = (
         .should('be.visible')
 }
 
-const setupBasicImportTest = (
-    dataset,
-    dataElement,
-    startDate = '2026-01-01',
-    endDate = '2026-01-03'
-) => {
+const makeImportSelections = ({ dataset, dataElement, startDate, endDate }) => {
     cy.visit('#/import')
     selectDataset(dataset)
     selectPeriodType('Weekly')
@@ -572,10 +567,12 @@ describe('Import', () => {
     })
 
     it('selects levels only for org units at or above the level in the tree', () => {
-        setupBasicImportTest(
-            'Earth Engine: Precipitation (ERA5-Land)',
-            'IDSR Malaria (weekly)'
-        )
+        makeImportSelections({
+            dataset: 'Earth Engine: Precipitation (ERA5-Land)',
+            dataElement: 'IDSR Malaria (weekly)',
+            startDate: '2026-01-01',
+            endDate: '2026-01-03',
+        })
 
         cy.getByDataTest('org-unit-tree').should('be.visible')
         expandOrgUnitTreeNode('Bonthe')
@@ -583,13 +580,14 @@ describe('Import', () => {
 
         cy.getByDataTest('org-unit-level-select').should('contain', 'District')
 
-        verifyImportPreview(
-            'Precipitation (ERA5-Land)',
-            '2026-01-01',
-            '2026-01-03',
-            'For District levels in Sierra Leone, Bendu Cha (13 organisation units)',
-            'IDSR Malaria'
-        )
+        verifyImportPreview({
+            datasetName: 'Precipitation (ERA5-Land)',
+            startDate: '2026-01-01',
+            endDate: '2026-01-03',
+            locationInfo:
+                'For District levels in Sierra Leone, Bendu Cha (13 organisation units)',
+            dataElementName: 'IDSR Malaria',
+        })
 
         cy.getByDataTest('import-preview')
             .contains('13 data values will be imported')
@@ -607,23 +605,25 @@ describe('Import', () => {
     })
 
     it('selects org unit from tree with org unit group but no level', () => {
-        setupBasicImportTest(
-            'Earth Engine: Air temperature (ERA5-Land)',
-            'IDSR Malaria (weekly)'
-        )
+        makeImportSelections({
+            dataset: 'Earth Engine: Air temperature (ERA5-Land)',
+            dataElement: 'IDSR Malaria (weekly)',
+            startDate: '2026-01-01',
+            endDate: '2026-01-03',
+        })
 
         selectOrgUnitFromTree('Sierra Leone')
         selectOrgUnitFromTree('Bonthe')
         removeOrgUnitLevel('District')
         selectOrgUnitGroup('Rural')
 
-        verifyImportPreview(
-            'Air temperature (ERA5-Land)',
-            '2026-01-01',
-            '2026-01-03',
-            'For Rural groups in Bonthe (41 organisation units)',
-            'IDSR Malaria'
-        )
+        verifyImportPreview({
+            datasetName: 'Air temperature (ERA5-Land)',
+            startDate: '2026-01-01',
+            endDate: '2026-01-03',
+            locationInfo: 'For Rural groups in Bonthe (41 organisation units)',
+            dataElementName: 'IDSR Malaria',
+        })
 
         interceptAndValidateDataValues(41, [
             { orgUnit: 'lc3eMKXaEfw', expectedValue: '25.9' },
@@ -635,22 +635,25 @@ describe('Import', () => {
     })
 
     it('selects with both level and group', () => {
-        setupBasicImportTest(
-            'Earth Engine: Precipitation (ERA5-Land)',
-            'IDSR Malaria (weekly)'
-        )
+        makeImportSelections({
+            dataset: 'Earth Engine: Precipitation (ERA5-Land)',
+            dataElement: 'IDSR Malaria (weekly)',
+            startDate: '2026-01-01',
+            endDate: '2026-01-03',
+        })
 
         cy.getByDataTest('org-unit-tree').should('be.visible')
         cy.getByDataTest('org-unit-level-select').should('contain', 'District')
         selectOrgUnitGroup('Rural')
 
-        verifyImportPreview(
-            'Precipitation (ERA5-Land)',
-            '2026-01-01',
-            '2026-01-03',
-            'For Rural groups in Sierra Leone - District levels in Sierra Leone (257 organisation units)',
-            'IDSR Malaria'
-        )
+        verifyImportPreview({
+            datasetName: 'Precipitation (ERA5-Land)',
+            startDate: '2026-01-01',
+            endDate: '2026-01-03',
+            locationInfo:
+                'For Rural groups in Sierra Leone - District levels in Sierra Leone (257 organisation units)',
+            dataElementName: 'IDSR Malaria',
+        })
 
         cy.intercept('POST', '**/api/*/dataValueSets*', (req) => {
             expect(req.body.dataValues).to.have.lengthOf(257)
