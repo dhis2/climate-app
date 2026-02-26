@@ -87,6 +87,88 @@ const typeStartAndEndDates = (startDate, endDate) => {
     cy.getByDataTest('end-date-input-content').find('input').type(endDate)
 }
 
+const verifyImportPreview = (
+    datasetName,
+    startDate,
+    endDate,
+    locationInfo,
+    dataElementName
+) => {
+    cy.getByDataTest('import-preview').scrollIntoView()
+    cy.getByDataTest('import-preview')
+        .contains(`${datasetName}" source data will be imported`)
+        .should('be.visible')
+
+    cy.getByDataTest('import-preview')
+        .contains(`Weekly values between ${startDate} and ${endDate}`)
+        .should('be.visible')
+
+    cy.getByDataTest('import-preview')
+        .contains(locationInfo)
+        .should('be.visible')
+
+    cy.getByDataTest('import-preview')
+        .contains(`To data element "${dataElementName}"`)
+        .should('be.visible')
+}
+
+const setupBasicImportTest = (
+    dataset,
+    dataElement,
+    startDate = '2026-01-01',
+    endDate = '2026-01-03'
+) => {
+    cy.visit('#/import')
+    selectDataset(dataset)
+    selectPeriodType('Weekly')
+    typeStartAndEndDates(startDate, endDate)
+    selectTargetDataElement(dataElement)
+}
+
+const interceptAndValidateDataValues = (expectedCount, valueChecks = []) => {
+    cy.intercept('POST', '**/api/*/dataValueSets*', (req) => {
+        expect(req.body.dataValues).to.have.lengthOf(expectedCount)
+
+        valueChecks.forEach(({ orgUnit, expectedValue }) => {
+            const dataValue = req.body.dataValues.find(
+                (dv) => dv.orgUnit === orgUnit
+            )
+            expect(dataValue).to.exist
+            expect(dataValue.value).to.equal(expectedValue)
+        })
+
+        req.reply({
+            statusCode: 200,
+            body: {
+                status: 'SUCCESS',
+                importCount: { imported: req.body.dataValues.length },
+            },
+        })
+    }).as('postDataValueSets')
+}
+
+const removeOrgUnitLevel = (levelName) => {
+    cy.getByDataTest('org-unit-level-select').should('be.visible')
+    cy.getByDataTest('dhis2-uicore-chip')
+        .contains(levelName)
+        .parent()
+        .within(() => {
+            cy.getByDataTest('dhis2-uicore-chip-remove').click()
+        })
+}
+
+const expandOrgUnitTreeNode = (nodeName) => {
+    cy.getByDataTest('org-unit-tree-node')
+        .contains(nodeName)
+        .closest('[data-test="org-unit-tree-node"]')
+        .find('[data-test="org-unit-tree-node-toggle"]')
+        .click()
+}
+
+const selectOrgUnitFromTree = (unitName) => {
+    cy.getByDataTest('org-unit-tree-node').contains(unitName).click()
+}
+
 describe('Import', () => {
     it('should inform no datasets available when Enacts and GEE are not configured', () => {
         cy.intercept('**/api/*/tokens/google', geeResponse500).as('getGeeToken')
@@ -409,7 +491,7 @@ describe('Import', () => {
             .should('be.visible')
     })
 
-    it.only('select the correct org unit groups and import the correct values', () => {
+    it('select the correct org unit groups and import the correct values', () => {
         cy.visit('#/import')
 
         selectDataset('Earth Engine: Precipitation (ERA5-Land)')
@@ -467,23 +549,120 @@ describe('Import', () => {
         cy.contains('Start import').click()
 
         // Wait for and verify the intercepted request
-        cy.wait('@postDataValueSets').then((interception) => {
-            expect(interception.request.body).to.deep.equal({
-                dataValues: [
-                    {
-                        value: '97.117',
-                        orgUnit: 'Z9ny6QeqsgX',
-                        dataElement: 'vq2qO3eTrNi',
-                        period: '2025W34',
-                    },
-                    {
-                        value: '94.236',
-                        orgUnit: 'jCnyQOKQBFX',
-                        dataElement: 'vq2qO3eTrNi',
-                        period: '2025W34',
-                    },
-                ],
+        cy.wait('@postDataValueSets', { timeout: 25000 }).then(
+            (interception) => {
+                expect(interception.request.body).to.deep.equal({
+                    dataValues: [
+                        {
+                            value: '97.117',
+                            orgUnit: 'Z9ny6QeqsgX',
+                            dataElement: 'vq2qO3eTrNi',
+                            period: '2025W34',
+                        },
+                        {
+                            value: '94.236',
+                            orgUnit: 'jCnyQOKQBFX',
+                            dataElement: 'vq2qO3eTrNi',
+                            period: '2025W34',
+                        },
+                    ],
+                })
+            }
+        )
+    })
+
+    it('selects levels only for org units at or above the level in the tree', () => {
+        setupBasicImportTest(
+            'Earth Engine: Precipitation (ERA5-Land)',
+            'IDSR Malaria (weekly)'
+        )
+
+        cy.getByDataTest('org-unit-tree').should('be.visible')
+        expandOrgUnitTreeNode('Bonthe')
+        selectOrgUnitFromTree('Bendu Cha')
+
+        cy.getByDataTest('org-unit-level-select').should('contain', 'District')
+
+        verifyImportPreview(
+            'Precipitation (ERA5-Land)',
+            '2026-01-01',
+            '2026-01-03',
+            'For District levels in Sierra Leone, Bendu Cha (13 organisation units)',
+            'IDSR Malaria'
+        )
+
+        cy.getByDataTest('import-preview')
+            .contains('13 data values will be imported')
+            .should('be.visible')
+
+        cy.intercept('POST', '**/api/*/dataValueSets*', (req) => {
+            expect(req.body.dataValues).to.have.lengthOf(13)
+            req.reply({
+                statusCode: 200,
+                body: { status: 'SUCCESS', importCount: { imported: 13 } },
             })
-        })
+        }).as('postDataValueSets')
+        cy.contains('Start import').click()
+        cy.wait('@postDataValueSets', { timeout: 25000 })
+    })
+
+    it('selects org unit from tree with org unit group but no level', () => {
+        setupBasicImportTest(
+            'Earth Engine: Air temperature (ERA5-Land)',
+            'IDSR Malaria (weekly)'
+        )
+
+        selectOrgUnitFromTree('Sierra Leone')
+        selectOrgUnitFromTree('Bonthe')
+        removeOrgUnitLevel('District')
+        selectOrgUnitGroup('Rural')
+
+        verifyImportPreview(
+            'Air temperature (ERA5-Land)',
+            '2026-01-01',
+            '2026-01-03',
+            'For Rural groups in Bonthe (41 organisation units)',
+            'IDSR Malaria'
+        )
+
+        interceptAndValidateDataValues(41, [
+            { orgUnit: 'lc3eMKXaEfw', expectedValue: '25.9' },
+            { orgUnit: 'EB1zRKdYjdY', expectedValue: '26.2' },
+        ])
+
+        cy.contains('Start import').click()
+        cy.wait('@postDataValueSets', { timeout: 25000 })
+    })
+
+    it('selects with both level and group', () => {
+        setupBasicImportTest(
+            'Earth Engine: Precipitation (ERA5-Land)',
+            'IDSR Malaria (weekly)'
+        )
+
+        cy.getByDataTest('org-unit-tree').should('be.visible')
+        cy.getByDataTest('org-unit-level-select').should('contain', 'District')
+        selectOrgUnitGroup('Rural')
+
+        verifyImportPreview(
+            'Precipitation (ERA5-Land)',
+            '2026-01-01',
+            '2026-01-03',
+            'For Rural groups in Sierra Leone - District levels in Sierra Leone (257 organisation units)',
+            'IDSR Malaria'
+        )
+
+        cy.intercept('POST', '**/api/*/dataValueSets*', (req) => {
+            expect(req.body.dataValues).to.have.lengthOf(257)
+            req.reply({
+                statusCode: 200,
+                body: {
+                    status: 'SUCCESS',
+                    importCount: { imported: req.body.dataValues.length },
+                },
+            })
+        }).as('postDataValueSets')
+        cy.contains('Start import').click()
+        cy.wait('@postDataValueSets', { timeout: 25000 })
     })
 })
