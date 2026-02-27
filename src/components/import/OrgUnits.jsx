@@ -18,7 +18,7 @@ const getOrgUnitsWarning = (featuresLoading, featuresError, featureCount) => {
         return featuresError.message
     }
     if (featureCount === 0) {
-        return i18n.t('No org units geometries found')
+        return i18n.t('No org unit geometries found')
     }
     return null
 }
@@ -90,14 +90,16 @@ const OrgUnits = ({
     return (
         <>
             <SectionH2 number="4" title={i18n.t('Select organisation units')} />
-            <OrgUnitDimension
-                roots={roots?.map((r) => r.id)}
-                selected={selected}
-                onSelect={onChangeOrgUnits}
-                hideUserOrgUnits={true}
-                warning={warning}
-                displayNameProp={displayNameProp}
-            />
+            <div data-test="org-units-selector">
+                <OrgUnitDimension
+                    roots={roots?.map((r) => r.id)}
+                    selected={selected}
+                    onSelect={onChangeOrgUnits}
+                    hideUserOrgUnits={true}
+                    warning={warning}
+                    displayNameProp={displayNameProp}
+                />
+            </div>
         </>
     )
 }

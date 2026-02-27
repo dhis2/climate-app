@@ -668,4 +668,134 @@ describe('Import', () => {
         cy.contains('Start import').click()
         cy.wait('@postDataValueSets', { timeout: 25000 })
     })
+
+    describe('Organisation unit warning scenarios', () => {
+        it('shows error message when org unit geometries fail to load', () => {
+            // Intercept the geoFeatures query to return an error
+            cy.intercept('GET', '**/api/*/geoFeatures?**', {
+                statusCode: 500,
+                body: {
+                    httpStatus: 'Internal Server Error',
+                    statusCode: 500,
+                    status: 'ERROR',
+                    message: 'Failed to load organisation unit geometries',
+                },
+            }).as('getGeoFeaturesError')
+
+            cy.visit('#/import')
+
+            selectDataset('Earth Engine: Precipitation (ERA5-Land)')
+            selectPeriodType('Weekly')
+            typeStartAndEndDates('2026-01-01', '2026-01-03')
+            selectTargetDataElement('IDSR Malaria (weekly)')
+
+            cy.wait('@getGeoFeaturesError')
+
+            // Verify the error message is displayed in the org units section
+            cy.getByDataTest('org-units-selector')
+                .contains('Failed to load organisation unit geometries')
+                .should('be.visible')
+
+            // Import button should still be disabled due to error
+            cy.get('button').contains('Start import').should('be.disabled')
+        })
+
+        it.only('shows warning when no org unit geometries are found', () => {
+            cy.visit('#/import')
+
+            selectDataset('Earth Engine: Precipitation (ERA5-Land)')
+            selectPeriodType('Weekly')
+            typeStartAndEndDates('2026-01-01', '2026-01-03')
+            selectTargetDataElement('IDSR Malaria (weekly)')
+
+            // Deselect Sierra Leone
+            selectOrgUnitFromTree('Sierra Leone')
+
+            // Remove District level
+            removeOrgUnitLevel('District')
+
+            // Verify the warning message is displayed
+            cy.getByDataTest('org-units-selector')
+                .contains('No org unit geometries found')
+                .should('be.visible')
+
+            // Import button should be disabled when no geometries found
+            cy.get('button').contains('Start import').should('be.disabled')
+        })
+
+        it('shows error when org unit selection is invalid', () => {
+            cy.visit('#/import')
+
+            selectDataset('Earth Engine: Precipitation (ERA5-Land)')
+            selectPeriodType('Weekly')
+            typeStartAndEndDates('2026-01-01', '2026-01-03')
+            selectTargetDataElement('IDSR Malaria (weekly)')
+
+            // Check that Start import is enabled with default selection
+            cy.get('button').contains('Start import').should('not.be.disabled')
+
+            // Make an invalid org unit selection
+            // Unselect Sierra Leone
+            selectOrgUnitFromTree('Sierra Leone')
+
+            // Drill down to Bendu Cha and select it
+            expandOrgUnitTreeNode('Bonthe')
+            selectOrgUnitFromTree('Bendu Cha')
+
+            // Leave the level at "District" - this creates an invalid selection
+            cy.getByDataTest('org-unit-level-select').should(
+                'contain',
+                'District'
+            )
+
+            // Verify the error message is displayed
+            cy.getByDataTest('org-units-selector')
+                .contains(
+                    'Organisation unit or organisation unit level is not valid'
+                )
+                .should('be.visible')
+
+            // Import button should be disabled due to invalid selection
+            cy.get('button').contains('Start import').should('be.disabled')
+        })
+
+        it('hides warning when org unit geometries load successfully', () => {
+            // First intercept with empty response
+            cy.intercept('GET', '**/api/*/geoFeatures?**', {
+                statusCode: 200,
+                body: [],
+            }).as('getGeoFeaturesEmpty')
+
+            cy.visit('#/import')
+
+            selectDataset('Earth Engine: Precipitation (ERA5-Land)')
+            selectPeriodType('Weekly')
+
+            cy.wait('@getGeoFeaturesEmpty')
+
+            // Verify warning is shown
+            cy.getByDataTest('org-units-selector')
+                .contains('No org unit geometries found')
+                .should('be.visible')
+
+            // Now allow normal response (remove intercept)
+            cy.intercept('GET', '**/api/*/geoFeatures?**').as(
+                'getGeoFeaturesSuccess'
+            )
+
+            // Trigger a re-fetch by typing dates
+            typeStartAndEndDates('2026-01-01', '2026-01-03')
+            selectTargetDataElement('IDSR Malaria (weekly)')
+
+            cy.wait('@getGeoFeaturesSuccess')
+
+            // Warning should no longer be visible
+            cy.getByDataTest('org-units-selector')
+                .contains('No org unit geometries found')
+                .should('not.exist')
+
+            // Import button should be enabled
+            cy.get('button').contains('Start import').should('not.be.disabled')
+        })
+    })
 })

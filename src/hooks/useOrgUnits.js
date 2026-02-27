@@ -1,5 +1,5 @@
 import { useDataQuery } from '@dhis2/app-runtime'
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useRef } from 'react'
 import { toGeoJson } from '../utils/toGeoJson.js'
 import useSystemInfo from './useSystemInfo.js'
 
@@ -32,17 +32,29 @@ const useOrgUnits = ({ orgUnits = DEFAULT_ORG_UNITS }) => {
 
     const { error, loading, refetch } = useDataQuery(GEOFEATURES_QUERY, {
         lazy: true,
-        onComplete: (data) => setFeatures(toGeoJson(data.geoFeatures)),
     })
+    const requestIdRef = useRef(0)
 
     useEffect(() => {
         if (userId && keyAnalysisDisplayProperty && orgUnitIds.length > 0) {
+            const requestId = requestIdRef.current + 1
+            requestIdRef.current = requestId
             refetch({
                 orgUnitIds,
                 keyAnalysisDisplayProperty,
                 userId,
             })
+                .then((data) => {
+                    if (!data || requestId !== requestIdRef.current) {
+                        return
+                    }
+                    setFeatures(toGeoJson(data.geoFeatures))
+                })
+                .catch(() => {
+                    // Errors are surfaced via the data query error state.
+                })
         } else {
+            requestIdRef.current += 1
             setFeatures(EMPTY_FEATURES)
         }
     }, [userId, keyAnalysisDisplayProperty, orgUnitIds, refetch])
