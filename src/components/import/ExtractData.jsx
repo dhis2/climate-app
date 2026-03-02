@@ -94,7 +94,7 @@ const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
 ExtractData.propTypes = {
     dataElement: PropTypes.object.isRequired,
     dataset: PropTypes.object.isRequired,
-    orgUnits: PropTypes.object.isRequired,
+    orgUnits: PropTypes.array.isRequired,
     period: PropTypes.object.isRequired,
 }
 

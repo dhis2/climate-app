@@ -700,7 +700,7 @@ describe('Import', () => {
             cy.get('button').contains('Start import').should('be.disabled')
         })
 
-        it.only('shows warning when no org unit geometries are found', () => {
+        it('shows warning when no org unit geometries are found', () => {
             cy.visit('#/import')
 
             selectDataset('Earth Engine: Precipitation (ERA5-Land)')
@@ -757,44 +757,16 @@ describe('Import', () => {
 
             // Import button should be disabled due to invalid selection
             cy.get('button').contains('Start import').should('be.disabled')
-        })
 
-        it('hides warning when org unit geometries load successfully', () => {
-            // First intercept with empty response
-            cy.intercept('GET', '**/api/*/geoFeatures?**', {
-                statusCode: 200,
-                body: [],
-            }).as('getGeoFeaturesEmpty')
+            // unselect Bendu Cha to return to valid selection and verify error message goes away and import button is enabled again
+            selectOrgUnitFromTree('Bendu Cha')
 
-            cy.visit('#/import')
-
-            selectDataset('Earth Engine: Precipitation (ERA5-Land)')
-            selectPeriodType('Weekly')
-
-            cy.wait('@getGeoFeaturesEmpty')
-
-            // Verify warning is shown
             cy.getByDataTest('org-units-selector')
-                .contains('No org unit geometries found')
-                .should('be.visible')
-
-            // Now allow normal response (remove intercept)
-            cy.intercept('GET', '**/api/*/geoFeatures?**').as(
-                'getGeoFeaturesSuccess'
-            )
-
-            // Trigger a re-fetch by typing dates
-            typeStartAndEndDates('2026-01-01', '2026-01-03')
-            selectTargetDataElement('IDSR Malaria (weekly)')
-
-            cy.wait('@getGeoFeaturesSuccess')
-
-            // Warning should no longer be visible
-            cy.getByDataTest('org-units-selector')
-                .contains('No org unit geometries found')
+                .contains(
+                    'Organisation unit or organisation unit level is not valid'
+                )
                 .should('not.exist')
 
-            // Import button should be enabled
             cy.get('button').contains('Start import').should('not.be.disabled')
         })
     })

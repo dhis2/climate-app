@@ -34,28 +34,50 @@ const useOrgUnits = ({ orgUnits = DEFAULT_ORG_UNITS }) => {
         lazy: true,
     })
     const requestIdRef = useRef(0)
+    const debounceTimeoutRef = useRef(null)
 
     useEffect(() => {
-        if (userId && keyAnalysisDisplayProperty && orgUnitIds.length > 0) {
-            const requestId = requestIdRef.current + 1
-            requestIdRef.current = requestId
-            refetch({
-                orgUnitIds,
-                keyAnalysisDisplayProperty,
-                userId,
-            })
-                .then((data) => {
-                    if (!data || requestId !== requestIdRef.current) {
-                        return
-                    }
-                    setFeatures(toGeoJson(data.geoFeatures))
+        // Clear any pending refetch
+        if (debounceTimeoutRef.current) {
+            clearTimeout(debounceTimeoutRef.current)
+        }
+
+        const performRefetch = () => {
+            if (userId && keyAnalysisDisplayProperty && orgUnitIds.length > 0) {
+                const requestId = requestIdRef.current + 1
+                requestIdRef.current = requestId
+                console.log('jj useOrgUnits refetch', orgUnitIds)
+                refetch({
+                    orgUnitIds,
+                    keyAnalysisDisplayProperty,
+                    userId,
                 })
-                .catch(() => {
-                    // Errors are surfaced via the data query error state.
-                })
-        } else {
-            requestIdRef.current += 1
-            setFeatures(EMPTY_FEATURES)
+                    .then((data) => {
+                        if (!data || requestId !== requestIdRef.current) {
+                            return
+                        }
+                        console.log('jj useOrgUnits onComplete', {
+                            geofeatures: data.geoFeatures,
+                        })
+                        setFeatures(toGeoJson(data.geoFeatures))
+                    })
+                    .catch(() => {
+                        // Errors are surfaced via the data query error state.
+                    })
+            } else {
+                requestIdRef.current += 1
+                console.log('jj useOrgUnits set empty features')
+                setFeatures(EMPTY_FEATURES)
+            }
+        }
+
+        // Debounce the refetch by 200ms to avoid redundant requests
+        debounceTimeoutRef.current = setTimeout(performRefetch, 200)
+
+        return () => {
+            if (debounceTimeoutRef.current) {
+                clearTimeout(debounceTimeoutRef.current)
+            }
         }
     }, [userId, keyAnalysisDisplayProperty, orgUnitIds, refetch])
 
