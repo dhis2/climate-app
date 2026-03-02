@@ -112,15 +112,18 @@ const ImportPage = () => {
     const periodCount = useMemo(() => getPeriods(period).length, [period])
     const valueCount = featureCount * periodCount
 
-    const isValid = !!(
+    // canShowPreview: show preview even during loading (avoids unmounting/remounting)
+    const canShowPreview = !!(
         dataset &&
         isValidPeriod(standardPeriod) &&
-        !featuresLoading &&
         !featuresError &&
         featureCount > 0 &&
         dataElement &&
         valueCount <= maxValues
     )
+
+    // isValid: only true when fully ready (for enabling import button)
+    const isValid = canShowPreview && !featuresLoading
 
     useEffect(() => {
         setStartExtract(false)
@@ -247,7 +250,7 @@ const ImportPage = () => {
                             )}
                         </div>
                     )}
-                    {isValid && !startExtract && (
+                    {canShowPreview && !startExtract && (
                         <ImportPreview
                             dataset={dataset.name || ''}
                             periodType={period.periodType || ''}

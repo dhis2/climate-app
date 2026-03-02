@@ -693,7 +693,10 @@ describe('Import', () => {
 
             // Verify the error message is displayed in the org units section
             cy.getByDataTest('org-units-selector')
-                .contains('Failed to load organisation unit geometries')
+                .contains('An unknown error occurred')
+                .scrollIntoView()
+            cy.getByDataTest('org-units-selector')
+                .contains('An unknown error occurred')
                 .should('be.visible')
 
             // Import button should still be disabled due to error
