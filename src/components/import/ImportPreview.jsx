@@ -37,13 +37,14 @@ const ImportPreview = ({
               )
 
     const orgUnitInfo = i18n.t(
-        'For {{ouText}} ({{count}} organisation units)',
+        'For {{ouText}} ({{count}} organisation units with geometry)',
         {
             ouText: getOuText(orgUnits),
             count: featureCount,
-            defaultValue: 'For {{ouText}} ({{count}} organisation unit)',
+            defaultValue:
+                'For {{ouText}} ({{count}} organisation unit with geometry)',
             defaultValue_plural:
-                'For {{ouText}} ({{count}} organisation units)',
+                'For {{ouText}} ({{count}} organisation units with geometry)',
             interpolation: { escapeValue: false },
         }
     )
