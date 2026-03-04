@@ -395,7 +395,9 @@ describe('Import', () => {
             .contains('Weekly values between')
             .should('be.visible')
         cy.getByDataTest('import-preview')
-            .contains('(13 organisation units)')
+            .contains(
+                '(13 organisation units have geometry and will be imported)'
+            )
             .should('be.visible')
         cy.getByDataTest('import-preview')
             .contains('To data element "IDSR Malaria"')
@@ -475,7 +477,9 @@ describe('Import', () => {
             .contains('Weekly values between')
             .should('be.visible')
         cy.getByDataTest('import-preview')
-            .contains('(13 organisation units)')
+            .contains(
+                '(13 organisation units have geometry and will be imported)'
+            )
             .should('be.visible')
         cy.getByDataTest('import-preview')
             .contains('To data element "IDSR Malaria"')
@@ -503,7 +507,7 @@ describe('Import', () => {
 
         cy.getByDataTest('import-preview')
             .contains(
-                'For Mission groups in Sierra Leone - District levels in Sierra Leone (15 organisation units)'
+                'Selected org units: Mission groups in Sierra Leone - District levels in Sierra Leone (15 organisation units have geometry and will be imported)'
             )
             .should('be.visible')
 
@@ -512,7 +516,7 @@ describe('Import', () => {
         cy.getByDataTest('import-preview').scrollIntoView()
         cy.getByDataTest('import-preview')
             .contains(
-                'For Mission and Rural groups in Sierra Leone - District levels in Sierra Leone (257 organisation units)'
+                'Selected org units: Mission and Rural groups in Sierra Leone - District levels in Sierra Leone (257 organisation units have geometry and will be imported)'
             )
             .should('be.visible')
 
@@ -534,7 +538,9 @@ describe('Import', () => {
 
         cy.getByDataTest('import-preview').scrollIntoView()
         cy.getByDataTest('import-preview')
-            .contains('(2 organisation units)')
+            .contains(
+                '(2 organisation units have geometry and will be imported)'
+            )
             .should('be.visible')
 
         cy.intercept('POST', '**/api/*/dataValueSets*', {
@@ -585,7 +591,7 @@ describe('Import', () => {
             startDate: '2026-01-01',
             endDate: '2026-01-03',
             locationInfo:
-                'For District levels in Sierra Leone, Bendu Cha (13 organisation units)',
+                'Selected org units: District levels in Sierra Leone, Bendu Cha (13 organisation units have geometry and will be imported)',
             dataElementName: 'IDSR Malaria',
         })
 
@@ -621,7 +627,8 @@ describe('Import', () => {
             datasetName: 'Air temperature (ERA5-Land)',
             startDate: '2026-01-01',
             endDate: '2026-01-03',
-            locationInfo: 'For Rural groups in Bonthe (41 organisation units)',
+            locationInfo:
+                'Selected org units: Rural groups in Bonthe (41 organisation units have geometry and will be imported)',
             dataElementName: 'IDSR Malaria',
         })
 
@@ -651,7 +658,7 @@ describe('Import', () => {
             startDate: '2026-01-01',
             endDate: '2026-01-03',
             locationInfo:
-                'For Rural groups in Sierra Leone - District levels in Sierra Leone (257 organisation units)',
+                'Selected org units: Rural groups in Sierra Leone - District levels in Sierra Leone (257 organisation units have geometry and will be imported)',
             dataElementName: 'IDSR Malaria',
         })
 
