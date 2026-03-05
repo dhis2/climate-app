@@ -287,7 +287,7 @@ describe('Import', () => {
             .should('be.visible')
 
         cy.getByDataTest('import-preview')
-            .contains('Weekly values between')
+            .contains('Weekly values from')
             .should('be.visible')
         cy.getByDataTest('import-preview')
             .contains(
@@ -365,7 +365,7 @@ describe('Import', () => {
             .should('be.visible')
 
         cy.getByDataTest('import-preview')
-            .contains('Weekly values between')
+            .contains('Weekly values from')
             .should('be.visible')
         cy.getByDataTest('import-preview')
             .contains(
