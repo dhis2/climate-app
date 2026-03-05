@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-01-30T12:52:50.606Z\n"
-"PO-Revision-Date: 2026-01-30T12:52:50.607Z\n"
+"POT-Creation-Date: 2026-03-05T13:23:23.205Z\n"
+"PO-Revision-Date: 2026-03-05T13:23:23.205Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -695,6 +695,16 @@ msgstr ""
 msgid "Start import"
 msgstr "Start import"
 
+msgid "For {{periodId}} ({{actualStartTime}} to {{actualEndTime}})"
+msgstr "For {{periodId}} ({{actualStartTime}} to {{actualEndTime}})"
+
+msgid ""
+"{{periodTypeName}} values from {{startPeriodId}} to {{endPeriodId}} "
+"({{actualStartTime}} to {{actualEndTime}})"
+msgstr ""
+"{{periodTypeName}} values from {{startPeriodId}} to {{endPeriodId}} "
+"({{actualStartTime}} to {{actualEndTime}})"
+
 msgid "For the {{periodTypeNoun}} {{date}}"
 msgstr "For the {{periodTypeNoun}} {{date}}"
 
@@ -776,6 +786,16 @@ msgstr "Start date is not within the valid range."
 
 msgid "End date is not within the valid range."
 msgstr "End date is not within the valid range."
+
+msgid "Data will be calculated for full weeks, even if a date mid-week is selected."
+msgstr "Data will be calculated for full weeks, even if a date mid-week is selected."
+
+msgid ""
+"Data will be calculated for full months, even if a date mid-month is "
+"selected."
+msgstr ""
+"Data will be calculated for full months, even if a date mid-month is "
+"selected."
 
 msgid ""
 "{{periodTypeName}} data between start and end date will be calculated from "

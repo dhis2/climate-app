@@ -6,6 +6,8 @@ import useSystemInfo from '../../hooks/useSystemInfo.js'
 import useUserLocale from '../../hooks/useUserLocale.js'
 import {
     YEARLY,
+    WEEKLY,
+    MONTHLY,
     normalizeIsoDate,
     getDateStringFromIsoDate,
     getPeriodTypes,
@@ -113,24 +115,43 @@ const Period = ({
         (pt) => pt.id === periodType
     )?.name
 
-    let helpText
+    let helpText = ''
+
+    // Add period normalization message for weekly/monthly first
+    if (periodType === WEEKLY) {
+        helpText = i18n.t(
+            'Data will be calculated for full weeks, even if a date mid-week is selected.'
+        )
+    } else if (periodType === MONTHLY) {
+        helpText = i18n.t(
+            'Data will be calculated for full months, even if a date mid-month is selected.'
+        )
+    }
+
+    // Append calculation/aggregation message
     if (dataset.timeZone || dataset.bands?.[0]?.timeZone) {
         if (timeZone === UTC_TIME_ZONE) {
-            helpText = i18n.t(
-                '{{periodTypeName}} data between start and end date will be calculated from hourly data.',
-                { periodTypeName, nsSeparator: ';' }
-            )
+            helpText +=
+                (helpText ? ' ' : '') +
+                i18n.t(
+                    '{{periodTypeName}} data between start and end date will be calculated from hourly data.',
+                    { periodTypeName, nsSeparator: ';' }
+                )
         } else {
-            helpText = i18n.t(
-                '{{periodTypeName}} data between start and end date will be calculated from hourly data, with time zone adjustments applied if the selected time zone is not set to UTC.',
-                { periodTypeName, nsSeparator: ';' }
-            )
+            helpText +=
+                (helpText ? ' ' : '') +
+                i18n.t(
+                    '{{periodTypeName}} data between start and end date will be calculated from hourly data, with time zone adjustments applied if the selected time zone is not set to UTC.',
+                    { periodTypeName, nsSeparator: ';' }
+                )
         }
     } else {
-        helpText = i18n.t(
-            '{{periodTypeName}} data between start and end date will be calculated and then aggregated to the selected period type.',
-            { periodTypeName, nsSeparator: ';' }
-        )
+        helpText +=
+            (helpText ? ' ' : '') +
+            i18n.t(
+                '{{periodTypeName}} data between start and end date will be calculated and then aggregated to the selected period type.',
+                { periodTypeName, nsSeparator: ';' }
+            )
     }
 
     if (datasetPeriod) {
