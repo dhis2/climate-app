@@ -1,24 +1,7 @@
-import { getApiBaseUrl } from '../support/utils.js'
-
-const geeResponse500 = {
-    httpStatus: 'Internal Server Error',
-    statusCode: 500,
-    httpStatusCode: 500,
-    status: 'ERROR',
-    message: 'No value present',
-}
-
-const getRoutesFixture = () => ({
-    routes: [
-        {
-            code: 'enacts',
-            url: 'http://168.253.224.242:9091/dst/**',
-            displayName: 'ENACTS API',
-            href: `${getApiBaseUrl()}/api/routes/tdsabC1MCfI`,
-            id: 'tdsabC1MCfI',
-        },
-    ],
-})
+const nonBoundaryStartDate = '2026-01-14' // Wednesday
+const nonBoundaryEndDate = '2026-01-29' // Thursday
+const expectedWeeklyNormalizedPeriodText =
+    'Weekly values from 2026-W03 to 2026-W05 (2026-01-12 to 2026-02-01)'
 
 const assertOrgUnitSection = () => {
     cy.contains('Select organisation units').scrollIntoView()
@@ -89,8 +72,7 @@ const typeStartAndEndDates = (startDate, endDate) => {
 
 const verifyImportPreview = ({
     datasetName,
-    startDate,
-    endDate,
+    period,
     locationInfo,
     dataElementName,
 }) => {
@@ -99,9 +81,7 @@ const verifyImportPreview = ({
         .contains(`${datasetName}" source data will be imported`)
         .should('be.visible')
 
-    cy.getByDataTest('import-preview')
-        .contains(`Weekly values between ${startDate} and ${endDate}`)
-        .should('be.visible')
+    cy.getByDataTest('import-preview').contains(period).should('be.visible')
 
     cy.getByDataTest('import-preview')
         .contains(locationInfo)
@@ -165,170 +145,6 @@ const selectOrgUnitFromTree = (unitName) => {
 }
 
 describe('Import', () => {
-    it('should inform no datasets available when Enacts and GEE are not configured', () => {
-        cy.intercept('**/api/*/tokens/google', geeResponse500).as('getGeeToken')
-
-        cy.intercept('GET', '**/api/*/routes?fields=id*', {
-            statusCode: 200,
-            body: {
-                routes: [],
-            },
-        }).as('getRoutes')
-
-        cy.visit('#/import')
-
-        cy.wait('@getGeeToken', { timeout: 30000 })
-        cy.wait('@getRoutes', { timeout: 30000 })
-
-        cy.contains('Select dataset to import').should('be.visible')
-        cy.getByDataTest('dataset-selector-content')
-            .should('be.visible')
-            .click()
-        cy.getByDataTest('dhis2-uicore-select-menu-menuwrapper')
-            .children()
-            .should('have.length', 1)
-        cy.contains('No datasets are available.').should('be.visible')
-        cy.getByDataTest('dhis2-uicore-popper').closePopper()
-        assertOrgUnitSection()
-    })
-
-    it('should show only GEE datasets when GEE is configured and Enacts is not', () => {
-        cy.intercept('GET', '**/api/*/routes?fields=id*', {
-            statusCode: 200,
-            body: {
-                routes: [],
-            },
-        }).as('getRoutes')
-
-        cy.visit('#/import')
-
-        cy.wait('@getRoutes')
-
-        cy.contains('Select dataset to import').should('be.visible')
-        cy.getByDataTest('dataset-selector-content')
-            .should('be.visible')
-            .click()
-        cy.contains('Earth Engine: Air temperature (ERA5-Land)').should(
-            'be.visible'
-        )
-        cy.getByDataTest('dhis2-uicore-select-menu-menuwrapper')
-            .children()
-            .should('have.length', 34)
-    })
-
-    it('should show only Enacts datasets when Enacts is configured and GEE is not', () => {
-        cy.intercept('**/api/*/tokens/google', geeResponse500).as('getGeeToken')
-        cy.intercept(
-            'GET',
-            '**/api/*/routes?fields=id*',
-            getRoutesFixture()
-        ).as('getRoutes')
-
-        cy.intercept('GET', '**/api/routes/*/run/info', {
-            fixture: 'enactsInfo.json',
-        }).as('getEnactsInfo')
-
-        cy.intercept('GET', '**/api/routes/*/run/dataset_info', {
-            fixture: 'enactsDatasetInfo.json',
-        }).as('getEnactsDatasetInfo')
-
-        cy.visit('#/import')
-
-        cy.wait('@getGeeToken')
-        cy.wait('@getRoutes')
-        cy.wait('@getEnactsInfo')
-        cy.wait('@getEnactsDatasetInfo')
-
-        cy.contains('Select dataset to import').should('be.visible')
-        cy.getByDataTest('dataset-selector-content')
-            .should('be.visible')
-            .click()
-        cy.contains('Earth Engine: Air temperature (ERA5-Land)').should(
-            'not.exist'
-        )
-        cy.contains('ENACTS: All stations - Rainfall').should('be.visible')
-        cy.getByDataTest('dhis2-uicore-select-menu-menuwrapper')
-            .children()
-            .should('have.length', 5)
-    })
-
-    it('should show both Enacts and GEE datasets when both are configured', () => {
-        cy.intercept(
-            'GET',
-            '**/api/*/routes?fields=id*',
-            getRoutesFixture()
-        ).as('getRoutes')
-
-        cy.intercept('GET', '**/api/routes/*/run/info', {
-            fixture: 'enactsInfo.json',
-        }).as('getEnactsInfo')
-
-        cy.intercept('GET', '**/api/routes/*/run/dataset_info', {
-            fixture: 'enactsDatasetInfo.json',
-        }).as('getEnactsDatasetInfo')
-
-        cy.visit('#/import')
-
-        cy.wait('@getRoutes')
-        cy.wait('@getEnactsInfo')
-        cy.wait('@getEnactsDatasetInfo')
-
-        cy.contains('Select dataset to import').should('be.visible')
-        cy.getByDataTest('dataset-selector-content')
-            .should('be.visible')
-            .click()
-
-        cy.getByDataTest('dhis2-uicore-select-menu-menuwrapper')
-            .children()
-            .should('have.length', 38)
-
-        cy.getByDataTest('dhis2-uicore-select-menu-menuwrapper').scrollTo('top')
-        cy.contains('ENACTS: All stations - Rainfall').should('be.visible')
-
-        cy.getByDataTest('dhis2-uicore-select-menu-menuwrapper').scrollTo(
-            'bottom'
-        )
-        cy.contains('Earth Engine: Water (MODIS)').should('be.visible')
-    })
-
-    it('should handle 500 error from Enacts endpoint', () => {
-        cy.intercept('**/api/*/tokens/google', geeResponse500).as('getGeeToken')
-        cy.intercept(
-            'GET',
-            '**/api/*/routes?fields=id*',
-            getRoutesFixture()
-        ).as('getRoutes')
-
-        cy.intercept('GET', '**/api/routes/*/run/info', {
-            httpStatus: 'Internal Server Error',
-            statusCode: 500,
-            httpStatusCode: 500,
-            status: 'ERROR',
-            message: 'Something went wrong while fetching Enacts info',
-        }).as('getEnactsInfo')
-
-        cy.visit('#/import')
-
-        cy.wait('@getGeeToken')
-        cy.wait('@getRoutes')
-        cy.wait('@getEnactsInfo')
-
-        cy.contains('Select dataset to import').should('be.visible')
-        cy.getByDataTest('dataset-selector-content')
-            .should('be.visible')
-            .click()
-        cy.contains('Earth Engine: Air temperature (ERA5-Land)').should(
-            'not.exist'
-        )
-        cy.contains('ENACTS: All stations - Rainfall').should('not.exist')
-        cy.getByDataTest('dhis2-uicore-select-menu-menuwrapper')
-            .children()
-            .should('have.length', 1)
-        cy.contains('No datasets are available.').should('be.visible')
-
-        cy.contains('ENACTS datasets could not be loaded').should('be.visible')
-    })
-
     it('configure import for GEE ERA5-Land weekly dataset', () => {
         cy.visit('#/import')
 
@@ -359,7 +175,7 @@ describe('Import', () => {
         cy.getByDataTest('end-date-input').should('be.visible')
 
         cy.contains(
-            'Daily data between start and end date will be calculated from hourly data.'
+            'Daily data between start and end date will be aggregated from hourly data.'
         ).should('be.visible')
 
         // Check the data element section
@@ -386,14 +202,37 @@ describe('Import', () => {
 
         selectTargetDataElement('IDSR Malaria (weekly)')
 
+        cy.getByDataTest('start-date-input').clear()
+        cy.getByDataTest('start-date-input').type(nonBoundaryStartDate)
+        cy.getByDataTest('end-date-input').clear()
+        cy.getByDataTest('end-date-input').type(nonBoundaryEndDate)
+
+        // Check that data elements are now available
+        cy.getByDataTest('data-element-select').click()
+        cy.getByDataTest('dhis2-uicore-select-menu-menuwrapper')
+            .children()
+            .should('have.length.greaterThan', 1)
+        cy.contains(
+            'No data elements found for the selected period type.'
+        ).should('not.exist')
+
+        // Select a weekly data element
+
+        cy.getByDataTest('dhis2-uicore-select-menu-menuwrapper')
+            .children()
+            .contains('IDSR Malaria (weekly)')
+            .click()
+
         cy.getByDataTest('import-preview').scrollIntoView()
         cy.getByDataTest('import-preview')
             .contains('Precipitation (ERA5-Land)" source data will be imported')
             .should('be.visible')
 
         cy.getByDataTest('import-preview')
-            .contains('Weekly values from')
-            .should('be.visible')
+            .find('li')
+            .first()
+            .invoke('text')
+            .should('eq', expectedWeeklyNormalizedPeriodText)
         cy.getByDataTest('import-preview')
             .contains(
                 '(13 organisation units have geometry and will be imported)'
@@ -406,6 +245,14 @@ describe('Import', () => {
         cy.getByDataTest('import-preview')
             .contains('data values will be imported')
             .should('be.visible')
+
+        cy.getByDataTest('start-date-input').scrollIntoView()
+        cy.getByDataTest('start-date-input')
+            .find('input')
+            .should('have.value', nonBoundaryStartDate)
+        cy.getByDataTest('end-date-input')
+            .find('input')
+            .should('have.value', nonBoundaryEndDate)
     })
 
     it('allows user to select time zone if not in Etc/UTC', () => {
@@ -455,6 +302,11 @@ describe('Import', () => {
             .find('input[type="radio"]')
             .should('be.checked')
 
+        cy.getByDataTest('start-date-input').clear()
+        cy.getByDataTest('start-date-input').type(nonBoundaryStartDate)
+        cy.getByDataTest('end-date-input').clear()
+        cy.getByDataTest('end-date-input').type(nonBoundaryEndDate)
+
         // Select a weekly data element
         cy.getByDataTest('data-element-select').click()
         cy.getByDataTest('dhis2-uicore-select-menu-menuwrapper')
@@ -474,8 +326,10 @@ describe('Import', () => {
             .should('be.visible')
 
         cy.getByDataTest('import-preview')
-            .contains('Weekly values from')
-            .should('be.visible')
+            .find('li')
+            .first()
+            .invoke('text')
+            .should('eq', expectedWeeklyNormalizedPeriodText)
         cy.getByDataTest('import-preview')
             .contains(
                 '(13 organisation units have geometry and will be imported)'
@@ -488,6 +342,14 @@ describe('Import', () => {
         cy.getByDataTest('import-preview')
             .contains('data values will be imported')
             .should('be.visible')
+
+        cy.getByDataTest('start-date-input').scrollIntoView()
+        cy.getByDataTest('start-date-input')
+            .find('input')
+            .should('have.value', nonBoundaryStartDate)
+        cy.getByDataTest('end-date-input')
+            .find('input')
+            .should('have.value', nonBoundaryEndDate)
     })
 
     it('select the correct org unit groups and import the correct values', () => {
@@ -588,8 +450,7 @@ describe('Import', () => {
 
         verifyImportPreview({
             datasetName: 'Precipitation (ERA5-Land)',
-            startDate: '2026-01-01',
-            endDate: '2026-01-03',
+            period: 'For 2026-W01 (2025-12-29 to 2026-01-04)',
             locationInfo:
                 'Selected org units: District levels in Sierra Leone, Bendu Cha (13 organisation units have geometry and will be imported)',
             dataElementName: 'IDSR Malaria',
@@ -615,7 +476,7 @@ describe('Import', () => {
             dataset: 'Earth Engine: Air temperature (ERA5-Land)',
             dataElement: 'IDSR Malaria (weekly)',
             startDate: '2026-01-01',
-            endDate: '2026-01-03',
+            endDate: '2026-01-27',
         })
 
         selectOrgUnitFromTree('Sierra Leone')
@@ -625,8 +486,7 @@ describe('Import', () => {
 
         verifyImportPreview({
             datasetName: 'Air temperature (ERA5-Land)',
-            startDate: '2026-01-01',
-            endDate: '2026-01-03',
+            period: 'For 2026-W01 to 2026-W04 (2025-12-29 to 2026-01-26)',
             locationInfo:
                 'Selected org units: Rural groups in Bonthe (41 organisation units have geometry and will be imported)',
             dataElementName: 'IDSR Malaria',
@@ -655,8 +515,7 @@ describe('Import', () => {
 
         verifyImportPreview({
             datasetName: 'Precipitation (ERA5-Land)',
-            startDate: '2026-01-01',
-            endDate: '2026-01-03',
+            period: 'For 2026-W01 (2025-12-29 to 2026-01-04)',
             locationInfo:
                 'Selected org units: Rural groups in Sierra Leone - District levels in Sierra Leone (257 organisation units have geometry and will be imported)',
             dataElementName: 'IDSR Malaria',

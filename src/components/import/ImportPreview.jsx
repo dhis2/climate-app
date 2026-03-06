@@ -39,11 +39,14 @@ const ImportPreview = ({
         const firstPeriod = periods[0]
         const lastPeriod = periods[periods.length - 1]
 
-        // Format period ID for display (e.g., "2025W07" -> "2025-W07", "202502" -> "2025-02")
+        // Format period ID for display (e.g., "2025W1" -> "2025-W01", "202502" -> "2025-02")
         const formatPeriodId = (id) => {
             if (periodType === WEEKLY) {
-                // Convert "2025W07" to "2025-W07"
-                return id.replace(/^(\d{4})W(\d{2})$/, '$1-W$2')
+                // Convert "2025W1" to "2025-W01" (zero-pad week number)
+                return id.replace(
+                    /^(\d{4})W(\d{1,2})$/,
+                    (match, year, week) => `${year}-W${week.padStart(2, '0')}`
+                )
             } else if (periodType === MONTHLY) {
                 // Convert "202502" to "2025-02"
                 return id.replace(/^(\d{4})(\d{2})$/, '$1-$2')
