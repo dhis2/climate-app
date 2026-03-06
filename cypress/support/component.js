@@ -15,7 +15,13 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands.js'
-
+import i18n from '@dhis2/d2-i18n'
 import { mount } from 'cypress/react'
+import enTranslations from '../../src/locales/en/translations.json'
+import '../../src/locales/index.js'
+
+// Move translations from 'default' namespace to 'translation' namespace
+// The locales file auto-generates with 'default' namespace, but d2-i18n expects 'translation'
+i18n.addResources('en', 'translation', enTranslations)
 
 Cypress.Commands.add('mount', mount)

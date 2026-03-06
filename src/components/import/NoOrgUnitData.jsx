@@ -15,7 +15,7 @@ const NoOrgUnitData = ({ data, features }) => {
             {orgUnits.join(', ')}
             <br />
             {i18n.t(
-                'ERA5-Land has limited data for costal areas. Values for other org units will be imported.'
+                'ERA5-Land has limited data for coastal areas. Values for other org units will be imported.'
             )}
         </div>
     ) : null

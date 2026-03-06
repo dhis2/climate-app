@@ -12,15 +12,23 @@ import ExtractGeeData from './ExtractGeeData.jsx'
 import styles from './styles/ExtractData.module.css'
 
 const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
-    const { parent, level } = orgUnits
-    const { features } = useOrgUnits(parent.id, level)
+    const { features, loading, error } = useOrgUnits({ orgUnits })
 
-    if (!features) {
+    if (loading) {
         return <DataLoader label={i18n.t('Loading org units')} height={100} />
+    } else if (error?.message) {
+        return (
+            <div className={styles.container}>
+                {i18n.t('Error loading org units: {{message}}', {
+                    message: error.message,
+                    nsSeparator: '>>',
+                })}
+            </div>
+        )
     } else if (!features.length) {
         return (
             <div className={styles.container}>
-                {i18n.t('No org units with geometry found for this level')}
+                {i18n.t('No org unit geometries found')}
             </div>
         )
     }
@@ -86,7 +94,7 @@ const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
 ExtractData.propTypes = {
     dataElement: PropTypes.object.isRequired,
     dataset: PropTypes.object.isRequired,
-    orgUnits: PropTypes.object.isRequired,
+    orgUnits: PropTypes.array.isRequired,
     period: PropTypes.object.isRequired,
 }
 
