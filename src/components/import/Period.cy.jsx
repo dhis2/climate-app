@@ -128,6 +128,8 @@ describe('Period', () => {
             cy.contains(
                 'Data between start and end date will be imported as daily values.'
             ).should('be.visible')
+            // TimeZone should not be shown for datasets without timezone
+            cy.getByDataTest('time-zone-select').should('not.exist')
         })
     })
 
@@ -162,6 +164,14 @@ describe('Period', () => {
             cy.contains(
                 'Weekly data for full calendar weeks inclusive of start and end dates will be aggregated from hourly data.'
             ).should('be.visible')
+            // TimeZone component should be shown
+            cy.getByDataTest('time-zone-select').should('be.visible')
+            cy.getByDataTest('time-zone-select').should(
+                'contain.text',
+                'Etc/UTC'
+            )
+            cy.getByDataTest('time-zone-select').click()
+            cy.contains('Africa/Freetown').should('be.visible')
         })
 
         it('shows monthly help text with hourly data mention', () => {
@@ -197,6 +207,14 @@ describe('Period', () => {
             cy.contains(
                 'Time zone adjustments will be applied if the selected time zone is not set to UTC.'
             ).should('be.visible')
+            // TimeZone component should be shown with Africa/Freetown
+            cy.getByDataTest('time-zone-select').should('be.visible')
+            cy.getByDataTest('time-zone-select').should(
+                'contain.text',
+                'Etc/UTC'
+            )
+            cy.getByDataTest('time-zone-select').click()
+            cy.contains('Africa/Freetown').should('be.visible')
         })
 
         it('does not show timezone adjustment note when UTC', () => {
@@ -231,6 +249,7 @@ describe('Period', () => {
             cy.contains('Time zone adjustments will be applied').should(
                 'not.exist'
             )
+            cy.getByDataTest('time-zone-select').should('not.exist')
         })
     })
 
