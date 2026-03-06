@@ -129,16 +129,15 @@ const Period = ({
 
     const getHelpText = () => {
         let helpText = ''
+        const periodTypeNoun = getPeriodTypes().find(
+            (pt) => pt.id === periodType
+        )?.noun
 
         if (datasetFromHourlyData) {
-            // Has timezone - data aggregated from hourly data
-            if (periodType === WEEKLY) {
+            if (periodType === WEEKLY || periodType === MONTHLY) {
                 helpText = i18n.t(
-                    'Weekly data for full calendar weeks inclusive of start and end dates will be aggregated from hourly data.'
-                )
-            } else if (periodType === MONTHLY) {
-                helpText = i18n.t(
-                    'Monthly data for full calendar months inclusive of start and end dates will be aggregated from hourly data.'
+                    '{{periodTypeName}} data for full calendar {{periodTypeNoun}}s inclusive of start and end dates will be aggregated from hourly data.',
+                    { periodTypeName, periodTypeNoun }
                 )
             } else {
                 helpText = i18n.t(
@@ -155,20 +154,15 @@ const Period = ({
                         'Time zone adjustments will be applied if the selected time zone is not set to UTC.'
                     )
             }
+        } else if (periodType === WEEKLY || periodType === MONTHLY) {
+            helpText = i18n.t(
+                'Data for full calendar {{periodTypeNoun}}s inclusive of start and end dates will be aggregated to {{periodTypeNoun}}ly values.',
+                { periodTypeNoun }
+            )
         } else {
-            if (periodType === WEEKLY) {
-                helpText = i18n.t(
-                    'Data for full calendar weeks inclusive of start and end dates will be aggregated to weekly values.'
-                )
-            } else if (periodType === MONTHLY) {
-                helpText = i18n.t(
-                    'Data for full calendar months inclusive of start and end dates will be aggregated to monthly values.'
-                )
-            } else {
-                helpText = i18n.t(
-                    'Data between start and end date will be imported as daily values.'
-                )
-            }
+            helpText = i18n.t(
+                'Data between start and end date will be imported as daily values.'
+            )
         }
         return helpText
     }
