@@ -1,3 +1,10 @@
+# [1.14.0](https://github.com/dhis2/climate-app/compare/v1.13.3...v1.14.0) (2026-03-06)
+
+
+### Features
+
+* allow user to select org unit groups when configuring import [CLIM-422] ([#103](https://github.com/dhis2/climate-app/issues/103)) ([ccb2749](https://github.com/dhis2/climate-app/commit/ccb2749c3b593fa5f512660daaade67529f38a4c))
+
 ## [1.13.3](https://github.com/dhis2/climate-app/compare/v1.13.2...v1.13.3) (2026-02-22)
 
 
