@@ -117,41 +117,46 @@ const Period = ({
 
     let helpText = ''
 
-    // Add period normalization message for weekly/monthly first
-    if (periodType === WEEKLY) {
-        helpText = i18n.t(
-            'Data will be calculated for full weeks, even if a date mid-week is selected.'
-        )
-    } else if (periodType === MONTHLY) {
-        helpText = i18n.t(
-            'Data will be calculated for full months, even if a date mid-month is selected.'
-        )
-    }
-
-    // Append calculation/aggregation message
     if (dataset.timeZone || dataset.bands?.[0]?.timeZone) {
-        if (timeZone === UTC_TIME_ZONE) {
-            helpText +=
-                (helpText ? ' ' : '') +
-                i18n.t(
-                    '{{periodTypeName}} data between start and end date will be calculated from hourly data.',
-                    { periodTypeName, nsSeparator: ';' }
-                )
+        // Has timezone - data aggregated from hourly data
+        if (periodType === WEEKLY) {
+            helpText = i18n.t(
+                'Weekly data for full calendar weeks inclusive of start and end dates will be aggregated from hourly data.'
+            )
+        } else if (periodType === MONTHLY) {
+            helpText = i18n.t(
+                'Monthly data for full calendar months inclusive of start and end dates will be aggregated from hourly data.'
+            )
         } else {
+            helpText = i18n.t(
+                '{{periodTypeName}} data between start and end date will be aggregated from hourly data.',
+                { periodTypeName, nsSeparator: ';' }
+            )
+        }
+
+        // Add timezone adjustment note if not UTC
+        if (timeZone !== UTC_TIME_ZONE) {
             helpText +=
-                (helpText ? ' ' : '') +
+                ' ' +
                 i18n.t(
-                    '{{periodTypeName}} data between start and end date will be calculated from hourly data, with time zone adjustments applied if the selected time zone is not set to UTC.',
-                    { periodTypeName, nsSeparator: ';' }
+                    'Time zone adjustments will be applied if the selected time zone is not set to UTC.'
                 )
         }
     } else {
-        helpText +=
-            (helpText ? ' ' : '') +
-            i18n.t(
-                '{{periodTypeName}} data between start and end date will be calculated and then aggregated to the selected period type.',
-                { periodTypeName, nsSeparator: ';' }
+        // No timezone - data aggregated
+        if (periodType === WEEKLY) {
+            helpText = i18n.t(
+                'Data for full calendar weeks inclusive of start and end dates will be aggregated to weekly values.'
             )
+        } else if (periodType === MONTHLY) {
+            helpText = i18n.t(
+                'Data for full calendar months inclusive of start and end dates will be aggregated to monthly values.'
+            )
+        } else {
+            helpText = i18n.t(
+                'Data between start and end date will be imported as daily values.'
+            )
+        }
     }
 
     if (datasetPeriod) {
