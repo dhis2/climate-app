@@ -1,7 +1,5 @@
 const nonBoundaryStartDate = '2026-01-14' // Wednesday
 const nonBoundaryEndDate = '2026-01-29' // Thursday
-const expectedWeeklyNormalizedPeriodText =
-    'Weekly values from 2026-W03 to 2026-W05 (2026-01-12 to 2026-02-01)'
 
 const assertOrgUnitSection = () => {
     cy.contains('Select organisation units').scrollIntoView()
@@ -75,13 +73,18 @@ const verifyImportPreview = ({
     period,
     locationInfo,
     dataElementName,
+    dataValues,
 }) => {
     cy.getByDataTest('import-preview').scrollIntoView()
     cy.getByDataTest('import-preview')
         .contains(`${datasetName}" source data will be imported`)
         .should('be.visible')
 
-    cy.getByDataTest('import-preview').contains(period).should('be.visible')
+    cy.getByDataTest('import-preview')
+        .find('li')
+        .first()
+        .invoke('text')
+        .should('eq', period)
 
     cy.getByDataTest('import-preview')
         .contains(locationInfo)
@@ -89,6 +92,10 @@ const verifyImportPreview = ({
 
     cy.getByDataTest('import-preview')
         .contains(`To data element "${dataElementName}"`)
+        .should('be.visible')
+
+    cy.getByDataTest('import-preview')
+        .contains(`${dataValues} data values will be imported`)
         .should('be.visible')
 }
 
@@ -223,28 +230,14 @@ describe('Import', () => {
             .contains('IDSR Malaria (weekly)')
             .click()
 
-        cy.getByDataTest('import-preview').scrollIntoView()
-        cy.getByDataTest('import-preview')
-            .contains('Precipitation (ERA5-Land)" source data will be imported')
-            .should('be.visible')
-
-        cy.getByDataTest('import-preview')
-            .find('li')
-            .first()
-            .invoke('text')
-            .should('eq', expectedWeeklyNormalizedPeriodText)
-        cy.getByDataTest('import-preview')
-            .contains(
-                '(13 organisation units have geometry and will be imported)'
-            )
-            .should('be.visible')
-        cy.getByDataTest('import-preview')
-            .contains('To data element "IDSR Malaria"')
-            .should('be.visible')
-
-        cy.getByDataTest('import-preview')
-            .contains('data values will be imported')
-            .should('be.visible')
+        verifyImportPreview({
+            datasetName: 'Precipitation (ERA5-Land)',
+            period: 'Weekly values from 2026-W03 to 2026-W05 (2026-01-12 to 2026-02-01)',
+            locationInfo:
+                'Selected org units: District levels in Sierra Leone (13 organisation units have geometry and will be imported)',
+            dataElementName: 'IDSR Malaria',
+            dataValues: 13,
+        })
 
         cy.getByDataTest('start-date-input').scrollIntoView()
         cy.getByDataTest('start-date-input')
@@ -318,30 +311,15 @@ describe('Import', () => {
             .click()
 
         // Check import preview section
-        cy.getByDataTest('import-preview').scrollIntoView()
-        cy.getByDataTest('import-preview')
-            .contains(
-                '"Precipitation (ERA5-Land)" source data will be imported'
-            )
-            .should('be.visible')
 
-        cy.getByDataTest('import-preview')
-            .find('li')
-            .first()
-            .invoke('text')
-            .should('eq', expectedWeeklyNormalizedPeriodText)
-        cy.getByDataTest('import-preview')
-            .contains(
-                '(13 organisation units have geometry and will be imported)'
-            )
-            .should('be.visible')
-        cy.getByDataTest('import-preview')
-            .contains('To data element "IDSR Malaria"')
-            .should('be.visible')
-
-        cy.getByDataTest('import-preview')
-            .contains('data values will be imported')
-            .should('be.visible')
+        verifyImportPreview({
+            datasetName: 'Precipitation (ERA5-Land)',
+            period: 'Weekly values from 2026-W03 to 2026-W05 (2026-01-12 to 2026-02-01)',
+            locationInfo:
+                'Selected org units: District levels in Sierra Leone (13 organisation units have geometry and will be imported)',
+            dataElementName: 'IDSR Malaria',
+            dataValues: 13,
+        })
 
         cy.getByDataTest('start-date-input').scrollIntoView()
         cy.getByDataTest('start-date-input')
@@ -362,25 +340,25 @@ describe('Import', () => {
         selectOrgUnitGroup('Mission')
 
         // confirm the import details
-        cy.getByDataTest('import-preview').scrollIntoView()
-        cy.getByDataTest('import-preview')
-            .contains('Precipitation (ERA5-Land)" source data will be imported')
-            .should('be.visible')
-
-        cy.getByDataTest('import-preview')
-            .contains(
-                'Selected org units: Mission groups in Sierra Leone - District levels in Sierra Leone (15 organisation units have geometry and will be imported)'
-            )
-            .should('be.visible')
+        verifyImportPreview({
+            datasetName: 'Precipitation (ERA5-Land)',
+            period: 'For 2025-W34 (2025-08-18 to 2025-08-24)',
+            locationInfo:
+                'Selected org units: Mission groups in Sierra Leone - District levels in Sierra Leone (15 organisation units have geometry and will be imported)',
+            dataElementName: 'IDSR Malaria',
+            dataValues: 15,
+        })
 
         selectOrgUnitGroup('Rural')
 
-        cy.getByDataTest('import-preview').scrollIntoView()
-        cy.getByDataTest('import-preview')
-            .contains(
-                'Selected org units: Mission and Rural groups in Sierra Leone - District levels in Sierra Leone (257 organisation units have geometry and will be imported)'
-            )
-            .should('be.visible')
+        verifyImportPreview({
+            datasetName: 'Precipitation (ERA5-Land)',
+            period: 'For 2025-W34 (2025-08-18 to 2025-08-24)',
+            locationInfo:
+                'Selected org units: Mission groups in Sierra Leone - District levels in Sierra Leone - Rural groups in Sierra Leone (257 organisation units have geometry and will be imported)',
+            dataElementName: 'IDSR Malaria',
+            dataValues: 257,
+        })
 
         // Remove Rural selection
         cy.getByDataTest('dhis2-uicore-chip')
@@ -398,12 +376,14 @@ describe('Import', () => {
                 cy.getByDataTest('dhis2-uicore-chip-remove').click()
             })
 
-        cy.getByDataTest('import-preview').scrollIntoView()
-        cy.getByDataTest('import-preview')
-            .contains(
-                '(2 organisation units have geometry and will be imported)'
-            )
-            .should('be.visible')
+        verifyImportPreview({
+            datasetName: 'Precipitation (ERA5-Land)',
+            period: 'For 2025-W34 (2025-08-18 to 2025-08-24)',
+            locationInfo:
+                'Selected org units: Mission groups in Sierra Leone (13 organisation units have geometry and will be imported)',
+            dataElementName: 'IDSR Malaria',
+            dataValues: 13,
+        })
 
         cy.intercept('POST', '**/api/*/dataValueSets*', {
             statusCode: 200,
@@ -454,11 +434,8 @@ describe('Import', () => {
             locationInfo:
                 'Selected org units: District levels in Sierra Leone, Bendu Cha (13 organisation units have geometry and will be imported)',
             dataElementName: 'IDSR Malaria',
+            dataValues: 13,
         })
-
-        cy.getByDataTest('import-preview')
-            .contains('13 data values will be imported')
-            .should('be.visible')
 
         cy.intercept('POST', '**/api/*/dataValueSets*', (req) => {
             expect(req.body.dataValues).to.have.lengthOf(13)
@@ -490,6 +467,7 @@ describe('Import', () => {
             locationInfo:
                 'Selected org units: Rural groups in Bonthe (41 organisation units have geometry and will be imported)',
             dataElementName: 'IDSR Malaria',
+            dataValues: 41,
         })
 
         interceptAndValidateDataValues(41, [
@@ -519,6 +497,7 @@ describe('Import', () => {
             locationInfo:
                 'Selected org units: Rural groups in Sierra Leone - District levels in Sierra Leone (257 organisation units have geometry and will be imported)',
             dataElementName: 'IDSR Malaria',
+            dataValues: 257,
         })
 
         cy.intercept('POST', '**/api/*/dataValueSets*', (req) => {
