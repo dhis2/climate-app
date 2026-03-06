@@ -109,9 +109,10 @@ describe('ImportPreview', () => {
                 endDate: '2025-12-31',
             }
             cy.mount(<ImportPreview {...props} />)
-            cy.contains(
-                'Monthly values between 2025-01-01 and 2025-12-31'
-            ).should('be.visible')
+            cy.contains('Monthly values from 2025-01 to 2025-12').should(
+                'be.visible'
+            )
+            cy.contains('(2025-01-01 to 2025-12-31)').should('be.visible')
         })
     })
 
@@ -150,9 +151,10 @@ describe('ImportPreview', () => {
                 endDate: '2025-01-26',
             }
             cy.mount(<ImportPreview {...props} />)
-            cy.contains(
-                'Weekly values between 2025-01-06 and 2025-01-26'
-            ).should('be.visible')
+            cy.contains('Weekly values from 2025-W02 to 2025-W04').should(
+                'be.visible'
+            )
+            cy.contains('(2025-01-06 to 2025-01-26)').should('be.visible')
         })
     })
 
