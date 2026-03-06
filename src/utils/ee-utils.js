@@ -188,10 +188,12 @@ const getEarthEngineValues = ({
 
         // Extract start and end dates from the generated periods array
         const startTime = periods[0]?.startDate
-        const endTime = periods.at(-1)?.endDate
 
         // add 1 day so that the last day selected is included by GEE
-        const endTimePlusOne = ee.Date(String(endTime)).advance(1, 'day')
+        const endTimePlusOne = ee
+            .Date(String(periods.at(-1)?.endDate))
+            .advance(1, 'day')
+            .advance(-1, 'second')
 
         const timeZoneStart = ee
             .Date(String(startTime))

@@ -286,7 +286,7 @@ const Period = ({
                         </p>
                     )}
 
-                    <HelpfulInfo text={getHelpText} />
+                    <HelpfulInfo text={getHelpText()} />
                 </>
             )}
 
