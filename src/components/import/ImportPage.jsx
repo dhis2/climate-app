@@ -2,7 +2,7 @@ import { useConfig } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
 import { useState, useMemo, useEffect, useCallback } from 'react'
-import useOrgUnitCount from '../../hooks/useOrgUnitCount.js'
+import useOrgUnits from '../../hooks/useOrgUnits.js'
 import {
     getDefaultImportPeriod,
     getStandardPeriod,
@@ -87,32 +87,43 @@ const getPeriodRange = ({ calendar, periodType, range }) => {
     return { startTime, endTime }
 }
 
+const DEFAULT_ORG_UNITS = []
+
 const ImportPage = () => {
     const { systemInfo = {} } = useConfig()
     const { calendar = 'gregory' } = systemInfo
     const [dataset, setDataset] = useState()
     const [period, setPeriod] = useState(getDefaultImportPeriod({ calendar }))
-    const [orgUnits, setOrgUnits] = useState()
+    const [orgUnits, setOrgUnits] = useState(DEFAULT_ORG_UNITS)
     const [dataElement, setDataElement] = useState()
     const standardPeriod = getStandardPeriod(period) // ISO 8601 used by GEE
     const [startExtract, setStartExtract] = useState(false)
 
-    const orgUnitCount = useOrgUnitCount(orgUnits?.parent?.id, orgUnits?.level)
+    const {
+        features,
+        loading: featuresLoading,
+        error: featuresError,
+    } = useOrgUnits({
+        orgUnits,
+    })
+
+    const featureCount = features.length
+
     const periodCount = useMemo(() => getPeriods(period).length, [period])
-    const valueCount = orgUnitCount * periodCount
+    const valueCount = featureCount * periodCount
 
-    const isValidOrgUnits =
-        orgUnits?.parent &&
-        orgUnits.level &&
-        orgUnits.parent.path.split('/').length - 1 <= Number(orgUnits.level)
-
-    const isValid = !!(
+    // canShowPreview: show preview even during loading (avoids unmounting/remounting)
+    const canShowPreview = !!(
         dataset &&
         isValidPeriod(standardPeriod) &&
-        isValidOrgUnits &&
+        !featuresError &&
+        featureCount > 0 &&
         dataElement &&
         valueCount <= maxValues
     )
+
+    // isValid: only true when fully ready (for enabling import button)
+    const isValid = canShowPreview && !featuresLoading
 
     useEffect(() => {
         setStartExtract(false)
@@ -211,7 +222,13 @@ const ImportPage = () => {
                     />
                 </div>
                 <div className={classes.formSection}>
-                    <OrgUnits selected={orgUnits} onChange={setOrgUnits} />
+                    <OrgUnits
+                        selected={orgUnits}
+                        onChange={setOrgUnits}
+                        featureCount={featureCount}
+                        featuresLoading={featuresLoading}
+                        featuresError={featuresError}
+                    />
                     {dataset?.resolutionText && (
                         <Resolution
                             resolution={dataset.resolutionText}
@@ -233,16 +250,16 @@ const ImportPage = () => {
                             )}
                         </div>
                     )}
-                    {isValid && !startExtract && (
+                    {canShowPreview && !startExtract && (
                         <ImportPreview
                             dataset={dataset.name || ''}
                             periodType={period.periodType || ''}
                             startDate={period.startTime || ''}
                             endDate={period.endTime || ''}
-                            calendar={calendar}
-                            orgUnits={orgUnits}
+                            featureCount={featureCount}
                             dataElement={dataElement.displayName || ''}
                             totalValues={valueCount}
+                            orgUnits={orgUnits}
                         />
                     )}
                     <div>
