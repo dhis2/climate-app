@@ -37,7 +37,7 @@ const ImportPreview = ({
             endTime: endDate,
         })
         const firstPeriod = periods[0]
-        const lastPeriod = periods[periods.length - 1]
+        const lastPeriod = periods.at(-1)
 
         // Format period ID for display (e.g., "2025W1" -> "2025-W01", "202502" -> "2025-02")
         const formatPeriodId = (id) => {

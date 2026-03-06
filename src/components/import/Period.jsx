@@ -22,6 +22,20 @@ import YearRange from './YearRange.jsx'
 
 const DEFAULT_DATASET = {}
 
+const getDateRangeErrorMessage = ({ startDateError, endDateError }) => {
+    let periodErrorMessage = null
+    if (startDateError && endDateError) {
+        periodErrorMessage = i18n.t(
+            'Start and end date are not within the valid range.'
+        )
+    } else if (startDateError) {
+        periodErrorMessage = i18n.t('Start date is not within the valid range.')
+    } else if (endDateError) {
+        periodErrorMessage = i18n.t('End date is not within the valid range.')
+    }
+    return periodErrorMessage
+}
+
 const getValidationState = (minCalendarDate, maxCalendarDate, dateError) => {
     if (!minCalendarDate || !maxCalendarDate) {
         return null
@@ -100,63 +114,63 @@ const Period = ({
 
     const isYearly = datasetPeriodType === YEARLY
 
-    let periodErrorMessage = null
-    if (startDateError && endDateError) {
-        periodErrorMessage = i18n.t(
-            'Start and end date are not within the valid range.'
-        )
-    } else if (startDateError) {
-        periodErrorMessage = i18n.t('Start date is not within the valid range.')
-    } else if (endDateError) {
-        periodErrorMessage = i18n.t('End date is not within the valid range.')
-    }
+    const periodErrorMessage = getDateRangeErrorMessage({
+        startDateError,
+        endDateError,
+    })
 
     const periodTypeName = getPeriodTypes().find(
         (pt) => pt.id === periodType
     )?.name
 
-    let helpText = ''
+    const datasetFromHourlyData = !!(
+        dataset.timeZone || dataset.bands?.[0]?.timeZone
+    )
 
-    if (dataset.timeZone || dataset.bands?.[0]?.timeZone) {
-        // Has timezone - data aggregated from hourly data
-        if (periodType === WEEKLY) {
-            helpText = i18n.t(
-                'Weekly data for full calendar weeks inclusive of start and end dates will be aggregated from hourly data.'
-            )
-        } else if (periodType === MONTHLY) {
-            helpText = i18n.t(
-                'Monthly data for full calendar months inclusive of start and end dates will be aggregated from hourly data.'
-            )
-        } else {
-            helpText = i18n.t(
-                '{{periodTypeName}} data between start and end date will be aggregated from hourly data.',
-                { periodTypeName, nsSeparator: ';' }
-            )
-        }
+    const getHelpText = () => {
+        let helpText = ''
 
-        // Add timezone adjustment note if not UTC
-        if (timeZone !== UTC_TIME_ZONE) {
-            helpText +=
-                ' ' +
-                i18n.t(
-                    'Time zone adjustments will be applied if the selected time zone is not set to UTC.'
+        if (datasetFromHourlyData) {
+            // Has timezone - data aggregated from hourly data
+            if (periodType === WEEKLY) {
+                helpText = i18n.t(
+                    'Weekly data for full calendar weeks inclusive of start and end dates will be aggregated from hourly data.'
                 )
-        }
-    } else {
-        // No timezone - data aggregated
-        if (periodType === WEEKLY) {
-            helpText = i18n.t(
-                'Data for full calendar weeks inclusive of start and end dates will be aggregated to weekly values.'
-            )
-        } else if (periodType === MONTHLY) {
-            helpText = i18n.t(
-                'Data for full calendar months inclusive of start and end dates will be aggregated to monthly values.'
-            )
+            } else if (periodType === MONTHLY) {
+                helpText = i18n.t(
+                    'Monthly data for full calendar months inclusive of start and end dates will be aggregated from hourly data.'
+                )
+            } else {
+                helpText = i18n.t(
+                    '{{periodTypeName}} data between start and end date will be aggregated from hourly data.',
+                    { periodTypeName }
+                )
+            }
+
+            // Add timezone adjustment note if not UTC
+            if (timeZone !== UTC_TIME_ZONE) {
+                helpText +=
+                    ' ' +
+                    i18n.t(
+                        'Time zone adjustments will be applied if the selected time zone is not set to UTC.'
+                    )
+            }
         } else {
-            helpText = i18n.t(
-                'Data between start and end date will be imported as daily values.'
-            )
+            if (periodType === WEEKLY) {
+                helpText = i18n.t(
+                    'Data for full calendar weeks inclusive of start and end dates will be aggregated to weekly values.'
+                )
+            } else if (periodType === MONTHLY) {
+                helpText = i18n.t(
+                    'Data for full calendar months inclusive of start and end dates will be aggregated to monthly values.'
+                )
+            } else {
+                helpText = i18n.t(
+                    'Data between start and end date will be imported as daily values.'
+                )
+            }
         }
+        return helpText
     }
 
     if (datasetPeriod) {
@@ -251,7 +265,7 @@ const Period = ({
                             )}
                             dataTest="end-date-input"
                         />
-                        {(dataset.timeZone || dataset.bands?.[0]?.timeZone) && (
+                        {datasetFromHourlyData && (
                             <div className={classes.timezone}>
                                 <TimeZone period={period} onChange={onChange} />
                             </div>
@@ -278,7 +292,7 @@ const Period = ({
                         </p>
                     )}
 
-                    <HelpfulInfo text={helpText} />
+                    <HelpfulInfo text={getHelpText} />
                 </>
             )}
 
