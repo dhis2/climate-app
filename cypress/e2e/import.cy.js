@@ -99,10 +99,19 @@ const verifyImportPreview = ({
         .should('be.visible')
 }
 
-const makeImportSelections = ({ dataset, dataElement, startDate, endDate }) => {
-    cy.visit('#/import')
+const makeImportSelections = ({
+    dataset,
+    dataElement,
+    periodType = 'Weekly',
+    startDate,
+    endDate,
+    visit = true,
+}) => {
+    if (visit) {
+        cy.visit('#/import')
+    }
     selectDataset(dataset)
-    selectPeriodType('Weekly')
+    selectPeriodType(periodType)
     typeStartAndEndDates(startDate, endDate)
     selectTargetDataElement(dataElement)
 }
@@ -111,9 +120,9 @@ const interceptAndValidateDataValues = (expectedCount, valueChecks = []) => {
     cy.intercept('POST', '**/api/*/dataValueSets*', (req) => {
         expect(req.body.dataValues).to.have.lengthOf(expectedCount)
 
-        valueChecks.forEach(({ orgUnit, expectedValue }) => {
+        valueChecks.forEach(({ orgUnit, period, expectedValue }) => {
             const dataValue = req.body.dataValues.find(
-                (dv) => dv.orgUnit === orgUnit
+                (dv) => dv.orgUnit === orgUnit && dv.period === period
             )
             expect(dataValue).to.exist
             expect(dataValue.value).to.equal(expectedValue)
@@ -236,7 +245,7 @@ describe('Import', () => {
             locationInfo:
                 'Selected org units: District levels in Sierra Leone (13 organisation units have geometry and will be imported)',
             dataElementName: 'IDSR Malaria',
-            dataValues: 13,
+            dataValues: 39,
         })
 
         cy.getByDataTest('start-date-input').scrollIntoView()
@@ -318,7 +327,7 @@ describe('Import', () => {
             locationInfo:
                 'Selected org units: District levels in Sierra Leone (13 organisation units have geometry and will be imported)',
             dataElementName: 'IDSR Malaria',
-            dataValues: 13,
+            dataValues: 39,
         })
 
         cy.getByDataTest('start-date-input').scrollIntoView()
@@ -355,7 +364,7 @@ describe('Import', () => {
             datasetName: 'Precipitation (ERA5-Land)',
             period: 'For 2025-W34 (2025-08-18 to 2025-08-24)',
             locationInfo:
-                'Selected org units: Mission groups in Sierra Leone - District levels in Sierra Leone - Rural groups in Sierra Leone (257 organisation units have geometry and will be imported)',
+                'Selected org units: Mission and Rural groups in Sierra Leone - District levels in Sierra Leone (257 organisation units have geometry and will be imported)',
             dataElementName: 'IDSR Malaria',
             dataValues: 257,
         })
@@ -380,9 +389,9 @@ describe('Import', () => {
             datasetName: 'Precipitation (ERA5-Land)',
             period: 'For 2025-W34 (2025-08-18 to 2025-08-24)',
             locationInfo:
-                'Selected org units: Mission groups in Sierra Leone (13 organisation units have geometry and will be imported)',
+                'Selected org units: Mission groups in Sierra Leone (2 organisation units have geometry and will be imported)',
             dataElementName: 'IDSR Malaria',
-            dataValues: 13,
+            dataValues: 2,
         })
 
         cy.intercept('POST', '**/api/*/dataValueSets*', {
@@ -450,7 +459,7 @@ describe('Import', () => {
 
     it('selects org unit from tree with org unit group but no level', () => {
         makeImportSelections({
-            dataset: 'Earth Engine: Air temperature (ERA5-Land)',
+            dataset: 'Earth Engine: Precipitation (ERA5-Land)',
             dataElement: 'IDSR Malaria (weekly)',
             startDate: '2026-01-01',
             endDate: '2026-01-27',
@@ -462,17 +471,141 @@ describe('Import', () => {
         selectOrgUnitGroup('Rural')
 
         verifyImportPreview({
-            datasetName: 'Air temperature (ERA5-Land)',
-            period: 'For 2026-W01 to 2026-W04 (2025-12-29 to 2026-01-26)',
+            datasetName: 'Precipitation (ERA5-Land)',
+            period: 'Weekly values from 2026-W01 to 2026-W05 (2025-12-29 to 2026-02-01)',
             locationInfo:
                 'Selected org units: Rural groups in Bonthe (41 organisation units have geometry and will be imported)',
             dataElementName: 'IDSR Malaria',
-            dataValues: 41,
+            dataValues: 205,
         })
 
-        interceptAndValidateDataValues(41, [
-            { orgUnit: 'lc3eMKXaEfw', expectedValue: '25.9' },
-            { orgUnit: 'EB1zRKdYjdY', expectedValue: '26.2' },
+        interceptAndValidateDataValues(205, [
+            {
+                orgUnit: 'lc3eMKXaEfw',
+                expectedValue: '31.849',
+                period: '2026W1',
+            },
+            {
+                orgUnit: 'EB1zRKdYjdY',
+                expectedValue: '31.716',
+                period: '2026W1',
+            },
+        ])
+
+        cy.contains('Start import').click()
+        cy.wait('@postDataValueSets', { timeout: 25000 })
+    })
+
+    it('complete weekly values are imported', () => {
+        makeImportSelections({
+            dataset: 'Earth Engine: Precipitation (ERA5-Land)',
+            periodType: 'Weekly',
+            dataElement: 'IDSR Malaria (weekly)',
+            startDate: '2025-12-24',
+            endDate: '2026-01-16',
+        })
+
+        selectOrgUnitFromTree('Sierra Leone')
+        selectOrgUnitFromTree('Bonthe')
+        removeOrgUnitLevel('District')
+
+        verifyImportPreview({
+            datasetName: 'Precipitation (ERA5-Land)',
+            period: 'Weekly values from 2025-W52 to 2026-W03 (2025-12-22 to 2026-01-18)',
+            locationInfo:
+                'Selected org units: Bonthe (1 organisation unit has geometry and will be imported)',
+            dataElementName: 'IDSR Malaria',
+            dataValues: 4,
+        })
+
+        interceptAndValidateDataValues(4, [
+            {
+                orgUnit: 'lc3eMKXaEfw',
+                expectedValue: '16.516',
+                period: '2025W52',
+            },
+            {
+                orgUnit: 'lc3eMKXaEfw',
+                expectedValue: '31.849',
+                period: '2026W1',
+            },
+            {
+                orgUnit: 'lc3eMKXaEfw',
+                expectedValue: '15.412',
+                period: '2026W2',
+            },
+            {
+                orgUnit: 'lc3eMKXaEfw',
+                expectedValue: '14.86',
+                period: '2026W3',
+            },
+        ])
+
+        cy.contains('Start import').click()
+        cy.wait('@postDataValueSets', { timeout: 25000 })
+    })
+
+    it('complete monthly values are imported', () => {
+        cy.intercept('GET', '**/api/*/dataSets*', {
+            statusCode: 200,
+            body: {
+                dataSets: [
+                    {
+                        id: 'x123abc789yz',
+                        displayName: 'Climate/Weather (monthly)',
+                        periodType: 'MONTHLY',
+                        dataSetElements: [
+                            {
+                                dataElement: {
+                                    id: 'vq2qO3eTrNi',
+                                    code: 'ERA5_PRECIPITATION_MONTHLY',
+                                    displayName:
+                                        'Precipitation (ERA5-Land) (monthly)',
+                                },
+                            },
+                        ],
+                    },
+                ],
+            },
+        }).as('getDataSets')
+
+        cy.visit('#/import')
+
+        cy.wait('@getDataSets')
+
+        makeImportSelections({
+            dataset: 'Earth Engine: Precipitation (ERA5-Land)',
+            dataElement: 'Precipitation (ERA5-Land) (monthly)',
+            periodType: 'Monthly',
+            startDate: '2025-12-24',
+            endDate: '2026-01-16',
+            visit: false,
+        })
+
+        selectOrgUnitFromTree('Sierra Leone')
+        selectOrgUnitFromTree('Bonthe')
+        removeOrgUnitLevel('District')
+
+        verifyImportPreview({
+            datasetName: 'Precipitation (ERA5-Land)',
+            period: 'Monthly values from 2025-12 to 2026-01 (2025-12-01 to 2026-01-31)',
+            locationInfo:
+                'Selected org units: Bonthe (1 organisation unit has geometry and will be imported)',
+            dataElementName: 'Precipitation (ERA5-Land) (monthly)',
+            dataValues: 2,
+        })
+
+        interceptAndValidateDataValues(2, [
+            {
+                expectedValue: '82.438',
+                orgUnit: 'lc3eMKXaEfw',
+                period: '202512',
+            },
+            {
+                expectedValue: '64.788',
+                orgUnit: 'lc3eMKXaEfw',
+                period: '202601',
+            },
         ])
 
         cy.contains('Start import').click()
