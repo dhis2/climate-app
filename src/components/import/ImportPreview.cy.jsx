@@ -59,9 +59,9 @@ describe('ImportPreview', () => {
             ],
         }
         cy.mount(<ImportPreview {...props} />)
-        cy.contains('For Bombali & Sebora (1 organisation unit)').should(
-            'be.visible'
-        )
+        cy.contains(
+            'Selected org units: Bombali & Sebora (1 organisation unit has geometry and will be imported)'
+        ).should('be.visible')
     })
 
     it('renders orgUnits text without HTML encoding special characters', () => {
@@ -80,7 +80,7 @@ describe('ImportPreview', () => {
     it('renders the complete organization unit text string', () => {
         cy.mount(<ImportPreview {...defaultProps} />)
         cy.contains(
-            'For Hospital and Clinic groups in Bombali & Sebora - Facility levels in Bombali & Sebora (5 organisation units)'
+            'Selected org units: Hospital and Clinic groups in Bombali & Sebora - Facility levels in Bombali & Sebora (5 organisation units have geometry and will be imported)'
         ).should('be.visible')
     })
 

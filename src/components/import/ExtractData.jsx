@@ -28,7 +28,7 @@ const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
     } else if (!features.length) {
         return (
             <div className={styles.container}>
-                {i18n.t('No org units geometries found')}
+                {i18n.t('No org unit geometries found')}
             </div>
         )
     }

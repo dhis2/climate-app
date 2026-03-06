@@ -85,10 +85,10 @@ ImportPreview.propTypes = {
     dataset: PropTypes.string.isRequired,
     endDate: PropTypes.string.isRequired,
     featureCount: PropTypes.number.isRequired,
+    orgUnits: PropTypes.array.isRequired,
     periodType: PropTypes.string.isRequired,
     startDate: PropTypes.string.isRequired,
     totalValues: PropTypes.number.isRequired,
-    orgUnits: PropTypes.array,
 }
 
 export default ImportPreview
