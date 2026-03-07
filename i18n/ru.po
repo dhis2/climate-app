@@ -1,16 +1,16 @@
-# 
 # Translators:
 # Yury Rogachev <yury@dhis2.org>, 2025
-# Viktor Varland <viktor@dhis2.org>, 2025
 # Valeriu Plesca <vplesca@gmail.com>, 2026
 # Philip Larsen Donnelly, 2026
+# Viktor Varland <viktor@dhis2.org>, 2026
+# Ulanbek Abakirov <ulans@mail.ru>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-01-30T12:52:50.606Z\n"
+"POT-Creation-Date: 2026-03-06T07:07:32.241Z\n"
 "PO-Revision-Date: 2025-02-05 13:11+0000\n"
-"Last-Translator: Philip Larsen Donnelly, 2026\n"
+"Last-Translator: Ulanbek Abakirov <ulans@mail.ru>, 2026\n"
 "Language-Team: Russian (https://app.transifex.com/hisp-uio/teams/100509/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -117,7 +117,7 @@ msgid "End date"
 msgstr "Дата окончания"
 
 msgid "Update"
-msgstr ""
+msgstr "Обновить"
 
 msgid "Maximum {{maxDays}} days allowed"
 msgstr ""
@@ -603,7 +603,10 @@ msgstr ""
 msgid "Loading org units"
 msgstr ""
 
-msgid "No org units with geometry found for this level"
+msgid "Error loading org units: {{message}}"
+msgstr ""
+
+msgid "No org unit geometries found"
 msgstr ""
 
 msgid ""
@@ -653,13 +656,16 @@ msgstr ""
 msgid "{{periodTypeName}} values between {{startDate}} and {{endDate}}"
 msgstr ""
 
-msgid "For {{orgUnitParent}} {{orgLevelName}}"
-msgstr ""
-
 msgid ""
-"For all organisation units at {{orgLevelName}} level within "
-"{{orgUnitParent}}"
-msgstr ""
+"Selected org units: {{ouText}} ({{count}} organisation units have geometry "
+"and will be imported)"
+msgid_plural ""
+"Selected org units: {{ouText}} ({{count}} organisation units have geometry "
+"and will be imported)"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 msgid "To data element \"{{dataElement}}\""
 msgstr ""
@@ -690,30 +696,12 @@ msgid "No data for the following org units"
 msgstr ""
 
 msgid ""
-"ERA5-Land has limited data for costal areas. Values for other org units will"
-" be imported."
+"ERA5-Land has limited data for coastal areas. Values for other org units "
+"will be imported."
 msgstr ""
 
-msgid "Loading organisation units..."
-msgstr ""
-
-msgid "Select organisation unit and level"
-msgstr ""
-
-msgid ""
-"All organisation units at the selected level within the parent org unit will"
-" be included. If the selected parent is on the selected level, then data "
-"will be imported for this single org unit only."
-msgstr ""
-
-msgid "Parent organisation unit"
-msgstr "Родительская организация"
-
-msgid "Org unit parent needs to be above or equal to the org unit level"
-msgstr ""
-
-msgid "Organisation unit level"
-msgstr "Уровень организации"
+msgid "Select organisation units"
+msgstr "Выбрать организационные единицы"
 
 msgid "Start and end date are not within the valid range."
 msgstr ""
@@ -805,13 +793,13 @@ msgid "Provider name"
 msgstr ""
 
 msgid "Status"
-msgstr ""
+msgstr "Статус"
 
 msgid "Setup info"
 msgstr ""
 
 msgid "Close"
-msgstr ""
+msgstr "Закрыть"
 
 msgid "Calculate from data"
 msgstr ""
@@ -835,7 +823,7 @@ msgid "Data element field"
 msgstr ""
 
 msgid "Value"
-msgstr ""
+msgstr "Значение"
 
 msgid "Note"
 msgstr ""
@@ -1280,6 +1268,21 @@ msgstr ""
 
 msgid "No data found for the selected period"
 msgstr ""
+
+msgid "{{dynamicOuNames}} and {{lastOuName}}"
+msgstr "{{dynamicOuNames}} и {{lastOuName}}"
+
+msgid "{{allDynamicOuNames}} levels in {{staticOuNames}}"
+msgstr "Уровни {{allDynamicOuNames}} в {{staticOuNames}}"
+
+msgid "{{allDynamicOuNames}} groups in {{staticOuNames}}"
+msgstr "Группы {{allDynamicOuNames}} в {{staticOuNames}}"
+
+msgid "{{allDynamicOuNames}} levels"
+msgstr "уровень {{allDynamicOuNames}}"
+
+msgid "{{allDynamicOuNames}} groups"
+msgstr "Группы {{allDynamicOuNames}}"
 
 msgid "day"
 msgstr ""
