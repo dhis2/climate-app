@@ -1,20 +1,21 @@
-# 
 # Translators:
 # Carlos Tejo Alonso, 2025
 # Juan M Alcantara Acosta <jmalcantara1@gmail.com>, 2025
 # Pablo Del Médico, 2025
 # Prabhjot Singh, 2025
-# Philip Larsen Donnelly, 2025
-# Janeth Cruz, 2025
-# Viktor Varland <viktor@dhis2.org>, 2025
 # Bruno Raimbault, 2025
+# Manuel Silva <manuel@dhis2.org>, 2026
+# Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2026
+# Philip Larsen Donnelly, 2026
+# Janeth Cruz, 2026
+# Viktor Varland <viktor@dhis2.org>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-01-30T12:52:50.606Z\n"
+"POT-Creation-Date: 2026-03-06T07:07:32.241Z\n"
 "PO-Revision-Date: 2025-02-05 13:11+0000\n"
-"Last-Translator: Bruno Raimbault, 2025\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2026\n"
 "Language-Team: Spanish (https://app.transifex.com/hisp-uio/teams/100509/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -121,7 +122,7 @@ msgid "End date"
 msgstr "Fecha final"
 
 msgid "Update"
-msgstr ""
+msgstr "Actualizar"
 
 msgid "Maximum {{maxDays}} days allowed"
 msgstr ""
@@ -607,7 +608,10 @@ msgstr ""
 msgid "Loading org units"
 msgstr ""
 
-msgid "No org units with geometry found for this level"
+msgid "Error loading org units: {{message}}"
+msgstr ""
+
+msgid "No org unit geometries found"
 msgstr ""
 
 msgid ""
@@ -649,7 +653,7 @@ msgid ""
 msgstr ""
 
 msgid "Start import"
-msgstr ""
+msgstr "Iniciar importación"
 
 msgid "For the {{periodTypeNoun}} {{date}}"
 msgstr ""
@@ -657,13 +661,15 @@ msgstr ""
 msgid "{{periodTypeName}} values between {{startDate}} and {{endDate}}"
 msgstr ""
 
-msgid "For {{orgUnitParent}} {{orgLevelName}}"
-msgstr ""
-
 msgid ""
-"For all organisation units at {{orgLevelName}} level within "
-"{{orgUnitParent}}"
-msgstr ""
+"Selected org units: {{ouText}} ({{count}} organisation units have geometry "
+"and will be imported)"
+msgid_plural ""
+"Selected org units: {{ouText}} ({{count}} organisation units have geometry "
+"and will be imported)"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid "To data element \"{{dataElement}}\""
 msgstr ""
@@ -693,30 +699,12 @@ msgid "No data for the following org units"
 msgstr ""
 
 msgid ""
-"ERA5-Land has limited data for costal areas. Values for other org units will"
-" be imported."
+"ERA5-Land has limited data for coastal areas. Values for other org units "
+"will be imported."
 msgstr ""
 
-msgid "Loading organisation units..."
-msgstr ""
-
-msgid "Select organisation unit and level"
-msgstr ""
-
-msgid ""
-"All organisation units at the selected level within the parent org unit will"
-" be included. If the selected parent is on the selected level, then data "
-"will be imported for this single org unit only."
-msgstr ""
-
-msgid "Parent organisation unit"
-msgstr "Padre de la unidad organizativa"
-
-msgid "Org unit parent needs to be above or equal to the org unit level"
-msgstr ""
-
-msgid "Organisation unit level"
-msgstr "Nivel de unidad organizativa"
+msgid "Select organisation units"
+msgstr "Seleccionar unidades organizativas"
 
 msgid "Start and end date are not within the valid range."
 msgstr ""
@@ -808,13 +796,13 @@ msgid "Provider name"
 msgstr ""
 
 msgid "Status"
-msgstr ""
+msgstr "Estado"
 
 msgid "Setup info"
 msgstr ""
 
 msgid "Close"
-msgstr ""
+msgstr "Cerrar"
 
 msgid "Calculate from data"
 msgstr ""
@@ -826,7 +814,7 @@ msgid "Changes made below will apply to all users of this app."
 msgstr ""
 
 msgid "General settings"
-msgstr ""
+msgstr "Configuración general"
 
 msgid "Default start page for users"
 msgstr ""
@@ -838,7 +826,7 @@ msgid "Data element field"
 msgstr ""
 
 msgid "Value"
-msgstr ""
+msgstr "Valor"
 
 msgid "Note"
 msgstr ""
@@ -1008,7 +996,7 @@ msgid "Latest period will be selected."
 msgstr ""
 
 msgid "Open as Map"
-msgstr ""
+msgstr "Abrir como mapa"
 
 msgid ""
 "For a temporary period there is limited data available for 2024. This is due"
@@ -1284,17 +1272,32 @@ msgstr ""
 msgid "No data found for the selected period"
 msgstr ""
 
-msgid "day"
+msgid "{{dynamicOuNames}} and {{lastOuName}}"
 msgstr ""
+
+msgid "{{allDynamicOuNames}} levels in {{staticOuNames}}"
+msgstr "{{allDynamicOuNames}} niveles en {{staticOuNames}}"
+
+msgid "{{allDynamicOuNames}} groups in {{staticOuNames}}"
+msgstr ""
+
+msgid "{{allDynamicOuNames}} levels"
+msgstr ""
+
+msgid "{{allDynamicOuNames}} groups"
+msgstr ""
+
+msgid "day"
+msgstr "día"
 
 msgid "week"
-msgstr ""
+msgstr "semana"
 
 msgid "month"
-msgstr ""
+msgstr "mes"
 
 msgid "Yearly"
 msgstr "Anual"
 
 msgid "year"
-msgstr ""
+msgstr "año"

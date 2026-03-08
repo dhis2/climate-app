@@ -1,16 +1,15 @@
-# 
 # Translators:
-# Namwan Chanthavisouk, 2025
-# Philip Larsen Donnelly, 2025
-# Viktor Varland <viktor@dhis2.org>, 2025
 # Saysamone Sibounma, 2026
+# Philip Larsen Donnelly, 2026
+# Viktor Varland <viktor@dhis2.org>, 2026
+# Namwan Chanthavisouk, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-01-30T12:52:50.606Z\n"
+"POT-Creation-Date: 2026-03-06T07:07:32.241Z\n"
 "PO-Revision-Date: 2025-02-05 13:11+0000\n"
-"Last-Translator: Saysamone Sibounma, 2026\n"
+"Last-Translator: Namwan Chanthavisouk, 2026\n"
 "Language-Team: Lao (https://app.transifex.com/hisp-uio/teams/100509/lo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -117,7 +116,7 @@ msgid "End date"
 msgstr "ວັນທີສຸດທ້າຍ"
 
 msgid "Update"
-msgstr ""
+msgstr "ປັບປຸງ"
 
 msgid "Maximum {{maxDays}} days allowed"
 msgstr ""
@@ -603,7 +602,10 @@ msgstr ""
 msgid "Loading org units"
 msgstr ""
 
-msgid "No org units with geometry found for this level"
+msgid "Error loading org units: {{message}}"
+msgstr ""
+
+msgid "No org unit geometries found"
 msgstr ""
 
 msgid ""
@@ -653,13 +655,13 @@ msgstr ""
 msgid "{{periodTypeName}} values between {{startDate}} and {{endDate}}"
 msgstr ""
 
-msgid "For {{orgUnitParent}} {{orgLevelName}}"
-msgstr ""
-
 msgid ""
-"For all organisation units at {{orgLevelName}} level within "
-"{{orgUnitParent}}"
-msgstr ""
+"Selected org units: {{ouText}} ({{count}} organisation units have geometry "
+"and will be imported)"
+msgid_plural ""
+"Selected org units: {{ouText}} ({{count}} organisation units have geometry "
+"and will be imported)"
+msgstr[0] ""
 
 msgid "To data element \"{{dataElement}}\""
 msgstr ""
@@ -687,30 +689,12 @@ msgid "No data for the following org units"
 msgstr ""
 
 msgid ""
-"ERA5-Land has limited data for costal areas. Values for other org units will"
-" be imported."
+"ERA5-Land has limited data for coastal areas. Values for other org units "
+"will be imported."
 msgstr ""
 
-msgid "Loading organisation units..."
-msgstr ""
-
-msgid "Select organisation unit and level"
-msgstr ""
-
-msgid ""
-"All organisation units at the selected level within the parent org unit will"
-" be included. If the selected parent is on the selected level, then data "
-"will be imported for this single org unit only."
-msgstr ""
-
-msgid "Parent organisation unit"
-msgstr "ໂຄງຮ່າງການຈັດຕັ້ງຂັ້ນສູງ"
-
-msgid "Org unit parent needs to be above or equal to the org unit level"
-msgstr ""
-
-msgid "Organisation unit level"
-msgstr "​ລະ​ດັບ​ຕ່າງໆ​ຂອງ​ຫົວ​ໜ່ວຍ​ການ​ຈັດ​ຕັ້ງ"
+msgid "Select organisation units"
+msgstr "ເລືອກຈາກອົງປະກອບ"
 
 msgid "Start and end date are not within the valid range."
 msgstr ""
@@ -802,13 +786,13 @@ msgid "Provider name"
 msgstr ""
 
 msgid "Status"
-msgstr ""
+msgstr "ສະຖານະ"
 
 msgid "Setup info"
 msgstr ""
 
 msgid "Close"
-msgstr ""
+msgstr "ປິດ"
 
 msgid "Calculate from data"
 msgstr ""
@@ -820,7 +804,7 @@ msgid "Changes made below will apply to all users of this app."
 msgstr ""
 
 msgid "General settings"
-msgstr ""
+msgstr "General"
 
 msgid "Default start page for users"
 msgstr ""
@@ -832,7 +816,7 @@ msgid "Data element field"
 msgstr ""
 
 msgid "Value"
-msgstr ""
+msgstr "ຄ່າ"
 
 msgid "Note"
 msgstr ""
@@ -1002,7 +986,7 @@ msgid "Latest period will be selected."
 msgstr ""
 
 msgid "Open as Map"
-msgstr ""
+msgstr "ເປີດເປັນແຜ່ນທີ່"
 
 msgid ""
 "For a temporary period there is limited data available for 2024. This is due"
@@ -1278,11 +1262,26 @@ msgstr ""
 msgid "No data found for the selected period"
 msgstr ""
 
+msgid "{{dynamicOuNames}} and {{lastOuName}}"
+msgstr "{{dynamicOuNames}} ແລະ {{lastOuName}}"
+
+msgid "{{allDynamicOuNames}} levels in {{staticOuNames}}"
+msgstr "{{allDynamicOuNames}} ຂັ້ນໃນ {{staticOuNames}}"
+
+msgid "{{allDynamicOuNames}} groups in {{staticOuNames}}"
+msgstr "{{allDynamicOuNames}} ກຸ່ມໃນ {{staticOuNames}}"
+
+msgid "{{allDynamicOuNames}} levels"
+msgstr "{{allDynamicOuNames}} ຂັ້ນ"
+
+msgid "{{allDynamicOuNames}} groups"
+msgstr "{{allDynamicOuNames}} ກຸ່ມ"
+
 msgid "day"
-msgstr ""
+msgstr "ມື້"
 
 msgid "week"
-msgstr ""
+msgstr "ອາທິດ"
 
 msgid "month"
 msgstr "ເດືອນ"
@@ -1291,4 +1290,4 @@ msgid "Yearly"
 msgstr "ລາຍປີ"
 
 msgid "year"
-msgstr ""
+msgstr "ປີ"

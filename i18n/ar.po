@@ -1,15 +1,14 @@
-# 
 # Translators:
-# Philip Larsen Donnelly, 2025
-# Viktor Varland <viktor@dhis2.org>, 2025
-# Hamza <7amza.it@gmail.com>, 2025
+# Philip Larsen Donnelly, 2026
+# Hamza <7amza.it@gmail.com>, 2026
+# Viktor Varland <viktor@dhis2.org>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-01-30T12:52:50.606Z\n"
+"POT-Creation-Date: 2026-03-06T07:07:32.241Z\n"
 "PO-Revision-Date: 2025-02-05 13:11+0000\n"
-"Last-Translator: Hamza <7amza.it@gmail.com>, 2025\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2026\n"
 "Language-Team: Arabic (https://app.transifex.com/hisp-uio/teams/100509/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -116,7 +115,7 @@ msgid "End date"
 msgstr "تاريخ النهاية"
 
 msgid "Update"
-msgstr ""
+msgstr "تحديث"
 
 msgid "Maximum {{maxDays}} days allowed"
 msgstr ""
@@ -602,7 +601,10 @@ msgstr ""
 msgid "Loading org units"
 msgstr ""
 
-msgid "No org units with geometry found for this level"
+msgid "Error loading org units: {{message}}"
+msgstr ""
+
+msgid "No org unit geometries found"
 msgstr ""
 
 msgid ""
@@ -644,7 +646,7 @@ msgid ""
 msgstr ""
 
 msgid "Start import"
-msgstr ""
+msgstr "ابدأ الاستيراد"
 
 msgid "For the {{periodTypeNoun}} {{date}}"
 msgstr ""
@@ -652,13 +654,18 @@ msgstr ""
 msgid "{{periodTypeName}} values between {{startDate}} and {{endDate}}"
 msgstr ""
 
-msgid "For {{orgUnitParent}} {{orgLevelName}}"
-msgstr ""
-
 msgid ""
-"For all organisation units at {{orgLevelName}} level within "
-"{{orgUnitParent}}"
-msgstr ""
+"Selected org units: {{ouText}} ({{count}} organisation units have geometry "
+"and will be imported)"
+msgid_plural ""
+"Selected org units: {{ouText}} ({{count}} organisation units have geometry "
+"and will be imported)"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
 
 msgid "To data element \"{{dataElement}}\""
 msgstr ""
@@ -691,30 +698,12 @@ msgid "No data for the following org units"
 msgstr ""
 
 msgid ""
-"ERA5-Land has limited data for costal areas. Values for other org units will"
-" be imported."
+"ERA5-Land has limited data for coastal areas. Values for other org units "
+"will be imported."
 msgstr ""
 
-msgid "Loading organisation units..."
-msgstr ""
-
-msgid "Select organisation unit and level"
-msgstr ""
-
-msgid ""
-"All organisation units at the selected level within the parent org unit will"
-" be included. If the selected parent is on the selected level, then data "
-"will be imported for this single org unit only."
-msgstr ""
-
-msgid "Parent organisation unit"
-msgstr "الوحدة التنظيمية الأصل"
-
-msgid "Org unit parent needs to be above or equal to the org unit level"
-msgstr ""
-
-msgid "Organisation unit level"
-msgstr "مستوى الوحدة التنظيمية"
+msgid "Select organisation units"
+msgstr "اختيار وحدات المنظمة"
 
 msgid "Start and end date are not within the valid range."
 msgstr ""
@@ -806,13 +795,13 @@ msgid "Provider name"
 msgstr ""
 
 msgid "Status"
-msgstr ""
+msgstr "الحالة"
 
 msgid "Setup info"
 msgstr ""
 
 msgid "Close"
-msgstr ""
+msgstr "إغلاق"
 
 msgid "Calculate from data"
 msgstr ""
@@ -824,7 +813,7 @@ msgid "Changes made below will apply to all users of this app."
 msgstr ""
 
 msgid "General settings"
-msgstr ""
+msgstr "الإعدادات العامة"
 
 msgid "Default start page for users"
 msgstr ""
@@ -836,7 +825,7 @@ msgid "Data element field"
 msgstr ""
 
 msgid "Value"
-msgstr ""
+msgstr "القيمة"
 
 msgid "Note"
 msgstr ""
@@ -1006,7 +995,7 @@ msgid "Latest period will be selected."
 msgstr ""
 
 msgid "Open as Map"
-msgstr ""
+msgstr "فتح كخريطة"
 
 msgid ""
 "For a temporary period there is limited data available for 2024. This is due"
@@ -1282,17 +1271,32 @@ msgstr ""
 msgid "No data found for the selected period"
 msgstr ""
 
-msgid "day"
+msgid "{{dynamicOuNames}} and {{lastOuName}}"
 msgstr ""
+
+msgid "{{allDynamicOuNames}} levels in {{staticOuNames}}"
+msgstr "مستويات {{allDynamicOuNames}} في {{staticOuNames}}"
+
+msgid "{{allDynamicOuNames}} groups in {{staticOuNames}}"
+msgstr ""
+
+msgid "{{allDynamicOuNames}} levels"
+msgstr ""
+
+msgid "{{allDynamicOuNames}} groups"
+msgstr ""
+
+msgid "day"
+msgstr "يوم"
 
 msgid "week"
-msgstr ""
+msgstr "اسبوع"
 
 msgid "month"
-msgstr ""
+msgstr "شهر"
 
 msgid "Yearly"
 msgstr "سنوي"
 
 msgid "year"
-msgstr ""
+msgstr "سنة"
