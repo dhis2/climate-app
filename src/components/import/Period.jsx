@@ -6,6 +6,8 @@ import useSystemInfo from '../../hooks/useSystemInfo.js'
 import useUserLocale from '../../hooks/useUserLocale.js'
 import {
     YEARLY,
+    WEEKLY,
+    MONTHLY,
     normalizeIsoDate,
     getDateStringFromIsoDate,
     getPeriodTypes,
@@ -19,6 +21,20 @@ import classes from './styles/Period.module.css'
 import YearRange from './YearRange.jsx'
 
 const DEFAULT_DATASET = {}
+
+const getDateRangeErrorMessage = ({ startDateError, endDateError }) => {
+    let periodErrorMessage = null
+    if (startDateError && endDateError) {
+        periodErrorMessage = i18n.t(
+            'Start and end date are not within the valid range.'
+        )
+    } else if (startDateError) {
+        periodErrorMessage = i18n.t('Start date is not within the valid range.')
+    } else if (endDateError) {
+        periodErrorMessage = i18n.t('End date is not within the valid range.')
+    }
+    return periodErrorMessage
+}
 
 const getValidationState = (minCalendarDate, maxCalendarDate, dateError) => {
     if (!minCalendarDate || !maxCalendarDate) {
@@ -98,39 +114,57 @@ const Period = ({
 
     const isYearly = datasetPeriodType === YEARLY
 
-    let periodErrorMessage = null
-    if (startDateError && endDateError) {
-        periodErrorMessage = i18n.t(
-            'Start and end date are not within the valid range.'
-        )
-    } else if (startDateError) {
-        periodErrorMessage = i18n.t('Start date is not within the valid range.')
-    } else if (endDateError) {
-        periodErrorMessage = i18n.t('End date is not within the valid range.')
-    }
+    const periodErrorMessage = getDateRangeErrorMessage({
+        startDateError,
+        endDateError,
+    })
 
     const periodTypeName = getPeriodTypes().find(
         (pt) => pt.id === periodType
     )?.name
 
-    let helpText
-    if (dataset.timeZone || dataset.bands?.[0]?.timeZone) {
-        if (timeZone === UTC_TIME_ZONE) {
+    const datasetFromHourlyData = !!(
+        dataset.timeZone || dataset.bands?.[0]?.timeZone
+    )
+
+    const getHelpText = () => {
+        let helpText = ''
+        const periodTypeNoun = getPeriodTypes().find(
+            (pt) => pt.id === periodType
+        )?.noun
+
+        if (datasetFromHourlyData) {
+            if (periodType === WEEKLY || periodType === MONTHLY) {
+                helpText = i18n.t(
+                    '{{periodTypeName}} data for full calendar {{periodTypeNoun}}s inclusive of start and end dates will be aggregated from hourly data.',
+                    { periodTypeName, periodTypeNoun }
+                )
+            } else {
+                helpText = i18n.t(
+                    '{{periodTypeName}} data between start and end date will be aggregated from hourly data.',
+                    { periodTypeName }
+                )
+            }
+
+            // Add timezone adjustment note if not UTC
+            if (timeZone !== UTC_TIME_ZONE) {
+                helpText +=
+                    ' ' +
+                    i18n.t(
+                        'Time zone adjustments will be applied if the selected time zone is not set to UTC.'
+                    )
+            }
+        } else if (periodType === WEEKLY || periodType === MONTHLY) {
             helpText = i18n.t(
-                '{{periodTypeName}} data between start and end date will be calculated from hourly data.',
-                { periodTypeName, nsSeparator: ';' }
+                'Data for full calendar {{periodTypeNoun}}s inclusive of start and end dates will be aggregated to {{periodTypeNoun}}ly values.',
+                { periodTypeNoun }
             )
         } else {
             helpText = i18n.t(
-                '{{periodTypeName}} data between start and end date will be calculated from hourly data, with time zone adjustments applied if the selected time zone is not set to UTC.',
-                { periodTypeName, nsSeparator: ';' }
+                'Data between start and end date will be imported as daily values.'
             )
         }
-    } else {
-        helpText = i18n.t(
-            '{{periodTypeName}} data between start and end date will be calculated and then aggregated to the selected period type.',
-            { periodTypeName, nsSeparator: ';' }
-        )
+        return helpText
     }
 
     if (datasetPeriod) {
@@ -225,7 +259,7 @@ const Period = ({
                             )}
                             dataTest="end-date-input"
                         />
-                        {(dataset.timeZone || dataset.bands?.[0]?.timeZone) && (
+                        {datasetFromHourlyData && (
                             <div className={classes.timezone}>
                                 <TimeZone period={period} onChange={onChange} />
                             </div>
@@ -252,7 +286,7 @@ const Period = ({
                         </p>
                     )}
 
-                    <HelpfulInfo text={helpText} />
+                    <HelpfulInfo text={getHelpText()} />
                 </>
             )}
 
