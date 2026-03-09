@@ -193,7 +193,6 @@ const getEarthEngineValues = ({
         const endTimePlusOne = ee
             .Date(String(periods.at(-1)?.endDate))
             .advance(1, 'day')
-            .advance(-1, 'second')
 
         const timeZoneStart = ee
             .Date(String(startTime))
