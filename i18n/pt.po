@@ -2,23 +2,23 @@
 # David Júnior <davidjr.mondlane@gmail.com>, 2025
 # Emílio Luís Mosse <emosse@saudigitus.org>, 2025
 # Edson Nhancale, 2025
-# Philip Larsen Donnelly, 2025
 # António Fernando Macaringue, 2025
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2026
 # Viktor Varland <viktor@dhis2.org>, 2026
 # Ge Joao <gsimango@saudigitus.org>, 2026
 # Jason Pickering <jason@dhis2.org>, 2026
 # Shelsea Chumaio, 2026
-# David Mondlane, 2026
 # Carlos Macaneta, 2026
 # Helton Dias, 2026
+# David Mondlane, 2026
+# Philip Larsen Donnelly, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-01-30T12:52:50.606Z\n"
+"POT-Creation-Date: 2026-03-06T07:07:32.241Z\n"
 "PO-Revision-Date: 2025-02-05 13:11+0000\n"
-"Last-Translator: Helton Dias, 2026\n"
+"Last-Translator: Philip Larsen Donnelly, 2026\n"
 "Language-Team: Portuguese (https://app.transifex.com/hisp-uio/teams/100509/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -678,9 +678,11 @@ msgstr "guia de configuração"
 msgid "Loading org units"
 msgstr "Carregamento de unidades organizacionais"
 
-msgid "No org units with geometry found for this level"
+msgid "Error loading org units: {{message}}"
 msgstr ""
-"Não foram encontradas unidades organizacionais com geometria para este nível"
+
+msgid "No org unit geometries found"
+msgstr ""
 
 msgid ""
 "Extracting data for {{periodCount}} {{periodType}} periods and "
@@ -735,15 +737,15 @@ msgstr "Para o {{periodTypeNoun}} {{date}}"
 msgid "{{periodTypeName}} values between {{startDate}} and {{endDate}}"
 msgstr "{{periodTypeName}} valores entre {{startDate}} e {{endDate}}"
 
-msgid "For {{orgUnitParent}} {{orgLevelName}}"
-msgstr "Para {{orgUnitParent}} {{orgLevelName}}"
-
 msgid ""
-"For all organisation units at {{orgLevelName}} level within "
-"{{orgUnitParent}}"
-msgstr ""
-"Para todas as unidades organizacionais ao nível de {{orgLevelName}} dentro "
-"de {{orgUnitParent}}"
+"Selected org units: {{ouText}} ({{count}} organisation units have geometry "
+"and will be imported)"
+msgid_plural ""
+"Selected org units: {{ouText}} ({{count}} organisation units have geometry "
+"and will be imported)"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid "To data element \"{{dataElement}}\""
 msgstr "Para o elemento de dados \"{{dataElement}}\""
@@ -773,38 +775,12 @@ msgid "No data for the following org units"
 msgstr "Não há dados para as seguintes unidades organizacionais"
 
 msgid ""
-"ERA5-Land has limited data for costal areas. Values for other org units will"
-" be imported."
+"ERA5-Land has limited data for coastal areas. Values for other org units "
+"will be imported."
 msgstr ""
-"O ERA5-Land tem dados limitados para as zonas costeiras. Os valores para "
-"outras unidades organizacionais serão importados."
 
-msgid "Loading organisation units..."
-msgstr "Carregamento de unidades de organização..."
-
-msgid "Select organisation unit and level"
-msgstr "Selecionar a unidade e o nível organizacional"
-
-msgid ""
-"All organisation units at the selected level within the parent org unit will"
-" be included. If the selected parent is on the selected level, then data "
-"will be imported for this single org unit only."
-msgstr ""
-"Todas as unidades organizacionais no nível selecionado dentro da unidade "
-"organizacional principal serão incluídas. Se a unidade principal selecionada"
-" estiver no nível selecionado, os dados serão importados apenas para essa "
-"unidade organizacional específica."
-
-msgid "Parent organisation unit"
-msgstr "Unidade organizacional pai"
-
-msgid "Org unit parent needs to be above or equal to the org unit level"
-msgstr ""
-"A unidade organizacional pai deve ser superior ou igual ao nível da unidade "
-"organizacional"
-
-msgid "Organisation unit level"
-msgstr "Nível de unidade organizacional"
+msgid "Select organisation units"
+msgstr "Selecionar unidades organizacionais"
 
 msgid "Start and end date are not within the valid range."
 msgstr "As datas de início e de fim não estão dentro do intervalo válido."
@@ -1443,6 +1419,21 @@ msgstr "NASA / USGS / JPL-Caltech / Google Earth Engine"
 
 msgid "No data found for the selected period"
 msgstr "Não foram encontrados dados para o período selecionado"
+
+msgid "{{dynamicOuNames}} and {{lastOuName}}"
+msgstr "{{dynamicOuNames}} e {{lastOuName}}"
+
+msgid "{{allDynamicOuNames}} levels in {{staticOuNames}}"
+msgstr "{{allDynamicOuNames}} níveis em {{staticOuNames}}"
+
+msgid "{{allDynamicOuNames}} groups in {{staticOuNames}}"
+msgstr "{{allDynamicOuNames}} grupos em {{staticOuNames}}"
+
+msgid "{{allDynamicOuNames}} levels"
+msgstr "{{allDynamicOuNames}} níveis"
+
+msgid "{{allDynamicOuNames}} groups"
+msgstr "{{allDynamicOuNames}} grupos"
 
 msgid "day"
 msgstr "dia"
