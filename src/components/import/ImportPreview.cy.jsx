@@ -9,17 +9,26 @@ describe('ImportPreview', () => {
         endDate: '2025-12-31',
         dataElement: 'Temperature',
         totalValues: 120,
-        orgUnits: {
-            level: '3',
-            levelName: 'Chiefdom',
-            parent: {
-                displayName: 'Test Province',
-                level: 2,
-                name: 'Test Province',
-                path: '/province/test',
+        featureCount: 5,
+        orgUnits: [
+            {
+                id: 'KKkLOTpMXGV',
+                path: '/ImspTQPwCqd/fdc6uOvgoji/KKkLOTpMXGV',
+                name: 'Bombali & Sebora',
             },
-        },
-        calendar: 'gregory',
+            {
+                id: 'LEVEL-m9lBJogzE95',
+                name: 'Facility',
+            },
+            {
+                id: 'OU_GROUP-tDZVQ1WtwpA',
+                name: 'Hospital',
+            },
+            {
+                id: 'OU_GROUP-RXL3lPSK8oG',
+                name: 'Clinic',
+            },
+        ],
     }
 
     it('shows 4 main pieces of information', () => {
@@ -37,29 +46,42 @@ describe('ImportPreview', () => {
         ).should('be.visible')
     })
 
-    it('renders organization unit information when parent level differs from selected level', () => {
-        cy.mount(<ImportPreview {...defaultProps} />)
+    it('renders organization unit information with singular form', () => {
+        const props = {
+            ...defaultProps,
+            featureCount: 1,
+            orgUnits: [
+                {
+                    id: 'KKkLOTpMXGV',
+                    path: '/ImspTQPwCqd/fdc6uOvgoji/KKkLOTpMXGV',
+                    name: 'Bombali & Sebora',
+                },
+            ],
+        }
+        cy.mount(<ImportPreview {...props} />)
         cy.contains(
-            'For all organisation units at chiefdom level within Test Province'
+            'Selected org units: Bombali & Sebora (1 organisation unit has geometry and will be imported)'
         ).should('be.visible')
     })
 
-    it('renders organization unit information when parent level equals selected level', () => {
-        const props = {
-            ...defaultProps,
-            orgUnits: {
-                level: '2',
-                levelName: 'Province',
-                parent: {
-                    displayName: 'Test Province',
-                    level: 2,
-                    name: 'Test Province',
-                    path: '/province/test',
-                },
-            },
-        }
-        cy.mount(<ImportPreview {...props} />)
-        cy.contains('For Test Province province').should('be.visible')
+    it('renders orgUnits text without HTML encoding special characters', () => {
+        cy.mount(<ImportPreview {...defaultProps} />)
+        // Verify that "&" in "Bombali & Sebora" is not HTML encoded as "&amp;"
+        cy.getByDataTest('import-preview').should('contain', 'Bombali & Sebora')
+    })
+
+    it('renders mixed orgUnits (levels, groups, and regular units)', () => {
+        cy.mount(<ImportPreview {...defaultProps} />)
+        cy.getByDataTest('import-preview').should('contain', 'Hospital')
+        cy.getByDataTest('import-preview').should('contain', 'Clinic')
+        cy.getByDataTest('import-preview').should('contain', 'Facility')
+    })
+
+    it('renders the complete organization unit text string', () => {
+        cy.mount(<ImportPreview {...defaultProps} />)
+        cy.contains(
+            'Selected org units: Hospital and Clinic groups in Bombali & Sebora - Facility levels in Bombali & Sebora (5 organisation units have geometry and will be imported)'
+        ).should('be.visible')
     })
 
     it('renders data element information', () => {
@@ -69,7 +91,7 @@ describe('ImportPreview', () => {
 
     it('renders total values count', () => {
         cy.mount(<ImportPreview {...defaultProps} />)
-        cy.contains('120 data value').should('be.visible')
+        cy.contains('120 data values will be imported').should('be.visible')
     })
 
     it('renders singular form when totalValues is 1', () => {

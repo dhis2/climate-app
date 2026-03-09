@@ -24,6 +24,8 @@ jobs:
                   node-version: 20
             - name: Install dependencies
               run: yarn install --frozen-lockfile
+            - name: Build the app
+              run: yarn build
             - name: Run Cypress component tests
               run: yarn cy:run:component
 

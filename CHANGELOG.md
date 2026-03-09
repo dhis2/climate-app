@@ -1,3 +1,24 @@
+## [1.14.1](https://github.com/dhis2/climate-app/compare/v1.14.0...v1.14.1) (2026-03-08)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (main) ([7f737b9](https://github.com/dhis2/climate-app/commit/7f737b94d38ca83a4ade5658a6371e369b0d6782))
+
+# [1.14.0](https://github.com/dhis2/climate-app/compare/v1.13.3...v1.14.0) (2026-03-06)
+
+
+### Features
+
+* allow user to select org unit groups when configuring import [CLIM-422] ([#103](https://github.com/dhis2/climate-app/issues/103)) ([ccb2749](https://github.com/dhis2/climate-app/commit/ccb2749c3b593fa5f512660daaade67529f38a4c))
+
+## [1.13.3](https://github.com/dhis2/climate-app/compare/v1.13.2...v1.13.3) (2026-02-22)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (main) ([9e57b4b](https://github.com/dhis2/climate-app/commit/9e57b4bee17703716ee695ae679fa4aa3760538b))
+
 ## [1.13.2](https://github.com/dhis2/climate-app/compare/v1.13.1...v1.13.2) (2026-02-08)
 
 
