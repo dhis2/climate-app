@@ -1,13 +1,12 @@
-# 
 # Translators:
-# Jiří Podhorecký <jirka.p@volny.cz>, 2025
+# Jiří Podhorecký <jirka.p@volny.cz>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-01-30T12:52:50.606Z\n"
+"POT-Creation-Date: 2026-03-06T07:07:32.241Z\n"
 "PO-Revision-Date: 2025-02-05 13:11+0000\n"
-"Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2025\n"
+"Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2026\n"
 "Language-Team: Czech (https://app.transifex.com/hisp-uio/teams/100509/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -144,7 +143,7 @@ msgid "End date"
 msgstr "Datum ukončení"
 
 msgid "Update"
-msgstr ""
+msgstr "Aktualizovat"
 
 msgid "Maximum {{maxDays}} days allowed"
 msgstr "Povoleno maximálně {{maxDays}} dní"
@@ -650,9 +649,11 @@ msgstr ""
 msgid "Loading org units"
 msgstr "Načítání organizačních jednotek"
 
-msgid "No org units with geometry found for this level"
+msgid "Error loading org units: {{message}}"
 msgstr ""
-"Pro tuto úroveň nebyly nalezeny žádné organizační jednotky s geometrií"
+
+msgid "No org unit geometries found"
+msgstr ""
 
 msgid ""
 "Extracting data for {{periodCount}} {{periodType}} periods and "
@@ -695,7 +696,7 @@ msgid ""
 msgstr ""
 
 msgid "Start import"
-msgstr ""
+msgstr "Zahájit import"
 
 msgid "For the {{periodTypeNoun}} {{date}}"
 msgstr ""
@@ -703,13 +704,16 @@ msgstr ""
 msgid "{{periodTypeName}} values between {{startDate}} and {{endDate}}"
 msgstr ""
 
-msgid "For {{orgUnitParent}} {{orgLevelName}}"
-msgstr ""
-
 msgid ""
-"For all organisation units at {{orgLevelName}} level within "
-"{{orgUnitParent}}"
-msgstr ""
+"Selected org units: {{ouText}} ({{count}} organisation units have geometry "
+"and will be imported)"
+msgid_plural ""
+"Selected org units: {{ouText}} ({{count}} organisation units have geometry "
+"and will be imported)"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 msgid "To data element \"{{dataElement}}\""
 msgstr ""
@@ -740,34 +744,12 @@ msgid "No data for the following org units"
 msgstr "Žádná data pro následující organizační jednotky"
 
 msgid ""
-"ERA5-Land has limited data for costal areas. Values for other org units will"
-" be imported."
-msgstr ""
-"ERA5-Land má omezené údaje pro pobřežní oblasti. Hodnoty pro ostatní org. "
-"jednotky budou importovány."
-
-msgid "Loading organisation units..."
+"ERA5-Land has limited data for coastal areas. Values for other org units "
+"will be imported."
 msgstr ""
 
-msgid "Select organisation unit and level"
-msgstr ""
-
-msgid ""
-"All organisation units at the selected level within the parent org unit will"
-" be included. If the selected parent is on the selected level, then data "
-"will be imported for this single org unit only."
-msgstr ""
-
-msgid "Parent organisation unit"
-msgstr "Nadřazená organizační jednotka"
-
-msgid "Org unit parent needs to be above or equal to the org unit level"
-msgstr ""
-"Nadřízená organizační jednotka musí být nad úrovní organizační jednotky nebo"
-" jí musí být rovna."
-
-msgid "Organisation unit level"
-msgstr "Úroveň organizační jednotky"
+msgid "Select organisation units"
+msgstr "Vybrat organizační jednotky"
 
 msgid "Start and end date are not within the valid range."
 msgstr ""
@@ -862,13 +844,13 @@ msgid "Provider name"
 msgstr ""
 
 msgid "Status"
-msgstr ""
+msgstr "Stav"
 
 msgid "Setup info"
 msgstr ""
 
 msgid "Close"
-msgstr ""
+msgstr "Zavřít"
 
 msgid "Calculate from data"
 msgstr "Výpočet z dat"
@@ -880,7 +862,7 @@ msgid "Changes made below will apply to all users of this app."
 msgstr "Níže uvedené změny se budou týkat všech uživatelů této aplikace."
 
 msgid "General settings"
-msgstr ""
+msgstr "Obecné nastavení"
 
 msgid "Default start page for users"
 msgstr "Výchozí úvodní stránka pro uživatele"
@@ -892,7 +874,7 @@ msgid "Data element field"
 msgstr ""
 
 msgid "Value"
-msgstr ""
+msgstr "Hodnota"
 
 msgid "Note"
 msgstr ""
@@ -1065,7 +1047,7 @@ msgid "Latest period will be selected."
 msgstr ""
 
 msgid "Open as Map"
-msgstr ""
+msgstr "Otevřít jako mapu"
 
 msgid ""
 "For a temporary period there is limited data available for 2024. This is due"
@@ -1363,17 +1345,32 @@ msgstr "NASA / USGS / JPL-Caltech / Google Earth Engine"
 msgid "No data found for the selected period"
 msgstr "Pro vybrané období nebyly nalezeny žádné údaje"
 
-msgid "day"
+msgid "{{dynamicOuNames}} and {{lastOuName}}"
 msgstr ""
+
+msgid "{{allDynamicOuNames}} levels in {{staticOuNames}}"
+msgstr "úrovně {{allDynamicOuNames}} v {{staticOuNames}}"
+
+msgid "{{allDynamicOuNames}} groups in {{staticOuNames}}"
+msgstr ""
+
+msgid "{{allDynamicOuNames}} levels"
+msgstr ""
+
+msgid "{{allDynamicOuNames}} groups"
+msgstr ""
+
+msgid "day"
+msgstr "den"
 
 msgid "week"
-msgstr ""
+msgstr "týden"
 
 msgid "month"
-msgstr ""
+msgstr "měsíc"
 
 msgid "Yearly"
 msgstr "Ročně"
 
 msgid "year"
-msgstr ""
+msgstr "rok"

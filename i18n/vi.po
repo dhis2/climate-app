@@ -1,17 +1,16 @@
-# 
 # Translators:
-# Thuy Nguyen <thuynguyen@hispvietnam.org>, 2025
-# Em Le <em.hispvietnam@gmail.com>, 2025
+# Philip Larsen Donnelly, 2026
 # Viktor Varland <viktor@dhis2.org>, 2026
 # Mai Nguyen <thanhmai.jica@gmail.com>, 2026
-# Philip Larsen Donnelly, 2026
+# Em Le <em.hispvietnam@gmail.com>, 2026
+# Thuy Nguyen <thuynguyen@hispvietnam.org>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-01-30T12:52:50.606Z\n"
+"POT-Creation-Date: 2026-03-06T07:07:32.241Z\n"
 "PO-Revision-Date: 2025-02-05 13:11+0000\n"
-"Last-Translator: Philip Larsen Donnelly, 2026\n"
+"Last-Translator: Thuy Nguyen <thuynguyen@hispvietnam.org>, 2026\n"
 "Language-Team: Vietnamese (https://app.transifex.com/hisp-uio/teams/100509/vi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -151,7 +150,7 @@ msgid "End date"
 msgstr "Ngày kết thúc"
 
 msgid "Update"
-msgstr ""
+msgstr "Cập nhật"
 
 msgid "Maximum {{maxDays}} days allowed"
 msgstr "Cho phép tối đa {{maxDays}} ngày"
@@ -652,7 +651,10 @@ msgstr ""
 msgid "Loading org units"
 msgstr ""
 
-msgid "No org units with geometry found for this level"
+msgid "Error loading org units: {{message}}"
+msgstr ""
+
+msgid "No org unit geometries found"
 msgstr ""
 
 msgid ""
@@ -702,13 +704,13 @@ msgstr ""
 msgid "{{periodTypeName}} values between {{startDate}} and {{endDate}}"
 msgstr ""
 
-msgid "For {{orgUnitParent}} {{orgLevelName}}"
-msgstr ""
-
 msgid ""
-"For all organisation units at {{orgLevelName}} level within "
-"{{orgUnitParent}}"
-msgstr ""
+"Selected org units: {{ouText}} ({{count}} organisation units have geometry "
+"and will be imported)"
+msgid_plural ""
+"Selected org units: {{ouText}} ({{count}} organisation units have geometry "
+"and will be imported)"
+msgstr[0] ""
 
 msgid "To data element \"{{dataElement}}\""
 msgstr ""
@@ -736,30 +738,12 @@ msgid "No data for the following org units"
 msgstr ""
 
 msgid ""
-"ERA5-Land has limited data for costal areas. Values for other org units will"
-" be imported."
+"ERA5-Land has limited data for coastal areas. Values for other org units "
+"will be imported."
 msgstr ""
 
-msgid "Loading organisation units..."
-msgstr ""
-
-msgid "Select organisation unit and level"
-msgstr ""
-
-msgid ""
-"All organisation units at the selected level within the parent org unit will"
-" be included. If the selected parent is on the selected level, then data "
-"will be imported for this single org unit only."
-msgstr ""
-
-msgid "Parent organisation unit"
-msgstr "Đơn vị tuyến trên"
-
-msgid "Org unit parent needs to be above or equal to the org unit level"
-msgstr ""
-
-msgid "Organisation unit level"
-msgstr "Cấp đơn vị"
+msgid "Select organisation units"
+msgstr "Chọn Đơn Vị"
 
 msgid "Start and end date are not within the valid range."
 msgstr ""
@@ -851,13 +835,13 @@ msgid "Provider name"
 msgstr ""
 
 msgid "Status"
-msgstr ""
+msgstr "Trạng thái"
 
 msgid "Setup info"
 msgstr ""
 
 msgid "Close"
-msgstr ""
+msgstr "Đóng"
 
 msgid "Calculate from data"
 msgstr ""
@@ -1327,11 +1311,26 @@ msgstr ""
 msgid "No data found for the selected period"
 msgstr ""
 
+msgid "{{dynamicOuNames}} and {{lastOuName}}"
+msgstr "{{dynamicOuNames}} và {{lastOuName}}"
+
+msgid "{{allDynamicOuNames}} levels in {{staticOuNames}}"
+msgstr "Các cấp {{allDynamicOuNames}}trong {{staticOuNames}}"
+
+msgid "{{allDynamicOuNames}} groups in {{staticOuNames}}"
+msgstr "Các nhóm {{allDynamicOuNames}}trong {{staticOuNames}}"
+
+msgid "{{allDynamicOuNames}} levels"
+msgstr "cấp độ {{allDynamicOuNames}}"
+
+msgid "{{allDynamicOuNames}} groups"
+msgstr "nhóm {{allDynamicOuNames}}"
+
 msgid "day"
-msgstr ""
+msgstr "Ngày"
 
 msgid "week"
-msgstr ""
+msgstr "Tuần"
 
 msgid "month"
 msgstr "Tháng"
@@ -1340,4 +1339,4 @@ msgid "Yearly"
 msgstr "Hàng năm"
 
 msgid "year"
-msgstr ""
+msgstr "Năm"
