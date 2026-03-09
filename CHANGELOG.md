@@ -1,3 +1,10 @@
+## [1.14.2](https://github.com/dhis2/climate-app/compare/v1.14.1...v1.14.2) (2026-03-09)
+
+
+### Bug Fixes
+
+* use full week and month values for the selected period range when period type is weekly/monthly ([#107](https://github.com/dhis2/climate-app/issues/107)) ([37cf659](https://github.com/dhis2/climate-app/commit/37cf659a40dc4ab9cb9fc9419252cf1e8db80884))
+
 ## [1.14.1](https://github.com/dhis2/climate-app/compare/v1.14.0...v1.14.1) (2026-03-08)
 
 
