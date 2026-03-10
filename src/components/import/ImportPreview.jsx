@@ -2,7 +2,14 @@ import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { getOuText } from '../../utils/getOuText.js'
-import { DAILY, YEARLY, getPeriodTypes } from '../../utils/time.js'
+import {
+    DAILY,
+    WEEKLY,
+    MONTHLY,
+    YEARLY,
+    getPeriodTypes,
+    getPeriods,
+} from '../../utils/time.js'
 import classes from './ImportPreview.module.css'
 
 const ImportPreview = ({
@@ -21,20 +28,74 @@ const ImportPreview = ({
 
     const { name: periodTypeName, noun: periodTypeNoun } = periodTypeObj
 
-    const periodInfo =
-        (periodType === DAILY || periodType === YEARLY) && endDate === startDate
-            ? i18n.t('For the {{periodTypeNoun}} {{date}}', {
-                  periodTypeNoun,
-                  date: startDate,
-              })
-            : i18n.t(
-                  '{{periodTypeName}} values between {{startDate}} and {{endDate}}',
-                  {
-                      periodTypeName,
-                      startDate: startDate,
-                      endDate: endDate,
-                  }
-              )
+    // Calculate actual period boundaries for weekly/monthly
+    let periodInfo
+    if (periodType === WEEKLY || periodType === MONTHLY) {
+        const periods = getPeriods({
+            periodType,
+            startTime: startDate,
+            endTime: endDate,
+        })
+        const firstPeriod = periods[0]
+        const lastPeriod = periods.at(-1)
+
+        // Format period ID for display (e.g., "2025W1" -> "2025-W01", "202502" -> "2025-02")
+        const formatPeriodId = (id) => {
+            if (periodType === WEEKLY) {
+                // Convert "2025W1" to "2025-W01" (zero-pad week number)
+                return id.replace(
+                    /^(\d{4})W(\d{1,2})$/,
+                    (match, year, week) => `${year}-W${week.padStart(2, '0')}`
+                )
+            } else if (periodType === MONTHLY) {
+                // Convert "202502" to "2025-02"
+                return id.replace(/^(\d{4})(\d{2})$/, '$1-$2')
+            }
+            return id
+        }
+
+        if (periods.length === 1) {
+            const periodId = formatPeriodId(firstPeriod.id)
+            periodInfo = i18n.t(
+                'For {{periodId}} ({{actualStartTime}} to {{actualEndTime}})',
+                {
+                    periodId,
+                    actualStartTime: firstPeriod.startDate,
+                    actualEndTime: firstPeriod.endDate,
+                }
+            )
+        } else {
+            const startPeriodId = formatPeriodId(firstPeriod.id)
+            const endPeriodId = formatPeriodId(lastPeriod.id)
+            periodInfo = i18n.t(
+                '{{periodTypeName}} values from {{startPeriodId}} to {{endPeriodId}} ({{actualStartTime}} to {{actualEndTime}})',
+                {
+                    periodTypeName,
+                    startPeriodId,
+                    endPeriodId,
+                    actualStartTime: firstPeriod.startDate,
+                    actualEndTime: lastPeriod.endDate,
+                }
+            )
+        }
+    } else if (
+        (periodType === DAILY || periodType === YEARLY) &&
+        endDate === startDate
+    ) {
+        periodInfo = i18n.t('For the {{periodTypeNoun}} {{date}}', {
+            periodTypeNoun,
+            date: startDate,
+        })
+    } else {
+        periodInfo = i18n.t(
+            '{{periodTypeName}} values between {{startDate}} and {{endDate}}',
+            {
+                periodTypeName,
+                startDate: startDate,
+                endDate: endDate,
+            }
+        )
+    }
 
     const orgUnitInfo = i18n.t(
         'Selected org units: {{ouText}} ({{count}} organisation units have geometry and will be imported)',
