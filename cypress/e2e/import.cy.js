@@ -406,13 +406,13 @@ describe('Import', () => {
                 expect(interception.request.body).to.deep.equal({
                     dataValues: [
                         {
-                            value: '97.117',
+                            value: '94.236',
                             orgUnit: 'Z9ny6QeqsgX',
                             dataElement: 'vq2qO3eTrNi',
                             period: '2025W34',
                         },
                         {
-                            value: '94.236',
+                            value: '85.062',
                             orgUnit: 'jCnyQOKQBFX',
                             dataElement: 'vq2qO3eTrNi',
                             period: '2025W34',
@@ -482,12 +482,12 @@ describe('Import', () => {
         interceptAndValidateDataValues(205, [
             {
                 orgUnit: 'lc3eMKXaEfw',
-                expectedValue: '31.849',
+                expectedValue: '30.473',
                 period: '2026W1',
             },
             {
                 orgUnit: 'EB1zRKdYjdY',
-                expectedValue: '31.716',
+                expectedValue: '29.862',
                 period: '2026W1',
             },
         ])
@@ -521,22 +521,22 @@ describe('Import', () => {
         interceptAndValidateDataValues(4, [
             {
                 orgUnit: 'lc3eMKXaEfw',
-                expectedValue: '16.516',
+                expectedValue: '16.035',
                 period: '2025W52',
             },
             {
                 orgUnit: 'lc3eMKXaEfw',
-                expectedValue: '31.849',
+                expectedValue: '30.473',
                 period: '2026W1',
             },
             {
                 orgUnit: 'lc3eMKXaEfw',
-                expectedValue: '15.412',
+                expectedValue: '15.096',
                 period: '2026W2',
             },
             {
                 orgUnit: 'lc3eMKXaEfw',
-                expectedValue: '14.86',
+                expectedValue: '14.854',
                 period: '2026W3',
             },
         ])
@@ -597,12 +597,12 @@ describe('Import', () => {
 
         interceptAndValidateDataValues(2, [
             {
-                expectedValue: '82.438',
+                expectedValue: '85.458',
                 orgUnit: 'lc3eMKXaEfw',
                 period: '202512',
             },
             {
-                expectedValue: '64.788',
+                expectedValue: '63.354',
                 orgUnit: 'lc3eMKXaEfw',
                 period: '202601',
             },
