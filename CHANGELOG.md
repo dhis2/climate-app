@@ -1,3 +1,10 @@
+## [1.14.3](https://github.com/dhis2/climate-app/compare/v1.14.2...v1.14.3) (2026-03-10)
+
+
+### Bug Fixes
+
+* add default minimum scale [CLIM-506] ([#87](https://github.com/dhis2/climate-app/issues/87)) ([51bd7f0](https://github.com/dhis2/climate-app/commit/51bd7f0ea52f4063b04f4fabde135987f9fa802e))
+
 ## [1.14.2](https://github.com/dhis2/climate-app/compare/v1.14.1...v1.14.2) (2026-03-09)
 
 
