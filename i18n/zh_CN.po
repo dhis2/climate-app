@@ -1,4 +1,3 @@
-# 
 # Translators:
 # 晓东 林 <13981924470@126.com>, 2026
 # easylin <lin_xd@126.com>, 2026
@@ -6,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-01-30T12:52:50.606Z\n"
+"POT-Creation-Date: 2026-03-06T12:42:03.706Z\n"
 "PO-Revision-Date: 2025-02-05 13:11+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2026\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
@@ -115,7 +114,7 @@ msgid "End date"
 msgstr "结束日期"
 
 msgid "Update"
-msgstr ""
+msgstr "更新"
 
 msgid "Maximum {{maxDays}} days allowed"
 msgstr ""
@@ -601,7 +600,10 @@ msgstr ""
 msgid "Loading org units"
 msgstr ""
 
-msgid "No org units with geometry found for this level"
+msgid "Error loading org units: {{message}}"
+msgstr ""
+
+msgid "No org unit geometries found"
 msgstr ""
 
 msgid ""
@@ -645,19 +647,27 @@ msgstr ""
 msgid "Start import"
 msgstr "开始导入"
 
+msgid "For {{periodId}} ({{actualStartTime}} to {{actualEndTime}})"
+msgstr ""
+
+msgid ""
+"{{periodTypeName}} values from {{startPeriodId}} to {{endPeriodId}} "
+"({{actualStartTime}} to {{actualEndTime}})"
+msgstr ""
+
 msgid "For the {{periodTypeNoun}} {{date}}"
 msgstr ""
 
 msgid "{{periodTypeName}} values between {{startDate}} and {{endDate}}"
 msgstr ""
 
-msgid "For {{orgUnitParent}} {{orgLevelName}}"
-msgstr ""
-
 msgid ""
-"For all organisation units at {{orgLevelName}} level within "
-"{{orgUnitParent}}"
-msgstr ""
+"Selected org units: {{ouText}} ({{count}} organisation units have geometry "
+"and will be imported)"
+msgid_plural ""
+"Selected org units: {{ouText}} ({{count}} organisation units have geometry "
+"and will be imported)"
+msgstr[0] ""
 
 msgid "To data element \"{{dataElement}}\""
 msgstr ""
@@ -685,30 +695,12 @@ msgid "No data for the following org units"
 msgstr ""
 
 msgid ""
-"ERA5-Land has limited data for costal areas. Values for other org units will"
-" be imported."
+"ERA5-Land has limited data for coastal areas. Values for other org units "
+"will be imported."
 msgstr ""
 
-msgid "Loading organisation units..."
-msgstr ""
-
-msgid "Select organisation unit and level"
-msgstr ""
-
-msgid ""
-"All organisation units at the selected level within the parent org unit will"
-" be included. If the selected parent is on the selected level, then data "
-"will be imported for this single org unit only."
-msgstr ""
-
-msgid "Parent organisation unit"
-msgstr "上级组织机构"
-
-msgid "Org unit parent needs to be above or equal to the org unit level"
-msgstr ""
-
-msgid "Organisation unit level"
-msgstr "组织机构等级"
+msgid "Select organisation units"
+msgstr "选择机构"
 
 msgid "Start and end date are not within the valid range."
 msgstr ""
@@ -720,19 +712,26 @@ msgid "End date is not within the valid range."
 msgstr ""
 
 msgid ""
-"{{periodTypeName}} data between start and end date will be calculated from "
+"{{periodTypeName}} data for full calendar {{periodTypeNoun}}s inclusive of "
+"start and end dates will be aggregated from hourly data."
+msgstr ""
+
+msgid ""
+"{{periodTypeName}} data between start and end date will be aggregated from "
 "hourly data."
 msgstr ""
 
 msgid ""
-"{{periodTypeName}} data between start and end date will be calculated from "
-"hourly data, with time zone adjustments applied if the selected time zone is"
-" not set to UTC."
+"Time zone adjustments will be applied if the selected time zone is not set "
+"to UTC."
 msgstr ""
 
 msgid ""
-"{{periodTypeName}} data between start and end date will be calculated and "
-"then aggregated to the selected period type."
+"Data for full calendar {{periodTypeNoun}}s inclusive of start and end dates "
+"will be aggregated to {{periodTypeNoun}}ly values."
+msgstr ""
+
+msgid "Data between start and end date will be imported as daily values."
 msgstr ""
 
 msgid ""
@@ -800,13 +799,13 @@ msgid "Provider name"
 msgstr ""
 
 msgid "Status"
-msgstr ""
+msgstr "状态"
 
 msgid "Setup info"
 msgstr ""
 
 msgid "Close"
-msgstr ""
+msgstr "关闭"
 
 msgid "Calculate from data"
 msgstr ""
@@ -1276,11 +1275,26 @@ msgstr ""
 msgid "No data found for the selected period"
 msgstr ""
 
-msgid "day"
+msgid "{{dynamicOuNames}} and {{lastOuName}}"
 msgstr ""
 
-msgid "week"
+msgid "{{allDynamicOuNames}} levels in {{staticOuNames}}"
 msgstr ""
+
+msgid "{{allDynamicOuNames}} groups in {{staticOuNames}}"
+msgstr ""
+
+msgid "{{allDynamicOuNames}} levels"
+msgstr ""
+
+msgid "{{allDynamicOuNames}} groups"
+msgstr ""
+
+msgid "day"
+msgstr "天"
+
+msgid "week"
+msgstr "周"
 
 msgid "month"
 msgstr "月"
@@ -1289,4 +1303,4 @@ msgid "Yearly"
 msgstr "每年"
 
 msgid "year"
-msgstr ""
+msgstr "年"
