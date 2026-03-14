@@ -1,11 +1,10 @@
-# 
 # Translators:
 # Yury Rogachev <yury@dhis2.org>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-01-30T12:52:50.606Z\n"
+"POT-Creation-Date: 2026-03-06T12:42:03.706Z\n"
 "PO-Revision-Date: 2025-02-05 13:11+0000\n"
 "Last-Translator: Yury Rogachev <yury@dhis2.org>, 2026\n"
 "Language-Team: Uzbek (Latin) (https://app.transifex.com/hisp-uio/teams/100509/uz@Latn/)\n"
@@ -600,7 +599,10 @@ msgstr ""
 msgid "Loading org units"
 msgstr ""
 
-msgid "No org units with geometry found for this level"
+msgid "Error loading org units: {{message}}"
+msgstr ""
+
+msgid "No org unit geometries found"
 msgstr ""
 
 msgid ""
@@ -644,19 +646,27 @@ msgstr ""
 msgid "Start import"
 msgstr "Importni boshlash"
 
+msgid "For {{periodId}} ({{actualStartTime}} to {{actualEndTime}})"
+msgstr ""
+
+msgid ""
+"{{periodTypeName}} values from {{startPeriodId}} to {{endPeriodId}} "
+"({{actualStartTime}} to {{actualEndTime}})"
+msgstr ""
+
 msgid "For the {{periodTypeNoun}} {{date}}"
 msgstr ""
 
 msgid "{{periodTypeName}} values between {{startDate}} and {{endDate}}"
 msgstr ""
 
-msgid "For {{orgUnitParent}} {{orgLevelName}}"
-msgstr ""
-
 msgid ""
-"For all organisation units at {{orgLevelName}} level within "
-"{{orgUnitParent}}"
-msgstr ""
+"Selected org units: {{ouText}} ({{count}} organisation units have geometry "
+"and will be imported)"
+msgid_plural ""
+"Selected org units: {{ouText}} ({{count}} organisation units have geometry "
+"and will be imported)"
+msgstr[0] ""
 
 msgid "To data element \"{{dataElement}}\""
 msgstr ""
@@ -684,30 +694,12 @@ msgid "No data for the following org units"
 msgstr ""
 
 msgid ""
-"ERA5-Land has limited data for costal areas. Values for other org units will"
-" be imported."
+"ERA5-Land has limited data for coastal areas. Values for other org units "
+"will be imported."
 msgstr ""
 
-msgid "Loading organisation units..."
-msgstr ""
-
-msgid "Select organisation unit and level"
-msgstr ""
-
-msgid ""
-"All organisation units at the selected level within the parent org unit will"
-" be included. If the selected parent is on the selected level, then data "
-"will be imported for this single org unit only."
-msgstr ""
-
-msgid "Parent organisation unit"
-msgstr "Yuqori tashkilot boʼlimi"
-
-msgid "Org unit parent needs to be above or equal to the org unit level"
-msgstr ""
-
-msgid "Organisation unit level"
-msgstr "Tashkiliy boʼlim pogʼonasi"
+msgid "Select organisation units"
+msgstr "Ташкилий бўлимларни танланг"
 
 msgid "Start and end date are not within the valid range."
 msgstr ""
@@ -719,19 +711,26 @@ msgid "End date is not within the valid range."
 msgstr ""
 
 msgid ""
-"{{periodTypeName}} data between start and end date will be calculated from "
+"{{periodTypeName}} data for full calendar {{periodTypeNoun}}s inclusive of "
+"start and end dates will be aggregated from hourly data."
+msgstr ""
+
+msgid ""
+"{{periodTypeName}} data between start and end date will be aggregated from "
 "hourly data."
 msgstr ""
 
 msgid ""
-"{{periodTypeName}} data between start and end date will be calculated from "
-"hourly data, with time zone adjustments applied if the selected time zone is"
-" not set to UTC."
+"Time zone adjustments will be applied if the selected time zone is not set "
+"to UTC."
 msgstr ""
 
 msgid ""
-"{{periodTypeName}} data between start and end date will be calculated and "
-"then aggregated to the selected period type."
+"Data for full calendar {{periodTypeNoun}}s inclusive of start and end dates "
+"will be aggregated to {{periodTypeNoun}}ly values."
+msgstr ""
+
+msgid "Data between start and end date will be imported as daily values."
 msgstr ""
 
 msgid ""
@@ -1274,6 +1273,21 @@ msgstr ""
 
 msgid "No data found for the selected period"
 msgstr ""
+
+msgid "{{dynamicOuNames}} and {{lastOuName}}"
+msgstr "{{dynamicOuNames}} va {{lastOuName}}"
+
+msgid "{{allDynamicOuNames}} levels in {{staticOuNames}}"
+msgstr "{{allDynamicOuNames}} pogʼonalar {{staticOuNames}} ichida"
+
+msgid "{{allDynamicOuNames}} groups in {{staticOuNames}}"
+msgstr "{{allDynamicOuNames}} guruhlar {{staticOuNames}} ichida"
+
+msgid "{{allDynamicOuNames}} levels"
+msgstr "Barcha {{allDynamicOuNames}} pogʼonalar"
+
+msgid "{{allDynamicOuNames}} groups"
+msgstr "{{allDynamicOuNames}} guruhlar"
 
 msgid "day"
 msgstr "kun"
