@@ -1,15 +1,15 @@
 # Translators:
 # Viktor Varland <viktor@dhis2.org>, 2026
-# 晓东 林 <13981924470@126.com>, 2026
 # Philip Larsen Donnelly, 2026
 # easylin <lin_xd@126.com>, 2026
+# 晓东 林 <13981924470@126.com>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-01-30T12:52:50.606Z\n"
+"POT-Creation-Date: 2026-03-06T12:42:03.706Z\n"
 "PO-Revision-Date: 2025-02-05 13:11+0000\n"
-"Last-Translator: easylin <lin_xd@126.com>, 2026\n"
+"Last-Translator: 晓东 林 <13981924470@126.com>, 2026\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -611,8 +611,11 @@ msgstr "设置指南"
 msgid "Loading org units"
 msgstr "装载组织单位"
 
-msgid "No org units with geometry found for this level"
-msgstr "未找到本级带几何图形的组织单位"
+msgid "Error loading org units: {{message}}"
+msgstr ""
+
+msgid "No org unit geometries found"
+msgstr ""
 
 msgid ""
 "Extracting data for {{periodCount}} {{periodType}} periods and "
@@ -659,19 +662,27 @@ msgstr ""
 msgid "Start import"
 msgstr "开始导入"
 
+msgid "For {{periodId}} ({{actualStartTime}} to {{actualEndTime}})"
+msgstr ""
+
+msgid ""
+"{{periodTypeName}} values from {{startPeriodId}} to {{endPeriodId}} "
+"({{actualStartTime}} to {{actualEndTime}})"
+msgstr ""
+
 msgid "For the {{periodTypeNoun}} {{date}}"
 msgstr "{{periodTypeNoun}} {{date}}"
 
 msgid "{{periodTypeName}} values between {{startDate}} and {{endDate}}"
 msgstr "{{periodTypeName}} {{startDate}} 和{{endDate}}"
 
-msgid "For {{orgUnitParent}} {{orgLevelName}}"
-msgstr "用于{{orgUnitParent}} {{orgLevelName}}"
-
 msgid ""
-"For all organisation units at {{orgLevelName}} level within "
-"{{orgUnitParent}}"
-msgstr "{{orgLevelName}} 级别的所有组织单位。{{orgUnitParent}}"
+"Selected org units: {{ouText}} ({{count}} organisation units have geometry "
+"and will be imported)"
+msgid_plural ""
+"Selected org units: {{ouText}} ({{count}} organisation units have geometry "
+"and will be imported)"
+msgstr[0] ""
 
 msgid "To data element \"{{dataElement}}\""
 msgstr "至数据元素 \"{{dataElement}}\""
@@ -699,30 +710,12 @@ msgid "No data for the following org units"
 msgstr "下列组织单位无数据"
 
 msgid ""
-"ERA5-Land has limited data for costal areas. Values for other org units will"
-" be imported."
-msgstr "ERA5-Land 的沿海地区数据有限。其他 org 单位的数值将被导入。"
+"ERA5-Land has limited data for coastal areas. Values for other org units "
+"will be imported."
+msgstr ""
 
-msgid "Loading organisation units..."
-msgstr "加载组织单位..."
-
-msgid "Select organisation unit and level"
-msgstr "选择组织单位和级别"
-
-msgid ""
-"All organisation units at the selected level within the parent org unit will"
-" be included. If the selected parent is on the selected level, then data "
-"will be imported for this single org unit only."
-msgstr "将包括父组织单位内所选级别的所有组织单位。如果所选父组织单位位于所选层级，则只导入该单一组织单位的数据。"
-
-msgid "Parent organisation unit"
-msgstr "上级组织机构"
-
-msgid "Org unit parent needs to be above or equal to the org unit level"
-msgstr "组织单位父级必须高于或等于组织单位级别"
-
-msgid "Organisation unit level"
-msgstr "组织机构等级"
+msgid "Select organisation units"
+msgstr "选择机构"
 
 msgid "Start and end date are not within the valid range."
 msgstr "开始和结束日期不在有效范围内。"
@@ -734,20 +727,27 @@ msgid "End date is not within the valid range."
 msgstr "结束日期不在有效范围内。"
 
 msgid ""
-"{{periodTypeName}} data between start and end date will be calculated from "
+"{{periodTypeName}} data for full calendar {{periodTypeNoun}}s inclusive of "
+"start and end dates will be aggregated from hourly data."
+msgstr ""
+
+msgid ""
+"{{periodTypeName}} data between start and end date will be aggregated from "
 "hourly data."
-msgstr "{{periodTypeName}} 开始日期和结束日期之间的数据将按小时计算。"
+msgstr ""
 
 msgid ""
-"{{periodTypeName}} data between start and end date will be calculated from "
-"hourly data, with time zone adjustments applied if the selected time zone is"
-" not set to UTC."
-msgstr "{{periodTypeName}} 开始日期和结束日期之间的数据将根据每小时数据计算，如果所选时区未设置为 UTC，则会应用时区调整。"
+"Time zone adjustments will be applied if the selected time zone is not set "
+"to UTC."
+msgstr ""
 
 msgid ""
-"{{periodTypeName}} data between start and end date will be calculated and "
-"then aggregated to the selected period type."
-msgstr "{{periodTypeName}} 将计算开始日期和结束日期之间的数据，然后汇总到所选的期间类型。"
+"Data for full calendar {{periodTypeNoun}}s inclusive of start and end dates "
+"will be aggregated to {{periodTypeNoun}}ly values."
+msgstr ""
+
+msgid "Data between start and end date will be imported as daily values."
+msgstr ""
 
 msgid ""
 "The data will be assigned a yearly period type that matches the year it was "
@@ -1292,6 +1292,21 @@ msgstr "NASA / USGS / JPL-Caltech / Google 地球引擎"
 
 msgid "No data found for the selected period"
 msgstr "所选时期无数据"
+
+msgid "{{dynamicOuNames}} and {{lastOuName}}"
+msgstr "{{dynamicOuNames}} 和{{lastOuName}}"
+
+msgid "{{allDynamicOuNames}} levels in {{staticOuNames}}"
+msgstr "{{allDynamicOuNames}} 等级在 {{staticOuNames}}"
+
+msgid "{{allDynamicOuNames}} groups in {{staticOuNames}}"
+msgstr "{{allDynamicOuNames}} 组在 {{staticOuNames}}"
+
+msgid "{{allDynamicOuNames}} levels"
+msgstr "{{allDynamicOuNames}} 等级"
+
+msgid "{{allDynamicOuNames}} groups"
+msgstr "{{allDynamicOuNames}} 组"
 
 msgid "day"
 msgstr "日"
