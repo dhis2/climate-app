@@ -2,15 +2,15 @@
 # Philip Larsen Donnelly, 2026
 # Viktor Varland <viktor@dhis2.org>, 2026
 # Mai Nguyen <thanhmai.jica@gmail.com>, 2026
-# Em Le <em.hispvietnam@gmail.com>, 2026
 # Thuy Nguyen <thuynguyen@hispvietnam.org>, 2026
+# Em Le <em.hispvietnam@gmail.com>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-03-06T07:07:32.241Z\n"
+"POT-Creation-Date: 2026-03-06T12:42:03.706Z\n"
 "PO-Revision-Date: 2025-02-05 13:11+0000\n"
-"Last-Translator: Thuy Nguyen <thuynguyen@hispvietnam.org>, 2026\n"
+"Last-Translator: Em Le <em.hispvietnam@gmail.com>, 2026\n"
 "Language-Team: Vietnamese (https://app.transifex.com/hisp-uio/teams/100509/vi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -388,94 +388,94 @@ msgid "Light sleet showers"
 msgstr "Mưa tuyết nhẹ"
 
 msgid "Sleet showers"
-msgstr ""
+msgstr "Mưa tuyết"
 
 msgid "Heavy sleet showers"
-msgstr ""
+msgstr "Mưa tuyết lớn"
 
 msgid "Light sleet showers and thunder"
-msgstr ""
+msgstr "Mưa tuyết nhỏ và sấm sét"
 
 msgid "Sleet showers and thunder"
-msgstr ""
+msgstr "Mưa tuyết và sấm sét"
 
 msgid "Heavy sleet showers and thunder"
-msgstr ""
+msgstr "Mưa tuyết lớn và sấm sét"
 
 msgid "Light snow showers"
-msgstr ""
+msgstr "Mưa rào tuyết nhỏ"
 
 msgid "Snow showers"
-msgstr ""
+msgstr "Mưa rào tuyết"
 
 msgid "Heavy show showers"
-msgstr ""
+msgstr "Mưa rào tuyết lớn"
 
 msgid "Light snow showers and thunder"
-msgstr ""
+msgstr "Mưa rào tuyết nhỏ và sấm sét"
 
 msgid "Snow showers and thunder"
-msgstr ""
+msgstr "Mưa rào tuyết và sấm sét"
 
 msgid "Heavy snow showers and thunder"
-msgstr ""
+msgstr "Mưa rào tuyết lớn và sấm sét"
 
 msgid "Light rain"
-msgstr ""
+msgstr "Mưa nhỏ"
 
 msgid "Rain"
-msgstr ""
+msgstr "Mưa"
 
 msgid "Heavy rain"
-msgstr ""
+msgstr "Mưa lớn"
 
 msgid "Light rain and thunder"
-msgstr ""
+msgstr "Mưa nhỏ và sấm sét"
 
 msgid "Rain and thunder"
-msgstr ""
+msgstr "Mưa và sấm sét"
 
 msgid "Heavy rain and thunder"
-msgstr ""
+msgstr "Mưa lớn và sấm sét"
 
 msgid "Light sleet"
-msgstr ""
+msgstr "Mưa tuyết nhỏ"
 
 msgid "Sleet"
-msgstr ""
+msgstr "Mưa tuyết"
 
 msgid "Heavy sleet"
-msgstr ""
+msgstr "Mưa tuyết lớn"
 
 msgid "Light sleet and thunder"
-msgstr ""
+msgstr "Mưa tuyết nhỏ và sấm sét"
 
 msgid "Sleet and thunder"
-msgstr ""
+msgstr "Mưa tuyết và sấm sét"
 
 msgid "Heavy sleet and thunder"
-msgstr ""
+msgstr "Mưa tuyết lớn và sấm sét"
 
 msgid "Light snow"
-msgstr ""
+msgstr "Tuyết rơi nhẹ"
 
 msgid "Snow"
-msgstr ""
+msgstr "Tuyết rơi"
 
 msgid "Heavy snow"
-msgstr ""
+msgstr "Tuyết rơi dày"
 
 msgid "Light snow and thunder"
-msgstr ""
+msgstr "Tuyết rơi nhẹ và sấm sét"
 
 msgid "Snow and thunder"
-msgstr ""
+msgstr "Tuyết rơi và sấm sét"
 
 msgid "Heavy snow and thunder"
-msgstr ""
+msgstr "Tuyết rơi dày và sấm sét"
 
 msgid "Fog"
-msgstr ""
+msgstr "Sương mù"
 
 msgid ""
 "The Universal Thermal Climate Index (UTCI) is an index that combines the "
@@ -483,45 +483,52 @@ msgid ""
 " body. It is a measure of the thermal stress experienced by a person in a "
 "given environment."
 msgstr ""
+"Chỉ số Khí hậu Nhiệt Phổ quát (UTCI) là một chỉ số kết hợp các tác động của "
+"nhiệt độ không khí, độ ẩm, tốc độ gió và bức xạ lên cơ thể con người. Đây là"
+" thước đo mức độ căng thẳng nhiệt mà một người phải trải qua trong một môi "
+"trường nhất định."
 
 msgid "{{name}}: Thermal comfort {{period}}"
-msgstr ""
+msgstr "{{name}}: Tiện nghi nhiệt {{period}}"
 
 msgid "Average felt temperature"
-msgstr ""
+msgstr "Nhiệt độ cảm nhận trung bình"
 
 msgid "Felt temperature range"
-msgstr ""
+msgstr "Dải nhiệt độ cảm nhận"
 
 msgid "Average temperature"
-msgstr ""
+msgstr "Nhiệt độ trung bình"
 
 msgid ""
 "Relative humidity is the the amount of water vapour present in air expressed"
 " as a percentage of the amount needed for saturation at the same temperature"
 " (dewpoint)."
 msgstr ""
+"Độ ẩm tương đối là lượng hơi nước có trong không khí, được biểu thị bằng tỷ "
+"lệ phần trăm của lượng cần thiết để đạt độ bão hòa ở cùng nhiệt độ (điểm "
+"sương)."
 
 msgid "{{name}}: Daily relative humidity {{period}}"
-msgstr ""
+msgstr "{{name}}: Độ ẩm tương đối hàng ngày {{period}}"
 
 msgid "Relative humidity"
-msgstr ""
+msgstr "Độ ẩm tương đối"
 
 msgid "{{name}}: Relative humidity {{period}}"
-msgstr ""
+msgstr "{{name}}: Độ ẩm tương đối {{period}}"
 
 msgid "Normals from reference period: {{period}}"
-msgstr ""
+msgstr "Mức chuẩn từ khoảng thời gian tham chiếu: {{period}}"
 
 msgid "Normal relative humidity"
-msgstr ""
+msgstr "Độ ẩm tương đối chuẩn"
 
 msgid "Dewpoint temperature"
-msgstr ""
+msgstr "Nhiệt độ điểm sương"
 
 msgid "Air temperature"
-msgstr ""
+msgstr "Nhiệt độ không khí"
 
 msgid "Evergreen Needleleaf forest"
 msgstr "Rừng lá kim thường xanh"
@@ -575,43 +582,43 @@ msgid "Water"
 msgstr "Nước"
 
 msgid "Land cover type"
-msgstr ""
+msgstr "Loại lớp phủ mặt đất"
 
 msgid "{{name}}: Land cover changes {{years}}"
-msgstr ""
+msgstr "{{name}}: Thay đổi lớp phủ mặt đất {{years}}"
 
 msgid "{{name}}: Daily precipitation {{period}}"
-msgstr ""
+msgstr "{{name}}: Lượng mưa hàng ngày {{period}}"
 
 msgid "Daily precipitation"
-msgstr ""
+msgstr "Lượng mưa hàng ngày"
 
 msgid "{{name}}: Monthly precipitation {{period}}"
-msgstr ""
+msgstr "{{name}}: Lượng mưa hàng tháng {{period}}"
 
 msgid "Monthly precipitation"
-msgstr ""
+msgstr "Lượng mưa hàng tháng"
 
 msgid "Normal precipitation"
-msgstr ""
+msgstr "Lượng mưa chuẩn"
 
 msgid "{{name}}: Daily temperatures {{period}}"
-msgstr ""
+msgstr "{{name}}: Nhiệt độ hàng ngày {{period}}"
 
 msgid "Mean temperature"
-msgstr ""
+msgstr "Nhiệt độ trung bình"
 
 msgid "Temperature range"
-msgstr ""
+msgstr "Dải nhiệt độ"
 
 msgid "{{name}}: Monthly temperatures {{period}}"
-msgstr ""
+msgstr "{{name}}: Nhiệt độ hàng tháng {{period}}"
 
 msgid "Normal temperature"
-msgstr ""
+msgstr "Nhiệt độ chuẩn"
 
 msgid "Resample"
-msgstr ""
+msgstr "Lấy mẫu lại"
 
 msgid "Weekly"
 msgstr "Hàng Tuần"
@@ -620,89 +627,110 @@ msgid ""
 "Change from 16-days to weekly or monthly periods using linear interpolation."
 " Weekly periods are recommended when importing to DHIS2."
 msgstr ""
+"Chuyển từ khoảng thời gian 16 ngày sang hàng tuần hoặc hàng tháng bằng cách "
+"nội suy tuyến tính. Khoảng thời gian hàng tuần được khuyên dùng khi nhập vào"
+" DHIS2."
 
 msgid "{{name}}: {{band}} vegetation index {{period}}"
-msgstr ""
+msgstr "{{name}}: Chỉ số thảm thực vật {{band}} {{period}}"
 
 msgid "Value is only for 250 x 250 m where the facility is located"
-msgstr ""
+msgstr "Giá trị này chỉ dành cho diện tích 250 x 250 m nơi cơ sở được đặt"
 
 msgid "Loading data elements..."
-msgstr ""
+msgstr "Đang tải các phần tử dữ liệu..."
 
 msgid "No data elements found. You must first select a dataset to import."
 msgstr ""
+"Không tìm thấy phần tử dữ liệu nào. Bạn phải chọn một tập dữ liệu để nhập "
+"trước."
 
 msgid "No data elements found for the selected period type."
-msgstr ""
+msgstr "Không tìm thấy phần tử dữ liệu nào cho khoảng thời gian đã chọn."
 
 msgid "Showing data elements from {{periodType}} data sets"
-msgstr ""
+msgstr "Đang hiển thị các phần tử dữ liệu từ các tập dữ liệu {{periodType}}"
 
 msgid "No match found"
 msgstr "Không tìm thấy kết quả phù hợp"
 
 msgid "Need help setting up data elements for import? Check out the "
-msgstr ""
+msgstr "Cần trợ giúp thiết lập các phần tử dữ liệu để nhập? Hãy xem "
 
 msgid "setup guide"
-msgstr ""
+msgstr "hướng dẫn thiết lập"
 
 msgid "Loading org units"
-msgstr ""
+msgstr "Đang tải các đơn vị tổ chức"
 
 msgid "Error loading org units: {{message}}"
-msgstr ""
+msgstr "Lỗi khi tải các đơn vị tổ chức: {{message}}"
 
 msgid "No org unit geometries found"
-msgstr ""
+msgstr "Không tìm thấy ranh giới địa lý của đơn vị tổ chức nào"
 
 msgid ""
 "Extracting data for {{periodCount}} {{periodType}} periods and "
 "{{orgUnitsCount}} org units ({{valueCount}} values)"
 msgstr ""
+"Đang trích xuất dữ liệu cho {{periodCount}} khoảng thời gian {{periodType}} "
+"và {{orgUnitsCount}} đơn vị tổ chức ({{valueCount}} giá trị)"
 
 msgid "Extracting data for {{orgUnitsCount}} org units"
-msgstr ""
+msgstr "Đang trích xuất dữ liệu cho {{orgUnitsCount}} đơn vị tổ chức"
 
 msgid "Dataset provider not recognized"
-msgstr ""
+msgstr "Không nhận diện được nhà cung cấp tập dữ liệu"
 
 msgid "Importing data to DHIS2"
-msgstr ""
+msgstr "Đang nhập dữ liệu vào DHIS2"
 
 msgid "Import failed"
-msgstr ""
+msgstr "Nhập thất bại"
 
 msgid "One or more conflicts encountered"
-msgstr ""
+msgstr "Đã gặp một hoặc nhiều xung đột"
 
 msgid "Import weather and climate data"
-msgstr ""
+msgstr "Nhập dữ liệu thời tiết và khí hậu"
 
 msgid "Choose data source"
-msgstr ""
+msgstr "Chọn nguồn dữ liệu"
 
 msgid "Choose destination data element"
-msgstr ""
+msgstr "Chọn phần tử dữ liệu đích"
 
 msgid "Review and import"
-msgstr ""
+msgstr "Xem lại và nhập"
 
 msgid ""
 "Import limit exceeded: {{valueCount}} values selected (maximum "
 "{{maxValues}}). Reduce your selection by choosing fewer organisation units "
 "or a shorter time period. Additional imports can be performed separately."
 msgstr ""
+"Vượt quá giới hạn nhập: đã chọn {{valueCount}} giá trị (tối đa "
+"{{maxValues}}). Vui lòng giảm lựa chọn của bạn bằng cách chọn ít đơn vị tổ "
+"chức hơn hoặc khoảng thời gian ngắn hơn. Bạn có thể thực hiện các lần nhập "
+"bổ sung một cách riêng biệt."
 
 msgid "Start import"
+msgstr "Bắt đầu nhập"
+
+msgid "For {{periodId}} ({{actualStartTime}} to {{actualEndTime}})"
+msgstr "Cho {{periodId}} ({{actualStartTime}} đến {{actualEndTime}})"
+
+msgid ""
+"{{periodTypeName}} values from {{startPeriodId}} to {{endPeriodId}} "
+"({{actualStartTime}} to {{actualEndTime}})"
 msgstr ""
+"Các giá trị {{periodTypeName}} từ {{startPeriodId}} đến {{endPeriodId}} "
+"({{actualStartTime}} đến {{actualEndTime}})"
 
 msgid "For the {{periodTypeNoun}} {{date}}"
-msgstr ""
+msgstr "Cho {{periodTypeNoun}} {{date}}"
 
 msgid "{{periodTypeName}} values between {{startDate}} and {{endDate}}"
-msgstr ""
+msgstr "Các giá trị {{periodTypeName}} giữa {{startDate}} và {{endDate}}"
 
 msgid ""
 "Selected org units: {{ouText}} ({{count}} organisation units have geometry "
@@ -711,164 +739,195 @@ msgid_plural ""
 "Selected org units: {{ouText}} ({{count}} organisation units have geometry "
 "and will be imported)"
 msgstr[0] ""
+"Đơn vị được chọn: {{ouText}} (có {{count}} đơn vị có tọa độ và sẽ được tích "
+"hợp)"
 
 msgid "To data element \"{{dataElement}}\""
-msgstr ""
+msgstr "Tới phần tử dữ liệu \"{{dataElement}}\""
 
 msgid "{{count}} data values will be imported"
 msgid_plural "{{count}} data values will be imported"
-msgstr[0] ""
+msgstr[0] "{{count}} dữ liệu sẽ được tích hợp"
 
 msgid "Data is imported"
-msgstr ""
+msgstr "Dữ liệu đã được nhập"
 
 msgid "Imported: {{imported}}"
-msgstr ""
+msgstr "Đã nhập: {{imported}}"
 
 msgid "Updated: {{updated}}"
-msgstr ""
+msgstr "Đã cập nhật: {{updated}}"
 
 msgid "Ignored (already exists): {{ignored}}"
-msgstr ""
+msgstr "Đã bỏ qua (đã tồn tại): {{ignored}}"
 
 msgid "Missing: {{missing}}"
-msgstr ""
+msgstr "Bị thiếu: {{missing}}"
 
 msgid "No data for the following org units"
-msgstr ""
+msgstr "Không có dữ liệu cho các đơn vị tổ chức sau"
 
 msgid ""
 "ERA5-Land has limited data for coastal areas. Values for other org units "
 "will be imported."
 msgstr ""
+"ERA5-Land có dữ liệu hạn chế cho các khu vực ven biển. Các giá trị cho các "
+"đơn vị tổ chức khác sẽ được nhập."
 
 msgid "Select organisation units"
 msgstr "Chọn Đơn Vị"
 
 msgid "Start and end date are not within the valid range."
-msgstr ""
+msgstr "Ngày bắt đầu và ngày kết thúc không nằm trong phạm vi hợp lệ."
 
 msgid "Start date is not within the valid range."
-msgstr ""
+msgstr "Ngày bắt đầu không nằm trong phạm vi hợp lệ."
 
 msgid "End date is not within the valid range."
-msgstr ""
+msgstr "Ngày kết thúc không nằm trong phạm vi hợp lệ."
 
 msgid ""
-"{{periodTypeName}} data between start and end date will be calculated from "
+"{{periodTypeName}} data for full calendar {{periodTypeNoun}}s inclusive of "
+"start and end dates will be aggregated from hourly data."
+msgstr ""
+"Dữ liệu {{periodTypeName}} cho toàn bộ lịch {{periodTypeNoun}} bao gồm cả "
+"ngày bắt đầu và ngày kết thúc sẽ được tổng hợp từ dữ liệu hàng giờ."
+
+msgid ""
+"{{periodTypeName}} data between start and end date will be aggregated from "
 "hourly data."
 msgstr ""
+"Dữ liệu {{periodTypeName}} giữa ngày bắt đầu và ngày kết thúc sẽ được tổng "
+"hợp từ dữ liệu hàng giờ."
 
 msgid ""
-"{{periodTypeName}} data between start and end date will be calculated from "
-"hourly data, with time zone adjustments applied if the selected time zone is"
-" not set to UTC."
+"Time zone adjustments will be applied if the selected time zone is not set "
+"to UTC."
 msgstr ""
+"Các điều chỉnh múi giờ sẽ được áp dụng nếu múi giờ đã chọn không được thiết "
+"lập là UTC."
 
 msgid ""
-"{{periodTypeName}} data between start and end date will be calculated and "
-"then aggregated to the selected period type."
+"Data for full calendar {{periodTypeNoun}}s inclusive of start and end dates "
+"will be aggregated to {{periodTypeNoun}}ly values."
 msgstr ""
+"Dữ liệu cho toàn bộ lịch {{periodTypeNoun}} bao gồm cả ngày bắt đầu và ngày "
+"kết thúc sẽ được tổng hợp thành các giá trị {{periodTypeNoun}}."
+
+msgid "Data between start and end date will be imported as daily values."
+msgstr ""
+"Dữ liệu giữa ngày bắt đầu và ngày kết thúc sẽ được nhập dưới dạng các giá "
+"trị hàng ngày."
 
 msgid ""
 "The data will be assigned a yearly period type that matches the year it was "
 "collected: {{datasetPeriod}}"
 msgstr ""
+"Dữ liệu sẽ được gán cho loại khoảng thời gian hàng năm tương ứng với năm nó "
+"được thu thập: {{datasetPeriod}}"
 
 msgid "Valid range: {{startDate}} - {{endDate}}"
-msgstr ""
+msgstr "Phạm vi hợp lệ: {{startDate}} - {{endDate}}"
 
 msgid "Valid range"
-msgstr ""
+msgstr "Phạm vi hợp lệ"
 
 msgid "Period type"
 msgstr "Kiểu thời điểm"
 
 msgid "Start year"
-msgstr ""
+msgstr "Năm bắt đầu"
 
 msgid "End year"
-msgstr ""
+msgstr "Năm kết thúc"
 
 msgid "Chart settings"
-msgstr ""
+msgstr "Cài đặt biểu đồ"
 
 msgid ""
 "Set y-axis values for charts in the Explore data section to make it easier "
 "to compare different org units. Leave blank to calculate based on data "
 "shown."
 msgstr ""
+"Đặt giá trị trục Y cho các biểu đồ trong phần Khám phá dữ liệu để dễ dàng so"
+" sánh giữa các đơn vị tổ chức khác nhau. Để trống nếu muốn tính toán tự động"
+" dựa trên dữ liệu được hiển thị."
 
 msgid "Max temperature in °C"
-msgstr ""
+msgstr "Nhiệt độ tối đa tính bằng °C"
 
 msgid "Min temperature in °C"
-msgstr ""
+msgstr "Nhiệt độ tối thiểu tính bằng °C"
 
 msgid "Min temperature must be less than max temperature"
-msgstr ""
+msgstr "Nhiệt độ tối thiểu phải nhỏ hơn nhiệt độ tối đa"
 
 msgid "Max change in temperature in +/- °C"
-msgstr ""
+msgstr "Sự thay đổi nhiệt độ tối đa tính bằng +/- °C"
 
 msgid "Max monthly precipitation in mm"
-msgstr ""
+msgstr "Lượng mưa hàng tháng tối đa tính bằng mm"
 
 msgid "Max daily precipitation in mm"
-msgstr ""
+msgstr "Lượng mưa hàng ngày tối đa tính bằng mm"
 
 msgid "Heat stress upper category"
-msgstr ""
+msgstr "Hạng mục giới hạn trên của căng thẳng nhiệt"
 
 msgid "Heat stress lower category"
-msgstr ""
+msgstr "Hạng mục giới hạn dưới của căng thẳng nhiệt"
 
 msgid "Data Providers"
-msgstr ""
+msgstr "Nhà cung cấp dữ liệu"
 
 msgid ""
 "The following data providers can be configured and used in the Climate app. "
 "Contact your administrator to configure these data providers."
 msgstr ""
+"Các nhà cung cấp dữ liệu sau đây có thể được cấu hình và sử dụng trong ứng "
+"dụng Khí hậu. Vui lòng liên hệ với quản trị viên của bạn để cấu hình các nhà"
+" cung cấp dữ liệu này."
 
 msgid "Provider name"
-msgstr ""
+msgstr "Tên nhà cung cấp"
 
 msgid "Status"
 msgstr "Trạng thái"
 
 msgid "Setup info"
-msgstr ""
+msgstr "Thông tin thiết lập"
 
 msgid "Close"
 msgstr "Đóng"
 
 msgid "Calculate from data"
-msgstr ""
+msgstr "Tính toán từ dữ liệu"
 
 msgid "App settings"
-msgstr ""
+msgstr "Cài đặt ứng dụng"
 
 msgid "Changes made below will apply to all users of this app."
 msgstr ""
+"Những thay đổi được thực hiện dưới đây sẽ áp dụng cho tất cả người dùng của "
+"ứng dụng này."
 
 msgid "General settings"
 msgstr "Cài đặt chung"
 
 msgid "Default start page for users"
-msgstr ""
+msgstr "Trang bắt đầu mặc định cho người dùng"
 
 msgid "Time zone where your org units are located"
-msgstr ""
+msgstr "Múi giờ nơi các đơn vị tổ chức của bạn được đặt"
 
 msgid "Data element field"
-msgstr ""
+msgstr "Trường phần tử dữ liệu"
 
 msgid "Value"
 msgstr "Giá trị"
 
 msgid "Note"
-msgstr ""
+msgstr "Ghi chú"
 
 msgid "Name"
 msgstr "Tên"
@@ -877,6 +936,8 @@ msgid ""
 "Include the data source in the name to distinguish it from other sources "
 "(e.g. precipitation data is available from both ERA5-Land and CHIRPS)."
 msgstr ""
+"Nên bao gồm nguồn dữ liệu vào trong tên để phân biệt với các nguồn khác (ví "
+"dụ: dữ liệu lượng mưa có sẵn từ cả ERA5-Land và CHIRPS)."
 
 msgid "Short name"
 msgstr "Tên rút gọn"
@@ -888,6 +949,8 @@ msgid ""
 "If you use this code, this data element will be autoselected in the import "
 "form when choosing the \"{{-name}}\" dataset."
 msgstr ""
+"Nếu bạn sử dụng mã này, phần tử dữ liệu này sẽ tự động được chọn trong biểu "
+"mẫu nhập khi bạn chọn tập dữ liệu \"{{-name}}\"."
 
 msgid "Description"
 msgstr "Mô tả"
@@ -905,73 +968,82 @@ msgid "Aggregation type"
 msgstr "Kiểu tổng hợp"
 
 msgid "Use your domain knowledge to select the appropriate aggregation type"
-msgstr ""
+msgstr "Sử dụng kiến thức chuyên môn của bạn để chọn loại tổng hợp phù hợp"
 
 msgid "Store zero data values"
 msgstr "Lưu giá trị 0"
 
 msgid "Make sure it is checked"
-msgstr ""
+msgstr "Hãy đảm bảo nó được đánh dấu"
 
 msgid "Aggregation levels"
 msgstr "Tuyến Tổng Hợp"
 
 msgid "Assign all org unit levels"
-msgstr ""
+msgstr "Chỉ định tất cả các cấp đơn vị tổ chức"
 
 msgid ""
 "Assign all to prevent aggregation across organisation unit levels, "
 "especially from facility to higher levels defined by a geographic boundary."
 msgstr ""
+"Chỉ định tất cả để ngăn việc tổng hợp chéo giữa các cấp đơn vị tổ chức, đặc "
+"biệt là từ cấp cơ sở lên các cấp cao hơn được xác định bởi ranh giới địa lý."
 
 msgid ""
 "You should now be able to import data with this app. Please reach out to us "
 "on climate-app@dhis2.org if you have any questions or need help with the "
 "setup."
 msgstr ""
+"Bây giờ bạn đã có thể nhập dữ liệu bằng ứng dụng này. Vui lòng liên hệ với "
+"chúng tôi tại climate-app@dhis2.org nếu bạn có bất kỳ câu hỏi nào hoặc cần "
+"trợ giúp thiết lập."
 
 msgid "4. Assign to a DHIS2 data element group"
-msgstr ""
+msgstr "4. Gán vào một nhóm phần tử dữ liệu DHIS2"
 
 msgid "Data element group field"
-msgstr ""
+msgstr "Trường nhóm phần tử dữ liệu"
 
 msgid "Data elements"
 msgstr "Phần tử dữ liệu"
 
 msgid "Assign above data element"
-msgstr ""
+msgstr "Gán phần tử dữ liệu ở trên"
 
 msgid "3. Assign to a DHIS2 data set"
-msgstr ""
+msgstr "3. Gán vào một tập dữ liệu DHIS2"
 
 msgid "Data set field"
-msgstr ""
+msgstr "Trường tập dữ liệu"
 
 msgid ""
 "The same DHIS2 data set can be used for all the \"{{-name}} "
 "{{-periodTypeName}}\" related data elements"
 msgstr ""
+"Có thể sử dụng cùng một tập dữ liệu DHIS2 cho tất cả các phần tử dữ liệu "
+"liên quan đến \"{{-name}} {{-periodTypeName}}\""
 
 msgid "Organisation units"
 msgstr "Đơn vị"
 
 msgid "Select all organisation units in your system"
-msgstr ""
+msgstr "Chọn tất cả các đơn vị tổ chức trong hệ thống của bạn"
 
 msgid ""
 "Assign all organisation units since data can be provided for any unit with "
 "defined geographic boundaries."
 msgstr ""
+"Chỉ định tất cả các đơn vị tổ chức vì dữ liệu có thể được cung cấp cho bất "
+"kỳ đơn vị nào có ranh giới địa lý được xác định."
 
 msgid "4. Add a legend"
-msgstr ""
+msgstr "4. Thêm chú giải"
 
 msgid "Recommended legend for this data element."
-msgstr ""
+msgstr "Chú giải được đề xuất cho phần tử dữ liệu này."
 
 msgid "Legend: \"{{-name}}\""
-msgstr ""
+msgstr "Chú giải: \"{{-name}}\""
 
 msgid "Start value"
 msgstr "Giá trị bắt đầu"
@@ -983,56 +1055,68 @@ msgid "Color"
 msgstr "Màu"
 
 msgid "Configure DHIS2 in order to import data"
-msgstr ""
+msgstr "Cấu hình DHIS2 để nhập dữ liệu"
 
 msgid ""
 "Create only one DHIS2 data element per dataset, using the lowest period type"
 " needed for analysis, to avoid duplicating data."
 msgstr ""
+"Tạo duy nhất một phần tử dữ liệu DHIS2 cho mỗi tập dữ liệu, sử dụng loại "
+"khoảng thời gian thấp nhất cần thiết để phân tích, nhằm tránh trùng lặp dữ "
+"liệu."
 
 msgid "1. Select the period type"
-msgstr ""
+msgstr "1. Chọn loại khoảng thời gian"
 
 msgid ""
 "Select the lowest period type needed for analysis. Data can then be "
 "aggregated to other period types in DHIS2 during analysis in Maps, Data "
 "Visualizer, and other apps."
 msgstr ""
+"Chọn loại khoảng thời gian thấp nhất cần thiết để phân tích. Dữ liệu sau đó "
+"có thể được tổng hợp sang các loại khoảng thời gian khác trong DHIS2 trong "
+"quá trình phân tích ở Bản đồ, Trình trực quan hóa dữ liệu và các ứng dụng "
+"khác."
 
 msgid "2. Create the DHIS2 data element"
-msgstr ""
+msgstr "2. Tạo phần tử dữ liệu DHIS2"
 
 msgid "Loading data"
 msgstr "Đang tải dữ liệu"
 
 msgid "Select dataset to import"
-msgstr ""
+msgstr "Chọn tập dữ liệu để nhập"
 
 msgid ""
 "No datasets are available. Go to the Settings page to learn how to configure"
 " dataset sources."
 msgstr ""
+"Không có tập dữ liệu nào khả dụng. Hãy đến trang Cài đặt để tìm hiểu cách "
+"cấu hình các nguồn tập dữ liệu."
 
 msgid "ENACTS datasets could not be loaded"
-msgstr ""
+msgstr "Không thể tải các tập dữ liệu ENACTS"
 
 msgid "Data is from "
-msgstr ""
+msgstr "Dữ liệu lấy từ "
 
 msgid ". Provider: "
-msgstr ""
+msgstr ". Nhà cung cấp: "
 
 msgid "You need access to Google Earth Engine to explore this data."
 msgstr ""
+"Bạn cần có quyền truy cập vào Google Earth Engine để khám phá dữ liệu này."
 
 msgid "How to get access?"
-msgstr ""
+msgstr "Làm thế nào để có quyền truy cập?"
 
 msgid "Install Maps app v101.5.0 or higher to enable this feature."
 msgstr ""
+"Cài đặt ứng dụng Bản đồ (Maps) phiên bản v101.5.0 hoặc cao hơn để bật tính "
+"năng này."
 
 msgid "Latest period will be selected."
-msgstr ""
+msgstr "Khoảng thời gian mới nhất sẽ được chọn."
 
 msgid "Open as Map"
 msgstr "Mở dưới dạng bản đồ"
@@ -1042,25 +1126,33 @@ msgid ""
 " to modernization work impacting the Copernicus Climate Data Store (CDS) "
 "where the data originates."
 msgstr ""
+"Trong một khoảng thời gian tạm thời, dữ liệu cho năm 2024 có sẵn rất hạn "
+"chế. Điều này là do công việc hiện đại hóa đang tác động đến Kho dữ liệu Khí"
+" hậu Copernicus (CDS) - nơi bắt nguồn của dữ liệu."
 
 msgid "Read more on the CDS user forum"
-msgstr ""
+msgstr "Đọc thêm trên diễn đàn người dùng CDS"
 
 msgid ""
 "You can import data for the lowest levels in your org unit hierarchy, but it"
 " won't improve the resolution of the data."
 msgstr ""
+"Bạn có thể nhập dữ liệu cho các cấp thấp nhất trong hệ thống phân cấp đơn vị"
+" tổ chức của mình, nhưng điều đó sẽ không cải thiện độ phân giải của dữ "
+"liệu."
 
 msgid ""
 "If two org units are close to each other (within the resolution), they will "
 "have the same data values."
 msgstr ""
+"Nếu hai đơn vị tổ chức ở gần nhau (trong cùng độ phân giải), chúng sẽ có "
+"cùng giá trị dữ liệu."
 
 msgid "Time zone"
-msgstr ""
+msgstr "Múi giờ"
 
 msgid "Data resolution is approximately {{resolution}}."
-msgstr ""
+msgstr "Độ phân giải dữ liệu xấp xỉ {{resolution}}."
 
 msgid ""
 "Landsat Normalized Difference Vegetation Index (NDVI) is used to quantify "
@@ -1068,248 +1160,261 @@ msgid ""
 "assessing changes in plant health. NDVI values range from -1 to 1, with "
 "higher values indicating denser vegetation."
 msgstr ""
+"Chỉ số Thực vật Khác biệt Chuẩn hóa Landsat (NDVI) được sử dụng để định "
+"lượng độ xanh của thảm thực vật và hữu ích trong việc hiểu mật độ thảm thực "
+"vật cũng như đánh giá các thay đổi về sức khỏe của cây trồng. Giá trị NDVI "
+"dao động từ -1 đến 1, với giá trị cao hơn cho thấy thảm thực vật dày đặc "
+"hơn."
 
 msgid ""
 "Enhanced vegetation index (EVI) differs from NDVI by reducing the influence "
 "of atmospheric conditions and canopy background noise. EVI values range from"
 " -1 to 1, with higher values indicating denser vegetation."
 msgstr ""
+"Chỉ số Thực vật Tăng cường (EVI) khác với NDVI ở chỗ giảm ảnh hưởng của các "
+"điều kiện khí quyển và nhiễu phông nền tán lá. Giá trị EVI dao động từ -1 "
+"đến 1, với giá trị cao hơn cho thấy thảm thực vật dày đặc hơn."
 
 msgid "Land cover types at yearly intervals"
-msgstr ""
+msgstr "Các loại lớp phủ mặt đất theo khoảng thời gian hàng năm"
 
 msgid "Air temperature (ERA5-Land)"
-msgstr ""
+msgstr "Nhiệt độ không khí (ERA5-Land)"
 
 msgid "Average air temperature in °C at 2 m above the surface."
-msgstr ""
+msgstr "Nhiệt độ không khí trung bình tính bằng °C ở độ cao 2m so với bề mặt."
 
 msgid "Average"
 msgstr "Trung bình"
 
 msgid "Max air temperature (ERA5-Land)"
-msgstr ""
+msgstr "Nhiệt độ không khí tối đa (ERA5-Land)"
 
 msgid "Max air temperature"
-msgstr ""
+msgstr "Nhiệt độ không khí tối đa"
 
 msgid "Maximum air temperature in °C at 2 m above the surface."
-msgstr ""
+msgstr "Nhiệt độ không khí tối đa tính bằng °C ở độ cao 2m so với bề mặt."
 
 msgid "Max"
 msgstr "Lớn nhất"
 
 msgid "Min temperature (ERA5-Land)"
-msgstr ""
+msgstr "Nhiệt độ tối thiểu (ERA5-Land)"
 
 msgid "Min air temperature"
-msgstr ""
+msgstr "Nhiệt độ không khí tối thiểu"
 
 msgid "Minimum air temperature in °C at 2 m above the surface."
-msgstr ""
+msgstr "Nhiệt độ không khí tối thiểu tính bằng °C ở độ cao 2m so với bề mặt."
 
 msgid "Min"
 msgstr "Nhỏ nhất"
 
 msgid "Precipitation (ERA5-Land)"
-msgstr ""
+msgstr "Lượng mưa (ERA5-Land)"
 
 msgid "Precipitation (ERA5)"
-msgstr ""
+msgstr "Lượng mưa (ERA5)"
 
 msgid "Total precipitation in mm."
-msgstr ""
+msgstr "Tổng lượng mưa tính bằng mm."
 
 msgid "Sum"
 msgstr "Tổng"
 
 msgid "Precipitation (CHIRPS)"
-msgstr ""
+msgstr "Lượng mưa (CHIRPS)"
 
 msgid "Precipitation in mm."
-msgstr ""
+msgstr "Lượng mưa tính bằng mm."
 
 msgid "Dewpoint temperature (ERA5-Land)"
-msgstr ""
+msgstr "Nhiệt độ điểm sương (ERA5-Land)"
 
 msgid ""
 "Temperature in °C at 2 m above the surface to which the air would have to be"
 " cooled for saturation to occur."
 msgstr ""
+"Nhiệt độ tính bằng °C ở độ cao 2m so với bề mặt mà không khí sẽ phải hạ "
+"xuống để xảy ra trạng thái bão hòa."
 
 msgid "Relative humidity (ERA5-Land)"
-msgstr ""
+msgstr "Độ ẩm tương đối (ERA5-Land)"
 
 msgid ""
 "Percentage of water vapor in the air compared to the total amount of vapor "
 "that can exist in the air at its current temperature. Calculated using air "
 "temperature and dewpoint temperature at 2 m above surface."
 msgstr ""
+"Tỷ lệ phần trăm hơi nước trong không khí so với tổng lượng hơi nước có thể "
+"tồn tại trong không khí ở nhiệt độ hiện tại. Được tính toán bằng cách sử "
+"dụng nhiệt độ không khí và nhiệt độ điểm sương ở độ cao 2m so với bề mặt."
 
 msgid "Heat stress (ERA5-HEAT)"
-msgstr ""
+msgstr "Căng thẳng nhiệt (ERA5-HEAT)"
 
 msgid "Heat stress"
-msgstr ""
+msgstr "Căng thẳng nhiệt"
 
 msgid "Average felt temperature in °C."
-msgstr ""
+msgstr "Nhiệt độ cảm nhận trung bình tính bằng °C."
 
 msgid "Max heat stress (ERA5-HEAT)"
-msgstr ""
+msgstr "Căng thẳng nhiệt tối đa (ERA5-HEAT)"
 
 msgid "Max heat stress"
-msgstr ""
+msgstr "Căng thẳng nhiệt tối đa"
 
 msgid "Maximum felt temperature in °C."
-msgstr ""
+msgstr "Nhiệt độ cảm nhận tối đa tính bằng °C."
 
 msgid "Min heat stress (ERA5-HEAT)"
-msgstr ""
+msgstr "Căng thẳng nhiệt tối thiểu (ERA5-HEAT)"
 
 msgid "Min heat stress"
-msgstr ""
+msgstr "Căng thẳng nhiệt tối thiểu"
 
 msgid "Minimum felt temperature in °C."
-msgstr ""
+msgstr "Nhiệt độ cảm nhận tối thiểu tính bằng °C."
 
 msgid "NDVI - Normalized difference vegetation index (MODIS)"
-msgstr ""
+msgstr "NDVI - Chỉ số thực vật khác biệt chuẩn hóa (MODIS)"
 
 msgid "NDVI"
-msgstr ""
+msgstr "NDVI"
 
 msgid "EVI - Enhanced vegetation index (MODIS)"
-msgstr ""
+msgstr "EVI - Chỉ số thực vật tăng cường (MODIS)"
 
 msgid "EVI"
-msgstr ""
+msgstr "EVI"
 
 msgid "Mean elevation (SRTM)"
-msgstr ""
+msgstr "Độ cao trung bình (SRTM)"
 
 msgid "Mean elevation in meters above sea level."
-msgstr ""
+msgstr "Độ cao trung bình tính bằng mét so với mực nước biển."
 
 msgid "First value"
-msgstr ""
+msgstr "Giá trị đầu tiên"
 
 msgid "Min elevation (SRTM)"
-msgstr ""
+msgstr "Độ cao tối thiểu (SRTM)"
 
 msgid "Min elevation in meters above sea level."
-msgstr ""
+msgstr "Độ cao tối thiểu tính bằng mét so với mực nước biển."
 
 msgid "Max elevation (SRTM)"
-msgstr ""
+msgstr "Độ cao tối đa (SRTM)"
 
 msgid "Max elevation in meters above sea level."
-msgstr ""
+msgstr "Độ cao tối đa tính bằng mét so với mực nước biển."
 
 msgid "Standard deviation of elevation (SRTM)"
-msgstr ""
+msgstr "Độ lệch chuẩn của độ cao (SRTM)"
 
 msgid "Std dev elevation"
-msgstr ""
+msgstr "Độ lệch chuẩn độ cao"
 
 msgid "Standard deviation of elevation in meters above sea level."
-msgstr ""
+msgstr "Độ lệch chuẩn của độ cao tính bằng mét so với mực nước biển."
 
 msgid "Percentage of area with this land cover type."
-msgstr ""
+msgstr "Tỷ lệ phần trăm diện tích có loại lớp phủ mặt đất này."
 
 msgid "Climate/Weather"
-msgstr ""
+msgstr "Khí hậu/Thời tiết"
 
 msgid "Environment"
-msgstr ""
+msgstr "Môi trường"
 
 msgid "Land"
-msgstr ""
+msgstr "Đất đai"
 
 msgid "Heat/cold stress"
-msgstr ""
+msgstr "Căng thẳng nóng/lạnh"
 
 msgid "You only need to include categories that are relevant for your area."
-msgstr ""
+msgstr "Bạn chỉ cần bao gồm các hạng mục phù hợp với khu vực của bạn."
 
 msgid "Extreme cold stress"
-msgstr ""
+msgstr "Căng thẳng lạnh cực độ"
 
 msgid "Extreme<br>cold stress"
-msgstr ""
+msgstr "Căng thẳng lạnh<br>cực độ"
 
 msgid "Very strong cold stress"
-msgstr ""
+msgstr "Căng thẳng lạnh rất mạnh"
 
 msgid "Very strong<br>cold stress"
-msgstr ""
+msgstr "Căng thẳng lạnh<br>rất mạnh"
 
 msgid "Strong cold stress"
-msgstr ""
+msgstr "Căng thẳng lạnh mạnh"
 
 msgid "Strong<br>cold stress"
-msgstr ""
+msgstr "Căng thẳng lạnh<br>mạnh"
 
 msgid "Moderate cold stress"
-msgstr ""
+msgstr "Căng thẳng lạnh vừa phải"
 
 msgid "Moderate<br>cold stress"
-msgstr ""
+msgstr "Căng thẳng lạnh<br>vừa phải"
 
 msgid "Slight cold stress"
-msgstr ""
+msgstr "Căng thẳng lạnh nhẹ"
 
 msgid "Slight<br>cold stress"
-msgstr ""
+msgstr "Căng thẳng lạnh<br>nhẹ"
 
 msgid "No thermal stress"
-msgstr ""
+msgstr "Không có căng thẳng nhiệt"
 
 msgid "No thermal<br>stress"
-msgstr ""
+msgstr "Không có căng thẳng<br>nhiệt"
 
 msgid "Moderate heat stress"
-msgstr ""
+msgstr "Căng thẳng nhiệt vừa phải"
 
 msgid "Moderate<br>heat stress"
-msgstr ""
+msgstr "Căng thẳng nhiệt<br>vừa phải"
 
 msgid "Strong heat stress"
-msgstr ""
+msgstr "Căng thẳng nhiệt mạnh"
 
 msgid "Strong<br>heat stress"
-msgstr ""
+msgstr "Căng thẳng nhiệt<br>mạnh"
 
 msgid "Very strong heat stress"
-msgstr ""
+msgstr "Căng thẳng nhiệt rất mạnh"
 
 msgid "Very strong<br>heat stress"
-msgstr ""
+msgstr "Căng thẳng nhiệt<br>rất mạnh"
 
 msgid "Extreme heat stress"
-msgstr ""
+msgstr "Căng thẳng nhiệt cực độ"
 
 msgid "Extreme<br>heat stress"
-msgstr ""
+msgstr "Căng thẳng nhiệt<br>cực độ"
 
 msgid "Data resolution is approximately {{resolution}} degrees."
-msgstr ""
+msgstr "Độ phân giải dữ liệu xấp xỉ {{resolution}} độ."
 
 msgid "ERA5-Land / Copernicus Climate Change Service / Google Earth Engine"
-msgstr ""
+msgstr "ERA5-Land / Dịch vụ Biến đổi Khí hậu Copernicus / Google Earth Engine"
 
 msgid "ERA5-HEAT / Copernicus Climate Change Service / Google Earth Engine"
-msgstr ""
+msgstr "ERA5-HEAT / Dịch vụ Biến đổi Khí hậu Copernicus / Google Earth Engine"
 
 msgid "NASA LP DAAC at the USGS EROS Center / Google Earth Engine"
-msgstr ""
+msgstr "NASA LP DAAC tại Trung tâm USGS EROS / Google Earth Engine"
 
 msgid "NASA / USGS / JPL-Caltech / Google Earth Engine"
-msgstr ""
+msgstr "NASA / USGS / JPL-Caltech / Google Earth Engine"
 
 msgid "No data found for the selected period"
-msgstr ""
+msgstr "Không tìm thấy dữ liệu cho khoảng thời gian đã chọn"
 
 msgid "{{dynamicOuNames}} and {{lastOuName}}"
 msgstr "{{dynamicOuNames}} và {{lastOuName}}"
