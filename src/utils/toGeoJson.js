@@ -10,7 +10,7 @@ export const toGeoJson = (organisationUnits) =>
 
             if (ou.ty === 2) {
                 type = 'Polygon'
-                if (ou.co.substring(0, 4) === '[[[[') {
+                if (ou.co?.substring(0, 4) === '[[[[') {
                     type = 'MultiPolygon'
                 }
             }

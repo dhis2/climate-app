@@ -101,6 +101,7 @@ const ImportPage = () => {
 
     const {
         features,
+        totalOrgUnits,
         loading: featuresLoading,
         error: featuresError,
     } = useOrgUnits({
@@ -108,6 +109,12 @@ const ImportPage = () => {
     })
 
     const featureCount = features.length
+    // console.log('jj ImportPage', {
+    //     orgUnits,
+    //     featureCount,
+    //     totalOrgUnits,
+    //     features,
+    // }) // --- IGNORE ---
 
     const periodCount = useMemo(() => getPeriods(period).length, [period])
     const valueCount = featureCount * periodCount
@@ -257,6 +264,7 @@ const ImportPage = () => {
                             startDate={period.startTime || ''}
                             endDate={period.endTime || ''}
                             featureCount={featureCount}
+                            totalOrgUnits={totalOrgUnits}
                             dataElement={dataElement.displayName || ''}
                             totalValues={valueCount}
                             orgUnits={orgUnits}

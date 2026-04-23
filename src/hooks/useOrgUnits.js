@@ -19,6 +19,7 @@ const EMPTY_FEATURES = []
 
 const useOrgUnits = ({ orgUnits = DEFAULT_ORG_UNITS, debounceDelay = 250 }) => {
     const [features, setFeatures] = useState(EMPTY_FEATURES)
+    const [totalOrgUnits, setTotalOrgUnits] = useState(0)
     const [featuresLoading, setFeaturesLoading] = useState(false)
     const { system } = useSystemInfo()
 
@@ -56,7 +57,9 @@ const useOrgUnits = ({ orgUnits = DEFAULT_ORG_UNITS, debounceDelay = 250 }) => {
                         if (!data || requestId !== requestIdRef.current) {
                             return
                         }
-                        setFeatures(toGeoJson(data.geoFeatures))
+                        const raw = data.geoFeatures
+                        setTotalOrgUnits(raw.length)
+                        setFeatures(toGeoJson(raw))
                         setFeaturesLoading(false)
                     })
                     .catch(() => {
@@ -65,6 +68,7 @@ const useOrgUnits = ({ orgUnits = DEFAULT_ORG_UNITS, debounceDelay = 250 }) => {
                     })
             } else {
                 requestIdRef.current += 1
+                setTotalOrgUnits(0)
                 setFeatures(EMPTY_FEATURES)
                 setFeaturesLoading(false)
             }
@@ -89,6 +93,7 @@ const useOrgUnits = ({ orgUnits = DEFAULT_ORG_UNITS, debounceDelay = 250 }) => {
 
     return {
         features,
+        totalOrgUnits,
         featuresLoading,
         error,
         loading,

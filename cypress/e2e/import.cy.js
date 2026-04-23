@@ -704,6 +704,47 @@ describe('Import', () => {
             cy.get('button').contains('Start import').should('be.disabled')
         })
 
+        it('shows warning in import preview when some org units lack geometry', () => {
+            // Simulate a response where 3 of 13 district OUs lack geometry.
+            // Setting co: null causes toGeoJson to filter them out (JSON.parse(null)
+            // returns null, so geometry.coordinates is null, failing the Array.isArray
+            // check), while keeping them in the raw API response count.
+            cy.intercept('GET', '**/api/*/geoFeatures?**', (req) => {
+                req.continue((res) => {
+                    if (Array.isArray(res.body) && res.body.length > 3) {
+                        res.body = res.body.map((ou, idx) =>
+                            idx < 3 ? { ...ou, co: null } : ou
+                        )
+                    }
+                })
+            }).as('getGeoFeaturesPartial')
+
+            makeImportSelections({
+                dataset: 'Earth Engine: Precipitation (ERA5-Land)',
+                dataElement: 'IDSR Malaria (weekly)',
+                startDate: '2026-01-01',
+                endDate: '2026-01-03',
+            })
+
+            cy.wait('@getGeoFeaturesPartial')
+
+            // 13 district OUs returned, 3 lack geometry → 10 have geometry
+            verifyImportPreview({
+                datasetName: 'Precipitation (ERA5-Land)',
+                period: 'For 2026-W01 (2025-12-29 to 2026-01-04)',
+                locationInfo:
+                    '10 of 13 organisation units have geometry and will be imported; 3 have no geometry and will not be imported',
+                dataElementName: 'IDSR Malaria',
+                dataValues: 10,
+            })
+
+            // Import can still proceed for the OUs that do have geometry
+            cy.get('button').contains('Start import').should('not.be.disabled')
+            interceptAndValidateDataValues(10)
+            // cy.contains('Start import').click()
+            // cy.wait('@postDataValueSets', { timeout: 25000 })
+        })
+
         it('shows error when org unit selection is invalid', () => {
             cy.visit('#/import')
 

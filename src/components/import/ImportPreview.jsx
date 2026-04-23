@@ -18,10 +18,12 @@ const ImportPreview = ({
     startDate,
     endDate,
     featureCount,
+    totalOrgUnits,
     dataElement,
     totalValues,
     orgUnits,
 }) => {
+    const noGeometryCount = totalOrgUnits - featureCount
     const periodTypeObj = getPeriodTypes().find(
         (type) => type.id === periodType
     )
@@ -97,19 +99,33 @@ const ImportPreview = ({
         )
     }
 
-    const orgUnitInfo = i18n.t(
-        'Selected org units: {{ouText}} ({{count}} organisation units have geometry and will be imported)',
-        {
-            ouText: getOuText(orgUnits),
-            count: featureCount,
-            defaultValue:
-                'Selected org units: {{ouText}} ({{count}} organisation unit has geometry and will be imported)',
-            defaultValue_plural:
-                'Selected org units: {{ouText}} ({{count}} organisation units have geometry and will be imported)',
-            interpolation: { escapeValue: false },
-            nsSeparator: '<<',
-        }
-    )
+    const ouText = getOuText(orgUnits)
+    const orgUnitInfo =
+        noGeometryCount > 0
+            ? i18n.t(
+                  'Selected org units: {{ouText}} ({{withGeometry}} of {{total}} organisation units have geometry and will be imported; {{withoutGeometry}} have no geometry and will not be imported)',
+                  {
+                      ouText,
+                      withGeometry: featureCount,
+                      total: totalOrgUnits,
+                      withoutGeometry: noGeometryCount,
+                      interpolation: { escapeValue: false },
+                      nsSeparator: '<<',
+                  }
+              )
+            : i18n.t(
+                  'Selected org units: {{ouText}} ({{count}} organisation units have geometry and will be imported)',
+                  {
+                      ouText,
+                      count: featureCount,
+                      defaultValue:
+                          'Selected org units: {{ouText}} ({{count}} organisation unit has geometry and will be imported)',
+                      defaultValue_plural:
+                          'Selected org units: {{ouText}} ({{count}} organisation units have geometry and will be imported)',
+                      interpolation: { escapeValue: false },
+                      nsSeparator: '<<',
+                  }
+              )
 
     return (
         <div data-test="import-preview">
@@ -149,6 +165,7 @@ ImportPreview.propTypes = {
     orgUnits: PropTypes.array.isRequired,
     periodType: PropTypes.string.isRequired,
     startDate: PropTypes.string.isRequired,
+    totalOrgUnits: PropTypes.number.isRequired,
     totalValues: PropTypes.number.isRequired,
 }
 
