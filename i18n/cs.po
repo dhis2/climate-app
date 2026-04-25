@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-03-06T07:07:32.241Z\n"
+"POT-Creation-Date: 2026-03-06T12:42:03.706Z\n"
 "PO-Revision-Date: 2025-02-05 13:11+0000\n"
 "Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2026\n"
 "Language-Team: Czech (https://app.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -626,34 +626,37 @@ msgid "Value is only for 250 x 250 m where the facility is located"
 msgstr "Hodnota platí pouze pro 250 x 250 m, kde se zařízení nachází."
 
 msgid "Loading data elements..."
-msgstr ""
+msgstr "Načítání datových prvků..."
 
 msgid "No data elements found. You must first select a dataset to import."
 msgstr ""
+"Nebyly nalezeny žádné datové prvky. Nejprve musíte vybrat datovou sadu, "
+"kterou chcete importovat."
 
 msgid "No data elements found for the selected period type."
-msgstr ""
+msgstr "Pro vybraný typ období nebyly nalezeny žádné datové prvky."
 
 msgid "Showing data elements from {{periodType}} data sets"
-msgstr ""
+msgstr "Zobrazení datových prvků z datové sady {{periodType}} "
 
 msgid "No match found"
 msgstr "Žádná shoda nenalezena"
 
 msgid "Need help setting up data elements for import? Check out the "
 msgstr ""
+"Potřebujete pomoci s nastavením datových prvků pro import? Podívejte se na "
 
 msgid "setup guide"
-msgstr ""
+msgstr "průvodce nastavením"
 
 msgid "Loading org units"
 msgstr "Načítání organizačních jednotek"
 
 msgid "Error loading org units: {{message}}"
-msgstr ""
+msgstr "Chyba při načítání org jednotek: {{message}}"
 
 msgid "No org unit geometries found"
-msgstr ""
+msgstr "Nebyly nalezeny žádné geometrie org jednotek"
 
 msgid ""
 "Extracting data for {{periodCount}} {{periodType}} periods and "
@@ -666,7 +669,7 @@ msgid "Extracting data for {{orgUnitsCount}} org units"
 msgstr "Extrakce dat pro jednotky {{orgUnitsCount}} org"
 
 msgid "Dataset provider not recognized"
-msgstr ""
+msgstr "Poskytovatel datové sady nebyl rozpoznán"
 
 msgid "Importing data to DHIS2"
 msgstr "Import dat do DHIS2"
@@ -681,13 +684,13 @@ msgid "Import weather and climate data"
 msgstr "Import dat o počasí a klimatu"
 
 msgid "Choose data source"
-msgstr ""
+msgstr "Výběr zdroje dat"
 
 msgid "Choose destination data element"
-msgstr ""
+msgstr "Výběr cílového datového prvku"
 
 msgid "Review and import"
-msgstr ""
+msgstr "Přezkoumání a import"
 
 msgid ""
 "Import limit exceeded: {{valueCount}} values selected (maximum "
@@ -698,8 +701,18 @@ msgstr ""
 msgid "Start import"
 msgstr "Zahájit import"
 
-msgid "For the {{periodTypeNoun}} {{date}}"
+msgid "For {{periodId}} ({{actualStartTime}} to {{actualEndTime}})"
 msgstr ""
+
+msgid ""
+"{{periodTypeName}} values from {{startPeriodId}} to {{endPeriodId}} "
+"({{actualStartTime}} to {{actualEndTime}})"
+msgstr ""
+"{{periodTypeName}} hodnoty od {{startPeriodId}} do {{endPeriodId}} "
+"({{actualStartTime}} až {{actualEndTime}})."
+
+msgid "For the {{periodTypeNoun}} {{date}}"
+msgstr "Pro {{periodTypeNoun}} {{date}}"
 
 msgid "{{periodTypeName}} values between {{startDate}} and {{endDate}}"
 msgstr ""
@@ -729,16 +742,16 @@ msgid "Data is imported"
 msgstr "Data jsou importována"
 
 msgid "Imported: {{imported}}"
-msgstr ""
+msgstr "Importováno: {{imported}}"
 
 msgid "Updated: {{updated}}"
-msgstr ""
+msgstr "Aktualizováno: {{updated}}"
 
 msgid "Ignored (already exists): {{ignored}}"
 msgstr ""
 
 msgid "Missing: {{missing}}"
-msgstr ""
+msgstr "Chybí: {{missing}}"
 
 msgid "No data for the following org units"
 msgstr "Žádná data pro následující organizační jednotky"
@@ -747,45 +760,63 @@ msgid ""
 "ERA5-Land has limited data for coastal areas. Values for other org units "
 "will be imported."
 msgstr ""
+"ERA5-Land má omezená data pro pobřežní oblasti. Hodnoty pro ostatní org "
+"jednotky budou importovány."
 
 msgid "Select organisation units"
 msgstr "Vybrat organizační jednotky"
 
 msgid "Start and end date are not within the valid range."
-msgstr ""
+msgstr "Počáteční a koncové datum nejsou v platném rozsahu."
 
 msgid "Start date is not within the valid range."
-msgstr ""
+msgstr "Počáteční datum není v platném rozsahu."
 
 msgid "End date is not within the valid range."
-msgstr ""
+msgstr "Datum ukončení není v platném rozsahu."
 
 msgid ""
-"{{periodTypeName}} data between start and end date will be calculated from "
+"{{periodTypeName}} data for full calendar {{periodTypeNoun}}s inclusive of "
+"start and end dates will be aggregated from hourly data."
+msgstr ""
+"{{periodTypeName}} údaje za celý kalendář {{periodTypeNoun}}s včetně data "
+"začátku a konce budou agregovány z hodinových údajů."
+
+msgid ""
+"{{periodTypeName}} data between start and end date will be aggregated from "
 "hourly data."
 msgstr ""
+"{{periodTypeName}} údaje mezi počátečním a koncovým datem budou agregovány z"
+" hodinových údajů."
 
 msgid ""
-"{{periodTypeName}} data between start and end date will be calculated from "
-"hourly data, with time zone adjustments applied if the selected time zone is"
-" not set to UTC."
+"Time zone adjustments will be applied if the selected time zone is not set "
+"to UTC."
 msgstr ""
+"Pokud vybrané časové pásmo není nastaveno na UTC, použijí se úpravy časového"
+" pásma."
 
 msgid ""
-"{{periodTypeName}} data between start and end date will be calculated and "
-"then aggregated to the selected period type."
+"Data for full calendar {{periodTypeNoun}}s inclusive of start and end dates "
+"will be aggregated to {{periodTypeNoun}}ly values."
 msgstr ""
+
+msgid "Data between start and end date will be imported as daily values."
+msgstr ""
+"Data mezi počátečním a koncovým datem budou importována jako denní hodnoty."
 
 msgid ""
 "The data will be assigned a yearly period type that matches the year it was "
 "collected: {{datasetPeriod}}"
 msgstr ""
+"Datům bude přiřazen typ ročního období, který odpovídá roku, kdy byla "
+"shromážděna: {{datasetPeriod}}"
 
 msgid "Valid range: {{startDate}} - {{endDate}}"
-msgstr ""
+msgstr "Platný rozsah: {{startDate}} - {{endDate}}"
 
 msgid "Valid range"
-msgstr ""
+msgstr "Platný rozsah"
 
 msgid "Period type"
 msgstr "Typ období"
@@ -797,7 +828,7 @@ msgid "End year"
 msgstr "Konečný rok"
 
 msgid "Chart settings"
-msgstr ""
+msgstr "Nastavení grafu"
 
 msgid ""
 "Set y-axis values for charts in the Explore data section to make it easier "
@@ -833,21 +864,23 @@ msgid "Heat stress lower category"
 msgstr "Tepelný stres nižší kategorie"
 
 msgid "Data Providers"
-msgstr ""
+msgstr "Poskytovatelé dat"
 
 msgid ""
 "The following data providers can be configured and used in the Climate app. "
 "Contact your administrator to configure these data providers."
 msgstr ""
+"V aplikaci Climate lze konfigurovat a používat následující poskytovatele "
+"dat. Pro konfiguraci těchto poskytovatelů dat kontaktujte svého správce."
 
 msgid "Provider name"
-msgstr ""
+msgstr "Název poskytovatele"
 
 msgid "Status"
 msgstr "Stav"
 
 msgid "Setup info"
-msgstr ""
+msgstr "Informace o nastavení"
 
 msgid "Close"
 msgstr "Zavřít"
@@ -871,13 +904,13 @@ msgid "Time zone where your org units are located"
 msgstr "Časové pásmo, ve kterém se nachází vaše organizační jednotky"
 
 msgid "Data element field"
-msgstr ""
+msgstr "Pole datového prvku"
 
 msgid "Value"
 msgstr "Hodnota"
 
 msgid "Note"
-msgstr ""
+msgstr "Poznámka"
 
 msgid "Name"
 msgstr "název"
@@ -886,6 +919,8 @@ msgid ""
 "Include the data source in the name to distinguish it from other sources "
 "(e.g. precipitation data is available from both ERA5-Land and CHIRPS)."
 msgstr ""
+"V názvu uveďte zdroj dat, abyste jej odlišili od jiných zdrojů (např. data o"
+" srážkách jsou k dispozici z ERA5-Land i CHIRPS)."
 
 msgid "Short name"
 msgstr "Krátký název"
@@ -897,6 +932,8 @@ msgid ""
 "If you use this code, this data element will be autoselected in the import "
 "form when choosing the \"{{-name}}\" dataset."
 msgstr ""
+"Pokud použijete tento kód, bude tento datový prvek automaticky vybrán ve "
+"formuláři pro import při výběru datové sady \"{{-name}}\"."
 
 msgid "Description"
 msgstr "Popis"
@@ -914,7 +951,7 @@ msgid "Aggregation type"
 msgstr "Typ agregace"
 
 msgid "Use your domain knowledge to select the appropriate aggregation type"
-msgstr ""
+msgstr "K výběru vhodného typu agregace použijte své znalosti domény."
 
 msgid "Store zero data values"
 msgstr "Uložit nulové hodnoty dat"
@@ -932,6 +969,9 @@ msgid ""
 "Assign all to prevent aggregation across organisation unit levels, "
 "especially from facility to higher levels defined by a geographic boundary."
 msgstr ""
+"Přiřadit vše, aby se zabránilo agregaci mezi úrovněmi organizačních "
+"jednotek, zejména od zařízení k vyšším úrovním definovaným geografickou "
+"hranicí."
 
 msgid ""
 "You should now be able to import data with this app. Please reach out to us "
@@ -943,10 +983,10 @@ msgstr ""
 "adrese climate-app@dhis2.org."
 
 msgid "4. Assign to a DHIS2 data element group"
-msgstr ""
+msgstr "4. Přiřazení do skupiny datových prvků DHIS2"
 
 msgid "Data element group field"
-msgstr ""
+msgstr "Pole skupiny datových prvků"
 
 msgid "Data elements"
 msgstr "Datové prvky"
@@ -955,15 +995,17 @@ msgid "Assign above data element"
 msgstr "Přiřazení výše uvedeného datového prvku"
 
 msgid "3. Assign to a DHIS2 data set"
-msgstr ""
+msgstr "3. Přiřazení k datové sadě DHIS2"
 
 msgid "Data set field"
-msgstr ""
+msgstr "Pole datové sady"
 
 msgid ""
 "The same DHIS2 data set can be used for all the \"{{-name}} "
 "{{-periodTypeName}}\" related data elements"
 msgstr ""
+"Pro všechny datové prvky související s \"{{-name}} {{-periodTypeName}} \" "
+"lze použít stejný datový soubor DHIS2."
 
 msgid "Organisation units"
 msgstr "Organizační jednotky"
@@ -975,6 +1017,8 @@ msgid ""
 "Assign all organisation units since data can be provided for any unit with "
 "defined geographic boundaries."
 msgstr ""
+"Přiřaďte všechny organizační jednotky, protože údaje lze poskytnout pro "
+"jakoukoli jednotku s definovanými zeměpisnými hranicemi."
 
 msgid "4. Add a legend"
 msgstr "4. Přidání legendy"
@@ -995,56 +1039,67 @@ msgid "Color"
 msgstr "Barva"
 
 msgid "Configure DHIS2 in order to import data"
-msgstr ""
+msgstr "Konfigurace DHIS2 za účelem importu dat"
 
 msgid ""
 "Create only one DHIS2 data element per dataset, using the lowest period type"
 " needed for analysis, to avoid duplicating data."
 msgstr ""
+"Vytvořte pouze jeden datový prvek DHIS2 pro každou datovou sadu s použitím "
+"nejnižšího typu období potřebného pro analýzu, aby nedocházelo k duplikaci "
+"údajů."
 
 msgid "1. Select the period type"
-msgstr ""
+msgstr "1. Vyberte typ období"
 
 msgid ""
 "Select the lowest period type needed for analysis. Data can then be "
 "aggregated to other period types in DHIS2 during analysis in Maps, Data "
 "Visualizer, and other apps."
 msgstr ""
+"Vyberte nejnižší typ období potřebný pro analýzu. Data pak lze při analýze v"
+" Mapách, Vizualizéru dat a dalších aplikacích agregovat do dalších typů "
+"období v DHIS2."
 
 msgid "2. Create the DHIS2 data element"
-msgstr ""
+msgstr "2. Vytvoření datového prvku DHIS2"
 
 msgid "Loading data"
 msgstr "Načítání dat"
 
 msgid "Select dataset to import"
-msgstr ""
+msgstr "Výběr datové sady pro import"
 
 msgid ""
 "No datasets are available. Go to the Settings page to learn how to configure"
 " dataset sources."
 msgstr ""
+"Nejsou k dispozici žádné datové soubory. Přejděte na stránku Nastavení, kde "
+"se dozvíte, jak nakonfigurovat zdroje datových sad."
 
 msgid "ENACTS datasets could not be loaded"
-msgstr ""
+msgstr "Datové sady ENACTS se nepodařilo načíst"
 
 msgid "Data is from "
-msgstr ""
+msgstr "Data pocházejí z "
 
 msgid ". Provider: "
-msgstr ""
+msgstr ". Poskytovatel: "
 
 msgid "You need access to Google Earth Engine to explore this data."
 msgstr ""
+"K prozkoumání těchto dat potřebujete přístup k aplikaci Google Earth Engine."
 
 msgid "How to get access?"
 msgstr "Jak získat přístup?"
 
 msgid "Install Maps app v101.5.0 or higher to enable this feature."
 msgstr ""
+"Chcete-li tuto funkci povolit, nainstalujte aplikaci Mapy v101.5.0 nebo "
+"vyšší."
 
 msgid "Latest period will be selected."
-msgstr ""
+msgstr "Bude vybráno poslední období."
 
 msgid "Open as Map"
 msgstr "Otevřít jako mapu"
@@ -1079,7 +1134,7 @@ msgid "Time zone"
 msgstr "Časové pásmo"
 
 msgid "Data resolution is approximately {{resolution}}."
-msgstr ""
+msgstr "Rozlišení dat je přibližně {{resolution}}."
 
 msgid ""
 "Landsat Normalized Difference Vegetation Index (NDVI) is used to quantify "
@@ -1328,7 +1383,7 @@ msgid "Extreme<br>heat stress"
 msgstr "Extrémní<br>tepelný stres"
 
 msgid "Data resolution is approximately {{resolution}} degrees."
-msgstr ""
+msgstr "Rozlišení dat je přibližně {{resolution}} stupňů."
 
 msgid "ERA5-Land / Copernicus Climate Change Service / Google Earth Engine"
 msgstr "ERA5-Land / Copernicus Climate Change Service / Google Earth Engine"
@@ -1346,19 +1401,19 @@ msgid "No data found for the selected period"
 msgstr "Pro vybrané období nebyly nalezeny žádné údaje"
 
 msgid "{{dynamicOuNames}} and {{lastOuName}}"
-msgstr ""
+msgstr "{{dynamicOuNames}} a {{lastOuName}}"
 
 msgid "{{allDynamicOuNames}} levels in {{staticOuNames}}"
 msgstr "úrovně {{allDynamicOuNames}} v {{staticOuNames}}"
 
 msgid "{{allDynamicOuNames}} groups in {{staticOuNames}}"
-msgstr ""
+msgstr "Skupiny {{allDynamicOuNames}} v {{staticOuNames}}"
 
 msgid "{{allDynamicOuNames}} levels"
-msgstr ""
+msgstr "úrovně {{allDynamicOuNames}}"
 
 msgid "{{allDynamicOuNames}} groups"
-msgstr ""
+msgstr "skupiny {{allDynamicOuNames}}"
 
 msgid "day"
 msgstr "den"
