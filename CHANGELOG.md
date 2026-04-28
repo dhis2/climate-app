@@ -1,3 +1,10 @@
+# [1.15.0](https://github.com/dhis2/climate-app/compare/v1.14.3...v1.15.0) (2026-04-28)
+
+
+### Features
+
+* integration with the ENACTS service ([#115](https://github.com/dhis2/climate-app/issues/115)) ([9d6b595](https://github.com/dhis2/climate-app/commit/9d6b5952f4be936e56dbc2225df9331511260945))
+
 ## [1.14.3](https://github.com/dhis2/climate-app/compare/v1.14.2...v1.14.3) (2026-03-10)
 
 
