@@ -23,20 +23,20 @@ const DataProviderList = () => {
 
             if (item.id === gee.id) {
                 if (gee.enabled === null) {
-                    status = 'Offline'
+                    status = i18n.t('Offline')
                 } else if (gee.enabled === false) {
-                    status = 'Not configured'
+                    status = i18n.t('Not configured')
                 } else {
-                    status = 'Online'
+                    status = i18n.t('Online')
                 }
             } else {
                 // enacts
                 if (!enacts.route) {
-                    status = 'Not configured'
+                    status = i18n.t('Not configured')
                 } else if (enacts.info?.status === 'OK') {
-                    status = 'Online'
+                    status = i18n.t('Online')
                 } else {
-                    status = 'Offline'
+                    status = i18n.t('Offline')
                 }
             }
 

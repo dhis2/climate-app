@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-04-28T09:36:04.177Z\n"
-"PO-Revision-Date: 2026-04-28T09:36:04.177Z\n"
+"POT-Creation-Date: 2026-04-28T10:01:05.930Z\n"
+"PO-Revision-Date: 2026-04-28T10:01:05.931Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -861,6 +861,15 @@ msgstr "Heat stress upper category"
 msgid "Heat stress lower category"
 msgstr "Heat stress lower category"
 
+msgid "Offline"
+msgstr "Offline"
+
+msgid "Not configured"
+msgstr "Not configured"
+
+msgid "Online"
+msgstr "Online"
+
 msgid "Data Providers"
 msgstr "Data Providers"
 
@@ -910,6 +919,9 @@ msgstr ""
 
 msgid "Your ENACTS DST API key here"
 msgstr "Your ENACTS DST API key here"
+
+msgid "Example configuration:"
+msgstr "Example configuration:"
 
 msgid "Close"
 msgstr "Close"

@@ -110,7 +110,11 @@ const DataProviderListItem = ({ name, status }) => {
                             <strong>disabled</strong>: <code>false</code>
                         </li>
                     </ul>
-                    <p>{i18n.t('Example configuration:')}</p>
+                    <p>
+                        {i18n.t('Example configuration:', {
+                            nsSeparator: false,
+                        })}
+                    </p>
                     <pre style={{ whiteSpace: 'pre-wrap' }}>
                         {`{
     "code": "enacts",
