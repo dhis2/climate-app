@@ -1,4 +1,3 @@
-import { useConfig } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import useAppSettings from '../../hooks/useAppSettings.js'
 import ChartSettings from './ChartSettings.jsx'
@@ -9,7 +8,6 @@ import TimeZoneSelect from './TimeZoneSelect.jsx'
 
 const SettingsPage = () => {
     const { settings, changeSetting } = useAppSettings()
-    const { serverVersion } = useConfig() // VERSION_TOGGLE
 
     return (
         <div className={styles.container}>
@@ -19,7 +17,7 @@ const SettingsPage = () => {
                     'Changes made below will apply to all users of this app.'
                 )}
             </p>
-            {serverVersion.minor > 39 && <DataProviderList />}
+            <DataProviderList />
             <h2>{i18n.t('General settings')}</h2>
             {settings && (
                 <>

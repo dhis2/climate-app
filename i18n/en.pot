@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-03-06T12:42:03.706Z\n"
-"PO-Revision-Date: 2026-03-06T12:42:03.707Z\n"
+"POT-Creation-Date: 2026-04-28T11:05:26.356Z\n"
+"PO-Revision-Date: 2026-04-28T11:05:26.357Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -861,6 +861,15 @@ msgstr "Heat stress upper category"
 msgid "Heat stress lower category"
 msgstr "Heat stress lower category"
 
+msgid "Offline"
+msgstr "Offline"
+
+msgid "Not configured"
+msgstr "Not configured"
+
+msgid "Online"
+msgstr "Online"
+
 msgid "Data Providers"
 msgstr "Data Providers"
 
@@ -879,6 +888,40 @@ msgstr "Status"
 
 msgid "Setup info"
 msgstr "Setup info"
+
+msgid "Google Earth Engine Setup Guide"
+msgstr "Google Earth Engine Setup Guide"
+
+msgid "The ENACTS api is made available using a DHIS2 route. Follow the"
+msgstr "The ENACTS api is made available using a DHIS2 route. Follow the"
+
+msgid "DHIS2 Routes documentation"
+msgstr "DHIS2 Routes documentation"
+
+msgid "to set up the route."
+msgstr "to set up the route."
+
+msgid "The following fields must be set in the route configuration. Note that the"
+msgstr "The following fields must be set in the route configuration. Note that the"
+
+msgid "must be"
+msgstr "must be"
+
+msgid "A short, descriptive name to identify the route"
+msgstr "A short, descriptive name to identify the route"
+
+msgid ""
+"The base url where your ENACTS DST API is hosted. You must append \"/**\" "
+"to the url"
+msgstr ""
+"The base url where your ENACTS DST API is hosted. You must append \"/**\" "
+"to the url"
+
+msgid "Your ENACTS DST API key here"
+msgstr "Your ENACTS DST API key here"
+
+msgid "Example configuration:"
+msgstr "Example configuration:"
 
 msgid "Close"
 msgstr "Close"

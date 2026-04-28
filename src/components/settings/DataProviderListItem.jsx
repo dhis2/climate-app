@@ -34,16 +34,16 @@ const DataProviderListItem = ({ name, status }) => {
             return (
                 <section aria-labelledby="gee-setup-info">
                     <p>
-                        To use Google Earth Engine, you must sign up and
-                        authorize access. Please follow the instructions in the
-                        official documentation:
+                        {i18n.t(
+                            'To use Google Earth Engine, you must sign up and authorize access. Please follow the instructions in the official documentation:'
+                        )}
                         <br />
                         <a
                             href="https://docs.dhis2.org/en/topics/tutorials/google-earth-engine-sign-up.html"
                             target="_blank"
                             rel="noopener noreferrer"
                         >
-                            Google Earth Engine Setup Guide
+                            {i18n.t('Google Earth Engine Setup Guide')}
                         </a>
                     </p>
                 </section>
@@ -52,38 +52,43 @@ const DataProviderListItem = ({ name, status }) => {
             return (
                 <section aria-labelledby="enacts-setup-info">
                     <p>
-                        The ENACTS api is made available using a DHIS2 route.
-                        Follow the{' '}
+                        {i18n.t(
+                            'The ENACTS api is made available using a DHIS2 route. Follow the'
+                        )}{' '}
                         <a
                             href={`https://docs.dhis2.org/en/develop/using-the-api/dhis-core-version-${docsVersion}/route.html`}
                             target="_blank"
                             rel="noopener noreferrer"
                         >
-                            DHIS2 Routes documentation
+                            {i18n.t('DHIS2 Routes documentation')}
                         </a>{' '}
-                        to set up the route.
+                        {i18n.t('to set up the route.')}
                     </p>
                     <p>
-                        The following fields must be set in the route
-                        configuration. Note that the <strong>code</strong> must
-                        be <code>enacts</code>.
+                        {i18n.t(
+                            'The following fields must be set in the route configuration. Note that the'
+                        )}{' '}
+                        <strong>code</strong> {i18n.t('must be')}{' '}
+                        <code>enacts</code>.
                     </p>
                     <ul>
-                        <li>
-                            <strong>name</strong>:{' '}
-                            <em>
-                                A short, descriptive name to identify the route
-                            </em>
-                        </li>
                         <li>
                             <strong>code</strong>: <code>enacts</code>
                         </li>
                         <li>
+                            <strong>name</strong>:{' '}
+                            <em>
+                                {i18n.t(
+                                    'A short, descriptive name to identify the route'
+                                )}
+                            </em>
+                        </li>
+                        <li>
                             <strong>url</strong>:{' '}
                             <em>
-                                The base url where your ENACTS DST API is
-                                hosted. You must append &quot;/&#42;&#42;&quot;
-                                to the url
+                                {i18n.t(
+                                    'The base url where your ENACTS DST API is hosted. You must append "/**" to the url'
+                                )}
                             </em>
                         </li>
                         <li>
@@ -95,7 +100,9 @@ const DataProviderListItem = ({ name, status }) => {
                                 </li>
                                 <li>
                                     <strong>X-API-Key</strong>:{' '}
-                                    <em>Your ENACTS DST API key here</em>
+                                    <em>
+                                        {i18n.t('Your ENACTS DST API key here')}
+                                    </em>
                                 </li>
                             </ul>
                         </li>
@@ -103,11 +110,15 @@ const DataProviderListItem = ({ name, status }) => {
                             <strong>disabled</strong>: <code>false</code>
                         </li>
                     </ul>
-                    <p>Example configuration:</p>
+                    <p>
+                        {i18n.t('Example configuration:', {
+                            nsSeparator: false,
+                        })}
+                    </p>
                     <pre style={{ whiteSpace: 'pre-wrap' }}>
                         {`{
-    "name": "ENACTS Data Sharing Tool",
     "code": "enacts",
+    "name": "ENACTS Data Sharing Tool",
     "url": "https://your-enacts-dst-base-url/**",
     "headers": {
         "Content-Type": "application/json",
@@ -137,7 +148,7 @@ const DataProviderListItem = ({ name, status }) => {
                                 status === NOT_CONFIGURED,
                         })}
                     ></div>
-                    <span>{status}</span>
+                    <span>{i18n.t(status)}</span>
                 </div>
             </TableCell>
             <TableCell>

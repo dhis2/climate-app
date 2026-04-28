@@ -16,38 +16,35 @@ const DataProviderList = () => {
 
     const { gee, enacts } = sources
 
-    // TODO: Re-enable Enacts when the API is stable
-    const sourcesWithoutEnacts = Object.values(sources).filter(
-        (source) => source.id !== enacts.id
-    )
+    const dataProviders = Object.values(sources)
+        .filter((item) => item.supported !== false)
+        .map((item) => {
+            let status = ''
 
-    const dataProviders = Object.values(sourcesWithoutEnacts).map((item) => {
-        let status = ''
-
-        if (item.id === gee.id) {
-            if (gee.enabled === null) {
-                status = 'Offline'
-            } else if (gee.enabled === false) {
-                status = 'Not configured'
+            if (item.id === gee.id) {
+                if (gee.enabled === null) {
+                    status = i18n.t('Offline')
+                } else if (gee.enabled === false) {
+                    status = i18n.t('Not configured')
+                } else {
+                    status = i18n.t('Online')
+                }
             } else {
-                status = 'Online'
+                // enacts
+                if (!enacts.route) {
+                    status = i18n.t('Not configured')
+                } else if (enacts.info?.status === 'OK') {
+                    status = i18n.t('Online')
+                } else {
+                    status = i18n.t('Offline')
+                }
             }
-        } else {
-            // enacts
-            if (!enacts.route) {
-                status = 'Not configured'
-            } else if (enacts.info?.status === 'OK') {
-                status = 'Online'
-            } else {
-                status = 'Offline'
-            }
-        }
 
-        return {
-            name: item.name,
-            status,
-        }
-    })
+            return {
+                name: item.name,
+                status,
+            }
+        })
 
     return (
         <div>

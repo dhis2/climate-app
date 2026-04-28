@@ -1,3 +1,4 @@
+import { useConfig } from '@dhis2/app-runtime'
 import PropTypes from 'prop-types'
 import React, {
     createContext,
@@ -31,6 +32,8 @@ export const enactsProvider = {
 const DataSourcesProvider = ({ children }) => {
     const [hasGeeToken, setHasGeeToken] = useState(null)
     const tokenPromise = useEarthEngineToken()
+    const { serverVersion } = useConfig()
+    const isEnactsSupported = serverVersion.minor >= 41
 
     const {
         routes,
@@ -39,6 +42,7 @@ const DataSourcesProvider = ({ children }) => {
     } = useRoutesAPI()
 
     const eroute =
+        isEnactsSupported &&
         !routesLoading &&
         !routesError &&
         routes?.find((route) => route.code == enactsRouteCode)
@@ -75,6 +79,7 @@ const DataSourcesProvider = ({ children }) => {
             },
             [PROVIDER_ENACTS]: {
                 ...enactsProvider,
+                supported: isEnactsSupported,
                 enabled: enactsInfo?.enabled || false,
                 loading: routesLoading || enactsInfoLoading,
                 route: enactsRoute,
@@ -84,6 +89,7 @@ const DataSourcesProvider = ({ children }) => {
         }),
         [
             hasGeeToken,
+            isEnactsSupported,
             enactsInfo,
             enactsInfoError,
             routesLoading,
