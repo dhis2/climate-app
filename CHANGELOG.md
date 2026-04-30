@@ -1,3 +1,10 @@
+## [1.15.1](https://github.com/dhis2/climate-app/compare/v1.15.0...v1.15.1) (2026-04-30)
+
+
+### Bug Fixes
+
+* update minimum supported DHIS2 version to 2.40 ([#116](https://github.com/dhis2/climate-app/issues/116)) ([6ed7dde](https://github.com/dhis2/climate-app/commit/6ed7dde56a6dfada1410f1c02961ea73ede01307))
+
 # [1.15.0](https://github.com/dhis2/climate-app/compare/v1.14.3...v1.15.0) (2026-04-28)
 
 
