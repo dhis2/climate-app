@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-05-07T08:59:13.420Z\n"
-"PO-Revision-Date: 2026-05-07T08:59:13.420Z\n"
+"POT-Creation-Date: 2026-05-07T09:52:25.254Z\n"
+"PO-Revision-Date: 2026-05-07T09:52:25.255Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -840,9 +840,6 @@ msgstr "E.g. ERA5 Monthly Temperature"
 msgid "Save"
 msgstr "Save"
 
-msgid "Delete configuration"
-msgstr "Delete configuration"
-
 msgid "{{count}} org units"
 msgid_plural "{{count}} org units"
 msgstr[0] "{{count}} org units"
@@ -860,23 +857,29 @@ msgstr "Delete this configuration?"
 msgid "Delete"
 msgstr "Delete"
 
-msgid "Data is up to date"
-msgstr "Data is up to date"
-
-msgid "Next import: {{start}} → {{end}}"
-msgstr "Next import: {{start}} → {{end}}"
-
-msgid "Run import"
-msgstr "Run import"
-
-msgid "Saved import configurations"
-msgstr "Saved import configurations"
-
 msgid "Start year"
 msgstr "Start year"
 
 msgid "End year"
 msgstr "End year"
+
+msgid "Run import"
+msgstr "Run import"
+
+msgid "Data is up to date"
+msgstr "Data is up to date"
+
+msgid "Next: {{start}} → {{end}}"
+msgstr "Next: {{start}} → {{end}}"
+
+msgid "Delete config"
+msgstr "Delete config"
+
+msgid "Adjust dates"
+msgstr "Adjust dates"
+
+msgid "Saved import configurations"
+msgstr "Saved import configurations"
 
 msgid "Chart settings"
 msgstr "Chart settings"

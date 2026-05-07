@@ -38,20 +38,6 @@
     font-weight: 500;
 }
 
-.deleteButton {
-    background: none;
-    border: none;
-    color: var(--colors-grey600);
-    cursor: pointer;
-    font-size: 18px;
-    line-height: 1;
-    padding: 0;
-}
-
-.deleteButton:hover {
-    color: var(--colors-red700);
-}
-
 .cardMeta {
     color: var(--colors-grey600);
     font-size: 12px;
@@ -69,12 +55,9 @@
 }
 
 .cardActions {
-    align-items: center;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: var(--spacers-dp8);
-    justify-content: space-between;
 }
 
 .nextPeriod {
@@ -85,6 +68,29 @@
 .upToDate {
     color: var(--colors-green700);
     font-size: 12px;
+}
+
+.cardButtons {
+    display: flex;
+    gap: var(--spacers-dp8);
+}
+
+.dateAdjust {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp8);
+    width: 100%;
+}
+
+.dateAdjustPickers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacers-dp8);
+}
+
+.dateAdjustActions {
+    display: flex;
+    gap: var(--spacers-dp8);
 }
 
 .confirmDelete {
