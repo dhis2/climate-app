@@ -46,7 +46,7 @@ const isVersionEqualOrHigher = (version, target) => {
 }
 
 const useAppVersion = (key, targetVersion) => {
-    const { baseUrl } = useConfig()
+    const { baseUrl, serverVersion } = useConfig()
     const {
         data: installedApps,
         loading: installedLoading,
@@ -66,7 +66,9 @@ const useAppVersion = (key, targetVersion) => {
             }
 
             const json = await response.json()
-            setBundledApps(json)
+            setBundledApps(
+                serverVersion.minor >= 43 ? json.apps : json // Version toggle. Structure of apps-bundle.json changed for 2.43
+            )
         } catch (e) {
             setBundledError(e)
         } finally {
