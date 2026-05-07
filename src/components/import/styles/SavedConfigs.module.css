@@ -93,6 +93,24 @@
     gap: var(--spacers-dp8);
 }
 
+.scheduleInfo {
+    color: var(--colors-blue700);
+    font-size: 12px;
+    margin-block-end: var(--spacers-dp8);
+}
+
+.scheduleForm {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp8);
+    width: 100%;
+}
+
+.scheduleFormActions {
+    display: flex;
+    gap: var(--spacers-dp8);
+}
+
 .confirmDelete {
     align-items: center;
     display: flex;

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-05-07T09:52:25.254Z\n"
-"PO-Revision-Date: 2026-05-07T09:52:25.255Z\n"
+"POT-Creation-Date: 2026-05-07T10:01:46.523Z\n"
+"PO-Revision-Date: 2026-05-07T10:01:46.523Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -840,6 +840,9 @@ msgstr "E.g. ERA5 Monthly Temperature"
 msgid "Save"
 msgstr "Save"
 
+msgid "Yearly"
+msgstr "Yearly"
+
 msgid "{{count}} org units"
 msgid_plural "{{count}} org units"
 msgstr[0] "{{count}} org units"
@@ -851,11 +854,23 @@ msgstr "Last import: {{date}}"
 msgid "Data through: {{period}}"
 msgstr "Data through: {{period}}"
 
+msgid "Scheduled: {{frequency}}"
+msgstr "Scheduled: {{frequency}}"
+
 msgid "Delete this configuration?"
 msgstr "Delete this configuration?"
 
 msgid "Delete"
 msgstr "Delete"
+
+msgid "Run frequency"
+msgstr "Run frequency"
+
+msgid "Remove schedule"
+msgstr "Remove schedule"
+
+msgid "Save schedule"
+msgstr "Save schedule"
 
 msgid "Start year"
 msgstr "Start year"
@@ -874,6 +889,12 @@ msgstr "Next: {{start}} → {{end}}"
 
 msgid "Delete config"
 msgstr "Delete config"
+
+msgid "Edit schedule"
+msgstr "Edit schedule"
+
+msgid "Schedule"
+msgstr "Schedule"
 
 msgid "Adjust dates"
 msgstr "Adjust dates"
@@ -1512,9 +1533,6 @@ msgstr "week"
 
 msgid "month"
 msgstr "month"
-
-msgid "Yearly"
-msgstr "Yearly"
 
 msgid "year"
 msgstr "year"

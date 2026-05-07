@@ -1,5 +1,10 @@
 import i18n from '@dhis2/d2-i18n'
-import { Button, CalendarInput } from '@dhis2/ui'
+import {
+    Button,
+    CalendarInput,
+    SingleSelectField,
+    SingleSelectOption,
+} from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import { useState } from 'react'
 import useUserLocale from '../../hooks/useUserLocale.js'
@@ -30,6 +35,13 @@ const formatPeriodTime = (timeStr, periodType) => {
     })
 }
 
+const FREQUENCY_OPTIONS = [
+    { value: 'DAILY', label: i18n.t('Daily') },
+    { value: 'WEEKLY', label: i18n.t('Weekly') },
+    { value: 'MONTHLY', label: i18n.t('Monthly') },
+    { value: 'YEARLY', label: i18n.t('Yearly') },
+]
+
 const formatImportDate = (isoTimestamp) => {
     if (!isoTimestamp) {
         return ''
@@ -45,6 +57,9 @@ const ConfigCard = ({ config, onRun, onDelete }) => {
     const [confirmDelete, setConfirmDelete] = useState(false)
     const [adjustingDates, setAdjustingDates] = useState(false)
     const [localPeriod, setLocalPeriod] = useState(null)
+    const [schedule, setSchedule] = useState(null)
+    const [schedulingOpen, setSchedulingOpen] = useState(false)
+    const [localFrequency, setLocalFrequency] = useState(null)
     const { locale } = useUserLocale()
     const { name, dataset, periodType, orgUnits, lastImport } = config
 
@@ -69,6 +84,21 @@ const ConfigCard = ({ config, onRun, onDelete }) => {
     const handleRunAdjusted = () => {
         onRun(config, localPeriod)
         setAdjustingDates(false)
+    }
+
+    const handleOpenSchedule = () => {
+        setLocalFrequency(schedule?.frequency || periodType)
+        setSchedulingOpen(true)
+    }
+
+    const handleSaveSchedule = () => {
+        setSchedule({ frequency: localFrequency })
+        setSchedulingOpen(false)
+    }
+
+    const handleRemoveSchedule = () => {
+        setSchedule(null)
+        setSchedulingOpen(false)
     }
 
     return (
@@ -107,6 +137,16 @@ const ConfigCard = ({ config, onRun, onDelete }) => {
                     </div>
                 </div>
             )}
+            {schedule && (
+                <div className={classes.scheduleInfo}>
+                    {i18n.t('Scheduled: {{frequency}}', {
+                        frequency: FREQUENCY_OPTIONS.find(
+                            (o) => o.value === schedule.frequency
+                        )?.label.toLowerCase(),
+                        nsSeparator: ';',
+                    })}
+                </div>
+            )}
             {confirmDelete ? (
                 <div className={classes.confirmDelete}>
                     <span>{i18n.t('Delete this configuration?')}</span>
@@ -123,7 +163,50 @@ const ConfigCard = ({ config, onRun, onDelete }) => {
                 </div>
             ) : (
                 <div className={classes.cardActions}>
-                    {adjustingDates && localPeriod ? (
+                    {schedulingOpen ? (
+                        <div className={classes.scheduleForm}>
+                            <SingleSelectField
+                                label={i18n.t('Run frequency')}
+                                selected={localFrequency}
+                                onChange={({ selected }) =>
+                                    setLocalFrequency(selected)
+                                }
+                            >
+                                {FREQUENCY_OPTIONS.map(({ value, label }) => (
+                                    <SingleSelectOption
+                                        key={value}
+                                        value={value}
+                                        label={label}
+                                    />
+                                ))}
+                            </SingleSelectField>
+                            <div className={classes.scheduleFormActions}>
+                                <Button
+                                    small
+                                    secondary
+                                    onClick={() => setSchedulingOpen(false)}
+                                >
+                                    {i18n.t('Cancel')}
+                                </Button>
+                                {schedule && (
+                                    <Button
+                                        small
+                                        destructive
+                                        onClick={handleRemoveSchedule}
+                                    >
+                                        {i18n.t('Remove schedule')}
+                                    </Button>
+                                )}
+                                <Button
+                                    small
+                                    primary
+                                    onClick={handleSaveSchedule}
+                                >
+                                    {i18n.t('Save schedule')}
+                                </Button>
+                            </div>
+                        </div>
+                    ) : adjustingDates && localPeriod ? (
                         <div className={classes.dateAdjust}>
                             <div className={classes.dateAdjustPickers}>
                                 {isYearly ? (
@@ -249,6 +332,15 @@ const ConfigCard = ({ config, onRun, onDelete }) => {
                                     onClick={() => setConfirmDelete(true)}
                                 >
                                     {i18n.t('Delete config')}
+                                </Button>
+                                <Button
+                                    small
+                                    secondary
+                                    onClick={handleOpenSchedule}
+                                >
+                                    {schedule
+                                        ? i18n.t('Edit schedule')
+                                        : i18n.t('Schedule')}
                                 </Button>
                                 {nextPeriod && (
                                     <Button
