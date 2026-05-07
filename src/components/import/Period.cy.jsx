@@ -13,7 +13,6 @@ describe('Period', () => {
     }
 
     let mockOnChange
-    let mockOnChangeType
 
     // Mock DHIS2 app configuration
     const mockAppConfig = {
@@ -62,7 +61,6 @@ describe('Period', () => {
     beforeEach(() => {
         // Create stubs for each test
         mockOnChange = cy.stub().as('onChange')
-        mockOnChangeType = cy.stub().as('onChangeType')
 
         // Set up API intercepts with default UTC timezone
         setupApiIntercepts('Etc/UTC')
@@ -85,7 +83,6 @@ describe('Period', () => {
                         period={period}
                         dataset={dataset}
                         onChange={mockOnChange}
-                        onChangeType={mockOnChangeType}
                     />
                 </TestWrapper>
             )
@@ -103,7 +100,6 @@ describe('Period', () => {
                         period={period}
                         dataset={dataset}
                         onChange={mockOnChange}
-                        onChangeType={mockOnChangeType}
                     />
                 </TestWrapper>
             )
@@ -120,7 +116,6 @@ describe('Period', () => {
                         period={defaultPeriod}
                         dataset={dataset}
                         onChange={mockOnChange}
-                        onChangeType={mockOnChangeType}
                     />
                 </TestWrapper>
             )
@@ -156,7 +151,6 @@ describe('Period', () => {
                         period={period}
                         dataset={datasetWithTimeZone}
                         onChange={mockOnChange}
-                        onChangeType={mockOnChangeType}
                     />
                 </TestWrapper>
             )
@@ -182,7 +176,6 @@ describe('Period', () => {
                         period={period}
                         dataset={datasetWithTimeZone}
                         onChange={mockOnChange}
-                        onChangeType={mockOnChangeType}
                     />
                 </TestWrapper>
             )
@@ -199,7 +192,6 @@ describe('Period', () => {
                         period={defaultPeriod}
                         dataset={datasetWithTimeZone}
                         onChange={mockOnChange}
-                        onChangeType={mockOnChangeType}
                     />
                 </TestWrapper>
             )
@@ -241,7 +233,6 @@ describe('Period', () => {
                         period={defaultPeriod}
                         dataset={datasetUTC}
                         onChange={mockOnChange}
-                        onChangeType={mockOnChangeType}
                     />
                 </TestWrapper>
             )
@@ -253,7 +244,7 @@ describe('Period', () => {
         })
     })
 
-    describe('Period type selector', () => {
+    describe('Date range', () => {
         const dataset = {
             supportedPeriodTypes: [
                 { periodType: 'DAILY' },
@@ -267,21 +258,6 @@ describe('Period', () => {
             setupApiIntercepts('Etc/UTC')
         })
 
-        it('renders period type selector', () => {
-            cy.mount(
-                <TestWrapper>
-                    <Period
-                        period={defaultPeriod}
-                        dataset={dataset}
-                        onChange={mockOnChange}
-                        onChangeType={mockOnChangeType}
-                    />
-                </TestWrapper>
-            )
-            cy.wait('@getSystemInfo')
-            cy.getByDataTest('period-type-selector').should('be.visible')
-        })
-
         it('renders start and end date inputs', () => {
             cy.mount(
                 <TestWrapper>
@@ -289,7 +265,6 @@ describe('Period', () => {
                         period={defaultPeriod}
                         dataset={dataset}
                         onChange={mockOnChange}
-                        onChangeType={mockOnChangeType}
                     />
                 </TestWrapper>
             )

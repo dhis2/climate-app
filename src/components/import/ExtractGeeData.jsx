@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import useEarthEngineData from '../../hooks/useEarthEngineData.js'
 import DataLoader from '../shared/DataLoader.jsx'
 import ErrorMessage from '../shared/ErrorMessage.jsx'
@@ -11,25 +11,20 @@ const ExtractGeeData = ({
     dataset,
     period,
     features,
-    onComplete,
+    onError,
+    onSuccess,
 }) => {
     const { data, error, progress } = useEarthEngineData({
         dataset,
         period,
         features,
     })
-    const [importDone, setImportDone] = useState(false)
 
     useEffect(() => {
-        if (error) {
-            onComplete()
+        if (error && onError) {
+            onError(error)
         }
-    }, [error, onComplete])
-
-    const handleImportComplete = useCallback(() => {
-        setImportDone(true)
-        onComplete()
-    }, [onComplete])
+    }, [error, onError])
 
     if (error) {
         const displayError = /payload size exceeds the limit/i.test(error)
@@ -40,34 +35,32 @@ const ExtractGeeData = ({
         return <ErrorMessage error={displayError} />
     }
 
-    let loadingLabel
-    if (data) {
-        loadingLabel = i18n.t('Importing data to DHIS2')
-    } else if (progress.total > 1) {
-        loadingLabel = i18n.t(
-            'Extracting data from Google Earth Engine (batch {{current}} of {{total}})',
-            {
-                current: progress.current,
-                total: progress.total,
-                nsSeparator: ';',
-            }
-        )
-    } else {
-        loadingLabel = i18n.t('Extracting data from Google Earth Engine')
+    if (!data) {
+        let loadingLabel
+        if (progress.total > 1) {
+            loadingLabel = i18n.t(
+                'Extracting data from Google Earth Engine (batch {{current}} of {{total}})',
+                {
+                    current: progress.current,
+                    total: progress.total,
+                    nsSeparator: ';',
+                }
+            )
+        } else {
+            loadingLabel = i18n.t('Extracting data from Google Earth Engine')
+        }
+        return <DataLoader label={loadingLabel} height={100} />
     }
 
     return (
-        <>
-            {!importDone && <DataLoader label={loadingLabel} height={100} />}
-            {data && (
-                <ImportData
-                    data={data}
-                    dataElement={dataElement}
-                    features={features}
-                    onComplete={handleImportComplete}
-                />
-            )}
-        </>
+        <ImportData
+            data={data}
+            dataElement={dataElement}
+            features={features}
+            period={period}
+            onError={onError}
+            onSuccess={onSuccess}
+        />
     )
 }
 
@@ -76,7 +69,8 @@ ExtractGeeData.propTypes = {
     dataset: PropTypes.object.isRequired,
     features: PropTypes.array.isRequired,
     period: PropTypes.object.isRequired,
-    onComplete: PropTypes.func.isRequired,
+    onError: PropTypes.func,
+    onSuccess: PropTypes.func,
 }
 
 export default ExtractGeeData

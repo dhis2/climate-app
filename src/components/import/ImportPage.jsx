@@ -1,9 +1,11 @@
 import { useConfig } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { Button } from '@dhis2/ui'
-import { useState, useMemo, useEffect, useCallback } from 'react'
+import { Button, InputField, Radio } from '@dhis2/ui'
+import { useState, useMemo, useEffect, useCallback, useRef } from 'react'
 import { useBlocker } from 'react-router-dom'
+import useImportConfigs from '../../hooks/useImportConfigs.js'
 import useOrgUnits from '../../hooks/useOrgUnits.js'
+import { autoConfigName } from '../../utils/recurringImports.js'
 import {
     getDefaultImportPeriod,
     getStandardPeriod,
@@ -25,6 +27,7 @@ import ImportModal from './ImportModal.jsx'
 import ImportPreview from './ImportPreview.jsx'
 import OrgUnits from './OrgUnits.jsx'
 import Period from './Period.jsx'
+import PeriodType from './PeriodType.jsx'
 import classes from './styles/ImportPage.module.css'
 
 const maxValues = 50000
@@ -102,16 +105,14 @@ const ImportPage = () => {
     const [importDone, setImportDone] = useState(false)
     const [importFeatures, setImportFeatures] = useState(null)
     const [importAttempted, setImportAttempted] = useState(false)
+    const [saveAsRecurring, setSaveAsRecurring] = useState(false)
+    const [configName, setConfigName] = useState('')
+    const configNameTouched = useRef(false)
+    const [savedConfig, setSavedConfig] = useState(null)
+
+    const { createConfig, recordRun } = useImportConfigs()
 
     useBlocker(startExtract && !importDone)
-
-    const handleImportDone = useCallback(() => setImportDone(true), [])
-    const handleModalClose = useCallback(() => {
-        setStartExtract(false)
-        setImportDone(false)
-        setImportFeatures(null)
-        setImportAttempted(true)
-    }, [])
 
     const {
         features,
@@ -125,6 +126,11 @@ const ImportPage = () => {
 
     const periodCount = useMemo(() => getPeriods(period).length, [period])
     const valueCount = featureCount * periodCount
+
+    // Period type is intrinsic to the dataset: only offer a choice when the
+    // selected dataset supports more than one type (otherwise it's auto-set).
+    const showPeriodTypePicker =
+        (dataset?.supportedPeriodTypes?.length ?? 0) > 1
 
     // canShowPreview: show preview even during loading (avoids unmounting/remounting)
     const canShowPreview = !!(
@@ -143,7 +149,72 @@ const ImportPage = () => {
         setStartExtract(false)
         setImportDone(false)
         setImportAttempted(false)
+        setImportFeatures(null)
+        setSavedConfig(null)
     }, [dataset, period, orgUnits, dataElement])
+
+    const suggestedName = useMemo(
+        () => (dataset ? autoConfigName(dataset, featureCount) : ''),
+        [dataset, featureCount]
+    )
+
+    // Seed the config name from the suggested name until the user edits it
+    useEffect(() => {
+        if (!configNameTouched.current) {
+            setConfigName(suggestedName)
+        }
+    }, [suggestedName])
+
+    const handleStartImport = useCallback(async () => {
+        let newConfig = null
+        if (saveAsRecurring) {
+            newConfig = await createConfig({
+                name: configName || suggestedName,
+                dataset,
+                dataElement,
+                orgUnits,
+                featureCount,
+                periodType: period.periodType,
+            })
+            setSavedConfig(newConfig)
+        }
+        setImportFeatures(features)
+        setStartExtract(true)
+    }, [
+        saveAsRecurring,
+        createConfig,
+        configName,
+        suggestedName,
+        dataset,
+        dataElement,
+        orgUnits,
+        featureCount,
+        period,
+        features,
+    ])
+
+    const handleImportDone = useCallback(
+        (importCount, lastRunError) => {
+            setImportDone(true)
+            if (savedConfig) {
+                recordRun(savedConfig.id, {
+                    dataUpdatedThrough: importCount
+                        ? standardPeriod.endTime
+                        : undefined,
+                    lastRunError,
+                })
+            }
+        },
+        [savedConfig, recordRun, standardPeriod]
+    )
+
+    const handleModalClose = useCallback(() => {
+        setStartExtract(false)
+        setImportDone(false)
+        setImportFeatures(null)
+        setImportAttempted(true)
+        setSavedConfig(null)
+    }, [])
 
     const updatePeriod = useCallback((val) => {
         setPeriod((prev) => ({
@@ -211,23 +282,22 @@ const ImportPage = () => {
             <div className={classes.formContainer}>
                 <div className={classes.formSection}>
                     <Dataset
-                        title={i18n.t('Choose data source')}
+                        title={i18n.t('Data source')}
                         selected={dataset}
                         onChange={updateDataset}
                         showDescription={true}
                     />
-                </div>
-                <div className={classes.formSection}>
-                    <Period
-                        period={period}
-                        dataset={dataset}
-                        onChange={updatePeriod}
-                        onChangeType={updatePeriodType}
-                    />
+                    {showPeriodTypePicker && (
+                        <PeriodType
+                            periodType={period.periodType}
+                            supportedPeriodTypes={dataset.supportedPeriodTypes}
+                            onChange={updatePeriodType}
+                        />
+                    )}
                 </div>
                 <div className={classes.formSection}>
                     <SectionH2
-                        number="3"
+                        number="2"
                         title={i18n.t('Choose destination data element')}
                     />
                     <DataElement
@@ -253,7 +323,71 @@ const ImportPage = () => {
                     )}
                 </div>
                 <div className={classes.formSection}>
-                    <SectionH2 number="5" title={i18n.t('Review and import')} />
+                    <Period
+                        period={period}
+                        dataset={dataset}
+                        onChange={updatePeriod}
+                    />
+                </div>
+                <div className={classes.formSection}>
+                    <SectionH2 number="5" title={i18n.t('Save this import?')} />
+                    <div className={classes.importTypeCards}>
+                        <label
+                            className={
+                                !saveAsRecurring
+                                    ? classes.importTypeCardSelected
+                                    : classes.importTypeCard
+                            }
+                        >
+                            <Radio
+                                name="importType"
+                                value="oneTime"
+                                label={i18n.t('One-time import')}
+                                checked={!saveAsRecurring}
+                                onChange={() => setSaveAsRecurring(false)}
+                            />
+                            <p className={classes.importTypeCardSubtitle}>
+                                {i18n.t(
+                                    'Run this import once. Your selections are not saved.'
+                                )}
+                            </p>
+                        </label>
+                        <label
+                            className={
+                                saveAsRecurring
+                                    ? classes.importTypeCardSelected
+                                    : classes.importTypeCard
+                            }
+                        >
+                            <Radio
+                                name="importType"
+                                value="recurring"
+                                label={i18n.t('Save this import')}
+                                checked={saveAsRecurring}
+                                onChange={() => setSaveAsRecurring(true)}
+                            />
+                            <p className={classes.importTypeCardSubtitle}>
+                                {i18n.t(
+                                    'Save it so you can re-run it later. Each run fetches new data since the last import.'
+                                )}
+                            </p>
+                        </label>
+                    </div>
+                    {saveAsRecurring && (
+                        <div className={classes.saveRecurringBox}>
+                            <InputField
+                                label={i18n.t('Import name')}
+                                value={configName}
+                                onChange={({ value }) => {
+                                    configNameTouched.current = true
+                                    setConfigName(value)
+                                }}
+                            />
+                        </div>
+                    )}
+                </div>
+                <div className={classes.formSection}>
+                    <SectionH2 number="6" title={i18n.t('Review and import')} />
                     {valueCount > maxValues && (
                         <div className={classes.warning}>
                             {i18n.t(
@@ -278,18 +412,17 @@ const ImportPage = () => {
                             orgUnits={orgUnits}
                         />
                     )}
-                    <div>
+                    <div className={classes.submitRow}>
                         <Button
                             primary
                             disabled={
                                 !isValid || startExtract || importAttempted
                             }
-                            onClick={() => {
-                                setImportFeatures(features)
-                                setStartExtract(true)
-                            }}
+                            onClick={handleStartImport}
                         >
-                            {i18n.t('Start import')}
+                            {saveAsRecurring
+                                ? i18n.t('Save & import')
+                                : i18n.t('Import once')}
                         </Button>
                     </div>
                     {startExtract && (
@@ -298,6 +431,7 @@ const ImportPage = () => {
                             period={dataset.period ? null : standardPeriod}
                             features={importFeatures}
                             dataElement={dataElement}
+                            savedConfig={savedConfig}
                             onClose={handleModalClose}
                             onImportDone={handleImportDone}
                         />
