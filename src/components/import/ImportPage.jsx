@@ -257,6 +257,8 @@ const ImportPage = () => {
             <h1>{i18n.t('Import weather and climate data')}</h1>
             {showSaveModal && (
                 <SaveConfigModal
+                    datasetName={dataset?.name}
+                    period={period}
                     onSave={handleSaveConfig}
                     onClose={() => setShowSaveModal(false)}
                 />

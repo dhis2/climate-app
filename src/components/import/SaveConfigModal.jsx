@@ -11,8 +11,12 @@ import {
 import PropTypes from 'prop-types'
 import { useState } from 'react'
 
-const SaveConfigModal = ({ onSave, onClose }) => {
-    const [name, setName] = useState('')
+const SaveConfigModal = ({ datasetName, period, onSave, onClose }) => {
+    const suggestedName =
+        datasetName && period?.periodType
+            ? `${datasetName} ${period.periodType.toLowerCase()} [org unit]`
+            : ''
+    const [name, setName] = useState(suggestedName)
 
     return (
         <Modal position="middle" onClose={onClose}>
@@ -47,6 +51,10 @@ const SaveConfigModal = ({ onSave, onClose }) => {
 SaveConfigModal.propTypes = {
     onClose: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
+    datasetName: PropTypes.string,
+    period: PropTypes.shape({
+        periodType: PropTypes.string,
+    }),
 }
 
 export default SaveConfigModal
