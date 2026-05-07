@@ -65,3 +65,13 @@
     padding: var(--spacers-dp16);
     background-color: var(--colors-grey050);
 }
+
+.configRunLabel {
+    color: var(--colors-grey700);
+    font-size: 14px;
+    margin-block-end: var(--spacers-dp12);
+}
+
+.saveConfigButton {
+    margin-block-start: var(--spacers-dp8);
+}

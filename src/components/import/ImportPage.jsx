@@ -2,6 +2,7 @@ import { useConfig } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
 import { useState, useMemo, useEffect, useCallback } from 'react'
+import useImportConfigs from '../../hooks/useImportConfigs.js'
 import useOrgUnits from '../../hooks/useOrgUnits.js'
 import {
     getDefaultImportPeriod,
@@ -24,6 +25,8 @@ import ExtractData from './ExtractData.jsx'
 import ImportPreview from './ImportPreview.jsx'
 import OrgUnits from './OrgUnits.jsx'
 import Period from './Period.jsx'
+import SaveConfigModal from './SaveConfigModal.jsx'
+import SavedConfigs from './SavedConfigs.jsx'
 import classes from './styles/ImportPage.module.css'
 
 const maxValues = 50000
@@ -96,8 +99,14 @@ const ImportPage = () => {
     const [period, setPeriod] = useState(getDefaultImportPeriod({ calendar }))
     const [orgUnits, setOrgUnits] = useState(DEFAULT_ORG_UNITS)
     const [dataElement, setDataElement] = useState()
-    const standardPeriod = getStandardPeriod(period) // ISO 8601 used by GEE
+    const standardPeriod = useMemo(() => getStandardPeriod(period), [period])
     const [startExtract, setStartExtract] = useState(false)
+    const [activeConfigRun, setActiveConfigRun] = useState(null)
+    const [pendingSaveImport, setPendingSaveImport] = useState(null)
+    const [showSaveModal, setShowSaveModal] = useState(false)
+
+    const { configs, saveConfig, updateConfig, deleteConfig } =
+        useImportConfigs()
 
     const {
         features,
@@ -189,98 +198,215 @@ const ImportPage = () => {
         [period, updatePeriod, calendar]
     )
 
+    const handleManualImportSuccess = useCallback(
+        (importCount) => {
+            setPendingSaveImport({
+                dataset,
+                periodType: period.periodType,
+                orgUnits,
+                dataElement,
+                lastImport: {
+                    date: new Date().toISOString(),
+                    startTime: standardPeriod.startTime,
+                    endTime: standardPeriod.endTime,
+                    periodType: period.periodType,
+                    calendar: period.calendar,
+                    importCount,
+                },
+            })
+        },
+        [dataset, period, orgUnits, dataElement, standardPeriod]
+    )
+
+    const handleConfigRunSuccess = useCallback(
+        (importCount) => {
+            if (!activeConfigRun) {
+                return
+            }
+            updateConfig(activeConfigRun.config.id, {
+                date: new Date().toISOString(),
+                startTime: activeConfigRun.period.startTime,
+                endTime: activeConfigRun.period.endTime,
+                periodType: activeConfigRun.period.periodType,
+                calendar: activeConfigRun.period.calendar,
+                importCount,
+            })
+            setActiveConfigRun(null)
+        },
+        [activeConfigRun, updateConfig]
+    )
+
+    const handleRunConfig = useCallback((config, nextPeriod) => {
+        setActiveConfigRun({ config, period: nextPeriod })
+    }, [])
+
+    const handleSaveConfig = useCallback(
+        (name) => {
+            if (!pendingSaveImport) {
+                return
+            }
+            saveConfig({ name, ...pendingSaveImport })
+            setShowSaveModal(false)
+            setPendingSaveImport(null)
+        },
+        [pendingSaveImport, saveConfig]
+    )
+
     return (
         <div className={classes.page}>
             <h1>{i18n.t('Import weather and climate data')}</h1>
-            <div className={classes.formContainer}>
-                <div className={classes.formSection}>
-                    <Dataset
-                        title={i18n.t('Choose data source')}
-                        selected={dataset}
-                        onChange={updateDataset}
-                        showDescription={true}
-                    />
-                </div>
-                <div className={classes.formSection}>
-                    <Period
-                        period={period}
-                        dataset={dataset}
-                        onChange={updatePeriod}
-                        onChangeType={updatePeriodType}
-                    />
-                </div>
-                <div className={classes.formSection}>
-                    <SectionH2
-                        number="3"
-                        title={i18n.t('Choose destination data element')}
-                    />
-                    <DataElement
-                        selected={dataElement}
-                        onChange={setDataElement}
-                        datasetCode={dataset?.dataElementCode}
-                        periodType={period.periodType}
-                    />
-                </div>
-                <div className={classes.formSection}>
-                    <OrgUnits
-                        selected={orgUnits}
-                        onChange={setOrgUnits}
-                        featureCount={featureCount}
-                        featuresLoading={featuresLoading}
-                        featuresError={featuresError}
-                    />
-                    {dataset?.resolutionText && (
-                        <Resolution
-                            resolution={dataset.resolutionText}
-                            isImport={true}
+            {showSaveModal && (
+                <SaveConfigModal
+                    onSave={handleSaveConfig}
+                    onClose={() => setShowSaveModal(false)}
+                />
+            )}
+            {activeConfigRun ? (
+                <div className={classes.formContainer}>
+                    <div className={classes.formSection}>
+                        <p className={classes.configRunLabel}>
+                            {i18n.t('Running saved configuration: {{name}}', {
+                                name: activeConfigRun.config.name,
+                                nsSeparator: ';',
+                            })}
+                        </p>
+                        <ExtractData
+                            dataset={activeConfigRun.config.dataset}
+                            period={
+                                activeConfigRun.config.dataset.period
+                                    ? null
+                                    : activeConfigRun.period
+                            }
+                            orgUnits={activeConfigRun.config.orgUnits}
+                            dataElement={activeConfigRun.config.dataElement}
+                            onSuccess={handleConfigRunSuccess}
                         />
-                    )}
-                </div>
-                <div className={classes.formSection}>
-                    <SectionH2 number="5" title={i18n.t('Review and import')} />
-                    {valueCount > maxValues && (
-                        <div className={classes.warning}>
-                            {i18n.t(
-                                'Import limit exceeded: {{valueCount}} values selected (maximum {{maxValues}}). Reduce your selection by choosing fewer organisation units or a shorter time period. Additional imports can be performed separately.',
-                                {
-                                    nsSeparator: ';',
-                                    valueCount,
-                                    maxValues,
-                                }
-                            )}
-                        </div>
-                    )}
-                    {canShowPreview && !startExtract && (
-                        <ImportPreview
-                            dataset={dataset.name || ''}
-                            periodType={period.periodType || ''}
-                            startDate={period.startTime || ''}
-                            endDate={period.endTime || ''}
-                            featureCount={featureCount}
-                            dataElement={dataElement.displayName || ''}
-                            totalValues={valueCount}
-                            orgUnits={orgUnits}
-                        />
-                    )}
-                    <div>
                         <Button
-                            primary
-                            disabled={!isValid || startExtract}
-                            onClick={() => setStartExtract(true)}
+                            secondary
+                            small
+                            onClick={() => setActiveConfigRun(null)}
                         >
-                            {i18n.t('Start import')}
+                            {i18n.t('Cancel')}
                         </Button>
-                        {startExtract && isValid && (
-                            <ExtractData
-                                dataset={dataset}
-                                period={dataset.period ? null : standardPeriod}
-                                orgUnits={orgUnits}
-                                dataElement={dataElement}
-                            />
-                        )}
                     </div>
                 </div>
-            </div>
+            ) : (
+                <>
+                    <SavedConfigs
+                        configs={configs}
+                        onRunConfig={handleRunConfig}
+                        onDeleteConfig={deleteConfig}
+                    />
+                    <div className={classes.formContainer}>
+                        <div className={classes.formSection}>
+                            <Dataset
+                                title={i18n.t('Choose data source')}
+                                selected={dataset}
+                                onChange={updateDataset}
+                                showDescription={true}
+                            />
+                        </div>
+                        <div className={classes.formSection}>
+                            <Period
+                                period={period}
+                                dataset={dataset}
+                                onChange={updatePeriod}
+                                onChangeType={updatePeriodType}
+                            />
+                        </div>
+                        <div className={classes.formSection}>
+                            <SectionH2
+                                number="3"
+                                title={i18n.t(
+                                    'Choose destination data element'
+                                )}
+                            />
+                            <DataElement
+                                selected={dataElement}
+                                onChange={setDataElement}
+                                datasetCode={dataset?.dataElementCode}
+                                periodType={period.periodType}
+                            />
+                        </div>
+                        <div className={classes.formSection}>
+                            <OrgUnits
+                                selected={orgUnits}
+                                onChange={setOrgUnits}
+                                featureCount={featureCount}
+                                featuresLoading={featuresLoading}
+                                featuresError={featuresError}
+                            />
+                            {dataset?.resolutionText && (
+                                <Resolution
+                                    resolution={dataset.resolutionText}
+                                    isImport={true}
+                                />
+                            )}
+                        </div>
+                        <div className={classes.formSection}>
+                            <SectionH2
+                                number="5"
+                                title={i18n.t('Review and import')}
+                            />
+                            {valueCount > maxValues && (
+                                <div className={classes.warning}>
+                                    {i18n.t(
+                                        'Import limit exceeded: {{valueCount}} values selected (maximum {{maxValues}}). Reduce your selection by choosing fewer organisation units or a shorter time period. Additional imports can be performed separately.',
+                                        {
+                                            nsSeparator: ';',
+                                            valueCount,
+                                            maxValues,
+                                        }
+                                    )}
+                                </div>
+                            )}
+                            {canShowPreview && !startExtract && (
+                                <ImportPreview
+                                    dataset={dataset.name || ''}
+                                    periodType={period.periodType || ''}
+                                    startDate={period.startTime || ''}
+                                    endDate={period.endTime || ''}
+                                    featureCount={featureCount}
+                                    dataElement={dataElement.displayName || ''}
+                                    totalValues={valueCount}
+                                    orgUnits={orgUnits}
+                                />
+                            )}
+                            <div>
+                                <Button
+                                    primary
+                                    disabled={!isValid || startExtract}
+                                    onClick={() => setStartExtract(true)}
+                                >
+                                    {i18n.t('Start import')}
+                                </Button>
+                                {startExtract && isValid && (
+                                    <ExtractData
+                                        dataset={dataset}
+                                        period={
+                                            dataset.period
+                                                ? null
+                                                : standardPeriod
+                                        }
+                                        orgUnits={orgUnits}
+                                        dataElement={dataElement}
+                                        onSuccess={handleManualImportSuccess}
+                                    />
+                                )}
+                                {pendingSaveImport && !showSaveModal && (
+                                    <Button
+                                        secondary
+                                        onClick={() => setShowSaveModal(true)}
+                                        className={classes.saveConfigButton}
+                                    >
+                                        {i18n.t('Save as import configuration')}
+                                    </Button>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </>
+            )}
         </div>
     )
 }

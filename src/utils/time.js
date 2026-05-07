@@ -641,3 +641,71 @@ export const normalizeIsoDate = (input) => {
 
     return null
 }
+
+/**
+ * Computes the next import period for a saved import config.
+ * @param {Object} lastImport - stored lastImport (standard ISO dates)
+ * @param {Object} dataset - the dataset object (for periodRange cap)
+ * @returns {Object|null} next period { startTime, endTime, periodType, calendar }, or null if already up to date
+ */
+export const computeNextPeriod = (lastImport, dataset) => {
+    if (!lastImport) {
+        return null
+    }
+
+    const { endTime, periodType, calendar } = lastImport
+    let nextStartTime
+
+    if (periodType === YEARLY) {
+        nextStartTime = String(parseInt(endTime, 10) + 1)
+    } else if (periodType === MONTHLY) {
+        const [yearStr, monthStr] = endTime.split('-')
+        const year = parseInt(yearStr, 10)
+        const month = parseInt(monthStr, 10)
+        const nextYear = month === 12 ? year + 1 : year
+        const nextMonth = month === 12 ? 1 : month + 1
+        nextStartTime = `${nextYear}-${padWithZeroes(nextMonth)}-01`
+    } else if (periodType === WEEKLY) {
+        const date = new Date(endTime)
+        date.setDate(date.getDate() + 7)
+        nextStartTime = formatStandardDate(date)
+    } else {
+        const date = new Date(endTime)
+        date.setDate(date.getDate() + 1)
+        nextStartTime = formatStandardDate(date)
+    }
+
+    let nextEndTime =
+        periodType === YEARLY
+            ? String(new Date().getFullYear())
+            : formatStandardDate(new Date())
+
+    const datasetMax = dataset?.supportedPeriodTypes?.find(
+        (pt) => pt.periodType === periodType
+    )?.periodRange?.end
+
+    if (datasetMax) {
+        if (periodType === YEARLY) {
+            if (parseInt(nextEndTime, 10) > parseInt(datasetMax, 10)) {
+                nextEndTime = datasetMax
+            }
+        } else if (nextEndTime > datasetMax) {
+            nextEndTime = datasetMax
+        }
+    }
+
+    if (periodType === YEARLY) {
+        if (parseInt(nextStartTime, 10) > parseInt(nextEndTime, 10)) {
+            return null
+        }
+    } else if (nextStartTime > nextEndTime) {
+        return null
+    }
+
+    return {
+        startTime: nextStartTime,
+        endTime: nextEndTime,
+        periodType,
+        calendar,
+    }
+}

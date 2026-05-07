@@ -10,6 +10,7 @@ const ExtractEnactsData = ({
     period,
     extractingLabel,
     features,
+    onSuccess,
 }) => {
     const { data, error, loading } = useEnactsData(dataset, period, features)
 
@@ -22,7 +23,12 @@ const ExtractEnactsData = ({
     }
 
     return (
-        <ImportData data={data} dataElement={dataElement} features={features} />
+        <ImportData
+            data={data}
+            dataElement={dataElement}
+            features={features}
+            onSuccess={onSuccess}
+        />
     )
 }
 
@@ -32,6 +38,7 @@ ExtractEnactsData.propTypes = {
     features: PropTypes.array.isRequired,
     period: PropTypes.object.isRequired,
     extractingLabel: PropTypes.string,
+    onSuccess: PropTypes.func,
 }
 
 export default ExtractEnactsData

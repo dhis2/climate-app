@@ -25,11 +25,12 @@ const countMissing = (data) => {
     return missing
 }
 
-const ImportData = ({ data, dataElement, features }) => {
+const ImportData = ({ data, dataElement, features, onSuccess }) => {
     const [response, setResponse] = useState(false)
     const [mutate, { error }] = useDataMutation(dataImportMutation)
 
     useEffect(() => {
+        console.log('jj Importing data to DHIS2', data)
         mutate({
             dataValues: data
                 .filter((d) => !Number.isNaN(d.value)) // NaN values are ignored before sending to DHIS2
@@ -40,20 +41,28 @@ const ImportData = ({ data, dataElement, features }) => {
                     period: obj.period,
                 })),
         }).then((response) => {
+            console.log('jj response', response)
+            let importCount
             // support for 2.38 +
             if (response.httpStatus === 'OK') {
                 // count and add number of missing values to response metadata
                 response.response.importCount.missing = countMissing(data)
+                importCount = response.response.importCount
                 setResponse(response.response)
             }
             //support for 2.37
             else if (response.status === 'SUCCESS') {
                 // count and add number of missing values to response metadata
                 response.importCount.missing = countMissing(data)
+                importCount = response.importCount
                 setResponse(response)
             }
+            console.log('jj import count', { importCount, onSuccess })
+            if (onSuccess && importCount) {
+                onSuccess(importCount)
+            }
         })
-    }, [mutate, data, dataElement])
+    }, [mutate, data, dataElement, onSuccess])
 
     return (
         <div className={styles.container}>
@@ -73,6 +82,7 @@ ImportData.propTypes = {
     data: PropTypes.array.isRequired,
     dataElement: PropTypes.object.isRequired,
     features: PropTypes.array.isRequired,
+    onSuccess: PropTypes.func,
 }
 
 export default ImportData

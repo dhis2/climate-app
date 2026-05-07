@@ -11,7 +11,7 @@ import ExtractEnactsData from './ExtractEnactsData.jsx'
 import ExtractGeeData from './ExtractGeeData.jsx'
 import styles from './styles/ExtractData.module.css'
 
-const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
+const ExtractData = ({ dataset, period, orgUnits, dataElement, onSuccess }) => {
     const { features, loading, error } = useOrgUnits({ orgUnits })
 
     if (loading) {
@@ -70,6 +70,7 @@ const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
                 features={features}
                 dataElement={dataElement}
                 extractingLabel={extractingLabel}
+                onSuccess={onSuccess}
             />
         )
     } else if (dataset?.provider.id == PROVIDER_ENACTS) {
@@ -80,6 +81,7 @@ const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
                 features={features}
                 dataElement={dataElement}
                 extractingLabel={extractingLabel}
+                onSuccess={onSuccess}
             />
         )
     } else {
@@ -96,6 +98,7 @@ ExtractData.propTypes = {
     dataset: PropTypes.object.isRequired,
     orgUnits: PropTypes.array.isRequired,
     period: PropTypes.object.isRequired,
+    onSuccess: PropTypes.func,
 }
 
 export default ExtractData

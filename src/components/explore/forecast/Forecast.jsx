@@ -32,6 +32,8 @@ const Forecast = () => {
 
     const timeZone = settings?.timeZone || browserTimeZone || 'Etc/UTC'
 
+    console.log('jj data', data.properties.timeseries)
+
     const timeseries = data.properties.timeseries.map(({ time, data }) => ({
         time: convertTimezone(time, timeZone),
         data,
@@ -44,6 +46,8 @@ const Forecast = () => {
         }
         return acc
     }, [])
+
+    console.log('jj timeseries', timeseries)
 
     return (
         <>

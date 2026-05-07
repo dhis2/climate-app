@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-04-28T11:05:26.356Z\n"
-"PO-Revision-Date: 2026-04-28T11:05:26.357Z\n"
+"POT-Creation-Date: 2026-05-07T08:59:13.420Z\n"
+"PO-Revision-Date: 2026-05-07T08:59:13.420Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -677,6 +677,12 @@ msgstr "One or more conflicts encountered"
 msgid "Import weather and climate data"
 msgstr "Import weather and climate data"
 
+msgid "Running saved configuration: {{name}}"
+msgstr "Running saved configuration: {{name}}"
+
+msgid "Cancel"
+msgstr "Cancel"
+
 msgid "Choose data source"
 msgstr "Choose data source"
 
@@ -697,6 +703,9 @@ msgstr ""
 
 msgid "Start import"
 msgstr "Start import"
+
+msgid "Save as import configuration"
+msgstr "Save as import configuration"
 
 msgid "For {{periodId}} ({{actualStartTime}} to {{actualEndTime}})"
 msgstr "For {{periodId}} ({{actualStartTime}} to {{actualEndTime}})"
@@ -818,6 +827,50 @@ msgstr "Valid range"
 
 msgid "Period type"
 msgstr "Period type"
+
+msgid "Save import configuration"
+msgstr "Save import configuration"
+
+msgid "Configuration name"
+msgstr "Configuration name"
+
+msgid "E.g. ERA5 Monthly Temperature"
+msgstr "E.g. ERA5 Monthly Temperature"
+
+msgid "Save"
+msgstr "Save"
+
+msgid "Delete configuration"
+msgstr "Delete configuration"
+
+msgid "{{count}} org units"
+msgid_plural "{{count}} org units"
+msgstr[0] "{{count}} org units"
+msgstr[1] "{{count}} org units"
+
+msgid "Last import: {{date}}"
+msgstr "Last import: {{date}}"
+
+msgid "Data through: {{period}}"
+msgstr "Data through: {{period}}"
+
+msgid "Delete this configuration?"
+msgstr "Delete this configuration?"
+
+msgid "Delete"
+msgstr "Delete"
+
+msgid "Data is up to date"
+msgstr "Data is up to date"
+
+msgid "Next import: {{start}} → {{end}}"
+msgstr "Next import: {{start}} → {{end}}"
+
+msgid "Run import"
+msgstr "Run import"
+
+msgid "Saved import configurations"
+msgstr "Saved import configurations"
 
 msgid "Start year"
 msgstr "Start year"

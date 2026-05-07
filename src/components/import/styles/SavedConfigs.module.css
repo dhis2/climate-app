@@ -1,0 +1,99 @@
+.container {
+    margin-block-end: var(--spacers-dp24);
+}
+
+.title {
+    color: var(--colors-grey900);
+    font-size: 18px;
+    font-weight: 500;
+    margin-block-end: var(--spacers-dp12);
+}
+
+.cardList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--spacers-dp16);
+}
+
+.card {
+    background-color: var(--colors-grey050);
+    border: 1px solid var(--colors-grey300);
+    border-radius: 3px;
+    flex: 1 1 280px;
+    max-inline-size: 360px;
+    padding: var(--spacers-dp16);
+}
+
+.cardHeader {
+    align-items: flex-start;
+    display: flex;
+    justify-content: space-between;
+    margin-block-end: var(--spacers-dp4);
+}
+
+.configName {
+    color: var(--colors-grey900);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.deleteButton {
+    background: none;
+    border: none;
+    color: var(--colors-grey600);
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    padding: 0;
+}
+
+.deleteButton:hover {
+    color: var(--colors-red700);
+}
+
+.cardMeta {
+    color: var(--colors-grey600);
+    font-size: 12px;
+    margin-block-end: var(--spacers-dp8);
+}
+
+.metaSep {
+    margin-inline: var(--spacers-dp4);
+}
+
+.cardInfo {
+    color: var(--colors-grey700);
+    font-size: 12px;
+    margin-block-end: var(--spacers-dp12);
+}
+
+.cardActions {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--spacers-dp8);
+    justify-content: space-between;
+}
+
+.nextPeriod {
+    color: var(--colors-grey700);
+    font-size: 12px;
+}
+
+.upToDate {
+    color: var(--colors-green700);
+    font-size: 12px;
+}
+
+.confirmDelete {
+    align-items: center;
+    display: flex;
+    gap: var(--spacers-dp8);
+}
+
+.confirmDelete span {
+    color: var(--colors-grey700);
+    font-size: 12px;
+}
