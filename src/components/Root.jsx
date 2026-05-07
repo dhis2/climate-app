@@ -11,6 +11,7 @@ export const getAppPages = () => [
     { path: '/home', name: i18n.t('Home') },
     { path: '/explore', name: i18n.t('Explore data') },
     { path: '/import', name: i18n.t('Import data') },
+    { path: '/saved-configs', name: i18n.t('Saved import configs') },
     { path: '/setup', name: i18n.t('Setup guide') },
     { path: '/settings', name: i18n.t('Settings') },
 ]

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-05-07T10:01:46.523Z\n"
-"PO-Revision-Date: 2026-05-07T10:01:46.523Z\n"
+"POT-Creation-Date: 2026-05-07T19:56:40.014Z\n"
+"PO-Revision-Date: 2026-05-07T19:56:40.015Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -113,6 +113,9 @@ msgstr "Explore data"
 
 msgid "Import data"
 msgstr "Import data"
+
+msgid "Saved import configs"
+msgstr "Saved import configs"
 
 msgid "Setup guide"
 msgstr "Setup guide"
@@ -677,12 +680,6 @@ msgstr "One or more conflicts encountered"
 msgid "Import weather and climate data"
 msgstr "Import weather and climate data"
 
-msgid "Running saved configuration: {{name}}"
-msgstr "Running saved configuration: {{name}}"
-
-msgid "Cancel"
-msgstr "Cancel"
-
 msgid "Choose data source"
 msgstr "Choose data source"
 
@@ -837,6 +834,9 @@ msgstr "Configuration name"
 msgid "E.g. ERA5 Monthly Temperature"
 msgstr "E.g. ERA5 Monthly Temperature"
 
+msgid "Cancel"
+msgstr "Cancel"
+
 msgid "Save"
 msgstr "Save"
 
@@ -887,9 +887,6 @@ msgstr "Data is up to date"
 msgid "Next: {{start}} → {{end}}"
 msgstr "Next: {{start}} → {{end}}"
 
-msgid "Delete config"
-msgstr "Delete config"
-
 msgid "Edit schedule"
 msgstr "Edit schedule"
 
@@ -899,8 +896,14 @@ msgstr "Schedule"
 msgid "Adjust dates"
 msgstr "Adjust dates"
 
+msgid "Run"
+msgstr "Run"
+
 msgid "Saved import configurations"
 msgstr "Saved import configurations"
+
+msgid "Running saved configuration: {{name}}"
+msgstr "Running saved configuration: {{name}}"
 
 msgid "Chart settings"
 msgstr "Chart settings"

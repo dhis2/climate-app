@@ -331,7 +331,7 @@ const ConfigCard = ({ config, onRun, onDelete }) => {
                                     destructive
                                     onClick={() => setConfirmDelete(true)}
                                 >
-                                    {i18n.t('Delete config')}
+                                    {i18n.t('Delete')}
                                 </Button>
                                 <Button
                                     small
@@ -359,7 +359,7 @@ const ConfigCard = ({ config, onRun, onDelete }) => {
                                             onRun(config, nextPeriod)
                                         }
                                     >
-                                        {i18n.t('Run import')}
+                                        {i18n.t('Run')}
                                     </Button>
                                 )}
                             </div>
