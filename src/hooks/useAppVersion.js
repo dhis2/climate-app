@@ -74,7 +74,7 @@ const useAppVersion = (key, targetVersion) => {
         } finally {
             setBundledLoading(false)
         }
-    }, [baseUrl])
+    }, [baseUrl, serverVersion])
 
     useEffect(() => {
         fetchBundledApps()
