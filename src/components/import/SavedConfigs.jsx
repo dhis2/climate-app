@@ -1,16 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
-import {
-    Button,
-    CalendarInput,
-    SingleSelectField,
-    SingleSelectOption,
-} from '@dhis2/ui'
+import { Button, SingleSelectField, SingleSelectOption } from '@dhis2/ui'
 import PropTypes from 'prop-types'
 import { useState } from 'react'
-import useUserLocale from '../../hooks/useUserLocale.js'
 import { MONTHLY, YEARLY, computeNextPeriod } from '../../utils/time.js'
 import classes from './styles/SavedConfigs.module.css'
-import YearSelect from './YearSelect.jsx'
 
 const formatPeriodTime = (timeStr, periodType) => {
     if (!timeStr) {
@@ -55,36 +48,13 @@ const formatImportDate = (isoTimestamp) => {
 
 const ConfigCard = ({ config, onRun, onDelete }) => {
     const [confirmDelete, setConfirmDelete] = useState(false)
-    const [adjustingDates, setAdjustingDates] = useState(false)
-    const [localPeriod, setLocalPeriod] = useState(null)
     const [schedule, setSchedule] = useState(null)
     const [schedulingOpen, setSchedulingOpen] = useState(false)
     const [localFrequency, setLocalFrequency] = useState(null)
-    const { locale } = useUserLocale()
     const { name, dataset, periodType, orgUnits, lastImport } = config
 
     const nextPeriod = computeNextPeriod(lastImport, dataset)
     const isUpToDate = lastImport && !nextPeriod
-    const isYearly = periodType === YEARLY
-
-    const periodRange = dataset?.supportedPeriodTypes?.find(
-        (pt) => pt.periodType === periodType
-    )?.periodRange
-
-    const handleAdjustDates = () => {
-        setLocalPeriod({ ...nextPeriod })
-        setAdjustingDates(true)
-    }
-
-    const handleCancelAdjust = () => {
-        setAdjustingDates(false)
-        setLocalPeriod(null)
-    }
-
-    const handleRunAdjusted = () => {
-        onRun(config, localPeriod)
-        setAdjustingDates(false)
-    }
 
     const handleOpenSchedule = () => {
         setLocalFrequency(schedule?.frequency || periodType)
@@ -206,103 +176,6 @@ const ConfigCard = ({ config, onRun, onDelete }) => {
                                 </Button>
                             </div>
                         </div>
-                    ) : adjustingDates && localPeriod ? (
-                        <div className={classes.dateAdjust}>
-                            <div className={classes.dateAdjustPickers}>
-                                {isYearly ? (
-                                    <>
-                                        <YearSelect
-                                            label={i18n.t('Start year')}
-                                            year={String(localPeriod.startTime)}
-                                            minYear={
-                                                periodRange?.start || '2000'
-                                            }
-                                            maxYear={
-                                                periodRange?.end ||
-                                                String(new Date().getFullYear())
-                                            }
-                                            onChange={(year) =>
-                                                setLocalPeriod((p) => ({
-                                                    ...p,
-                                                    startTime: String(year),
-                                                }))
-                                            }
-                                        />
-                                        <YearSelect
-                                            label={i18n.t('End year')}
-                                            year={String(localPeriod.endTime)}
-                                            minYear={
-                                                periodRange?.start || '2000'
-                                            }
-                                            maxYear={
-                                                periodRange?.end ||
-                                                String(new Date().getFullYear())
-                                            }
-                                            onChange={(year) =>
-                                                setLocalPeriod((p) => ({
-                                                    ...p,
-                                                    endTime: String(year),
-                                                }))
-                                            }
-                                        />
-                                    </>
-                                ) : (
-                                    <>
-                                        <CalendarInput
-                                            label={i18n.t('Start date')}
-                                            date={localPeriod.startTime}
-                                            calendar={
-                                                localPeriod.calendar ||
-                                                'gregory'
-                                            }
-                                            locale={locale || 'en'}
-                                            onDateSelect={({
-                                                calendarDateString,
-                                            }) =>
-                                                setLocalPeriod((p) => ({
-                                                    ...p,
-                                                    startTime:
-                                                        calendarDateString,
-                                                }))
-                                            }
-                                        />
-                                        <CalendarInput
-                                            label={i18n.t('End date')}
-                                            date={localPeriod.endTime}
-                                            calendar={
-                                                localPeriod.calendar ||
-                                                'gregory'
-                                            }
-                                            locale={locale || 'en'}
-                                            onDateSelect={({
-                                                calendarDateString,
-                                            }) =>
-                                                setLocalPeriod((p) => ({
-                                                    ...p,
-                                                    endTime: calendarDateString,
-                                                }))
-                                            }
-                                        />
-                                    </>
-                                )}
-                            </div>
-                            <div className={classes.dateAdjustActions}>
-                                <Button
-                                    small
-                                    secondary
-                                    onClick={handleCancelAdjust}
-                                >
-                                    {i18n.t('Cancel')}
-                                </Button>
-                                <Button
-                                    small
-                                    primary
-                                    onClick={handleRunAdjusted}
-                                >
-                                    {i18n.t('Run import')}
-                                </Button>
-                            </div>
-                        </div>
                     ) : (
                         <>
                             {isUpToDate && (
@@ -342,15 +215,6 @@ const ConfigCard = ({ config, onRun, onDelete }) => {
                                         ? i18n.t('Edit schedule')
                                         : i18n.t('Schedule')}
                                 </Button>
-                                {nextPeriod && (
-                                    <Button
-                                        small
-                                        secondary
-                                        onClick={handleAdjustDates}
-                                    >
-                                        {i18n.t('Adjust dates')}
-                                    </Button>
-                                )}
                                 {!isUpToDate && (
                                     <Button
                                         small

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-05-07T19:56:40.014Z\n"
-"PO-Revision-Date: 2026-05-07T19:56:40.015Z\n"
+"POT-Creation-Date: 2026-05-08T09:14:23.169Z\n"
+"PO-Revision-Date: 2026-05-08T09:14:23.169Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -872,15 +872,6 @@ msgstr "Remove schedule"
 msgid "Save schedule"
 msgstr "Save schedule"
 
-msgid "Start year"
-msgstr "Start year"
-
-msgid "End year"
-msgstr "End year"
-
-msgid "Run import"
-msgstr "Run import"
-
 msgid "Data is up to date"
 msgstr "Data is up to date"
 
@@ -893,9 +884,6 @@ msgstr "Edit schedule"
 msgid "Schedule"
 msgstr "Schedule"
 
-msgid "Adjust dates"
-msgstr "Adjust dates"
-
 msgid "Run"
 msgstr "Run"
 
@@ -904,6 +892,12 @@ msgstr "Saved import configurations"
 
 msgid "Running saved configuration: {{name}}"
 msgstr "Running saved configuration: {{name}}"
+
+msgid "Start year"
+msgstr "Start year"
+
+msgid "End year"
+msgstr "End year"
 
 msgid "Chart settings"
 msgstr "Chart settings"

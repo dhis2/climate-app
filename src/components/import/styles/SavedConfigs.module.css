@@ -75,24 +75,6 @@
     gap: var(--spacers-dp8);
 }
 
-.dateAdjust {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacers-dp8);
-    width: 100%;
-}
-
-.dateAdjustPickers {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacers-dp8);
-}
-
-.dateAdjustActions {
-    display: flex;
-    gap: var(--spacers-dp8);
-}
-
 .scheduleInfo {
     color: var(--colors-blue700);
     font-size: 12px;
