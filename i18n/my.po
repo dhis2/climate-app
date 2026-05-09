@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-03-06T07:07:32.241Z\n"
+"POT-Creation-Date: 2026-04-28T11:05:26.356Z\n"
 "PO-Revision-Date: 2025-02-05 13:11+0000\n"
 "Last-Translator: Philip Larsen Donnelly, 2026\n"
 "Language-Team: Burmese (https://app.transifex.com/hisp-uio/teams/100509/my/)\n"
@@ -648,6 +648,14 @@ msgstr ""
 msgid "Start import"
 msgstr ""
 
+msgid "For {{periodId}} ({{actualStartTime}} to {{actualEndTime}})"
+msgstr ""
+
+msgid ""
+"{{periodTypeName}} values from {{startPeriodId}} to {{endPeriodId}} "
+"({{actualStartTime}} to {{actualEndTime}})"
+msgstr ""
+
 msgid "For the {{periodTypeNoun}} {{date}}"
 msgstr ""
 
@@ -705,19 +713,26 @@ msgid "End date is not within the valid range."
 msgstr ""
 
 msgid ""
-"{{periodTypeName}} data between start and end date will be calculated from "
+"{{periodTypeName}} data for full calendar {{periodTypeNoun}}s inclusive of "
+"start and end dates will be aggregated from hourly data."
+msgstr ""
+
+msgid ""
+"{{periodTypeName}} data between start and end date will be aggregated from "
 "hourly data."
 msgstr ""
 
 msgid ""
-"{{periodTypeName}} data between start and end date will be calculated from "
-"hourly data, with time zone adjustments applied if the selected time zone is"
-" not set to UTC."
+"Time zone adjustments will be applied if the selected time zone is not set "
+"to UTC."
 msgstr ""
 
 msgid ""
-"{{periodTypeName}} data between start and end date will be calculated and "
-"then aggregated to the selected period type."
+"Data for full calendar {{periodTypeNoun}}s inclusive of start and end dates "
+"will be aggregated to {{periodTypeNoun}}ly values."
+msgstr ""
+
+msgid "Data between start and end date will be imported as daily values."
 msgstr ""
 
 msgid ""
@@ -773,6 +788,15 @@ msgstr ""
 msgid "Heat stress lower category"
 msgstr ""
 
+msgid "Offline"
+msgstr "အင်တာနက်နှင့်မချိတ်ဆက်ထားပါ"
+
+msgid "Not configured"
+msgstr ""
+
+msgid "Online"
+msgstr "အင်တာနက်နှင့်ချိတ်ဆက်ထားသည်"
+
 msgid "Data Providers"
 msgstr ""
 
@@ -788,6 +812,39 @@ msgid "Status"
 msgstr "အခြေအနေ"
 
 msgid "Setup info"
+msgstr ""
+
+msgid "Google Earth Engine Setup Guide"
+msgstr ""
+
+msgid "The ENACTS api is made available using a DHIS2 route. Follow the"
+msgstr ""
+
+msgid "DHIS2 Routes documentation"
+msgstr ""
+
+msgid "to set up the route."
+msgstr ""
+
+msgid ""
+"The following fields must be set in the route configuration. Note that the"
+msgstr ""
+
+msgid "must be"
+msgstr ""
+
+msgid "A short, descriptive name to identify the route"
+msgstr ""
+
+msgid ""
+"The base url where your ENACTS DST API is hosted. You must append \"/**\" to"
+" the url"
+msgstr ""
+
+msgid "Your ENACTS DST API key here"
+msgstr ""
+
+msgid "Example configuration:"
 msgstr ""
 
 msgid "Close"

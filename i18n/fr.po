@@ -3,7 +3,6 @@
 # tx_e2f_frfr r6 <tx_e2f_frfr_r661@ate2f.com>, 2025
 # Esther Tokouli, 2025
 # tx_e2f_fr r25 <tx_e2f_fr_r25@ate2f.com>, 2025
-# Cyrille Kabrane, 2026
 # Karoline Tufte Lien <karoline@dhis2.org>, 2026
 # Edem Kossi <ekossi@hispwca.org>, 2026
 # Yayra Gomado <ygomado@hispwca.org>, 2026
@@ -12,13 +11,14 @@
 # Yao Selom SAKA (HISP WCA) <ysaka@hispwca.org>, 2026
 # Viktor Varland <viktor@dhis2.org>, 2026
 # Philip Larsen Donnelly, 2026
+# Cyrille Kabrane, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-03-06T07:07:32.241Z\n"
+"POT-Creation-Date: 2026-04-28T11:05:26.356Z\n"
 "PO-Revision-Date: 2025-02-05 13:11+0000\n"
-"Last-Translator: Philip Larsen Donnelly, 2026\n"
+"Last-Translator: Cyrille Kabrane, 2026\n"
 "Language-Team: French (https://app.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -720,6 +720,14 @@ msgstr ""
 msgid "Start import"
 msgstr "Lancer l'importation"
 
+msgid "For {{periodId}} ({{actualStartTime}} to {{actualEndTime}})"
+msgstr ""
+
+msgid ""
+"{{periodTypeName}} values from {{startPeriodId}} to {{endPeriodId}} "
+"({{actualStartTime}} to {{actualEndTime}})"
+msgstr ""
+
 msgid "For the {{periodTypeNoun}} {{date}}"
 msgstr ""
 
@@ -781,19 +789,26 @@ msgid "End date is not within the valid range."
 msgstr ""
 
 msgid ""
-"{{periodTypeName}} data between start and end date will be calculated from "
+"{{periodTypeName}} data for full calendar {{periodTypeNoun}}s inclusive of "
+"start and end dates will be aggregated from hourly data."
+msgstr ""
+
+msgid ""
+"{{periodTypeName}} data between start and end date will be aggregated from "
 "hourly data."
 msgstr ""
 
 msgid ""
-"{{periodTypeName}} data between start and end date will be calculated from "
-"hourly data, with time zone adjustments applied if the selected time zone is"
-" not set to UTC."
+"Time zone adjustments will be applied if the selected time zone is not set "
+"to UTC."
 msgstr ""
 
 msgid ""
-"{{periodTypeName}} data between start and end date will be calculated and "
-"then aggregated to the selected period type."
+"Data for full calendar {{periodTypeNoun}}s inclusive of start and end dates "
+"will be aggregated to {{periodTypeNoun}}ly values."
+msgstr ""
+
+msgid "Data between start and end date will be imported as daily values."
 msgstr ""
 
 msgid ""
@@ -854,6 +869,15 @@ msgstr "Stress thermique catégorie supérieure"
 msgid "Heat stress lower category"
 msgstr "Stress thermique catégorie inférieure"
 
+msgid "Offline"
+msgstr "Hors ligne"
+
+msgid "Not configured"
+msgstr ""
+
+msgid "Online"
+msgstr "En ligne"
+
 msgid "Data Providers"
 msgstr ""
 
@@ -869,6 +893,39 @@ msgid "Status"
 msgstr "Statut"
 
 msgid "Setup info"
+msgstr ""
+
+msgid "Google Earth Engine Setup Guide"
+msgstr ""
+
+msgid "The ENACTS api is made available using a DHIS2 route. Follow the"
+msgstr ""
+
+msgid "DHIS2 Routes documentation"
+msgstr ""
+
+msgid "to set up the route."
+msgstr ""
+
+msgid ""
+"The following fields must be set in the route configuration. Note that the"
+msgstr ""
+
+msgid "must be"
+msgstr ""
+
+msgid "A short, descriptive name to identify the route"
+msgstr ""
+
+msgid ""
+"The base url where your ENACTS DST API is hosted. You must append \"/**\" to"
+" the url"
+msgstr ""
+
+msgid "Your ENACTS DST API key here"
+msgstr ""
+
+msgid "Example configuration:"
 msgstr ""
 
 msgid "Close"
@@ -970,7 +1027,7 @@ msgid "Data element group field"
 msgstr ""
 
 msgid "Data elements"
-msgstr "Eléments de donnée"
+msgstr "Éléments de données"
 
 msgid "Assign above data element"
 msgstr ""
