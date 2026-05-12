@@ -15,7 +15,7 @@ const getAllFiles = (dirPath, arrayOfFiles = []) => {
     return arrayOfFiles
 }
 
-const createGroups = (files, numberOfGroups = 8) => {
+const createGroups = (files, numberOfGroups = 2) => {
     const groups = []
     for (let i = 0; i < numberOfGroups; i++) {
         groups.push([])
