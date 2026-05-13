@@ -189,11 +189,11 @@ describe('Datasets', () => {
 
         cy.contains('Explore weather and climate data').should('be.visible')
 
-        cy.get('[data-test="dhis2-uiwidgets-orgunittree-node-label"]').click({ multiple: true})
+        cy.get('[data-test="dhis2-uiwidgets-orgunittree-node-label"]').eq(0).click()
 
-        cy.wait(1000)
+        cy.contains('No geometry found').should('be.visible')
 
-        cy.get('[data-test="dhis2-uiwidgets-orgunittree-node-label"]').click({ multiple: true })
+        cy.get('[data-test="dhis2-uiwidgets-orgunittree-node-label"]').eq(1).click()
 
         cy.get('h1').should('be.visible')
         cy.contains('Temperature').should('be.visible')
@@ -202,6 +202,8 @@ describe('Datasets', () => {
         cy.contains('Temperature range').should('be.visible')
 
         cy.get('.highcharts-series').should('be.visible')
+        cy.contains('Open as Map').should('exist')
     })
+
 
 })
