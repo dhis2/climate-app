@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { useState, useEffect } from 'react'
-import useAppSettings from '../../../hooks/useAppSettings.js'
+import tzlookup from 'tz-lookup'
 import exploreStore from '../../../store/exploreStore.js'
 import DataLoader from '../../shared/DataLoader.jsx'
 import DayForecast from './DayForecast.jsx'
@@ -9,12 +9,9 @@ import styles from './styles/ForecastTab.module.css'
 const convertTimezone = (date, timeZone) =>
     new Date(date).toLocaleString('sv-SE', { timeZone }) // "sv-SE" follows ISO format
 
-const browserTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
-
 const Forecast = () => {
     const orgUnit = exploreStore((state) => state.orgUnit)
     const [data, setData] = useState()
-    const { settings, loading } = useAppSettings()
 
     const [lng, lat] = orgUnit.geometry.coordinates
 
@@ -26,14 +23,15 @@ const Forecast = () => {
             .then(setData)
     }, [lng, lat])
 
-    if (!data || loading) {
+    if (!data) {
         return <DataLoader />
     }
 
-    const timeZone = settings?.timeZone || browserTimeZone || 'Etc/UTC'
+    const timeZone = tzlookup(lat, lng)
 
     const timeseries = data.properties.timeseries.map(({ time, data }) => ({
         time: convertTimezone(time, timeZone),
+        originalTime: time,
         data,
     }))
 
@@ -92,20 +90,10 @@ const Forecast = () => {
                 </a>
             </div>
             <div className={styles.timeZone}>
-                {settings.timeZone
-                    ? i18n.t(
-                          'The forecast is using the "{{- timeZone}}" time zone. You can change the time zone for your org units under "Settings".',
-                          { timeZone }
-                      )
-                    : browserTimeZone
-                    ? i18n.t(
-                          'The forecast is using the time zone of your browser ({{- timeZone}}). You can set the time zone for your org units under "Settings".',
-                          { timeZone }
-                      )
-                    : i18n.t(
-                          'The forecast is using the default "{{- timeZone}}" time zone. You can set the time zone for your org units under "Settings".',
-                          { timeZone }
-                      )}
+                {i18n.t(
+                    'The forecast is using the "{{- timeZone}}" time zone.',
+                    { timeZone }
+                )}
             </div>
         </>
     )

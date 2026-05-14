@@ -22,6 +22,7 @@ const DayForecast = ({ date, series }) => {
     const sixHourSeries = sixHours.map(({ start, end }) =>
         series.find((s) => {
             const hour = s.time.substring(11, 13)
+
             return hour >= start && hour < end && s.data?.next_6_hours
         })
     )
