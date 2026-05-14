@@ -1,3 +1,10 @@
+## [1.15.2](https://github.com/dhis2/climate-app/compare/v1.15.1...v1.15.2) (2026-05-14)
+
+
+### Bug Fixes
+
+* prevent explore page from crashing in 2.43 when clicking on an org unit ([#122](https://github.com/dhis2/climate-app/issues/122)) ([05482e7](https://github.com/dhis2/climate-app/commit/05482e7690b3fd5b83b16f664246193a46786e63))
+
 ## [1.15.1](https://github.com/dhis2/climate-app/compare/v1.15.0...v1.15.1) (2026-04-30)
 
 
