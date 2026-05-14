@@ -31,7 +31,6 @@ const Forecast = () => {
 
     const timeseries = data.properties.timeseries.map(({ time, data }) => ({
         time: convertTimezone(time, timeZone),
-        originalTime: time,
         data,
     }))
 
@@ -91,7 +90,7 @@ const Forecast = () => {
             </div>
             <div className={styles.timeZone}>
                 {i18n.t(
-                    'The forecast is using the "{{- timeZone}}" time zone.',
+                    'The forecast is displayed using the "{{- timeZone}}" time zone.',
                     { timeZone }
                 )}
             </div>
