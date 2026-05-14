@@ -27,18 +27,18 @@ const Forecast = () => {
         return <DataLoader />
     }
 
-    const timeZone =
-        tzlookup(lat, lng) ??
-        Intl.DateTimeFormat().resolvedOptions().timeZone ??
-        'Etc/UTC'
+    const locationTimeZone = tzlookup(lat, lng)
+    const browserTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
+    const timeZone = locationTimeZone || browserTimeZone || 'Etc/UTC'
 
     const timeseries = data.properties.timeseries.map(({ time, data }) => ({
-        time: convertTimezone(time, timeZone),
+        localTime: convertTimezone(time, timeZone),
+        originalTime: time,
         data,
     }))
 
-    const dates = timeseries.reduce((acc, { time }) => {
-        const date = time.slice(0, 10)
+    const dates = timeseries.reduce((acc, { localTime }) => {
+        const date = localTime.slice(0, 10)
         if (!acc.includes(date)) {
             acc.push(date)
         }
@@ -51,10 +51,10 @@ const Forecast = () => {
                 <thead>
                     <tr>
                         <td></td>
-                        <td>{i18n.t('Night')}</td>
-                        <td>{i18n.t('Morning')}</td>
-                        <td>{i18n.t('Afternoon')}</td>
-                        <td>{i18n.t('Evening')}</td>
+                        <td>{i18n.t('00-06')}</td>
+                        <td>{i18n.t('06-12')}</td>
+                        <td>{i18n.t('12-18')}</td>
+                        <td>{i18n.t('18-24')}</td>
                         <td className={styles.right}>
                             {i18n.t('Max/min temp.')}
                         </td>
@@ -71,7 +71,7 @@ const Forecast = () => {
                             key={date}
                             date={date}
                             series={timeseries.filter((t) =>
-                                t.time.startsWith(date)
+                                t.localTime.startsWith(date)
                             )}
                         />
                     ))}
@@ -92,10 +92,20 @@ const Forecast = () => {
                 </a>
             </div>
             <div className={styles.timeZone}>
-                {i18n.t(
-                    'The forecast is displayed using the "{{- timeZone}}" time zone.',
-                    { timeZone }
-                )}
+                {locationTimeZone
+                    ? i18n.t(
+                          'The forecast is using the "{{- timeZone}}" time zone based on the location of your org unit.',
+                          { timeZone }
+                      )
+                    : browserTimeZone
+                    ? i18n.t(
+                          'The forecast is using the time zone of your browser ({{- timeZone}}).',
+                          { timeZone }
+                      )
+                    : i18n.t(
+                          'The forecast is using the default "{{- timeZone}}" time zone.',
+                          { timeZone }
+                      )}
             </div>
         </>
     )

@@ -21,20 +21,34 @@ const DayForecast = ({ date, series }) => {
 
     const sixHourSeries = sixHours.map(({ start, end }) =>
         series.find((s) => {
-            const hour = s.time.substring(11, 13)
-            return hour >= start && hour < end && s.data?.next_6_hours
+            const hour = s.localTime.substring(11, 13)
+            return (
+                hour >= start &&
+                hour < end &&
+                (s.data?.next_6_hours || s.data?.next_1_hours)
+            )
         })
     )
-
     if (sixHourSeries.every((s) => s == undefined)) {
         return null
     }
 
-    const weatherSymbols = sixHourSeries.map((s, i) => (
-        <WeatherSymbol
-            key={i}
-            code={s?.data?.next_6_hours.summary.symbol_code}
-        />
+    const getSymbolCode = (entry, start) => {
+        if (!entry) {
+            return undefined
+        }
+        const hour = entry.localTime.substring(11, 13)
+        if (hour === start) {
+            return entry.data?.next_6_hours?.summary?.symbol_code
+        }
+        return (
+            entry.data?.next_1_hours?.summary?.symbol_code ??
+            entry.data?.next_6_hours?.summary?.symbol_code
+        )
+    }
+
+    const weatherSymbols = sixHours.map(({ start }, i) => (
+        <WeatherSymbol key={i} code={getSymbolCode(sixHourSeries[i], start)} />
     ))
 
     const precip = roundOneDecimal(
