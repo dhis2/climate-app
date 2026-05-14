@@ -8,16 +8,6 @@ concurrency:
     cancel-in-progress: ${{ !contains(fromJSON('["refs/heads/main", "ref/heads/main"]'), github.ref) }}
 
 jobs:
-    setup-matrix:
-        runs-on: ubuntu-latest
-        outputs:
-            matrix: ${{ steps.set-matrix.outputs.specs }}
-        steps:
-            - uses: actions/checkout@v4
-            - name: Generate Test matrix
-              id: set-matrix
-              run: echo "::set-output name=specs::$(node cypress/support/generateTestMatrix.js)"
-
     lint-commits:
         uses: dhis2/workflows-platform/.github/workflows/lint-commits.yml@v1
     lint:
@@ -41,11 +31,10 @@ jobs:
 
     cypress-e2e:
         if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
-        needs: [lint, test, setup-matrix]
+        needs: [lint, test]
         uses: ./.github/workflows/e2e-tests-prod.yml
         with:
             should_record: ${{ contains(github.event.head_commit.message, '[e2e record]') || contains(join(github.event.pull_request.labels.*.name), 'e2e record')}}
-            spec-group: ${{ needs.setup-matrix.outputs.matrix }}
         secrets:
             username: ${{ secrets.CYPRESS_DHIS2_USERNAME }}
             password: ${{ secrets.CYPRESS_DHIS2_PASSWORD }}

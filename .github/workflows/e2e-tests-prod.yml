@@ -7,9 +7,6 @@ on:
                 required: false
                 type: boolean
                 default: false
-            spec-group:
-                required: false
-                type: string
         secrets:
             username:
                 required: true
@@ -42,7 +39,6 @@ jobs:
             fail-fast: false
             matrix:
                 versions: ['41', '42', '43']
-                spec-group: ${{ fromJson(inputs.spec-group) }}
                 include:
                     - versions: '43'
                       instance_url: 'https://dev.im.dhis2.org/clim-e2e-43'
@@ -71,19 +67,11 @@ jobs:
                   version: ${{ matrix.versions }}
                   MATRIX_INSTANCE_URL: ${{ matrix.instance_url }}
 
-            - name: Debug spec-group and should_record
-              run: |
-                  echo "spec-group: ${{ toJson(matrix.spec-group) }}"
-                  echo "should_record: ${{ inputs.should_record }}"
-
             - name: Debug Test Parameters
               run: |
                   echo "Record: ${{ inputs.should_record }}"
-                  echo "Parallel: ${{ inputs.should_record }}"
                   echo "Browser: chrome"
-                  echo "Specs: ${{ join(matrix.spec-group.tests, ',') }}"
-                  echo "Group: ${{ inputs.should_record && format('e2e-chrome-parallel-{0}-{1}', matrix.versions, matrix.spec-group.id) || '' }}"
-                  echo "CI Build ID: ${{ inputs.should_record && github.run_id || '' }}"
+                  echo "Version: ${{ matrix.versions }}"
 
             - name: Run e2e tests
               uses: cypress-io/github-action@v5
@@ -94,8 +82,7 @@ jobs:
                   record: ${{ inputs.should_record }}
                   parallel: ${{ inputs.should_record }}
                   browser: chrome
-                  spec: ${{ join(matrix.spec-group.tests, ',') }}
-                  group: ${{ inputs.should_record && format('e2e-chrome-parallel-{0}-{1}', matrix.versions, matrix.spec-group.id) || '' }}
+                  group: ${{ inputs.should_record && format('e2e-chrome-parallel-{0}', matrix.versions) || '' }}
                   ci-build-id: ${{ inputs.should_record && github.run_id || '' }}
               env:
                   CI: true
