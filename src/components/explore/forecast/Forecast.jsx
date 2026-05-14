@@ -27,7 +27,10 @@ const Forecast = () => {
         return <DataLoader />
     }
 
-    const timeZone = tzlookup(lat, lng)
+    const timeZone =
+        tzlookup(lat, lng) ??
+        Intl.DateTimeFormat().resolvedOptions().timeZone ??
+        'Etc/UTC'
 
     const timeseries = data.properties.timeseries.map(({ time, data }) => ({
         time: convertTimezone(time, timeZone),
