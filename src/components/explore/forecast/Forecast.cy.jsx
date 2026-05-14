@@ -245,9 +245,22 @@ describe('Forecast', () => {
             cy.contains('Thu May 14').should('exist')
             cy.contains('Fri May 15').should('exist')
         })
+
+        it('shows a day symbol in the 18-24 column of the first row', () => {
+            cy.mount(<Forecast />)
+            cy.wait('@getForecast')
+            // midnight sun — entry at 18:00 local (block start), next_6_hours should still be day
+            cy.get('tbody tr')
+                .first()
+                .find('td')
+                .eq(4)
+                .find('img')
+                .should('have.attr', 'src')
+                .and('match', /d\.png$/)
+        })
     })
 
-    describe.skip('browser timezone fallback (ocean coordinates)', () => {
+    describe('browser timezone fallback (ocean coordinates)', () => {
         beforeEach(() => {
             cy.intercept(
                 'GET',
