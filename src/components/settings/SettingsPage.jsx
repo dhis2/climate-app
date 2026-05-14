@@ -4,7 +4,6 @@ import ChartSettings from './ChartSettings.jsx'
 import DataProviderList from './DataProviderList.jsx'
 import StartPageSelect from './StartPageSelect.jsx'
 import styles from './styles/SettingsPage.module.css'
-import TimeZoneSelect from './TimeZoneSelect.jsx'
 
 const SettingsPage = () => {
     const { settings, changeSetting } = useAppSettings()
@@ -20,16 +19,10 @@ const SettingsPage = () => {
             <DataProviderList />
             <h2>{i18n.t('General settings')}</h2>
             {settings && (
-                <>
-                    <StartPageSelect
-                        startPage={settings.startPage}
-                        onChange={changeSetting}
-                    />
-                    <TimeZoneSelect
-                        timeZone={settings.timeZone}
-                        onChange={changeSetting}
-                    />
-                </>
+                <StartPageSelect
+                    startPage={settings.startPage}
+                    onChange={changeSetting}
+                />
             )}
             <ChartSettings />
         </div>
