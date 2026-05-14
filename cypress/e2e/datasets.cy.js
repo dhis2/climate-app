@@ -183,4 +183,29 @@ describe('Datasets', () => {
 
         cy.contains('ENACTS datasets could not be loaded').should('be.visible')
     })
+
+    it('should open Explore and show temperature graph for an org unit', () => {
+        cy.visit('#/explore')
+
+        cy.contains('Explore weather and climate data').should('be.visible')
+
+        cy.get('[data-test="dhis2-uiwidgets-orgunittree-node-label"]')
+            .eq(0)
+            .click()
+
+        cy.contains('No geometry found').should('be.visible')
+
+        cy.get('[data-test="dhis2-uiwidgets-orgunittree-node-label"]')
+            .eq(1)
+            .click()
+
+        cy.get('h1').should('be.visible')
+        cy.contains('Temperature').should('be.visible')
+        cy.contains('Precipitation').should('be.visible')
+        cy.contains('Mean temperature').should('be.visible')
+        cy.contains('Temperature range').should('be.visible')
+
+        cy.get('.highcharts-series').should('be.visible')
+        cy.contains('Open as Map').should('exist')
+    })
 })
