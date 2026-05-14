@@ -48,7 +48,10 @@ const DayForecast = ({ date, series }) => {
     }
 
     const weatherSymbols = sixHours.map(({ start }, i) => (
-        <WeatherSymbol key={i} code={getSymbolCode(sixHourSeries[i], start)} />
+        <WeatherSymbol
+            key={start}
+            code={getSymbolCode(sixHourSeries[i], start)}
+        />
     ))
 
     const precip = roundOneDecimal(
