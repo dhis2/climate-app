@@ -51,10 +51,10 @@ const Forecast = () => {
                 <thead>
                     <tr>
                         <td></td>
-                        <td>{i18n.t('00-06')}</td>
-                        <td>{i18n.t('06-12')}</td>
-                        <td>{i18n.t('12-18')}</td>
-                        <td>{i18n.t('18-24')}</td>
+                        <td>{i18n.t('Night')}</td>
+                        <td>{i18n.t('Morning')}</td>
+                        <td>{i18n.t('Afternoon')}</td>
+                        <td>{i18n.t('Evening')}</td>
                         <td className={styles.right}>
                             {i18n.t('Max/min temp.')}
                         </td>
