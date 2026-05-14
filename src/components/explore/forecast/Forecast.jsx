@@ -33,7 +33,6 @@ const Forecast = () => {
 
     const timeseries = data.properties.timeseries.map(({ time, data }) => ({
         localTime: convertTimezone(time, timeZone),
-        originalTime: time,
         data,
     }))
 
