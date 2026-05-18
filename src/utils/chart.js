@@ -38,30 +38,30 @@ export const strokePattern = {
 }
 
 export const credits = {
-    href: 'https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-land',
+    href: 'javascript:window.open("https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-land", "_blank")',
     text: i18n.t(
         'ERA5-Land / Copernicus Climate Change Service / Google Earth Engine'
     ),
 }
 
 export const heatCredits = {
-    href: 'https://cds.climate.copernicus.eu/cdsapp#!/dataset/derived-utci-historical',
+    href: 'javascript:window.open("https://cds.climate.copernicus.eu/cdsapp#!/dataset/derived-utci-historical", "_blank")',
     text: i18n.t(
         'ERA5-HEAT / Copernicus Climate Change Service / Google Earth Engine'
     ),
 }
 
 export const vegetationCredits = {
-    href: 'https://lpdaac.usgs.gov/products/mod13q1v061/',
+    href: 'javascript:window.open("https://lpdaac.usgs.gov/products/mod13q1v061/", "_blank")',
     text: i18n.t('NASA LP DAAC at the USGS EROS Center / Google Earth Engine'),
 }
 
 export const landCoverCredits = {
-    href: 'https://lpdaac.usgs.gov/products/mcd12q1v061/',
+    href: 'javascript:window.open("https://lpdaac.usgs.gov/products/mcd12q1v061/", "_blank")',
     text: i18n.t('NASA LP DAAC at the USGS EROS Center / Google Earth Engine'),
 }
 
 export const elevationCredits = {
-    href: 'https://lpdaac.usgs.gov/products/srtmgl1v003/',
+    href: 'javascript:window.open("https://lpdaac.usgs.gov/products/srtmgl1v003/", "_blank")',
     text: i18n.t('NASA / USGS / JPL-Caltech / Google Earth Engine'),
 }
