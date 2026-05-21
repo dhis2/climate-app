@@ -24,7 +24,7 @@ const Chart = ({ config }) => {
 
     useLayoutEffect(() => {
         Highcharts.chart(chartRef.current, mergedConfig)
-    }, [config, chartRef])
+    }, [mergedConfig, chartRef])
 
     return (
         <>
