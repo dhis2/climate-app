@@ -14,22 +14,35 @@ patternFill(Highcharts)
 const Chart = ({ config }) => {
     const chartRef = useRef()
 
-    const mergedConfig = {
-        ...config,
-        credits: { 
-            ...config.credits,
-            enabled: false 
-        },
-    }
-
     useLayoutEffect(() => {
+        const mergedConfig = {
+            ...config,
+            credits: {
+                ...config.credits,
+                enabled: false,
+            },
+        }
+
         Highcharts.chart(chartRef.current, mergedConfig)
-    }, [mergedConfig, chartRef])
+    }, [config])
 
     return (
         <>
             <div ref={chartRef} />
-            <a href={mergedConfig.credits?.href} target='_blank' rel='noopener noreferrer' style={{ fontSize: '10px', color: 'grey', display: 'block', textAlign: 'right', textDecoration: 'none' }}>{mergedConfig.credits?.text}</a>
+            <a
+                href={config.credits?.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                    fontSize: '10px',
+                    color: 'grey',
+                    display: 'block',
+                    textAlign: 'right',
+                    textDecoration: 'none',
+                }}
+            >
+                {config.credits?.text}
+            </a>
         </>
     )
 }
@@ -39,4 +52,3 @@ Chart.propTypes = {
 }
 
 export default Chart
-
