@@ -24,18 +24,18 @@ const Chart = ({ config }) => {
 
     useLayoutEffect(() => {
         Highcharts.chart(chartRef.current, mergedConfig)
-    }, [mergedConfig, chartRef])
+    }, [config, chartRef])
 
     return (
         <>
             <div ref={chartRef} />
-            <a href={mergedConfig.credits.href} target='_blank' rel='noopener noreferrer' style={{ fontSize: '10px', color: 'grey', display: 'block', textAlign: 'right', textDecoration: 'none' }}>{mergedConfig.credits.text}</a>
+            <a href={mergedConfig.credits?.href} target='_blank' rel='noopener noreferrer' style={{ fontSize: '10px', color: 'grey', display: 'block', textAlign: 'right', textDecoration: 'none' }}>{mergedConfig.credits?.text}</a>
         </>
     )
 }
 
 Chart.propTypes = {
-    mergedConfig: PropTypes.object.isRequired,
+    config: PropTypes.object.isRequired,
 }
 
 export default Chart
