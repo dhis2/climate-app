@@ -48,7 +48,12 @@ const Chart = ({ config }) => {
 }
 
 Chart.propTypes = {
-    config: PropTypes.object.isRequired,
+    config: PropTypes.shape({
+        credits: PropTypes.shape({
+            href: PropTypes.string,
+            text: PropTypes.string,
+        }),
+    }).isRequired,
 }
 
 export default Chart
