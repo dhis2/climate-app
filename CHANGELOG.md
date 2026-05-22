@@ -1,3 +1,10 @@
+## [1.15.4](https://github.com/dhis2/climate-app/compare/v1.15.3...v1.15.4) (2026-05-22)
+
+
+### Bug Fixes
+
+* prevent crash when clicking on data source link in Explore pages ([#124](https://github.com/dhis2/climate-app/issues/124)) ([461ab44](https://github.com/dhis2/climate-app/commit/461ab44a0a8eaef0bd5f0695d81d5ecc99f51284))
+
 ## [1.15.3](https://github.com/dhis2/climate-app/compare/v1.15.2...v1.15.3) (2026-05-14)
 
 
