@@ -1,15 +1,15 @@
 # Translators:
 # Philip Larsen Donnelly, 2026
 # 晓东 林 <13981924470@126.com>, 2026
-# easylin <lin_xd@126.com>, 2026
 # Viktor Varland <viktor@dhis2.org>, 2026
+# easylin <lin_xd@126.com>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2026-04-28T11:05:26.356Z\n"
 "PO-Revision-Date: 2025-02-05 13:11+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2026\n"
+"Last-Translator: easylin <lin_xd@126.com>, 2026\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -808,7 +808,7 @@ msgid "Offline"
 msgstr "离线"
 
 msgid "Not configured"
-msgstr ""
+msgstr "未配置"
 
 msgid "Online"
 msgstr "在线"
@@ -831,37 +831,37 @@ msgid "Setup info"
 msgstr "设置信息"
 
 msgid "Google Earth Engine Setup Guide"
-msgstr ""
+msgstr "谷歌地球引擎设置指南"
 
 msgid "The ENACTS api is made available using a DHIS2 route. Follow the"
-msgstr ""
+msgstr "ENACTS api 通过 DHIS2 路由提供。请按照"
 
 msgid "DHIS2 Routes documentation"
-msgstr ""
+msgstr "DHIS2 路线文件"
 
 msgid "to set up the route."
-msgstr ""
+msgstr "来设置路线。"
 
 msgid ""
 "The following fields must be set in the route configuration. Note that the"
-msgstr ""
+msgstr "路由配置中必须设置以下字段。请注意"
 
 msgid "must be"
-msgstr ""
+msgstr "必须"
 
 msgid "A short, descriptive name to identify the route"
-msgstr ""
+msgstr "一个简短的、描述性的名称来标识路线"
 
 msgid ""
 "The base url where your ENACTS DST API is hosted. You must append \"/**\" to"
 " the url"
-msgstr ""
+msgstr "ENACTS DST API 所在的基本 URL。您必须在 url 后添加\"/**\"。"
 
 msgid "Your ENACTS DST API key here"
-msgstr ""
+msgstr "在此输入您的 ENACTS DST API 密钥"
 
 msgid "Example configuration:"
-msgstr ""
+msgstr "配置示例："
 
 msgid "Close"
 msgstr "关闭"
