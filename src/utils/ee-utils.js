@@ -24,7 +24,6 @@ export const chunkFeaturesBySize = (features) => {
 
     for (const feature of features) {
         const featureSize = JSON.stringify(feature).length
-        console.log('jj feature', feature.properties.name, featureSize)
         if (currentChunk.length > 0 && currentSize + featureSize > limitBytes) {
             chunks.push(currentChunk)
             currentChunk = [feature]
