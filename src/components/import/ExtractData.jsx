@@ -28,7 +28,7 @@ const ExtractData = ({
         const valueCount = periodCount * orgUnitsCount
 
         extractingLabel = i18n.t(
-            'Extracting data for {{periodCount}} {{periodType}} periods and {{orgUnitsCount}} org units ({{valueCount}} values)',
+            'Importing data for {{periodCount}} {{periodType}} periods and {{orgUnitsCount}} org units ({{valueCount}} values)',
             {
                 periodCount,
                 periodType,
@@ -38,7 +38,7 @@ const ExtractData = ({
         )
     } else {
         extractingLabel = i18n.t(
-            'Extracting data for {{orgUnitsCount}} org units',
+            'Importing data for {{orgUnitsCount}} org units',
             {
                 orgUnitsCount,
             }

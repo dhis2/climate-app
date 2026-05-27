@@ -108,6 +108,7 @@ const ImportPage = () => {
     const [startExtract, setStartExtract] = useState(false)
     const [importDone, setImportDone] = useState(false)
     const [importFeatures, setImportFeatures] = useState(null)
+    const [importAttempted, setImportAttempted] = useState(false)
 
     useBlocker(startExtract && !importDone)
 
@@ -116,6 +117,7 @@ const ImportPage = () => {
         setStartExtract(false)
         setImportDone(false)
         setImportFeatures(null)
+        setImportAttempted(true)
     }, [])
 
     const {
@@ -147,6 +149,7 @@ const ImportPage = () => {
     useEffect(() => {
         setStartExtract(false)
         setImportDone(false)
+        setImportAttempted(false)
     }, [dataset, period, orgUnits, dataElement])
 
     const updatePeriod = useCallback((val) => {
@@ -270,7 +273,7 @@ const ImportPage = () => {
                             )}
                         </div>
                     )}
-                    {canShowPreview && !startExtract && (
+                    {canShowPreview && !startExtract && !importAttempted && (
                         <ImportPreview
                             dataset={dataset.name || ''}
                             periodType={period.periodType || ''}
@@ -285,7 +288,9 @@ const ImportPage = () => {
                     <div>
                         <Button
                             primary
-                            disabled={!isValid || startExtract}
+                            disabled={
+                                !isValid || startExtract || importAttempted
+                            }
                             onClick={() => {
                                 setImportFeatures(features)
                                 setStartExtract(true)

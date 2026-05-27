@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
-import { useEffect, useState, useCallback } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import useEnactsData from '../../hooks/useEnactsData.js'
+import DataLoader from '../shared/DataLoader.jsx'
 import ErrorMessage from '../shared/ErrorMessage.jsx'
 import ImportData from './ImportData.jsx'
-import ImportSteps from './ImportSteps.jsx'
 
 const ExtractEnactsData = ({
     dataElement,
@@ -13,7 +13,7 @@ const ExtractEnactsData = ({
     features,
     onComplete,
 }) => {
-    const { data, error, loading } = useEnactsData(dataset, period, features)
+    const { data, error } = useEnactsData(dataset, period, features)
     const [importDone, setImportDone] = useState(false)
 
     useEffect(() => {
@@ -33,13 +33,7 @@ const ExtractEnactsData = ({
 
     return (
         <>
-            {!importDone && (
-                <ImportSteps
-                    extractingLabel={extractingLabel}
-                    extractDone={!loading}
-                    importDone={importDone}
-                />
-            )}
+            {!importDone && <DataLoader label={extractingLabel} height={100} />}
             {data && (
                 <ImportData
                     data={data}
