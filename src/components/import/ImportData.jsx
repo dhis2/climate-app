@@ -27,6 +27,7 @@ const countMissing = (data) => {
 
 const ImportData = ({ data, dataElement, features, onComplete }) => {
     const [response, setResponse] = useState(false)
+    const [importFailed, setImportFailed] = useState(false)
     const [mutate, { error }] = useDataMutation(dataImportMutation)
 
     useEffect(() => {
@@ -51,23 +52,34 @@ const ImportData = ({ data, dataElement, features, onComplete }) => {
                 // count and add number of missing values to response metadata
                 response.importCount.missing = countMissing(data)
                 setResponse(response)
+            } else {
+                setImportFailed(true)
             }
-            onComplete?.()
+            onComplete()
         })
-    }, [mutate, data, dataElement]) // eslint-disable-line react-hooks/exhaustive-deps
+    }, [mutate, data, dataElement, onComplete])
 
     useEffect(() => {
         if (error) {
-            onComplete?.()
+            onComplete()
         }
-    }, [error]) // eslint-disable-line react-hooks/exhaustive-deps
+    }, [error, onComplete])
 
     return (
         <div className={styles.container}>
             {response ? (
                 <ImportResponse {...response} />
-            ) : error?.details ? (
-                <ImportError {...error.details} />
+            ) : error ? (
+                <ImportError
+                    {...(error.details || {})}
+                    message={error.message}
+                />
+            ) : importFailed ? (
+                <ImportError
+                    message={i18n.t(
+                        'Received an unrecognized response from DHIS2'
+                    )}
+                />
             ) : (
                 i18n.t('Importing data to DHIS2')
             )}
@@ -80,7 +92,7 @@ ImportData.propTypes = {
     data: PropTypes.array.isRequired,
     dataElement: PropTypes.object.isRequired,
     features: PropTypes.array.isRequired,
-    onComplete: PropTypes.func,
+    onComplete: PropTypes.func.isRequired,
 }
 
 export default ImportData

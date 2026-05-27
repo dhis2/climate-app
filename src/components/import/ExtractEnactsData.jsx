@@ -17,9 +17,9 @@ const ExtractEnactsData = ({
 
     useEffect(() => {
         if (error) {
-            onComplete?.()
+            onComplete()
         }
-    }, [error]) // eslint-disable-line react-hooks/exhaustive-deps
+    }, [error, onComplete])
 
     if (loading) {
         return <DataLoader label={extractingLabel} height={100} />
@@ -44,8 +44,8 @@ ExtractEnactsData.propTypes = {
     dataset: PropTypes.object.isRequired,
     features: PropTypes.array.isRequired,
     period: PropTypes.object.isRequired,
+    onComplete: PropTypes.func.isRequired,
     extractingLabel: PropTypes.string,
-    onComplete: PropTypes.func,
 }
 
 export default ExtractEnactsData
