@@ -14,6 +14,7 @@ const ExtractData = ({
     period,
     features,
     dataElement,
+    featurePayloadMbLimit,
     onComplete,
 }) => {
     const orgUnitsCount = features.length
@@ -53,6 +54,7 @@ const ExtractData = ({
                 features={features}
                 dataElement={dataElement}
                 extractingLabel={extractingLabel}
+                featurePayloadMbLimit={featurePayloadMbLimit}
                 onComplete={onComplete}
             />
         )
@@ -82,6 +84,7 @@ ExtractData.propTypes = {
     features: PropTypes.array.isRequired,
     period: PropTypes.object.isRequired,
     onComplete: PropTypes.func.isRequired,
+    featurePayloadMbLimit: PropTypes.number,
 }
 
 export default ExtractData

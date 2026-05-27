@@ -16,8 +16,11 @@ const VALUE_LIMIT = 5000
 const DEFAULT_SCALE = 1000
 const FEATURE_PAYLOAD_MB_LIMIT = 0.5
 
-export const chunkFeaturesBySize = (features) => {
-    const limitBytes = FEATURE_PAYLOAD_MB_LIMIT * 1024 * 1024
+export const chunkFeaturesBySize = (
+    features,
+    limitMb = FEATURE_PAYLOAD_MB_LIMIT
+) => {
+    const limitBytes = limitMb * 1024 * 1024
     const chunks = []
     let currentChunk = []
     let currentSize = 0
@@ -404,8 +407,14 @@ const getEarthEngineValues = ({
         }
     })
 
-export const getEarthEngineData = ({ ee, dataset, period, features }) => {
-    const chunks = chunkFeaturesBySize(features)
+export const getEarthEngineData = ({
+    ee,
+    dataset,
+    period,
+    features,
+    featurePayloadMbLimit,
+}) => {
+    const chunks = chunkFeaturesBySize(features, featurePayloadMbLimit)
 
     const runForChunk = (chunkFeatures) => {
         if (!period) {

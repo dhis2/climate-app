@@ -11,9 +11,15 @@ const ExtractGeeData = ({
     period,
     features,
     extractingLabel,
+    featurePayloadMbLimit,
     onComplete,
 }) => {
-    const { data, error } = useEarthEngineData(dataset, period, features)
+    const { data, error } = useEarthEngineData({
+        dataset,
+        period,
+        features,
+        featurePayloadMbLimit,
+    })
     const [importDone, setImportDone] = useState(false)
 
     useEffect(() => {
@@ -53,6 +59,7 @@ ExtractGeeData.propTypes = {
     period: PropTypes.object.isRequired,
     onComplete: PropTypes.func.isRequired,
     extractingLabel: PropTypes.string,
+    featurePayloadMbLimit: PropTypes.number,
 }
 
 export default ExtractGeeData

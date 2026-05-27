@@ -109,6 +109,7 @@ const ImportPage = () => {
     const [importDone, setImportDone] = useState(false)
     const [importFeatures, setImportFeatures] = useState(null)
     const [importAttempted, setImportAttempted] = useState(false)
+    const [featurePayloadMbLimit, setFeaturePayloadMbLimit] = useState(1)
 
     useBlocker(startExtract && !importDone)
 
@@ -299,6 +300,22 @@ const ImportPage = () => {
                             {i18n.t('Start import')}
                         </Button>
                     </div>
+                    <div className={classes.limitInput}>
+                        <label htmlFor="feature-payload-limit">
+                            {i18n.t('Feature payload limit (MB):')}
+                        </label>
+                        <input
+                            id="feature-payload-limit"
+                            type="number"
+                            min={0.1}
+                            max={10}
+                            step={0.1}
+                            value={featurePayloadMbLimit}
+                            onChange={(e) =>
+                                setFeaturePayloadMbLimit(Number(e.target.value))
+                            }
+                        />
+                    </div>
                     {startExtract && isValid && (
                         <Modal
                             large
@@ -316,6 +333,9 @@ const ImportPage = () => {
                                     }
                                     features={importFeatures}
                                     dataElement={dataElement}
+                                    featurePayloadMbLimit={
+                                        featurePayloadMbLimit
+                                    }
                                     onComplete={handleImportComplete}
                                 />
                             </ModalContent>

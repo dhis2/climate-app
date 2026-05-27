@@ -65,3 +65,16 @@
     padding: var(--spacers-dp16);
     background-color: var(--colors-grey050);
 }
+
+.limitInput {
+    display: flex;
+    align-items: center;
+    gap: var(--spacers-dp8);
+    margin-block-start: var(--spacers-dp8);
+    font-size: 12px;
+    color: var(--colors-grey700);
+}
+
+.limitInput input {
+    width: 64px;
+}
