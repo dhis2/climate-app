@@ -322,7 +322,7 @@ const ImportPage = () => {
                                         onClick={handleModalClose}
                                     >
                                         {importDone
-                                            ? i18n.t('Done')
+                                            ? i18n.t('Close')
                                             : i18n.t('Importing...')}
                                     </Button>
                                 </ButtonStrip>

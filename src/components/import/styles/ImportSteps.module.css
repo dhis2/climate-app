@@ -1,0 +1,35 @@
+.steps {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px 0;
+    gap: 4px;
+    font-size: 14px;
+    font-style: italic;
+    color: #555;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    line-height: 30px;
+}
+
+.pending {
+    opacity: 0.4;
+}
+
+.icon {
+    width: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.checkmark {
+    font-size: 16px;
+    font-style: normal;
+    color: #1a9e3f;
+}

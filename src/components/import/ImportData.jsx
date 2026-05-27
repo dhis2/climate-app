@@ -80,9 +80,7 @@ const ImportData = ({ data, dataElement, features, onComplete }) => {
                         'Received an unrecognized response from DHIS2'
                     )}
                 />
-            ) : (
-                i18n.t('Importing data to DHIS2')
-            )}
+            ) : null}
             <NoOrgUnitData data={data} features={features} />
         </div>
     )

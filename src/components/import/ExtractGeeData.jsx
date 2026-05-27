@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
-import { useEffect } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import useEarthEngineData from '../../hooks/useEarthEngineData.js'
-import DataLoader from '../shared/DataLoader.jsx'
 import ErrorMessage from '../shared/ErrorMessage.jsx'
 import ImportData from './ImportData.jsx'
+import ImportSteps from './ImportSteps.jsx'
 
 const ExtractGeeData = ({
     dataElement,
@@ -18,6 +18,7 @@ const ExtractGeeData = ({
         period,
         features
     )
+    const [importDone, setImportDone] = useState(false)
 
     useEffect(() => {
         if (error) {
@@ -25,21 +26,33 @@ const ExtractGeeData = ({
         }
     }, [error, onComplete])
 
-    if (loading) {
-        return <DataLoader label={extractingLabel} height={100} />
-    }
+    const handleImportComplete = useCallback(() => {
+        setImportDone(true)
+        onComplete()
+    }, [onComplete])
 
     if (error) {
         return <ErrorMessage error={error} />
     }
 
     return (
-        <ImportData
-            data={data}
-            dataElement={dataElement}
-            features={features}
-            onComplete={onComplete}
-        />
+        <>
+            {!importDone && (
+                <ImportSteps
+                    extractingLabel={extractingLabel}
+                    extractDone={!loading}
+                    importDone={importDone}
+                />
+            )}
+            {data && (
+                <ImportData
+                    data={data}
+                    dataElement={dataElement}
+                    features={features}
+                    onComplete={handleImportComplete}
+                />
+            )}
+        </>
     )
 }
 

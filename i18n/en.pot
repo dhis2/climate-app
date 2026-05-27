@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-05-27T13:51:29.515Z\n"
-"PO-Revision-Date: 2026-05-27T13:51:29.516Z\n"
+"POT-Creation-Date: 2026-05-27T14:28:50.413Z\n"
+"PO-Revision-Date: 2026-05-27T14:28:50.414Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -659,9 +659,6 @@ msgstr "Dataset provider not recognized"
 msgid "Received an unrecognized response from DHIS2"
 msgstr "Received an unrecognized response from DHIS2"
 
-msgid "Importing data to DHIS2"
-msgstr "Importing data to DHIS2"
-
 msgid "Import failed"
 msgstr "Import failed"
 
@@ -695,8 +692,8 @@ msgstr "Start import"
 msgid "Importing climate data"
 msgstr "Importing climate data"
 
-msgid "Done"
-msgstr "Done"
+msgid "Close"
+msgstr "Close"
 
 msgid "Importing..."
 msgstr "Importing..."
@@ -752,6 +749,9 @@ msgstr "Ignored (already exists): {{ignored}}"
 
 msgid "Missing: {{missing}}"
 msgstr "Missing: {{missing}}"
+
+msgid "Importing data to DHIS2"
+msgstr "Importing data to DHIS2"
 
 msgid "No data for the following org units"
 msgstr "No data for the following org units"
@@ -928,9 +928,6 @@ msgstr "Your ENACTS DST API key here"
 
 msgid "Example configuration:"
 msgstr "Example configuration:"
-
-msgid "Close"
-msgstr "Close"
 
 msgid "Calculate from data"
 msgstr "Calculate from data"

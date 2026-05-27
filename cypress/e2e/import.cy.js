@@ -5,7 +5,7 @@ const verifyImportSuccess = () => {
     cy.getByDataTest('dhis2-uicore-modal')
         .contains('Data is imported')
         .should('be.visible')
-    cy.getByDataTest('dhis2-uicore-modal').contains('Done').click()
+    cy.getByDataTest('dhis2-uicore-modal').contains('Close').click()
     cy.getByDataTest('dhis2-uicore-modal').should('not.exist')
 }
 
