@@ -1,13 +1,10 @@
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
-import { useEffect } from 'react'
 import {
     PROVIDER_ENACTS,
     PROVIDER_GEE,
 } from '../../components/DataSourcesProvider.jsx'
-import useOrgUnits from '../../hooks/useOrgUnits.js'
 import { getPeriods, getPeriodTypes } from '../../utils/time.js'
-import DataLoader from '../shared/DataLoader.jsx'
 import ExtractEnactsData from './ExtractEnactsData.jsx'
 import ExtractGeeData from './ExtractGeeData.jsx'
 import styles from './styles/ExtractData.module.css'
@@ -15,37 +12,10 @@ import styles from './styles/ExtractData.module.css'
 const ExtractData = ({
     dataset,
     period,
-    orgUnits,
+    features,
     dataElement,
     onComplete,
 }) => {
-    const { features, loading, error } = useOrgUnits({ orgUnits })
-
-    useEffect(() => {
-        if (!loading && (error?.message || !features.length)) {
-            onComplete?.()
-        }
-    }, [loading, error, features]) // eslint-disable-line react-hooks/exhaustive-deps
-
-    if (loading) {
-        return <DataLoader label={i18n.t('Loading org units')} height={100} />
-    } else if (error?.message) {
-        return (
-            <div className={styles.container}>
-                {i18n.t('Error loading org units: {{message}}', {
-                    message: error.message,
-                    nsSeparator: '>>',
-                })}
-            </div>
-        )
-    } else if (!features.length) {
-        return (
-            <div className={styles.container}>
-                {i18n.t('No org unit geometries found')}
-            </div>
-        )
-    }
-
     const orgUnitsCount = features.length
     let extractingLabel
 
@@ -109,9 +79,9 @@ const ExtractData = ({
 ExtractData.propTypes = {
     dataElement: PropTypes.object.isRequired,
     dataset: PropTypes.object.isRequired,
-    orgUnits: PropTypes.array.isRequired,
+    features: PropTypes.array.isRequired,
     period: PropTypes.object.isRequired,
-    onComplete: PropTypes.func,
+    onComplete: PropTypes.func.isRequired,
 }
 
 export default ExtractData

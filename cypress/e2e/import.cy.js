@@ -408,6 +408,14 @@ describe('Import', () => {
         }).as('postDataValueSets')
         cy.contains('Start import').click()
 
+        // Button should be disabled and show 'Importing...' while in progress
+        cy.getByDataTest('dhis2-uicore-modal')
+            .contains('Importing...')
+            .should('be.visible')
+        cy.getByDataTest('dhis2-uicore-modal')
+            .contains('Importing...')
+            .should('be.disabled')
+
         // Wait for and verify the intercepted request
         cy.wait('@postDataValueSets', { timeout: 25000 }).then(
             (interception) => {

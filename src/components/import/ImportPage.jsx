@@ -104,9 +104,10 @@ const ImportPage = () => {
     const [period, setPeriod] = useState(getDefaultImportPeriod({ calendar }))
     const [orgUnits, setOrgUnits] = useState(DEFAULT_ORG_UNITS)
     const [dataElement, setDataElement] = useState()
-    const standardPeriod = getStandardPeriod(period) // ISO 8601 used by GEE
+    const standardPeriod = useMemo(() => getStandardPeriod(period), [period])
     const [startExtract, setStartExtract] = useState(false)
     const [importDone, setImportDone] = useState(false)
+    const [importFeatures, setImportFeatures] = useState(null)
 
     useBlocker(startExtract && !importDone)
 
@@ -114,6 +115,7 @@ const ImportPage = () => {
     const handleModalClose = useCallback(() => {
         setStartExtract(false)
         setImportDone(false)
+        setImportFeatures(null)
     }, [])
 
     const {
@@ -284,7 +286,10 @@ const ImportPage = () => {
                         <Button
                             primary
                             disabled={!isValid || startExtract}
-                            onClick={() => setStartExtract(true)}
+                            onClick={() => {
+                                setImportFeatures(features)
+                                setStartExtract(true)
+                            }}
                         >
                             {i18n.t('Start import')}
                         </Button>
@@ -304,23 +309,24 @@ const ImportPage = () => {
                                     period={
                                         dataset.period ? null : standardPeriod
                                     }
-                                    orgUnits={orgUnits}
+                                    features={importFeatures}
                                     dataElement={dataElement}
                                     onComplete={handleImportComplete}
                                 />
                             </ModalContent>
-                            {importDone && (
-                                <ModalActions>
-                                    <ButtonStrip end>
-                                        <Button
-                                            primary
-                                            onClick={handleModalClose}
-                                        >
-                                            {i18n.t('Done')}
-                                        </Button>
-                                    </ButtonStrip>
-                                </ModalActions>
-                            )}
+                            <ModalActions>
+                                <ButtonStrip end>
+                                    <Button
+                                        primary
+                                        disabled={!importDone}
+                                        onClick={handleModalClose}
+                                    >
+                                        {importDone
+                                            ? i18n.t('Done')
+                                            : i18n.t('Importing...')}
+                                    </Button>
+                                </ButtonStrip>
+                            </ModalActions>
                         </Modal>
                     )}
                 </div>
