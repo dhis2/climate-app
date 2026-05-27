@@ -14,6 +14,33 @@ import {
 
 const VALUE_LIMIT = 5000
 const DEFAULT_SCALE = 1000
+const FEATURE_PAYLOAD_MB_LIMIT = 0.5
+
+export const chunkFeaturesBySize = (features) => {
+    const limitBytes = FEATURE_PAYLOAD_MB_LIMIT * 1024 * 1024
+    const chunks = []
+    let currentChunk = []
+    let currentSize = 0
+
+    for (const feature of features) {
+        const featureSize = JSON.stringify(feature).length
+        console.log('jj feature', feature.properties.name, featureSize)
+        if (currentChunk.length > 0 && currentSize + featureSize > limitBytes) {
+            chunks.push(currentChunk)
+            currentChunk = [feature]
+            currentSize = featureSize
+        } else {
+            currentChunk.push(feature)
+            currentSize += featureSize
+        }
+    }
+
+    if (currentChunk.length > 0) {
+        chunks.push(currentChunk)
+    }
+
+    return chunks
+}
 
 // Returns the linear scale in meters of the units of this projection
 export const getScale = (image) =>
@@ -379,25 +406,40 @@ const getEarthEngineValues = ({
     })
 
 export const getEarthEngineData = ({ ee, dataset, period, features }) => {
-    if (!period) {
-        return getEarthEngineImageValues({ ee, dataset, features })
-    } else if (dataset.bands) {
-        // Multiple bands (used for relative humidity)
-        const { bandsParser = (v) => v } = dataset
+    const chunks = chunkFeaturesBySize(features)
 
-        return Promise.all(
-            dataset.bands.map((band) =>
-                getEarthEngineValues({
-                    ee,
-                    dataset: { ...dataset, ...band },
-                    period,
-                    features,
-                })
-            )
-        ).then(bandsParser)
-    } else {
-        return getEarthEngineValues({ ee, dataset, period, features })
+    const runForChunk = (chunkFeatures) => {
+        if (!period) {
+            return getEarthEngineImageValues({
+                ee,
+                dataset,
+                features: chunkFeatures,
+            })
+        } else if (dataset.bands) {
+            const { bandsParser = (v) => v } = dataset
+            return Promise.all(
+                dataset.bands.map((band) =>
+                    getEarthEngineValues({
+                        ee,
+                        dataset: { ...dataset, ...band },
+                        period,
+                        features: chunkFeatures,
+                    })
+                )
+            ).then(bandsParser)
+        } else {
+            return getEarthEngineValues({
+                ee,
+                dataset,
+                period,
+                features: chunkFeatures,
+            })
+        }
     }
+
+    return Promise.all(chunks.map(runForChunk)).then((results) =>
+        results.flat()
+    )
 }
 
 export const getTimeSeriesData = async ({

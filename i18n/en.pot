@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-04-28T11:05:26.356Z\n"
-"PO-Revision-Date: 2026-04-28T11:05:26.357Z\n"
+"POT-Creation-Date: 2026-05-24T15:55:15.910Z\n"
+"PO-Revision-Date: 2026-05-24T15:55:15.910Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -697,6 +697,12 @@ msgstr ""
 
 msgid "Start import"
 msgstr "Start import"
+
+msgid "Importing climate data"
+msgstr "Importing climate data"
+
+msgid "Done"
+msgstr "Done"
 
 msgid "For {{periodId}} ({{actualStartTime}} to {{actualEndTime}})"
 msgstr "For {{periodId}} ({{actualStartTime}} to {{actualEndTime}})"

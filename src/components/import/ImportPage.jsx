@@ -1,7 +1,15 @@
 import { useConfig } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { Button } from '@dhis2/ui'
+import {
+    Button,
+    ButtonStrip,
+    Modal,
+    ModalActions,
+    ModalContent,
+    ModalTitle,
+} from '@dhis2/ui'
 import { useState, useMemo, useEffect, useCallback } from 'react'
+import { useBlocker } from 'react-router-dom'
 import useOrgUnits from '../../hooks/useOrgUnits.js'
 import {
     getDefaultImportPeriod,
@@ -98,6 +106,15 @@ const ImportPage = () => {
     const [dataElement, setDataElement] = useState()
     const standardPeriod = getStandardPeriod(period) // ISO 8601 used by GEE
     const [startExtract, setStartExtract] = useState(false)
+    const [importDone, setImportDone] = useState(false)
+
+    useBlocker(startExtract && !importDone)
+
+    const handleImportComplete = useCallback(() => setImportDone(true), [])
+    const handleModalClose = useCallback(() => {
+        setStartExtract(false)
+        setImportDone(false)
+    }, [])
 
     const {
         features,
@@ -127,6 +144,7 @@ const ImportPage = () => {
 
     useEffect(() => {
         setStartExtract(false)
+        setImportDone(false)
     }, [dataset, period, orgUnits, dataElement])
 
     const updatePeriod = useCallback((val) => {
@@ -270,15 +288,41 @@ const ImportPage = () => {
                         >
                             {i18n.t('Start import')}
                         </Button>
-                        {startExtract && isValid && (
-                            <ExtractData
-                                dataset={dataset}
-                                period={dataset.period ? null : standardPeriod}
-                                orgUnits={orgUnits}
-                                dataElement={dataElement}
-                            />
-                        )}
                     </div>
+                    {startExtract && isValid && (
+                        <Modal
+                            large
+                            position="middle"
+                            onClose={importDone ? handleModalClose : undefined}
+                        >
+                            <ModalTitle>
+                                {i18n.t('Importing climate data')}
+                            </ModalTitle>
+                            <ModalContent>
+                                <ExtractData
+                                    dataset={dataset}
+                                    period={
+                                        dataset.period ? null : standardPeriod
+                                    }
+                                    orgUnits={orgUnits}
+                                    dataElement={dataElement}
+                                    onComplete={handleImportComplete}
+                                />
+                            </ModalContent>
+                            {importDone && (
+                                <ModalActions>
+                                    <ButtonStrip end>
+                                        <Button
+                                            primary
+                                            onClick={handleModalClose}
+                                        >
+                                            {i18n.t('Done')}
+                                        </Button>
+                                    </ButtonStrip>
+                                </ModalActions>
+                            )}
+                        </Modal>
+                    )}
                 </div>
             </div>
         </div>

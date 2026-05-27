@@ -25,7 +25,7 @@ const countMissing = (data) => {
     return missing
 }
 
-const ImportData = ({ data, dataElement, features }) => {
+const ImportData = ({ data, dataElement, features, onComplete }) => {
     const [response, setResponse] = useState(false)
     const [mutate, { error }] = useDataMutation(dataImportMutation)
 
@@ -52,8 +52,15 @@ const ImportData = ({ data, dataElement, features }) => {
                 response.importCount.missing = countMissing(data)
                 setResponse(response)
             }
+            onComplete?.()
         })
-    }, [mutate, data, dataElement])
+    }, [mutate, data, dataElement]) // eslint-disable-line react-hooks/exhaustive-deps
+
+    useEffect(() => {
+        if (error) {
+            onComplete?.()
+        }
+    }, [error]) // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div className={styles.container}>
@@ -73,6 +80,7 @@ ImportData.propTypes = {
     data: PropTypes.array.isRequired,
     dataElement: PropTypes.object.isRequired,
     features: PropTypes.array.isRequired,
+    onComplete: PropTypes.func,
 }
 
 export default ImportData
