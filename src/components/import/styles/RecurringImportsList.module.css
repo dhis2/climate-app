@@ -1,0 +1,143 @@
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp8);
+}
+
+.card {
+    background-color: #fff;
+    border: 1px solid var(--colors-grey300);
+    border-radius: 6px;
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.card:hover {
+    border-color: var(--colors-grey400);
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacers-dp12);
+    min-block-size: 28px;
+}
+
+.nameGroup {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    flex: 1 1 auto;
+    min-inline-size: 0;
+}
+
+.name {
+    color: var(--colors-grey900);
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 20px;
+    margin: 0;
+    letter-spacing: -0.005em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.renameButton {
+    background: none;
+    border: none;
+    padding: 4px;
+    border-radius: 4px;
+    cursor: pointer;
+    color: var(--colors-grey500);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 120ms ease, background-color 120ms ease,
+        color 120ms ease;
+}
+
+.card:hover .renameButton {
+    opacity: 1;
+}
+
+.renameButton:hover,
+.renameButton:focus-visible {
+    background-color: var(--colors-grey100);
+    color: var(--colors-grey800);
+    opacity: 1;
+    outline: none;
+}
+
+.nameInput {
+    flex: 1 1 auto;
+    min-inline-size: 0;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 20px;
+    color: var(--colors-grey900);
+    background-color: #fff;
+    border: 1px solid var(--colors-blue500);
+    border-radius: 4px;
+    padding: 3px 8px;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.16);
+    letter-spacing: -0.005em;
+}
+
+.headerActions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacers-dp8);
+    flex-shrink: 0;
+    position: relative;
+}
+
+.headerTag {
+    display: inline-flex;
+    align-items: center;
+}
+
+.overflowButton {
+    background: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 4px;
+    cursor: pointer;
+    color: var(--colors-grey600);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 120ms ease, border-color 120ms ease,
+        color 120ms ease;
+}
+
+.overflowButton:hover,
+.overflowButton:focus-visible {
+    background-color: var(--colors-grey100);
+    border-color: var(--colors-grey300);
+    color: var(--colors-grey900);
+    outline: none;
+}
+
+.runStatus {
+    margin: 0 0 var(--spacers-dp4) 0;
+    color: var(--colors-grey900);
+    font-size: 14px;
+    line-height: 19px;
+}
+
+.metadata {
+    margin: 0;
+    color: var(--colors-grey600);
+    font-size: 13px;
+    line-height: 17px;
+}

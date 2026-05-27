@@ -25,9 +25,15 @@ const countMissing = (data) => {
     return missing
 }
 
-const ImportData = ({ data, dataElement, features, onSuccess }) => {
+const ImportData = ({ data, dataElement, features, onSuccess, onError }) => {
     const [response, setResponse] = useState(false)
     const [mutate, { error }] = useDataMutation(dataImportMutation)
+
+    useEffect(() => {
+        if (error && onError) {
+            onError(error)
+        }
+    }, [error, onError])
 
     useEffect(() => {
         console.log('jj Importing data to DHIS2', data)
@@ -82,6 +88,7 @@ ImportData.propTypes = {
     data: PropTypes.array.isRequired,
     dataElement: PropTypes.object.isRequired,
     features: PropTypes.array.isRequired,
+    onError: PropTypes.func,
     onSuccess: PropTypes.func,
 }
 

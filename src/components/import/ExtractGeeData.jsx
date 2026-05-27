@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types'
+import { useEffect } from 'react'
 import useEarthEngineData from '../../hooks/useEarthEngineData.js'
 import DataLoader from '../shared/DataLoader.jsx'
 import ErrorMessage from '../shared/ErrorMessage.jsx'
@@ -10,6 +11,7 @@ const ExtractGeeData = ({
     period,
     features,
     extractingLabel,
+    onError,
     onSuccess,
 }) => {
     const { data, error, loading } = useEarthEngineData(
@@ -17,6 +19,12 @@ const ExtractGeeData = ({
         period,
         features
     )
+
+    useEffect(() => {
+        if (error && onError) {
+            onError(error)
+        }
+    }, [error, onError])
 
     if (loading) {
         return <DataLoader label={extractingLabel} height={100} />
@@ -31,6 +39,7 @@ const ExtractGeeData = ({
             data={data}
             dataElement={dataElement}
             features={features}
+            onError={onError}
             onSuccess={onSuccess}
         />
     )
@@ -42,6 +51,7 @@ ExtractGeeData.propTypes = {
     features: PropTypes.array.isRequired,
     period: PropTypes.object.isRequired,
     extractingLabel: PropTypes.string,
+    onError: PropTypes.func,
     onSuccess: PropTypes.func,
 }
 

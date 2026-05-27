@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types'
+import { useEffect } from 'react'
 import useEnactsData from '../../hooks/useEnactsData.js'
 import DataLoader from '../shared/DataLoader.jsx'
 import ErrorMessage from '../shared/ErrorMessage.jsx'
@@ -10,9 +11,16 @@ const ExtractEnactsData = ({
     period,
     extractingLabel,
     features,
+    onError,
     onSuccess,
 }) => {
     const { data, error, loading } = useEnactsData(dataset, period, features)
+
+    useEffect(() => {
+        if (error && onError) {
+            onError(error)
+        }
+    }, [error, onError])
 
     if (loading) {
         return <DataLoader label={extractingLabel} height={100} />
@@ -27,6 +35,7 @@ const ExtractEnactsData = ({
             data={data}
             dataElement={dataElement}
             features={features}
+            onError={onError}
             onSuccess={onSuccess}
         />
     )
@@ -38,6 +47,7 @@ ExtractEnactsData.propTypes = {
     features: PropTypes.array.isRequired,
     period: PropTypes.object.isRequired,
     extractingLabel: PropTypes.string,
+    onError: PropTypes.func,
     onSuccess: PropTypes.func,
 }
 

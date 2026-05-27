@@ -1,9 +1,10 @@
 import { useDataEngine } from '@dhis2/app-runtime'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import useSystemInfo from './useSystemInfo.js'
 
 const APP_NAMESPACE = 'CLIMATE_DATA'
-const CONFIGS_KEY = 'importConfigs'
-const resource = `userDataStore/${APP_NAMESPACE}/${CONFIGS_KEY}`
+const CONFIGS_KEY = 'recurringImports'
+const resource = `dataStore/${APP_NAMESPACE}/${CONFIGS_KEY}`
 
 const generateId = () =>
     Math.random().toString(36).substring(2) + Date.now().toString(36)
@@ -13,7 +14,10 @@ const useImportConfigs = () => {
     const [configs, setConfigs] = useState([])
     const [error, setError] = useState()
     const engine = useDataEngine()
+    const { system } = useSystemInfo()
     const keyExists = useRef(false)
+
+    const currentUser = system?.currentUser
 
     const loadConfigs = useCallback(() => {
         setLoading(true)
@@ -49,34 +53,60 @@ const useImportConfigs = () => {
         [engine]
     )
 
-    const saveConfig = useCallback(
-        ({ name, dataset, periodType, orgUnits, dataElement, lastImport }) => {
+    const createConfig = useCallback(
+        ({ name, dataset, dataElement, orgUnits, periodType }) => {
             const newConfig = {
                 id: generateId(),
                 name,
-                createdAt: new Date().toISOString(),
-                dataset,
-                periodType,
-                orgUnits,
+                // Store only the dataset id, never the live dataset object: it
+                // carries functions (valueParser, reducers) that JSON drops,
+                // which would silently import unconverted values on re-run.
+                // The live dataset is re-hydrated by id at run time.
+                datasetId: dataset?.id ?? null,
+                datasetName: dataset?.name ?? null,
                 dataElement,
-                lastImport,
+                orgUnits,
+                periodType,
+                dataUpdatedThrough: null,
+                createdAt: new Date().toISOString(),
+                createdBy: currentUser?.id ?? null,
+                createdByName: currentUser?.name ?? null,
+                lastRunAt: null,
+                lastRunBy: null,
+                lastRunByName: null,
             }
             const newConfigs = [...configs, newConfig]
+            setConfigs(newConfigs)
+            return persistConfigs(newConfigs).then(() => newConfig)
+        },
+        [configs, persistConfigs, currentUser]
+    )
+
+    const updateConfig = useCallback(
+        (id, patch) => {
+            const newConfigs = configs.map((c) =>
+                c.id === id ? { ...c, ...patch } : c
+            )
             setConfigs(newConfigs)
             return persistConfigs(newConfigs)
         },
         [configs, persistConfigs]
     )
 
-    const updateConfig = useCallback(
-        (id, lastImport) => {
-            const newConfigs = configs.map((c) =>
-                c.id === id ? { ...c, lastImport } : c
-            )
-            setConfigs(newConfigs)
-            return persistConfigs(newConfigs)
-        },
-        [configs, persistConfigs]
+    const recordRun = useCallback(
+        (id, { dataUpdatedThrough }) =>
+            updateConfig(id, {
+                dataUpdatedThrough,
+                lastRunAt: new Date().toISOString(),
+                lastRunBy: currentUser?.id ?? null,
+                lastRunByName: currentUser?.name ?? null,
+            }),
+        [updateConfig, currentUser]
+    )
+
+    const renameConfig = useCallback(
+        (id, name) => updateConfig(id, { name }),
+        [updateConfig]
     )
 
     const deleteConfig = useCallback(
@@ -92,7 +122,17 @@ const useImportConfigs = () => {
         loadConfigs()
     }, [loadConfigs])
 
-    return { configs, loading, error, saveConfig, updateConfig, deleteConfig }
+    return {
+        configs,
+        loading,
+        error,
+        currentUser,
+        createConfig,
+        updateConfig,
+        recordRun,
+        renameConfig,
+        deleteConfig,
+    }
 }
 
 export default useImportConfigs

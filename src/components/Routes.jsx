@@ -22,7 +22,7 @@ import TemperatureDaily from './explore/temperature/TemperatureDaily.jsx'
 import TemperatureMonthly from './explore/temperature/TemperatureMonthly.jsx'
 import Vegetation from './explore/vegetation/Vegetation.jsx'
 import ImportPage from './import/ImportPage.jsx'
-import SavedConfigsPage from './import/SavedConfigsPage.jsx'
+import ImportsOverviewPage from './import/ImportsOverviewPage.jsx'
 import Root from './Root.jsx'
 import SettingsPage from './settings/SettingsPage.jsx'
 import SetupPage from './setup/SetupPage.jsx'
@@ -188,12 +188,12 @@ const Routes = () => {
                     ],
                 },
                 {
-                    path: 'import',
-                    element: <ImportPage />,
+                    path: 'imports',
+                    element: <ImportsOverviewPage />,
                 },
                 {
-                    path: 'saved-configs',
-                    element: <SavedConfigsPage />,
+                    path: 'imports/new',
+                    element: <ImportPage />,
                 },
                 {
                     path: 'setup',

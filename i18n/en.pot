@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-05-08T09:14:23.169Z\n"
-"PO-Revision-Date: 2026-05-08T09:14:23.169Z\n"
+"POT-Creation-Date: 2026-05-27T11:16:52.878Z\n"
+"PO-Revision-Date: 2026-05-27T11:16:52.879Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -111,11 +111,8 @@ msgstr "Home"
 msgid "Explore data"
 msgstr "Explore data"
 
-msgid "Import data"
-msgstr "Import data"
-
-msgid "Saved import configs"
-msgstr "Saved import configs"
+msgid "Imports"
+msgstr "Imports"
 
 msgid "Setup guide"
 msgstr "Setup guide"
@@ -646,6 +643,25 @@ msgstr "Need help setting up data elements for import? Check out the "
 msgid "setup guide"
 msgstr "setup guide"
 
+msgid "Delete \"{{name}}\"?"
+msgstr "Delete \"{{name}}\"?"
+
+msgid "Created by {{name}} on {{date}}."
+msgstr "Created by {{name}} on {{date}}."
+
+msgid ""
+"Deleting will remove the saved import and its update history. Imported data "
+"values in DHIS2 will not be affected."
+msgstr ""
+"Deleting will remove the saved import and its update history. Imported data "
+"values in DHIS2 will not be affected."
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Delete"
+msgstr "Delete"
+
 msgid "Loading org units"
 msgstr "Loading org units"
 
@@ -680,11 +696,33 @@ msgstr "One or more conflicts encountered"
 msgid "Import weather and climate data"
 msgstr "Import weather and climate data"
 
-msgid "Choose data source"
-msgstr "Choose data source"
+msgid "Data source"
+msgstr "Data source"
 
 msgid "Choose destination data element"
 msgstr "Choose destination data element"
+
+msgid "Save this import?"
+msgstr "Save this import?"
+
+msgid "One-time import"
+msgstr "One-time import"
+
+msgid "Run this import once. Your selections are not saved."
+msgstr "Run this import once. Your selections are not saved."
+
+msgid "Save this import"
+msgstr "Save this import"
+
+msgid ""
+"Save it so you can re-run it later. Each run fetches new data since the "
+"last import."
+msgstr ""
+"Save it so you can re-run it later. Each run fetches new data since the "
+"last import."
+
+msgid "Import name"
+msgstr "Import name"
 
 msgid "Review and import"
 msgstr "Review and import"
@@ -698,11 +736,17 @@ msgstr ""
 "{{maxValues}}). Reduce your selection by choosing fewer organisation units "
 "or a shorter time period. Additional imports can be performed separately."
 
-msgid "Start import"
-msgstr "Start import"
+msgid "Save & import"
+msgstr "Save & import"
 
-msgid "Save as import configuration"
-msgstr "Save as import configuration"
+msgid "Import once"
+msgstr "Import once"
+
+msgid "Saved as \"{{name}}\""
+msgstr "Saved as \"{{name}}\""
+
+msgid "View in Imports →"
+msgstr "View in Imports →"
 
 msgid "For {{periodId}} ({{actualStartTime}} to {{actualEndTime}})"
 msgstr "For {{periodId}} ({{actualStartTime}} to {{actualEndTime}})"
@@ -755,6 +799,31 @@ msgstr "Ignored (already exists): {{ignored}}"
 
 msgid "Missing: {{missing}}"
 msgstr "Missing: {{missing}}"
+
+msgid "Import weather and climate data into DHIS2."
+msgstr "Import weather and climate data into DHIS2."
+
+msgid "New import"
+msgstr "New import"
+
+msgid "Import climate data once, or save it to re-run later."
+msgstr "Import climate data once, or save it to re-run later."
+
+msgid "Import data"
+msgstr "Import data"
+
+msgid "Saved imports"
+msgstr "Saved imports"
+
+msgid "You haven't saved any imports yet."
+msgstr "You haven't saved any imports yet."
+
+msgid ""
+"When you create a new import, choose \"Save this import\" to re-run it with "
+"one click as new climate data becomes available."
+msgstr ""
+"When you create a new import, choose \"Save this import\" to re-run it with "
+"one click as new climate data becomes available."
 
 msgid "No data for the following org units"
 msgstr "No data for the following org units"
@@ -809,6 +878,9 @@ msgstr ""
 msgid "Data between start and end date will be imported as daily values."
 msgstr "Data between start and end date will be imported as daily values."
 
+msgid "Import date range"
+msgstr "Import date range"
+
 msgid ""
 "The data will be assigned a yearly period type that matches the year it was "
 "collected: {{datasetPeriod}}"
@@ -825,79 +897,115 @@ msgstr "Valid range"
 msgid "Period type"
 msgstr "Period type"
 
-msgid "Save import configuration"
-msgstr "Save import configuration"
-
-msgid "Configuration name"
-msgstr "Configuration name"
-
-msgid "E.g. ERA5 Monthly Temperature"
-msgstr "E.g. ERA5 Monthly Temperature"
-
-msgid "Cancel"
-msgstr "Cancel"
-
-msgid "Save"
-msgstr "Save"
-
-msgid "Yearly"
-msgstr "Yearly"
-
 msgid "{{count}} org units"
 msgid_plural "{{count}} org units"
-msgstr[0] "{{count}} org units"
+msgstr[0] "{{count}} org unit"
 msgstr[1] "{{count}} org units"
 
-msgid "Last import: {{date}}"
-msgstr "Last import: {{date}}"
+msgid "Data imported through {{date}} · Last run {{relative}}"
+msgstr "Data imported through {{date}} · Last run {{relative}}"
 
-msgid "Data through: {{period}}"
-msgstr "Data through: {{period}}"
+msgid "Never imported"
+msgstr "Never imported"
 
-msgid "Scheduled: {{frequency}}"
-msgstr "Scheduled: {{frequency}}"
+msgid "{{date}} by {{user}}"
+msgstr "{{date}} by {{user}}"
 
-msgid "Delete this configuration?"
-msgstr "Delete this configuration?"
+msgid "Rename"
+msgstr "Rename"
 
-msgid "Delete"
-msgstr "Delete"
+msgid "Import…"
+msgstr "Import…"
 
-msgid "Run frequency"
-msgstr "Run frequency"
+msgid "More actions"
+msgstr "More actions"
 
-msgid "Remove schedule"
-msgstr "Remove schedule"
+msgid "Loading org units…"
+msgstr "Loading org units…"
 
-msgid "Save schedule"
-msgstr "Save schedule"
+msgid "Extracting data from {{provider}}…"
+msgstr "Extracting data from {{provider}}…"
 
-msgid "Data is up to date"
-msgstr "Data is up to date"
+msgid "Importing values into DHIS2…"
+msgstr "Importing values into DHIS2…"
 
-msgid "Next: {{start}} → {{end}}"
-msgstr "Next: {{start}} → {{end}}"
+msgid "Unknown error"
+msgstr "Unknown error"
 
-msgid "Edit schedule"
-msgstr "Edit schedule"
+msgid "Import \"{{name}}\""
+msgstr "Import \"{{name}}\""
 
-msgid "Schedule"
-msgstr "Schedule"
+msgid "Data element"
+msgstr "Data element"
 
-msgid "Run"
-msgstr "Run"
+msgid "For {{count}} organisation units"
+msgid_plural "For {{count}} organisation units"
+msgstr[0] "For {{count}} organisation unit"
+msgstr[1] "For {{count}} organisation units"
 
-msgid "Saved import configurations"
-msgstr "Saved import configurations"
-
-msgid "Running saved configuration: {{name}}"
-msgstr "Running saved configuration: {{name}}"
+msgid "For date range"
+msgstr "For date range"
 
 msgid "Start year"
 msgstr "Start year"
 
 msgid "End year"
 msgstr "End year"
+
+msgid "Start date must be on or before the end date."
+msgstr "Start date must be on or before the end date."
+
+msgid "Done"
+msgstr "Done"
+
+msgid "Use default range"
+msgstr "Use default range"
+
+msgid "Since last import ({{range}})"
+msgstr "Since last import ({{range}})"
+
+msgid "Change"
+msgstr "Change"
+
+msgid ""
+"Range exceeds the {{max}}-value limit. Split into multiple runs by "
+"importing a shorter date range from the form."
+msgstr ""
+"Range exceeds the {{max}}-value limit. Split into multiple runs by "
+"importing a shorter date range from the form."
+
+msgid "Start import"
+msgstr "Start import"
+
+msgid "Importing \"{{name}}\"…"
+msgstr "Importing \"{{name}}\"…"
+
+msgid "Don't close this tab."
+msgstr "Don't close this tab."
+
+msgid "Imported \"{{name}}\""
+msgstr "Imported \"{{name}}\""
+
+msgid "Imported {{imported}} values. Data updated to {{date}}."
+msgstr "Imported {{imported}} values. Data updated to {{date}}."
+
+msgid "Updated"
+msgstr "Updated"
+
+msgid "Ignored (already exists)"
+msgstr "Ignored (already exists)"
+
+msgid "Missing"
+msgstr "Missing"
+
+msgid "Close"
+msgstr "Close"
+
+msgid "Failed to import \"{{name}}\""
+msgstr "Failed to import \"{{name}}\""
+
+msgid "Retry"
+msgstr "Retry"
 
 msgid "Chart settings"
 msgstr "Chart settings"
@@ -997,9 +1105,6 @@ msgstr "Your ENACTS DST API key here"
 msgid "Example configuration:"
 msgstr "Example configuration:"
 
-msgid "Close"
-msgstr "Close"
-
 msgid "Calculate from data"
 msgstr "Calculate from data"
 
@@ -1052,9 +1157,6 @@ msgstr ""
 
 msgid "Description"
 msgstr "Description"
-
-msgid "Data source"
-msgstr "Data source"
 
 msgid "Domain type"
 msgstr "Domain type"
@@ -1522,6 +1624,34 @@ msgstr "{{allDynamicOuNames}} levels"
 msgid "{{allDynamicOuNames}} groups"
 msgstr "{{allDynamicOuNames}} groups"
 
+msgid "just now"
+msgstr "just now"
+
+msgid "{{count}} minutes ago"
+msgid_plural "{{count}} minutes ago"
+msgstr[0] "{{count}} minute ago"
+msgstr[1] "{{count}} minutes ago"
+
+msgid "{{count}} hours ago"
+msgid_plural "{{count}} hours ago"
+msgstr[0] "{{count}} hour ago"
+msgstr[1] "{{count}} hours ago"
+
+msgid "{{count}} days ago"
+msgid_plural "{{count}} days ago"
+msgstr[0] "{{count}} day ago"
+msgstr[1] "{{count}} days ago"
+
+msgid "{{count}} months ago"
+msgid_plural "{{count}} months ago"
+msgstr[0] "{{count}} month ago"
+msgstr[1] "{{count}} months ago"
+
+msgid "{{count}} years ago"
+msgid_plural "{{count}} years ago"
+msgstr[0] "{{count}} year ago"
+msgstr[1] "{{count}} years ago"
+
 msgid "day"
 msgstr "day"
 
@@ -1530,6 +1660,9 @@ msgstr "week"
 
 msgid "month"
 msgstr "month"
+
+msgid "Yearly"
+msgstr "Yearly"
 
 msgid "year"
 msgstr "year"
