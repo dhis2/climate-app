@@ -416,6 +416,8 @@ export const getEarthEngineData = async ({
 }) => {
     const chunks = chunkFeaturesBySize(features, featurePayloadMbLimit)
 
+    console.log('Number of chunks:', chunks.length)
+
     const runForChunk = (chunkFeatures) => {
         if (!period) {
             return getEarthEngineImageValues({

@@ -109,7 +109,7 @@ const ImportPage = () => {
     const [importDone, setImportDone] = useState(false)
     const [importFeatures, setImportFeatures] = useState(null)
     const [importAttempted, setImportAttempted] = useState(false)
-    const [featurePayloadMbLimit, setFeaturePayloadMbLimit] = useState(1)
+    const [featurePayloadMbLimit, setFeaturePayloadMbLimit] = useState(10)
 
     useBlocker(startExtract && !importDone)
 
@@ -307,9 +307,9 @@ const ImportPage = () => {
                         <input
                             id="feature-payload-limit"
                             type="number"
-                            min={0.1}
+                            min={1}
                             max={10}
-                            step={0.1}
+                            step={1}
                             value={featurePayloadMbLimit}
                             onChange={(e) =>
                                 setFeaturePayloadMbLimit(Number(e.target.value))
