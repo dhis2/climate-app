@@ -12,6 +12,7 @@ const ExtractGeeData = ({
     features,
     extractingLabel,
     featurePayloadMbLimit,
+    chunkCount,
     onComplete,
 }) => {
     const { data, error } = useEarthEngineData({
@@ -45,6 +46,7 @@ const ExtractGeeData = ({
                     data={data}
                     dataElement={dataElement}
                     features={features}
+                    chunkCount={chunkCount}
                     onComplete={handleImportComplete}
                 />
             )}
@@ -58,6 +60,7 @@ ExtractGeeData.propTypes = {
     features: PropTypes.array.isRequired,
     period: PropTypes.object.isRequired,
     onComplete: PropTypes.func.isRequired,
+    chunkCount: PropTypes.number,
     extractingLabel: PropTypes.string,
     featurePayloadMbLimit: PropTypes.number,
 }
