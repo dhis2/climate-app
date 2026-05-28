@@ -675,10 +675,24 @@ export const computeNextPeriod = (lastImport, dataset) => {
         nextStartTime = formatStandardDate(date)
     }
 
-    let nextEndTime =
-        periodType === YEARLY
-            ? String(new Date().getFullYear())
-            : formatStandardDate(new Date())
+    const now = new Date()
+    let nextEndTime
+    if (periodType === YEARLY) {
+        nextEndTime = String(now.getFullYear() - 1)
+    } else if (periodType === DAILY) {
+        nextEndTime = formatStandardDate(new Date(now.getTime() - oneDayInMs))
+    } else if (periodType === MONTHLY) {
+        // Day 0 of the current month is the last day of the previous month
+        nextEndTime = formatStandardDate(
+            new Date(now.getFullYear(), now.getMonth(), 0)
+        )
+    } else if (periodType === WEEKLY) {
+        nextEndTime = formatStandardDate(
+            new Date(now.getTime() - 7 * oneDayInMs)
+        )
+    } else {
+        nextEndTime = formatStandardDate(now)
+    }
 
     const datasetMax = dataset?.supportedPeriodTypes?.find(
         (pt) => pt.periodType === periodType
