@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-05-27T11:16:52.878Z\n"
-"PO-Revision-Date: 2026-05-27T11:16:52.879Z\n"
+"POT-Creation-Date: 2026-05-28T12:02:34.012Z\n"
+"PO-Revision-Date: 2026-05-28T12:02:34.013Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -913,6 +913,9 @@ msgstr "{{date}} by {{user}}"
 
 msgid "Rename"
 msgstr "Rename"
+
+msgid "Data source is not available"
+msgstr "Data source is not available"
 
 msgid "Import…"
 msgstr "Import…"
