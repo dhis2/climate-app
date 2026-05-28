@@ -1,5 +1,13 @@
 import i18n from '@dhis2/d2-i18n'
-import { YEARLY, formatStandardDate, getPeriods } from './time.js'
+import {
+    DAILY,
+    MONTHLY,
+    WEEKLY,
+    YEARLY,
+    formatStandardDate,
+    getPeriods,
+    oneDayInMs,
+} from './time.js'
 
 const parseDate = (str) => {
     if (!str) {
@@ -31,9 +39,8 @@ export const computeFillGapRange = (config) => {
 
     if (periodType === YEARLY) {
         const lastYear = parseInt(dataUpdatedThrough, 10)
-        const today = new Date()
-        const currentYear = today.getFullYear()
-        let endYear = currentYear
+        const now = new Date()
+        let endYear = now.getFullYear() - 1
         if (datasetMax) {
             endYear = Math.min(endYear, parseInt(datasetMax, 10))
         }
@@ -47,14 +54,28 @@ export const computeFillGapRange = (config) => {
         }
     }
 
-    const start = parseDate(dataUpdatedThrough)
-    let end = new Date()
+    const now = new Date()
+    let end
+    if (periodType === DAILY) {
+        end = new Date(now.getTime() - oneDayInMs)
+    } else if (periodType === MONTHLY) {
+        end = new Date(now.getFullYear(), now.getMonth(), 0)
+    } else if (periodType === WEEKLY) {
+        const dow = now.getDay() // 0 = Sun, 1 = Mon, …, 6 = Sat
+        const daysToLastSunday = dow === 0 ? 7 : dow
+        end = new Date(now.getTime() - daysToLastSunday * oneDayInMs)
+    } else {
+        end = now
+    }
+
     if (datasetMax) {
         const maxEnd = parseDate(datasetMax)
         if (maxEnd && maxEnd < end) {
             end = maxEnd
         }
     }
+
+    const start = parseDate(dataUpdatedThrough)
     if (end < start) {
         return null
     }

@@ -11,7 +11,7 @@ import {
     NoticeBox,
 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import useUserLocale from '../../hooks/useUserLocale.js'
 import { getOuText } from '../../utils/getOuText.js'
 import {
@@ -20,9 +20,14 @@ import {
     valueCountForRange,
 } from '../../utils/recurringImports.js'
 import {
+    DAILY,
+    MONTHLY,
+    WEEKLY,
     YEARLY,
     formatStandardDate,
+    getPeriodTypes,
     normalizeIsoDate,
+    oneDayInMs,
 } from '../../utils/time.js'
 import ExtractData from './ExtractData.jsx'
 import ImportError from './ImportError.jsx'
@@ -174,19 +179,22 @@ const RunConfigModal = ({ config, onClose, onRunComplete }) => {
         setState(STATE.PROGRESS)
     }
 
-    const handleSuccess = (count) => {
-        setImportCount(count)
-        onRunComplete(config.id, { dataUpdatedThrough: range.endTime })
-        setState(STATE.SUCCESS)
-    }
+    const handleSuccess = useCallback(
+        (count) => {
+            setImportCount(count)
+            onRunComplete(config.id, { dataUpdatedThrough: range.endTime })
+            setState(STATE.SUCCESS)
+        },
+        [onRunComplete, config.id, range.endTime]
+    )
 
-    const handleError = (err) => {
+    const handleError = useCallback((err) => {
         setErrorMessage(
             err?.message ?? err?.toString?.() ?? i18n.t('Unknown error')
         )
         setErrorDetails(err?.details ?? null)
         setState(STATE.FAILURE)
-    }
+    }, [])
 
     const handleRetry = () => {
         setErrorMessage(null)
@@ -240,7 +248,22 @@ const RunConfigModal = ({ config, onClose, onRunComplete }) => {
                                     <dd>{getOuText(config.orgUnits)}</dd>
                                 </div>
                                 <div className={classes.summaryRow}>
-                                    <dt>{i18n.t('For date range')}</dt>
+                                    <dt>
+                                        {i18n.t(
+                                            'For {{periodType}} date range',
+                                            {
+                                                periodType:
+                                                    getPeriodTypes()
+                                                        .find(
+                                                            (pt) =>
+                                                                pt.id ===
+                                                                config.periodType
+                                                        )
+                                                        ?.name?.toLowerCase() ??
+                                                    config.periodType,
+                                            }
+                                        )}
+                                    </dt>
                                     <dd>
                                         {editing ? (
                                             <div
