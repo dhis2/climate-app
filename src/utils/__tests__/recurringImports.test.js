@@ -28,8 +28,7 @@ describe('computeFillGapRange', () => {
     // periods does not yet exist). It returns null when there is nothing new
     // to import.
     //
-    // Unlike computeNextPeriod, the start is NOT advanced past the last
-    // imported date — it re-covers from that point forward to catch any
+    // it re-covers from that point forward to catch any
     // values that may have been missing or updated.
 
     it('returns null when no previous import has been recorded', () => {
@@ -160,5 +159,63 @@ describe('computeFillGapRange', () => {
             },
         }
         expect(computeFillGapRange(config)).toBeNull()
+    })
+
+    describe('calendar-agnostic behaviour', () => {
+        // dataUpdatedThrough is always stored as a Gregorian ISO date regardless
+        // of the DHIS2 instance calendar. The calendar field on the config has no
+        // effect on the computed range — the output is always Gregorian dates.
+
+        it('produces the same DAILY range on a Nepali calendar instance', () => {
+            const gregorianResult = computeFillGapRange({
+                periodType: DAILY,
+                dataUpdatedThrough: '2024-01-15',
+            })
+            const nepaliResult = computeFillGapRange({
+                periodType: DAILY,
+                dataUpdatedThrough: '2024-01-15',
+                calendar: 'nepali',
+            })
+            expect(nepaliResult).toEqual(gregorianResult)
+        })
+
+        it('produces the same MONTHLY range on an Ethiopic calendar instance', () => {
+            const gregorianResult = computeFillGapRange({
+                periodType: MONTHLY,
+                dataUpdatedThrough: '2024-01-01',
+            })
+            const ethiopicResult = computeFillGapRange({
+                periodType: MONTHLY,
+                dataUpdatedThrough: '2024-01-01',
+                calendar: 'ethiopic',
+            })
+            expect(ethiopicResult).toEqual(gregorianResult)
+        })
+
+        it('produces the same WEEKLY range on a Nepali calendar instance', () => {
+            const gregorianResult = computeFillGapRange({
+                periodType: WEEKLY,
+                dataUpdatedThrough: '2024-01-07',
+            })
+            const nepaliResult = computeFillGapRange({
+                periodType: WEEKLY,
+                dataUpdatedThrough: '2024-01-07',
+                calendar: 'nepali',
+            })
+            expect(nepaliResult).toEqual(gregorianResult)
+        })
+
+        it('produces the same YEARLY range on an Ethiopic calendar instance', () => {
+            const gregorianResult = computeFillGapRange({
+                periodType: YEARLY,
+                dataUpdatedThrough: '2022',
+            })
+            const ethiopicResult = computeFillGapRange({
+                periodType: YEARLY,
+                dataUpdatedThrough: '2022',
+                calendar: 'ethiopic',
+            })
+            expect(ethiopicResult).toEqual(gregorianResult)
+        })
     })
 })

@@ -131,7 +131,7 @@ const RunConfigModal = ({ config, onClose, onRunComplete }) => {
     const valueCount = useMemo(
         () =>
             valueCountForRange({
-                orgUnits: config.orgUnits,
+                featureCount: config.featureCount,
                 periodType: config.periodType,
                 range,
             }),
@@ -226,7 +226,7 @@ const RunConfigModal = ({ config, onClose, onRunComplete }) => {
                                     </dd>
                                 </div>
                                 <div className={classes.summaryRow}>
-                                    <dt>{i18n.t('Data element')}</dt>
+                                    <dt>{i18n.t('DHIS2 data element')}</dt>
                                     <dd>
                                         {config.dataElement?.displayName ??
                                             config.dataElement?.name}
@@ -237,7 +237,7 @@ const RunConfigModal = ({ config, onClose, onRunComplete }) => {
                                         {i18n.t(
                                             'For {{count}} organisation units',
                                             {
-                                                count: config.orgUnits.length,
+                                                count: config.featureCount,
                                                 defaultValue:
                                                     'For {{count}} organisation unit',
                                                 defaultValue_plural:
@@ -609,6 +609,7 @@ const RunConfigModal = ({ config, onClose, onRunComplete }) => {
 
 RunConfigModal.propTypes = {
     config: PropTypes.shape({
+        featureCount: PropTypes.number.isRequired,
         id: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
         orgUnits: PropTypes.array.isRequired,

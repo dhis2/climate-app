@@ -54,7 +54,14 @@ const useImportConfigs = () => {
     )
 
     const createConfig = useCallback(
-        ({ name, dataset, dataElement, orgUnits, periodType }) => {
+        ({
+            name,
+            dataset,
+            dataElement,
+            orgUnits,
+            featureCount,
+            periodType,
+        }) => {
             const newConfig = {
                 id: generateId(),
                 name,
@@ -66,6 +73,7 @@ const useImportConfigs = () => {
                 datasetName: dataset?.name ?? null,
                 dataElement,
                 orgUnits,
+                featureCount,
                 periodType,
                 dataUpdatedThrough: null,
                 createdAt: new Date().toISOString(),
@@ -128,7 +136,6 @@ const useImportConfigs = () => {
         error,
         currentUser,
         createConfig,
-        updateConfig,
         recordRun,
         renameConfig,
         deleteConfig,

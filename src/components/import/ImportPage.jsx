@@ -148,8 +148,8 @@ const ImportPage = () => {
     }, [dataset, period, orgUnits, dataElement])
 
     const suggestedName = useMemo(
-        () => (dataset ? autoConfigName(dataset, orgUnits) : ''),
-        [dataset, orgUnits]
+        () => (dataset ? autoConfigName(dataset, featureCount) : ''),
+        [dataset, featureCount]
     )
 
     // Seed the config name from the suggested name until the user edits it
@@ -166,6 +166,7 @@ const ImportPage = () => {
                 dataset,
                 dataElement,
                 orgUnits,
+                featureCount,
                 periodType: period.periodType,
             })
             setSavedConfig(newConfig)
@@ -179,6 +180,7 @@ const ImportPage = () => {
         dataset,
         dataElement,
         orgUnits,
+        featureCount,
         period,
     ])
 

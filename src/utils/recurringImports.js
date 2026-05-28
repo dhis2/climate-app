@@ -19,8 +19,8 @@ const parseDate = (str) => {
     return new Date(str)
 }
 
-export const autoConfigName = (dataset, orgUnits) => {
-    const count = orgUnits?.length ?? 0
+export const autoConfigName = (dataset, featureCount) => {
+    const count = featureCount ?? 0
     return `${dataset?.name ?? 'Import'} — ${i18n.t('{{count}} org units', {
         count,
         defaultValue: '{{count}} org unit',
@@ -86,8 +86,8 @@ export const computeFillGapRange = (config) => {
     }
 }
 
-export const valueCountForRange = ({ orgUnits, periodType, range }) => {
-    if (!range || !orgUnits?.length) {
+export const valueCountForRange = ({ featureCount, periodType, range }) => {
+    if (!range || !featureCount) {
         return 0
     }
     const periods = getPeriods({
@@ -96,7 +96,7 @@ export const valueCountForRange = ({ orgUnits, periodType, range }) => {
         endTime: range.endTime,
         calendar: 'gregory',
     })
-    return periods.length * orgUnits.length
+    return periods.length * featureCount
 }
 
 export const formatBookmarkDate = (str) => {

@@ -65,7 +65,7 @@ const RecurringImportRow = ({ config, onRun, onRename, onDelete }) => {
     const range = computeFillGapRange(config)
 
     const ouCountLabel = i18n.t('{{count}} org units', {
-        count: config.orgUnits.length,
+        count: config.featureCount,
         defaultValue: '{{count}} org unit',
         defaultValue_plural: '{{count}} org units',
     })
@@ -184,6 +184,7 @@ const RecurringImportRow = ({ config, onRun, onRename, onDelete }) => {
 
 RecurringImportRow.propTypes = {
     config: PropTypes.shape({
+        featureCount: PropTypes.number.isRequired,
         id: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
         orgUnits: PropTypes.array.isRequired,
