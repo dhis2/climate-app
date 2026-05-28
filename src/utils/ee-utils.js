@@ -407,7 +407,7 @@ const getEarthEngineValues = ({
         }
     })
 
-export const getEarthEngineData = ({
+export const getEarthEngineData = async ({
     ee,
     dataset,
     period,
@@ -445,9 +445,11 @@ export const getEarthEngineData = ({
         }
     }
 
-    return Promise.all(chunks.map(runForChunk)).then((results) =>
-        results.flat()
-    )
+    const results = []
+    for (const chunk of chunks) {
+        results.push(await runForChunk(chunk))
+    }
+    return results.flat()
 }
 
 export const getTimeSeriesData = async ({
