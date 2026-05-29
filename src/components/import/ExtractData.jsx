@@ -1,5 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
+import { useEffect } from 'react'
 import {
     PROVIDER_ENACTS,
     PROVIDER_GEE,
@@ -11,8 +12,21 @@ import ExtractEnactsData from './ExtractEnactsData.jsx'
 import ExtractGeeData from './ExtractGeeData.jsx'
 import styles from './styles/ExtractData.module.css'
 
-const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
+const ExtractData = ({
+    dataset,
+    period,
+    orgUnits,
+    dataElement,
+    onError,
+    onSuccess,
+}) => {
     const { features, loading, error } = useOrgUnits({ orgUnits })
+
+    useEffect(() => {
+        if (error && onError) {
+            onError(error)
+        }
+    }, [error, onError])
 
     if (loading) {
         return <DataLoader label={i18n.t('Loading org units')} height={100} />
@@ -70,6 +84,8 @@ const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
                 features={features}
                 dataElement={dataElement}
                 extractingLabel={extractingLabel}
+                onError={onError}
+                onSuccess={onSuccess}
             />
         )
     } else if (dataset?.provider.id == PROVIDER_ENACTS) {
@@ -80,6 +96,8 @@ const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
                 features={features}
                 dataElement={dataElement}
                 extractingLabel={extractingLabel}
+                onError={onError}
+                onSuccess={onSuccess}
             />
         )
     } else {
@@ -96,6 +114,8 @@ ExtractData.propTypes = {
     dataset: PropTypes.object.isRequired,
     orgUnits: PropTypes.array.isRequired,
     period: PropTypes.object.isRequired,
+    onError: PropTypes.func,
+    onSuccess: PropTypes.func,
 }
 
 export default ExtractData

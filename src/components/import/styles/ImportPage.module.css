@@ -61,7 +61,68 @@
     gap: var(--spacers-dp16);
 }
 
+.importTypeCards {
+    display: flex;
+    flex-direction: row;
+    gap: var(--spacers-dp12);
+}
+
+.importTypeCard,
+.importTypeCardSelected {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp4);
+    padding: var(--spacers-dp16);
+    background-color: #fff;
+    border: 1px solid var(--colors-grey400);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.importTypeCardSelected {
+    border-color: var(--colors-teal600);
+    background-color: var(--colors-teal050);
+}
+
+.importTypeCardSubtitle {
+    color: var(--colors-grey700);
+    font-size: 13px;
+    line-height: 18px;
+    margin: 0;
+    padding-inline-start: 26px;
+}
+
 .formSection {
     padding: var(--spacers-dp16);
     background-color: var(--colors-grey050);
+}
+
+.saveRecurringBox {
+    margin-block-start: var(--spacers-dp16);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp8);
+}
+
+.submitRow {
+    margin-block-start: var(--spacers-dp16);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp12);
+    align-items: flex-start;
+}
+
+.savedNotice {
+    align-self: stretch;
+}
+
+.savedNoticeLink {
+    color: var(--colors-blue700);
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.savedNoticeLink:hover {
+    text-decoration: underline;
 }

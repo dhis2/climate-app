@@ -1,10 +1,8 @@
 import { useDataMutation } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
-import { useState, useEffect } from 'react'
-import ImportError from './ImportError.jsx'
+import { useState, useEffect, useMemo, useRef } from 'react'
 import ImportResponse from './ImportResponse.jsx'
-import NoOrgUnitData from './NoOrgUnitData.jsx'
 import styles from './styles/ImportData.module.css'
 
 const dataImportMutation = {
@@ -13,58 +11,107 @@ const dataImportMutation = {
     data: (dataValues) => dataValues,
 }
 
-const countMissing = (data) => {
-    // Note: for now we require that all missing values have been converted
-    // ...to NaN in a previous step
-    let missing = 0
-    data.map((obj) => {
-        if (Number.isNaN(obj.value)) {
-            missing += 1
-        }
-    })
-    return missing
-}
+const countMissing = (data) =>
+    data.filter((obj) => Number.isNaN(Number(obj.value))).length
 
-const ImportData = ({ data, dataElement, features }) => {
-    const [response, setResponse] = useState(false)
+const ImportData = ({
+    data,
+    dataElement,
+    features,
+    period,
+    onSuccess,
+    onError,
+}) => {
+    const [importResult, setImportResult] = useState(null)
     const [mutate, { error }] = useDataMutation(dataImportMutation)
+    const hasMutated = useRef(false)
 
-    useEffect(() => {
-        mutate({
-            dataValues: data
-                .filter((d) => !Number.isNaN(d.value)) // NaN values are ignored before sending to DHIS2
+    const sentDataValues = useMemo(
+        () =>
+            data
+                .filter((d) => !Number.isNaN(Number(d.value)))
                 .map((obj) => ({
                     value: obj.value,
                     orgUnit: obj.ou,
                     dataElement: dataElement.id,
                     period: obj.period,
                 })),
-        }).then((response) => {
-            // support for 2.38 +
-            if (response.httpStatus === 'OK') {
-                // count and add number of missing values to response metadata
-                response.response.importCount.missing = countMissing(data)
-                setResponse(response.response)
+        [data, dataElement]
+    )
+
+    const noDataOrgUnits = useMemo(
+        () =>
+            features
+                .filter((f) =>
+                    data
+                        .filter((d) => d.ou === f.id)
+                        .every((d) => Number.isNaN(Number(d.value)))
+                )
+                .map((f) => f.properties.name),
+        [data, features]
+    )
+
+    useEffect(() => {
+        if (error) {
+            if (onError) {
+                onError(error)
             }
-            //support for 2.37
-            else if (response.status === 'SUCCESS') {
-                // count and add number of missing values to response metadata
-                response.importCount.missing = countMissing(data)
-                setResponse(response)
+            const errorResponse = error.details?.response
+            if (errorResponse) {
+                const missing = countMissing(data)
+                const { importCount, conflicts } = errorResponse
+                setImportResult({
+                    importCount: { ...importCount, missing },
+                    conflicts,
+                })
+            }
+        }
+    }, [error, onError, data])
+
+    useEffect(() => {
+        if (hasMutated.current) {
+            return
+        }
+        hasMutated.current = true
+        mutate({ dataValues: sentDataValues }).then((response) => {
+            const missing = countMissing(data)
+            let importCount
+            if (response.httpStatus === 'OK') {
+                importCount = { ...response.response.importCount, missing }
+                setImportResult({ importCount })
+            } else if (response.status === 'SUCCESS') {
+                importCount = { ...response.importCount, missing }
+                setImportResult({ importCount })
+            }
+            if (onSuccess && importCount) {
+                const noDataMessage =
+                    noDataOrgUnits.length > 0
+                        ? i18n.t(
+                              'No data for the following org units: {{orgUnits}}',
+                              {
+                                  orgUnits: noDataOrgUnits.join(', '),
+                                  nsSeparator: ';',
+                              }
+                          )
+                        : null
+                onSuccess(importCount, noDataMessage)
             }
         })
-    }, [mutate, data, dataElement])
+    }, [mutate, sentDataValues, data, onSuccess, noDataOrgUnits])
 
     return (
         <div className={styles.container}>
-            {response ? (
-                <ImportResponse {...response} />
-            ) : error?.details ? (
-                <ImportError {...error.details} />
+            {importResult ? (
+                <ImportResponse
+                    {...importResult}
+                    sentDataValues={sentDataValues}
+                    features={features}
+                    noDataOrgUnits={noDataOrgUnits}
+                    period={period}
+                />
             ) : (
                 i18n.t('Importing data to DHIS2')
             )}
-            <NoOrgUnitData data={data} features={features} />
         </div>
     )
 }
@@ -73,6 +120,9 @@ ImportData.propTypes = {
     data: PropTypes.array.isRequired,
     dataElement: PropTypes.object.isRequired,
     features: PropTypes.array.isRequired,
+    period: PropTypes.object.isRequired,
+    onError: PropTypes.func,
+    onSuccess: PropTypes.func,
 }
 
 export default ImportData
