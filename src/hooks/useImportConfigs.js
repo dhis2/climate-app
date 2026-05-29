@@ -82,6 +82,7 @@ const useImportConfigs = () => {
                 lastRunAt: null,
                 lastRunBy: null,
                 lastRunByName: null,
+                lastRunError: null,
             }
             const newConfigs = [...configs, newConfig]
             setConfigs(newConfigs)
@@ -102,13 +103,18 @@ const useImportConfigs = () => {
     )
 
     const recordRun = useCallback(
-        (id, { dataUpdatedThrough }) =>
-            updateConfig(id, {
-                dataUpdatedThrough,
+        (id, { dataUpdatedThrough, lastRunError = null }) => {
+            const patch = {
                 lastRunAt: new Date().toISOString(),
                 lastRunBy: currentUser?.id ?? null,
                 lastRunByName: currentUser?.name ?? null,
-            }),
+                lastRunError,
+            }
+            if (dataUpdatedThrough !== undefined) {
+                patch.dataUpdatedThrough = dataUpdatedThrough
+            }
+            return updateConfig(id, patch)
+        },
         [updateConfig, currentUser]
     )
 

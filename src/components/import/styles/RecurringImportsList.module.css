@@ -135,6 +135,13 @@
     line-height: 19px;
 }
 
+.runError {
+    margin: 0 0 var(--spacers-dp4) 0;
+    color: var(--colors-red700);
+    font-size: 13px;
+    line-height: 17px;
+}
+
 .metadata {
     margin: 0;
     color: var(--colors-grey600);

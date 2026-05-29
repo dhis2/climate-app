@@ -1,7 +1,7 @@
 import { useDataMutation } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useRef } from 'react'
 import ImportResponse from './ImportResponse.jsx'
 import styles from './styles/ImportData.module.css'
 
@@ -24,6 +24,7 @@ const ImportData = ({
 }) => {
     const [importResult, setImportResult] = useState(null)
     const [mutate, { error }] = useDataMutation(dataImportMutation)
+    const hasMutated = useRef(false)
 
     const sentDataValues = useMemo(
         () =>
@@ -68,6 +69,10 @@ const ImportData = ({
     }, [error, onError, data])
 
     useEffect(() => {
+        if (hasMutated.current) {
+            return
+        }
+        hasMutated.current = true
         mutate({ dataValues: sentDataValues }).then((response) => {
             const missing = countMissing(data)
             let importCount
@@ -79,10 +84,20 @@ const ImportData = ({
                 setImportResult({ importCount })
             }
             if (onSuccess && importCount) {
-                onSuccess(importCount)
+                const noDataMessage =
+                    noDataOrgUnits.length > 0
+                        ? i18n.t(
+                              'No data for the following org units: {{orgUnits}}',
+                              {
+                                  orgUnits: noDataOrgUnits.join(', '),
+                                  nsSeparator: ';',
+                              }
+                          )
+                        : null
+                onSuccess(importCount, noDataMessage)
             }
         })
-    }, [mutate, sentDataValues, data, onSuccess])
+    }, [mutate, sentDataValues, data, onSuccess, noDataOrgUnits])
 
     return (
         <div className={styles.container}>

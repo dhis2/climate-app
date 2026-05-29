@@ -184,14 +184,32 @@ const ImportPage = () => {
         period,
     ])
 
-    const handleImportSuccess = useCallback(() => {
-        setImportSucceeded(true)
-        if (savedConfig) {
-            recordRun(savedConfig.id, {
-                dataUpdatedThrough: standardPeriod.endTime,
-            })
-        }
-    }, [savedConfig, recordRun, standardPeriod])
+    const handleImportSuccess = useCallback(
+        (_, lastRunError) => {
+            setImportSucceeded(true)
+            if (savedConfig) {
+                recordRun(savedConfig.id, {
+                    dataUpdatedThrough: standardPeriod.endTime,
+                    lastRunError,
+                })
+            }
+        },
+        [savedConfig, recordRun, standardPeriod]
+    )
+
+    const handleImportError = useCallback(
+        (err) => {
+            if (savedConfig) {
+                recordRun(savedConfig.id, {
+                    lastRunError:
+                        err?.message ??
+                        err?.toString?.() ??
+                        i18n.t('Unknown error'),
+                })
+            }
+        },
+        [savedConfig, recordRun]
+    )
 
     const updatePeriod = useCallback((val) => {
         setPeriod((prev) => ({
@@ -426,6 +444,7 @@ const ImportPage = () => {
                                 orgUnits={orgUnits}
                                 dataElement={dataElement}
                                 onSuccess={handleImportSuccess}
+                                onError={handleImportError}
                             />
                         )}
                     </div>

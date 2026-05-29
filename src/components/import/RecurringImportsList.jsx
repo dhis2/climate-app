@@ -70,13 +70,18 @@ const RecurringImportRow = ({ config, onRun, onRename, onDelete }) => {
         defaultValue_plural: '{{count}} org units',
     })
 
-    const runStatusLabel = config.lastRunAt
+    const runStatusLabel = !config.lastRunAt
+        ? i18n.t('Never imported')
+        : config.dataUpdatedThrough
         ? i18n.t('Data imported through {{date}} · Last run {{relative}}', {
               date: formatBookmarkDate(config.dataUpdatedThrough),
               relative: formatRelativeTime(config.lastRunAt),
               nsSeparator: ';',
           })
-        : i18n.t('Never imported')
+        : i18n.t('Last run {{relative}}', {
+              relative: formatRelativeTime(config.lastRunAt),
+              nsSeparator: ';',
+          })
 
     const runStatusTooltip =
         config.lastRunAt && config.lastRunByName
@@ -177,6 +182,9 @@ const RecurringImportRow = ({ config, onRun, onRename, onDelete }) => {
             <p className={classes.runStatus} title={runStatusTooltip}>
                 {runStatusLabel}
             </p>
+            {config.lastRunError && (
+                <p className={classes.runError}>{config.lastRunError}</p>
+            )}
             <p className={classes.metadata}>{metadataLabel}</p>
         </article>
     )
@@ -195,6 +203,7 @@ RecurringImportRow.propTypes = {
         datasetName: PropTypes.string,
         lastRunAt: PropTypes.string,
         lastRunByName: PropTypes.string,
+        lastRunError: PropTypes.string,
     }).isRequired,
     onDelete: PropTypes.func.isRequired,
     onRename: PropTypes.func.isRequired,

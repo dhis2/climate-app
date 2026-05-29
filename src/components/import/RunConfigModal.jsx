@@ -180,21 +180,28 @@ const RunConfigModal = ({ config, onClose, onRunComplete }) => {
     }
 
     const handleSuccess = useCallback(
-        (count) => {
+        (count, lastRunError) => {
             setImportCount(count)
-            onRunComplete(config.id, { dataUpdatedThrough: range.endTime })
+            onRunComplete(config.id, {
+                dataUpdatedThrough: range.endTime,
+                lastRunError,
+            })
             setState(STATE.SUCCESS)
         },
         [onRunComplete, config.id, range.endTime]
     )
 
-    const handleError = useCallback((err) => {
-        setErrorMessage(
-            err?.message ?? err?.toString?.() ?? i18n.t('Unknown error')
-        )
-        setErrorDetails(err?.details ?? null)
-        setState(STATE.FAILURE)
-    }, [])
+    const handleError = useCallback(
+        (err) => {
+            const message =
+                err?.message ?? err?.toString?.() ?? i18n.t('Unknown error')
+            setErrorMessage(message)
+            setErrorDetails(err?.details ?? null)
+            onRunComplete(config.id, { lastRunError: message })
+            setState(STATE.FAILURE)
+        },
+        [onRunComplete, config.id]
+    )
 
     const handleRetry = () => {
         setErrorMessage(null)
