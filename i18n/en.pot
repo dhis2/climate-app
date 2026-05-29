@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-05-28T15:20:59.603Z\n"
-"PO-Revision-Date: 2026-05-28T15:20:59.604Z\n"
+"POT-Creation-Date: 2026-05-29T11:59:27.620Z\n"
+"PO-Revision-Date: 2026-05-29T11:59:27.621Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -687,12 +687,6 @@ msgstr "Dataset provider not recognized"
 msgid "Importing data to DHIS2"
 msgstr "Importing data to DHIS2"
 
-msgid "Import failed"
-msgstr "Import failed"
-
-msgid "One or more conflicts encountered"
-msgstr "One or more conflicts encountered"
-
 msgid "Import weather and climate data"
 msgstr "Import weather and climate data"
 
@@ -785,6 +779,12 @@ msgid_plural "{{count}} data values will be imported"
 msgstr[0] "{{count}} data value will be imported"
 msgstr[1] "{{count}} data values will be imported"
 
+msgid "No data for the following org units: {{orgUnits}}"
+msgstr "No data for the following org units: {{orgUnits}}"
+
+msgid "Value '{{value}}' is not numeric"
+msgstr "Value '{{value}}' is not numeric"
+
 msgid "Data is imported"
 msgstr "Data is imported"
 
@@ -799,6 +799,19 @@ msgstr "Ignored (already exists): {{ignored}}"
 
 msgid "Missing: {{missing}}"
 msgstr "Missing: {{missing}}"
+
+msgid ""
+"No data between {{startTime}} and {{endTime}} for the following org units: "
+"{{orgUnits}}"
+msgstr ""
+"No data between {{startTime}} and {{endTime}} for the following org units: "
+"{{orgUnits}}"
+
+msgid "Import failed"
+msgstr "Import failed"
+
+msgid "One or more conflicts encountered"
+msgstr "One or more conflicts encountered"
 
 msgid "Import weather and climate data into DHIS2."
 msgstr "Import weather and climate data into DHIS2."
@@ -824,16 +837,6 @@ msgid ""
 msgstr ""
 "When you create a new import, choose \"Save this import\" to re-run it with "
 "one click as new climate data becomes available."
-
-msgid "No data for the following org units"
-msgstr "No data for the following org units"
-
-msgid ""
-"ERA5-Land has limited data for coastal areas. Values for other org units "
-"will be imported."
-msgstr ""
-"ERA5-Land has limited data for coastal areas. Values for other org units "
-"will be imported."
 
 msgid "Select organisation units"
 msgstr "Select organisation units"

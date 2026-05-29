@@ -30,7 +30,7 @@ import {
     oneDayInMs,
 } from '../../utils/time.js'
 import ExtractData from './ExtractData.jsx'
-import ImportError from './ImportError.jsx'
+import ImportResponse from './ImportResponse.jsx'
 import classes from './styles/RunConfigModal.module.css'
 import YearSelect from './YearSelect.jsx'
 
@@ -584,8 +584,13 @@ const RunConfigModal = ({ config, onClose, onRunComplete }) => {
                     </ModalTitle>
                     <ModalContent>
                         <div className={classes.body}>
-                            {errorDetails ? (
-                                <ImportError response={errorDetails} />
+                            {errorDetails?.response?.importCount ? (
+                                <ImportResponse
+                                    importCount={
+                                        errorDetails.response.importCount
+                                    }
+                                    conflicts={errorDetails.response.conflicts}
+                                />
                             ) : (
                                 <NoticeBox error>
                                     {errorMessage ?? i18n.t('Unknown error')}

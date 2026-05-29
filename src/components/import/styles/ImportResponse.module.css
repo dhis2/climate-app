@@ -7,3 +7,8 @@
     font-weight: 600;
     padding-bottom: 4px;
 }
+
+.conflicts {
+    color: red;
+    line-height: 20px;
+}

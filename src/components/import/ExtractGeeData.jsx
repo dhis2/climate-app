@@ -39,6 +39,7 @@ const ExtractGeeData = ({
             data={data}
             dataElement={dataElement}
             features={features}
+            period={period}
             onError={onError}
             onSuccess={onSuccess}
         />
