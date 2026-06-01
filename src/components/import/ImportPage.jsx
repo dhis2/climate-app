@@ -1,7 +1,15 @@
 import { useConfig } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { Button } from '@dhis2/ui'
+import {
+    Button,
+    ButtonStrip,
+    Modal,
+    ModalActions,
+    ModalContent,
+    ModalTitle,
+} from '@dhis2/ui'
 import { useState, useMemo, useEffect, useCallback } from 'react'
+import { useBlocker } from 'react-router-dom'
 import useOrgUnits from '../../hooks/useOrgUnits.js'
 import {
     getDefaultImportPeriod,
@@ -96,8 +104,22 @@ const ImportPage = () => {
     const [period, setPeriod] = useState(getDefaultImportPeriod({ calendar }))
     const [orgUnits, setOrgUnits] = useState(DEFAULT_ORG_UNITS)
     const [dataElement, setDataElement] = useState()
-    const standardPeriod = getStandardPeriod(period) // ISO 8601 used by GEE
+    const standardPeriod = useMemo(() => getStandardPeriod(period), [period])
     const [startExtract, setStartExtract] = useState(false)
+    const [importDone, setImportDone] = useState(false)
+    const [importFeatures, setImportFeatures] = useState(null)
+    const [importAttempted, setImportAttempted] = useState(false)
+    const [featurePayloadMbLimit, setFeaturePayloadMbLimit] = useState(10)
+
+    useBlocker(startExtract && !importDone)
+
+    const handleImportComplete = useCallback(() => setImportDone(true), [])
+    const handleModalClose = useCallback(() => {
+        setStartExtract(false)
+        setImportDone(false)
+        setImportFeatures(null)
+        setImportAttempted(true)
+    }, [])
 
     const {
         features,
@@ -127,6 +149,8 @@ const ImportPage = () => {
 
     useEffect(() => {
         setStartExtract(false)
+        setImportDone(false)
+        setImportAttempted(false)
     }, [dataset, period, orgUnits, dataElement])
 
     const updatePeriod = useCallback((val) => {
@@ -250,7 +274,7 @@ const ImportPage = () => {
                             )}
                         </div>
                     )}
-                    {canShowPreview && !startExtract && (
+                    {canShowPreview && !startExtract && !importAttempted && (
                         <ImportPreview
                             dataset={dataset.name || ''}
                             periodType={period.periodType || ''}
@@ -265,20 +289,71 @@ const ImportPage = () => {
                     <div>
                         <Button
                             primary
-                            disabled={!isValid || startExtract}
-                            onClick={() => setStartExtract(true)}
+                            disabled={
+                                !isValid || startExtract || importAttempted
+                            }
+                            onClick={() => {
+                                setImportFeatures(features)
+                                setStartExtract(true)
+                            }}
                         >
                             {i18n.t('Start import')}
                         </Button>
-                        {startExtract && isValid && (
-                            <ExtractData
-                                dataset={dataset}
-                                period={dataset.period ? null : standardPeriod}
-                                orgUnits={orgUnits}
-                                dataElement={dataElement}
-                            />
-                        )}
                     </div>
+                    <div className={classes.limitInput}>
+                        <label htmlFor="feature-payload-limit">
+                            {i18n.t('Feature payload limit (MB):')}
+                        </label>
+                        <input
+                            id="feature-payload-limit"
+                            type="number"
+                            min={1}
+                            max={10}
+                            step={1}
+                            value={featurePayloadMbLimit}
+                            onChange={(e) =>
+                                setFeaturePayloadMbLimit(Number(e.target.value))
+                            }
+                        />
+                    </div>
+                    {startExtract && isValid && (
+                        <Modal
+                            large
+                            position="middle"
+                            onClose={importDone ? handleModalClose : undefined}
+                        >
+                            <ModalTitle>
+                                {i18n.t('Importing climate data')}
+                            </ModalTitle>
+                            <ModalContent>
+                                <ExtractData
+                                    dataset={dataset}
+                                    period={
+                                        dataset.period ? null : standardPeriod
+                                    }
+                                    features={importFeatures}
+                                    dataElement={dataElement}
+                                    featurePayloadMbLimit={
+                                        featurePayloadMbLimit
+                                    }
+                                    onComplete={handleImportComplete}
+                                />
+                            </ModalContent>
+                            <ModalActions>
+                                <ButtonStrip end>
+                                    <Button
+                                        primary
+                                        disabled={!importDone}
+                                        onClick={handleModalClose}
+                                    >
+                                        {importDone
+                                            ? i18n.t('Close')
+                                            : i18n.t('Importing...')}
+                                    </Button>
+                                </ButtonStrip>
+                            </ModalActions>
+                        </Modal>
+                    )}
                 </div>
             </div>
         </div>

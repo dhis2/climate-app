@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-04-28T11:05:26.356Z\n"
-"PO-Revision-Date: 2026-04-28T11:05:26.357Z\n"
+"POT-Creation-Date: 2026-05-28T10:09:13.612Z\n"
+"PO-Revision-Date: 2026-05-28T10:09:13.612Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -643,30 +643,21 @@ msgstr "Need help setting up data elements for import? Check out the "
 msgid "setup guide"
 msgstr "setup guide"
 
-msgid "Loading org units"
-msgstr "Loading org units"
-
-msgid "Error loading org units: {{message}}"
-msgstr "Error loading org units: {{message}}"
-
-msgid "No org unit geometries found"
-msgstr "No org unit geometries found"
-
 msgid ""
-"Extracting data for {{periodCount}} {{periodType}} periods and "
+"Importing data for {{periodCount}} {{periodType}} periods and "
 "{{orgUnitsCount}} org units ({{valueCount}} values)"
 msgstr ""
-"Extracting data for {{periodCount}} {{periodType}} periods and "
+"Importing data for {{periodCount}} {{periodType}} periods and "
 "{{orgUnitsCount}} org units ({{valueCount}} values)"
 
-msgid "Extracting data for {{orgUnitsCount}} org units"
-msgstr "Extracting data for {{orgUnitsCount}} org units"
+msgid "Importing data for {{orgUnitsCount}} org units"
+msgstr "Importing data for {{orgUnitsCount}} org units"
 
 msgid "Dataset provider not recognized"
 msgstr "Dataset provider not recognized"
 
-msgid "Importing data to DHIS2"
-msgstr "Importing data to DHIS2"
+msgid "Received an unrecognized response from DHIS2"
+msgstr "Received an unrecognized response from DHIS2"
 
 msgid "Import failed"
 msgstr "Import failed"
@@ -697,6 +688,15 @@ msgstr ""
 
 msgid "Start import"
 msgstr "Start import"
+
+msgid "Importing climate data"
+msgstr "Importing climate data"
+
+msgid "Close"
+msgstr "Close"
+
+msgid "Importing..."
+msgstr "Importing..."
 
 msgid "For {{periodId}} ({{actualStartTime}} to {{actualEndTime}})"
 msgstr "For {{periodId}} ({{actualStartTime}} to {{actualEndTime}})"
@@ -759,6 +759,9 @@ msgid ""
 msgstr ""
 "ERA5-Land has limited data for coastal areas. Values for other org units "
 "will be imported."
+
+msgid "No org unit geometries found"
+msgstr "No org unit geometries found"
 
 msgid "Select organisation units"
 msgstr "Select organisation units"
@@ -922,9 +925,6 @@ msgstr "Your ENACTS DST API key here"
 
 msgid "Example configuration:"
 msgstr "Example configuration:"
-
-msgid "Close"
-msgstr "Close"
 
 msgid "Calculate from data"
 msgstr "Calculate from data"

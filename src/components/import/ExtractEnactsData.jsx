@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types'
+import { useCallback, useEffect, useState } from 'react'
 import useEnactsData from '../../hooks/useEnactsData.js'
 import DataLoader from '../shared/DataLoader.jsx'
 import ErrorMessage from '../shared/ErrorMessage.jsx'
@@ -10,19 +11,38 @@ const ExtractEnactsData = ({
     period,
     extractingLabel,
     features,
+    onComplete,
 }) => {
-    const { data, error, loading } = useEnactsData(dataset, period, features)
+    const { data, error } = useEnactsData(dataset, period, features)
+    const [importDone, setImportDone] = useState(false)
 
-    if (loading) {
-        return <DataLoader label={extractingLabel} height={100} />
-    }
+    useEffect(() => {
+        if (error) {
+            onComplete()
+        }
+    }, [error, onComplete])
+
+    const handleImportComplete = useCallback(() => {
+        setImportDone(true)
+        onComplete()
+    }, [onComplete])
 
     if (error) {
         return <ErrorMessage error={error} />
     }
 
     return (
-        <ImportData data={data} dataElement={dataElement} features={features} />
+        <>
+            {!importDone && <DataLoader label={extractingLabel} height={100} />}
+            {data && (
+                <ImportData
+                    data={data}
+                    dataElement={dataElement}
+                    features={features}
+                    onComplete={handleImportComplete}
+                />
+            )}
+        </>
     )
 }
 
@@ -31,6 +51,7 @@ ExtractEnactsData.propTypes = {
     dataset: PropTypes.object.isRequired,
     features: PropTypes.array.isRequired,
     period: PropTypes.object.isRequired,
+    onComplete: PropTypes.func.isRequired,
     extractingLabel: PropTypes.string,
 }
 
