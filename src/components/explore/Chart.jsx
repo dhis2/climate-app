@@ -15,14 +15,45 @@ const Chart = ({ config }) => {
     const chartRef = useRef()
 
     useLayoutEffect(() => {
-        Highcharts.chart(chartRef.current, config)
-    }, [config, chartRef])
+        const mergedConfig = {
+            ...config,
+            credits: {
+                ...config.credits,
+                enabled: false,
+            },
+        }
 
-    return <div ref={chartRef} />
+        Highcharts.chart(chartRef.current, mergedConfig)
+    }, [config])
+
+    return (
+        <>
+            <div ref={chartRef} />
+            <a
+                href={config.credits?.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                    fontSize: '10px',
+                    color: 'grey',
+                    display: 'block',
+                    textAlign: 'right',
+                    textDecoration: 'none',
+                }}
+            >
+                {config.credits?.text}
+            </a>
+        </>
+    )
 }
 
 Chart.propTypes = {
-    config: PropTypes.object.isRequired,
+    config: PropTypes.shape({
+        credits: PropTypes.shape({
+            href: PropTypes.string,
+            text: PropTypes.string,
+        }),
+    }).isRequired,
 }
 
 export default Chart
