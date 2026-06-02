@@ -1,13 +1,6 @@
 import { useConfig } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import {
-    Button,
-    ButtonStrip,
-    Modal,
-    ModalActions,
-    ModalContent,
-    ModalTitle,
-} from '@dhis2/ui'
+import { Button } from '@dhis2/ui'
 import { useState, useMemo, useEffect, useCallback } from 'react'
 import { useBlocker } from 'react-router-dom'
 import useOrgUnits from '../../hooks/useOrgUnits.js'
@@ -28,7 +21,7 @@ import Dataset from '../shared/Dataset.jsx'
 import Resolution from '../shared/Resolution.jsx'
 import SectionH2 from '../shared/SectionH2.jsx'
 import DataElement from './DataElement.jsx'
-import ExtractData from './ExtractData.jsx'
+import ImportModal from './ImportModal.jsx'
 import ImportPreview from './ImportPreview.jsx'
 import OrgUnits from './OrgUnits.jsx'
 import Period from './Period.jsx'
@@ -113,7 +106,7 @@ const ImportPage = () => {
 
     useBlocker(startExtract && !importDone)
 
-    const handleImportComplete = useCallback(() => setImportDone(true), [])
+    const handleImportDone = useCallback(() => setImportDone(true), [])
     const handleModalClose = useCallback(() => {
         setStartExtract(false)
         setImportDone(false)
@@ -307,9 +300,9 @@ const ImportPage = () => {
                         <input
                             id="feature-payload-limit"
                             type="number"
-                            min={1}
+                            min={0.1}
                             max={10}
-                            step={1}
+                            step={0.1}
                             value={featurePayloadMbLimit}
                             onChange={(e) =>
                                 setFeaturePayloadMbLimit(Number(e.target.value))
@@ -317,42 +310,15 @@ const ImportPage = () => {
                         />
                     </div>
                     {startExtract && isValid && (
-                        <Modal
-                            large
-                            position="middle"
-                            onClose={importDone ? handleModalClose : undefined}
-                        >
-                            <ModalTitle>
-                                {i18n.t('Importing climate data')}
-                            </ModalTitle>
-                            <ModalContent>
-                                <ExtractData
-                                    dataset={dataset}
-                                    period={
-                                        dataset.period ? null : standardPeriod
-                                    }
-                                    features={importFeatures}
-                                    dataElement={dataElement}
-                                    featurePayloadMbLimit={
-                                        featurePayloadMbLimit
-                                    }
-                                    onComplete={handleImportComplete}
-                                />
-                            </ModalContent>
-                            <ModalActions>
-                                <ButtonStrip end>
-                                    <Button
-                                        primary
-                                        disabled={!importDone}
-                                        onClick={handleModalClose}
-                                    >
-                                        {importDone
-                                            ? i18n.t('Close')
-                                            : i18n.t('Importing...')}
-                                    </Button>
-                                </ButtonStrip>
-                            </ModalActions>
-                        </Modal>
+                        <ImportModal
+                            dataset={dataset}
+                            period={dataset.period ? null : standardPeriod}
+                            features={importFeatures}
+                            dataElement={dataElement}
+                            featurePayloadMbLimit={featurePayloadMbLimit}
+                            onClose={handleModalClose}
+                            onImportDone={handleImportDone}
+                        />
                     )}
                 </div>
             </div>

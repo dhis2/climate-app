@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
 import { useCallback, useEffect, useState } from 'react'
 import useEarthEngineData from '../../hooks/useEarthEngineData.js'
@@ -35,7 +36,14 @@ const ExtractGeeData = ({
     }, [onComplete])
 
     if (error) {
-        return <ErrorMessage error={error} />
+        const displayError =
+            error?.code === 400 &&
+            error?.message?.includes('payload size exceeds')
+                ? i18n.t(
+                      'An org unit in your selection has boundaries that are too detailed to process. Try removing org units with very complex boundaries and importing again.'
+                  )
+                : error
+        return <ErrorMessage error={displayError} />
     }
 
     return (

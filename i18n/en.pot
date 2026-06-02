@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-05-28T10:09:13.612Z\n"
-"PO-Revision-Date: 2026-05-28T10:09:13.612Z\n"
+"POT-Creation-Date: 2026-06-02T13:58:03.590Z\n"
+"PO-Revision-Date: 2026-06-02T13:58:03.591Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -656,6 +656,15 @@ msgstr "Importing data for {{orgUnitsCount}} org units"
 msgid "Dataset provider not recognized"
 msgstr "Dataset provider not recognized"
 
+msgid ""
+"An org unit in your selection has boundaries that are too detailed to "
+"process. Try removing org units with very complex boundaries and importing "
+"again."
+msgstr ""
+"An org unit in your selection has boundaries that are too detailed to "
+"process. Try removing org units with very complex boundaries and importing "
+"again."
+
 msgid "Received an unrecognized response from DHIS2"
 msgstr "Received an unrecognized response from DHIS2"
 
@@ -664,6 +673,15 @@ msgstr "Import failed"
 
 msgid "One or more conflicts encountered"
 msgstr "One or more conflicts encountered"
+
+msgid "Importing climate data"
+msgstr "Importing climate data"
+
+msgid "Close"
+msgstr "Close"
+
+msgid "Importing..."
+msgstr "Importing..."
 
 msgid "Import weather and climate data"
 msgstr "Import weather and climate data"
@@ -688,15 +706,6 @@ msgstr ""
 
 msgid "Start import"
 msgstr "Start import"
-
-msgid "Importing climate data"
-msgstr "Importing climate data"
-
-msgid "Close"
-msgstr "Close"
-
-msgid "Importing..."
-msgstr "Importing..."
 
 msgid "For {{periodId}} ({{actualStartTime}} to {{actualEndTime}})"
 msgstr "For {{periodId}} ({{actualStartTime}} to {{actualEndTime}})"

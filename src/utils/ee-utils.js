@@ -447,9 +447,28 @@ export const getEarthEngineData = async ({
         }
     }
 
+    const runForChunkWithRetry = async (chunkFeatures) => {
+        try {
+            return await runForChunk(chunkFeatures)
+        } catch (error) {
+            if (error?.code === 400 && chunkFeatures.length > 1) {
+                console.log(
+                    `Payload too large for ${chunkFeatures.length} features, splitting in half`
+                )
+                const mid = Math.floor(chunkFeatures.length / 2)
+                const [left, right] = await Promise.all([
+                    runForChunkWithRetry(chunkFeatures.slice(0, mid)),
+                    runForChunkWithRetry(chunkFeatures.slice(mid)),
+                ])
+                return [...left, ...right]
+            }
+            throw error
+        }
+    }
+
     const results = []
     for (const chunk of chunks) {
-        results.push(await runForChunk(chunk))
+        results.push(await runForChunkWithRetry(chunk))
     }
     return results.flat()
 }
