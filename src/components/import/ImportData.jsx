@@ -71,22 +71,24 @@ const ImportData = ({
         }
     }, [error, onComplete])
 
+    let feedback = null
+    if (response) {
+        feedback = <ImportResponse {...response} chunkCount={chunkCount} />
+    } else if (error) {
+        feedback = (
+            <ImportError {...(error.details || {})} message={error.message} />
+        )
+    } else if (importFailed) {
+        feedback = (
+            <ImportError
+                message={i18n.t('Received an unrecognized response from DHIS2')}
+            />
+        )
+    }
+
     return (
         <div className={styles.container}>
-            {response ? (
-                <ImportResponse {...response} chunkCount={chunkCount} />
-            ) : error ? (
-                <ImportError
-                    {...(error.details || {})}
-                    message={error.message}
-                />
-            ) : importFailed ? (
-                <ImportError
-                    message={i18n.t(
-                        'Received an unrecognized response from DHIS2'
-                    )}
-                />
-            ) : null}
+            {feedback}
             <NoOrgUnitData data={data} features={features} />
         </div>
     )
