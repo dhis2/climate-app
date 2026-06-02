@@ -81,7 +81,7 @@ jobs:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     release:
-        needs: [lint-commits, lint, test, cypress-component, cypress-e2e]
+        needs: [lint-commits, lint, test, build, cypress-component, cypress-e2e]
         uses: dhis2/workflows-platform/.github/workflows/release.yml@v1
         # Skips forks and dependabot PRs
         if: '!github.event.push.repository.fork'
