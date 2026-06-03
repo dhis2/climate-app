@@ -58,7 +58,6 @@ const ExtractData = ({
                 period={period}
                 features={features}
                 dataElement={dataElement}
-                extractingLabel={extractingLabel}
                 featurePayloadMbLimit={featurePayloadMbLimit}
                 chunkCount={chunkCount}
                 onComplete={onComplete}

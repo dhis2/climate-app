@@ -300,16 +300,16 @@ const ImportPage = () => {
                         <input
                             id="feature-payload-limit"
                             type="number"
-                            min={0.1}
+                            min={1}
                             max={10}
-                            step={0.1}
+                            step={1}
                             value={featurePayloadMbLimit}
                             onChange={(e) =>
                                 setFeaturePayloadMbLimit(Number(e.target.value))
                             }
                         />
                     </div>
-                    {startExtract && isValid && (
+                    {startExtract && (
                         <ImportModal
                             dataset={dataset}
                             period={dataset.period ? null : standardPeriod}

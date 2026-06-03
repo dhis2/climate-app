@@ -1,9 +1,39 @@
-import { chunkFeaturesBySize } from '../ee-utils.js'
+import { chunkFeaturesBySize, retryOn502 } from '../ee-utils.js'
 
 const makeFeature = (padKB = 0) => ({
     id: 'abc123',
     geometry: { type: 'Point', coordinates: [0, 0] },
     properties: { name: 'Test', _pad: 'x'.repeat(padKB * 1024) },
+})
+
+describe('retryOn502', () => {
+    it('resolves immediately when fn succeeds first time', async () => {
+        const fn = jest.fn().mockResolvedValue('ok')
+        await expect(retryOn502(fn, 3, 0)).resolves.toBe('ok')
+        expect(fn).toHaveBeenCalledTimes(1)
+    })
+
+    it('retries on 502 and resolves when fn eventually succeeds', async () => {
+        const fn = jest
+            .fn()
+            .mockRejectedValueOnce('502 Bad Gateway')
+            .mockRejectedValueOnce('502 Bad Gateway')
+            .mockResolvedValue('ok')
+        await expect(retryOn502(fn, 3, 0)).resolves.toBe('ok')
+        expect(fn).toHaveBeenCalledTimes(3)
+    })
+
+    it('throws after exhausting all retries', async () => {
+        const fn = jest.fn().mockRejectedValue('502 Bad Gateway')
+        await expect(retryOn502(fn, 3, 0)).rejects.toBe('502 Bad Gateway')
+        expect(fn).toHaveBeenCalledTimes(4) // initial + 3 retries
+    })
+
+    it('does not retry on non-502 errors', async () => {
+        const fn = jest.fn().mockRejectedValue('some other error')
+        await expect(retryOn502(fn, 3, 0)).rejects.toBe('some other error')
+        expect(fn).toHaveBeenCalledTimes(1)
+    })
 })
 
 describe('chunkFeaturesBySize', () => {

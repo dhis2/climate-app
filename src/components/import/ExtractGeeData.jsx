@@ -11,12 +11,11 @@ const ExtractGeeData = ({
     dataset,
     period,
     features,
-    extractingLabel,
     featurePayloadMbLimit,
     chunkCount,
     onComplete,
 }) => {
-    const { data, error } = useEarthEngineData({
+    const { data, error, splitCount, progress } = useEarthEngineData({
         dataset,
         period,
         features,
@@ -46,15 +45,32 @@ const ExtractGeeData = ({
         return <ErrorMessage error={displayError} />
     }
 
+    let loadingLabel
+    if (data) {
+        loadingLabel = i18n.t('Importing data to DHIS2')
+    } else if (progress.total > 1) {
+        loadingLabel = i18n.t(
+            'Extracting data from Google Earth Engine (batch {{current}} of {{total}})',
+            {
+                current: progress.current,
+                total: progress.total,
+                nsSeparator: ';',
+            }
+        )
+    } else {
+        loadingLabel = i18n.t('Extracting data from Google Earth Engine')
+    }
+
     return (
         <>
-            {!importDone && <DataLoader label={extractingLabel} height={100} />}
+            {!importDone && <DataLoader label={loadingLabel} height={100} />}
             {data && (
                 <ImportData
                     data={data}
                     dataElement={dataElement}
                     features={features}
                     chunkCount={chunkCount}
+                    splitCount={splitCount}
                     onComplete={handleImportComplete}
                 />
             )}
@@ -69,7 +85,6 @@ ExtractGeeData.propTypes = {
     period: PropTypes.object.isRequired,
     onComplete: PropTypes.func.isRequired,
     chunkCount: PropTypes.number,
-    extractingLabel: PropTypes.string,
     featurePayloadMbLimit: PropTypes.number,
 }
 

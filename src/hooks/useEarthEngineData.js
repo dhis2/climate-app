@@ -11,6 +11,8 @@ const useEarthEngineData = ({
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState()
     const [error, setError] = useState()
+    const [splitCount, setSplitCount] = useState(0)
+    const [progress, setProgress] = useState({ current: 0, total: 0 })
     const eePromise = useEarthEngine()
 
     useEffect(() => {
@@ -24,9 +26,12 @@ const useEarthEngineData = ({
                     period,
                     features,
                     featurePayloadMbLimit,
+                    onProgress: (current, total) =>
+                        setProgress({ current, total }),
                 })
-                    .then((data) => {
+                    .then(({ data, splitCount }) => {
                         setData(data)
+                        setSplitCount(splitCount)
                         setLoading(false)
                     })
                     .catch((error) => {
@@ -37,7 +42,7 @@ const useEarthEngineData = ({
         }
     }, [eePromise, dataset, period, features, featurePayloadMbLimit])
 
-    return { data, error, loading }
+    return { data, error, loading, splitCount, progress }
 }
 
 export default useEarthEngineData

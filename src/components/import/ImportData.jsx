@@ -30,6 +30,7 @@ const ImportData = ({
     dataElement,
     features,
     chunkCount,
+    splitCount,
     onComplete,
 }) => {
     const [response, setResponse] = useState(false)
@@ -73,7 +74,13 @@ const ImportData = ({
 
     let feedback = null
     if (response) {
-        feedback = <ImportResponse {...response} chunkCount={chunkCount} />
+        feedback = (
+            <ImportResponse
+                {...response}
+                chunkCount={chunkCount}
+                splitCount={splitCount}
+            />
+        )
     } else if (error) {
         feedback = (
             <ImportError {...(error.details || {})} message={error.message} />
@@ -100,6 +107,7 @@ ImportData.propTypes = {
     features: PropTypes.array.isRequired,
     onComplete: PropTypes.func.isRequired,
     chunkCount: PropTypes.number,
+    splitCount: PropTypes.number,
 }
 
 export default ImportData

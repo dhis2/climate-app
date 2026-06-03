@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
 import styles from './styles/ImportResponse.module.css'
 
-const ImportResponse = ({ importCount, chunkCount }) => {
+const ImportResponse = ({ importCount, chunkCount, splitCount }) => {
     const { imported, updated, ignored, missing } = importCount
     return (
         <div className={styles.container}>
@@ -32,6 +32,7 @@ const ImportResponse = ({ importCount, chunkCount }) => {
                 })}
             </div>
             {chunkCount !== undefined && <div>{`Chunks: ${chunkCount}`}</div>}
+            {splitCount !== undefined && <div>{`Splits: ${splitCount}`}</div>}
         </div>
     )
 }
@@ -39,6 +40,7 @@ const ImportResponse = ({ importCount, chunkCount }) => {
 ImportResponse.propTypes = {
     importCount: PropTypes.object.isRequired,
     chunkCount: PropTypes.number,
+    splitCount: PropTypes.number,
 }
 
 export default ImportResponse
