@@ -12,10 +12,9 @@ const ExtractGeeData = ({
     period,
     features,
     featurePayloadMbLimit,
-    chunkCount,
     onComplete,
 }) => {
-    const { data, error, splitCount, progress } = useEarthEngineData({
+    const { data, error, progress } = useEarthEngineData({
         dataset,
         period,
         features,
@@ -69,8 +68,6 @@ const ExtractGeeData = ({
                     data={data}
                     dataElement={dataElement}
                     features={features}
-                    chunkCount={chunkCount}
-                    splitCount={splitCount}
                     onComplete={handleImportComplete}
                 />
             )}
@@ -84,7 +81,6 @@ ExtractGeeData.propTypes = {
     features: PropTypes.array.isRequired,
     period: PropTypes.object.isRequired,
     onComplete: PropTypes.func.isRequired,
-    chunkCount: PropTypes.number,
     featurePayloadMbLimit: PropTypes.number,
 }
 

@@ -4,7 +4,6 @@ import {
     PROVIDER_ENACTS,
     PROVIDER_GEE,
 } from '../../components/DataSourcesProvider.jsx'
-import { chunkFeaturesBySize } from '../../utils/ee-utils.js'
 import { getPeriods, getPeriodTypes } from '../../utils/time.js'
 import ExtractEnactsData from './ExtractEnactsData.jsx'
 import ExtractGeeData from './ExtractGeeData.jsx'
@@ -48,10 +47,6 @@ const ExtractData = ({
     }
 
     if (dataset?.provider.id == PROVIDER_GEE) {
-        const chunkCount = chunkFeaturesBySize(
-            features,
-            featurePayloadMbLimit
-        ).length
         return (
             <ExtractGeeData
                 dataset={dataset}
@@ -59,7 +54,6 @@ const ExtractData = ({
                 features={features}
                 dataElement={dataElement}
                 featurePayloadMbLimit={featurePayloadMbLimit}
-                chunkCount={chunkCount}
                 onComplete={onComplete}
             />
         )

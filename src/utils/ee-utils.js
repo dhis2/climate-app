@@ -484,8 +484,6 @@ export const getEarthEngineData = async ({
         }
     }
 
-    let splitCount = 0
-
     const runForChunkWithRetry = async (chunkFeatures) => {
         try {
             return await retryOn502(() => runForChunk(chunkFeatures))
@@ -494,7 +492,6 @@ export const getEarthEngineData = async ({
                 chunkFeatures.length > 1 &&
                 /payload size exceeds the limit/i.test(error)
             ) {
-                splitCount++
                 const mid = Math.floor(chunkFeatures.length / 2)
                 const [left, right] = await Promise.all([
                     runForChunkWithRetry(chunkFeatures.slice(0, mid)),
@@ -511,7 +508,7 @@ export const getEarthEngineData = async ({
         onProgress?.(i + 1, chunks.length)
         results.push(await runForChunkWithRetry(chunks[i]))
     }
-    return { data: results.flat(), splitCount }
+    return results.flat()
 }
 
 export const getTimeSeriesData = async ({

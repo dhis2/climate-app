@@ -25,14 +25,7 @@ const countMissing = (data) => {
     return missing
 }
 
-const ImportData = ({
-    data,
-    dataElement,
-    features,
-    chunkCount,
-    splitCount,
-    onComplete,
-}) => {
+const ImportData = ({ data, dataElement, features, onComplete }) => {
     const [response, setResponse] = useState(false)
     const [importFailed, setImportFailed] = useState(false)
     const [mutate, { error }] = useDataMutation(dataImportMutation)
@@ -74,13 +67,7 @@ const ImportData = ({
 
     let feedback = null
     if (response) {
-        feedback = (
-            <ImportResponse
-                {...response}
-                chunkCount={chunkCount}
-                splitCount={splitCount}
-            />
-        )
+        feedback = <ImportResponse {...response} />
     } else if (error) {
         feedback = (
             <ImportError {...(error.details || {})} message={error.message} />
@@ -106,8 +93,6 @@ ImportData.propTypes = {
     dataElement: PropTypes.object.isRequired,
     features: PropTypes.array.isRequired,
     onComplete: PropTypes.func.isRequired,
-    chunkCount: PropTypes.number,
-    splitCount: PropTypes.number,
 }
 
 export default ImportData
