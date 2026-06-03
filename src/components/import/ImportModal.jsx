@@ -16,7 +16,6 @@ const ImportModal = ({
     period,
     features,
     dataElement,
-    featurePayloadMbLimit,
     onClose,
     onImportDone,
     ExtractDataComponent = ExtractData,
@@ -41,7 +40,6 @@ const ImportModal = ({
                     period={period}
                     features={features}
                     dataElement={dataElement}
-                    featurePayloadMbLimit={featurePayloadMbLimit}
                     onComplete={handleImportComplete}
                 />
             </ModalContent>
@@ -62,7 +60,6 @@ ImportModal.propTypes = {
     features: PropTypes.array.isRequired,
     onClose: PropTypes.func.isRequired,
     ExtractDataComponent: PropTypes.elementType,
-    featurePayloadMbLimit: PropTypes.number,
     period: PropTypes.object,
     onImportDone: PropTypes.func,
 }

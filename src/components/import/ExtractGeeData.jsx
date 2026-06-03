@@ -11,14 +11,12 @@ const ExtractGeeData = ({
     dataset,
     period,
     features,
-    featurePayloadMbLimit,
     onComplete,
 }) => {
     const { data, error, progress } = useEarthEngineData({
         dataset,
         period,
         features,
-        featurePayloadMbLimit,
     })
     const [importDone, setImportDone] = useState(false)
 
@@ -34,13 +32,11 @@ const ExtractGeeData = ({
     }, [onComplete])
 
     if (error) {
-        const displayError =
-            error?.code === 400 &&
-            error?.message?.includes('payload size exceeds')
-                ? i18n.t(
-                      'An org unit in your selection has boundaries that are too detailed to process. Try removing org units with very complex boundaries and importing again.'
-                  )
-                : error
+        const displayError = /payload size exceeds the limit/i.test(error)
+            ? i18n.t(
+                  'An org unit in your selection has boundaries that are too detailed to process.'
+              )
+            : error
         return <ErrorMessage error={displayError} />
     }
 
@@ -81,7 +77,6 @@ ExtractGeeData.propTypes = {
     features: PropTypes.array.isRequired,
     period: PropTypes.object.isRequired,
     onComplete: PropTypes.func.isRequired,
-    featurePayloadMbLimit: PropTypes.number,
 }
 
 export default ExtractGeeData

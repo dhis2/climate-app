@@ -2,12 +2,7 @@ import { useState, useEffect } from 'react'
 import { getEarthEngineData } from '../utils/ee-utils.js'
 import useEarthEngine from './useEarthEngine.js'
 
-const useEarthEngineData = ({
-    dataset,
-    period,
-    features,
-    featurePayloadMbLimit,
-}) => {
+const useEarthEngineData = ({ dataset, period, features }) => {
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState()
     const [error, setError] = useState()
@@ -24,7 +19,6 @@ const useEarthEngineData = ({
                     dataset,
                     period,
                     features,
-                    featurePayloadMbLimit,
                     onProgress: (current, total) =>
                         setProgress({ current, total }),
                 })
@@ -38,7 +32,7 @@ const useEarthEngineData = ({
                     })
             )
         }
-    }, [eePromise, dataset, period, features, featurePayloadMbLimit])
+    }, [eePromise, dataset, period, features])
 
     return { data, error, loading, progress }
 }

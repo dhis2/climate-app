@@ -14,7 +14,7 @@ import {
 
 const VALUE_LIMIT = 5000
 const DEFAULT_SCALE = 1000
-const FEATURE_PAYLOAD_MB_LIMIT = 0.5
+const FEATURE_PAYLOAD_MB_LIMIT = 2
 
 export const chunkFeaturesBySize = (
     features,
@@ -450,10 +450,9 @@ export const getEarthEngineData = async ({
     dataset,
     period,
     features,
-    featurePayloadMbLimit,
     onProgress,
 }) => {
-    const chunks = chunkFeaturesBySize(features, featurePayloadMbLimit)
+    const chunks = chunkFeaturesBySize(features)
 
     const runForChunk = (chunkFeatures) => {
         if (!period) {

@@ -102,7 +102,6 @@ const ImportPage = () => {
     const [importDone, setImportDone] = useState(false)
     const [importFeatures, setImportFeatures] = useState(null)
     const [importAttempted, setImportAttempted] = useState(false)
-    const featurePayloadMbLimit = 3
 
     useBlocker(startExtract && !importDone)
 
@@ -299,7 +298,6 @@ const ImportPage = () => {
                             period={dataset.period ? null : standardPeriod}
                             features={importFeatures}
                             dataElement={dataElement}
-                            featurePayloadMbLimit={featurePayloadMbLimit}
                             onClose={handleModalClose}
                             onImportDone={handleImportDone}
                         />
