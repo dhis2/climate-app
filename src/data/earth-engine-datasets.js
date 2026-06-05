@@ -121,7 +121,8 @@ const getEEDatasets = () => [
         periodType: DAILY,
         supportedPeriodTypes: [DAILY, WEEKLY, MONTHLY],
         band: 'temperature_2m_max',
-        reducer: 'max',
+        reducer: 'mean',
+        periodReducer: 'max',
         timeZone: {
             datasetId: 'ECMWF/ERA5_LAND/HOURLY',
             band: 'temperature_2m',
@@ -148,7 +149,8 @@ const getEEDatasets = () => [
         periodType: DAILY,
         supportedPeriodTypes: [DAILY, WEEKLY, MONTHLY],
         band: 'temperature_2m_min',
-        reducer: 'min',
+        reducer: 'mean',
+        periodReducer: 'min',
         timeZone: {
             datasetId: 'ECMWF/ERA5_LAND/HOURLY',
             band: 'temperature_2m',
