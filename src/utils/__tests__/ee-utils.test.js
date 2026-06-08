@@ -47,15 +47,15 @@ describe('chunkFeaturesBySize', () => {
     })
 
     it('splits into multiple chunks when payload exceeds limit', () => {
-        // 10 features × 100KB each = ~1MB > 0.5MB limit
-        const features = Array.from({ length: 10 }, () => makeFeature(100))
+        // 10 features × 250KB each = ~2.5MB > 2MB limit
+        const features = Array.from({ length: 10 }, () => makeFeature(250))
         const chunks = chunkFeaturesBySize(features)
         expect(chunks.length).toBeGreaterThan(1)
     })
 
     it('preserves all features across chunks with no duplicates or gaps', () => {
         const features = Array.from({ length: 10 }, (_, i) => ({
-            ...makeFeature(100),
+            ...makeFeature(250),
             id: `ou${i}`,
         }))
         const chunks = chunkFeaturesBySize(features)
@@ -65,8 +65,8 @@ describe('chunkFeaturesBySize', () => {
     })
 
     it('puts an oversized single feature in its own chunk', () => {
-        // First feature alone exceeds the 0.5MB limit
-        const features = [makeFeature(600), makeFeature(1)]
+        // First feature alone exceeds the 2MB limit
+        const features = [makeFeature(2100), makeFeature(1)]
         const chunks = chunkFeaturesBySize(features)
         expect(chunks[0]).toHaveLength(1)
         expect(chunks[0][0].id).toBe(features[0].id)
@@ -74,7 +74,7 @@ describe('chunkFeaturesBySize', () => {
     })
 
     it('keeps features together when they fit cumulatively', () => {
-        // 4 features × 100KB = ~400KB, just under 0.5MB limit
+        // 4 features × 100KB = ~400KB, well under 2MB limit
         const features = Array.from({ length: 4 }, () => makeFeature(100))
         const chunks = chunkFeaturesBySize(features)
         expect(chunks).toHaveLength(1)
