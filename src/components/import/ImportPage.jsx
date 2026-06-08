@@ -2,6 +2,7 @@ import { useConfig } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
 import { useState, useMemo, useEffect, useCallback } from 'react'
+import { useBlocker } from 'react-router-dom'
 import useOrgUnits from '../../hooks/useOrgUnits.js'
 import {
     getDefaultImportPeriod,
@@ -20,7 +21,7 @@ import Dataset from '../shared/Dataset.jsx'
 import Resolution from '../shared/Resolution.jsx'
 import SectionH2 from '../shared/SectionH2.jsx'
 import DataElement from './DataElement.jsx'
-import ExtractData from './ExtractData.jsx'
+import ImportModal from './ImportModal.jsx'
 import ImportPreview from './ImportPreview.jsx'
 import OrgUnits from './OrgUnits.jsx'
 import Period from './Period.jsx'
@@ -96,8 +97,21 @@ const ImportPage = () => {
     const [period, setPeriod] = useState(getDefaultImportPeriod({ calendar }))
     const [orgUnits, setOrgUnits] = useState(DEFAULT_ORG_UNITS)
     const [dataElement, setDataElement] = useState()
-    const standardPeriod = getStandardPeriod(period) // ISO 8601 used by GEE
+    const standardPeriod = useMemo(() => getStandardPeriod(period), [period])
     const [startExtract, setStartExtract] = useState(false)
+    const [importDone, setImportDone] = useState(false)
+    const [importFeatures, setImportFeatures] = useState(null)
+    const [importAttempted, setImportAttempted] = useState(false)
+
+    useBlocker(startExtract && !importDone)
+
+    const handleImportDone = useCallback(() => setImportDone(true), [])
+    const handleModalClose = useCallback(() => {
+        setStartExtract(false)
+        setImportDone(false)
+        setImportFeatures(null)
+        setImportAttempted(true)
+    }, [])
 
     const {
         features,
@@ -127,6 +141,8 @@ const ImportPage = () => {
 
     useEffect(() => {
         setStartExtract(false)
+        setImportDone(false)
+        setImportAttempted(false)
     }, [dataset, period, orgUnits, dataElement])
 
     const updatePeriod = useCallback((val) => {
@@ -250,7 +266,7 @@ const ImportPage = () => {
                             )}
                         </div>
                     )}
-                    {canShowPreview && !startExtract && (
+                    {canShowPreview && !startExtract && !importAttempted && (
                         <ImportPreview
                             dataset={dataset.name || ''}
                             periodType={period.periodType || ''}
@@ -265,20 +281,27 @@ const ImportPage = () => {
                     <div>
                         <Button
                             primary
-                            disabled={!isValid || startExtract}
-                            onClick={() => setStartExtract(true)}
+                            disabled={
+                                !isValid || startExtract || importAttempted
+                            }
+                            onClick={() => {
+                                setImportFeatures(features)
+                                setStartExtract(true)
+                            }}
                         >
                             {i18n.t('Start import')}
                         </Button>
-                        {startExtract && isValid && (
-                            <ExtractData
-                                dataset={dataset}
-                                period={dataset.period ? null : standardPeriod}
-                                orgUnits={orgUnits}
-                                dataElement={dataElement}
-                            />
-                        )}
                     </div>
+                    {startExtract && (
+                        <ImportModal
+                            dataset={dataset}
+                            period={dataset.period ? null : standardPeriod}
+                            features={importFeatures}
+                            dataElement={dataElement}
+                            onClose={handleModalClose}
+                            onImportDone={handleImportDone}
+                        />
+                    )}
                 </div>
             </div>
         </div>

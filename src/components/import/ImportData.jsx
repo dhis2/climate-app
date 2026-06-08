@@ -25,8 +25,9 @@ const countMissing = (data) => {
     return missing
 }
 
-const ImportData = ({ data, dataElement, features }) => {
+const ImportData = ({ data, dataElement, features, onComplete }) => {
     const [response, setResponse] = useState(false)
+    const [importFailed, setImportFailed] = useState(false)
     const [mutate, { error }] = useDataMutation(dataImportMutation)
 
     useEffect(() => {
@@ -51,19 +52,37 @@ const ImportData = ({ data, dataElement, features }) => {
                 // count and add number of missing values to response metadata
                 response.importCount.missing = countMissing(data)
                 setResponse(response)
+            } else {
+                setImportFailed(true)
             }
+            onComplete()
         })
-    }, [mutate, data, dataElement])
+    }, [mutate, data, dataElement, onComplete])
+
+    useEffect(() => {
+        if (error) {
+            onComplete()
+        }
+    }, [error, onComplete])
+
+    let feedback = null
+    if (response) {
+        feedback = <ImportResponse {...response} />
+    } else if (error) {
+        feedback = (
+            <ImportError {...(error.details || {})} message={error.message} />
+        )
+    } else if (importFailed) {
+        feedback = (
+            <ImportError
+                message={i18n.t('Received an unrecognized response from DHIS2')}
+            />
+        )
+    }
 
     return (
         <div className={styles.container}>
-            {response ? (
-                <ImportResponse {...response} />
-            ) : error?.details ? (
-                <ImportError {...error.details} />
-            ) : (
-                i18n.t('Importing data to DHIS2')
-            )}
+            {feedback}
             <NoOrgUnitData data={data} features={features} />
         </div>
     )
@@ -73,6 +92,7 @@ ImportData.propTypes = {
     data: PropTypes.array.isRequired,
     dataElement: PropTypes.object.isRequired,
     features: PropTypes.array.isRequired,
+    onComplete: PropTypes.func.isRequired,
 }
 
 export default ImportData

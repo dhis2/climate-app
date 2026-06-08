@@ -15,6 +15,28 @@ jobs:
     test:
         uses: dhis2/workflows-platform/.github/workflows/test.yml@v1
 
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 20.x
+
+            - name: Install
+              run: yarn install --frozen-lockfile
+
+            - name: Build
+              run: yarn d2-app-scripts build
+
+            - uses: actions/upload-artifact@v4
+              with:
+                  name: app-build
+                  path: |
+                      **/build
+                      !**/node_modules
+                  retention-days: 1
+
     cypress-component:
         runs-on: ubuntu-latest
         steps:
@@ -59,7 +81,7 @@ jobs:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     release:
-        needs: [lint-commits, lint, test, cypress-component, cypress-e2e]
+        needs: [lint-commits, lint, test, build, cypress-component, cypress-e2e]
         uses: dhis2/workflows-platform/.github/workflows/release.yml@v1
         # Skips forks and dependabot PRs
         if: '!github.event.push.repository.fork'
