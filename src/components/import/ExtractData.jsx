@@ -4,7 +4,6 @@ import {
     PROVIDER_ENACTS,
     PROVIDER_GEE,
 } from '../../components/DataSourcesProvider.jsx'
-import { getPeriods, getPeriodTypes } from '../../utils/time.js'
 import ExtractEnactsData from './ExtractEnactsData.jsx'
 import ExtractGeeData from './ExtractGeeData.jsx'
 import styles from './styles/ExtractData.module.css'
@@ -16,35 +15,6 @@ const ExtractData = ({
     dataElement,
     onComplete,
 }) => {
-    const orgUnitsCount = features.length
-    let extractingLabel
-
-    if (period) {
-        const periodType = getPeriodTypes()
-            .find((type) => type.id === period.periodType)
-            ?.name.toLowerCase()
-        const periods = getPeriods(period)
-        const periodCount = periods.length
-        const valueCount = periodCount * orgUnitsCount
-
-        extractingLabel = i18n.t(
-            'Importing data for {{periodCount}} {{periodType}} periods and {{orgUnitsCount}} org units ({{valueCount}} values)',
-            {
-                periodCount,
-                periodType,
-                orgUnitsCount,
-                valueCount,
-            }
-        )
-    } else {
-        extractingLabel = i18n.t(
-            'Importing data for {{orgUnitsCount}} org units',
-            {
-                orgUnitsCount,
-            }
-        )
-    }
-
     if (dataset?.provider.id == PROVIDER_GEE) {
         return (
             <ExtractGeeData
@@ -62,7 +32,6 @@ const ExtractData = ({
                 period={period}
                 features={features}
                 dataElement={dataElement}
-                extractingLabel={extractingLabel}
                 onComplete={onComplete}
             />
         )

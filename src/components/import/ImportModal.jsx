@@ -18,7 +18,6 @@ const ImportModal = ({
     dataElement,
     onClose,
     onImportDone,
-    ExtractDataComponent = ExtractData,
 }) => {
     const [importDone, setImportDone] = useState(false)
 
@@ -35,7 +34,7 @@ const ImportModal = ({
         >
             <ModalTitle>{i18n.t('Importing climate data')}</ModalTitle>
             <ModalContent>
-                <ExtractDataComponent
+                <ExtractData
                     dataset={dataset}
                     period={period}
                     features={features}
@@ -59,7 +58,6 @@ ImportModal.propTypes = {
     dataset: PropTypes.object.isRequired,
     features: PropTypes.array.isRequired,
     onClose: PropTypes.func.isRequired,
-    ExtractDataComponent: PropTypes.elementType,
     period: PropTypes.object,
     onImportDone: PropTypes.func,
 }

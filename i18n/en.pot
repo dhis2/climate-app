@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-06-03T12:08:39.455Z\n"
-"PO-Revision-Date: 2026-06-03T12:08:39.456Z\n"
+"POT-Creation-Date: 2026-06-08T12:01:46.863Z\n"
+"PO-Revision-Date: 2026-06-08T12:01:46.864Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -643,6 +643,9 @@ msgstr "Need help setting up data elements for import? Check out the "
 msgid "setup guide"
 msgstr "setup guide"
 
+msgid "Dataset provider not recognized"
+msgstr "Dataset provider not recognized"
+
 msgid ""
 "Importing data for {{periodCount}} {{periodType}} periods and "
 "{{orgUnitsCount}} org units ({{valueCount}} values)"
@@ -652,9 +655,6 @@ msgstr ""
 
 msgid "Importing data for {{orgUnitsCount}} org units"
 msgstr "Importing data for {{orgUnitsCount}} org units"
-
-msgid "Dataset provider not recognized"
-msgstr "Dataset provider not recognized"
 
 msgid ""
 "An org unit in your selection has boundaries that are too detailed to "
