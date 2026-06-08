@@ -7,7 +7,6 @@ const defaultProps = {
     period: { periodType: 'MONTHLY', startDate: '2025-01', endDate: '2025-12' },
     features: [{ id: 'ouId1' }],
     dataElement: { id: 'deId1', displayName: 'Temperature' },
-    featurePayloadMbLimit: 10,
     onClose: () => {},
 }
 
