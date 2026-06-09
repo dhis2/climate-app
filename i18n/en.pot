@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-06-08T19:45:53.336Z\n"
-"PO-Revision-Date: 2026-06-08T19:45:53.336Z\n"
+"POT-Creation-Date: 2026-06-09T05:55:17.093Z\n"
+"PO-Revision-Date: 2026-06-09T05:55:17.094Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -948,15 +948,6 @@ msgstr "Import…"
 msgid "More actions"
 msgstr "More actions"
 
-msgid "Loading org units…"
-msgstr "Loading org units…"
-
-msgid "Extracting data from {{provider}}…"
-msgstr "Extracting data from {{provider}}…"
-
-msgid "Importing values into DHIS2…"
-msgstr "Importing values into DHIS2…"
-
 msgid "Import \"{{name}}\""
 msgstr "Import \"{{name}}\""
 
@@ -992,6 +983,9 @@ msgstr "Since last import ({{range}})"
 msgid "Change"
 msgstr "Change"
 
+msgid "Failed to load org unit geometries"
+msgstr "Failed to load org unit geometries"
+
 msgid ""
 "Range exceeds the {{max}}-value limit. Split into multiple runs by "
 "importing a shorter date range from the form."
@@ -1001,33 +995,6 @@ msgstr ""
 
 msgid "Start import"
 msgstr "Start import"
-
-msgid "Importing \"{{name}}\"…"
-msgstr "Importing \"{{name}}\"…"
-
-msgid "Don't close this tab."
-msgstr "Don't close this tab."
-
-msgid "Imported \"{{name}}\""
-msgstr "Imported \"{{name}}\""
-
-msgid "Imported {{imported}} values. Data updated to {{date}}."
-msgstr "Imported {{imported}} values. Data updated to {{date}}."
-
-msgid "Updated"
-msgstr "Updated"
-
-msgid "Ignored (already exists)"
-msgstr "Ignored (already exists)"
-
-msgid "Missing"
-msgstr "Missing"
-
-msgid "Failed to import \"{{name}}\""
-msgstr "Failed to import \"{{name}}\""
-
-msgid "Retry"
-msgstr "Retry"
 
 msgid "Chart settings"
 msgstr "Chart settings"
