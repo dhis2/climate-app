@@ -260,6 +260,28 @@ export const formatDate = (date) => {
 }
 
 /**
+ * Formats an ISO date string for display (e.g. "Jun 10, 2026").
+ * Returns bare year strings as-is. Returns empty string for falsy input.
+ */
+export const formatBookmarkDate = (str) => {
+    if (!str) {
+        return ''
+    }
+    if (/^\d{4}$/.test(str)) {
+        return str
+    }
+    const d = new Date(str)
+    if (Number.isNaN(d.getTime())) {
+        return str
+    }
+    return d.toLocaleDateString('en', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric',
+    })
+}
+
+/**
  * Translates a date string to a date object
  * @param {String} dateString Date string in the format YYYY-MM-DD or YYYY-MM or YYYY
  * @returns {Object} Date object with year, month and day

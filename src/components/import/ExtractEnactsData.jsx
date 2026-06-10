@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import useEnactsData from '../../hooks/useEnactsData.js'
 import { getPeriods, getPeriodTypes } from '../../utils/time.js'
 import DataLoader from '../shared/DataLoader.jsx'
@@ -40,11 +40,14 @@ const ExtractEnactsData = ({
     const extractingLabel = getExtractingLabel(period, features)
     const { data, error } = useEnactsData(dataset, period, features)
 
+    const onErrorRef = useRef(onError)
+    onErrorRef.current = onError
+
     useEffect(() => {
-        if (error && onError) {
-            onError(error)
+        if (error) {
+            onErrorRef.current?.()
         }
-    }, [error, onError])
+    }, [error])
 
     if (error) {
         return <ErrorMessage error={error} />

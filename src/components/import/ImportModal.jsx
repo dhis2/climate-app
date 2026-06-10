@@ -38,9 +38,11 @@ const ImportModal = ({
     const handleError = useCallback(
         (err) => {
             setImportDone(true)
-            const errMessage =
-                err?.message ?? err?.toString?.() ?? i18n.t('Unknown error')
-            onImportDone?.(null, errMessage)
+            if (err != null) {
+                const errMessage =
+                    err?.message ?? err?.toString?.() ?? i18n.t('Unknown error')
+                onImportDone?.(null, errMessage)
+            }
         },
         [onImportDone]
     )

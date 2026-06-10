@@ -1,9 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
+import { NoticeBox } from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import useEarthEngineData from '../../hooks/useEarthEngineData.js'
 import DataLoader from '../shared/DataLoader.jsx'
-import ErrorMessage from '../shared/ErrorMessage.jsx'
 import ImportData from './ImportData.jsx'
 
 const ExtractGeeData = ({
@@ -20,11 +20,18 @@ const ExtractGeeData = ({
         features,
     })
 
+    // Keep a stable ref so the effect below only re-fires when `error`
+    // changes, not when the parent re-creates the `onError` callback.
+    // Without this, a 400 from GEE triggers recordRun → new configs →
+    // new onError ref → effect re-fires → infinite recordRun loop.
+    const onErrorRef = useRef(onError)
+    onErrorRef.current = onError
+
     useEffect(() => {
-        if (error && onError) {
-            onError(error)
+        if (error) {
+            onErrorRef.current?.()
         }
-    }, [error, onError])
+    }, [error])
 
     if (error) {
         const displayError = /payload size exceeds the limit/i.test(error)
@@ -32,7 +39,11 @@ const ExtractGeeData = ({
                   'An org unit in your selection has boundaries that are too detailed to process.'
               )
             : error
-        return <ErrorMessage error={displayError} />
+        return (
+            <NoticeBox error title={i18n.t('Import failed')}>
+                {displayError}
+            </NoticeBox>
+        )
     }
 
     if (!data) {

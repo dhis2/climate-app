@@ -101,24 +101,6 @@ export const valueCountForRange = ({ featureCount, periodType, range }) => {
     return periods.length * featureCount
 }
 
-export const formatBookmarkDate = (str) => {
-    if (!str) {
-        return ''
-    }
-    if (/^\d{4}$/.test(str)) {
-        return str
-    }
-    const d = new Date(str)
-    if (Number.isNaN(d.getTime())) {
-        return str
-    }
-    return d.toLocaleDateString('en', {
-        day: 'numeric',
-        month: 'short',
-        year: 'numeric',
-    })
-}
-
 export const formatRelativeTime = (isoString) => {
     if (!isoString) {
         return ''

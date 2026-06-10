@@ -127,11 +127,6 @@ const ImportPage = () => {
     const periodCount = useMemo(() => getPeriods(period).length, [period])
     const valueCount = featureCount * periodCount
 
-    // Period type is intrinsic to the dataset: only offer a choice when the
-    // selected dataset supports more than one type (otherwise it's auto-set).
-    const showPeriodTypePicker =
-        (dataset?.supportedPeriodTypes?.length ?? 0) > 1
-
     // canShowPreview: show preview even during loading (avoids unmounting/remounting)
     const canShowPreview = !!(
         dataset &&
@@ -141,9 +136,6 @@ const ImportPage = () => {
         dataElement &&
         valueCount <= maxValues
     )
-
-    // isValid: only true when fully ready (for enabling import button)
-    const isValid = canShowPreview && !featuresLoading
 
     useEffect(() => {
         setStartExtract(false)
@@ -287,7 +279,7 @@ const ImportPage = () => {
                         onChange={updateDataset}
                         showDescription={true}
                     />
-                    {showPeriodTypePicker && (
+                    {dataset && (
                         <PeriodType
                             periodType={period.periodType}
                             supportedPeriodTypes={dataset.supportedPeriodTypes}
@@ -368,7 +360,7 @@ const ImportPage = () => {
                             />
                             <p className={classes.importTypeCardSubtitle}>
                                 {i18n.t(
-                                    'Save it so you can re-run it later. Each run fetches new data since the last import.'
+                                    'Saved imports can be re-run by any user. Each run fetches new data since the last import.'
                                 )}
                             </p>
                         </label>
@@ -415,8 +407,12 @@ const ImportPage = () => {
                     <div className={classes.submitRow}>
                         <Button
                             primary
+                            loading={canShowPreview && featuresLoading}
                             disabled={
-                                !isValid || startExtract || importAttempted
+                                !canShowPreview ||
+                                featuresLoading ||
+                                startExtract ||
+                                importAttempted
                             }
                             onClick={handleStartImport}
                         >

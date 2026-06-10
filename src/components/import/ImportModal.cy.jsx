@@ -30,6 +30,23 @@ const ErrorExtract = ({ onComplete }) => {
 }
 ErrorExtract.propTypes = { onComplete: PropTypes.func.isRequired }
 
+// Calls onError with no argument — mirrors GEE/ENACTS extraction failures
+const ExtractErrorNoArg = ({ onError }) => {
+    React.useEffect(() => onError?.(), [onError])
+    return null
+}
+ExtractErrorNoArg.propTypes = { onError: PropTypes.func }
+
+// Calls onError with an error — mirrors DHIS2 import-level failures
+const ExtractErrorWithArg = ({ onError }) => {
+    React.useEffect(
+        () => onError?.(new Error('Something went wrong')),
+        [onError]
+    )
+    return null
+}
+ExtractErrorWithArg.propTypes = { onError: PropTypes.func }
+
 describe('ImportModal', () => {
     it('shows the modal title', () => {
         cy.mount(
@@ -104,5 +121,43 @@ describe('ImportModal', () => {
             />
         )
         cy.contains('button', 'Close').should('not.be.disabled')
+    })
+
+    it('does not call onImportDone when onError is called with no argument', () => {
+        const onImportDone = cy.stub()
+        cy.mount(
+            <ImportModal
+                {...defaultProps}
+                onImportDone={onImportDone}
+                ExtractDataComponent={ExtractErrorNoArg}
+            />
+        )
+        cy.wrap(onImportDone).should('not.have.been.called')
+    })
+
+    it('enables the Close button when onError is called with no argument', () => {
+        cy.mount(
+            <ImportModal
+                {...defaultProps}
+                ExtractDataComponent={ExtractErrorNoArg}
+            />
+        )
+        cy.contains('button', 'Close').should('not.be.disabled')
+    })
+
+    it('calls onImportDone with the error message when onError is called with an error', () => {
+        const onImportDone = cy.stub()
+        cy.mount(
+            <ImportModal
+                {...defaultProps}
+                onImportDone={onImportDone}
+                ExtractDataComponent={ExtractErrorWithArg}
+            />
+        )
+        cy.wrap(onImportDone).should(
+            'have.been.calledWith',
+            null,
+            'Error: Something went wrong'
+        )
     })
 })

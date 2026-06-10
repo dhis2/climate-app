@@ -16,7 +16,6 @@ import useUserLocale from '../../hooks/useUserLocale.js'
 import { getOuText } from '../../utils/getOuText.js'
 import {
     computeFillGapRange,
-    formatBookmarkDate,
     valueCountForRange,
 } from '../../utils/recurringImports.js'
 import {
@@ -24,6 +23,7 @@ import {
     MONTHLY,
     WEEKLY,
     YEARLY,
+    formatBookmarkDate,
     formatStandardDate,
     getPeriodTypes,
     normalizeIsoDate,

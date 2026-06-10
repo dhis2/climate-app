@@ -13,10 +13,9 @@ import PropTypes from 'prop-types'
 import { useEffect, useRef, useState } from 'react'
 import {
     computeFillGapRange,
-    formatBookmarkDate,
     formatRelativeTime,
 } from '../../utils/recurringImports.js'
-import { getPeriodTypes } from '../../utils/time.js'
+import { formatBookmarkDate, getPeriodTypes } from '../../utils/time.js'
 import classes from './styles/RecurringImportsList.module.css'
 
 const periodTypeLabel = (id) =>

@@ -8,22 +8,8 @@ import {
     ModalTitle,
 } from '@dhis2/ui'
 import PropTypes from 'prop-types'
+import { formatBookmarkDate } from '../../utils/time.js'
 import classes from './styles/DeleteConfigModal.module.css'
-
-const formatDate = (iso) => {
-    if (!iso) {
-        return ''
-    }
-    const d = new Date(iso)
-    if (Number.isNaN(d.getTime())) {
-        return iso
-    }
-    return d.toLocaleDateString('en', {
-        day: 'numeric',
-        month: 'short',
-        year: 'numeric',
-    })
-}
 
 const DeleteConfigModal = ({ config, onCancel, onConfirm }) => (
     <Modal small onClose={onCancel} position="middle">
@@ -39,7 +25,7 @@ const DeleteConfigModal = ({ config, onCancel, onConfirm }) => (
                     <p className={classes.attribution}>
                         {i18n.t('Created by {{name}} on {{date}}.', {
                             name: config.createdByName,
-                            date: formatDate(config.createdAt),
+                            date: formatBookmarkDate(config.createdAt),
                             nsSeparator: ';',
                         })}
                     </p>

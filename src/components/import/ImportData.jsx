@@ -19,12 +19,14 @@ const ImportData = ({
     dataElement,
     features,
     period,
-    onSuccess,
     onError,
+    onSuccess,
 }) => {
     const [importResult, setImportResult] = useState(null)
     const [mutate, { error }] = useDataMutation(dataImportMutation)
     const hasMutated = useRef(false)
+    const onErrorRef = useRef(onError)
+    onErrorRef.current = onError
 
     const sentDataValues = useMemo(
         () =>
@@ -53,9 +55,7 @@ const ImportData = ({
 
     useEffect(() => {
         if (error) {
-            if (onError) {
-                onError(error)
-            }
+            onErrorRef.current?.(error)
             const errorResponse = error.details?.response
             if (errorResponse) {
                 const missing = countMissing(data)
@@ -66,7 +66,7 @@ const ImportData = ({
                 })
             }
         }
-    }, [error, onError, data])
+    }, [error, data])
 
     useEffect(() => {
         if (hasMutated.current) {
