@@ -14,18 +14,31 @@ const parseDate = (str) => {
         return null
     }
     if (/^\d{4}$/.test(str)) {
-        return new Date(parseInt(str, 10), 11, 31)
+        return new Date(Number.parseInt(str, 10), 11, 31)
     }
     return new Date(str)
 }
 
-export const autoConfigName = (dataset, featureCount) => {
-    const count = featureCount ?? 0
+export const autoConfigName = (dataset, featureCount = 0) => {
     return `${dataset?.name ?? 'Import'} — ${i18n.t('{{count}} org units', {
-        count,
+        count: featureCount,
         defaultValue: '{{count}} org unit',
         defaultValue_plural: '{{count}} org units',
     })}`
+}
+
+const getDefaultEndDate = (periodType, now) => {
+    if (periodType === DAILY) {
+        return new Date(now.getTime() - oneDayInMs)
+    }
+    if (periodType === MONTHLY) {
+        return new Date(now.getFullYear(), now.getMonth(), 0)
+    }
+    if (periodType === WEEKLY) {
+        const daysToLastSunday = now.getDay() || 7
+        return new Date(now.getTime() - daysToLastSunday * oneDayInMs)
+    }
+    return new Date(now)
 }
 
 export const computeFillGapRange = (config) => {
@@ -38,11 +51,11 @@ export const computeFillGapRange = (config) => {
     )?.periodRange?.end
 
     if (periodType === YEARLY) {
-        const lastYear = parseInt(dataUpdatedThrough, 10)
+        const lastYear = Number.parseInt(dataUpdatedThrough, 10)
         const now = new Date()
         let endYear = now.getFullYear() - 1
         if (datasetMax) {
-            endYear = Math.min(endYear, parseInt(datasetMax, 10))
+            endYear = Math.min(endYear, Number.parseInt(datasetMax, 10))
         }
         if (endYear < lastYear) {
             return null
@@ -55,18 +68,7 @@ export const computeFillGapRange = (config) => {
     }
 
     const now = new Date()
-    let end
-    if (periodType === DAILY) {
-        end = new Date(now.getTime() - oneDayInMs)
-    } else if (periodType === MONTHLY) {
-        end = new Date(now.getFullYear(), now.getMonth(), 0)
-    } else if (periodType === WEEKLY) {
-        const dow = now.getDay() // 0 = Sun, 1 = Mon, …, 6 = Sat
-        const daysToLastSunday = dow === 0 ? 7 : dow
-        end = new Date(now.getTime() - daysToLastSunday * oneDayInMs)
-    } else {
-        end = now
-    }
+    let end = getDefaultEndDate(periodType, now)
 
     if (datasetMax) {
         const maxEnd = parseDate(datasetMax)

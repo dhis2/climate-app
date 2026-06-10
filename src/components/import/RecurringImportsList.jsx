@@ -70,18 +70,26 @@ const RecurringImportRow = ({ config, onRun, onRename, onDelete }) => {
         defaultValue_plural: '{{count}} org units',
     })
 
-    const runStatusLabel = !config.lastRunAt
-        ? i18n.t('Never imported')
-        : config.dataUpdatedThrough
-        ? i18n.t('Data imported through {{date}} · Last run {{relative}}', {
-              date: formatBookmarkDate(config.dataUpdatedThrough),
-              relative: formatRelativeTime(config.lastRunAt),
-              nsSeparator: ';',
-          })
-        : i18n.t('Last run {{relative}}', {
-              relative: formatRelativeTime(config.lastRunAt),
-              nsSeparator: ';',
-          })
+    let runStatusLabel
+    if (config.lastRunAt) {
+        if (config.dataUpdatedThrough) {
+            runStatusLabel = i18n.t(
+                'Data imported through {{date}} · Last run {{relative}}',
+                {
+                    date: formatBookmarkDate(config.dataUpdatedThrough),
+                    relative: formatRelativeTime(config.lastRunAt),
+                    nsSeparator: ';',
+                }
+            )
+        } else {
+            runStatusLabel = i18n.t('Last run {{relative}}', {
+                relative: formatRelativeTime(config.lastRunAt),
+                nsSeparator: ';',
+            })
+        }
+    } else {
+        runStatusLabel = i18n.t('Never imported')
+    }
 
     const runStatusTooltip =
         config.lastRunAt && config.lastRunByName
@@ -133,9 +141,9 @@ const RecurringImportRow = ({ config, onRun, onRename, onDelete }) => {
                             (!range && !!config.dataUpdatedThrough)
                         }
                         title={
-                            !config.dataset
-                                ? i18n.t('Data source is not available')
-                                : undefined
+                            config.dataset
+                                ? undefined
+                                : i18n.t('Data source is not available')
                         }
                         onClick={() => onRun(config)}
                     >

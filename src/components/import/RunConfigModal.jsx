@@ -60,7 +60,7 @@ const getDefaultRange = (periodType) => {
         end = new Date(now.getTime() - oneDayInMs)
     }
     const monthsBack = periodType === MONTHLY ? 12 : 6
-    const start = new Date(end.getTime())
+    const start = new Date(end)
     start.setMonth(start.getMonth() - monthsBack)
     return {
         startTime: formatStandardDate(start),
@@ -119,8 +119,17 @@ const RunConfigModal = ({ config, onClose, onRunComplete }) => {
     const maxDate = normalizeIsoDate(periodRange?.end) || undefined
 
     const rangeInvalid = isYearly
-        ? parseInt(range.startTime, 10) > parseInt(range.endTime, 10)
+        ? Number.parseInt(range.startTime, 10) >
+          Number.parseInt(range.endTime, 10)
         : new Date(range.startTime) > new Date(range.endTime)
+
+    const rangeDisplayText =
+        overrideRange || !config.dataUpdatedThrough
+            ? formatRangeDisplay(range)
+            : i18n.t('Since last import ({{range}})', {
+                  range: formatRangeDisplay(range),
+                  nsSeparator: ';',
+              })
 
     const startEditing = () => {
         if (!overrideRange) {
@@ -356,21 +365,7 @@ const RunConfigModal = ({ config, onClose, onRunComplete }) => {
                                     </div>
                                 ) : (
                                     <div className={classes.rangeDisplay}>
-                                        <span>
-                                            {overrideRange
-                                                ? formatRangeDisplay(range)
-                                                : config.dataUpdatedThrough
-                                                ? i18n.t(
-                                                      'Since last import ({{range}})',
-                                                      {
-                                                          range: formatRangeDisplay(
-                                                              range
-                                                          ),
-                                                          nsSeparator: ';',
-                                                      }
-                                                  )
-                                                : formatRangeDisplay(range)}
-                                        </span>
+                                        <span>{rangeDisplayText}</span>
                                         <Button
                                             small
                                             secondary

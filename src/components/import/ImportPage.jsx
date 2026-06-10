@@ -334,9 +334,9 @@ const ImportPage = () => {
                     <div className={classes.importTypeCards}>
                         <label
                             className={
-                                !saveAsRecurring
-                                    ? classes.importTypeCardSelected
-                                    : classes.importTypeCard
+                                saveAsRecurring
+                                    ? classes.importTypeCard
+                                    : classes.importTypeCardSelected
                             }
                         >
                             <Radio

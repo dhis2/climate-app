@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-06-09T05:55:17.093Z\n"
-"PO-Revision-Date: 2026-06-09T05:55:17.094Z\n"
+"POT-Creation-Date: 2026-06-10T06:50:50.403Z\n"
+"PO-Revision-Date: 2026-06-10T06:50:50.403Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -924,14 +924,14 @@ msgid_plural "{{count}} org units"
 msgstr[0] "{{count}} org unit"
 msgstr[1] "{{count}} org units"
 
-msgid "Never imported"
-msgstr "Never imported"
-
 msgid "Data imported through {{date}} · Last run {{relative}}"
 msgstr "Data imported through {{date}} · Last run {{relative}}"
 
 msgid "Last run {{relative}}"
 msgstr "Last run {{relative}}"
+
+msgid "Never imported"
+msgstr "Never imported"
 
 msgid "{{date}} by {{user}}"
 msgstr "{{date}} by {{user}}"
@@ -947,6 +947,9 @@ msgstr "Import…"
 
 msgid "More actions"
 msgstr "More actions"
+
+msgid "Since last import ({{range}})"
+msgstr "Since last import ({{range}})"
 
 msgid "Import \"{{name}}\""
 msgstr "Import \"{{name}}\""
@@ -976,9 +979,6 @@ msgstr "Done"
 
 msgid "Use default range"
 msgstr "Use default range"
-
-msgid "Since last import ({{range}})"
-msgstr "Since last import ({{range}})"
 
 msgid "Change"
 msgstr "Change"
