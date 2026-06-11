@@ -249,7 +249,6 @@ describe('Imports overview', () => {
         cy.intercept('GET', DATASTORE_URL, { configs: [MOCK_CONFIG] }).as(
             'getDataStore'
         )
-        // cy.intercept('GET', '**/api/*/geoFeatures*').as('getGeoFeatures')
         cy.intercept('PUT', DATASTORE_URL, { status: 'OK' }).as('putDataStore')
         interceptDataValueSets()
 
@@ -262,7 +261,6 @@ describe('Imports overview', () => {
 
         cy.contains(`Import "${MOCK_CONFIG_NAME}"`).should('be.visible')
 
-        // cy.wait('@getGeoFeatures', { timeout: 15000 })
         cy.contains('button', 'Start import').should('not.be.disabled')
         cy.contains('button', 'Start import').click()
 
@@ -296,7 +294,6 @@ describe('Imports overview', () => {
         cy.getByDataTest('config-end-date-input')
             .find('input')
             .type('2026-05-07')
-        // cy.getByDataTest('config-end-date-input').find('input').blur()
 
         cy.contains('button', 'Done').click()
 
