@@ -360,7 +360,7 @@ const ImportPage = () => {
                             />
                             <p className={classes.importTypeCardSubtitle}>
                                 {i18n.t(
-                                    'Saved imports can be re-run by any user. Each run fetches new data since the last import.'
+                                    'Saved imports can be re-run by any user with data import access. Each run fetches new data since the last import.'
                                 )}
                             </p>
                         </label>

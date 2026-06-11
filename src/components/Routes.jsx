@@ -188,11 +188,11 @@ const Routes = () => {
                     ],
                 },
                 {
-                    path: 'imports',
+                    path: 'import',
                     element: <ImportsOverviewPage />,
                 },
                 {
-                    path: 'imports/new',
+                    path: 'import/new',
                     element: <ImportPage />,
                 },
                 {

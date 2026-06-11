@@ -125,7 +125,7 @@ const makeImportSelections = ({
     visit = true,
 }) => {
     if (visit) {
-        cy.visit('#/imports/new')
+        cy.visit('#/import/new')
     }
     selectDataset(dataset)
     selectPeriodType(periodType)
@@ -186,7 +186,7 @@ const selectOrgUnitFromTree = (unitName) => {
 
 describe('Import', () => {
     it('configure import for GEE ERA5-Land weekly dataset', () => {
-        cy.visit('#/imports/new')
+        cy.visit('#/import/new')
 
         selectDataset('Earth Engine: Precipitation (ERA5-Land)')
 
@@ -283,7 +283,7 @@ describe('Import', () => {
             })
         }).as('getSystemInfo')
 
-        cy.visit('#/imports/new')
+        cy.visit('#/import/new')
 
         cy.wait('@getSystemInfo')
 
@@ -357,7 +357,7 @@ describe('Import', () => {
     })
 
     it('select the correct org unit groups and import the correct values', () => {
-        cy.visit('#/imports/new')
+        cy.visit('#/import/new')
 
         selectDataset('Earth Engine: Precipitation (ERA5-Land)')
         selectPeriodType('Weekly')
@@ -601,7 +601,7 @@ describe('Import', () => {
             },
         }).as('getDataSets')
 
-        cy.visit('#/imports/new')
+        cy.visit('#/import/new')
 
         cy.wait('@getDataSets')
 
@@ -686,7 +686,7 @@ describe('Import', () => {
                 },
             }).as('getGeoFeaturesError')
 
-            cy.visit('#/imports/new')
+            cy.visit('#/import/new')
 
             selectDataset('Earth Engine: Precipitation (ERA5-Land)')
             selectPeriodType('Weekly')
@@ -709,7 +709,7 @@ describe('Import', () => {
         })
 
         it('shows warning when no org unit geometries are found', () => {
-            cy.visit('#/imports/new')
+            cy.visit('#/import/new')
 
             selectDataset('Earth Engine: Precipitation (ERA5-Land)')
             selectPeriodType('Weekly')
@@ -736,7 +736,7 @@ describe('Import', () => {
         })
 
         it('shows error when org unit selection is invalid', () => {
-            cy.visit('#/imports/new')
+            cy.visit('#/import/new')
 
             selectDataset('Earth Engine: Precipitation (ERA5-Land)')
             selectPeriodType('Weekly')

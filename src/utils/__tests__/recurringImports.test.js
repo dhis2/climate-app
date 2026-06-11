@@ -48,7 +48,7 @@ describe('computeFillGapRange', () => {
         expect(result.periodType).toEqual(DAILY)
     })
 
-    it('WEEKLY: starts from dataUpdatedThrough and ends 7 days ago', () => {
+    it('WEEKLY: starts from dataUpdatedThrough and ends at the previous Sunday', () => {
         const config = {
             periodType: WEEKLY,
             dataUpdatedThrough: '2024-01-07',

@@ -23,12 +23,12 @@ const ImportModal = ({
     onImportDone,
     ExtractDataComponent = ExtractData,
 }) => {
-    const [importDone, setImportDone] = useState(false)
+    const [importSettled, setImportSettled] = useState(false)
     const [importSucceeded, setImportSucceeded] = useState(false)
 
     const handleSuccess = useCallback(
         (importCount, noDataMessage) => {
-            setImportDone(true)
+            setImportSettled(true)
             setImportSucceeded(true)
             onImportDone?.(importCount, noDataMessage)
         },
@@ -37,7 +37,7 @@ const ImportModal = ({
 
     const handleError = useCallback(
         (err) => {
-            setImportDone(true)
+            setImportSettled(true)
             if (err != null) {
                 const errMessage =
                     err?.message ?? err?.toString?.() ?? i18n.t('Unknown error')
@@ -51,7 +51,7 @@ const ImportModal = ({
         <Modal
             large
             position="middle"
-            onClose={importDone ? onClose : undefined}
+            onClose={importSettled ? onClose : undefined}
         >
             <ModalTitle>{i18n.t('Importing climate data')}</ModalTitle>
             <ModalContent>
@@ -63,7 +63,7 @@ const ImportModal = ({
                     onSuccess={handleSuccess}
                     onError={handleError}
                 />
-                {importDone && importSucceeded && savedConfig && (
+                {importSettled && importSucceeded && savedConfig && (
                     <NoticeBox
                         valid
                         title={i18n.t('Saved as "{{name}}"', {
@@ -71,14 +71,16 @@ const ImportModal = ({
                             nsSeparator: ';',
                         })}
                     >
-                        <Link to="/imports">{i18n.t('View in Imports →')}</Link>
+                        <Link to="/import">{i18n.t('View in Imports →')}</Link>
                     </NoticeBox>
                 )}
             </ModalContent>
             <ModalActions>
                 <ButtonStrip end>
-                    <Button primary disabled={!importDone} onClick={onClose}>
-                        {importDone ? i18n.t('Close') : i18n.t('Importing...')}
+                    <Button primary disabled={!importSettled} onClick={onClose}>
+                        {importSettled
+                            ? i18n.t('Close')
+                            : i18n.t('Importing...')}
                     </Button>
                 </ButtonStrip>
             </ModalActions>

@@ -79,7 +79,7 @@ const typeStartAndEndDates = (startDate, endDate) => {
 }
 
 const fillImportForm = () => {
-    cy.visit('#/imports/new')
+    cy.visit('#/import/new')
     selectDataset('Earth Engine: Precipitation (ERA5-Land)')
     selectPeriodType('Weekly')
     selectTargetDataElement('IDSR Malaria (weekly)')
@@ -88,7 +88,7 @@ const fillImportForm = () => {
 
 describe('Save import', () => {
     it('shows one-time import as the default selection', () => {
-        cy.visit('#/imports/new')
+        cy.visit('#/import/new')
 
         cy.contains('Save this import?').scrollIntoView()
         cy.contains('Save this import?').should('be.visible')
@@ -108,7 +108,7 @@ describe('Save import', () => {
     })
 
     it('switching to "Save this import" shows import name field and changes button text', () => {
-        cy.visit('#/imports/new')
+        cy.visit('#/import/new')
 
         cy.getByDataTest('dhis2-uicore-radio')
             .containsExact('Save this import')
@@ -212,7 +212,7 @@ describe('Imports overview', () => {
         cy.intercept('GET', DATASTORE_URL, { statusCode: 404 }).as(
             'getDataStore'
         )
-        cy.visit('#/imports')
+        cy.visit('#/import')
 
         cy.contains('Saved imports').should('be.visible')
         cy.contains("You haven't saved any imports yet.").should('be.visible')
@@ -222,7 +222,7 @@ describe('Imports overview', () => {
         cy.intercept('GET', DATASTORE_URL, { configs: [MOCK_CONFIG] }).as(
             'getDataStore'
         )
-        cy.visit('#/imports')
+        cy.visit('#/import')
 
         cy.contains(MOCK_CONFIG_NAME).should('be.visible')
         cy.contains('Last run').should('be.visible')
@@ -233,7 +233,7 @@ describe('Imports overview', () => {
         cy.intercept('GET', DATASTORE_URL, { configs: [MOCK_CONFIG] }).as(
             'getDataStore'
         )
-        cy.visit('#/imports')
+        cy.visit('#/import')
 
         cy.contains('button', 'Import…', { timeout: 10000 }).should(
             'not.be.disabled'
@@ -252,7 +252,7 @@ describe('Imports overview', () => {
         cy.intercept('PUT', DATASTORE_URL, { status: 'OK' }).as('putDataStore')
         interceptDataValueSets()
 
-        cy.visit('#/imports')
+        cy.visit('#/import')
 
         cy.contains('button', 'Import…', { timeout: 10000 }).should(
             'not.be.disabled'
@@ -279,7 +279,7 @@ describe('Imports overview', () => {
         cy.intercept('PUT', DATASTORE_URL, { status: 'OK' }).as('putDataStore')
         interceptDataValueSets()
 
-        cy.visit('#/imports')
+        cy.visit('#/import')
 
         cy.contains('button', 'Import…', { timeout: 10000 }).should(
             'not.be.disabled'
@@ -323,7 +323,7 @@ describe('Imports overview', () => {
             req.reply({ status: 'OK' })
         }).as('putDataStore')
 
-        cy.visit('#/imports')
+        cy.visit('#/import')
         cy.contains(MOCK_CONFIG_NAME).should('be.visible')
 
         cy.get('[aria-label="More actions"]').click()
@@ -347,7 +347,7 @@ describe('Imports overview', () => {
             req.reply({ status: 'OK' })
         }).as('putDataStore')
 
-        cy.visit('#/imports')
+        cy.visit('#/import')
 
         cy.get('[aria-label="Rename"]').click()
         cy.get('article').find('input[type="text"]').clear()

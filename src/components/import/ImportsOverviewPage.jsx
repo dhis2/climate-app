@@ -27,7 +27,7 @@ const ImportsOverviewPage = () => {
         }))
     }, [configs, datasets])
 
-    const goToNew = useCallback(() => navigate('/imports/new'), [navigate])
+    const goToNew = useCallback(() => navigate('/import/new'), [navigate])
 
     const handleRun = useCallback((config) => setRunningConfig(config), [])
     const handleCloseRun = useCallback(() => setRunningConfig(null), [])
@@ -49,7 +49,9 @@ const ImportsOverviewPage = () => {
             <header className={classes.pageHeader}>
                 <h1 className={classes.pageTitle}>{i18n.t('Imports')}</h1>
                 <p className={classes.pageSubtitle}>
-                    {i18n.t('Import weather and climate data into DHIS2.')}
+                    {i18n.t(
+                        'Import climate and earth observation data into DHIS2.'
+                    )}
                 </p>
             </header>
 
@@ -58,9 +60,7 @@ const ImportsOverviewPage = () => {
                     {i18n.t('New import')}
                 </h2>
                 <p className={classes.newImportBody}>
-                    {i18n.t(
-                        'Import climate data once, or save it to re-run later.'
-                    )}
+                    {i18n.t('Import data once, or save it to re-run later.')}
                 </p>
                 <div className={classes.newImportAction}>
                     <Button primary icon={<IconAdd16 />} onClick={goToNew}>
