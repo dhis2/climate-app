@@ -290,10 +290,8 @@ describe('Imports overview', () => {
 
         cy.contains('button', 'Change').click()
 
-        cy.getByDataTest('config-end-date-input').find('input').clear()
-        cy.getByDataTest('config-end-date-input')
-            .find('input')
-            .type('2026-05-07')
+        cy.getByDataTest('end-date-input').find('input').clear()
+        cy.getByDataTest('end-date-input').find('input').type('2026-05-07')
 
         cy.contains('button', 'Done').click()
 

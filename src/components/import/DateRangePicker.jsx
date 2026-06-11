@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { CalendarInput } from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import { useRef, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import useUserLocale from '../../hooks/useUserLocale.js'
 import {
     YEARLY,
@@ -47,13 +47,16 @@ const DateRangePicker = ({ period, dataset, onChange }) => {
     const periodRef = useRef(period)
     periodRef.current = period
 
-    const handleTimeZoneChange = (updaterOrPeriod) => {
-        const updated =
-            typeof updaterOrPeriod === 'function'
-                ? updaterOrPeriod(periodRef.current)
-                : updaterOrPeriod
-        onChange(updated)
-    }
+    const handleTimeZoneChange = useCallback(
+        (updaterOrPeriod) => {
+            const updated =
+                typeof updaterOrPeriod === 'function'
+                    ? updaterOrPeriod(periodRef.current)
+                    : updaterOrPeriod
+            onChange(updated)
+        },
+        [onChange]
+    )
 
     const updateStartDate = ({ calendarDateString, validation }) => {
         setStartDateError(validation.valid ? null : validation.validationText)

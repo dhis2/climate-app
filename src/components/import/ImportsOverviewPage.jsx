@@ -49,9 +49,7 @@ const ImportsOverviewPage = () => {
             <header className={classes.pageHeader}>
                 <h1 className={classes.pageTitle}>{i18n.t('Imports')}</h1>
                 <p className={classes.pageSubtitle}>
-                    {i18n.t(
-                        'Import climate and earth observation data into DHIS2.'
-                    )}
+                    {i18n.t('Import weather and climate data into DHIS2.')}
                 </p>
             </header>
 

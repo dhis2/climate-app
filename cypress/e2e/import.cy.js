@@ -303,18 +303,10 @@ describe('Import', () => {
             .click()
         cy.wait('@getSystemInfoSpecific')
 
+        cy.contains('Time zone').scrollIntoView()
         cy.contains('Time zone').should('exist')
         cy.getByDataTest('time-zone-select').scrollIntoView()
         cy.getByDataTest('time-zone-select').should('be.visible')
-        cy.getByDataTest('time-zone-select').contains('Etc/UTC')
-
-        // Change time zone to UTC
-        cy.getByDataTest('time-zone-select').click()
-        cy.getByDataTest('dhis2-uicore-select-menu-menuwrapper')
-            .children()
-            .contains('Africa/Freetown')
-            .click()
-
         cy.getByDataTest('time-zone-select').contains('Africa/Freetown')
 
         // Change the period type to weekly
