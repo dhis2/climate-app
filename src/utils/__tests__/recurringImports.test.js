@@ -43,7 +43,6 @@ describe('computeFillGapRange', () => {
             dataUpdatedThrough: '2024-01-15',
         }
         const result = computeFillGapRange(config)
-        console.log('jj DAILY test result', { result })
         expect(result.startTime).toEqual('2024-01-15')
         expect(result.endTime).toEqual(yesterday)
         expect(result.periodType).toEqual(DAILY)
@@ -55,7 +54,6 @@ describe('computeFillGapRange', () => {
             dataUpdatedThrough: '2024-01-07',
         }
         const result = computeFillGapRange(config)
-        console.log('jj WEEKLY test result', { result })
         expect(result.startTime).toEqual('2024-01-07')
         expect(result.endTime).toEqual(lastWeekEnd)
         expect(result.periodType).toEqual(WEEKLY)
@@ -67,7 +65,6 @@ describe('computeFillGapRange', () => {
             dataUpdatedThrough: '2024-01-01',
         }
         const result = computeFillGapRange(config)
-        console.log('jj MONTHLY test result', { result })
         expect(result.startTime).toEqual('2024-01-01')
         expect(result.endTime).toEqual(lastMonthEnd)
         expect(result.periodType).toEqual(MONTHLY)
@@ -79,7 +76,6 @@ describe('computeFillGapRange', () => {
             dataUpdatedThrough: '2022',
         }
         const result = computeFillGapRange(config)
-        console.log('jj YEARLY test result', { result })
         expect(result.startTime).toEqual('2022')
         expect(result.endTime).toEqual(lastYear)
         expect(result.periodType).toEqual(YEARLY)
