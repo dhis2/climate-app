@@ -319,6 +319,7 @@ const RunConfigModal = ({ config, onClose, onRunComplete }) => {
                                                 />
                                                 <CalendarInput
                                                     label={i18n.t('End date')}
+                                                    dataTest="config-end-date-input"
                                                     date={range.endTime}
                                                     minDate={minDate}
                                                     maxDate={maxDate}
@@ -386,6 +387,18 @@ const RunConfigModal = ({ config, onClose, onRunComplete }) => {
                             {featuresError.message}
                         </NoticeBox>
                     )}
+                    {!featuresLoading &&
+                        !featuresError &&
+                        features.length === 0 && (
+                            <NoticeBox
+                                warning
+                                title={i18n.t('No org unit geometries found')}
+                            >
+                                {i18n.t(
+                                    'None of the selected organisation units have boundaries stored in DHIS2. Update the import configuration to include organisation units with geometry.'
+                                )}
+                            </NoticeBox>
+                        )}
                     {exceedsLimit && (
                         <NoticeBox warning>
                             {i18n.t(
@@ -408,7 +421,8 @@ const RunConfigModal = ({ config, onClose, onRunComplete }) => {
                             exceedsLimit ||
                             rangeInvalid ||
                             featuresLoading ||
-                            !!featuresError
+                            !!featuresError ||
+                            features.length === 0
                         }
                         onClick={() => setConfirmed(true)}
                     >

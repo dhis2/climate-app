@@ -369,6 +369,7 @@ const ImportPage = () => {
                         <div className={classes.saveRecurringBox}>
                             <InputField
                                 label={i18n.t('Import name')}
+                                dataTest="import-name-input"
                                 value={configName}
                                 onChange={({ value }) => {
                                     configNameTouched.current = true

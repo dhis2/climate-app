@@ -17,18 +17,18 @@ const friendlyErrorMessage =
 const LoadingExtract = () => null
 
 // Immediately signals successful completion
-const SuccessExtract = ({ onComplete }) => {
-    React.useEffect(() => onComplete(), [onComplete])
+const SuccessExtract = ({ onSuccess }) => {
+    React.useEffect(() => onSuccess?.(), [onSuccess])
     return null
 }
-SuccessExtract.propTypes = { onComplete: PropTypes.func.isRequired }
+SuccessExtract.propTypes = { onSuccess: PropTypes.func }
 
-// Mirrors ExtractGeeData error behaviour: renders the friendly message and calls onComplete
-const ErrorExtract = ({ onComplete }) => {
-    React.useEffect(() => onComplete(), [onComplete])
+// Mirrors ExtractGeeData error behaviour: renders the friendly message and calls onError with no arg
+const ErrorExtract = ({ onError }) => {
+    React.useEffect(() => onError?.(), [onError])
     return <div>{friendlyErrorMessage}</div>
 }
-ErrorExtract.propTypes = { onComplete: PropTypes.func.isRequired }
+ErrorExtract.propTypes = { onError: PropTypes.func }
 
 // Calls onError with no argument — mirrors GEE/ENACTS extraction failures
 const ExtractErrorNoArg = ({ onError }) => {
@@ -157,7 +157,7 @@ describe('ImportModal', () => {
         cy.wrap(onImportDone).should(
             'have.been.calledWith',
             null,
-            'Error: Something went wrong'
+            'Something went wrong'
         )
     })
 })

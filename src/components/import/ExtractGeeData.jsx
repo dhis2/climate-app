@@ -20,10 +20,7 @@ const ExtractGeeData = ({
         features,
     })
 
-    // Keep a stable ref so the effect below only re-fires when `error`
-    // changes, not when the parent re-creates the `onError` callback.
-    // Without this, a 400 from GEE triggers recordRun → new configs →
-    // new onError ref → effect re-fires → infinite recordRun loop.
+    // Keep a stable ref so the effect below only re-fires when `error` changes
     const onErrorRef = useRef(onError)
     onErrorRef.current = onError
 

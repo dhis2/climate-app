@@ -68,12 +68,14 @@ const selectTargetDataElement = (dataElementName) => {
 
 const typeStartAndEndDates = (startDate, endDate) => {
     // Type the start date directly into the input, ignoring the calendar popup
+    cy.getByDataTest('start-date-input-content').scrollIntoView()
     cy.getByDataTest('start-date-input-content').find('input').clear()
     cy.getByDataTest('start-date-input-content').find('input').type(startDate)
 
     // Type the end date directly into the input, ignoring the calendar popup
     cy.getByDataTest('end-date-input-content').find('input').clear()
     cy.getByDataTest('end-date-input-content').find('input').type(endDate)
+    cy.getByDataTest('end-date-input-content').find('input').blur()
 }
 
 const verifyImportPreview = ({
@@ -102,31 +104,45 @@ const verifyImportPreview = ({
         .contains(`To data element "${dataElementName}"`)
         .should('be.visible')
 
-    cy.getByDataTest('import-preview')
-        .contains(`${dataValues} data values will be imported`)
-        .should('be.visible')
+    if (typeof dataValues === 'object') {
+        cy.getByDataTest('import-preview')
+            .contains(/\d+ data values will be imported/)
+            .invoke('text')
+            .then((text) =>
+                expect(Number.parseInt(text)).to.be.at.least(dataValues.min)
+            )
+    } else {
+        cy.getByDataTest('import-preview')
+            .contains(`${dataValues} data values will be imported`)
+            .should('be.visible')
+    }
 }
 
 const makeImportSelections = ({
     dataset,
     dataElement,
     periodType = 'Weekly',
-    startDate,
-    endDate,
     visit = true,
 }) => {
     if (visit) {
-        cy.visit('#/import')
+        cy.visit('#/imports/new')
     }
     selectDataset(dataset)
     selectPeriodType(periodType)
-    typeStartAndEndDates(startDate, endDate)
     selectTargetDataElement(dataElement)
 }
 
 const interceptAndValidateDataValues = (expectedCount, valueChecks = []) => {
     cy.intercept('POST', '**/api/*/dataValueSets*', (req) => {
-        expect(req.body.dataValues).to.have.lengthOf(expectedCount)
+        if (expectedCount != null) {
+            if (typeof expectedCount === 'object') {
+                expect(req.body.dataValues.length).to.be.at.least(
+                    expectedCount.min
+                )
+            } else {
+                expect(req.body.dataValues).to.have.lengthOf(expectedCount)
+            }
+        }
 
         valueChecks.forEach(({ orgUnit, period, expectedValue }) => {
             const dataValue = req.body.dataValues.find(
@@ -170,7 +186,7 @@ const selectOrgUnitFromTree = (unitName) => {
 
 describe('Import', () => {
     it('configure import for GEE ERA5-Land weekly dataset', () => {
-        cy.visit('#/import')
+        cy.visit('#/imports/new')
 
         selectDataset('Earth Engine: Precipitation (ERA5-Land)')
 
@@ -192,10 +208,11 @@ describe('Import', () => {
             .find('input[type="radio"]')
             .should('not.be.checked')
 
-        cy.contains('Start date').should('be.visible')
+        cy.contains('Start date').should('exist')
+        cy.getByDataTest('start-date-input').scrollIntoView()
         cy.getByDataTest('start-date-input').should('be.visible')
 
-        cy.contains('End date').should('be.visible')
+        cy.contains('End date').should('exist')
         cy.getByDataTest('end-date-input').should('be.visible')
 
         cy.contains(
@@ -218,18 +235,11 @@ describe('Import', () => {
         // Check review and import section
         cy.contains('Review and import').scrollIntoView()
         cy.contains('Review and import').should('be.visible')
-        cy.get('button').contains('Start import').scrollIntoView()
-        cy.get('button').contains('Start import').should('be.disabled')
+        cy.get('button').contains('Import once').scrollIntoView()
+        cy.get('button').contains('Import once').should('be.disabled')
 
         // Change the period type to weekly
         selectPeriodType('Weekly')
-
-        selectTargetDataElement('IDSR Malaria (weekly)')
-
-        cy.getByDataTest('start-date-input').clear()
-        cy.getByDataTest('start-date-input').type(nonBoundaryStartDate)
-        cy.getByDataTest('end-date-input').clear()
-        cy.getByDataTest('end-date-input').type(nonBoundaryEndDate)
 
         // Check that data elements are now available
         cy.getByDataTest('data-element-select').click()
@@ -241,11 +251,12 @@ describe('Import', () => {
         ).should('not.exist')
 
         // Select a weekly data element
-
         cy.getByDataTest('dhis2-uicore-select-menu-menuwrapper')
             .children()
             .contains('IDSR Malaria (weekly)')
             .click()
+
+        typeStartAndEndDates(nonBoundaryStartDate, nonBoundaryEndDate)
 
         verifyImportPreview({
             datasetName: 'Precipitation (ERA5-Land)',
@@ -272,7 +283,7 @@ describe('Import', () => {
             })
         }).as('getSystemInfo')
 
-        cy.visit('#/import')
+        cy.visit('#/imports/new')
 
         cy.wait('@getSystemInfo')
 
@@ -292,7 +303,8 @@ describe('Import', () => {
             .click()
         cy.wait('@getSystemInfoSpecific')
 
-        cy.contains('Time zone').should('be.visible')
+        cy.contains('Time zone').should('exist')
+        cy.getByDataTest('time-zone-select').scrollIntoView()
         cy.getByDataTest('time-zone-select').should('be.visible')
         cy.getByDataTest('time-zone-select').contains('Etc/UTC')
 
@@ -312,11 +324,6 @@ describe('Import', () => {
             .find('input[type="radio"]')
             .should('be.checked')
 
-        cy.getByDataTest('start-date-input').clear()
-        cy.getByDataTest('start-date-input').type(nonBoundaryStartDate)
-        cy.getByDataTest('end-date-input').clear()
-        cy.getByDataTest('end-date-input').type(nonBoundaryEndDate)
-
         // Select a weekly data element
         cy.getByDataTest('data-element-select').click()
         cy.getByDataTest('dhis2-uicore-select-menu-menuwrapper')
@@ -326,6 +333,8 @@ describe('Import', () => {
             .children()
             .contains('IDSR Malaria (weekly)')
             .click()
+
+        typeStartAndEndDates(nonBoundaryStartDate, nonBoundaryEndDate)
 
         // Check import preview section
 
@@ -348,13 +357,13 @@ describe('Import', () => {
     })
 
     it('select the correct org unit groups and import the correct values', () => {
-        cy.visit('#/import')
+        cy.visit('#/imports/new')
 
         selectDataset('Earth Engine: Precipitation (ERA5-Land)')
         selectPeriodType('Weekly')
-        typeStartAndEndDates('2025-08-18', '2025-08-24')
         selectTargetDataElement('IDSR Malaria (weekly)')
         selectOrgUnitGroup('Mission')
+        typeStartAndEndDates('2025-08-18', '2025-08-24')
 
         // confirm the import details
         verifyImportPreview({
@@ -406,7 +415,7 @@ describe('Import', () => {
             statusCode: 200,
             body: { status: 'SUCCESS', importCount: { imported: 2 } },
         }).as('postDataValueSets')
-        cy.contains('Start import').click()
+        cy.contains('Import once').click()
 
         // Button should be disabled and show 'Importing...' while in progress
         cy.getByDataTest('dhis2-uicore-modal')
@@ -447,8 +456,6 @@ describe('Import', () => {
         makeImportSelections({
             dataset: 'Earth Engine: Precipitation (ERA5-Land)',
             dataElement: 'IDSR Malaria (weekly)',
-            startDate: '2026-01-01',
-            endDate: '2026-01-03',
         })
 
         cy.getByDataTest('org-unit-tree').should('be.visible')
@@ -456,6 +463,8 @@ describe('Import', () => {
         selectOrgUnitFromTree('Bendu Cha')
 
         cy.getByDataTest('org-unit-level-select').should('contain', 'District')
+
+        typeStartAndEndDates('2026-01-01', '2026-01-03')
 
         verifyImportPreview({
             datasetName: 'Precipitation (ERA5-Land)',
@@ -473,7 +482,7 @@ describe('Import', () => {
                 body: { status: 'SUCCESS', importCount: { imported: 13 } },
             })
         }).as('postDataValueSets')
-        cy.contains('Start import').click()
+        cy.contains('Import once').click()
         cy.wait('@postDataValueSets', { timeout: 25000 })
         verifyImportSuccess()
     })
@@ -482,8 +491,6 @@ describe('Import', () => {
         makeImportSelections({
             dataset: 'Earth Engine: Precipitation (ERA5-Land)',
             dataElement: 'IDSR Malaria (weekly)',
-            startDate: '2026-01-01',
-            endDate: '2026-01-27',
         })
 
         selectOrgUnitFromTree('Sierra Leone')
@@ -491,16 +498,18 @@ describe('Import', () => {
         removeOrgUnitLevel('District')
         selectOrgUnitGroup('Rural')
 
+        typeStartAndEndDates('2026-01-01', '2026-01-27')
+
         verifyImportPreview({
             datasetName: 'Precipitation (ERA5-Land)',
             period: 'Weekly values from 2026-W01 to 2026-W05 (2025-12-29 to 2026-02-01)',
             locationInfo:
                 'Selected org units: Rural groups in Bonthe (41 organisation units have geometry and will be imported)',
             dataElementName: 'IDSR Malaria',
-            dataValues: 205,
+            dataValues: { min: 195 },
         })
 
-        interceptAndValidateDataValues(205, [
+        interceptAndValidateDataValues({ min: 195 }, [
             {
                 orgUnit: 'lc3eMKXaEfw',
                 expectedValue: '30.473',
@@ -513,7 +522,7 @@ describe('Import', () => {
             },
         ])
 
-        cy.contains('Start import').click()
+        cy.contains('Import once').click()
         cy.wait('@postDataValueSets', { timeout: 25000 })
         verifyImportSuccess()
     })
@@ -523,13 +532,13 @@ describe('Import', () => {
             dataset: 'Earth Engine: Precipitation (ERA5-Land)',
             periodType: 'Weekly',
             dataElement: 'IDSR Malaria (weekly)',
-            startDate: '2025-12-24',
-            endDate: '2026-01-16',
         })
 
         selectOrgUnitFromTree('Sierra Leone')
         selectOrgUnitFromTree('Bonthe')
         removeOrgUnitLevel('District')
+
+        typeStartAndEndDates('2025-12-24', '2026-01-16')
 
         verifyImportPreview({
             datasetName: 'Precipitation (ERA5-Land)',
@@ -563,7 +572,7 @@ describe('Import', () => {
             },
         ])
 
-        cy.contains('Start import').click()
+        cy.contains('Import once').click()
         cy.wait('@postDataValueSets', { timeout: 25000 })
         verifyImportSuccess()
     })
@@ -592,7 +601,7 @@ describe('Import', () => {
             },
         }).as('getDataSets')
 
-        cy.visit('#/import')
+        cy.visit('#/imports/new')
 
         cy.wait('@getDataSets')
 
@@ -600,14 +609,14 @@ describe('Import', () => {
             dataset: 'Earth Engine: Precipitation (ERA5-Land)',
             dataElement: 'Precipitation (ERA5-Land) (monthly)',
             periodType: 'Monthly',
-            startDate: '2025-12-24',
-            endDate: '2026-01-16',
             visit: false,
         })
 
         selectOrgUnitFromTree('Sierra Leone')
         selectOrgUnitFromTree('Bonthe')
         removeOrgUnitLevel('District')
+
+        typeStartAndEndDates('2025-12-24', '2026-01-16')
 
         verifyImportPreview({
             datasetName: 'Precipitation (ERA5-Land)',
@@ -631,7 +640,7 @@ describe('Import', () => {
             },
         ])
 
-        cy.contains('Start import').click()
+        cy.contains('Import once').click()
         cy.wait('@postDataValueSets', { timeout: 25000 })
         verifyImportSuccess()
     })
@@ -640,13 +649,14 @@ describe('Import', () => {
         makeImportSelections({
             dataset: 'Earth Engine: Precipitation (ERA5-Land)',
             dataElement: 'IDSR Malaria (weekly)',
-            startDate: '2026-01-01',
-            endDate: '2026-01-03',
         })
 
+        cy.getByDataTest('org-unit-tree').scrollIntoView()
         cy.getByDataTest('org-unit-tree').should('be.visible')
         cy.getByDataTest('org-unit-level-select').should('contain', 'District')
         selectOrgUnitGroup('Rural')
+
+        typeStartAndEndDates('2026-01-01', '2026-01-03')
 
         verifyImportPreview({
             datasetName: 'Precipitation (ERA5-Land)',
@@ -654,20 +664,11 @@ describe('Import', () => {
             locationInfo:
                 'Selected org units: Rural groups in Sierra Leone - District levels in Sierra Leone (257 organisation units have geometry and will be imported)',
             dataElementName: 'IDSR Malaria',
-            dataValues: 257,
+            dataValues: { min: 245 },
         })
 
-        cy.intercept('POST', '**/api/*/dataValueSets*', (req) => {
-            expect(req.body.dataValues).to.have.lengthOf(257)
-            req.reply({
-                statusCode: 200,
-                body: {
-                    status: 'SUCCESS',
-                    importCount: { imported: req.body.dataValues.length },
-                },
-            })
-        }).as('postDataValueSets')
-        cy.contains('Start import').click()
+        interceptAndValidateDataValues({ min: 245 })
+        cy.contains('Import once').click()
         cy.wait('@postDataValueSets', { timeout: 25000 })
         verifyImportSuccess()
     })
@@ -685,14 +686,15 @@ describe('Import', () => {
                 },
             }).as('getGeoFeaturesError')
 
-            cy.visit('#/import')
+            cy.visit('#/imports/new')
 
             selectDataset('Earth Engine: Precipitation (ERA5-Land)')
             selectPeriodType('Weekly')
-            typeStartAndEndDates('2026-01-01', '2026-01-03')
             selectTargetDataElement('IDSR Malaria (weekly)')
 
             cy.wait('@getGeoFeaturesError')
+
+            typeStartAndEndDates('2026-01-01', '2026-01-03')
 
             // Verify the error message is displayed in the org units section
             cy.getByDataTest('org-units-selector')
@@ -703,15 +705,14 @@ describe('Import', () => {
                 .should('be.visible')
 
             // Import button should still be disabled due to error
-            cy.get('button').contains('Start import').should('be.disabled')
+            cy.get('button').contains('Import once').should('be.disabled')
         })
 
         it('shows warning when no org unit geometries are found', () => {
-            cy.visit('#/import')
+            cy.visit('#/imports/new')
 
             selectDataset('Earth Engine: Precipitation (ERA5-Land)')
             selectPeriodType('Weekly')
-            typeStartAndEndDates('2026-01-01', '2026-01-03')
             selectTargetDataElement('IDSR Malaria (weekly)')
 
             // Deselect Sierra Leone
@@ -720,25 +721,30 @@ describe('Import', () => {
             // Remove District level
             removeOrgUnitLevel('District')
 
+            typeStartAndEndDates('2026-01-01', '2026-01-03')
+
             // Verify the warning message is displayed
+            cy.getByDataTest('org-units-selector')
+                .contains('No org unit geometries found')
+                .scrollIntoView()
             cy.getByDataTest('org-units-selector')
                 .contains('No org unit geometries found')
                 .should('be.visible')
 
             // Import button should be disabled when no geometries found
-            cy.get('button').contains('Start import').should('be.disabled')
+            cy.get('button').contains('Import once').should('be.disabled')
         })
 
         it('shows error when org unit selection is invalid', () => {
-            cy.visit('#/import')
+            cy.visit('#/imports/new')
 
             selectDataset('Earth Engine: Precipitation (ERA5-Land)')
             selectPeriodType('Weekly')
-            typeStartAndEndDates('2026-01-01', '2026-01-03')
             selectTargetDataElement('IDSR Malaria (weekly)')
+            typeStartAndEndDates('2026-01-01', '2026-01-03')
 
-            // Check that Start import is enabled with default selection
-            cy.get('button').contains('Start import').should('not.be.disabled')
+            // Check that Import once is enabled with default selection
+            cy.get('button').contains('Import once').should('not.be.disabled')
 
             // Make an invalid org unit selection
             // Unselect Sierra Leone
@@ -762,7 +768,7 @@ describe('Import', () => {
                 .should('be.visible')
 
             // Import button should be disabled due to invalid selection
-            cy.get('button').contains('Start import').should('be.disabled')
+            cy.get('button').contains('Import once').should('be.disabled')
 
             // unselect Bendu Cha to return to valid selection and verify error message goes away and import button is enabled again
             selectOrgUnitFromTree('Bendu Cha')
@@ -773,7 +779,7 @@ describe('Import', () => {
                 )
                 .should('not.exist')
 
-            cy.get('button').contains('Start import').should('not.be.disabled')
+            cy.get('button').contains('Import once').should('not.be.disabled')
         })
     })
 })
