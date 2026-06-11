@@ -2,7 +2,6 @@ import i18n from '@dhis2/d2-i18n'
 import {
     Button,
     ButtonStrip,
-    CalendarInput,
     Modal,
     ModalActions,
     ModalContent,
@@ -12,7 +11,6 @@ import {
 import PropTypes from 'prop-types'
 import { useCallback, useMemo, useState } from 'react'
 import useOrgUnits from '../../hooks/useOrgUnits.js'
-import useUserLocale from '../../hooks/useUserLocale.js'
 import { getOuText } from '../../utils/getOuText.js'
 import {
     computeFillGapRange,
@@ -26,12 +24,11 @@ import {
     formatBookmarkDate,
     formatStandardDate,
     getPeriodTypes,
-    normalizeIsoDate,
     oneDayInMs,
 } from '../../utils/time.js'
+import DateRangePicker from './DateRangePicker.jsx'
 import ImportModal from './ImportModal.jsx'
 import classes from './styles/RunConfigModal.module.css'
-import YearSelect from './YearSelect.jsx'
 
 const MAX_VALUES = 50000
 
@@ -79,7 +76,6 @@ const formatRangeDisplay = (range) => {
 }
 
 const RunConfigModal = ({ config, onClose, onRunComplete }) => {
-    const { locale } = useUserLocale()
     const {
         features,
         featuresLoading,
@@ -106,17 +102,6 @@ const RunConfigModal = ({ config, onClose, onRunComplete }) => {
                 : defaultRange,
         [overrideRange, defaultRange, config.periodType]
     )
-
-    const periodRange = useMemo(
-        () =>
-            config.dataset?.supportedPeriodTypes?.find(
-                (pt) => pt.periodType === config.periodType
-            )?.periodRange,
-        [config]
-    )
-
-    const minDate = normalizeIsoDate(periodRange?.start) || undefined
-    const maxDate = normalizeIsoDate(periodRange?.end) || undefined
 
     const rangeInvalid = isYearly
         ? Number.parseInt(range.startTime, 10) >
@@ -146,6 +131,14 @@ const RunConfigModal = ({ config, onClose, onRunComplete }) => {
         setEditing(false)
     }
 
+    const handleRangeChange = useCallback((updatedPeriod) => {
+        setOverrideRange({
+            startTime: updatedPeriod.startTime,
+            endTime: updatedPeriod.endTime,
+            timeZone: updatedPeriod.timeZone,
+        })
+    }, [])
+
     const valueCount = useMemo(
         () =>
             valueCountForRange({
@@ -164,6 +157,7 @@ const RunConfigModal = ({ config, onClose, onRunComplete }) => {
             endTime: range.endTime,
             periodType: range.periodType,
             calendar: 'gregory',
+            timeZone: range.timeZone,
         }),
         [range]
     )
@@ -243,102 +237,17 @@ const RunConfigModal = ({ config, onClose, onRunComplete }) => {
                             <dd>
                                 {editing ? (
                                     <div className={classes.rangeEditor}>
-                                        {isYearly ? (
-                                            <div className={classes.pickers}>
-                                                <YearSelect
-                                                    label={i18n.t('Start year')}
-                                                    year={range.startTime}
-                                                    minYear={
-                                                        periodRange?.start ??
-                                                        '1980'
-                                                    }
-                                                    maxYear={
-                                                        periodRange?.end ??
-                                                        String(
-                                                            new Date().getFullYear()
-                                                        )
-                                                    }
-                                                    onChange={(year) =>
-                                                        setOverrideRange(
-                                                            (r) => ({
-                                                                ...r,
-                                                                startTime:
-                                                                    String(
-                                                                        year
-                                                                    ),
-                                                            })
-                                                        )
-                                                    }
-                                                />
-                                                <YearSelect
-                                                    label={i18n.t('End year')}
-                                                    year={range.endTime}
-                                                    minYear={
-                                                        periodRange?.start ??
-                                                        '1980'
-                                                    }
-                                                    maxYear={
-                                                        periodRange?.end ??
-                                                        String(
-                                                            new Date().getFullYear()
-                                                        )
-                                                    }
-                                                    onChange={(year) =>
-                                                        setOverrideRange(
-                                                            (r) => ({
-                                                                ...r,
-                                                                endTime:
-                                                                    String(
-                                                                        year
-                                                                    ),
-                                                            })
-                                                        )
-                                                    }
-                                                />
-                                            </div>
-                                        ) : (
-                                            <div className={classes.pickers}>
-                                                <CalendarInput
-                                                    label={i18n.t('Start date')}
-                                                    date={range.startTime}
-                                                    minDate={minDate}
-                                                    maxDate={maxDate}
-                                                    calendar="gregory"
-                                                    locale={locale || 'en'}
-                                                    onDateSelect={({
-                                                        calendarDateString,
-                                                    }) =>
-                                                        setOverrideRange(
-                                                            (r) => ({
-                                                                ...r,
-                                                                startTime:
-                                                                    calendarDateString,
-                                                            })
-                                                        )
-                                                    }
-                                                />
-                                                <CalendarInput
-                                                    label={i18n.t('End date')}
-                                                    dataTest="config-end-date-input"
-                                                    date={range.endTime}
-                                                    minDate={minDate}
-                                                    maxDate={maxDate}
-                                                    calendar="gregory"
-                                                    locale={locale || 'en'}
-                                                    onDateSelect={({
-                                                        calendarDateString,
-                                                    }) =>
-                                                        setOverrideRange(
-                                                            (r) => ({
-                                                                ...r,
-                                                                endTime:
-                                                                    calendarDateString,
-                                                            })
-                                                        )
-                                                    }
-                                                />
-                                            </div>
-                                        )}
+                                        <DateRangePicker
+                                            period={{
+                                                startTime: range.startTime,
+                                                endTime: range.endTime,
+                                                periodType: config.periodType,
+                                                calendar: 'gregory',
+                                                timeZone: range.timeZone,
+                                            }}
+                                            dataset={config.dataset}
+                                            onChange={handleRangeChange}
+                                        />
                                         {rangeInvalid && (
                                             <span
                                                 className={classes.rangeError}

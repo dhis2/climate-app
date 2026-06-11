@@ -60,13 +60,6 @@
     gap: var(--spacers-dp8);
 }
 
-.pickers {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    gap: var(--spacers-dp12);
-}
-
 .rangeActions {
     display: flex;
     flex-direction: row;
