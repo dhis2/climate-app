@@ -77,6 +77,14 @@ const DateRangePicker = ({ period, dataset, onChange }) => {
         errorMessage = i18n.t('Start date is not within the valid range.')
     } else if (endDateError) {
         errorMessage = i18n.t('End date is not within the valid range.')
+    } else if (
+        !startDateError &&
+        !endDateError &&
+        startTime &&
+        endTime &&
+        new Date(startTime) > new Date(endTime)
+    ) {
+        errorMessage = i18n.t('Start date must be on or before the end date.')
     }
 
     if (isYearly) {
@@ -106,6 +114,9 @@ const DateRangePicker = ({ period, dataset, onChange }) => {
                             nsSeparator: ';',
                         })}
                     </div>
+                )}
+                {errorMessage && (
+                    <p className={classes.periodError}>{errorMessage}</p>
                 )}
             </div>
         )

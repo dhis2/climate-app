@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-06-12T08:40:44.176Z\n"
-"PO-Revision-Date: 2026-06-12T08:40:44.176Z\n"
+"POT-Creation-Date: 2026-06-12T09:29:40.421Z\n"
+"PO-Revision-Date: 2026-06-12T09:29:40.422Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -652,6 +652,9 @@ msgstr "Start date is not within the valid range."
 msgid "End date is not within the valid range."
 msgstr "End date is not within the valid range."
 
+msgid "Start date must be on or before the end date."
+msgstr "Start date must be on or before the end date."
+
 msgid "Valid range: {{startDate}} – {{endDate}}"
 msgstr "Valid range: {{startDate}} – {{endDate}}"
 
@@ -970,9 +973,6 @@ msgstr "Time zone"
 
 msgid "For {{periodType}} date range"
 msgstr "For {{periodType}} date range"
-
-msgid "Start date must be on or before the end date."
-msgstr "Start date must be on or before the end date."
 
 msgid "Done"
 msgstr "Done"

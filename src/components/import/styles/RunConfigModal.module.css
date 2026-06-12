@@ -66,11 +66,6 @@
     gap: var(--spacers-dp8);
 }
 
-.rangeError {
-    color: var(--colors-red700);
-    font-size: 13px;
-}
-
 .progressBody {
     display: flex;
     flex-direction: column;

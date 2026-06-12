@@ -270,15 +270,6 @@ const RunConfigModal = ({ config, onClose, onRunComplete }) => {
                                             dataset={datasetForPicker}
                                             onChange={handleRangeChange}
                                         />
-                                        {rangeInvalid && (
-                                            <span
-                                                className={classes.rangeError}
-                                            >
-                                                {i18n.t(
-                                                    'Start date must be on or before the end date.'
-                                                )}
-                                            </span>
-                                        )}
                                         <div className={classes.rangeActions}>
                                             <Button
                                                 small
