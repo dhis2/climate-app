@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-06-11T13:27:38.934Z\n"
-"PO-Revision-Date: 2026-06-11T13:27:38.935Z\n"
+"POT-Creation-Date: 2026-06-12T08:40:44.176Z\n"
+"PO-Revision-Date: 2026-06-12T08:40:44.176Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -965,6 +965,9 @@ msgid_plural "For {{count}} organisation units"
 msgstr[0] "For {{count}} organisation unit"
 msgstr[1] "For {{count}} organisation units"
 
+msgid "Time zone"
+msgstr "Time zone"
+
 msgid "For {{periodType}} date range"
 msgstr "For {{periodType}} date range"
 
@@ -1340,9 +1343,6 @@ msgid ""
 msgstr ""
 "If two org units are close to each other (within the resolution), they will "
 "have the same data values."
-
-msgid "Time zone"
-msgstr "Time zone"
 
 msgid "Data resolution is approximately {{resolution}}."
 msgstr "Data resolution is approximately {{resolution}}."

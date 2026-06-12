@@ -245,6 +245,44 @@ describe('Imports overview', () => {
         cy.contains('IDSR Malaria').should('be.visible')
     })
 
+    it('shows the saved timezone as read-only in the run modal', () => {
+        const configWithTz = {
+            id: 'test-config-tz-1',
+            name: 'Daily Precipitation SL',
+            datasetId: 'ECMWF/ERA5_LAND/DAILY_AGGR/total_precipitation_sum',
+            datasetName: 'Precipitation (ERA5-Land)',
+            dataElement: {
+                id: 'fbfJHSPpUQD',
+                displayName: 'IDSR Malaria',
+            },
+            orgUnits: [
+                { id: 'O6uvpzGd5pu', name: 'Connaught Hospital' },
+                { id: 'kJq2mPyFpX8', name: 'Rokupa Government Hospital' },
+            ],
+            featureCount: 13,
+            periodType: 'DAILY',
+            timeZone: 'Africa/Nairobi',
+            dataUpdatedThrough: '2026-04-30',
+            lastRunAt: '2026-05-01T10:00:00.000Z',
+            createdAt: '2026-01-01T12:00:00.000Z',
+            createdByName: 'Test User',
+        }
+
+        cy.intercept('GET', DATASTORE_URL, {
+            configs: [configWithTz],
+        }).as('getDataStore')
+        cy.visit('#/import')
+
+        cy.contains('button', 'Import…', { timeout: 10000 }).should(
+            'not.be.disabled'
+        )
+        cy.contains('button', 'Import…').click()
+
+        cy.contains('Import "Daily Precipitation SL"').should('be.visible')
+        cy.contains('Time zone').should('be.visible')
+        cy.contains('Africa/Nairobi').should('be.visible')
+    })
+
     it('runs a saved import from the overview', () => {
         cy.intercept('GET', DATASTORE_URL, { configs: [MOCK_CONFIG] }).as(
             'getDataStore'

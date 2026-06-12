@@ -61,6 +61,7 @@ const useImportConfigs = () => {
             orgUnits,
             featureCount,
             periodType,
+            timeZone,
         }) => {
             const newConfig = {
                 id: generateId(),
@@ -75,6 +76,7 @@ const useImportConfigs = () => {
                 orgUnits,
                 featureCount,
                 periodType,
+                timeZone: timeZone ?? null,
                 dataUpdatedThrough: null,
                 createdAt: new Date().toISOString(),
                 createdBy: currentUser?.id ?? null,

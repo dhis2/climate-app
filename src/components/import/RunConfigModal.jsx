@@ -135,7 +135,6 @@ const RunConfigModal = ({ config, onClose, onRunComplete }) => {
         setOverrideRange({
             startTime: updatedPeriod.startTime,
             endTime: updatedPeriod.endTime,
-            timeZone: updatedPeriod.timeZone,
         })
     }, [])
 
@@ -157,10 +156,28 @@ const RunConfigModal = ({ config, onClose, onRunComplete }) => {
             endTime: range.endTime,
             periodType: range.periodType,
             calendar: 'gregory',
-            timeZone: range.timeZone,
+            timeZone: config.timeZone,
         }),
-        [range]
+        [range, config.timeZone]
     )
+
+    // Strip timezone from the dataset so DateRangePicker never renders the
+    // editable TimeZone selector — the saved config's timezone is fixed.
+    const datasetForPicker = useMemo(() => {
+        if (!config.dataset) {
+            return config.dataset
+        }
+        const d = { ...config.dataset }
+        delete d.timeZone
+        if (d.bands) {
+            d.bands = d.bands.map((b) => {
+                const band = { ...b }
+                delete band.timeZone
+                return band
+            })
+        }
+        return d
+    }, [config.dataset])
 
     const handleImportDone = useCallback(
         (importCount, lastRunError) => {
@@ -221,6 +238,12 @@ const RunConfigModal = ({ config, onClose, onRunComplete }) => {
                             </dt>
                             <dd>{getOuText(config.orgUnits)}</dd>
                         </div>
+                        {config.timeZone && (
+                            <div className={classes.summaryRow}>
+                                <dt>{i18n.t('Time zone')}</dt>
+                                <dd>{config.timeZone}</dd>
+                            </div>
+                        )}
                         <div className={classes.summaryRow}>
                             <dt>
                                 {i18n.t('For {{periodType}} date range', {
@@ -243,9 +266,8 @@ const RunConfigModal = ({ config, onClose, onRunComplete }) => {
                                                 endTime: range.endTime,
                                                 periodType: config.periodType,
                                                 calendar: 'gregory',
-                                                timeZone: range.timeZone,
                                             }}
-                                            dataset={config.dataset}
+                                            dataset={datasetForPicker}
                                             onChange={handleRangeChange}
                                         />
                                         {rangeInvalid && (
@@ -356,6 +378,7 @@ RunConfigModal.propTypes = {
         dataset: PropTypes.object,
         datasetName: PropTypes.string,
         lastRunByName: PropTypes.string,
+        timeZone: PropTypes.string,
     }).isRequired,
     onClose: PropTypes.func.isRequired,
     onRunComplete: PropTypes.func.isRequired,

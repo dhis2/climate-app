@@ -167,6 +167,7 @@ const ImportPage = () => {
                 orgUnits,
                 featureCount,
                 periodType: period.periodType,
+                timeZone: period.timeZone ?? null,
             })
             setSavedConfig(newConfig)
         }
