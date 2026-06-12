@@ -139,7 +139,7 @@ const getEEDatasets = () => [
     {
         id: 'ECMWF/ERA5_LAND/DAILY_AGGR/temperature_2m_min',
         datasetId: 'ECMWF/ERA5_LAND/DAILY_AGGR',
-        name: i18n.t('Min temperature (ERA5-Land)'),
+        name: i18n.t('Min air temperature (ERA5-Land)'),
         shortName: i18n.t('Min air temperature'),
         description: i18n.t(
             'Minimum air temperature in °C at 2 m above the surface.'
