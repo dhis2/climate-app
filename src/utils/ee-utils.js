@@ -14,6 +14,35 @@ import {
 
 const VALUE_LIMIT = 5000
 const DEFAULT_SCALE = 1000
+const FEATURE_PAYLOAD_MB_LIMIT = 2
+
+export const chunkFeaturesBySize = (
+    features,
+    limitMb = FEATURE_PAYLOAD_MB_LIMIT
+) => {
+    const limitBytes = limitMb * 1024 * 1024
+    const chunks = []
+    let currentChunk = []
+    let currentSize = 0
+
+    for (const feature of features) {
+        const featureSize = JSON.stringify(feature).length
+        if (currentChunk.length > 0 && currentSize + featureSize > limitBytes) {
+            chunks.push(currentChunk)
+            currentChunk = [feature]
+            currentSize = featureSize
+        } else {
+            currentChunk.push(feature)
+            currentSize += featureSize
+        }
+    }
+
+    if (currentChunk.length > 0) {
+        chunks.push(currentChunk)
+    }
+
+    return chunks
+}
 
 // Returns the linear scale in meters of the units of this projection
 export const getScale = (image) =>
@@ -170,234 +199,315 @@ const getEarthEngineValues = ({
 }) =>
     // eslint-disable-next-line
     new Promise(async (resolve, reject) => {
-        const dataset = period.timeZone
-            ? { ...datasetParams, ...datasetParams.timeZone }
-            : datasetParams
+        try {
+            const dataset = period.timeZone
+                ? { ...datasetParams, ...datasetParams.timeZone }
+                : datasetParams
 
-        const {
-            datasetId,
-            band,
-            reducer = 'mean',
-            periodType: datasetPeriodType,
-            periodReducer = reducer,
-            histogramKey,
-            valueParser,
-        } = dataset
+            const {
+                datasetId,
+                band,
+                reducer = 'mean',
+                periodType: datasetPeriodType,
+                periodReducer = reducer,
+                histogramKey,
+                valueParser,
+            } = dataset
 
-        const { timeZone = 'UTC', periodType } = period
+            const { timeZone = 'UTC', periodType } = period
 
-        const periods = getPeriods(period).map(addPeriodTimestamp)
+            const periods = getPeriods(period).map(addPeriodTimestamp)
 
-        // Extract start and end dates from the generated periods array
-        const startTime = periods[0]?.startDate
+            // Extract start and end dates from the generated periods array
+            const startTime = periods[0]?.startDate
 
-        // add 1 day so that the last day selected is included by GEE
-        const endTimePlusOne = ee
-            .Date(String(periods.at(-1)?.endDate))
-            .advance(1, 'day')
+            // add 1 day so that the last day selected is included by GEE
+            const endTimePlusOne = ee
+                .Date(String(periods.at(-1)?.endDate))
+                .advance(1, 'day')
 
-        const timeZoneStart = ee
-            .Date(String(startTime))
-            .advance(datasetPeriodType === SIXTEEN_DAYS ? -32 : 0, 'day')
-            .format(null, timeZone)
-        const timeZoneEnd = endTimePlusOne.format(null, timeZone)
-        const mappedPeriods = getMappedPeriods(periods)
+            const timeZoneStart = ee
+                .Date(String(startTime))
+                .advance(datasetPeriodType === SIXTEEN_DAYS ? -32 : 0, 'day')
+                .format(null, timeZone)
+            const timeZoneEnd = endTimePlusOne.format(null, timeZone)
+            const mappedPeriods = getMappedPeriods(periods)
 
-        const dataParser = (features) => {
-            let data = features.map(getFeatureProperties)
+            const dataParser = (features) => {
+                let data = features.map(getFeatureProperties)
 
-            if (datasetPeriodType === SIXTEEN_DAYS) {
-                const orgUnits = [...new Set(data.map((d) => d.ou))]
+                if (datasetPeriodType === SIXTEEN_DAYS) {
+                    const orgUnits = [...new Set(data.map((d) => d.ou))]
 
-                data = orgUnits
-                    .map((ou) => {
-                        const ouData = data.filter((d) => d.ou === ou)
-                        return periods.map((p) => {
-                            const value = interpolate(ouData, getMiddleTime(p))
-                            const period = p.startDate
-                            return {
-                                ou,
-                                period,
-                                value,
-                            }
+                    data = orgUnits
+                        .map((ou) => {
+                            const ouData = data.filter((d) => d.ou === ou)
+                            return periods.map((p) => {
+                                const value = interpolate(
+                                    ouData,
+                                    getMiddleTime(p)
+                                )
+                                const period = p.startDate
+                                return {
+                                    ou,
+                                    period,
+                                    value,
+                                }
+                            })
                         })
-                    })
-                    .flat()
-            }
+                        .flat()
+                }
 
-            if (histogramKey !== undefined) {
+                if (histogramKey !== undefined) {
+                    return data.map((d) => ({
+                        ...d,
+                        period: mappedPeriods.get(d.period),
+                        value: getHistogramPercentage(
+                            d.histogram,
+                            histogramKey
+                        ),
+                    }))
+                }
+
                 return data.map((d) => ({
                     ...d,
                     period: mappedPeriods.get(d.period),
-                    value: getHistogramPercentage(d.histogram, histogramKey),
+                    value: valueParser ? valueParser(d.value) : d.value,
                 }))
             }
 
-            return data.map((d) => ({
-                ...d,
-                period: mappedPeriods.get(d.period),
-                value: valueParser ? valueParser(d.value) : d.value,
-            }))
-        }
+            let collection = ee
+                .ImageCollection(datasetId)
+                .select(band)
+                .filter(ee.Filter.date(timeZoneStart, timeZoneEnd))
 
-        let collection = ee
-            .ImageCollection(datasetId)
-            .select(band)
-            .filter(ee.Filter.date(timeZoneStart, timeZoneEnd))
+            const imageCount = await getInfo(collection.size())
 
-        const imageCount = await getInfo(collection.size())
-
-        if (imageCount === 0) {
-            reject(new Error(i18n.t('No data found for the selected period')))
-        }
-
-        let eeScale = getScale(collection.first())
-
-        if (reducer === 'min' || reducer === 'max') {
-            // ReduceRegions with min/max reducer may fail if the features are smaller than the pixel area
-            // https://stackoverflow.com/questions/59774022/reduce-regions-some-features-dont-contains-centroid-of-pixel-in-consecuence-ex
-
-            const scale = await getInfo(eeScale)
-
-            const minArea = Math.min(
-                ...features
-                    .filter((f) => f.geometry.type.includes('Polygon'))
-                    .map(area)
-            )
-
-            if (minArea < scale * scale) {
-                eeScale = Math.sqrt(minArea) / 2
+            if (imageCount === 0) {
+                reject(
+                    new Error(i18n.t('No data found for the selected period'))
+                )
             }
-        }
 
-        const featureCollection = ee.FeatureCollection(features)
+            let eeScale = getScale(collection.first())
 
-        const eeReducer = ee.Reducer[reducer]()
+            if (reducer === 'min' || reducer === 'max') {
+                // ReduceRegions with min/max reducer may fail if the features are smaller than the pixel area
+                // https://stackoverflow.com/questions/59774022/reduce-regions-some-features-dont-contains-centroid-of-pixel-in-consecuence-ex
 
-        if (periodType !== datasetPeriodType) {
-            // Filter images with data
-            const imagesWithData = ee.Filter.listContains(
-                'system:band_names',
-                band
-            )
+                const scale = await getInfo(eeScale)
 
-            // Go from hourly to daily
-            if (datasetPeriodType === HOURLY) {
-                const days = ee
-                    .Date(timeZoneEnd)
-                    .difference(ee.Date(timeZoneStart), 'days')
+                const minArea = Math.min(
+                    ...features
+                        .filter((f) => f.geometry.type.includes('Polygon'))
+                        .map(area)
+                )
 
-                const daysList = ee.List.sequence(0, days.subtract(1))
+                if (minArea < scale * scale) {
+                    eeScale = Math.sqrt(minArea) / 2
+                }
+            }
 
-                collection = ee.ImageCollection.fromImages(
-                    daysList.map((day) => {
-                        const startUTC = ee.Date(startTime).advance(day, 'days')
-                        const startDate = ee.Date(
-                            startUTC.format(null, timeZone)
+            const featureCollection = ee.FeatureCollection(features)
+
+            const eeReducer = ee.Reducer[reducer]()
+
+            if (periodType !== datasetPeriodType) {
+                // Filter images with data
+                const imagesWithData = ee.Filter.listContains(
+                    'system:band_names',
+                    band
+                )
+
+                // Go from hourly to daily
+                if (datasetPeriodType === HOURLY) {
+                    const days = ee
+                        .Date(timeZoneEnd)
+                        .difference(ee.Date(timeZoneStart), 'days')
+
+                    const daysList = ee.List.sequence(0, days.subtract(1))
+
+                    collection = ee.ImageCollection.fromImages(
+                        daysList.map((day) => {
+                            const startUTC = ee
+                                .Date(startTime)
+                                .advance(day, 'days')
+                            const startDate = ee.Date(
+                                startUTC.format(null, timeZone)
+                            )
+                            const endDate = startDate.advance(1, 'days')
+
+                            return getReducedCollection({
+                                ee,
+                                collection,
+                                startDate,
+                                endDate,
+                                reducer: periodReducer,
+                            })
+                        })
+                    ).filter(imagesWithData)
+                }
+
+                // Go from daily to period type (weekly or monthly)
+                if (datasetPeriodType === DAILY && periodType !== DAILY) {
+                    const periodList = ee.List(periods)
+
+                    collection = ee.ImageCollection.fromImages(
+                        periodList.map((item) => {
+                            const period = ee.Dictionary(item)
+                            const startDate = ee.Date(period.get('startDate'))
+                            const endDate = ee
+                                .Date(period.get('endDate'))
+                                .advance(1, 'day')
+
+                            return getReducedCollection({
+                                ee,
+                                collection,
+                                startDate,
+                                endDate,
+                                reducer: periodReducer,
+                            })
+                        })
+                    ).filter(imagesWithData)
+                }
+            }
+
+            // Aggregate data for each feature
+            const reduced = collection
+                .map((image) =>
+                    image
+                        .reduceRegions({
+                            collection: featureCollection,
+                            reducer: eeReducer,
+                            scale: eeScale,
+                        })
+                        .map((feature) =>
+                            ee.Feature(null, {
+                                ou: feature.get('id'),
+                                period: image.date().format('YYYY-MM-dd'),
+                                startTime: image.get('system:time_start'),
+                                endTime: image.get('system:time_end'),
+                                value: feature.get(reducer),
+                                histogram: feature.get('histogram'),
+                            })
                         )
-                        const endDate = startDate.advance(1, 'days')
+                )
+                .flatten()
 
-                        return getReducedCollection({
-                            ee,
-                            collection,
-                            startDate,
-                            endDate,
-                            reducer: periodReducer,
-                        })
-                    })
-                ).filter(imagesWithData)
-            }
+            const valueCollection = ee.FeatureCollection(reduced)
 
-            // Go from daily to period type (weekly or monthly)
-            if (datasetPeriodType === DAILY && periodType !== DAILY) {
-                const periodList = ee.List(periods)
+            const valueCount = await getInfo(valueCollection.size())
 
-                collection = ee.ImageCollection.fromImages(
-                    periodList.map((item) => {
-                        const period = ee.Dictionary(item)
-                        const startDate = ee.Date(period.get('startDate'))
-                        const endDate = ee
-                            .Date(period.get('endDate'))
-                            .advance(1, 'day')
+            if (valueCount <= VALUE_LIMIT) {
+                return getInfo(valueCollection.toList(VALUE_LIMIT))
+                    .then(dataParser)
+                    .then(resolve)
+            } else {
+                const chunks = Math.ceil(valueCount / VALUE_LIMIT)
 
-                        return getReducedCollection({
-                            ee,
-                            collection,
-                            startDate,
-                            endDate,
-                            reducer: periodReducer,
-                        })
-                    })
-                ).filter(imagesWithData)
-            }
-        }
-
-        // Aggregate data for each feature
-        const reduced = collection
-            .map((image) =>
-                image
-                    .reduceRegions({
-                        collection: featureCollection,
-                        reducer: eeReducer,
-                        scale: eeScale,
-                    })
-                    .map((feature) =>
-                        ee.Feature(null, {
-                            ou: feature.get('id'),
-                            period: image.date().format('YYYY-MM-dd'),
-                            startTime: image.get('system:time_start'),
-                            endTime: image.get('system:time_end'),
-                            value: feature.get(reducer),
-                            histogram: feature.get('histogram'),
-                        })
-                    )
-            )
-            .flatten()
-
-        const valueCollection = ee.FeatureCollection(reduced)
-
-        const valueCount = await getInfo(valueCollection.size())
-
-        if (valueCount <= VALUE_LIMIT) {
-            return getInfo(valueCollection.toList(VALUE_LIMIT))
-                .then(dataParser)
-                .then(resolve)
-        } else {
-            const chunks = Math.ceil(valueCount / VALUE_LIMIT)
-
-            return Promise.all(
-                Array.from({ length: chunks }, (_, chunk) =>
-                    getInfo(
-                        valueCollection.toList(VALUE_LIMIT, chunk * VALUE_LIMIT)
+                return Promise.all(
+                    Array.from({ length: chunks }, (_, chunk) =>
+                        getInfo(
+                            valueCollection.toList(
+                                VALUE_LIMIT,
+                                chunk * VALUE_LIMIT
+                            )
+                        )
                     )
                 )
-            )
-                .then((data) => [].concat(...data))
-                .then(dataParser)
-                .then(resolve)
+                    .then((data) => [].concat(...data))
+                    .then(dataParser)
+                    .then(resolve)
+            }
+        } catch (error) {
+            reject(error)
         }
     })
 
-export const getEarthEngineData = ({ ee, dataset, period, features }) => {
-    if (!period) {
-        return getEarthEngineImageValues({ ee, dataset, features })
-    } else if (dataset.bands) {
-        // Multiple bands (used for relative humidity)
-        const { bandsParser = (v) => v } = dataset
+const MAX_RETRIES = 3
+const RETRY_DELAY_MS = 2000
 
-        return Promise.all(
-            dataset.bands.map((band) =>
-                getEarthEngineValues({
-                    ee,
-                    dataset: { ...dataset, ...band },
-                    period,
-                    features,
-                })
-            )
-        ).then(bandsParser)
-    } else {
-        return getEarthEngineValues({ ee, dataset, period, features })
+export const retryOn502 = async (
+    fn,
+    maxRetries = MAX_RETRIES,
+    delayMs = RETRY_DELAY_MS
+) => {
+    for (let attempt = 0; attempt <= maxRetries; attempt++) {
+        try {
+            return await fn()
+        } catch (error) {
+            if (attempt < maxRetries && /502|bad gateway/i.test(error)) {
+                await new Promise((resolve) => setTimeout(resolve, delayMs))
+            } else {
+                throw error
+            }
+        }
     }
+}
+
+export const getEarthEngineData = async ({
+    ee,
+    dataset,
+    period,
+    features,
+    onProgress,
+}) => {
+    const chunks = chunkFeaturesBySize(features)
+
+    const runForChunk = (chunkFeatures) => {
+        if (!period) {
+            return getEarthEngineImageValues({
+                ee,
+                dataset,
+                features: chunkFeatures,
+            })
+        } else if (dataset.bands) {
+            const { bandsParser = (v) => v } = dataset
+            return Promise.all(
+                dataset.bands.map((band) =>
+                    getEarthEngineValues({
+                        ee,
+                        dataset: { ...dataset, ...band },
+                        period,
+                        features: chunkFeatures,
+                    })
+                )
+            ).then(bandsParser)
+        } else {
+            return getEarthEngineValues({
+                ee,
+                dataset,
+                period,
+                features: chunkFeatures,
+            })
+        }
+    }
+
+    const runForChunkWithRetry = async (chunkFeatures) => {
+        try {
+            return await retryOn502(() => runForChunk(chunkFeatures))
+        } catch (error) {
+            if (
+                chunkFeatures.length > 1 &&
+                /payload size exceeds the limit/i.test(error)
+            ) {
+                const mid = Math.floor(chunkFeatures.length / 2)
+                const [left, right] = await Promise.all([
+                    runForChunkWithRetry(chunkFeatures.slice(0, mid)),
+                    runForChunkWithRetry(chunkFeatures.slice(mid)),
+                ])
+                return [...left, ...right]
+            }
+            throw error
+        }
+    }
+
+    const results = []
+    for (let i = 0; i < chunks.length; i++) {
+        onProgress?.(i + 1, chunks.length)
+        results.push(await runForChunkWithRetry(chunks[i]))
+    }
+    return results.flat()
 }
 
 export const getTimeSeriesData = async ({

@@ -4,64 +4,17 @@ import {
     PROVIDER_ENACTS,
     PROVIDER_GEE,
 } from '../../components/DataSourcesProvider.jsx'
-import useOrgUnits from '../../hooks/useOrgUnits.js'
-import { getPeriods, getPeriodTypes } from '../../utils/time.js'
-import DataLoader from '../shared/DataLoader.jsx'
 import ExtractEnactsData from './ExtractEnactsData.jsx'
 import ExtractGeeData from './ExtractGeeData.jsx'
 import styles from './styles/ExtractData.module.css'
 
-const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
-    const { features, loading, error } = useOrgUnits({ orgUnits })
-
-    if (loading) {
-        return <DataLoader label={i18n.t('Loading org units')} height={100} />
-    } else if (error?.message) {
-        return (
-            <div className={styles.container}>
-                {i18n.t('Error loading org units: {{message}}', {
-                    message: error.message,
-                    nsSeparator: '>>',
-                })}
-            </div>
-        )
-    } else if (!features.length) {
-        return (
-            <div className={styles.container}>
-                {i18n.t('No org unit geometries found')}
-            </div>
-        )
-    }
-
-    const orgUnitsCount = features.length
-    let extractingLabel
-
-    if (period) {
-        const periodType = getPeriodTypes()
-            .find((type) => type.id === period.periodType)
-            ?.name.toLowerCase()
-        const periods = getPeriods(period)
-        const periodCount = periods.length
-        const valueCount = periodCount * orgUnitsCount
-
-        extractingLabel = i18n.t(
-            'Extracting data for {{periodCount}} {{periodType}} periods and {{orgUnitsCount}} org units ({{valueCount}} values)',
-            {
-                periodCount,
-                periodType,
-                orgUnitsCount,
-                valueCount,
-            }
-        )
-    } else {
-        extractingLabel = i18n.t(
-            'Extracting data for {{orgUnitsCount}} org units',
-            {
-                orgUnitsCount,
-            }
-        )
-    }
-
+const ExtractData = ({
+    dataset,
+    period,
+    features,
+    dataElement,
+    onComplete,
+}) => {
     if (dataset?.provider.id == PROVIDER_GEE) {
         return (
             <ExtractGeeData
@@ -69,7 +22,7 @@ const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
                 period={period}
                 features={features}
                 dataElement={dataElement}
-                extractingLabel={extractingLabel}
+                onComplete={onComplete}
             />
         )
     } else if (dataset?.provider.id == PROVIDER_ENACTS) {
@@ -79,7 +32,7 @@ const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
                 period={period}
                 features={features}
                 dataElement={dataElement}
-                extractingLabel={extractingLabel}
+                onComplete={onComplete}
             />
         )
     } else {
@@ -94,8 +47,9 @@ const ExtractData = ({ dataset, period, orgUnits, dataElement }) => {
 ExtractData.propTypes = {
     dataElement: PropTypes.object.isRequired,
     dataset: PropTypes.object.isRequired,
-    orgUnits: PropTypes.array.isRequired,
+    features: PropTypes.array.isRequired,
     period: PropTypes.object.isRequired,
+    onComplete: PropTypes.func.isRequired,
 }
 
 export default ExtractData

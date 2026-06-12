@@ -1,6 +1,14 @@
 const nonBoundaryStartDate = '2026-01-14' // Wednesday
 const nonBoundaryEndDate = '2026-01-29' // Thursday
 
+const verifyImportSuccess = () => {
+    cy.getByDataTest('dhis2-uicore-modal')
+        .contains('Data is imported')
+        .should('be.visible')
+    cy.getByDataTest('dhis2-uicore-modal').contains('Close').click()
+    cy.getByDataTest('dhis2-uicore-modal').should('not.exist')
+}
+
 const assertOrgUnitSection = () => {
     cy.contains('Select organisation units').scrollIntoView()
     cy.contains('Select organisation units').should('be.visible')
@@ -400,6 +408,14 @@ describe('Import', () => {
         }).as('postDataValueSets')
         cy.contains('Start import').click()
 
+        // Button should be disabled and show 'Importing...' while in progress
+        cy.getByDataTest('dhis2-uicore-modal')
+            .contains('Importing...')
+            .should('be.visible')
+        cy.getByDataTest('dhis2-uicore-modal')
+            .contains('Importing...')
+            .should('be.disabled')
+
         // Wait for and verify the intercepted request
         cy.wait('@postDataValueSets', { timeout: 25000 }).then(
             (interception) => {
@@ -421,6 +437,10 @@ describe('Import', () => {
                 })
             }
         )
+        cy.getByDataTest('dhis2-uicore-modal')
+            .contains('Imported: 2')
+            .should('be.visible')
+        verifyImportSuccess()
     })
 
     it('selects levels only for org units at or above the level in the tree', () => {
@@ -455,6 +475,7 @@ describe('Import', () => {
         }).as('postDataValueSets')
         cy.contains('Start import').click()
         cy.wait('@postDataValueSets', { timeout: 25000 })
+        verifyImportSuccess()
     })
 
     it('selects org unit from tree with org unit group but no level', () => {
@@ -494,6 +515,7 @@ describe('Import', () => {
 
         cy.contains('Start import').click()
         cy.wait('@postDataValueSets', { timeout: 25000 })
+        verifyImportSuccess()
     })
 
     it('complete weekly values are imported', () => {
@@ -543,6 +565,7 @@ describe('Import', () => {
 
         cy.contains('Start import').click()
         cy.wait('@postDataValueSets', { timeout: 25000 })
+        verifyImportSuccess()
     })
 
     it('complete monthly values are imported', () => {
@@ -610,6 +633,7 @@ describe('Import', () => {
 
         cy.contains('Start import').click()
         cy.wait('@postDataValueSets', { timeout: 25000 })
+        verifyImportSuccess()
     })
 
     it('selects with both level and group', () => {
@@ -645,6 +669,7 @@ describe('Import', () => {
         }).as('postDataValueSets')
         cy.contains('Start import').click()
         cy.wait('@postDataValueSets', { timeout: 25000 })
+        verifyImportSuccess()
     })
 
     describe('Organisation unit warning scenarios', () => {
