@@ -1,9 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
+import { NoticeBox } from '@dhis2/ui'
 import PropTypes from 'prop-types'
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import useEarthEngineData from '../../hooks/useEarthEngineData.js'
 import DataLoader from '../shared/DataLoader.jsx'
-import ErrorMessage from '../shared/ErrorMessage.jsx'
 import ImportData from './ImportData.jsx'
 
 const ExtractGeeData = ({
@@ -11,25 +11,24 @@ const ExtractGeeData = ({
     dataset,
     period,
     features,
-    onComplete,
+    onError,
+    onSuccess,
 }) => {
     const { data, error, progress } = useEarthEngineData({
         dataset,
         period,
         features,
     })
-    const [importDone, setImportDone] = useState(false)
+
+    // Keep a stable ref so the effect below only re-fires when `error` changes
+    const onErrorRef = useRef(onError)
+    onErrorRef.current = onError
 
     useEffect(() => {
         if (error) {
-            onComplete()
+            onErrorRef.current?.()
         }
-    }, [error, onComplete])
-
-    const handleImportComplete = useCallback(() => {
-        setImportDone(true)
-        onComplete()
-    }, [onComplete])
+    }, [error])
 
     if (error) {
         const displayError = /payload size exceeds the limit/i.test(error)
@@ -37,37 +36,39 @@ const ExtractGeeData = ({
                   'An org unit in your selection has boundaries that are too detailed to process.'
               )
             : error
-        return <ErrorMessage error={displayError} />
+        return (
+            <NoticeBox error title={i18n.t('Import failed')}>
+                {displayError}
+            </NoticeBox>
+        )
     }
 
-    let loadingLabel
-    if (data) {
-        loadingLabel = i18n.t('Importing data to DHIS2')
-    } else if (progress.total > 1) {
-        loadingLabel = i18n.t(
-            'Extracting data from Google Earth Engine (batch {{current}} of {{total}})',
-            {
-                current: progress.current,
-                total: progress.total,
-                nsSeparator: ';',
-            }
-        )
-    } else {
-        loadingLabel = i18n.t('Extracting data from Google Earth Engine')
+    if (!data) {
+        let loadingLabel
+        if (progress.total > 1) {
+            loadingLabel = i18n.t(
+                'Extracting data from Google Earth Engine (batch {{current}} of {{total}})',
+                {
+                    current: progress.current,
+                    total: progress.total,
+                    nsSeparator: ';',
+                }
+            )
+        } else {
+            loadingLabel = i18n.t('Extracting data from Google Earth Engine')
+        }
+        return <DataLoader label={loadingLabel} height={100} />
     }
 
     return (
-        <>
-            {!importDone && <DataLoader label={loadingLabel} height={100} />}
-            {data && (
-                <ImportData
-                    data={data}
-                    dataElement={dataElement}
-                    features={features}
-                    onComplete={handleImportComplete}
-                />
-            )}
-        </>
+        <ImportData
+            data={data}
+            dataElement={dataElement}
+            features={features}
+            period={period}
+            onError={onError}
+            onSuccess={onSuccess}
+        />
     )
 }
 
@@ -76,7 +77,8 @@ ExtractGeeData.propTypes = {
     dataset: PropTypes.object.isRequired,
     features: PropTypes.array.isRequired,
     period: PropTypes.object.isRequired,
-    onComplete: PropTypes.func.isRequired,
+    onError: PropTypes.func,
+    onSuccess: PropTypes.func,
 }
 
 export default ExtractGeeData

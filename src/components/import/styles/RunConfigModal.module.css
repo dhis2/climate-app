@@ -1,0 +1,90 @@
+.body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp16);
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--colors-grey900);
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp8);
+}
+
+.sectionTitle {
+    margin: 0;
+    color: var(--colors-grey700);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.summary {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp16);
+}
+
+.summaryRow {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.summaryRow dt {
+    color: var(--colors-grey700);
+    font-size: 13px;
+    margin: 0;
+}
+
+.summaryRow dd {
+    color: var(--colors-grey900);
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.rangeDisplay {
+    display: flex;
+    align-items: center;
+    gap: var(--spacers-dp12);
+}
+
+.rangeEditor {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp8);
+}
+
+.rangeActions {
+    display: flex;
+    flex-direction: row;
+    gap: var(--spacers-dp8);
+}
+
+.progressBody {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacers-dp12);
+    padding-block: var(--spacers-dp16);
+}
+
+.stageLabel {
+    color: var(--colors-grey800);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.warningText {
+    color: var(--colors-grey600);
+    font-size: 13px;
+}
+
+.hidden {
+    display: none;
+}

@@ -35,8 +35,10 @@ const PeriodType = ({ periodType, supportedPeriodTypes, onChange }) => {
         return (
             <div className={classes.singlePeriodTypeContainer}>
                 <div>
-                    {i18n.t('Period type')}:{' '}
-                    {supportedPeriodTypeObjects[0].name}
+                    {i18n.t('Period type: {{periodType}}', {
+                        periodType: supportedPeriodTypeObjects[0].name,
+                        nsSeparator: ';',
+                    })}
                 </div>
             </div>
         )

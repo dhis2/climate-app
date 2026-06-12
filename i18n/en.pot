@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-06-12T08:35:23.472Z\n"
-"PO-Revision-Date: 2026-06-12T08:35:23.473Z\n"
+"POT-Creation-Date: 2026-06-12T09:29:40.421Z\n"
+"PO-Revision-Date: 2026-06-12T09:29:40.422Z\n"
 
 msgid "About this app"
 msgstr "About this app"
@@ -111,8 +111,8 @@ msgstr "Home"
 msgid "Explore data"
 msgstr "Explore data"
 
-msgid "Import data"
-msgstr "Import data"
+msgid "Imports"
+msgstr "Imports"
 
 msgid "Setup guide"
 msgstr "Setup guide"
@@ -643,6 +643,43 @@ msgstr "Need help setting up data elements for import? Check out the "
 msgid "setup guide"
 msgstr "setup guide"
 
+msgid "Start and end date are not within the valid range."
+msgstr "Start and end date are not within the valid range."
+
+msgid "Start date is not within the valid range."
+msgstr "Start date is not within the valid range."
+
+msgid "End date is not within the valid range."
+msgstr "End date is not within the valid range."
+
+msgid "Start date must be on or before the end date."
+msgstr "Start date must be on or before the end date."
+
+msgid "Valid range: {{startDate}} – {{endDate}}"
+msgstr "Valid range: {{startDate}} – {{endDate}}"
+
+msgid "Valid range"
+msgstr "Valid range"
+
+msgid "Delete \"{{name}}\"?"
+msgstr "Delete \"{{name}}\"?"
+
+msgid "Created by {{name}} on {{date}}."
+msgstr "Created by {{name}} on {{date}}."
+
+msgid ""
+"Deleting will remove the saved import and its update history. Imported data "
+"values in DHIS2 will not be affected."
+msgstr ""
+"Deleting will remove the saved import and its update history. Imported data "
+"values in DHIS2 will not be affected."
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Delete"
+msgstr "Delete"
+
 msgid "Dataset provider not recognized"
 msgstr "Dataset provider not recognized"
 
@@ -663,8 +700,8 @@ msgstr ""
 "An org unit in your selection has boundaries that are too detailed to "
 "process."
 
-msgid "Importing data to DHIS2"
-msgstr "Importing data to DHIS2"
+msgid "Import failed"
+msgstr "Import failed"
 
 msgid "Extracting data from Google Earth Engine (batch {{current}} of {{total}})"
 msgstr "Extracting data from Google Earth Engine (batch {{current}} of {{total}})"
@@ -672,17 +709,23 @@ msgstr "Extracting data from Google Earth Engine (batch {{current}} of {{total}}
 msgid "Extracting data from Google Earth Engine"
 msgstr "Extracting data from Google Earth Engine"
 
-msgid "Received an unrecognized response from DHIS2"
-msgstr "Received an unrecognized response from DHIS2"
+msgid "No data for the following org units: {{orgUnits}}"
+msgstr "No data for the following org units: {{orgUnits}}"
 
-msgid "Import failed"
-msgstr "Import failed"
+msgid "Importing data to DHIS2"
+msgstr "Importing data to DHIS2"
 
-msgid "One or more conflicts encountered"
-msgstr "One or more conflicts encountered"
+msgid "Unknown error"
+msgstr "Unknown error"
 
 msgid "Importing climate data"
 msgstr "Importing climate data"
+
+msgid "Saved as \"{{name}}\""
+msgstr "Saved as \"{{name}}\""
+
+msgid "View in Imports →"
+msgstr "View in Imports →"
 
 msgid "Close"
 msgstr "Close"
@@ -693,11 +736,33 @@ msgstr "Importing..."
 msgid "Import weather and climate data"
 msgstr "Import weather and climate data"
 
-msgid "Choose data source"
-msgstr "Choose data source"
+msgid "Data source"
+msgstr "Data source"
 
 msgid "Choose destination data element"
 msgstr "Choose destination data element"
+
+msgid "Save this import?"
+msgstr "Save this import?"
+
+msgid "One-time import"
+msgstr "One-time import"
+
+msgid "Run this import once. Your selections are not saved."
+msgstr "Run this import once. Your selections are not saved."
+
+msgid "Save this import"
+msgstr "Save this import"
+
+msgid ""
+"Saved imports can be re-run by any user with data import access. Each run "
+"fetches new data since the last import."
+msgstr ""
+"Saved imports can be re-run by any user with data import access. Each run "
+"fetches new data since the last import."
+
+msgid "Import name"
+msgstr "Import name"
 
 msgid "Review and import"
 msgstr "Review and import"
@@ -711,8 +776,11 @@ msgstr ""
 "{{maxValues}}). Reduce your selection by choosing fewer organisation units "
 "or a shorter time period. Additional imports can be performed separately."
 
-msgid "Start import"
-msgstr "Start import"
+msgid "Save & import"
+msgstr "Save & import"
+
+msgid "Import once"
+msgstr "Import once"
 
 msgid "For {{periodId}} ({{actualStartTime}} to {{actualEndTime}})"
 msgstr "For {{periodId}} ({{actualStartTime}} to {{actualEndTime}})"
@@ -751,6 +819,9 @@ msgid_plural "{{count}} data values will be imported"
 msgstr[0] "{{count}} data value will be imported"
 msgstr[1] "{{count}} data values will be imported"
 
+msgid "Value '{{value}}' is not numeric"
+msgstr "Value '{{value}}' is not numeric"
+
 msgid "Data is imported"
 msgstr "Data is imported"
 
@@ -766,30 +837,46 @@ msgstr "Ignored (already exists): {{ignored}}"
 msgid "Missing: {{missing}}"
 msgstr "Missing: {{missing}}"
 
-msgid "No data for the following org units"
-msgstr "No data for the following org units"
+msgid ""
+"No data between {{startTime}} and {{endTime}} for the following org units: "
+"{{orgUnits}}"
+msgstr ""
+"No data between {{startTime}} and {{endTime}} for the following org units: "
+"{{orgUnits}}"
+
+msgid "One or more conflicts encountered"
+msgstr "One or more conflicts encountered"
+
+msgid "Import weather and climate data into DHIS2."
+msgstr "Import weather and climate data into DHIS2."
+
+msgid "New import"
+msgstr "New import"
+
+msgid "Import data once, or save it to re-run later."
+msgstr "Import data once, or save it to re-run later."
+
+msgid "Import data"
+msgstr "Import data"
+
+msgid "Saved imports"
+msgstr "Saved imports"
+
+msgid "You haven't saved any imports yet."
+msgstr "You haven't saved any imports yet."
 
 msgid ""
-"ERA5-Land has limited data for coastal areas. Values for other org units "
-"will be imported."
+"When you create a new import, choose \"Save this import\" to re-run it with "
+"one click as new climate data becomes available."
 msgstr ""
-"ERA5-Land has limited data for coastal areas. Values for other org units "
-"will be imported."
+"When you create a new import, choose \"Save this import\" to re-run it with "
+"one click as new climate data becomes available."
 
 msgid "No org unit geometries found"
 msgstr "No org unit geometries found"
 
 msgid "Select organisation units"
 msgstr "Select organisation units"
-
-msgid "Start and end date are not within the valid range."
-msgstr "Start and end date are not within the valid range."
-
-msgid "Start date is not within the valid range."
-msgstr "Start date is not within the valid range."
-
-msgid "End date is not within the valid range."
-msgstr "End date is not within the valid range."
 
 msgid ""
 "{{periodTypeName}} data for full calendar {{periodTypeNoun}}s inclusive of "
@@ -822,6 +909,9 @@ msgstr ""
 msgid "Data between start and end date will be imported as daily values."
 msgstr "Data between start and end date will be imported as daily values."
 
+msgid "Import date range"
+msgstr "Import date range"
+
 msgid ""
 "The data will be assigned a yearly period type that matches the year it was "
 "collected: {{datasetPeriod}}"
@@ -829,14 +919,89 @@ msgstr ""
 "The data will be assigned a yearly period type that matches the year it was "
 "collected: {{datasetPeriod}}"
 
-msgid "Valid range: {{startDate}} - {{endDate}}"
-msgstr "Valid range: {{startDate}} - {{endDate}}"
-
-msgid "Valid range"
-msgstr "Valid range"
+msgid "Period type: {{periodType}}"
+msgstr "Period type: {{periodType}}"
 
 msgid "Period type"
 msgstr "Period type"
+
+msgid "{{count}} org units"
+msgid_plural "{{count}} org units"
+msgstr[0] "{{count}} org unit"
+msgstr[1] "{{count}} org units"
+
+msgid "Data imported through {{date}} · Last run {{relative}}"
+msgstr "Data imported through {{date}} · Last run {{relative}}"
+
+msgid "Last run {{relative}}"
+msgstr "Last run {{relative}}"
+
+msgid "Never imported"
+msgstr "Never imported"
+
+msgid "{{date}} by {{user}}"
+msgstr "{{date}} by {{user}}"
+
+msgid "Rename"
+msgstr "Rename"
+
+msgid "Data source is not available"
+msgstr "Data source is not available"
+
+msgid "Import…"
+msgstr "Import…"
+
+msgid "More actions"
+msgstr "More actions"
+
+msgid "Since last import ({{range}})"
+msgstr "Since last import ({{range}})"
+
+msgid "Import \"{{name}}\""
+msgstr "Import \"{{name}}\""
+
+msgid "DHIS2 data element"
+msgstr "DHIS2 data element"
+
+msgid "For {{count}} organisation units"
+msgid_plural "For {{count}} organisation units"
+msgstr[0] "For {{count}} organisation unit"
+msgstr[1] "For {{count}} organisation units"
+
+msgid "Time zone"
+msgstr "Time zone"
+
+msgid "For {{periodType}} date range"
+msgstr "For {{periodType}} date range"
+
+msgid "Done"
+msgstr "Done"
+
+msgid "Use default range"
+msgstr "Use default range"
+
+msgid "Change"
+msgstr "Change"
+
+msgid "Failed to load org unit geometries"
+msgstr "Failed to load org unit geometries"
+
+msgid ""
+"None of the selected organisation units have boundaries stored in DHIS2. "
+"Update the import configuration to include organisation units with geometry."
+msgstr ""
+"None of the selected organisation units have boundaries stored in DHIS2. "
+"Update the import configuration to include organisation units with geometry."
+
+msgid ""
+"Range exceeds the {{max}}-value limit. Split into multiple runs by "
+"importing a shorter date range from the form."
+msgstr ""
+"Range exceeds the {{max}}-value limit. Split into multiple runs by "
+"importing a shorter date range from the form."
+
+msgid "Start import"
+msgstr "Start import"
 
 msgid "Start year"
 msgstr "Start year"
@@ -994,9 +1159,6 @@ msgstr ""
 
 msgid "Description"
 msgstr "Description"
-
-msgid "Data source"
-msgstr "Data source"
 
 msgid "Domain type"
 msgstr "Domain type"
@@ -1181,9 +1343,6 @@ msgid ""
 msgstr ""
 "If two org units are close to each other (within the resolution), they will "
 "have the same data values."
-
-msgid "Time zone"
-msgstr "Time zone"
 
 msgid "Data resolution is approximately {{resolution}}."
 msgstr "Data resolution is approximately {{resolution}}."
@@ -1463,6 +1622,34 @@ msgstr "{{allDynamicOuNames}} levels"
 
 msgid "{{allDynamicOuNames}} groups"
 msgstr "{{allDynamicOuNames}} groups"
+
+msgid "just now"
+msgstr "just now"
+
+msgid "{{count}} minutes ago"
+msgid_plural "{{count}} minutes ago"
+msgstr[0] "{{count}} minute ago"
+msgstr[1] "{{count}} minutes ago"
+
+msgid "{{count}} hours ago"
+msgid_plural "{{count}} hours ago"
+msgstr[0] "{{count}} hour ago"
+msgstr[1] "{{count}} hours ago"
+
+msgid "{{count}} days ago"
+msgid_plural "{{count}} days ago"
+msgstr[0] "{{count}} day ago"
+msgstr[1] "{{count}} days ago"
+
+msgid "{{count}} months ago"
+msgid_plural "{{count}} months ago"
+msgstr[0] "{{count}} month ago"
+msgstr[1] "{{count}} months ago"
+
+msgid "{{count}} years ago"
+msgid_plural "{{count}} years ago"
+msgstr[0] "{{count}} year ago"
+msgstr[1] "{{count}} years ago"
 
 msgid "day"
 msgstr "day"
