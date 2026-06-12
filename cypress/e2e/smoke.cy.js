@@ -15,10 +15,7 @@ describe('Smoke test', () => {
             'contain',
             'Explore data'
         )
-        cy.getByDataTest('import-data-menu-item').should(
-            'contain',
-            'Import data'
-        )
+        cy.getByDataTest('imports-menu-item').should('contain', 'Imports')
         cy.getByDataTest('setup-guide-menu-item').should(
             'contain',
             'Setup guide'
@@ -55,17 +52,17 @@ describe('Smoke test', () => {
         cy.getByDataTest('dataset-selector').should('not.exist')
 
         // navigate to Import data page
-        cy.getByDataTest('import-data-menu-item').click()
+        cy.getByDataTest('imports-menu-item').click()
         cy.location().should((loc) => {
             expect(loc.hash).to.eq('#/import')
         })
-        cy.get('h1')
+        cy.get('header')
             .contains('Import weather and climate data')
             .scrollIntoView()
-        cy.get('h1')
+        cy.get('header')
             .contains('Import weather and climate data')
             .should('be.visible')
-        cy.getByDataTest('dataset-selector').should('be.visible')
+        cy.contains('button', 'Import data').should('be.visible')
 
         // navigate to Settings page
         cy.getByDataTest('settings-menu-item').click()

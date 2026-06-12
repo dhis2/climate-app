@@ -7,6 +7,8 @@ const config = {
     entryPoints: {
         app: './src/App.jsx',
     },
+
+    dataStoreNamespace: 'CLIMATE_DATA',
 }
 
 module.exports = config

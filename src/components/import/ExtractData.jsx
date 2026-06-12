@@ -13,7 +13,8 @@ const ExtractData = ({
     period,
     features,
     dataElement,
-    onComplete,
+    onSuccess,
+    onError,
 }) => {
     if (dataset?.provider.id == PROVIDER_GEE) {
         return (
@@ -22,7 +23,8 @@ const ExtractData = ({
                 period={period}
                 features={features}
                 dataElement={dataElement}
-                onComplete={onComplete}
+                onSuccess={onSuccess}
+                onError={onError}
             />
         )
     } else if (dataset?.provider.id == PROVIDER_ENACTS) {
@@ -32,7 +34,8 @@ const ExtractData = ({
                 period={period}
                 features={features}
                 dataElement={dataElement}
-                onComplete={onComplete}
+                onSuccess={onSuccess}
+                onError={onError}
             />
         )
     } else {
@@ -49,7 +52,8 @@ ExtractData.propTypes = {
     dataset: PropTypes.object.isRequired,
     features: PropTypes.array.isRequired,
     period: PropTypes.object.isRequired,
-    onComplete: PropTypes.func.isRequired,
+    onError: PropTypes.func,
+    onSuccess: PropTypes.func,
 }
 
 export default ExtractData

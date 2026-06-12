@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import PropTypes from 'prop-types'
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import useEnactsData from '../../hooks/useEnactsData.js'
 import { getPeriods, getPeriodTypes } from '../../utils/time.js'
 import DataLoader from '../shared/DataLoader.jsx'
@@ -34,39 +34,38 @@ const ExtractEnactsData = ({
     dataset,
     period,
     features,
-    onComplete,
+    onError,
+    onSuccess,
 }) => {
     const extractingLabel = getExtractingLabel(period, features)
     const { data, error } = useEnactsData(dataset, period, features)
-    const [importDone, setImportDone] = useState(false)
+
+    const onErrorRef = useRef(onError)
+    onErrorRef.current = onError
 
     useEffect(() => {
         if (error) {
-            onComplete()
+            onErrorRef.current?.()
         }
-    }, [error, onComplete])
-
-    const handleImportComplete = useCallback(() => {
-        setImportDone(true)
-        onComplete()
-    }, [onComplete])
+    }, [error])
 
     if (error) {
         return <ErrorMessage error={error} />
     }
 
+    if (!data) {
+        return <DataLoader label={extractingLabel} height={100} />
+    }
+
     return (
-        <>
-            {!importDone && <DataLoader label={extractingLabel} height={100} />}
-            {data && (
-                <ImportData
-                    data={data}
-                    dataElement={dataElement}
-                    features={features}
-                    onComplete={handleImportComplete}
-                />
-            )}
-        </>
+        <ImportData
+            data={data}
+            dataElement={dataElement}
+            features={features}
+            period={period}
+            onError={onError}
+            onSuccess={onSuccess}
+        />
     )
 }
 
@@ -75,7 +74,8 @@ ExtractEnactsData.propTypes = {
     dataset: PropTypes.object.isRequired,
     features: PropTypes.array.isRequired,
     period: PropTypes.object.isRequired,
-    onComplete: PropTypes.func.isRequired,
+    onError: PropTypes.func,
+    onSuccess: PropTypes.func,
 }
 
 export default ExtractEnactsData

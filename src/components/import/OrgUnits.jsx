@@ -89,7 +89,7 @@ const OrgUnits = ({
 
     return (
         <>
-            <SectionH2 number="4" title={i18n.t('Select organisation units')} />
+            <SectionH2 number="3" title={i18n.t('Select organisation units')} />
             <div data-test="org-units-selector">
                 <OrgUnitDimension
                     roots={roots?.map((r) => r.id)}

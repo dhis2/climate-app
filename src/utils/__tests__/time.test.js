@@ -1,5 +1,6 @@
 import {
     extractYear,
+    formatBookmarkDate,
     formatStandardDate,
     formatCalendarDate,
     fromStandardDate,
@@ -521,6 +522,34 @@ describe('time utils', () => {
             expect(result.calendar).toEqual(nepaliCalendar)
             expect(result.startTime).toBeDefined()
             expect(result.endTime).toBeDefined()
+        })
+    })
+
+    describe('formatBookmarkDate', () => {
+        it('returns empty string for falsy input', () => {
+            expect(formatBookmarkDate('')).toEqual('')
+            expect(formatBookmarkDate(null)).toEqual('')
+            expect(formatBookmarkDate(undefined)).toEqual('')
+        })
+
+        it('returns bare 4-digit year strings as-is', () => {
+            expect(formatBookmarkDate('2024')).toEqual('2024')
+            expect(formatBookmarkDate('1999')).toEqual('1999')
+        })
+
+        it('returns invalid date strings as-is', () => {
+            expect(formatBookmarkDate('not-a-date')).toEqual('not-a-date')
+            expect(formatBookmarkDate('2024-13-99')).toEqual('2024-13-99')
+        })
+
+        it('formats a YYYY-MM-DD date string for display', () => {
+            expect(formatBookmarkDate('2024-08-06')).toEqual('Aug 6, 2024')
+        })
+
+        it('formats an ISO datetime string for display', () => {
+            expect(formatBookmarkDate('2024-08-06T00:00:00.000Z')).toEqual(
+                'Aug 6, 2024'
+            )
         })
     })
 })

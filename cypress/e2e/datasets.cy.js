@@ -31,7 +31,7 @@ describe('Datasets', () => {
             },
         }).as('getRoutes')
 
-        cy.visit('#/import')
+        cy.visit('#/import/new')
 
         cy.wait('@getGeeToken', { timeout: 30000 })
         cy.wait('@getRoutes', { timeout: 30000 })
@@ -55,7 +55,7 @@ describe('Datasets', () => {
             },
         }).as('getRoutes')
 
-        cy.visit('#/import')
+        cy.visit('#/import/new')
 
         cy.wait('@getRoutes')
 
@@ -87,7 +87,7 @@ describe('Datasets', () => {
             fixture: 'enactsDatasetInfo.json',
         }).as('getEnactsDatasetInfo')
 
-        cy.visit('#/import')
+        cy.visit('#/import/new')
 
         cy.wait('@getGeeToken')
         cy.wait('@getRoutes')
@@ -122,7 +122,7 @@ describe('Datasets', () => {
             fixture: 'enactsDatasetInfo.json',
         }).as('getEnactsDatasetInfo')
 
-        cy.visit('#/import')
+        cy.visit('#/import/new')
 
         cy.wait('@getRoutes')
         cy.wait('@getEnactsInfo')
@@ -162,7 +162,7 @@ describe('Datasets', () => {
             message: 'Something went wrong while fetching Enacts info',
         }).as('getEnactsInfo')
 
-        cy.visit('#/import')
+        cy.visit('#/import/new')
 
         cy.wait('@getGeeToken')
         cy.wait('@getRoutes')

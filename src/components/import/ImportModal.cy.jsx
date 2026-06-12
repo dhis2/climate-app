@@ -17,18 +17,35 @@ const friendlyErrorMessage =
 const LoadingExtract = () => null
 
 // Immediately signals successful completion
-const SuccessExtract = ({ onComplete }) => {
-    React.useEffect(() => onComplete(), [onComplete])
+const SuccessExtract = ({ onSuccess }) => {
+    React.useEffect(() => onSuccess?.(), [onSuccess])
     return null
 }
-SuccessExtract.propTypes = { onComplete: PropTypes.func.isRequired }
+SuccessExtract.propTypes = { onSuccess: PropTypes.func }
 
-// Mirrors ExtractGeeData error behaviour: renders the friendly message and calls onComplete
-const ErrorExtract = ({ onComplete }) => {
-    React.useEffect(() => onComplete(), [onComplete])
+// Mirrors ExtractGeeData error behaviour: renders the friendly message and calls onError with no arg
+const ErrorExtract = ({ onError }) => {
+    React.useEffect(() => onError?.(), [onError])
     return <div>{friendlyErrorMessage}</div>
 }
-ErrorExtract.propTypes = { onComplete: PropTypes.func.isRequired }
+ErrorExtract.propTypes = { onError: PropTypes.func }
+
+// Calls onError with no argument — mirrors GEE/ENACTS extraction failures
+const ExtractErrorNoArg = ({ onError }) => {
+    React.useEffect(() => onError?.(), [onError])
+    return null
+}
+ExtractErrorNoArg.propTypes = { onError: PropTypes.func }
+
+// Calls onError with an error — mirrors DHIS2 import-level failures
+const ExtractErrorWithArg = ({ onError }) => {
+    React.useEffect(
+        () => onError?.(new Error('Something went wrong')),
+        [onError]
+    )
+    return null
+}
+ExtractErrorWithArg.propTypes = { onError: PropTypes.func }
 
 describe('ImportModal', () => {
     it('shows the modal title', () => {
@@ -104,5 +121,43 @@ describe('ImportModal', () => {
             />
         )
         cy.contains('button', 'Close').should('not.be.disabled')
+    })
+
+    it('does not call onImportDone when onError is called with no argument', () => {
+        const onImportDone = cy.stub()
+        cy.mount(
+            <ImportModal
+                {...defaultProps}
+                onImportDone={onImportDone}
+                ExtractDataComponent={ExtractErrorNoArg}
+            />
+        )
+        cy.wrap(onImportDone).should('not.have.been.called')
+    })
+
+    it('enables the Close button when onError is called with no argument', () => {
+        cy.mount(
+            <ImportModal
+                {...defaultProps}
+                ExtractDataComponent={ExtractErrorNoArg}
+            />
+        )
+        cy.contains('button', 'Close').should('not.be.disabled')
+    })
+
+    it('calls onImportDone with the error message when onError is called with an error', () => {
+        const onImportDone = cy.stub()
+        cy.mount(
+            <ImportModal
+                {...defaultProps}
+                onImportDone={onImportDone}
+                ExtractDataComponent={ExtractErrorWithArg}
+            />
+        )
+        cy.wrap(onImportDone).should(
+            'have.been.calledWith',
+            null,
+            'Something went wrong'
+        )
     })
 })
