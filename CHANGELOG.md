@@ -1,3 +1,11 @@
+# [1.16.0](https://github.com/dhis2/climate-app/compare/v1.15.4...v1.16.0) (2026-06-12)
+
+
+### Features
+
+* allow user to import for all org units at once by making multiple requests to earth engine as needed ([723ebe7](https://github.com/dhis2/climate-app/commit/723ebe711f7f2e3bd956cf617850b79e949902fd))
+* save import configurations so they can be re-run using the latest date range ([#128](https://github.com/dhis2/climate-app/issues/128)) ([c487c08](https://github.com/dhis2/climate-app/commit/c487c08de8fb30aabaf9fba2af278d1c76129826))
+
 ## [1.15.4](https://github.com/dhis2/climate-app/compare/v1.15.3...v1.15.4) (2026-05-22)
 
 
