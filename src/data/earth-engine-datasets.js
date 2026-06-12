@@ -309,7 +309,8 @@ const getEEDatasets = () => [
         periodType: DAILY,
         supportedPeriodTypes: [DAILY, WEEKLY, MONTHLY],
         band: 'utci_max',
-        reducer: 'max',
+        reducer: 'mean',
+        periodReducer: 'max',
         valueParser: temperatureParser,
         aggregationType: i18n.t('Max'),
         dataElementCode: 'ERA5_HEAT_UTCI_MAX',
@@ -329,7 +330,8 @@ const getEEDatasets = () => [
         periodType: DAILY,
         supportedPeriodTypes: [DAILY, WEEKLY, MONTHLY],
         band: 'utci_min',
-        reducer: 'min',
+        reducer: 'mean',
+        periodReducer: 'min',
         valueParser: temperatureParser,
         aggregationType: i18n.t('Min'),
         dataElementCode: 'ERA5_HEAT_UTCI_MIN',
@@ -525,13 +527,14 @@ export const era5MonthlyTemperatures = {
 export const era5HeatDaily = {
     datasetId: 'projects/climate-engine-pro/assets/ce-era5-heat',
     band: ['utci_mean', 'utci_min', 'utci_max'],
-    reducer: ['mean', 'min', 'max'],
+    reducer: 'mean',
     periodType: DAILY,
     resolution: ERA5_RESOLUTION,
 }
 
 export const era5HeatMonthly = {
     ...era5HeatDaily,
+    temporalReducers: ['mean', 'min', 'max'],
     aggregationPeriod: MONTHLY,
 }
 

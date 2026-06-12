@@ -517,7 +517,7 @@ export const getTimeSeriesData = async ({
     geometry,
     filter,
 }) => {
-    const { datasetId, band, aggregationPeriod } = dataset
+    const { datasetId, band, aggregationPeriod, temporalReducers } = dataset
 
     let collection = ee.ImageCollection(datasetId).select(band)
 
@@ -550,9 +550,20 @@ export const getTimeSeriesData = async ({
                 const startDate = ee.Date(date)
                 const endDate = startDate.advance(1, 'month')
 
-                return collection
-                    .filter(ee.Filter.date(startDate, endDate))
-                    .mean() // Use mean to avoid extremes on monthly chart
+                const filtered = collection.filter(
+                    ee.Filter.date(startDate, endDate)
+                )
+
+                const reduced = temporalReducers
+                    ? band.reduce((acc, b, i) => {
+                          const bandImg = filtered
+                              .select(b)
+                              [temporalReducers[i]]()
+                          return i === 0 ? bandImg : acc.addBands(bandImg)
+                      }, null)
+                    : filtered.mean()
+
+                return reduced
                     .set('system:index', startDate.format('YYYYMM'))
                     .set('system:time_start', startDate.millis())
                     .set('system:time_end', endDate.millis())
