@@ -1,3 +1,10 @@
+## [1.16.1](https://github.com/dhis2/climate-app/compare/v1.16.0...v1.16.1) (2026-06-23)
+
+
+### Bug Fixes
+
+* use mean spatial and min/max temporal reducers for temperature  and heatstress [CLIM-502] ([#129](https://github.com/dhis2/climate-app/issues/129)) ([880f898](https://github.com/dhis2/climate-app/commit/880f8989baf8a5fcc7166a0840ed39cdb5f48666))
+
 # [1.16.0](https://github.com/dhis2/climate-app/compare/v1.15.4...v1.16.0) (2026-06-12)
 
 
