@@ -115,7 +115,7 @@ const DataElement = ({
             {legend && <Legend {...legend} />}
             <p>
                 {i18n.t(
-                    'You should now be able to import data with this app. Please reach out to us on climate-app@dhis2.org if you have any questions or need help with the setup.'
+                    'You should now be able to import data with this app. Please reach out to us on climate-data@dhis2.org if you have any questions or need help with the setup.'
                 )}
             </p>
         </>
