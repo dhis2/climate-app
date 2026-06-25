@@ -8,7 +8,7 @@ export const GEOFEATURES_QUERY = {
         resource: 'geoFeatures',
         params: ({ orgUnitIds, keyAnalysisDisplayProperty, userId }) => ({
             ou: `ou:${orgUnitIds.join(';')}`,
-            displayProperty: keyAnalysisDisplayProperty,
+            displayProperty: keyAnalysisDisplayProperty?.toUpperCase(),
             _: userId,
         }),
     },
