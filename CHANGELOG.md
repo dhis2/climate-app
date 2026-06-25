@@ -1,3 +1,10 @@
+## [1.16.2](https://github.com/dhis2/climate-app/compare/v1.16.1...v1.16.2) (2026-06-25)
+
+
+### Bug Fixes
+
+* selecting org units for import fails in DHIS2 v39 ([#130](https://github.com/dhis2/climate-app/issues/130)) ([bd7eeb0](https://github.com/dhis2/climate-app/commit/bd7eeb010a61b244ab5939ba645df985d7dfcac0))
+
 ## [1.16.1](https://github.com/dhis2/climate-app/compare/v1.16.0...v1.16.1) (2026-06-23)
 
 
