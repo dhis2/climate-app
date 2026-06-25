@@ -1,0 +1,105 @@
+name: 'e2e-prod'
+
+on:
+    workflow_call:
+        inputs:
+            should_record:
+                required: false
+                type: boolean
+                default: false
+        secrets:
+            username:
+                required: true
+            password:
+                required: true
+            recordkey:
+                required: true
+
+env:
+    BASE_URL_INSTANCES: https://test.e2e.dhis2.org
+    NAME_PATTERN_PROD_INSTANCES: 'anly-e2e-{version}'
+
+concurrency:
+    group: e2e-prod-${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
+defaults:
+    run:
+        shell: bash
+
+jobs:
+    e2e-prod:
+        runs-on: ubuntu-latest
+        env:
+            CI_BUILD_ID: ${{ github.sha }}-${{ github.workflow }}-${{ github.event_name }}
+            BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+            PR_TITLE: ${{ github.event.pull_request.title }}
+            DHIS2_VERSION: ${{ matrix.versions }}
+        strategy:
+            fail-fast: false
+            matrix:
+                versions: ['41', '42', '43']
+                include:
+                    - versions: '43'
+                      instance_url: 'https://dev.im.dhis2.org/clim-e2e-43'
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: 20.x
+            - uses: browser-actions/setup-chrome@v1
+              with:
+                  chrome-version: stable
+            - run: |
+                  echo "BROWSER_PATH=$(which chrome)" >> $GITHUB_ENV
+
+            - name: Compute prod instance url
+              id: instance-url
+              run: |
+                  if [ -n "$MATRIX_INSTANCE_URL" ]; then
+                    url="$MATRIX_INSTANCE_URL"
+                  else
+                    url=${BASE_URL_INSTANCES%/}/${NAME_PATTERN_PROD_INSTANCES/"{version}"/$version}
+                  fi
+                  echo "url=$url" >> $GITHUB_OUTPUT
+                  echo "url: $url"
+              env:
+                  version: ${{ matrix.versions }}
+                  MATRIX_INSTANCE_URL: ${{ matrix.instance_url }}
+
+            - name: Debug Test Parameters
+              run: |
+                  echo "Record: ${{ inputs.should_record }}"
+                  echo "Browser: chrome"
+                  echo "Version: ${{ matrix.versions }}"
+
+            - name: Run e2e tests
+              uses: cypress-io/github-action@v5
+              with:
+                  start: yarn start
+                  wait-on: 'http://localhost:3000'
+                  wait-on-timeout: 300
+                  record: ${{ inputs.should_record }}
+                  parallel: ${{ inputs.should_record }}
+                  browser: chrome
+                  group: ${{ inputs.should_record && format('e2e-chrome-parallel-{0}', matrix.versions) || '' }}
+                  ci-build-id: ${{ inputs.should_record && github.run_id || '' }}
+              env:
+                  CI: true
+                  BROWSER: none
+                  CYPRESS_RECORD_KEY: ${{ secrets.recordkey }}
+                  CYPRESS_dhis2BaseUrl: ${{ steps.instance-url.outputs.url }}
+                  CYPRESS_dhis2InstanceVersion: ${{ matrix.versions }}
+                  CYPRESS_dhis2Username: ${{ secrets.username }}
+                  CYPRESS_dhis2Password: ${{ secrets.password }}
+                  CYPRESS_networkMode: live
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    e2e-tests-success:
+        needs: e2e-prod
+        if: ${{ success() || failure() }}
+        runs-on: ubuntu-latest
+        steps:
+            - run: if [ $result != 'success' ]; then exit 1; fi;
+              env:
+                  result: ${{ needs.e2e-prod.result }}
