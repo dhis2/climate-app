@@ -474,11 +474,10 @@ export const PeriodPicker = ({
                         placement="bottom-start"
                         modifiers={[popperOffsetModifier]}
                     >
-                        <div
+                        <dialog
+                            open
                             className={styles.popover}
-                            role="dialog"
                             aria-label={ariaLabel}
-                            tabIndex={-1}
                             onKeyDown={handleEscapeKeyDown}
                         >
                             <div className={styles.header}>
@@ -607,7 +606,7 @@ export const PeriodPicker = ({
                                     )
                                 })}
                             </div>
-                        </div>
+                        </dialog>
                     </Popper>
                 </Layer>
             )}

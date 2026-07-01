@@ -55,7 +55,9 @@
     font-size: 14px;
     font-weight: 400;
     background: var(--colors-white);
+    border: 0;
     border-radius: 3px;
+    margin: 0;
     box-shadow: 0 4px 12px rgba(12, 14, 16, 0.15),
         0 0 0 1px rgba(12, 14, 16, 0.05);
 }
