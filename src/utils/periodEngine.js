@@ -31,6 +31,29 @@ const stripLeadingZeroes = (value) => value.replace(/^0+(?=\d)/, '')
 
 const padWithZeroes = (value) => String(value).padStart(2, '0')
 
+const isDigitSequence = (value) => {
+    if (!value) {
+        return false
+    }
+
+    for (const char of value) {
+        if (char < '0' || char > '9') {
+            return false
+        }
+    }
+
+    return true
+}
+
+const isWeeklyOffset = (value) =>
+    value.length === 3 &&
+    value[0] >= 'A' &&
+    value[0] <= 'Z' &&
+    value[1] >= 'a' &&
+    value[1] <= 'z' &&
+    value[2] >= 'a' &&
+    value[2] <= 'z'
+
 export const normalizeDhis2Calendar = (calendar = DEFAULT_DHIS2_CALENDAR) => {
     if (!calendar) {
         return DEFAULT_DHIS2_CALENDAR
@@ -42,20 +65,31 @@ export const normalizeDhis2Calendar = (calendar = DEFAULT_DHIS2_CALENDAR) => {
 
 export const canonicalizePeriodId = (periodId) => {
     const trimmedPeriodId = String(periodId ?? '').trim()
-    const weeklyMatch = trimmedPeriodId.match(
-        /^(\d{4})([A-Z][a-z]{2})?W0*(\d+)$/
-    )
+    const year = trimmedPeriodId.slice(0, 4)
 
-    if (weeklyMatch) {
-        const [, year, offset = '', week] = weeklyMatch
-        return `${year}${offset}W${stripLeadingZeroes(week)}`
+    if (!isDigitSequence(year)) {
+        return trimmedPeriodId
     }
 
-    const biWeeklyMatch = trimmedPeriodId.match(/^(\d{4})BiW0*(\d+)$/)
+    const rest = trimmedPeriodId.slice(4)
+    const biWeeklyPrefix = 'BiW'
 
-    if (biWeeklyMatch) {
-        const [, year, week] = biWeeklyMatch
+    if (rest.startsWith(biWeeklyPrefix)) {
+        const week = rest.slice(biWeeklyPrefix.length)
+        if (!isDigitSequence(week)) {
+            return trimmedPeriodId
+        }
         return `${year}BiW${stripLeadingZeroes(week)}`
+    }
+
+    const weekMarkerIndex = rest.indexOf('W')
+    if (weekMarkerIndex !== -1) {
+        const offset = rest.slice(0, weekMarkerIndex)
+        const week = rest.slice(weekMarkerIndex + 1)
+
+        if (isDigitSequence(week) && (!offset || isWeeklyOffset(offset))) {
+            return `${year}${offset}W${stripLeadingZeroes(week)}`
+        }
     }
 
     return trimmedPeriodId

@@ -25,7 +25,7 @@ const getPeriodYear = (periodId) => {
         return undefined
     }
 
-    const yearMatch = String(periodId).match(/^(\d{4})/)
+    const yearMatch = /^(\d{4})/.exec(String(periodId))
     return yearMatch ? Number(yearMatch[1]) : undefined
 }
 
@@ -46,12 +46,11 @@ const getInitialVisibleYear = ({
     maxPeriodId,
     minPeriodId,
     calendar,
-    locale,
 }) =>
-    getPeriodYear(value, calendar, locale) ??
-    getPeriodYear(referencePeriodId, calendar, locale) ??
-    getPeriodYear(maxPeriodId, calendar, locale) ??
-    getPeriodYear(minPeriodId, calendar, locale) ??
+    getPeriodYear(value) ??
+    getPeriodYear(referencePeriodId) ??
+    getPeriodYear(maxPeriodId) ??
+    getPeriodYear(minPeriodId) ??
     getCurrentCalendarYear(calendar)
 
 const isMonthlyPeriodType = (periodType) => periodType === MONTHLY
@@ -259,7 +258,6 @@ export const PeriodPicker = ({
             minPeriodId,
             maxPeriodId,
             calendar: normalizedCalendar,
-            locale,
         })
     )
 
@@ -453,7 +451,6 @@ export const PeriodPicker = ({
                 disabled={disabled}
                 aria-label={accessibleTriggerLabel}
                 aria-expanded={open}
-                aria-invalid={error || undefined}
                 data-test={dataTest}
                 onClick={() => setOpen((prev) => !prev)}
                 onKeyDown={handleEscapeKeyDown}
@@ -479,6 +476,9 @@ export const PeriodPicker = ({
                     >
                         <div
                             className={styles.popover}
+                            role="dialog"
+                            aria-label={ariaLabel}
+                            tabIndex={-1}
                             onKeyDown={handleEscapeKeyDown}
                         >
                             <div className={styles.header}>
