@@ -1,0 +1,262 @@
+.container {
+    inline-size: 100%;
+}
+
+.trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacers-dp8);
+    inline-size: 100%;
+    min-block-size: 40px;
+    padding: 8px 8px 8px 11px;
+    color: var(--colors-grey900);
+    background: var(--colors-white);
+    border: 1px solid var(--colors-grey500);
+    border-radius: 3px;
+    box-shadow: inset 0 1px 2px 0 rgba(48, 54, 60, 0.1);
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: start;
+}
+
+.trigger:focus {
+    outline: none;
+    border-color: var(--colors-teal400);
+}
+
+.trigger:disabled {
+    color: var(--colors-grey600);
+    background: var(--colors-grey100);
+    cursor: not-allowed;
+}
+
+.triggerError {
+    border-color: var(--colors-red500);
+}
+
+.triggerValue,
+.placeholder {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.placeholder {
+    color: var(--colors-grey600);
+}
+
+.popover {
+    inline-size: min(300px, calc(100vw - 32px));
+    overflow: hidden;
+    padding: 0;
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    background: var(--colors-white);
+    border-radius: 3px;
+    box-shadow: 0 4px 12px rgba(12, 14, 16, 0.15),
+        0 0 0 1px rgba(12, 14, 16, 0.05);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--spacers-dp4);
+    width: 100%;
+    padding: var(--spacers-dp4);
+    font-size: 1em;
+    border-block-end: 1px solid var(--colors-grey300);
+    background: var(--colors-grey050);
+}
+
+.yearNavigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--colors-white);
+    border: 1px solid var(--colors-grey300);
+    border-radius: 3px;
+}
+
+.yearNavigationPrevious {
+    border-inline-end: 1px solid var(--colors-grey300);
+}
+
+.yearNavigationNext {
+    border-inline-start: 1px solid var(--colors-grey300);
+}
+
+.yearNavigationPrevious,
+.yearNavigationNext,
+.yearSelectWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.yearNavigationPrevious,
+.yearNavigationNext {
+    inline-size: 20px;
+    flex-shrink: 0;
+}
+
+.yearSelectWrapper {
+    position: relative;
+    flex: 0 1 auto;
+    overflow: hidden;
+}
+
+.yearSelect {
+    inline-size: 100%;
+    max-inline-size: 100%;
+    block-size: 24px;
+    box-sizing: border-box;
+    padding-block-start: 1px;
+    padding-block-end: 0;
+    padding-inline-start: var(--spacers-dp4);
+    padding-inline-end: var(--spacers-dp16);
+    overflow: hidden;
+    color: var(--colors-grey800);
+    background: none;
+    border: 0;
+    border-radius: 0;
+    appearance: none;
+    text-align: start;
+    white-space: nowrap;
+}
+
+.yearSelect:hover {
+    background: var(--colors-grey100);
+    cursor: pointer;
+}
+
+.yearSelect:focus {
+    background: var(--colors-grey100);
+    outline-color: var(--colors-grey700);
+}
+
+.yearSelectIcon {
+    position: absolute;
+    inset-inline-end: 0;
+    pointer-events: none;
+    color: var(--colors-grey700);
+}
+
+.iconButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: 20px;
+    block-size: 24px;
+    padding: 4px 2px;
+    color: var(--colors-grey700);
+    background: none;
+    border: 0;
+}
+
+.iconButton:hover {
+    color: var(--colors-grey900);
+    background-color: var(--colors-grey100);
+    cursor: pointer;
+}
+
+.iconButton:disabled {
+    color: var(--colors-grey500);
+    background: none;
+    cursor: not-allowed;
+}
+
+.monthGrid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2px;
+    padding: var(--spacers-dp4);
+}
+
+.weekList {
+    display: grid;
+    gap: 2px;
+    max-block-size: 272px;
+    overflow-y: auto;
+    padding: var(--spacers-dp4);
+}
+
+.periodButton,
+.periodButtonSelected {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 1px;
+    min-block-size: 40px;
+    padding: 4px 7px;
+    color: var(--colors-grey900);
+    background: var(--colors-white);
+    border: 2px solid transparent;
+    border-radius: 3px;
+    cursor: pointer;
+    font: inherit;
+    line-height: 18px;
+    text-align: start;
+}
+
+.periodButton:hover,
+.periodButton:focus {
+    background: var(--colors-grey100);
+    outline: none;
+}
+
+.periodButton:hover .periodName,
+.periodButton:focus .periodName {
+    text-decoration: underline;
+}
+
+.periodButton:active {
+    background: var(--colors-grey300);
+}
+
+.periodButtonSelected {
+    color: var(--colors-white);
+    background: var(--colors-teal700);
+}
+
+.periodButtonSingleLine {
+    justify-content: center;
+    min-block-size: 34px;
+    padding-block: 3px;
+}
+
+.periodButton:disabled,
+.periodButtonSelected:disabled {
+    color: var(--colors-grey500);
+    background: var(--colors-white);
+    border-color: transparent;
+    cursor: not-allowed;
+}
+
+.periodName {
+    overflow: hidden;
+    color: inherit;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.periodId {
+    color: var(--colors-grey700);
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.periodButtonSelected .periodId {
+    color: var(--colors-teal100);
+}
+
+.periodButton:disabled .periodId,
+.periodButtonSelected:disabled .periodId {
+    color: var(--colors-grey500);
+}

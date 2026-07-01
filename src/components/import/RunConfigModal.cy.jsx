@@ -24,6 +24,16 @@ const baseConfig = {
     createdByName: 'Test User',
 }
 
+const dailyConfig = {
+    ...baseConfig,
+    name: 'Daily Temperature',
+    dataset: {
+        ...baseConfig.dataset,
+        supportedPeriodTypes: [{ periodType: 'DAILY' }],
+    },
+    periodType: 'DAILY',
+}
+
 // A valid Point geoFeature that toGeoJson will accept
 const singleFeature = {
     id: 'ou1',
@@ -142,11 +152,11 @@ describe('RunConfigModal', () => {
     })
 
     describe('editing the date range', () => {
-        it('shows date inputs when Change is clicked', () => {
+        it('shows period selectors for monthly configs when Change is clicked', () => {
             mount()
             cy.contains('button', 'Change').click()
-            cy.getByDataTest('start-date-input').should('be.visible')
-            cy.getByDataTest('end-date-input').should('be.visible')
+            cy.getByDataTest('start-period-input').should('be.visible')
+            cy.getByDataTest('end-period-input').should('be.visible')
         })
 
         it('replaces the Change button with Done and Use default range while editing', () => {
@@ -161,7 +171,7 @@ describe('RunConfigModal', () => {
             mount()
             cy.contains('button', 'Change').click()
             cy.contains('button', 'Done').click()
-            cy.getByDataTest('start-date-input').should('not.exist')
+            cy.getByDataTest('start-period-input').should('not.exist')
         })
 
         it('drops the "Since last import" prefix after the range is edited', () => {
@@ -177,11 +187,11 @@ describe('RunConfigModal', () => {
             cy.contains('button', 'Change').click()
             cy.contains('button', 'Use default range').click()
             cy.contains('Since last import').should('be.visible')
-            cy.getByDataTest('start-date-input').should('not.exist')
+            cy.getByDataTest('start-period-input').should('not.exist')
         })
 
         it('shows an error and disables Done when start date is after end date', () => {
-            mount()
+            mount(dailyConfig)
             cy.contains('button', 'Change').click()
             cy.getByDataTest('start-date-input').within(() => {
                 cy.get('input').clear()
@@ -220,7 +230,6 @@ describe('RunConfigModal', () => {
                 dataset: { ...baseConfig.dataset, timeZone: {} },
             }
             mount(configWithTz)
-            cy.wait('@getSystemInfo')
             cy.contains('button', 'Change').click()
             cy.getByDataTest('time-zone-select').should('not.exist')
         })
@@ -263,8 +272,6 @@ describe('RunConfigModal', () => {
                 req.reply({ delay: 3000, body: [singleFeature] })
             }).as('getGeoFeaturesDelayed')
             mount()
-            // Wait for user info so the loading state is triggered
-            cy.wait('@getSystemInfo')
             cy.contains('button', 'Start import').should('be.disabled')
         })
 
@@ -295,8 +302,31 @@ describe('RunConfigModal', () => {
             cy.contains('button', 'Start import').should('be.disabled')
         })
 
+        it('is disabled when no complete fixed periods are available', () => {
+            mount({
+                ...baseConfig,
+                dataset: {
+                    ...baseConfig.dataset,
+                    supportedPeriodTypes: [
+                        {
+                            periodType: 'WEEKLY',
+                            periodRange: {
+                                start: '2026-01-13',
+                                end: '2026-01-15',
+                            },
+                        },
+                    ],
+                },
+                periodType: 'WEEKLY',
+            })
+            cy.contains(
+                'No complete periods are available within the dataset date range.'
+            ).should('be.visible')
+            cy.contains('button', 'Start import').should('be.disabled')
+        })
+
         it('is disabled when the date range is invalid', () => {
-            mount()
+            mount(dailyConfig)
             cy.contains('button', 'Change').click()
             cy.getByDataTest('start-date-input').within(() => {
                 cy.get('input').clear()

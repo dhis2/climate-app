@@ -1,3 +1,4 @@
+import { useConfig } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import {
     Button,
@@ -11,7 +12,10 @@ import {
 import PropTypes from 'prop-types'
 import { useCallback, useMemo, useState } from 'react'
 import useOrgUnits from '../../hooks/useOrgUnits.js'
+import useUserLocale from '../../hooks/useUserLocale.js'
+import { getCompleteFixedPeriodRange } from '../../utils/fixedPeriodRange.js'
 import { getOuText } from '../../utils/getOuText.js'
+import { normalizeDhis2Calendar } from '../../utils/periodEngine.js'
 import {
     computeFillGapRange,
     valueCountForRange,
@@ -23,14 +27,44 @@ import {
     YEARLY,
     formatBookmarkDate,
     formatStandardDate,
+    fromStandardDate,
+    getDateStringFromIsoDate,
     getPeriodTypes,
     oneDayInMs,
+    toStandardDate,
 } from '../../utils/time.js'
 import DateRangePicker from './DateRangePicker.jsx'
 import ImportModal from './ImportModal.jsx'
 import classes from './styles/RunConfigModal.module.css'
 
 const MAX_VALUES = 50000
+const FIXED_RANGE_PERIOD_TYPES = new Set([WEEKLY, MONTHLY])
+
+const getDatasetPeriodRange = (dataset, periodType) =>
+    dataset?.supportedPeriodTypes?.find((pt) => pt.periodType === periodType)
+        ?.periodRange
+
+const convertDateSafely = (date, calendar, converter) => {
+    if (!date) {
+        return date
+    }
+
+    try {
+        return converter(date, calendar)
+    } catch {
+        return date
+    }
+}
+
+const toPickerDate = ({ date, calendar, periodType }) =>
+    periodType === YEARLY
+        ? date
+        : convertDateSafely(date, calendar, fromStandardDate)
+
+const toStoredDate = ({ date, calendar, periodType }) =>
+    periodType === YEARLY
+        ? date
+        : convertDateSafely(date, calendar, toStandardDate)
 
 // Fallback range when a config has never successfully imported.
 // Uses the same "last completed period" end boundary as computeFillGapRange.
@@ -66,16 +100,23 @@ const getDefaultRange = (periodType) => {
     }
 }
 
-const formatRangeDisplay = (range) => {
+const formatRangeDisplay = ({ range, calendar, locale }) => {
     if (range.periodType === YEARLY) {
         return `${range.startTime} → ${range.endTime}`
     }
-    return `${formatBookmarkDate(range.startTime)} → ${formatBookmarkDate(
-        range.endTime
-    )}`
+    const formatDate = (date) =>
+        calendar === 'gregory'
+            ? formatBookmarkDate(date)
+            : getDateStringFromIsoDate({ date, calendar, locale })
+
+    return `${formatDate(range.startTime)} → ${formatDate(range.endTime)}`
 }
 
 const RunConfigModal = ({ config, onClose, onRunComplete }) => {
+    const { systemInfo = {} } = useConfig()
+    const { locale } = useUserLocale()
+    const calendar = normalizeDhis2Calendar(systemInfo.calendar)
+
     const {
         features,
         featuresLoading,
@@ -103,16 +144,34 @@ const RunConfigModal = ({ config, onClose, onRunComplete }) => {
         [overrideRange, defaultRange, config.periodType]
     )
 
-    const rangeInvalid = isYearly
-        ? Number.parseInt(range.startTime, 10) >
-          Number.parseInt(range.endTime, 10)
-        : new Date(range.startTime) > new Date(range.endTime)
+    const fixedPeriodRangeValid = useMemo(() => {
+        if (!FIXED_RANGE_PERIOD_TYPES.has(config.periodType)) {
+            return true
+        }
+
+        return getCompleteFixedPeriodRange({
+            periodRange: getDatasetPeriodRange(
+                config.dataset,
+                config.periodType
+            ),
+            periodType: config.periodType,
+            calendar,
+            locale,
+        }).hasCompleteFixedPeriods
+    }, [calendar, config.dataset, config.periodType, locale])
+
+    const rangeInvalid =
+        !fixedPeriodRangeValid ||
+        (isYearly
+            ? Number.parseInt(range.startTime, 10) >
+              Number.parseInt(range.endTime, 10)
+            : new Date(range.startTime) > new Date(range.endTime))
 
     const rangeDisplayText =
         overrideRange || !config.dataUpdatedThrough
-            ? formatRangeDisplay(range)
+            ? formatRangeDisplay({ range, calendar, locale })
             : i18n.t('Since last import ({{range}})', {
-                  range: formatRangeDisplay(range),
+                  range: formatRangeDisplay({ range, calendar, locale }),
                   nsSeparator: ';',
               })
 
@@ -131,12 +190,42 @@ const RunConfigModal = ({ config, onClose, onRunComplete }) => {
         setEditing(false)
     }
 
-    const handleRangeChange = useCallback((updatedPeriod) => {
-        setOverrideRange({
-            startTime: updatedPeriod.startTime,
-            endTime: updatedPeriod.endTime,
-        })
-    }, [])
+    const pickerPeriod = useMemo(
+        () => ({
+            startTime: toPickerDate({
+                date: range.startTime,
+                calendar,
+                periodType: config.periodType,
+            }),
+            endTime: toPickerDate({
+                date: range.endTime,
+                calendar,
+                periodType: config.periodType,
+            }),
+            periodType: config.periodType,
+            calendar,
+            locale,
+        }),
+        [range.startTime, range.endTime, calendar, config.periodType, locale]
+    )
+
+    const handleRangeChange = useCallback(
+        (updatedPeriod) => {
+            setOverrideRange({
+                startTime: toStoredDate({
+                    date: updatedPeriod.startTime,
+                    calendar,
+                    periodType: config.periodType,
+                }),
+                endTime: toStoredDate({
+                    date: updatedPeriod.endTime,
+                    calendar,
+                    periodType: config.periodType,
+                }),
+            })
+        },
+        [calendar, config.periodType]
+    )
 
     const valueCount = useMemo(
         () =>
@@ -261,12 +350,7 @@ const RunConfigModal = ({ config, onClose, onRunComplete }) => {
                                 {editing ? (
                                     <div className={classes.rangeEditor}>
                                         <DateRangePicker
-                                            period={{
-                                                startTime: range.startTime,
-                                                endTime: range.endTime,
-                                                periodType: config.periodType,
-                                                calendar: 'gregory',
-                                            }}
+                                            period={pickerPeriod}
                                             dataset={datasetForPicker}
                                             onChange={handleRangeChange}
                                         />
@@ -321,6 +405,13 @@ const RunConfigModal = ({ config, onClose, onRunComplete }) => {
                                 )}
                             </NoticeBox>
                         )}
+                    {!fixedPeriodRangeValid && (
+                        <NoticeBox warning>
+                            {i18n.t(
+                                'No complete periods are available within the dataset date range.'
+                            )}
+                        </NoticeBox>
+                    )}
                     {exceedsLimit && (
                         <NoticeBox warning>
                             {i18n.t(

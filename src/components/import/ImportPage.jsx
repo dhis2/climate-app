@@ -5,6 +5,11 @@ import { useState, useMemo, useEffect, useCallback, useRef } from 'react'
 import { useBlocker } from 'react-router-dom'
 import useImportConfigs from '../../hooks/useImportConfigs.js'
 import useOrgUnits from '../../hooks/useOrgUnits.js'
+import {
+    getCompleteFixedPeriodRange,
+    normalizeStandardDateBoundary,
+} from '../../utils/fixedPeriodRange.js'
+import { normalizeDhis2Calendar } from '../../utils/periodEngine.js'
 import { autoConfigName } from '../../utils/recurringImports.js'
 import {
     getDefaultImportPeriod,
@@ -16,6 +21,7 @@ import {
     formatStandardDate,
     DAILY,
     MONTHLY,
+    WEEKLY,
     YEARLY,
     oneDayInMs,
 } from '../../utils/time.js'
@@ -31,21 +37,40 @@ import PeriodType from './PeriodType.jsx'
 import classes from './styles/ImportPage.module.css'
 
 const maxValues = 50000
+const FIXED_RANGE_PERIOD_TYPES = new Set([WEEKLY, MONTHLY])
+
+const getDatasetPeriodRange = (dataset, periodType) =>
+    dataset?.supportedPeriodTypes?.find((pt) => pt.periodType === periodType)
+        ?.periodRange ||
+    (dataset?.period
+        ? { start: dataset.period, end: dataset.period }
+        : undefined)
 
 const getPeriodRange = ({ calendar, periodType, range }) => {
-    const getDefaultRange = () => {
+    if (!range) {
         const defaultPeriod = getDefaultImportPeriod({ calendar, periodType })
-        return { start: defaultPeriod.startTime, end: defaultPeriod.endTime }
+        return {
+            startTime: defaultPeriod.startTime,
+            endTime: defaultPeriod.endTime,
+        }
     }
-    const validRange = range || getDefaultRange()
+
+    const normalizedStart = normalizeStandardDateBoundary(range.start, 'start')
+    const normalizedEnd = normalizeStandardDateBoundary(range.end, 'end')
+    const validRange = {
+        start: normalizedStart || normalizedEnd,
+        end: normalizedEnd || normalizedStart,
+    }
     // compute end and start depending on requested periodType
     // endTime will generally be converted from standard -> calendar
     // For YEARLY we keep year values (e.g. "2023") so downstream code
     // that expects years for yearly periods continues to work
-    let endTime = fromStandardDate(validRange.end, calendar)
+    let endTime
     let startTime
 
     try {
+        endTime = fromStandardDate(validRange.end, calendar)
+
         if (periodType === DAILY) {
             // subtract 30 days from end
             const endStd = toDateObject(validRange.end)
@@ -95,12 +120,24 @@ const DEFAULT_ORG_UNITS = []
 
 const ImportPage = () => {
     const { systemInfo = {} } = useConfig()
-    const { calendar = 'gregory' } = systemInfo
+    const calendar = normalizeDhis2Calendar(systemInfo.calendar)
     const [dataset, setDataset] = useState()
     const [period, setPeriod] = useState(getDefaultImportPeriod({ calendar }))
     const [orgUnits, setOrgUnits] = useState(DEFAULT_ORG_UNITS)
     const [dataElement, setDataElement] = useState()
     const standardPeriod = useMemo(() => getStandardPeriod(period), [period])
+    const fixedPeriodRangeValid = useMemo(() => {
+        if (!FIXED_RANGE_PERIOD_TYPES.has(period.periodType)) {
+            return true
+        }
+
+        return getCompleteFixedPeriodRange({
+            periodRange: getDatasetPeriodRange(dataset, period.periodType),
+            periodType: period.periodType,
+            calendar: period.calendar,
+            locale: period.locale,
+        }).hasCompleteFixedPeriods
+    }, [dataset, period.calendar, period.locale, period.periodType])
     const [startExtract, setStartExtract] = useState(false)
     const [importDone, setImportDone] = useState(false)
     const [importFeatures, setImportFeatures] = useState(null)
@@ -124,12 +161,16 @@ const ImportPage = () => {
 
     const featureCount = features.length
 
-    const periodCount = useMemo(() => getPeriods(period).length, [period])
+    const periodCount = useMemo(
+        () => getPeriods(standardPeriod).length,
+        [standardPeriod]
+    )
     const valueCount = featureCount * periodCount
 
     // canShowPreview: show preview even during loading (avoids unmounting/remounting)
     const canShowPreview = !!(
         dataset &&
+        fixedPeriodRangeValid &&
         isValidPeriod(standardPeriod) &&
         !featuresError &&
         featureCount > 0 &&
@@ -220,9 +261,19 @@ const ImportPage = () => {
     const updatePeriodType = useCallback(
         (val) => {
             setDataElement(null)
-            updatePeriod({ periodType: val })
+            const { startTime, endTime } = getPeriodRange({
+                range: getDatasetPeriodRange(dataset, val),
+                calendar,
+                periodType: val,
+            })
+
+            updatePeriod({
+                periodType: val,
+                startTime,
+                endTime,
+            })
         },
-        [updatePeriod]
+        [calendar, dataset, updatePeriod]
     )
 
     const updateDataset = useCallback(
@@ -234,19 +285,13 @@ const ImportPage = () => {
                         prev.supportedPeriodTypes.some((pt) => pt.periodRange))
                 )
 
-                const periodType = ds.supportedPeriodTypes.includes(
-                    period.periodType
+                const periodType = ds.supportedPeriodTypes.some(
+                    (pt) => pt.periodType === period.periodType
                 )
                     ? period.periodType
                     : ds.supportedPeriodTypes[0].periodType
 
-                const range =
-                    ds.supportedPeriodTypes.find(
-                        (pt) => pt.periodType === periodType
-                    )?.periodRange ||
-                    (ds.period
-                        ? { start: ds.period, end: ds.period }
-                        : undefined)
+                const range = getDatasetPeriodRange(ds, periodType)
 
                 if (range || prevHasRangeOrPeriod) {
                     const { startTime, endTime } = getPeriodRange({
@@ -398,8 +443,10 @@ const ImportPage = () => {
                         <ImportPreview
                             dataset={dataset.name || ''}
                             periodType={period.periodType || ''}
-                            startDate={period.startTime || ''}
-                            endDate={period.endTime || ''}
+                            startDate={standardPeriod.startTime || ''}
+                            endDate={standardPeriod.endTime || ''}
+                            calendar={period.calendar}
+                            locale={period.locale}
                             featureCount={featureCount}
                             dataElement={dataElement.displayName || ''}
                             totalValues={valueCount}

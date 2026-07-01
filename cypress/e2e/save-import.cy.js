@@ -69,13 +69,110 @@ const selectTargetDataElement = (dataElementName) => {
         .click()
 }
 
-const typeStartAndEndDates = (startDate, endDate) => {
+const parseDate = (dateString) => {
+    const [year, month, day] = dateString.split('-').map(Number)
+    return new Date(Date.UTC(year, month - 1, day))
+}
+
+const formatDate = (date) => date.toISOString().slice(0, 10)
+
+const getWeeklyPeriodId = (dateString) => {
+    const date = parseDate(dateString)
+    const day = date.getUTCDay() || 7
+    date.setUTCDate(date.getUTCDate() + 4 - day)
+
+    const isoYear = date.getUTCFullYear()
+    const yearStart = new Date(Date.UTC(isoYear, 0, 1))
+    const week = Math.ceil(((date - yearStart) / 86400000 + 1) / 7)
+
+    return `${isoYear}W${week}`
+}
+
+const getWeeklyPeriodEndDate = (dateString) => {
+    const date = parseDate(dateString)
+    const day = date.getUTCDay() || 7
+    date.setUTCDate(date.getUTCDate() + 7 - day)
+    return formatDate(date)
+}
+
+const getMonthlyPeriodId = (dateString) =>
+    dateString.replaceAll('-', '').slice(0, 6)
+
+const getMonthlyPeriodEndDate = (dateString) => {
+    const [year, month] = dateString.split('-').map(Number)
+    return formatDate(new Date(Date.UTC(year, month, 0)))
+}
+
+const getPeriodIdForDate = (dateString, periodType) =>
+    periodType === 'monthly'
+        ? getMonthlyPeriodId(dateString)
+        : getWeeklyPeriodId(dateString)
+
+const getPeriodEndDate = (dateString, periodType = 'weekly') =>
+    periodType === 'monthly'
+        ? getMonthlyPeriodEndDate(dateString)
+        : getWeeklyPeriodEndDate(dateString)
+
+const selectFixedPeriod = (fieldDataTest, periodId) => {
+    cy.getByDataTest(fieldDataTest).scrollIntoView()
+    cy.getByDataTest(fieldDataTest).click()
+    cy.getByDataTest(`${fieldDataTest}-visible-year`).select(
+        periodId.slice(0, 4)
+    )
+    cy.getByDataTest(`${fieldDataTest}-option-${periodId}`).click()
+}
+
+const typeCalendarStartAndEndDates = (startDate, endDate) => {
     cy.getByDataTest('start-date-input-content').scrollIntoView()
     cy.getByDataTest('start-date-input-content').find('input').clear()
     cy.getByDataTest('start-date-input-content').find('input').type(startDate)
     cy.getByDataTest('end-date-input-content').find('input').clear()
     cy.getByDataTest('end-date-input-content').find('input').type(endDate)
     cy.getByDataTest('end-date-input-content').find('input').blur()
+}
+
+const typeStartAndEndDates = (startDate, endDate, periodType = 'weekly') => {
+    cy.get(
+        '[data-test="start-period-input"], [data-test="start-date-input-content"]'
+    )
+        .first()
+        .then(($field) => {
+            if ($field.attr('data-test') === 'start-period-input') {
+                selectFixedPeriod(
+                    'start-period-input',
+                    getPeriodIdForDate(startDate, periodType)
+                )
+                selectFixedPeriod(
+                    'end-period-input',
+                    getPeriodIdForDate(endDate, periodType)
+                )
+                return
+            }
+
+            typeCalendarStartAndEndDates(startDate, endDate)
+        })
+}
+
+const typeEndDate = (endDate, periodType = 'weekly') => {
+    cy.get(
+        '[data-test="end-period-input"], [data-test="end-date-input-content"]'
+    )
+        .first()
+        .then(($field) => {
+            if ($field.attr('data-test') === 'end-period-input') {
+                selectFixedPeriod(
+                    'end-period-input',
+                    getPeriodIdForDate(endDate, periodType)
+                )
+                return
+            }
+
+            cy.getByDataTest('end-date-input-content').find('input').clear()
+            cy.getByDataTest('end-date-input-content')
+                .find('input')
+                .type(endDate)
+            cy.getByDataTest('end-date-input-content').find('input').blur()
+        })
 }
 
 const fillImportForm = () => {
@@ -311,6 +408,9 @@ describe('Imports overview', () => {
     })
 
     it('updates the last import date on the card after running with changed dates', () => {
+        const changedEndDate = '2026-05-07'
+        const changedEndPeriodEndDate = getPeriodEndDate(changedEndDate)
+
         cy.intercept('GET', DATASTORE_URL, { configs: [MOCK_CONFIG] }).as(
             'getDataStore'
         )
@@ -328,8 +428,7 @@ describe('Imports overview', () => {
 
         cy.contains('button', 'Change').click()
 
-        cy.getByDataTest('end-date-input').find('input').clear()
-        cy.getByDataTest('end-date-input').find('input').type('2026-05-07')
+        typeEndDate(changedEndDate)
 
         cy.contains('button', 'Done').click()
 
@@ -343,11 +442,11 @@ describe('Imports overview', () => {
 
         cy.wait('@putDataStore').then((interception) => {
             const config = interception.request.body.configs[0]
-            expect(config.dataUpdatedThrough).to.eq('2026-05-07')
+            expect(config.dataUpdatedThrough).to.eq(changedEndPeriodEndDate)
         })
 
         cy.contains('Data imported through').should('be.visible')
-        cy.contains('May 7, 2026').should('be.visible')
+        cy.contains('May 10, 2026').should('be.visible')
     })
 
     it('deletes a saved import', () => {

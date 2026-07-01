@@ -658,6 +658,15 @@ msgstr "Start date must be on or before the end date."
 msgid "Valid range: {{startDate}} – {{endDate}}"
 msgstr "Valid range: {{startDate}} – {{endDate}}"
 
+msgid "Start period"
+msgstr "Start period"
+
+msgid "End period"
+msgstr "End period"
+
+msgid "No complete periods are available within the valid range."
+msgstr "No complete periods are available within the valid range."
+
 msgid "Valid range"
 msgstr "Valid range"
 
@@ -993,6 +1002,9 @@ msgstr ""
 "None of the selected organisation units have boundaries stored in DHIS2. "
 "Update the import configuration to include organisation units with geometry."
 
+msgid "No complete periods are available within the dataset date range."
+msgstr "No complete periods are available within the dataset date range."
+
 msgid ""
 "Range exceeds the {{max}}-value limit. Split into multiple runs by "
 "importing a shorter date range from the form."
@@ -1008,6 +1020,33 @@ msgstr "Start year"
 
 msgid "End year"
 msgstr "End year"
+
+msgid "Month {{month}}, {{year}}"
+msgstr "Month {{month}}, {{year}}"
+
+msgid "Month {{month}}"
+msgstr "Month {{month}}"
+
+msgid "Select period"
+msgstr "Select period"
+
+msgid "Previous year"
+msgstr "Previous year"
+
+msgid "Select year"
+msgstr "Select year"
+
+msgid "Next year"
+msgstr "Next year"
+
+msgid "Start period must be before or equal to end period."
+msgstr "Start period must be before or equal to end period."
+
+msgid "From period"
+msgstr "From period"
+
+msgid "To period"
+msgstr "To period"
 
 msgid "Chart settings"
 msgstr "Chart settings"

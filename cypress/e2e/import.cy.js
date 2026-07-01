@@ -66,7 +66,41 @@ const selectTargetDataElement = (dataElementName) => {
         .click()
 }
 
-const typeStartAndEndDates = (startDate, endDate) => {
+const parseDate = (dateString) => {
+    const [year, month, day] = dateString.split('-').map(Number)
+    return new Date(Date.UTC(year, month - 1, day))
+}
+
+const getWeeklyPeriodId = (dateString) => {
+    const date = parseDate(dateString)
+    const day = date.getUTCDay() || 7
+    date.setUTCDate(date.getUTCDate() + 4 - day)
+
+    const isoYear = date.getUTCFullYear()
+    const yearStart = new Date(Date.UTC(isoYear, 0, 1))
+    const week = Math.ceil(((date - yearStart) / 86400000 + 1) / 7)
+
+    return `${isoYear}W${week}`
+}
+
+const getMonthlyPeriodId = (dateString) =>
+    dateString.replaceAll('-', '').slice(0, 6)
+
+const getPeriodIdForDate = (dateString, periodType) =>
+    periodType === 'monthly'
+        ? getMonthlyPeriodId(dateString)
+        : getWeeklyPeriodId(dateString)
+
+const selectFixedPeriod = (fieldDataTest, periodId) => {
+    cy.getByDataTest(fieldDataTest).scrollIntoView()
+    cy.getByDataTest(fieldDataTest).click()
+    cy.getByDataTest(`${fieldDataTest}-visible-year`).select(
+        periodId.slice(0, 4)
+    )
+    cy.getByDataTest(`${fieldDataTest}-option-${periodId}`).click()
+}
+
+const typeCalendarStartAndEndDates = (startDate, endDate) => {
     // Type the start date directly into the input, ignoring the calendar popup
     cy.getByDataTest('start-date-input-content').scrollIntoView()
     cy.getByDataTest('start-date-input-content').find('input').clear()
@@ -76,6 +110,69 @@ const typeStartAndEndDates = (startDate, endDate) => {
     cy.getByDataTest('end-date-input-content').find('input').clear()
     cy.getByDataTest('end-date-input-content').find('input').type(endDate)
     cy.getByDataTest('end-date-input-content').find('input').blur()
+}
+
+const typeStartAndEndDates = (startDate, endDate, periodType = 'weekly') => {
+    cy.get(
+        '[data-test="start-period-input"], [data-test="start-date-input-content"]'
+    )
+        .first()
+        .then(($field) => {
+            if ($field.attr('data-test') === 'start-period-input') {
+                selectFixedPeriod(
+                    'start-period-input',
+                    getPeriodIdForDate(startDate, periodType)
+                )
+                selectFixedPeriod(
+                    'end-period-input',
+                    getPeriodIdForDate(endDate, periodType)
+                )
+                return
+            }
+
+            typeCalendarStartAndEndDates(startDate, endDate)
+        })
+}
+
+const assertFixedPeriodSelection = (fieldDataTest, periodId) => {
+    cy.getByDataTest(fieldDataTest).scrollIntoView()
+    cy.getByDataTest(fieldDataTest).click()
+    cy.getByDataTest(`${fieldDataTest}-visible-year`).select(
+        periodId.slice(0, 4)
+    )
+    cy.getByDataTest(`${fieldDataTest}-option-${periodId}`)
+        .should('have.attr', 'aria-pressed', 'true')
+        .click()
+}
+
+const assertDateRangeSelection = (
+    startDate,
+    endDate,
+    periodType = 'weekly'
+) => {
+    cy.get('[data-test="start-period-input"], [data-test="start-date-input"]')
+        .first()
+        .then(($field) => {
+            if ($field.attr('data-test') === 'start-period-input') {
+                assertFixedPeriodSelection(
+                    'start-period-input',
+                    getPeriodIdForDate(startDate, periodType)
+                )
+                assertFixedPeriodSelection(
+                    'end-period-input',
+                    getPeriodIdForDate(endDate, periodType)
+                )
+                return
+            }
+
+            cy.getByDataTest('start-date-input').scrollIntoView()
+            cy.getByDataTest('start-date-input')
+                .find('input')
+                .should('have.value', startDate)
+            cy.getByDataTest('end-date-input')
+                .find('input')
+                .should('have.value', endDate)
+        })
 }
 
 const verifyImportPreview = ({
@@ -267,13 +364,7 @@ describe('Import', () => {
             dataValues: 39,
         })
 
-        cy.getByDataTest('start-date-input').scrollIntoView()
-        cy.getByDataTest('start-date-input')
-            .find('input')
-            .should('have.value', nonBoundaryStartDate)
-        cy.getByDataTest('end-date-input')
-            .find('input')
-            .should('have.value', nonBoundaryEndDate)
+        assertDateRangeSelection(nonBoundaryStartDate, nonBoundaryEndDate)
     })
 
     it('allows user to select time zone if not in Etc/UTC', () => {
@@ -339,13 +430,7 @@ describe('Import', () => {
             dataValues: 39,
         })
 
-        cy.getByDataTest('start-date-input').scrollIntoView()
-        cy.getByDataTest('start-date-input')
-            .find('input')
-            .should('have.value', nonBoundaryStartDate)
-        cy.getByDataTest('end-date-input')
-            .find('input')
-            .should('have.value', nonBoundaryEndDate)
+        assertDateRangeSelection(nonBoundaryStartDate, nonBoundaryEndDate)
     })
 
     it('select the correct org unit groups and import the correct values', () => {
@@ -608,7 +693,7 @@ describe('Import', () => {
         selectOrgUnitFromTree('Bonthe')
         removeOrgUnitLevel('District')
 
-        typeStartAndEndDates('2025-12-24', '2026-01-16')
+        typeStartAndEndDates('2025-12-24', '2026-01-16', 'monthly')
 
         verifyImportPreview({
             datasetName: 'Precipitation (ERA5-Land)',
