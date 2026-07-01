@@ -258,7 +258,7 @@ describe('Period', () => {
             setupApiIntercepts('Etc/UTC')
         })
 
-        it('renders start and end date inputs', () => {
+        it('renders start and end date inputs for daily periods', () => {
             cy.mount(
                 <TestWrapper>
                     <Period
@@ -271,6 +271,25 @@ describe('Period', () => {
             cy.wait('@getSystemInfo')
             cy.getByDataTest('start-date-input').should('be.visible')
             cy.getByDataTest('end-date-input').should('be.visible')
+        })
+
+        it('renders fixed period selectors for weekly periods', () => {
+            const period = { ...defaultPeriod, periodType: 'WEEKLY' }
+
+            cy.mount(
+                <TestWrapper>
+                    <Period
+                        period={period}
+                        dataset={dataset}
+                        onChange={mockOnChange}
+                    />
+                </TestWrapper>
+            )
+            cy.wait('@getSystemInfo')
+            cy.getByDataTest('start-period-input').should('be.visible')
+            cy.getByDataTest('end-period-input').should('be.visible')
+            cy.getByDataTest('start-date-input').should('not.exist')
+            cy.getByDataTest('end-date-input').should('not.exist')
         })
     })
 })

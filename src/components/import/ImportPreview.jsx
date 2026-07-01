@@ -21,6 +21,8 @@ const ImportPreview = ({
     dataElement,
     totalValues,
     orgUnits,
+    calendar,
+    locale,
 }) => {
     const periodTypeObj = getPeriodTypes().find(
         (type) => type.id === periodType
@@ -35,6 +37,8 @@ const ImportPreview = ({
             periodType,
             startTime: startDate,
             endTime: endDate,
+            calendar,
+            locale,
         })
         const firstPeriod = periods[0]
         const lastPeriod = periods.at(-1)
@@ -150,6 +154,8 @@ ImportPreview.propTypes = {
     periodType: PropTypes.string.isRequired,
     startDate: PropTypes.string.isRequired,
     totalValues: PropTypes.number.isRequired,
+    calendar: PropTypes.string,
+    locale: PropTypes.string,
 }
 
 export default ImportPreview
