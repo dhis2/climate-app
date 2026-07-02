@@ -20,7 +20,6 @@ const EMPTY_FEATURES = []
 const useOrgUnits = ({ orgUnits = DEFAULT_ORG_UNITS, debounceDelay = 250 }) => {
     const [features, setFeatures] = useState(EMPTY_FEATURES)
     const [featuresLoading, setFeaturesLoading] = useState(false)
-    console.log('jj call useSystemInfo')
     const { system } = useSystemInfo()
 
     const userId = system?.currentUser?.id

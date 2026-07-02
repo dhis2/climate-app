@@ -76,7 +76,6 @@ const formatRangeDisplay = (range) => {
 }
 
 const RunConfigModal = ({ config, onClose, onRunComplete }) => {
-    console.log('jj RunConfigModal call useOrgUnits ')
     const {
         features,
         featuresLoading,
