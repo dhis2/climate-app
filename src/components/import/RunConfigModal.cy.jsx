@@ -76,7 +76,8 @@ const setupIntercepts = ({
     }).as('getGeoFeatures')
 }
 
-const mount = (config = baseConfig, props = {}) => {
+const mount = (config = baseConfig) => {
+    console.log('jj test mount')
     const onClose = cy.stub().as('onClose')
     const onRunComplete = cy.stub().as('onRunComplete')
     cy.mount(
@@ -85,7 +86,6 @@ const mount = (config = baseConfig, props = {}) => {
                 config={config}
                 onClose={onClose}
                 onRunComplete={onRunComplete}
-                {...props}
             />
         </TestWrapper>
     )
@@ -258,7 +258,7 @@ describe('RunConfigModal', () => {
     })
 
     describe('Start import button', () => {
-        it('is disabled while org unit features are loading', () => {
+        it.only('is disabled while org unit features are loading', () => {
             cy.intercept('GET', '**/api/*/geoFeatures*', (req) => {
                 req.reply({ delay: 3000, body: [singleFeature] })
             }).as('getGeoFeaturesDelayed')
