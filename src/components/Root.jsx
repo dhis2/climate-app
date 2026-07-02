@@ -3,6 +3,7 @@ import { CssVariables, CssReset, Menu, MenuItem } from '@dhis2/ui'
 import { Fragment, useEffect } from 'react'
 import { Outlet, useResolvedPath, useNavigate } from 'react-router-dom'
 import useAppSettings from '../hooks/useAppSettings.js'
+import useHasDataValueAuthority from '../hooks/useHasDataValueAuthority.js'
 import CheckOrgUnitTree from './check/OrgUnitTree.jsx'
 import OrgUnitTree from './explore/OrgUnitTree.jsx'
 import styles from './styles/Root.module.css'
@@ -10,23 +11,32 @@ import styles from './styles/Root.module.css'
 export const getAppPages = () => [
     { path: '/home', name: i18n.t('Home') },
     { path: '/explore', name: i18n.t('Explore data') },
-    { path: '/import', name: i18n.t('Imports') },
-    { path: '/setup', name: i18n.t('Setup guide') },
-    { path: '/settings', name: i18n.t('Settings') },
+    { path: '/import', name: i18n.t('Imports'), requiresAuthority: true },
+    { path: '/setup', name: i18n.t('Setup guide'), requiresAuthority: true },
+    { path: '/settings', name: i18n.t('Settings'), requiresAuthority: true },
 ]
 
 const Root = () => {
     const { settings } = useAppSettings()
     const { pathname } = useResolvedPath()
     const navigate = useNavigate()
+    const { hasAuthority } = useHasDataValueAuthority()
 
     useEffect(() => {
-        if (pathname === '/' && settings?.startPage) {
+        if (pathname !== '/') {
+            return
+        }
+        if (hasAuthority === null) {
+            return
+        }
+        if (hasAuthority === false) {
+            navigate('/explore')
+        } else if (settings?.startPage) {
             navigate(settings.startPage)
-        } else if (pathname === '/') {
+        } else {
             navigate('/home')
         }
-    }, [settings, pathname, navigate])
+    }, [settings, pathname, navigate, hasAuthority])
 
     return (
         <>
@@ -35,26 +45,34 @@ const Root = () => {
             <div className={styles.container}>
                 <div className={styles.sidebar} data-test="sidebar">
                     <Menu>
-                        {getAppPages().map(({ path, name }) => (
-                            <Fragment key={path}>
-                                <MenuItem
-                                    label={name}
-                                    onClick={() => navigate(path)}
-                                    active={
-                                        pathname === path ||
-                                        (path !== '/' &&
-                                            pathname.startsWith(path))
-                                    }
-                                    dataTest={`${name
-                                        .toLowerCase()
-                                        .replaceAll(/\s+/g, '-')}-menu-item`}
-                                />
-                                {path === '/explore' &&
-                                    pathname.startsWith('/explore') && (
-                                        <OrgUnitTree />
-                                    )}
-                            </Fragment>
-                        ))}
+                        {getAppPages()
+                            .filter(
+                                ({ requiresAuthority }) =>
+                                    !requiresAuthority || hasAuthority !== false
+                            )
+                            .map(({ path, name }) => (
+                                <Fragment key={path}>
+                                    <MenuItem
+                                        label={name}
+                                        onClick={() => navigate(path)}
+                                        active={
+                                            pathname === path ||
+                                            (path !== '/' &&
+                                                pathname.startsWith(path))
+                                        }
+                                        dataTest={`${name
+                                            .toLowerCase()
+                                            .replaceAll(
+                                                /\s+/g,
+                                                '-'
+                                            )}-menu-item`}
+                                    />
+                                    {path === '/explore' &&
+                                        pathname.startsWith('/explore') && (
+                                            <OrgUnitTree />
+                                        )}
+                                </Fragment>
+                            ))}
                         {pathname.startsWith('/check') && (
                             <>
                                 <MenuItem
