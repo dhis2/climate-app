@@ -1,0 +1,4 @@
+.container {
+    padding: var(--spacers-dp16);
+    max-width: 600px;
+}

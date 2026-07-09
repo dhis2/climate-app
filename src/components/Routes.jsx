@@ -1,4 +1,5 @@
 import { useDataEngine } from '@dhis2/app-runtime'
+import { useMemo } from 'react'
 import { RouterProvider, createHashRouter } from 'react-router-dom'
 import checkPlaceLoader from '../utils/checkPlaceLoader.js'
 import orgUnitLoader from '../utils/orgUnitLoader.js'
@@ -23,6 +24,7 @@ import TemperatureMonthly from './explore/temperature/TemperatureMonthly.jsx'
 import Vegetation from './explore/vegetation/Vegetation.jsx'
 import ImportPage from './import/ImportPage.jsx'
 import ImportsOverviewPage from './import/ImportsOverviewPage.jsx'
+import RequireAuthority from './RequireAuthority.jsx'
 import Root from './Root.jsx'
 import SettingsPage from './settings/SettingsPage.jsx'
 import SetupPage from './setup/SetupPage.jsx'
@@ -143,69 +145,89 @@ const tabRoutes = [
 const Routes = () => {
     const engine = useDataEngine()
 
-    const router = createHashRouter([
-        {
-            path: '/',
-            element: <Root />,
-            errorElement: <ErrorPage />,
-            children: [
+    const router = useMemo(
+        () =>
+            createHashRouter([
                 {
                     path: '/',
-                    element: <AboutPage />,
-                },
-                {
-                    path: 'home',
-                    element: <AboutPage />,
-                },
-                {
-                    path: 'explore',
+                    element: <Root />,
+                    errorElement: <ErrorPage />,
                     children: [
                         {
-                            index: true,
-                            element: <ExplorePage />,
+                            path: '/',
+                            element: <AboutPage />,
                         },
                         {
-                            path: ':orgUnitId',
-                            element: <OrgUnit />,
-                            loader: orgUnitLoader(engine),
-                            children: tabRoutes,
+                            path: 'home',
+                            element: <AboutPage />,
+                        },
+                        {
+                            path: 'explore',
+                            children: [
+                                {
+                                    index: true,
+                                    element: <ExplorePage />,
+                                },
+                                {
+                                    path: ':orgUnitId',
+                                    element: <OrgUnit />,
+                                    loader: orgUnitLoader(engine),
+                                    children: tabRoutes,
+                                },
+                            ],
+                        },
+                        {
+                            path: 'check',
+                            children: [
+                                {
+                                    index: true,
+                                    element: <CheckPage />,
+                                },
+                                {
+                                    path: ':placeId',
+                                    element: <OrgUnit />,
+                                    loader: checkPlaceLoader,
+                                    children: tabRoutes,
+                                },
+                            ],
+                        },
+                        {
+                            path: 'import',
+                            element: (
+                                <RequireAuthority>
+                                    <ImportsOverviewPage />
+                                </RequireAuthority>
+                            ),
+                        },
+                        {
+                            path: 'import/new',
+                            element: (
+                                <RequireAuthority>
+                                    <ImportPage />
+                                </RequireAuthority>
+                            ),
+                        },
+                        {
+                            path: 'setup',
+                            element: (
+                                <RequireAuthority>
+                                    <SetupPage />
+                                </RequireAuthority>
+                            ),
+                        },
+                        {
+                            path: 'settings',
+                            element: (
+                                <RequireAuthority>
+                                    <SettingsPage />
+                                </RequireAuthority>
+                            ),
                         },
                     ],
                 },
-                {
-                    path: 'check',
-                    children: [
-                        {
-                            index: true,
-                            element: <CheckPage />,
-                        },
-                        {
-                            path: ':placeId',
-                            element: <OrgUnit />,
-                            loader: checkPlaceLoader,
-                            children: tabRoutes,
-                        },
-                    ],
-                },
-                {
-                    path: 'import',
-                    element: <ImportsOverviewPage />,
-                },
-                {
-                    path: 'import/new',
-                    element: <ImportPage />,
-                },
-                {
-                    path: 'setup',
-                    element: <SetupPage />,
-                },
-                {
-                    path: 'settings',
-                    element: <SettingsPage />,
-                },
-            ],
-        },
-    ])
+            ]),
+        [engine]
+    )
 
     return <RouterProvider router={router}></RouterProvider>
 }
