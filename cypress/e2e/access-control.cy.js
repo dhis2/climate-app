@@ -1,5 +1,4 @@
 // Intercepts the /me endpoint to simulate a user without F_DATAVALUE_ADD.
-// Uses the same credentials configured for the other e2e tests — no extra user needed.
 
 const interceptRestrictedUser = () => {
     cy.intercept('GET', /\/api\/\d+\/me\b/, (req) => {
@@ -13,10 +12,6 @@ describe('Access control for restricted pages', () => {
     const restrictedPaths = ['#/import', '#/setup', '#/settings']
 
     beforeEach(function () {
-        if (!Cypress.env('dhis2BaseUrl')) {
-            this.skip()
-        }
-
         interceptRestrictedUser()
         cy.visit('/')
         cy.wait('@getMe')
@@ -54,9 +49,6 @@ describe('Access control for restricted pages', () => {
 
 describe('Access control - start page redirect', () => {
     beforeEach(function () {
-        if (!Cypress.env('dhis2BaseUrl')) {
-            this.skip()
-        }
         interceptRestrictedUser()
     })
 
@@ -78,7 +70,17 @@ describe('Access control - start page redirect', () => {
     })
 
     it('redirects to Explore even with no saved start page', () => {
+        cy.intercept(
+            'GET',
+            /\/api\/\d+\/dataStore\/CLIMATE_DATA\/settings/,
+            (req) => {
+                req.reply((res) => {
+                    delete res.body.startPage
+                })
+            }
+        ).as('getSettings')
         cy.visit('/')
+        cy.wait('@getSettings')
         cy.location().should((loc) => {
             expect(loc.hash).to.eq('#/explore')
         })
