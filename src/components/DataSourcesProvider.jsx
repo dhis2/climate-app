@@ -9,11 +9,14 @@ import React, {
 } from 'react'
 import useEarthEngineToken from '../hooks/useEarthEngineToken.js'
 import useEnactsInfo from '../hooks/useEnactsInfo.js'
+import useOcsInfo from '../hooks/useOcsInfo.js'
 import useRoutesAPI from '../hooks/useRoutesAPI.js'
 
 export const PROVIDER_GEE = 'gee'
 export const PROVIDER_ENACTS = 'enacts'
+export const PROVIDER_OCS = 'ocs'
 const enactsRouteCode = PROVIDER_ENACTS
+const ocsRouteCode = PROVIDER_OCS
 
 const CachedDataQueryCtx = createContext({})
 
@@ -27,6 +30,12 @@ export const enactsProvider = {
     id: PROVIDER_ENACTS,
     name: 'ENACTS Data Sharing Tool (DST)',
     nameShort: 'ENACTS',
+}
+
+export const ocsProvider = {
+    id: PROVIDER_OCS,
+    name: 'Open Climate Service (OCS)',
+    nameShort: 'OCS',
 }
 
 const DataSourcesProvider = ({ children }) => {
@@ -57,6 +66,21 @@ const DataSourcesProvider = ({ children }) => {
 
     const enactsInfo = useMemo(() => eInfo, [eInfo])
 
+    const oroute =
+        !routesLoading &&
+        !routesError &&
+        routes?.find((route) => route.code == ocsRouteCode)
+
+    const ocsRoute = useMemo(() => oroute, [oroute])
+
+    const {
+        data: oInfo,
+        loading: ocsInfoLoading,
+        error: ocsInfoError,
+    } = useOcsInfo(ocsRoute)
+
+    const ocsInfo = useMemo(() => oInfo, [oInfo])
+
     useEffect(() => {
         if (hasGeeToken !== null) {
             return
@@ -86,6 +110,14 @@ const DataSourcesProvider = ({ children }) => {
                 info: enactsInfo,
                 error: enactsInfoError,
             },
+            [PROVIDER_OCS]: {
+                ...ocsProvider,
+                enabled: ocsInfo?.routes?.status === 'healthy',
+                loading: routesLoading || ocsInfoLoading,
+                route: ocsRoute,
+                info: ocsInfo,
+                error: ocsInfoError,
+            },
         }),
         [
             hasGeeToken,
@@ -95,6 +127,10 @@ const DataSourcesProvider = ({ children }) => {
             routesLoading,
             enactsInfoLoading,
             enactsRoute,
+            ocsInfo,
+            ocsInfoError,
+            ocsInfoLoading,
+            ocsRoute,
         ]
     )
 
@@ -102,6 +138,10 @@ const DataSourcesProvider = ({ children }) => {
         console.warn(
             `Could not find a route with the code "${enactsRouteCode}"`
         )
+    }
+
+    if (!routesLoading && !routesError && !oroute) {
+        console.warn(`Could not find a route with the code "${ocsRouteCode}"`)
     }
 
     return (

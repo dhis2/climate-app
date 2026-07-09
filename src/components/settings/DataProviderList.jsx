@@ -14,7 +14,7 @@ import DataProviderListItem from './DataProviderListItem.jsx'
 const DataProviderList = () => {
     const sources = useDataSources()
 
-    const { gee, enacts } = sources
+    const { gee, enacts, ocs } = sources
 
     const dataProviders = Object.values(sources)
         .filter((item) => item.supported !== false)
@@ -29,11 +29,20 @@ const DataProviderList = () => {
                 } else {
                     status = i18n.t('Online')
                 }
-            } else {
-                // enacts
+            } else if (item.id === enacts.id) {
                 if (!enacts.route) {
                     status = i18n.t('Not configured')
                 } else if (enacts.info?.status === 'OK') {
+                    status = i18n.t('Online')
+                } else {
+                    status = i18n.t('Offline')
+                }
+            } else {
+                // ocs
+                console.log('jj ocs info', ocs.info)
+                if (!ocs.route) {
+                    status = i18n.t('Not configured')
+                } else if (ocs.info?.status === 'healthy') {
                     status = i18n.t('Online')
                 } else {
                     status = i18n.t('Offline')

@@ -13,6 +13,7 @@ import {
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React, { useState, useRef, useMemo } from 'react'
+import { ocsProvider } from '../DataSourcesProvider.jsx'
 import styles from './styles/DataProviderListItem.module.css'
 
 const ONLINE = 'Online'
@@ -46,6 +47,68 @@ const DataProviderListItem = ({ name, status }) => {
                             {i18n.t('Google Earth Engine Setup Guide')}
                         </a>
                     </p>
+                </section>
+            )
+        } else if (showInfo === ocsProvider.name) {
+            return (
+                <section aria-labelledby="ocs-setup-info">
+                    <p>
+                        {i18n.t(
+                            'The Open Climate Service (OCS) API is made available using a DHIS2 route. Follow the'
+                        )}{' '}
+                        <a
+                            href={`https://docs.dhis2.org/en/develop/using-the-api/dhis-core-version-${docsVersion}/route.html`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            {i18n.t('DHIS2 Routes documentation')}
+                        </a>{' '}
+                        {i18n.t('to set up the route.')}
+                    </p>
+                    <p>
+                        {i18n.t(
+                            'The following fields must be set in the route configuration. Note that the'
+                        )}{' '}
+                        <strong>code</strong> {i18n.t('must be')}{' '}
+                        <code>ocs</code>.
+                    </p>
+                    <ul>
+                        <li>
+                            <strong>code</strong>: <code>ocs</code>
+                        </li>
+                        <li>
+                            <strong>name</strong>:{' '}
+                            <em>
+                                {i18n.t(
+                                    'A short, descriptive name to identify the route'
+                                )}
+                            </em>
+                        </li>
+                        <li>
+                            <strong>url</strong>:{' '}
+                            <em>
+                                {i18n.t(
+                                    'The base url where your OCS API is hosted. You must append "/**" to the url'
+                                )}
+                            </em>
+                        </li>
+                        <li>
+                            <strong>disabled</strong>: <code>false</code>
+                        </li>
+                    </ul>
+                    <p>
+                        {i18n.t('Example configuration:', {
+                            nsSeparator: false,
+                        })}
+                    </p>
+                    <pre style={{ whiteSpace: 'pre-wrap' }}>
+                        {`{
+    "code": "ocs",
+    "name": "Open Climate Service",
+    "url": "https://your-ocs-base-url/**",
+    "disabled": false
+}`}
+                    </pre>
                 </section>
             )
         } else {
