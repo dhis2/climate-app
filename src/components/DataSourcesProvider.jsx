@@ -112,7 +112,7 @@ const DataSourcesProvider = ({ children }) => {
             },
             [PROVIDER_OCS]: {
                 ...ocsProvider,
-                enabled: ocsInfo?.routes?.status === 'healthy',
+                enabled: ocsInfo?.status === 'healthy',
                 loading: routesLoading || ocsInfoLoading,
                 route: ocsRoute,
                 info: ocsInfo,

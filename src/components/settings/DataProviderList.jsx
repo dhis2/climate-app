@@ -39,7 +39,6 @@ const DataProviderList = () => {
                 }
             } else {
                 // ocs
-                console.log('jj ocs info', ocs.info)
                 if (!ocs.route) {
                     status = i18n.t('Not configured')
                 } else if (ocs.info?.status === 'healthy') {

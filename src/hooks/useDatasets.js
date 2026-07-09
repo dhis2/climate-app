@@ -3,8 +3,15 @@ import getEEDatasets, {
     getResolutionText,
 } from '../data/earth-engine-datasets.js'
 import useEnactsDatasets from './useEnactsDatasets.js'
+import useOcsDatasets from './useOcsDatasets.js'
 
 const useDatasets = () => {
+    const {
+        data: ocsDatasets,
+        error: ocsError,
+        loading: ocsLoading,
+    } = useOcsDatasets()
+
     const {
         data: enactsDatasets,
         error: enactsError,
@@ -28,14 +35,16 @@ const useDatasets = () => {
         }
     })
 
-    const data = gee.enabled
-        ? enactsDatasets.concat(normalizedGeeDatasets)
-        : enactsDatasets
+    const data = ocsDatasets.concat(
+        gee.enabled
+            ? enactsDatasets.concat(normalizedGeeDatasets)
+            : enactsDatasets
+    )
 
     return {
         data,
-        loading: gee.loading || enactsLoading,
-        error: enactsError,
+        loading: gee.loading || enactsLoading || ocsLoading,
+        error: enactsError || ocsError,
     }
 }
 
