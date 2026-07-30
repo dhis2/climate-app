@@ -4,21 +4,25 @@
 # António Fernando Macaringue, 2025
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2026
 # Viktor Varland <viktor@dhis2.org>, 2026
-# Ge Joao <gsimango@saudigitus.org>, 2026
 # Jason Pickering <jason@dhis2.org>, 2026
-# Shelsea Chumaio, 2026
 # Carlos Macaneta, 2026
 # Helton Dias, 2026
 # David Mondlane, 2026
-# Philip Larsen Donnelly, 2026
 # Edson Nhancale, 2026
+# Laurência Luís, 2026
+# Shelsea Chumaio, 2026
+# Miguel Vasco Macamo, 2026
+# Philip Larsen Donnelly, 2026
+# Andres Miguel Rubio, 2026
+# Sheila André <sandre@saudigitus.org>, 2026
+# Ge Joao <gsimango@saudigitus.org>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-04-28T11:05:26.356Z\n"
+"POT-Creation-Date: 2026-06-24T09:50:06.895Z\n"
 "PO-Revision-Date: 2025-02-05 13:11+0000\n"
-"Last-Translator: Edson Nhancale, 2026\n"
+"Last-Translator: Ge Joao <gsimango@saudigitus.org>, 2026\n"
 "Language-Team: Portuguese (https://app.transifex.com/hisp-uio/teams/100509/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -134,8 +138,8 @@ msgstr "Início"
 msgid "Explore data"
 msgstr "Explorar dados"
 
-msgid "Import data"
-msgstr "Importar valores"
+msgid "Imports"
+msgstr ""
 
 msgid "Setup guide"
 msgstr "Guia de configuração"
@@ -675,45 +679,119 @@ msgstr ""
 msgid "setup guide"
 msgstr "guia de configuração"
 
-msgid "Loading org units"
-msgstr "Carregamento de unidades organizacionais"
+msgid "Start and end date are not within the valid range."
+msgstr "As datas de início e de fim não estão dentro do intervalo válido."
 
-msgid "Error loading org units: {{message}}"
+msgid "Start date is not within the valid range."
+msgstr "A data de início não está dentro do intervalo válido."
+
+msgid "End date is not within the valid range."
+msgstr "A data final não está dentro do intervalo válido."
+
+msgid "Start date must be on or before the end date."
 msgstr ""
 
-msgid "No org unit geometries found"
+msgid "Valid range: {{startDate}} – {{endDate}}"
+msgstr ""
+
+msgid "Valid range"
+msgstr "Intervalo válido"
+
+msgid "Delete \"{{name}}\"?"
+msgstr ""
+
+msgid "Created by {{name}} on {{date}}."
 msgstr ""
 
 msgid ""
-"Extracting data for {{periodCount}} {{periodType}} periods and "
-"{{orgUnitsCount}} org units ({{valueCount}} values)"
+"Deleting will remove the saved import and its update history. Imported data "
+"values in DHIS2 will not be affected."
 msgstr ""
-"Extração de dados para {{periodCount}} {{periodType}} períodos e "
-"{{orgUnitsCount}} unidades orgânicas ({{valueCount}} valores)"
 
-msgid "Extracting data for {{orgUnitsCount}} org units"
-msgstr "Extração de dados para {{orgUnitsCount}} unidades orgânicas"
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Delete"
+msgstr "Apagar"
 
 msgid "Dataset provider not recognized"
 msgstr "Fornecedor de conjunto de dados não reconhecido"
 
-msgid "Importing data to DHIS2"
-msgstr "Importação de dados para o DHIS2"
+msgid ""
+"Importing data for {{periodCount}} {{periodType}} periods and "
+"{{orgUnitsCount}} org units ({{valueCount}} values)"
+msgstr ""
+
+msgid "Importing data for {{orgUnitsCount}} org units"
+msgstr ""
+
+msgid ""
+"An org unit in your selection has boundaries that are too detailed to "
+"process."
+msgstr ""
 
 msgid "Import failed"
 msgstr "A importação falhou"
 
-msgid "One or more conflicts encountered"
-msgstr "Um ou mais conflitos encontrados"
+msgid ""
+"Extracting data from Google Earth Engine (batch {{current}} of {{total}})"
+msgstr ""
+
+msgid "Extracting data from Google Earth Engine"
+msgstr ""
+
+msgid "No data for the following org units: {{orgUnits}}"
+msgstr ""
+
+msgid "Importing data to DHIS2"
+msgstr "Importação de dados para o DHIS2"
+
+msgid "Unknown error"
+msgstr "Erro desconhecido"
+
+msgid "Importing climate data"
+msgstr ""
+
+msgid "Saved as \"{{name}}\""
+msgstr ""
+
+msgid "View in Imports →"
+msgstr ""
+
+msgid "Close"
+msgstr "Fechar"
+
+msgid "Importing..."
+msgstr ""
 
 msgid "Import weather and climate data"
 msgstr "Importar dados meteorológicos e climáticos"
 
-msgid "Choose data source"
-msgstr "Selecionar a fonte de dados"
+msgid "Data source"
+msgstr "Fonte de dados"
 
 msgid "Choose destination data element"
 msgstr "Selecionar o elemento de dados de destino"
+
+msgid "Save this import?"
+msgstr ""
+
+msgid "One-time import"
+msgstr ""
+
+msgid "Run this import once. Your selections are not saved."
+msgstr ""
+
+msgid "Save this import"
+msgstr ""
+
+msgid ""
+"Saved imports can be re-run by any user with data import access. Each run "
+"fetches new data since the last import."
+msgstr ""
+
+msgid "Import name"
+msgstr ""
 
 msgid "Review and import"
 msgstr "Revisão e importação"
@@ -728,8 +806,11 @@ msgstr ""
 "organizacionais ou um período de tempo mais curto. As importações adicionais"
 " podem ser efectuadas separadamente."
 
-msgid "Start import"
-msgstr "Iniciar importação"
+msgid "Save & import"
+msgstr ""
+
+msgid "Import once"
+msgstr ""
 
 msgid "For {{periodId}} ({{actualStartTime}} to {{actualEndTime}})"
 msgstr ""
@@ -764,6 +845,9 @@ msgstr[0] "{{count}} o valor dos dados será importado"
 msgstr[1] "{{count}} os valores dos dados serão importados"
 msgstr[2] "{{count}} os valores dos dados serão importados"
 
+msgid "Value '{{value}}' is not numeric"
+msgstr ""
+
 msgid "Data is imported"
 msgstr "Os dados são importados"
 
@@ -779,25 +863,42 @@ msgstr "Ignorado (já existe): {{ignored}}"
 msgid "Missing: {{missing}}"
 msgstr "Falta: {{missing}}"
 
-msgid "No data for the following org units"
-msgstr "Não há dados para as seguintes unidades organizacionais"
+msgid ""
+"No data between {{startTime}} and {{endTime}} for the following org units: "
+"{{orgUnits}}"
+msgstr ""
+
+msgid "One or more conflicts encountered"
+msgstr "Um ou mais conflitos encontrados"
+
+msgid "Import weather and climate data into DHIS2."
+msgstr ""
+
+msgid "New import"
+msgstr ""
+
+msgid "Import data once, or save it to re-run later."
+msgstr ""
+
+msgid "Import data"
+msgstr "Importar valores"
+
+msgid "Saved imports"
+msgstr ""
+
+msgid "You haven't saved any imports yet."
+msgstr ""
 
 msgid ""
-"ERA5-Land has limited data for coastal areas. Values for other org units "
-"will be imported."
+"When you create a new import, choose \"Save this import\" to re-run it with "
+"one click as new climate data becomes available."
+msgstr ""
+
+msgid "No org unit geometries found"
 msgstr ""
 
 msgid "Select organisation units"
 msgstr "Selecionar unidades organizacionais"
-
-msgid "Start and end date are not within the valid range."
-msgstr "As datas de início e de fim não estão dentro do intervalo válido."
-
-msgid "Start date is not within the valid range."
-msgstr "A data de início não está dentro do intervalo válido."
-
-msgid "End date is not within the valid range."
-msgstr "A data final não está dentro do intervalo válido."
 
 msgid ""
 "{{periodTypeName}} data for full calendar {{periodTypeNoun}}s inclusive of "
@@ -822,6 +923,9 @@ msgstr ""
 msgid "Data between start and end date will be imported as daily values."
 msgstr ""
 
+msgid "Import date range"
+msgstr ""
+
 msgid ""
 "The data will be assigned a yearly period type that matches the year it was "
 "collected: {{datasetPeriod}}"
@@ -829,14 +933,87 @@ msgstr ""
 "Aos dados será atribuído um tipo de período anual que corresponde ao ano em "
 "que foram recolhidos: {{datasetPeriod}}"
 
-msgid "Valid range: {{startDate}} - {{endDate}}"
-msgstr "Intervalo válido: {{startDate}} - {{endDate}}"
-
-msgid "Valid range"
-msgstr "Intervalo válido"
+msgid "Period type: {{periodType}}"
+msgstr ""
 
 msgid "Period type"
 msgstr "Tipo de periodo"
+
+msgid "{{count}} org units"
+msgid_plural "{{count}} org units"
+msgstr[0] "{{count}} unidade orgânica"
+msgstr[1] "{{count}} unidades orgânicas"
+msgstr[2] "{{count}} unidades organizacionais"
+
+msgid "Data imported through {{date}} · Last run {{relative}}"
+msgstr ""
+
+msgid "Last run {{relative}}"
+msgstr ""
+
+msgid "Never imported"
+msgstr ""
+
+msgid "{{date}} by {{user}}"
+msgstr ""
+
+msgid "Rename"
+msgstr "Renomear"
+
+msgid "Data source is not available"
+msgstr ""
+
+msgid "Import…"
+msgstr ""
+
+msgid "More actions"
+msgstr "Mais acções"
+
+msgid "Since last import ({{range}})"
+msgstr ""
+
+msgid "Import \"{{name}}\""
+msgstr ""
+
+msgid "DHIS2 data element"
+msgstr ""
+
+msgid "For {{count}} organisation units"
+msgid_plural "For {{count}} organisation units"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "Time zone"
+msgstr "Fuso horário"
+
+msgid "For {{periodType}} date range"
+msgstr ""
+
+msgid "Done"
+msgstr "Feito"
+
+msgid "Use default range"
+msgstr ""
+
+msgid "Change"
+msgstr "Alterar"
+
+msgid "Failed to load org unit geometries"
+msgstr ""
+
+msgid ""
+"None of the selected organisation units have boundaries stored in DHIS2. "
+"Update the import configuration to include organisation units with geometry."
+msgstr ""
+
+msgid ""
+"Range exceeds the {{max}}-value limit. Split into multiple runs by importing"
+" a shorter date range from the form."
+msgstr ""
+
+msgid "Start import"
+msgstr "Iniciar importação"
 
 msgid "Start year"
 msgstr "Ano de início"
@@ -942,9 +1119,6 @@ msgstr ""
 msgid "Example configuration:"
 msgstr ""
 
-msgid "Close"
-msgstr "Fechar"
-
 msgid "Calculate from data"
 msgstr "Calcular a partir dos dados"
 
@@ -1002,9 +1176,6 @@ msgstr ""
 msgid "Description"
 msgstr "Descrição"
 
-msgid "Data source"
-msgstr "Fonte de dados"
-
 msgid "Domain type"
 msgstr "Tipo de domínio"
 
@@ -1041,12 +1212,9 @@ msgstr ""
 
 msgid ""
 "You should now be able to import data with this app. Please reach out to us "
-"on climate-app@dhis2.org if you have any questions or need help with the "
+"on climate-data@dhis2.org if you have any questions or need help with the "
 "setup."
 msgstr ""
-"Agora já deve ser possível importar dados com esta aplicação. Contacte-nos "
-"em climate-app@dhis2.org se tiver alguma dúvida ou precisar de ajuda com a "
-"configuração."
 
 msgid "4. Assign to a DHIS2 data element group"
 msgstr "4. Atribuir a um grupo de elementos de dados DHIS2"
@@ -1196,9 +1364,6 @@ msgstr ""
 "Se duas unidades organizacioanis estiverem próximas uma da outra (dentro da "
 "resolução), elas terão os mesmos valores de dados."
 
-msgid "Time zone"
-msgstr "Fuso horário"
-
 msgid "Data resolution is approximately {{resolution}}."
 msgstr "A resolução dos dados é de aproximadamente {{resolution}}."
 
@@ -1248,8 +1413,8 @@ msgstr "Temperatura máxima do ar em °C a 2 m acima da superfície."
 msgid "Max"
 msgstr "Máx."
 
-msgid "Min temperature (ERA5-Land)"
-msgstr "Temperatura mínima (ERA5-Terra)"
+msgid "Min air temperature (ERA5-Land)"
+msgstr ""
 
 msgid "Min air temperature"
 msgstr "Temperatura mínima do ar"
@@ -1484,6 +1649,39 @@ msgstr "{{allDynamicOuNames}} níveis"
 
 msgid "{{allDynamicOuNames}} groups"
 msgstr "{{allDynamicOuNames}} grupos"
+
+msgid "just now"
+msgstr ""
+
+msgid "{{count}} minutes ago"
+msgid_plural "{{count}} minutes ago"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "{{count}} hours ago"
+msgid_plural "{{count}} hours ago"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "{{count}} days ago"
+msgid_plural "{{count}} days ago"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "{{count}} months ago"
+msgid_plural "{{count}} months ago"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "{{count}} years ago"
+msgid_plural "{{count}} years ago"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid "day"
 msgstr "dia"
