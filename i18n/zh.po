@@ -1,15 +1,16 @@
 # Translators:
-# Philip Larsen Donnelly, 2026
-# 晓东 林 <13981924470@126.com>, 2026
-# easylin <lin_xd@126.com>, 2026
 # Viktor Varland <viktor@dhis2.org>, 2026
+# easylin <lin_xd@126.com>, 2026
+# Philip Larsen Donnelly, 2026
+# Andres Miguel Rubio, 2026
+# 晓东 林 <13981924470@126.com>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-04-28T11:05:26.356Z\n"
+"POT-Creation-Date: 2026-06-24T09:50:06.895Z\n"
 "PO-Revision-Date: 2025-02-05 13:11+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2026\n"
+"Last-Translator: 晓东 林 <13981924470@126.com>, 2026\n"
 "Language-Team: Chinese (https://app.transifex.com/hisp-uio/teams/100509/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -99,8 +100,8 @@ msgstr "首页"
 msgid "Explore data"
 msgstr "探索数据"
 
-msgid "Import data"
-msgstr "导入数据"
+msgid "Imports"
+msgstr ""
 
 msgid "Setup guide"
 msgstr "设置指南"
@@ -608,45 +609,119 @@ msgstr "需要帮助设置导入数据元素吗？查看 "
 msgid "setup guide"
 msgstr "设置指南"
 
-msgid "Loading org units"
-msgstr "装载组织单位"
+msgid "Start and end date are not within the valid range."
+msgstr "开始和结束日期不在有效范围内。"
 
-msgid "Error loading org units: {{message}}"
-msgstr "加载 组织机构时出错：{{message}}"
+msgid "Start date is not within the valid range."
+msgstr "开始日期不在有效范围内。"
 
-msgid "No org unit geometries found"
-msgstr "未找到组织机构的空间几何图形"
+msgid "End date is not within the valid range."
+msgstr "结束日期不在有效范围内。"
+
+msgid "Start date must be on or before the end date."
+msgstr ""
+
+msgid "Valid range: {{startDate}} – {{endDate}}"
+msgstr ""
+
+msgid "Valid range"
+msgstr "有效范围"
+
+msgid "Delete \"{{name}}\"?"
+msgstr ""
+
+msgid "Created by {{name}} on {{date}}."
+msgstr ""
 
 msgid ""
-"Extracting data for {{periodCount}} {{periodType}} periods and "
-"{{orgUnitsCount}} org units ({{valueCount}} values)"
+"Deleting will remove the saved import and its update history. Imported data "
+"values in DHIS2 will not be affected."
 msgstr ""
-"提取{{periodCount}} {{periodType}} 期间和{{orgUnitsCount}} 组织单位的数据 "
-"({{valueCount}} 值)"
 
-msgid "Extracting data for {{orgUnitsCount}} org units"
-msgstr "提取{{orgUnitsCount}} org 单位的数据"
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Delete"
+msgstr "删除"
 
 msgid "Dataset provider not recognized"
 msgstr "未识别数据集提供者"
 
-msgid "Importing data to DHIS2"
-msgstr "将数据导入 DHIS2"
+msgid ""
+"Importing data for {{periodCount}} {{periodType}} periods and "
+"{{orgUnitsCount}} org units ({{valueCount}} values)"
+msgstr ""
+
+msgid "Importing data for {{orgUnitsCount}} org units"
+msgstr ""
+
+msgid ""
+"An org unit in your selection has boundaries that are too detailed to "
+"process."
+msgstr ""
 
 msgid "Import failed"
 msgstr "导入失败"
 
-msgid "One or more conflicts encountered"
-msgstr "遇到一个或多个冲突"
+msgid ""
+"Extracting data from Google Earth Engine (batch {{current}} of {{total}})"
+msgstr ""
+
+msgid "Extracting data from Google Earth Engine"
+msgstr ""
+
+msgid "No data for the following org units: {{orgUnits}}"
+msgstr ""
+
+msgid "Importing data to DHIS2"
+msgstr "将数据导入 DHIS2"
+
+msgid "Unknown error"
+msgstr "未知错误"
+
+msgid "Importing climate data"
+msgstr ""
+
+msgid "Saved as \"{{name}}\""
+msgstr ""
+
+msgid "View in Imports →"
+msgstr ""
+
+msgid "Close"
+msgstr "关闭"
+
+msgid "Importing..."
+msgstr ""
 
 msgid "Import weather and climate data"
 msgstr "导入天气和气候数据"
 
-msgid "Choose data source"
-msgstr "选择数据源"
+msgid "Data source"
+msgstr "数据源"
 
 msgid "Choose destination data element"
 msgstr "选择目的地数据元素"
+
+msgid "Save this import?"
+msgstr ""
+
+msgid "One-time import"
+msgstr ""
+
+msgid "Run this import once. Your selections are not saved."
+msgstr ""
+
+msgid "Save this import"
+msgstr ""
+
+msgid ""
+"Saved imports can be re-run by any user with data import access. Each run "
+"fetches new data since the last import."
+msgstr ""
+
+msgid "Import name"
+msgstr ""
 
 msgid "Review and import"
 msgstr "审查和导入"
@@ -659,8 +734,11 @@ msgstr ""
 "超过导入限制：已选择{{valueCount}} 值（最多{{maxValues}} "
 "）。通过选择更少的组织单位或更短的时间段来减少您的选择。其他导入可单独进行。"
 
-msgid "Start import"
-msgstr "开始导入"
+msgid "Save & import"
+msgstr ""
+
+msgid "Import once"
+msgstr ""
 
 msgid "For {{periodId}} ({{actualStartTime}} to {{actualEndTime}})"
 msgstr "用于{{periodId}} ({{actualStartTime}} 至{{actualEndTime}})"
@@ -693,6 +771,9 @@ msgid "{{count}} data values will be imported"
 msgid_plural "{{count}} data values will be imported"
 msgstr[0] "{{count}} 数据值将被导入"
 
+msgid "Value '{{value}}' is not numeric"
+msgstr ""
+
 msgid "Data is imported"
 msgstr "数据已导入"
 
@@ -708,25 +789,42 @@ msgstr "忽略（已存在）：{{ignored}}"
 msgid "Missing: {{missing}}"
 msgstr "失踪：{{missing}}"
 
-msgid "No data for the following org units"
-msgstr "下列组织单位无数据"
+msgid ""
+"No data between {{startTime}} and {{endTime}} for the following org units: "
+"{{orgUnits}}"
+msgstr ""
+
+msgid "One or more conflicts encountered"
+msgstr "遇到一个或多个冲突"
+
+msgid "Import weather and climate data into DHIS2."
+msgstr ""
+
+msgid "New import"
+msgstr ""
+
+msgid "Import data once, or save it to re-run later."
+msgstr ""
+
+msgid "Import data"
+msgstr "导入数据"
+
+msgid "Saved imports"
+msgstr ""
+
+msgid "You haven't saved any imports yet."
+msgstr ""
 
 msgid ""
-"ERA5-Land has limited data for coastal areas. Values for other org units "
-"will be imported."
-msgstr "ERA5-Land 的沿海地区数据有限。其他 org 单位的数值将被导入。"
+"When you create a new import, choose \"Save this import\" to re-run it with "
+"one click as new climate data becomes available."
+msgstr ""
+
+msgid "No org unit geometries found"
+msgstr "未找到组织机构的空间几何图形"
 
 msgid "Select organisation units"
 msgstr "选择机构"
-
-msgid "Start and end date are not within the valid range."
-msgstr "开始和结束日期不在有效范围内。"
-
-msgid "Start date is not within the valid range."
-msgstr "开始日期不在有效范围内。"
-
-msgid "End date is not within the valid range."
-msgstr "结束日期不在有效范围内。"
 
 msgid ""
 "{{periodTypeName}} data for full calendar {{periodTypeNoun}}s inclusive of "
@@ -751,19 +849,91 @@ msgstr "包括开始和结束日期在内的整个日历{{periodTypeNoun}}的数
 msgid "Data between start and end date will be imported as daily values."
 msgstr "开始日期和结束日期之间的数据将作为每日的值导入。"
 
+msgid "Import date range"
+msgstr ""
+
 msgid ""
 "The data will be assigned a yearly period type that matches the year it was "
 "collected: {{datasetPeriod}}"
 msgstr "数据将被分配一个与收集年份相匹配的年度周期类型：{{datasetPeriod}}"
 
-msgid "Valid range: {{startDate}} - {{endDate}}"
-msgstr "有效范围：{{startDate}} -{{endDate}}"
-
-msgid "Valid range"
-msgstr "有效范围"
+msgid "Period type: {{periodType}}"
+msgstr ""
 
 msgid "Period type"
 msgstr "期间类型"
+
+msgid "{{count}} org units"
+msgid_plural "{{count}} org units"
+msgstr[0] "{{count}} 个组织单位"
+
+msgid "Data imported through {{date}} · Last run {{relative}}"
+msgstr ""
+
+msgid "Last run {{relative}}"
+msgstr ""
+
+msgid "Never imported"
+msgstr ""
+
+msgid "{{date}} by {{user}}"
+msgstr ""
+
+msgid "Rename"
+msgstr "改名"
+
+msgid "Data source is not available"
+msgstr ""
+
+msgid "Import…"
+msgstr ""
+
+msgid "More actions"
+msgstr "更多操作"
+
+msgid "Since last import ({{range}})"
+msgstr ""
+
+msgid "Import \"{{name}}\""
+msgstr ""
+
+msgid "DHIS2 data element"
+msgstr ""
+
+msgid "For {{count}} organisation units"
+msgid_plural "For {{count}} organisation units"
+msgstr[0] ""
+
+msgid "Time zone"
+msgstr "时区"
+
+msgid "For {{periodType}} date range"
+msgstr ""
+
+msgid "Done"
+msgstr "完成"
+
+msgid "Use default range"
+msgstr ""
+
+msgid "Change"
+msgstr "改变"
+
+msgid "Failed to load org unit geometries"
+msgstr ""
+
+msgid ""
+"None of the selected organisation units have boundaries stored in DHIS2. "
+"Update the import configuration to include organisation units with geometry."
+msgstr ""
+
+msgid ""
+"Range exceeds the {{max}}-value limit. Split into multiple runs by importing"
+" a shorter date range from the form."
+msgstr ""
+
+msgid "Start import"
+msgstr "开始导入"
 
 msgid "Start year"
 msgstr "开始年份"
@@ -808,7 +978,7 @@ msgid "Offline"
 msgstr "离线"
 
 msgid "Not configured"
-msgstr ""
+msgstr "未配置"
 
 msgid "Online"
 msgstr "在线"
@@ -831,40 +1001,37 @@ msgid "Setup info"
 msgstr "设置信息"
 
 msgid "Google Earth Engine Setup Guide"
-msgstr ""
+msgstr "谷歌地球引擎设置指南"
 
 msgid "The ENACTS api is made available using a DHIS2 route. Follow the"
-msgstr ""
+msgstr "ENACTS api 通过 DHIS2 路由提供。请按照"
 
 msgid "DHIS2 Routes documentation"
-msgstr ""
+msgstr "DHIS2 路线文件"
 
 msgid "to set up the route."
-msgstr ""
+msgstr "来设置路线。"
 
 msgid ""
 "The following fields must be set in the route configuration. Note that the"
-msgstr ""
+msgstr "路由配置中必须设置以下字段。请注意"
 
 msgid "must be"
-msgstr ""
+msgstr "必须"
 
 msgid "A short, descriptive name to identify the route"
-msgstr ""
+msgstr "一个简短的、描述性的名称来标识路线"
 
 msgid ""
 "The base url where your ENACTS DST API is hosted. You must append \"/**\" to"
 " the url"
-msgstr ""
+msgstr "ENACTS DST API 所在的基本 URL。您必须在 url 后添加\"/**\"。"
 
 msgid "Your ENACTS DST API key here"
-msgstr ""
+msgstr "在此输入您的 ENACTS DST API 密钥"
 
 msgid "Example configuration:"
-msgstr ""
-
-msgid "Close"
-msgstr "关闭"
+msgstr "配置示例："
 
 msgid "Calculate from data"
 msgstr "根据数据计算"
@@ -915,9 +1082,6 @@ msgstr "如果使用此代码，则在导入表格中选择 \"{{-name}}\"数据�
 msgid "Description"
 msgstr "描述"
 
-msgid "Data source"
-msgstr "数据源"
-
 msgid "Domain type"
 msgstr "域类型"
 
@@ -949,10 +1113,9 @@ msgstr "全部分配以防止跨组织单位级别的汇总，特别是从设施
 
 msgid ""
 "You should now be able to import data with this app. Please reach out to us "
-"on climate-app@dhis2.org if you have any questions or need help with the "
+"on climate-data@dhis2.org if you have any questions or need help with the "
 "setup."
 msgstr ""
-"现在您应该可以使用此应用程序导入数据了。如果您在设置过程中有任何问题或需要帮助，请通过 climate-app@dhis2.org 联系我们。"
 
 msgid "4. Assign to a DHIS2 data element group"
 msgstr "4.分配给 DHIS2 数据元素组"
@@ -1080,9 +1243,6 @@ msgid ""
 "have the same data values."
 msgstr "如果两个 org 单元相距很近（在分辨率范围内），它们将具有相同的数据值。"
 
-msgid "Time zone"
-msgstr "时区"
-
 msgid "Data resolution is approximately {{resolution}}."
 msgstr "数据分辨率约为{{resolution}} 。"
 
@@ -1125,8 +1285,8 @@ msgstr "距地面 2 米处的最高气温（°C）。"
 msgid "Max"
 msgstr "最大"
 
-msgid "Min temperature (ERA5-Land)"
-msgstr "最低气温（ERA5-陆地）"
+msgid "Min air temperature (ERA5-Land)"
+msgstr ""
 
 msgid "Min air temperature"
 msgstr "最低气温"
@@ -1351,6 +1511,29 @@ msgstr "{{allDynamicOuNames}} 等级"
 
 msgid "{{allDynamicOuNames}} groups"
 msgstr "{{allDynamicOuNames}} 组"
+
+msgid "just now"
+msgstr ""
+
+msgid "{{count}} minutes ago"
+msgid_plural "{{count}} minutes ago"
+msgstr[0] ""
+
+msgid "{{count}} hours ago"
+msgid_plural "{{count}} hours ago"
+msgstr[0] ""
+
+msgid "{{count}} days ago"
+msgid_plural "{{count}} days ago"
+msgstr[0] ""
+
+msgid "{{count}} months ago"
+msgid_plural "{{count}} months ago"
+msgstr[0] ""
+
+msgid "{{count}} years ago"
+msgid_plural "{{count}} years ago"
+msgstr[0] ""
 
 msgid "day"
 msgstr "日"
