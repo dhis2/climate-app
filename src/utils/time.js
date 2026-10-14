@@ -4,6 +4,7 @@ import {
     convertToIso8601,
     generateFixedPeriods,
     getNowInCalendar,
+    validateDateString,
 } from '@dhis2/multi-calendar-dates'
 
 export const HOURLY = 'HOURLY'
@@ -101,15 +102,76 @@ export const formatCalendarDate = (date) => {
     return `${year}-${month}-${day}` // YYYY-MM-DD
 }
 
+const THIRTEEN_MONTH_CALENDARS = ['ethiopian', 'ethiopic', 'ethioaa', 'coptic']
+
+const getMonthsInYear = (calendar) =>
+    THIRTEEN_MONTH_CALENDARS.includes(calendar) ? 13 : 12
+
+/**
+ * Adds (or subtracts) whole months to a calendar date, clamping the day to
+ * the last day of the target month (e.g. 31 March - 1 month = 29 February)
+ * @param {Object} date Calendar date object with year, month and day
+ * @param {Number} months Number of months to add
+ * @param {String} calendar Calendar used
+ * @returns {Object} Calendar date object with year, month and day
+ */
+const addMonths = (date, months, calendar) => {
+    if (!months) {
+        return date
+    }
+    const monthsInYear = getMonthsInYear(calendar)
+    const monthIndex = date.year * monthsInYear + (date.month - 1) + months
+    const year = Math.floor(monthIndex / monthsInYear)
+    const month = (monthIndex % monthsInYear) + 1
+
+    for (let day = date.day; day > 1; day--) {
+        if (
+            validateDateString(formatCalendarDate({ year, month, day }), {
+                calendar,
+            }).valid
+        ) {
+            return { year, month, day }
+        }
+    }
+    return { year, month, day: 1 }
+}
+
+/**
+ * Adds (or subtracts) days to a calendar date string, using the standard
+ * (gregory) date for the arithmetic
+ * @param {String} dateString Calendar date string in the format YYYY-MM-DD
+ * @param {Number} days Number of days to add
+ * @param {String} calendar Calendar used
+ * @returns {String} Calendar date string in the format YYYY-MM-DD
+ */
+const addDays = (dateString, days, calendar) => {
+    if (!days) {
+        return dateString
+    }
+    const { year, month, day } = toDateObject(
+        toStandardDate(dateString, calendar)
+    )
+    const date = new Date(Date.UTC(year, month - 1, day + days))
+    return fromStandardDate(date.toISOString().slice(0, 10), calendar)
+}
+
 /**
  * Returns calendar date by adding a period to the current date
  * @param {String} calendar Calendar used
- * @param {Object} period Period object
+ * @param {Object} period Period object with years, months and/or days
  * @returns {String} Date string in the format YYYY-MM-DD
  */
-export const getCalendarDate = (calendar, period = { days: 0 }) => {
-    const now = getNowInCalendar(calendar).add(period)
-    return formatCalendarDate(now)
+export const getCalendarDate = (
+    calendar,
+    { years = 0, months = 0, days = 0 } = {}
+) => {
+    const now = getNowInCalendar(calendar)
+    const date = addMonths(
+        { year: now.eraYear ?? now.year, month: now.month, day: now.day },
+        years * getMonthsInYear(calendar) + months,
+        calendar
+    )
+    return addDays(formatCalendarDate(date), days, calendar)
 }
 
 /**

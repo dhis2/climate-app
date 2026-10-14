@@ -1651,31 +1651,31 @@ Array [
     "offset": Object {
       "months": -1,
     },
-    "result": "2080-11-17",
+    "result": "2080-11-18",
   },
   Object {
     "offset": Object {
       "months": -6,
     },
-    "result": "2080-06-13",
+    "result": "2080-06-18",
   },
   Object {
     "offset": Object {
       "months": -12,
     },
-    "result": "2079-12-17",
+    "result": "2079-12-18",
   },
   Object {
     "offset": Object {
       "years": -1,
     },
-    "result": "2079-12-17",
+    "result": "2079-12-18",
   },
   Object {
     "offset": Object {
       "years": -2,
     },
-    "result": "2078-12-17",
+    "result": "2078-12-18",
   },
 ]
 `;
@@ -1684,21 +1684,21 @@ exports[`nepali calendar now = 2024-03-31T10:30:00Z getDefaultImportPeriod 1`] =
 Array [
   Object {
     "calendar": "nepali",
-    "endTime": "2080-11-17",
+    "endTime": "2080-11-18",
     "periodType": "DAILY",
-    "startTime": "2080-06-13",
+    "startTime": "2080-06-18",
   },
   Object {
     "calendar": "nepali",
-    "endTime": "2080-11-17",
+    "endTime": "2080-11-18",
     "periodType": "WEEKLY",
-    "startTime": "2080-06-13",
+    "startTime": "2080-06-18",
   },
   Object {
     "calendar": "nepali",
-    "endTime": "2080-11-17",
+    "endTime": "2080-11-18",
     "periodType": "MONTHLY",
-    "startTime": "2079-12-17",
+    "startTime": "2079-12-18",
   },
   Object {
     "calendar": "nepali",
@@ -1737,25 +1737,25 @@ Array [
     "offset": Object {
       "months": -1,
     },
-    "result": "2081-02-02",
+    "result": "2081-02-01",
   },
   Object {
     "offset": Object {
       "months": -6,
     },
-    "result": "2080-08-29",
+    "result": "2080-09-01",
   },
   Object {
     "offset": Object {
       "months": -12,
     },
-    "result": "2080-02-32",
+    "result": "2080-03-01",
   },
   Object {
     "offset": Object {
       "years": -1,
     },
-    "result": "2080-02-32",
+    "result": "2080-03-01",
   },
   Object {
     "offset": Object {
@@ -1770,21 +1770,21 @@ exports[`nepali calendar now = 2024-06-15T10:30:00Z getDefaultImportPeriod 1`] =
 Array [
   Object {
     "calendar": "nepali",
-    "endTime": "2081-02-02",
+    "endTime": "2081-02-01",
     "periodType": "DAILY",
-    "startTime": "2080-08-29",
+    "startTime": "2080-09-01",
   },
   Object {
     "calendar": "nepali",
-    "endTime": "2081-02-02",
+    "endTime": "2081-02-01",
     "periodType": "WEEKLY",
-    "startTime": "2080-08-29",
+    "startTime": "2080-09-01",
   },
   Object {
     "calendar": "nepali",
-    "endTime": "2081-02-02",
+    "endTime": "2081-02-01",
     "periodType": "MONTHLY",
-    "startTime": "2080-02-32",
+    "startTime": "2080-03-01",
   },
   Object {
     "calendar": "nepali",
@@ -1823,25 +1823,25 @@ Array [
     "offset": Object {
       "months": -1,
     },
-    "result": "2081-04-24",
+    "result": "2081-04-23",
   },
   Object {
     "offset": Object {
       "months": -6,
     },
-    "result": "2080-11-25",
+    "result": "2080-11-23",
   },
   Object {
     "offset": Object {
       "months": -12,
     },
-    "result": "2080-05-22",
+    "result": "2080-05-23",
   },
   Object {
     "offset": Object {
       "years": -1,
     },
-    "result": "2080-05-22",
+    "result": "2080-05-23",
   },
   Object {
     "offset": Object {
@@ -1856,21 +1856,21 @@ exports[`nepali calendar now = 2024-09-08T10:30:00Z getDefaultImportPeriod 1`] =
 Array [
   Object {
     "calendar": "nepali",
-    "endTime": "2081-04-24",
+    "endTime": "2081-04-23",
     "periodType": "DAILY",
-    "startTime": "2080-11-25",
+    "startTime": "2080-11-23",
   },
   Object {
     "calendar": "nepali",
-    "endTime": "2081-04-24",
+    "endTime": "2081-04-23",
     "periodType": "WEEKLY",
-    "startTime": "2080-11-25",
+    "startTime": "2080-11-23",
   },
   Object {
     "calendar": "nepali",
-    "endTime": "2081-04-24",
+    "endTime": "2081-04-23",
     "periodType": "MONTHLY",
-    "startTime": "2080-05-22",
+    "startTime": "2080-05-23",
   },
   Object {
     "calendar": "nepali",
