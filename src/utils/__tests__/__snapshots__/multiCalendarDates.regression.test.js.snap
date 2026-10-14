@@ -1,0 +1,1899 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ethiopian calendar createFixedPeriodFromPeriodId (OpenAsMapButton) 1`] = `
+Array [
+  Object {
+    "error": "Era aa (ISO year 2015) was not matched by any era",
+  },
+  Object {
+    "error": "Era aa (ISO year 2015) was not matched by any era",
+  },
+  Object {
+    "error": "Era aa (ISO year 2016) was not matched by any era",
+  },
+]
+`;
+
+exports[`ethiopian calendar fromStandardDate (convertFromIso8601) 1`] = `
+Array [
+  Array [
+    "2024-01-01",
+    Object {
+      "error": "Era am (ISO year 2016) was not matched by any era",
+    },
+  ],
+  Array [
+    "2024-02-29",
+    Object {
+      "error": "Era am (ISO year 2016) was not matched by any era",
+    },
+  ],
+  Array [
+    "2024-06-15",
+    Object {
+      "error": "Era am (ISO year 2016) was not matched by any era",
+    },
+  ],
+  Array [
+    "2024-09-08",
+    Object {
+      "error": "Era am (ISO year 2016) was not matched by any era",
+    },
+  ],
+  Array [
+    "2024-12-31",
+    Object {
+      "error": "Era am (ISO year 2017) was not matched by any era",
+    },
+  ],
+]
+`;
+
+exports[`ethiopian calendar getDateStringFromIsoDate (generateFixedPeriods) 1`] = `
+Object {
+  "loggedErrors": Array [
+    "Era am (ISO year 2016) was not matched by any era",
+    "Era am (ISO year 2016) was not matched by any era",
+    "Era am (ISO year 2016) was not matched by any era",
+    "Era am (ISO year 2016) was not matched by any era",
+  ],
+  "results": Array [
+    Array [
+      "2024",
+      "2024",
+    ],
+    Array [
+      "2024-06",
+      "2024-06",
+    ],
+    Array [
+      "2024-06-15",
+      "2024-06-15",
+    ],
+    Array [
+      "2024-09-08",
+      "2024-09-08",
+    ],
+  ],
+}
+`;
+
+exports[`ethiopian calendar getPeriods (generateFixedPeriods) DAILY from 2024-06-01 to 2024-06-05 1`] = `
+Object {
+  "error": "Era am (ISO year 2016) was not matched by any era",
+}
+`;
+
+exports[`ethiopian calendar getPeriods (generateFixedPeriods) DAILY from 2024-09-04 to 2024-09-13 1`] = `
+Object {
+  "error": "Era am (ISO year 2016) was not matched by any era",
+}
+`;
+
+exports[`ethiopian calendar getPeriods (generateFixedPeriods) MONTHLY from 2023-07-01 to 2024-06-30 1`] = `
+Object {
+  "error": "Era am (ISO year 2015) was not matched by any era",
+}
+`;
+
+exports[`ethiopian calendar getPeriods (generateFixedPeriods) WEEKLY from 2024-05-01 to 2024-06-30 1`] = `
+Object {
+  "error": "Era am (ISO year 2016) was not matched by any era",
+}
+`;
+
+exports[`ethiopian calendar getPeriods (generateFixedPeriods) YEARLY 1`] = `
+Object {
+  "error": "Era aa (ISO year 2015) was not matched by any era",
+}
+`;
+
+exports[`ethiopian calendar now = 2024-03-31T10:30:00Z getCalendarDate 1`] = `
+Array [
+  Object {
+    "offset": undefined,
+    "result": Object {
+      "error": "Era am (ISO year 2016) was not matched by any era",
+    },
+  },
+  Object {
+    "offset": Object {
+      "days": 0,
+    },
+    "result": Object {
+      "error": "Era am (ISO year 2016) was not matched by any era",
+    },
+  },
+  Object {
+    "offset": Object {
+      "days": 1,
+    },
+    "result": Object {
+      "error": "Era am (ISO year 2016) was not matched by any era",
+    },
+  },
+  Object {
+    "offset": Object {
+      "days": -1,
+    },
+    "result": Object {
+      "error": "Era am (ISO year 2016) was not matched by any era",
+    },
+  },
+  Object {
+    "offset": Object {
+      "months": -1,
+    },
+    "result": Object {
+      "error": "Era am (ISO year 2016) was not matched by any era",
+    },
+  },
+  Object {
+    "offset": Object {
+      "months": -6,
+    },
+    "result": Object {
+      "error": "Era am (ISO year 2016) was not matched by any era",
+    },
+  },
+  Object {
+    "offset": Object {
+      "months": -12,
+    },
+    "result": Object {
+      "error": "Era am (ISO year 2016) was not matched by any era",
+    },
+  },
+  Object {
+    "offset": Object {
+      "years": -1,
+    },
+    "result": Object {
+      "error": "Era am (ISO year 2016) was not matched by any era",
+    },
+  },
+  Object {
+    "offset": Object {
+      "years": -2,
+    },
+    "result": Object {
+      "error": "Era am (ISO year 2016) was not matched by any era",
+    },
+  },
+]
+`;
+
+exports[`ethiopian calendar now = 2024-03-31T10:30:00Z getDefaultImportPeriod 1`] = `
+Array [
+  Object {
+    "error": "Era am (ISO year 2016) was not matched by any era",
+  },
+  Object {
+    "error": "Era am (ISO year 2016) was not matched by any era",
+  },
+  Object {
+    "error": "Era am (ISO year 2016) was not matched by any era",
+  },
+  Object {
+    "error": "Era am (ISO year 2016) was not matched by any era",
+  },
+]
+`;
+
+exports[`ethiopian calendar now = 2024-06-15T10:30:00Z getCalendarDate 1`] = `
+Array [
+  Object {
+    "offset": undefined,
+    "result": Object {
+      "error": "Era am (ISO year 2016) was not matched by any era",
+    },
+  },
+  Object {
+    "offset": Object {
+      "days": 0,
+    },
+    "result": Object {
+      "error": "Era am (ISO year 2016) was not matched by any era",
+    },
+  },
+  Object {
+    "offset": Object {
+      "days": 1,
+    },
+    "result": Object {
+      "error": "Era am (ISO year 2016) was not matched by any era",
+    },
+  },
+  Object {
+    "offset": Object {
+      "days": -1,
+    },
+    "result": Object {
+      "error": "Era am (ISO year 2016) was not matched by any era",
+    },
+  },
+  Object {
+    "offset": Object {
+      "months": -1,
+    },
+    "result": Object {
+      "error": "Era am (ISO year 2016) was not matched by any era",
+    },
+  },
+  Object {
+    "offset": Object {
+      "months": -6,
+    },
+    "result": Object {
+      "error": "Era am (ISO year 2016) was not matched by any era",
+    },
+  },
+  Object {
+    "offset": Object {
+      "months": -12,
+    },
+    "result": Object {
+      "error": "Era am (ISO year 2016) was not matched by any era",
+    },
+  },
+  Object {
+    "offset": Object {
+      "years": -1,
+    },
+    "result": Object {
+      "error": "Era am (ISO year 2016) was not matched by any era",
+    },
+  },
+  Object {
+    "offset": Object {
+      "years": -2,
+    },
+    "result": Object {
+      "error": "Era am (ISO year 2016) was not matched by any era",
+    },
+  },
+]
+`;
+
+exports[`ethiopian calendar now = 2024-06-15T10:30:00Z getDefaultImportPeriod 1`] = `
+Array [
+  Object {
+    "error": "Era am (ISO year 2016) was not matched by any era",
+  },
+  Object {
+    "error": "Era am (ISO year 2016) was not matched by any era",
+  },
+  Object {
+    "error": "Era am (ISO year 2016) was not matched by any era",
+  },
+  Object {
+    "error": "Era am (ISO year 2016) was not matched by any era",
+  },
+]
+`;
+
+exports[`ethiopian calendar now = 2024-09-08T10:30:00Z getCalendarDate 1`] = `
+Array [
+  Object {
+    "offset": undefined,
+    "result": Object {
+      "error": "Era am (ISO year 2016) was not matched by any era",
+    },
+  },
+  Object {
+    "offset": Object {
+      "days": 0,
+    },
+    "result": Object {
+      "error": "Era am (ISO year 2016) was not matched by any era",
+    },
+  },
+  Object {
+    "offset": Object {
+      "days": 1,
+    },
+    "result": Object {
+      "error": "Era am (ISO year 2016) was not matched by any era",
+    },
+  },
+  Object {
+    "offset": Object {
+      "days": -1,
+    },
+    "result": Object {
+      "error": "Era am (ISO year 2016) was not matched by any era",
+    },
+  },
+  Object {
+    "offset": Object {
+      "months": -1,
+    },
+    "result": Object {
+      "error": "Era am (ISO year 2016) was not matched by any era",
+    },
+  },
+  Object {
+    "offset": Object {
+      "months": -6,
+    },
+    "result": Object {
+      "error": "Era am (ISO year 2016) was not matched by any era",
+    },
+  },
+  Object {
+    "offset": Object {
+      "months": -12,
+    },
+    "result": Object {
+      "error": "Era am (ISO year 2016) was not matched by any era",
+    },
+  },
+  Object {
+    "offset": Object {
+      "years": -1,
+    },
+    "result": Object {
+      "error": "Era am (ISO year 2016) was not matched by any era",
+    },
+  },
+  Object {
+    "offset": Object {
+      "years": -2,
+    },
+    "result": Object {
+      "error": "Era am (ISO year 2016) was not matched by any era",
+    },
+  },
+]
+`;
+
+exports[`ethiopian calendar now = 2024-09-08T10:30:00Z getDefaultImportPeriod 1`] = `
+Array [
+  Object {
+    "error": "Era am (ISO year 2016) was not matched by any era",
+  },
+  Object {
+    "error": "Era am (ISO year 2016) was not matched by any era",
+  },
+  Object {
+    "error": "Era am (ISO year 2016) was not matched by any era",
+  },
+  Object {
+    "error": "Era am (ISO year 2016) was not matched by any era",
+  },
+]
+`;
+
+exports[`ethiopian calendar toStandardDate (convertToIso8601) 1`] = `
+Array [
+  Array [
+    "2016-01-01",
+    Object {
+      "error": "Era am (ISO year 2015) was not matched by any era",
+    },
+  ],
+  Array [
+    "2016-13-05",
+    Object {
+      "error": "Era am (ISO year 2016) was not matched by any era",
+    },
+  ],
+  Array [
+    "2017-04-30",
+    Object {
+      "error": "Era am (ISO year 2016) was not matched by any era",
+    },
+  ],
+]
+`;
+
+exports[`gregory calendar createFixedPeriodFromPeriodId (OpenAsMapButton) 1`] = `
+Array [
+  Object {
+    "fixedPeriod": Object {
+      "displayName": "2024",
+      "endDate": "2024-12-31",
+      "id": "2024",
+      "iso": "2024",
+      "name": "2024",
+      "periodType": "YEARLY",
+      "startDate": "2024-01-01",
+    },
+    "periodName": "2024",
+  },
+  Object {
+    "fixedPeriod": Object {
+      "displayName": "June 2024",
+      "endDate": "2024-06-30",
+      "id": "202406",
+      "iso": "202406",
+      "name": "June 2024",
+      "periodType": "MONTHLY",
+      "startDate": "2024-06-01",
+    },
+    "periodName": "June 2024",
+  },
+  Object {
+    "fixedPeriod": Object {
+      "displayName": "June 15, 2024",
+      "endDate": "2024-06-15",
+      "id": "20240615",
+      "iso": "20240615",
+      "name": "2024-06-15",
+      "periodType": "DAILY",
+      "startDate": "2024-06-15",
+    },
+    "periodName": "2024-06-15",
+  },
+]
+`;
+
+exports[`gregory calendar fromStandardDate (convertFromIso8601) 1`] = `
+Array [
+  Array [
+    "2024-01-01",
+    "2024-01-01",
+  ],
+  Array [
+    "2024-02-29",
+    "2024-02-29",
+  ],
+  Array [
+    "2024-06-15",
+    "2024-06-15",
+  ],
+  Array [
+    "2024-09-08",
+    "2024-09-08",
+  ],
+  Array [
+    "2024-12-31",
+    "2024-12-31",
+  ],
+]
+`;
+
+exports[`gregory calendar getDateStringFromIsoDate (generateFixedPeriods) 1`] = `
+Object {
+  "loggedErrors": Array [],
+  "results": Array [
+    Array [
+      "2024",
+      "2024",
+    ],
+    Array [
+      "2024-06",
+      "June 2024",
+    ],
+    Array [
+      "2024-06-15",
+      "June 15, 2024",
+    ],
+    Array [
+      "2024-09-08",
+      "September 8, 2024",
+    ],
+  ],
+}
+`;
+
+exports[`gregory calendar getPeriods (generateFixedPeriods) DAILY from 2024-06-01 to 2024-06-05 1`] = `
+Array [
+  Object {
+    "displayName": "June 1, 2024",
+    "endDate": "2024-06-01",
+    "id": "20240601",
+    "iso": "20240601",
+    "name": "2024-06-01",
+    "periodType": "DAILY",
+    "startDate": "2024-06-01",
+  },
+  Object {
+    "displayName": "June 2, 2024",
+    "endDate": "2024-06-02",
+    "id": "20240602",
+    "iso": "20240602",
+    "name": "2024-06-02",
+    "periodType": "DAILY",
+    "startDate": "2024-06-02",
+  },
+  Object {
+    "displayName": "June 3, 2024",
+    "endDate": "2024-06-03",
+    "id": "20240603",
+    "iso": "20240603",
+    "name": "2024-06-03",
+    "periodType": "DAILY",
+    "startDate": "2024-06-03",
+  },
+  Object {
+    "displayName": "June 4, 2024",
+    "endDate": "2024-06-04",
+    "id": "20240604",
+    "iso": "20240604",
+    "name": "2024-06-04",
+    "periodType": "DAILY",
+    "startDate": "2024-06-04",
+  },
+  Object {
+    "displayName": "June 5, 2024",
+    "endDate": "2024-06-05",
+    "id": "20240605",
+    "iso": "20240605",
+    "name": "2024-06-05",
+    "periodType": "DAILY",
+    "startDate": "2024-06-05",
+  },
+]
+`;
+
+exports[`gregory calendar getPeriods (generateFixedPeriods) DAILY from 2024-09-04 to 2024-09-13 1`] = `
+Array [
+  Object {
+    "displayName": "September 4, 2024",
+    "endDate": "2024-09-04",
+    "id": "20240904",
+    "iso": "20240904",
+    "name": "2024-09-04",
+    "periodType": "DAILY",
+    "startDate": "2024-09-04",
+  },
+  Object {
+    "displayName": "September 5, 2024",
+    "endDate": "2024-09-05",
+    "id": "20240905",
+    "iso": "20240905",
+    "name": "2024-09-05",
+    "periodType": "DAILY",
+    "startDate": "2024-09-05",
+  },
+  Object {
+    "displayName": "September 6, 2024",
+    "endDate": "2024-09-06",
+    "id": "20240906",
+    "iso": "20240906",
+    "name": "2024-09-06",
+    "periodType": "DAILY",
+    "startDate": "2024-09-06",
+  },
+  Object {
+    "displayName": "September 7, 2024",
+    "endDate": "2024-09-07",
+    "id": "20240907",
+    "iso": "20240907",
+    "name": "2024-09-07",
+    "periodType": "DAILY",
+    "startDate": "2024-09-07",
+  },
+  Object {
+    "displayName": "September 8, 2024",
+    "endDate": "2024-09-08",
+    "id": "20240908",
+    "iso": "20240908",
+    "name": "2024-09-08",
+    "periodType": "DAILY",
+    "startDate": "2024-09-08",
+  },
+  Object {
+    "displayName": "September 9, 2024",
+    "endDate": "2024-09-09",
+    "id": "20240909",
+    "iso": "20240909",
+    "name": "2024-09-09",
+    "periodType": "DAILY",
+    "startDate": "2024-09-09",
+  },
+  Object {
+    "displayName": "September 10, 2024",
+    "endDate": "2024-09-10",
+    "id": "20240910",
+    "iso": "20240910",
+    "name": "2024-09-10",
+    "periodType": "DAILY",
+    "startDate": "2024-09-10",
+  },
+  Object {
+    "displayName": "September 11, 2024",
+    "endDate": "2024-09-11",
+    "id": "20240911",
+    "iso": "20240911",
+    "name": "2024-09-11",
+    "periodType": "DAILY",
+    "startDate": "2024-09-11",
+  },
+  Object {
+    "displayName": "September 12, 2024",
+    "endDate": "2024-09-12",
+    "id": "20240912",
+    "iso": "20240912",
+    "name": "2024-09-12",
+    "periodType": "DAILY",
+    "startDate": "2024-09-12",
+  },
+  Object {
+    "displayName": "September 13, 2024",
+    "endDate": "2024-09-13",
+    "id": "20240913",
+    "iso": "20240913",
+    "name": "2024-09-13",
+    "periodType": "DAILY",
+    "startDate": "2024-09-13",
+  },
+]
+`;
+
+exports[`gregory calendar getPeriods (generateFixedPeriods) MONTHLY from 2023-07-01 to 2024-06-30 1`] = `
+Array [
+  Object {
+    "displayName": "July 2023",
+    "endDate": "2023-07-31",
+    "id": "202307",
+    "iso": "202307",
+    "name": "July 2023",
+    "periodType": "MONTHLY",
+    "startDate": "2023-07-01",
+  },
+  Object {
+    "displayName": "August 2023",
+    "endDate": "2023-08-31",
+    "id": "202308",
+    "iso": "202308",
+    "name": "August 2023",
+    "periodType": "MONTHLY",
+    "startDate": "2023-08-01",
+  },
+  Object {
+    "displayName": "September 2023",
+    "endDate": "2023-09-30",
+    "id": "202309",
+    "iso": "202309",
+    "name": "September 2023",
+    "periodType": "MONTHLY",
+    "startDate": "2023-09-01",
+  },
+  Object {
+    "displayName": "October 2023",
+    "endDate": "2023-10-31",
+    "id": "202310",
+    "iso": "202310",
+    "name": "October 2023",
+    "periodType": "MONTHLY",
+    "startDate": "2023-10-01",
+  },
+  Object {
+    "displayName": "November 2023",
+    "endDate": "2023-11-30",
+    "id": "202311",
+    "iso": "202311",
+    "name": "November 2023",
+    "periodType": "MONTHLY",
+    "startDate": "2023-11-01",
+  },
+  Object {
+    "displayName": "December 2023",
+    "endDate": "2023-12-31",
+    "id": "202312",
+    "iso": "202312",
+    "name": "December 2023",
+    "periodType": "MONTHLY",
+    "startDate": "2023-12-01",
+  },
+  Object {
+    "displayName": "January 2024",
+    "endDate": "2024-01-31",
+    "id": "202401",
+    "iso": "202401",
+    "name": "January 2024",
+    "periodType": "MONTHLY",
+    "startDate": "2024-01-01",
+  },
+  Object {
+    "displayName": "February 2024",
+    "endDate": "2024-02-29",
+    "id": "202402",
+    "iso": "202402",
+    "name": "February 2024",
+    "periodType": "MONTHLY",
+    "startDate": "2024-02-01",
+  },
+  Object {
+    "displayName": "March 2024",
+    "endDate": "2024-03-31",
+    "id": "202403",
+    "iso": "202403",
+    "name": "March 2024",
+    "periodType": "MONTHLY",
+    "startDate": "2024-03-01",
+  },
+  Object {
+    "displayName": "April 2024",
+    "endDate": "2024-04-30",
+    "id": "202404",
+    "iso": "202404",
+    "name": "April 2024",
+    "periodType": "MONTHLY",
+    "startDate": "2024-04-01",
+  },
+  Object {
+    "displayName": "May 2024",
+    "endDate": "2024-05-31",
+    "id": "202405",
+    "iso": "202405",
+    "name": "May 2024",
+    "periodType": "MONTHLY",
+    "startDate": "2024-05-01",
+  },
+  Object {
+    "displayName": "June 2024",
+    "endDate": "2024-06-30",
+    "id": "202406",
+    "iso": "202406",
+    "name": "June 2024",
+    "periodType": "MONTHLY",
+    "startDate": "2024-06-01",
+  },
+]
+`;
+
+exports[`gregory calendar getPeriods (generateFixedPeriods) WEEKLY from 2024-05-01 to 2024-06-30 1`] = `
+Array [
+  Object {
+    "displayName": "Week 18 - 2024-04-29 - 2024-05-05",
+    "endDate": "2024-05-05",
+    "id": "2024W18",
+    "iso": "2024W18",
+    "name": "Week 18 - 2024-04-29 - 2024-05-05",
+    "periodType": "WEEKLY",
+    "startDate": "2024-04-29",
+  },
+  Object {
+    "displayName": "Week 19 - 2024-05-06 - 2024-05-12",
+    "endDate": "2024-05-12",
+    "id": "2024W19",
+    "iso": "2024W19",
+    "name": "Week 19 - 2024-05-06 - 2024-05-12",
+    "periodType": "WEEKLY",
+    "startDate": "2024-05-06",
+  },
+  Object {
+    "displayName": "Week 20 - 2024-05-13 - 2024-05-19",
+    "endDate": "2024-05-19",
+    "id": "2024W20",
+    "iso": "2024W20",
+    "name": "Week 20 - 2024-05-13 - 2024-05-19",
+    "periodType": "WEEKLY",
+    "startDate": "2024-05-13",
+  },
+  Object {
+    "displayName": "Week 21 - 2024-05-20 - 2024-05-26",
+    "endDate": "2024-05-26",
+    "id": "2024W21",
+    "iso": "2024W21",
+    "name": "Week 21 - 2024-05-20 - 2024-05-26",
+    "periodType": "WEEKLY",
+    "startDate": "2024-05-20",
+  },
+  Object {
+    "displayName": "Week 22 - 2024-05-27 - 2024-06-02",
+    "endDate": "2024-06-02",
+    "id": "2024W22",
+    "iso": "2024W22",
+    "name": "Week 22 - 2024-05-27 - 2024-06-02",
+    "periodType": "WEEKLY",
+    "startDate": "2024-05-27",
+  },
+  Object {
+    "displayName": "Week 23 - 2024-06-03 - 2024-06-09",
+    "endDate": "2024-06-09",
+    "id": "2024W23",
+    "iso": "2024W23",
+    "name": "Week 23 - 2024-06-03 - 2024-06-09",
+    "periodType": "WEEKLY",
+    "startDate": "2024-06-03",
+  },
+  Object {
+    "displayName": "Week 24 - 2024-06-10 - 2024-06-16",
+    "endDate": "2024-06-16",
+    "id": "2024W24",
+    "iso": "2024W24",
+    "name": "Week 24 - 2024-06-10 - 2024-06-16",
+    "periodType": "WEEKLY",
+    "startDate": "2024-06-10",
+  },
+  Object {
+    "displayName": "Week 25 - 2024-06-17 - 2024-06-23",
+    "endDate": "2024-06-23",
+    "id": "2024W25",
+    "iso": "2024W25",
+    "name": "Week 25 - 2024-06-17 - 2024-06-23",
+    "periodType": "WEEKLY",
+    "startDate": "2024-06-17",
+  },
+  Object {
+    "displayName": "Week 26 - 2024-06-24 - 2024-06-30",
+    "endDate": "2024-06-30",
+    "id": "2024W26",
+    "iso": "2024W26",
+    "name": "Week 26 - 2024-06-24 - 2024-06-30",
+    "periodType": "WEEKLY",
+    "startDate": "2024-06-24",
+  },
+]
+`;
+
+exports[`gregory calendar getPeriods (generateFixedPeriods) YEARLY 1`] = `
+Array [
+  Object {
+    "displayName": "2024",
+    "endDate": "2024-12-31",
+    "id": "2024",
+    "iso": "2024",
+    "name": "2024",
+    "periodType": "YEARLY",
+    "startDate": "2024-01-01",
+  },
+  Object {
+    "displayName": "2023",
+    "endDate": "2023-12-31",
+    "id": "2023",
+    "iso": "2023",
+    "name": "2023",
+    "periodType": "YEARLY",
+    "startDate": "2023-01-01",
+  },
+  Object {
+    "displayName": "2022",
+    "endDate": "2022-12-31",
+    "id": "2022",
+    "iso": "2022",
+    "name": "2022",
+    "periodType": "YEARLY",
+    "startDate": "2022-01-01",
+  },
+]
+`;
+
+exports[`gregory calendar now = 2024-03-31T10:30:00Z getCalendarDate 1`] = `
+Array [
+  Object {
+    "offset": undefined,
+    "result": "2024-03-31",
+  },
+  Object {
+    "offset": Object {
+      "days": 0,
+    },
+    "result": "2024-03-31",
+  },
+  Object {
+    "offset": Object {
+      "days": 1,
+    },
+    "result": "2024-04-01",
+  },
+  Object {
+    "offset": Object {
+      "days": -1,
+    },
+    "result": "2024-03-30",
+  },
+  Object {
+    "offset": Object {
+      "months": -1,
+    },
+    "result": "2024-02-29",
+  },
+  Object {
+    "offset": Object {
+      "months": -6,
+    },
+    "result": "2023-09-30",
+  },
+  Object {
+    "offset": Object {
+      "months": -12,
+    },
+    "result": "2023-03-31",
+  },
+  Object {
+    "offset": Object {
+      "years": -1,
+    },
+    "result": "2023-03-31",
+  },
+  Object {
+    "offset": Object {
+      "years": -2,
+    },
+    "result": "2022-03-31",
+  },
+]
+`;
+
+exports[`gregory calendar now = 2024-03-31T10:30:00Z getDefaultImportPeriod 1`] = `
+Array [
+  Object {
+    "calendar": "gregory",
+    "endTime": "2024-02-29",
+    "periodType": "DAILY",
+    "startTime": "2023-09-30",
+  },
+  Object {
+    "calendar": "gregory",
+    "endTime": "2024-02-29",
+    "periodType": "WEEKLY",
+    "startTime": "2023-09-30",
+  },
+  Object {
+    "calendar": "gregory",
+    "endTime": "2024-02-29",
+    "periodType": "MONTHLY",
+    "startTime": "2023-03-31",
+  },
+  Object {
+    "calendar": "gregory",
+    "endTime": "2023",
+    "periodType": "YEARLY",
+    "startTime": "2022",
+  },
+]
+`;
+
+exports[`gregory calendar now = 2024-06-15T10:30:00Z getCalendarDate 1`] = `
+Array [
+  Object {
+    "offset": undefined,
+    "result": "2024-06-15",
+  },
+  Object {
+    "offset": Object {
+      "days": 0,
+    },
+    "result": "2024-06-15",
+  },
+  Object {
+    "offset": Object {
+      "days": 1,
+    },
+    "result": "2024-06-16",
+  },
+  Object {
+    "offset": Object {
+      "days": -1,
+    },
+    "result": "2024-06-14",
+  },
+  Object {
+    "offset": Object {
+      "months": -1,
+    },
+    "result": "2024-05-15",
+  },
+  Object {
+    "offset": Object {
+      "months": -6,
+    },
+    "result": "2023-12-15",
+  },
+  Object {
+    "offset": Object {
+      "months": -12,
+    },
+    "result": "2023-06-15",
+  },
+  Object {
+    "offset": Object {
+      "years": -1,
+    },
+    "result": "2023-06-15",
+  },
+  Object {
+    "offset": Object {
+      "years": -2,
+    },
+    "result": "2022-06-15",
+  },
+]
+`;
+
+exports[`gregory calendar now = 2024-06-15T10:30:00Z getDefaultImportPeriod 1`] = `
+Array [
+  Object {
+    "calendar": "gregory",
+    "endTime": "2024-05-15",
+    "periodType": "DAILY",
+    "startTime": "2023-12-15",
+  },
+  Object {
+    "calendar": "gregory",
+    "endTime": "2024-05-15",
+    "periodType": "WEEKLY",
+    "startTime": "2023-12-15",
+  },
+  Object {
+    "calendar": "gregory",
+    "endTime": "2024-05-15",
+    "periodType": "MONTHLY",
+    "startTime": "2023-06-15",
+  },
+  Object {
+    "calendar": "gregory",
+    "endTime": "2023",
+    "periodType": "YEARLY",
+    "startTime": "2022",
+  },
+]
+`;
+
+exports[`gregory calendar now = 2024-09-08T10:30:00Z getCalendarDate 1`] = `
+Array [
+  Object {
+    "offset": undefined,
+    "result": "2024-09-08",
+  },
+  Object {
+    "offset": Object {
+      "days": 0,
+    },
+    "result": "2024-09-08",
+  },
+  Object {
+    "offset": Object {
+      "days": 1,
+    },
+    "result": "2024-09-09",
+  },
+  Object {
+    "offset": Object {
+      "days": -1,
+    },
+    "result": "2024-09-07",
+  },
+  Object {
+    "offset": Object {
+      "months": -1,
+    },
+    "result": "2024-08-08",
+  },
+  Object {
+    "offset": Object {
+      "months": -6,
+    },
+    "result": "2024-03-08",
+  },
+  Object {
+    "offset": Object {
+      "months": -12,
+    },
+    "result": "2023-09-08",
+  },
+  Object {
+    "offset": Object {
+      "years": -1,
+    },
+    "result": "2023-09-08",
+  },
+  Object {
+    "offset": Object {
+      "years": -2,
+    },
+    "result": "2022-09-08",
+  },
+]
+`;
+
+exports[`gregory calendar now = 2024-09-08T10:30:00Z getDefaultImportPeriod 1`] = `
+Array [
+  Object {
+    "calendar": "gregory",
+    "endTime": "2024-08-08",
+    "periodType": "DAILY",
+    "startTime": "2024-03-08",
+  },
+  Object {
+    "calendar": "gregory",
+    "endTime": "2024-08-08",
+    "periodType": "WEEKLY",
+    "startTime": "2024-03-08",
+  },
+  Object {
+    "calendar": "gregory",
+    "endTime": "2024-08-08",
+    "periodType": "MONTHLY",
+    "startTime": "2023-09-08",
+  },
+  Object {
+    "calendar": "gregory",
+    "endTime": "2023",
+    "periodType": "YEARLY",
+    "startTime": "2022",
+  },
+]
+`;
+
+exports[`gregory calendar toStandardDate (convertToIso8601) 1`] = `
+Array [
+  Array [
+    "2024-01-01",
+    "2024-01-01",
+  ],
+  Array [
+    "2024-02-29",
+    "2024-02-29",
+  ],
+  Array [
+    "2024-12-31",
+    "2024-12-31",
+  ],
+]
+`;
+
+exports[`nepali calendar createFixedPeriodFromPeriodId (OpenAsMapButton) 1`] = `
+Array [
+  Object {
+    "fixedPeriod": Object {
+      "displayName": "2081",
+      "endDate": "2081-12-31",
+      "id": "2081",
+      "iso": "2081",
+      "name": "2081",
+      "periodType": "YEARLY",
+      "startDate": "2081-01-01",
+    },
+    "periodName": "2081",
+  },
+  Object {
+    "fixedPeriod": Object {
+      "displayName": "Ashadh 2081",
+      "endDate": "2081-03-31",
+      "id": "208103",
+      "iso": "208103",
+      "name": "Ashadh 2081",
+      "periodType": "MONTHLY",
+      "startDate": "2081-03-01",
+    },
+    "periodName": "Ashadh 2081",
+  },
+  Object {
+    "fixedPeriod": Object {
+      "displayName": "2081-03-01",
+      "endDate": "2081-03-01",
+      "id": "20810301",
+      "iso": "20810301",
+      "name": "2081-03-01",
+      "periodType": "DAILY",
+      "startDate": "2081-03-01",
+    },
+    "periodName": "2081-03-01",
+  },
+]
+`;
+
+exports[`nepali calendar fromStandardDate (convertFromIso8601) 1`] = `
+Array [
+  Array [
+    "2024-01-01",
+    "2080-09-16",
+  ],
+  Array [
+    "2024-02-29",
+    "2080-11-17",
+  ],
+  Array [
+    "2024-06-15",
+    "2081-03-01",
+  ],
+  Array [
+    "2024-09-08",
+    "2081-05-23",
+  ],
+  Array [
+    "2024-12-31",
+    "2081-09-16",
+  ],
+]
+`;
+
+exports[`nepali calendar getDateStringFromIsoDate (generateFixedPeriods) 1`] = `
+Object {
+  "loggedErrors": Array [],
+  "results": Array [
+    Array [
+      "2024",
+      "2080",
+    ],
+    Array [
+      "2024-06",
+      "Jestha 2081",
+    ],
+    Array [
+      "2024-06-15",
+      "2081-03-01",
+    ],
+    Array [
+      "2024-09-08",
+      "2081-05-23",
+    ],
+  ],
+}
+`;
+
+exports[`nepali calendar getPeriods (generateFixedPeriods) DAILY from 2024-06-01 to 2024-06-05 1`] = `
+Array [
+  Object {
+    "displayName": "2081-02-19",
+    "endDate": "2024-06-01",
+    "id": "20810219",
+    "iso": "20810219",
+    "name": "2081-02-19",
+    "periodType": "DAILY",
+    "startDate": "2024-06-01",
+  },
+  Object {
+    "displayName": "2081-02-20",
+    "endDate": "2024-06-02",
+    "id": "20810220",
+    "iso": "20810220",
+    "name": "2081-02-20",
+    "periodType": "DAILY",
+    "startDate": "2024-06-02",
+  },
+  Object {
+    "displayName": "2081-02-21",
+    "endDate": "2024-06-03",
+    "id": "20810221",
+    "iso": "20810221",
+    "name": "2081-02-21",
+    "periodType": "DAILY",
+    "startDate": "2024-06-03",
+  },
+  Object {
+    "displayName": "2081-02-22",
+    "endDate": "2024-06-04",
+    "id": "20810222",
+    "iso": "20810222",
+    "name": "2081-02-22",
+    "periodType": "DAILY",
+    "startDate": "2024-06-04",
+  },
+  Object {
+    "displayName": "2081-02-23",
+    "endDate": "2024-06-05",
+    "id": "20810223",
+    "iso": "20810223",
+    "name": "2081-02-23",
+    "periodType": "DAILY",
+    "startDate": "2024-06-05",
+  },
+]
+`;
+
+exports[`nepali calendar getPeriods (generateFixedPeriods) DAILY from 2024-09-04 to 2024-09-13 1`] = `
+Array [
+  Object {
+    "displayName": "2081-05-19",
+    "endDate": "2024-09-04",
+    "id": "20810519",
+    "iso": "20810519",
+    "name": "2081-05-19",
+    "periodType": "DAILY",
+    "startDate": "2024-09-04",
+  },
+  Object {
+    "displayName": "2081-05-20",
+    "endDate": "2024-09-05",
+    "id": "20810520",
+    "iso": "20810520",
+    "name": "2081-05-20",
+    "periodType": "DAILY",
+    "startDate": "2024-09-05",
+  },
+  Object {
+    "displayName": "2081-05-21",
+    "endDate": "2024-09-06",
+    "id": "20810521",
+    "iso": "20810521",
+    "name": "2081-05-21",
+    "periodType": "DAILY",
+    "startDate": "2024-09-06",
+  },
+  Object {
+    "displayName": "2081-05-22",
+    "endDate": "2024-09-07",
+    "id": "20810522",
+    "iso": "20810522",
+    "name": "2081-05-22",
+    "periodType": "DAILY",
+    "startDate": "2024-09-07",
+  },
+  Object {
+    "displayName": "2081-05-23",
+    "endDate": "2024-09-08",
+    "id": "20810523",
+    "iso": "20810523",
+    "name": "2081-05-23",
+    "periodType": "DAILY",
+    "startDate": "2024-09-08",
+  },
+  Object {
+    "displayName": "2081-05-24",
+    "endDate": "2024-09-09",
+    "id": "20810524",
+    "iso": "20810524",
+    "name": "2081-05-24",
+    "periodType": "DAILY",
+    "startDate": "2024-09-09",
+  },
+  Object {
+    "displayName": "2081-05-25",
+    "endDate": "2024-09-10",
+    "id": "20810525",
+    "iso": "20810525",
+    "name": "2081-05-25",
+    "periodType": "DAILY",
+    "startDate": "2024-09-10",
+  },
+  Object {
+    "displayName": "2081-05-26",
+    "endDate": "2024-09-11",
+    "id": "20810526",
+    "iso": "20810526",
+    "name": "2081-05-26",
+    "periodType": "DAILY",
+    "startDate": "2024-09-11",
+  },
+  Object {
+    "displayName": "2081-05-27",
+    "endDate": "2024-09-12",
+    "id": "20810527",
+    "iso": "20810527",
+    "name": "2081-05-27",
+    "periodType": "DAILY",
+    "startDate": "2024-09-12",
+  },
+  Object {
+    "displayName": "2081-05-28",
+    "endDate": "2024-09-13",
+    "id": "20810528",
+    "iso": "20810528",
+    "name": "2081-05-28",
+    "periodType": "DAILY",
+    "startDate": "2024-09-13",
+  },
+]
+`;
+
+exports[`nepali calendar getPeriods (generateFixedPeriods) MONTHLY from 2023-07-01 to 2024-06-30 1`] = `
+Array [
+  Object {
+    "displayName": "Ashadh 2080",
+    "endDate": "2023-07-16",
+    "id": "208003",
+    "iso": "208003",
+    "name": "Ashadh 2080",
+    "periodType": "MONTHLY",
+    "startDate": "2023-06-16",
+  },
+  Object {
+    "displayName": "Shrawan 2080",
+    "endDate": "2023-08-17",
+    "id": "208004",
+    "iso": "208004",
+    "name": "Shrawan 2080",
+    "periodType": "MONTHLY",
+    "startDate": "2023-07-17",
+  },
+  Object {
+    "displayName": "Bhadra 2080",
+    "endDate": "2023-09-17",
+    "id": "208005",
+    "iso": "208005",
+    "name": "Bhadra 2080",
+    "periodType": "MONTHLY",
+    "startDate": "2023-08-18",
+  },
+  Object {
+    "displayName": "Ashwin 2080",
+    "endDate": "2023-10-17",
+    "id": "208006",
+    "iso": "208006",
+    "name": "Ashwin 2080",
+    "periodType": "MONTHLY",
+    "startDate": "2023-09-18",
+  },
+  Object {
+    "displayName": "Kartik 2080",
+    "endDate": "2023-11-16",
+    "id": "208007",
+    "iso": "208007",
+    "name": "Kartik 2080",
+    "periodType": "MONTHLY",
+    "startDate": "2023-10-18",
+  },
+  Object {
+    "displayName": "Mangsir 2080",
+    "endDate": "2023-12-16",
+    "id": "208008",
+    "iso": "208008",
+    "name": "Mangsir 2080",
+    "periodType": "MONTHLY",
+    "startDate": "2023-11-17",
+  },
+  Object {
+    "displayName": "Paush 2080",
+    "endDate": "2024-01-14",
+    "id": "208009",
+    "iso": "208009",
+    "name": "Paush 2080",
+    "periodType": "MONTHLY",
+    "startDate": "2023-12-17",
+  },
+  Object {
+    "displayName": "Mangh 2080",
+    "endDate": "2024-02-12",
+    "id": "208010",
+    "iso": "208010",
+    "name": "Mangh 2080",
+    "periodType": "MONTHLY",
+    "startDate": "2024-01-15",
+  },
+  Object {
+    "displayName": "Falgun 2080",
+    "endDate": "2024-03-13",
+    "id": "208011",
+    "iso": "208011",
+    "name": "Falgun 2080",
+    "periodType": "MONTHLY",
+    "startDate": "2024-02-13",
+  },
+  Object {
+    "displayName": "Chaitra 2080",
+    "endDate": "2024-04-12",
+    "id": "208012",
+    "iso": "208012",
+    "name": "Chaitra 2080",
+    "periodType": "MONTHLY",
+    "startDate": "2024-03-14",
+  },
+  Object {
+    "displayName": "Baisakh 2081",
+    "endDate": "2024-05-13",
+    "id": "208101",
+    "iso": "208101",
+    "name": "Baisakh 2081",
+    "periodType": "MONTHLY",
+    "startDate": "2024-04-13",
+  },
+  Object {
+    "displayName": "Jestha 2081",
+    "endDate": "2024-06-14",
+    "id": "208102",
+    "iso": "208102",
+    "name": "Jestha 2081",
+    "periodType": "MONTHLY",
+    "startDate": "2024-05-14",
+  },
+  Object {
+    "displayName": "Ashadh 2081",
+    "endDate": "2024-07-15",
+    "id": "208103",
+    "iso": "208103",
+    "name": "Ashadh 2081",
+    "periodType": "MONTHLY",
+    "startDate": "2024-06-15",
+  },
+]
+`;
+
+exports[`nepali calendar getPeriods (generateFixedPeriods) WEEKLY from 2024-05-01 to 2024-06-30 1`] = `
+Array [
+  Object {
+    "displayName": "Week 3 - 2081-01-17 - 2081-01-23",
+    "endDate": "2024-05-05",
+    "id": "2081W3",
+    "iso": "2081W3",
+    "name": "Week 3 - 2081-01-17 - 2081-01-23",
+    "periodType": "WEEKLY",
+    "startDate": "2024-04-29",
+  },
+  Object {
+    "displayName": "Week 4 - 2081-01-24 - 2081-01-30",
+    "endDate": "2024-05-12",
+    "id": "2081W4",
+    "iso": "2081W4",
+    "name": "Week 4 - 2081-01-24 - 2081-01-30",
+    "periodType": "WEEKLY",
+    "startDate": "2024-05-06",
+  },
+  Object {
+    "displayName": "Week 5 - 2081-01-31 - 2081-02-06",
+    "endDate": "2024-05-19",
+    "id": "2081W5",
+    "iso": "2081W5",
+    "name": "Week 5 - 2081-01-31 - 2081-02-06",
+    "periodType": "WEEKLY",
+    "startDate": "2024-05-13",
+  },
+  Object {
+    "displayName": "Week 6 - 2081-02-07 - 2081-02-13",
+    "endDate": "2024-05-26",
+    "id": "2081W6",
+    "iso": "2081W6",
+    "name": "Week 6 - 2081-02-07 - 2081-02-13",
+    "periodType": "WEEKLY",
+    "startDate": "2024-05-20",
+  },
+  Object {
+    "displayName": "Week 7 - 2081-02-14 - 2081-02-20",
+    "endDate": "2024-06-02",
+    "id": "2081W7",
+    "iso": "2081W7",
+    "name": "Week 7 - 2081-02-14 - 2081-02-20",
+    "periodType": "WEEKLY",
+    "startDate": "2024-05-27",
+  },
+  Object {
+    "displayName": "Week 8 - 2081-02-21 - 2081-02-27",
+    "endDate": "2024-06-09",
+    "id": "2081W8",
+    "iso": "2081W8",
+    "name": "Week 8 - 2081-02-21 - 2081-02-27",
+    "periodType": "WEEKLY",
+    "startDate": "2024-06-03",
+  },
+  Object {
+    "displayName": "Week 9 - 2081-02-28 - 2081-03-02",
+    "endDate": "2024-06-16",
+    "id": "2081W9",
+    "iso": "2081W9",
+    "name": "Week 9 - 2081-02-28 - 2081-03-02",
+    "periodType": "WEEKLY",
+    "startDate": "2024-06-10",
+  },
+  Object {
+    "displayName": "Week 10 - 2081-03-03 - 2081-03-09",
+    "endDate": "2024-06-23",
+    "id": "2081W10",
+    "iso": "2081W10",
+    "name": "Week 10 - 2081-03-03 - 2081-03-09",
+    "periodType": "WEEKLY",
+    "startDate": "2024-06-17",
+  },
+  Object {
+    "displayName": "Week 11 - 2081-03-10 - 2081-03-16",
+    "endDate": "2024-06-30",
+    "id": "2081W11",
+    "iso": "2081W11",
+    "name": "Week 11 - 2081-03-10 - 2081-03-16",
+    "periodType": "WEEKLY",
+    "startDate": "2024-06-24",
+  },
+]
+`;
+
+exports[`nepali calendar getPeriods (generateFixedPeriods) YEARLY 1`] = `
+Array [
+  Object {
+    "displayName": "2081",
+    "endDate": "2081-12-31",
+    "id": "2081",
+    "iso": "2081",
+    "name": "2081",
+    "periodType": "YEARLY",
+    "startDate": "2081-01-01",
+  },
+  Object {
+    "displayName": "2080",
+    "endDate": "2080-12-30",
+    "id": "2080",
+    "iso": "2080",
+    "name": "2080",
+    "periodType": "YEARLY",
+    "startDate": "2080-01-01",
+  },
+  Object {
+    "displayName": "2079",
+    "endDate": "2079-12-30",
+    "id": "2079",
+    "iso": "2079",
+    "name": "2079",
+    "periodType": "YEARLY",
+    "startDate": "2079-01-01",
+  },
+]
+`;
+
+exports[`nepali calendar now = 2024-03-31T10:30:00Z getCalendarDate 1`] = `
+Array [
+  Object {
+    "offset": undefined,
+    "result": "2080-12-18",
+  },
+  Object {
+    "offset": Object {
+      "days": 0,
+    },
+    "result": "2080-12-18",
+  },
+  Object {
+    "offset": Object {
+      "days": 1,
+    },
+    "result": "2080-12-19",
+  },
+  Object {
+    "offset": Object {
+      "days": -1,
+    },
+    "result": "2080-12-17",
+  },
+  Object {
+    "offset": Object {
+      "months": -1,
+    },
+    "result": "2080-11-17",
+  },
+  Object {
+    "offset": Object {
+      "months": -6,
+    },
+    "result": "2080-06-13",
+  },
+  Object {
+    "offset": Object {
+      "months": -12,
+    },
+    "result": "2079-12-17",
+  },
+  Object {
+    "offset": Object {
+      "years": -1,
+    },
+    "result": "2079-12-17",
+  },
+  Object {
+    "offset": Object {
+      "years": -2,
+    },
+    "result": "2078-12-17",
+  },
+]
+`;
+
+exports[`nepali calendar now = 2024-03-31T10:30:00Z getDefaultImportPeriod 1`] = `
+Array [
+  Object {
+    "calendar": "nepali",
+    "endTime": "2080-11-17",
+    "periodType": "DAILY",
+    "startTime": "2080-06-13",
+  },
+  Object {
+    "calendar": "nepali",
+    "endTime": "2080-11-17",
+    "periodType": "WEEKLY",
+    "startTime": "2080-06-13",
+  },
+  Object {
+    "calendar": "nepali",
+    "endTime": "2080-11-17",
+    "periodType": "MONTHLY",
+    "startTime": "2079-12-17",
+  },
+  Object {
+    "calendar": "nepali",
+    "endTime": "2079",
+    "periodType": "YEARLY",
+    "startTime": "2078",
+  },
+]
+`;
+
+exports[`nepali calendar now = 2024-06-15T10:30:00Z getCalendarDate 1`] = `
+Array [
+  Object {
+    "offset": undefined,
+    "result": "2081-03-01",
+  },
+  Object {
+    "offset": Object {
+      "days": 0,
+    },
+    "result": "2081-03-01",
+  },
+  Object {
+    "offset": Object {
+      "days": 1,
+    },
+    "result": "2081-03-02",
+  },
+  Object {
+    "offset": Object {
+      "days": -1,
+    },
+    "result": "2081-02-32",
+  },
+  Object {
+    "offset": Object {
+      "months": -1,
+    },
+    "result": "2081-02-02",
+  },
+  Object {
+    "offset": Object {
+      "months": -6,
+    },
+    "result": "2080-08-29",
+  },
+  Object {
+    "offset": Object {
+      "months": -12,
+    },
+    "result": "2080-02-32",
+  },
+  Object {
+    "offset": Object {
+      "years": -1,
+    },
+    "result": "2080-02-32",
+  },
+  Object {
+    "offset": Object {
+      "years": -2,
+    },
+    "result": "2079-03-01",
+  },
+]
+`;
+
+exports[`nepali calendar now = 2024-06-15T10:30:00Z getDefaultImportPeriod 1`] = `
+Array [
+  Object {
+    "calendar": "nepali",
+    "endTime": "2081-02-02",
+    "periodType": "DAILY",
+    "startTime": "2080-08-29",
+  },
+  Object {
+    "calendar": "nepali",
+    "endTime": "2081-02-02",
+    "periodType": "WEEKLY",
+    "startTime": "2080-08-29",
+  },
+  Object {
+    "calendar": "nepali",
+    "endTime": "2081-02-02",
+    "periodType": "MONTHLY",
+    "startTime": "2080-02-32",
+  },
+  Object {
+    "calendar": "nepali",
+    "endTime": "2080",
+    "periodType": "YEARLY",
+    "startTime": "2079",
+  },
+]
+`;
+
+exports[`nepali calendar now = 2024-09-08T10:30:00Z getCalendarDate 1`] = `
+Array [
+  Object {
+    "offset": undefined,
+    "result": "2081-05-23",
+  },
+  Object {
+    "offset": Object {
+      "days": 0,
+    },
+    "result": "2081-05-23",
+  },
+  Object {
+    "offset": Object {
+      "days": 1,
+    },
+    "result": "2081-05-24",
+  },
+  Object {
+    "offset": Object {
+      "days": -1,
+    },
+    "result": "2081-05-22",
+  },
+  Object {
+    "offset": Object {
+      "months": -1,
+    },
+    "result": "2081-04-24",
+  },
+  Object {
+    "offset": Object {
+      "months": -6,
+    },
+    "result": "2080-11-25",
+  },
+  Object {
+    "offset": Object {
+      "months": -12,
+    },
+    "result": "2080-05-22",
+  },
+  Object {
+    "offset": Object {
+      "years": -1,
+    },
+    "result": "2080-05-22",
+  },
+  Object {
+    "offset": Object {
+      "years": -2,
+    },
+    "result": "2079-05-23",
+  },
+]
+`;
+
+exports[`nepali calendar now = 2024-09-08T10:30:00Z getDefaultImportPeriod 1`] = `
+Array [
+  Object {
+    "calendar": "nepali",
+    "endTime": "2081-04-24",
+    "periodType": "DAILY",
+    "startTime": "2080-11-25",
+  },
+  Object {
+    "calendar": "nepali",
+    "endTime": "2081-04-24",
+    "periodType": "WEEKLY",
+    "startTime": "2080-11-25",
+  },
+  Object {
+    "calendar": "nepali",
+    "endTime": "2081-04-24",
+    "periodType": "MONTHLY",
+    "startTime": "2080-05-22",
+  },
+  Object {
+    "calendar": "nepali",
+    "endTime": "2080",
+    "periodType": "YEARLY",
+    "startTime": "2079",
+  },
+]
+`;
+
+exports[`nepali calendar toStandardDate (convertToIso8601) 1`] = `
+Array [
+  Array [
+    "2081-01-01",
+    "2024-04-13",
+  ],
+  Array [
+    "2081-03-32",
+    "2024-07-16",
+  ],
+  Array [
+    "2081-12-30",
+    "2025-04-12",
+  ],
+]
+`;
