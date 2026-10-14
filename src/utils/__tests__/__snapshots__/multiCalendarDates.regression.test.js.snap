@@ -3,13 +3,40 @@
 exports[`ethiopian calendar createFixedPeriodFromPeriodId (OpenAsMapButton) 1`] = `
 Array [
   Object {
-    "error": "Era aa (ISO year 2015) was not matched by any era",
+    "fixedPeriod": Object {
+      "displayName": "2016",
+      "endDate": "2016-13-05",
+      "id": "2016",
+      "iso": "2016",
+      "name": "2016",
+      "periodType": "YEARLY",
+      "startDate": "2016-01-01",
+    },
+    "periodName": "2016",
   },
   Object {
-    "error": "Era aa (ISO year 2015) was not matched by any era",
+    "fixedPeriod": Object {
+      "displayName": "Sene 2016",
+      "endDate": "2016-10-30",
+      "id": "201610",
+      "iso": "201610",
+      "name": "Sene 2016",
+      "periodType": "MONTHLY",
+      "startDate": "2016-10-01",
+    },
+    "periodName": "Sene 2016",
   },
   Object {
-    "error": "Era aa (ISO year 2016) was not matched by any era",
+    "fixedPeriod": Object {
+      "displayName": "Sene 7, 2016",
+      "endDate": "2016-10-07",
+      "id": "20161007",
+      "iso": "20161007",
+      "name": "2016-10-07",
+      "periodType": "DAILY",
+      "startDate": "2016-10-07",
+    },
+    "periodName": "2016-10-07",
   },
 ]
 `;
@@ -18,167 +45,489 @@ exports[`ethiopian calendar fromStandardDate (convertFromIso8601) 1`] = `
 Array [
   Array [
     "2024-01-01",
-    Object {
-      "error": "Era am (ISO year 2016) was not matched by any era",
-    },
+    "2016-04-22",
   ],
   Array [
     "2024-02-29",
-    Object {
-      "error": "Era am (ISO year 2016) was not matched by any era",
-    },
+    "2016-06-21",
   ],
   Array [
     "2024-06-15",
-    Object {
-      "error": "Era am (ISO year 2016) was not matched by any era",
-    },
+    "2016-10-08",
   ],
   Array [
     "2024-09-08",
-    Object {
-      "error": "Era am (ISO year 2016) was not matched by any era",
-    },
+    "2016-13-03",
   ],
   Array [
     "2024-12-31",
-    Object {
-      "error": "Era am (ISO year 2017) was not matched by any era",
-    },
+    "2017-04-22",
   ],
 ]
 `;
 
 exports[`ethiopian calendar getDateStringFromIsoDate (generateFixedPeriods) 1`] = `
 Object {
-  "loggedErrors": Array [
-    "Era am (ISO year 2016) was not matched by any era",
-    "Era am (ISO year 2016) was not matched by any era",
-    "Era am (ISO year 2016) was not matched by any era",
-    "Era am (ISO year 2016) was not matched by any era",
-  ],
+  "loggedErrors": Array [],
   "results": Array [
     Array [
       "2024",
-      "2024",
+      "2016",
     ],
     Array [
       "2024-06",
-      "2024-06",
+      "Genbot 2016",
     ],
     Array [
       "2024-06-15",
-      "2024-06-15",
+      "Sene 8, 2016",
     ],
     Array [
       "2024-09-08",
-      "2024-09-08",
+      "Pagumen 3, 2016",
     ],
   ],
 }
 `;
 
 exports[`ethiopian calendar getPeriods (generateFixedPeriods) DAILY from 2024-06-01 to 2024-06-05 1`] = `
-Object {
-  "error": "Era am (ISO year 2016) was not matched by any era",
-}
+Array [
+  Object {
+    "displayName": "Genbot 24, 2016",
+    "endDate": "2024-06-01",
+    "id": "20160924",
+    "iso": "20160924",
+    "name": "2016-09-24",
+    "periodType": "DAILY",
+    "startDate": "2024-06-01",
+  },
+  Object {
+    "displayName": "Genbot 25, 2016",
+    "endDate": "2024-06-02",
+    "id": "20160925",
+    "iso": "20160925",
+    "name": "2016-09-25",
+    "periodType": "DAILY",
+    "startDate": "2024-06-02",
+  },
+  Object {
+    "displayName": "Genbot 26, 2016",
+    "endDate": "2024-06-03",
+    "id": "20160926",
+    "iso": "20160926",
+    "name": "2016-09-26",
+    "periodType": "DAILY",
+    "startDate": "2024-06-03",
+  },
+  Object {
+    "displayName": "Genbot 27, 2016",
+    "endDate": "2024-06-04",
+    "id": "20160927",
+    "iso": "20160927",
+    "name": "2016-09-27",
+    "periodType": "DAILY",
+    "startDate": "2024-06-04",
+  },
+  Object {
+    "displayName": "Genbot 28, 2016",
+    "endDate": "2024-06-05",
+    "id": "20160928",
+    "iso": "20160928",
+    "name": "2016-09-28",
+    "periodType": "DAILY",
+    "startDate": "2024-06-05",
+  },
+]
 `;
 
 exports[`ethiopian calendar getPeriods (generateFixedPeriods) DAILY from 2024-09-04 to 2024-09-13 1`] = `
-Object {
-  "error": "Era am (ISO year 2016) was not matched by any era",
-}
+Array [
+  Object {
+    "displayName": "Nehasse 29, 2016",
+    "endDate": "2024-09-04",
+    "id": "20161229",
+    "iso": "20161229",
+    "name": "2016-12-29",
+    "periodType": "DAILY",
+    "startDate": "2024-09-04",
+  },
+  Object {
+    "displayName": "Nehasse 30, 2016",
+    "endDate": "2024-09-05",
+    "id": "20161230",
+    "iso": "20161230",
+    "name": "2016-12-30",
+    "periodType": "DAILY",
+    "startDate": "2024-09-05",
+  },
+  Object {
+    "displayName": "Pagumen 1, 2016",
+    "endDate": "2024-09-06",
+    "id": "20161301",
+    "iso": "20161301",
+    "name": "2016-13-01",
+    "periodType": "DAILY",
+    "startDate": "2024-09-06",
+  },
+  Object {
+    "displayName": "Pagumen 2, 2016",
+    "endDate": "2024-09-07",
+    "id": "20161302",
+    "iso": "20161302",
+    "name": "2016-13-02",
+    "periodType": "DAILY",
+    "startDate": "2024-09-07",
+  },
+  Object {
+    "displayName": "Pagumen 3, 2016",
+    "endDate": "2024-09-08",
+    "id": "20161303",
+    "iso": "20161303",
+    "name": "2016-13-03",
+    "periodType": "DAILY",
+    "startDate": "2024-09-08",
+  },
+  Object {
+    "displayName": "Pagumen 4, 2016",
+    "endDate": "2024-09-09",
+    "id": "20161304",
+    "iso": "20161304",
+    "name": "2016-13-04",
+    "periodType": "DAILY",
+    "startDate": "2024-09-09",
+  },
+  Object {
+    "displayName": "Pagumen 5, 2016",
+    "endDate": "2024-09-10",
+    "id": "20161305",
+    "iso": "20161305",
+    "name": "2016-13-05",
+    "periodType": "DAILY",
+    "startDate": "2024-09-10",
+  },
+  Object {
+    "displayName": "Meskerem 1, 2017",
+    "endDate": "2024-09-11",
+    "id": "20170101",
+    "iso": "20170101",
+    "name": "2017-01-01",
+    "periodType": "DAILY",
+    "startDate": "2024-09-11",
+  },
+  Object {
+    "displayName": "Meskerem 2, 2017",
+    "endDate": "2024-09-12",
+    "id": "20170102",
+    "iso": "20170102",
+    "name": "2017-01-02",
+    "periodType": "DAILY",
+    "startDate": "2024-09-12",
+  },
+  Object {
+    "displayName": "Meskerem 3, 2017",
+    "endDate": "2024-09-13",
+    "id": "20170103",
+    "iso": "20170103",
+    "name": "2017-01-03",
+    "periodType": "DAILY",
+    "startDate": "2024-09-13",
+  },
+]
 `;
 
 exports[`ethiopian calendar getPeriods (generateFixedPeriods) MONTHLY from 2023-07-01 to 2024-06-30 1`] = `
-Object {
-  "error": "Era am (ISO year 2015) was not matched by any era",
-}
+Array [
+  Object {
+    "displayName": "Sene 2015",
+    "endDate": "2023-07-07",
+    "id": "201510",
+    "iso": "201510",
+    "name": "Sene 2015",
+    "periodType": "MONTHLY",
+    "startDate": "2023-06-08",
+  },
+  Object {
+    "displayName": "Hamle 2015",
+    "endDate": "2023-08-06",
+    "id": "201511",
+    "iso": "201511",
+    "name": "Hamle 2015",
+    "periodType": "MONTHLY",
+    "startDate": "2023-07-08",
+  },
+  Object {
+    "displayName": "Nehasse 2015",
+    "endDate": "2023-09-05",
+    "id": "201512",
+    "iso": "201512",
+    "name": "Nehasse 2015",
+    "periodType": "MONTHLY",
+    "startDate": "2023-08-07",
+  },
+  Object {
+    "displayName": "Meskerem 2016",
+    "endDate": "2023-10-11",
+    "id": "201601",
+    "iso": "201601",
+    "name": "Meskerem 2016",
+    "periodType": "MONTHLY",
+    "startDate": "2023-09-12",
+  },
+  Object {
+    "displayName": "Tekemt 2016",
+    "endDate": "2023-11-10",
+    "id": "201602",
+    "iso": "201602",
+    "name": "Tekemt 2016",
+    "periodType": "MONTHLY",
+    "startDate": "2023-10-12",
+  },
+  Object {
+    "displayName": "Hedar 2016",
+    "endDate": "2023-12-10",
+    "id": "201603",
+    "iso": "201603",
+    "name": "Hedar 2016",
+    "periodType": "MONTHLY",
+    "startDate": "2023-11-11",
+  },
+  Object {
+    "displayName": "Tahsas 2016",
+    "endDate": "2024-01-09",
+    "id": "201604",
+    "iso": "201604",
+    "name": "Tahsas 2016",
+    "periodType": "MONTHLY",
+    "startDate": "2023-12-11",
+  },
+  Object {
+    "displayName": "Ter 2016",
+    "endDate": "2024-02-08",
+    "id": "201605",
+    "iso": "201605",
+    "name": "Ter 2016",
+    "periodType": "MONTHLY",
+    "startDate": "2024-01-10",
+  },
+  Object {
+    "displayName": "Yekatit 2016",
+    "endDate": "2024-03-09",
+    "id": "201606",
+    "iso": "201606",
+    "name": "Yekatit 2016",
+    "periodType": "MONTHLY",
+    "startDate": "2024-02-09",
+  },
+  Object {
+    "displayName": "Megabit 2016",
+    "endDate": "2024-04-08",
+    "id": "201607",
+    "iso": "201607",
+    "name": "Megabit 2016",
+    "periodType": "MONTHLY",
+    "startDate": "2024-03-10",
+  },
+  Object {
+    "displayName": "Miazia 2016",
+    "endDate": "2024-05-08",
+    "id": "201608",
+    "iso": "201608",
+    "name": "Miazia 2016",
+    "periodType": "MONTHLY",
+    "startDate": "2024-04-09",
+  },
+  Object {
+    "displayName": "Genbot 2016",
+    "endDate": "2024-06-07",
+    "id": "201609",
+    "iso": "201609",
+    "name": "Genbot 2016",
+    "periodType": "MONTHLY",
+    "startDate": "2024-05-09",
+  },
+  Object {
+    "displayName": "Sene 2016",
+    "endDate": "2024-07-07",
+    "id": "201610",
+    "iso": "201610",
+    "name": "Sene 2016",
+    "periodType": "MONTHLY",
+    "startDate": "2024-06-08",
+  },
+]
 `;
 
 exports[`ethiopian calendar getPeriods (generateFixedPeriods) WEEKLY from 2024-05-01 to 2024-06-30 1`] = `
-Object {
-  "error": "Era am (ISO year 2016) was not matched by any era",
-}
+Array [
+  Object {
+    "displayName": "Week 34 - 2016-08-22 - 2016-08-28",
+    "endDate": "2024-05-06",
+    "id": "2016W34",
+    "iso": "2016W34",
+    "name": "Week 34 - 2016-08-22 - 2016-08-28",
+    "periodType": "WEEKLY",
+    "startDate": "2024-04-30",
+  },
+  Object {
+    "displayName": "Week 35 - 2016-08-29 - 2016-09-05",
+    "endDate": "2024-05-13",
+    "id": "2016W35",
+    "iso": "2016W35",
+    "name": "Week 35 - 2016-08-29 - 2016-09-05",
+    "periodType": "WEEKLY",
+    "startDate": "2024-05-07",
+  },
+  Object {
+    "displayName": "Week 36 - 2016-09-06 - 2016-09-12",
+    "endDate": "2024-05-20",
+    "id": "2016W36",
+    "iso": "2016W36",
+    "name": "Week 36 - 2016-09-06 - 2016-09-12",
+    "periodType": "WEEKLY",
+    "startDate": "2024-05-14",
+  },
+  Object {
+    "displayName": "Week 37 - 2016-09-13 - 2016-09-19",
+    "endDate": "2024-05-27",
+    "id": "2016W37",
+    "iso": "2016W37",
+    "name": "Week 37 - 2016-09-13 - 2016-09-19",
+    "periodType": "WEEKLY",
+    "startDate": "2024-05-21",
+  },
+  Object {
+    "displayName": "Week 38 - 2016-09-20 - 2016-09-26",
+    "endDate": "2024-06-03",
+    "id": "2016W38",
+    "iso": "2016W38",
+    "name": "Week 38 - 2016-09-20 - 2016-09-26",
+    "periodType": "WEEKLY",
+    "startDate": "2024-05-28",
+  },
+  Object {
+    "displayName": "Week 39 - 2016-09-27 - 2016-10-03",
+    "endDate": "2024-06-10",
+    "id": "2016W39",
+    "iso": "2016W39",
+    "name": "Week 39 - 2016-09-27 - 2016-10-03",
+    "periodType": "WEEKLY",
+    "startDate": "2024-06-04",
+  },
+  Object {
+    "displayName": "Week 40 - 2016-10-04 - 2016-10-10",
+    "endDate": "2024-06-17",
+    "id": "2016W40",
+    "iso": "2016W40",
+    "name": "Week 40 - 2016-10-04 - 2016-10-10",
+    "periodType": "WEEKLY",
+    "startDate": "2024-06-11",
+  },
+  Object {
+    "displayName": "Week 41 - 2016-10-11 - 2016-10-17",
+    "endDate": "2024-06-24",
+    "id": "2016W41",
+    "iso": "2016W41",
+    "name": "Week 41 - 2016-10-11 - 2016-10-17",
+    "periodType": "WEEKLY",
+    "startDate": "2024-06-18",
+  },
+  Object {
+    "displayName": "Week 42 - 2016-10-18 - 2016-10-24",
+    "endDate": "2024-07-01",
+    "id": "2016W42",
+    "iso": "2016W42",
+    "name": "Week 42 - 2016-10-18 - 2016-10-24",
+    "periodType": "WEEKLY",
+    "startDate": "2024-06-25",
+  },
+]
 `;
 
 exports[`ethiopian calendar getPeriods (generateFixedPeriods) YEARLY 1`] = `
-Object {
-  "error": "Era aa (ISO year 2015) was not matched by any era",
-}
+Array [
+  Object {
+    "displayName": "2016",
+    "endDate": "2016-13-05",
+    "id": "2016",
+    "iso": "2016",
+    "name": "2016",
+    "periodType": "YEARLY",
+    "startDate": "2016-01-01",
+  },
+  Object {
+    "displayName": "2015",
+    "endDate": "2015-13-06",
+    "id": "2015",
+    "iso": "2015",
+    "name": "2015",
+    "periodType": "YEARLY",
+    "startDate": "2015-01-01",
+  },
+  Object {
+    "displayName": "2014",
+    "endDate": "2014-13-05",
+    "id": "2014",
+    "iso": "2014",
+    "name": "2014",
+    "periodType": "YEARLY",
+    "startDate": "2014-01-01",
+  },
+]
 `;
 
 exports[`ethiopian calendar now = 2024-03-31T10:30:00Z getCalendarDate 1`] = `
 Array [
   Object {
     "offset": undefined,
-    "result": Object {
-      "error": "Era am (ISO year 2016) was not matched by any era",
-    },
+    "result": "2016-07-22",
   },
   Object {
     "offset": Object {
       "days": 0,
     },
-    "result": Object {
-      "error": "Era am (ISO year 2016) was not matched by any era",
-    },
+    "result": "2016-07-22",
   },
   Object {
     "offset": Object {
       "days": 1,
     },
-    "result": Object {
-      "error": "Era am (ISO year 2016) was not matched by any era",
-    },
+    "result": "2016-07-23",
   },
   Object {
     "offset": Object {
       "days": -1,
     },
-    "result": Object {
-      "error": "Era am (ISO year 2016) was not matched by any era",
-    },
+    "result": "2016-07-21",
   },
   Object {
     "offset": Object {
       "months": -1,
     },
-    "result": Object {
-      "error": "Era am (ISO year 2016) was not matched by any era",
-    },
+    "result": "2016-06-22",
   },
   Object {
     "offset": Object {
       "months": -6,
     },
-    "result": Object {
-      "error": "Era am (ISO year 2016) was not matched by any era",
-    },
+    "result": "2016-01-22",
   },
   Object {
     "offset": Object {
       "months": -12,
     },
-    "result": Object {
-      "error": "Era am (ISO year 2016) was not matched by any era",
-    },
+    "result": "2015-08-22",
   },
   Object {
     "offset": Object {
       "years": -1,
     },
-    "result": Object {
-      "error": "Era am (ISO year 2016) was not matched by any era",
-    },
+    "result": "2015-07-22",
   },
   Object {
     "offset": Object {
       "years": -2,
     },
-    "result": Object {
-      "error": "Era am (ISO year 2016) was not matched by any era",
-    },
+    "result": "2014-07-22",
   },
 ]
 `;
@@ -186,16 +535,28 @@ Array [
 exports[`ethiopian calendar now = 2024-03-31T10:30:00Z getDefaultImportPeriod 1`] = `
 Array [
   Object {
-    "error": "Era am (ISO year 2016) was not matched by any era",
+    "calendar": "ethiopian",
+    "endTime": "2016-06-22",
+    "periodType": "DAILY",
+    "startTime": "2016-01-22",
   },
   Object {
-    "error": "Era am (ISO year 2016) was not matched by any era",
+    "calendar": "ethiopian",
+    "endTime": "2016-06-22",
+    "periodType": "WEEKLY",
+    "startTime": "2016-01-22",
   },
   Object {
-    "error": "Era am (ISO year 2016) was not matched by any era",
+    "calendar": "ethiopian",
+    "endTime": "2016-06-22",
+    "periodType": "MONTHLY",
+    "startTime": "2015-08-22",
   },
   Object {
-    "error": "Era am (ISO year 2016) was not matched by any era",
+    "calendar": "ethiopian",
+    "endTime": "2015",
+    "periodType": "YEARLY",
+    "startTime": "2014",
   },
 ]
 `;
@@ -204,73 +565,55 @@ exports[`ethiopian calendar now = 2024-06-15T10:30:00Z getCalendarDate 1`] = `
 Array [
   Object {
     "offset": undefined,
-    "result": Object {
-      "error": "Era am (ISO year 2016) was not matched by any era",
-    },
+    "result": "2016-10-08",
   },
   Object {
     "offset": Object {
       "days": 0,
     },
-    "result": Object {
-      "error": "Era am (ISO year 2016) was not matched by any era",
-    },
+    "result": "2016-10-08",
   },
   Object {
     "offset": Object {
       "days": 1,
     },
-    "result": Object {
-      "error": "Era am (ISO year 2016) was not matched by any era",
-    },
+    "result": "2016-10-09",
   },
   Object {
     "offset": Object {
       "days": -1,
     },
-    "result": Object {
-      "error": "Era am (ISO year 2016) was not matched by any era",
-    },
+    "result": "2016-10-07",
   },
   Object {
     "offset": Object {
       "months": -1,
     },
-    "result": Object {
-      "error": "Era am (ISO year 2016) was not matched by any era",
-    },
+    "result": "2016-09-08",
   },
   Object {
     "offset": Object {
       "months": -6,
     },
-    "result": Object {
-      "error": "Era am (ISO year 2016) was not matched by any era",
-    },
+    "result": "2016-04-08",
   },
   Object {
     "offset": Object {
       "months": -12,
     },
-    "result": Object {
-      "error": "Era am (ISO year 2016) was not matched by any era",
-    },
+    "result": "2015-11-08",
   },
   Object {
     "offset": Object {
       "years": -1,
     },
-    "result": Object {
-      "error": "Era am (ISO year 2016) was not matched by any era",
-    },
+    "result": "2015-10-08",
   },
   Object {
     "offset": Object {
       "years": -2,
     },
-    "result": Object {
-      "error": "Era am (ISO year 2016) was not matched by any era",
-    },
+    "result": "2014-10-08",
   },
 ]
 `;
@@ -278,16 +621,28 @@ Array [
 exports[`ethiopian calendar now = 2024-06-15T10:30:00Z getDefaultImportPeriod 1`] = `
 Array [
   Object {
-    "error": "Era am (ISO year 2016) was not matched by any era",
+    "calendar": "ethiopian",
+    "endTime": "2016-09-08",
+    "periodType": "DAILY",
+    "startTime": "2016-04-08",
   },
   Object {
-    "error": "Era am (ISO year 2016) was not matched by any era",
+    "calendar": "ethiopian",
+    "endTime": "2016-09-08",
+    "periodType": "WEEKLY",
+    "startTime": "2016-04-08",
   },
   Object {
-    "error": "Era am (ISO year 2016) was not matched by any era",
+    "calendar": "ethiopian",
+    "endTime": "2016-09-08",
+    "periodType": "MONTHLY",
+    "startTime": "2015-11-08",
   },
   Object {
-    "error": "Era am (ISO year 2016) was not matched by any era",
+    "calendar": "ethiopian",
+    "endTime": "2015",
+    "periodType": "YEARLY",
+    "startTime": "2014",
   },
 ]
 `;
@@ -296,73 +651,55 @@ exports[`ethiopian calendar now = 2024-09-08T10:30:00Z getCalendarDate 1`] = `
 Array [
   Object {
     "offset": undefined,
-    "result": Object {
-      "error": "Era am (ISO year 2016) was not matched by any era",
-    },
+    "result": "2016-13-03",
   },
   Object {
     "offset": Object {
       "days": 0,
     },
-    "result": Object {
-      "error": "Era am (ISO year 2016) was not matched by any era",
-    },
+    "result": "2016-13-03",
   },
   Object {
     "offset": Object {
       "days": 1,
     },
-    "result": Object {
-      "error": "Era am (ISO year 2016) was not matched by any era",
-    },
+    "result": "2016-13-04",
   },
   Object {
     "offset": Object {
       "days": -1,
     },
-    "result": Object {
-      "error": "Era am (ISO year 2016) was not matched by any era",
-    },
+    "result": "2016-13-02",
   },
   Object {
     "offset": Object {
       "months": -1,
     },
-    "result": Object {
-      "error": "Era am (ISO year 2016) was not matched by any era",
-    },
+    "result": "2016-12-03",
   },
   Object {
     "offset": Object {
       "months": -6,
     },
-    "result": Object {
-      "error": "Era am (ISO year 2016) was not matched by any era",
-    },
+    "result": "2016-07-03",
   },
   Object {
     "offset": Object {
       "months": -12,
     },
-    "result": Object {
-      "error": "Era am (ISO year 2016) was not matched by any era",
-    },
+    "result": "2016-01-03",
   },
   Object {
     "offset": Object {
       "years": -1,
     },
-    "result": Object {
-      "error": "Era am (ISO year 2016) was not matched by any era",
-    },
+    "result": "2015-13-03",
   },
   Object {
     "offset": Object {
       "years": -2,
     },
-    "result": Object {
-      "error": "Era am (ISO year 2016) was not matched by any era",
-    },
+    "result": "2014-13-03",
   },
 ]
 `;
@@ -370,16 +707,28 @@ Array [
 exports[`ethiopian calendar now = 2024-09-08T10:30:00Z getDefaultImportPeriod 1`] = `
 Array [
   Object {
-    "error": "Era am (ISO year 2016) was not matched by any era",
+    "calendar": "ethiopian",
+    "endTime": "2016-12-03",
+    "periodType": "DAILY",
+    "startTime": "2016-07-03",
   },
   Object {
-    "error": "Era am (ISO year 2016) was not matched by any era",
+    "calendar": "ethiopian",
+    "endTime": "2016-12-03",
+    "periodType": "WEEKLY",
+    "startTime": "2016-07-03",
   },
   Object {
-    "error": "Era am (ISO year 2016) was not matched by any era",
+    "calendar": "ethiopian",
+    "endTime": "2016-12-03",
+    "periodType": "MONTHLY",
+    "startTime": "2016-01-03",
   },
   Object {
-    "error": "Era am (ISO year 2016) was not matched by any era",
+    "calendar": "ethiopian",
+    "endTime": "2015",
+    "periodType": "YEARLY",
+    "startTime": "2014",
   },
 ]
 `;
@@ -388,21 +737,15 @@ exports[`ethiopian calendar toStandardDate (convertToIso8601) 1`] = `
 Array [
   Array [
     "2016-01-01",
-    Object {
-      "error": "Era am (ISO year 2015) was not matched by any era",
-    },
+    "2023-09-12",
   ],
   Array [
     "2016-13-05",
-    Object {
-      "error": "Era am (ISO year 2016) was not matched by any era",
-    },
+    "2024-09-10",
   ],
   Array [
     "2017-04-30",
-    Object {
-      "error": "Era am (ISO year 2016) was not matched by any era",
-    },
+    "2025-01-08",
   ],
 ]
 `;
