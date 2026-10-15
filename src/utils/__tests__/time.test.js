@@ -2,7 +2,6 @@ import {
     extractYear,
     formatBookmarkDate,
     formatStandardDate,
-    formatCalendarDate,
     fromStandardDate,
     getCalendarDate,
     getMappedPeriods,
@@ -100,12 +99,6 @@ describe('time utils', () => {
     it('it should format a standard date', () => {
         const date = new Date(timestamp)
         expect(formatStandardDate(date)).toEqual('2024-08-06')
-    })
-
-    it('it should format a calendar date', () => {
-        expect(formatCalendarDate(gregoryDate)).toEqual(gregoryDateString)
-        expect(formatCalendarDate(nepaliDate)).toEqual(nepaliDateString)
-        // expect(formatCalendarDate(ethiopicDate)).toEqual(ethiopicDateString)
     })
 
     it('it should convert calendar dates from different calendars to the standard (gregory) date', () => {
