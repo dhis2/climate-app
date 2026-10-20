@@ -2,7 +2,6 @@ import {
     extractYear,
     formatBookmarkDate,
     formatStandardDate,
-    formatCalendarDate,
     fromStandardDate,
     getCalendarDate,
     getMappedPeriods,
@@ -102,17 +101,11 @@ describe('time utils', () => {
         expect(formatStandardDate(date)).toEqual('2024-08-06')
     })
 
-    it('it should format a calendar date', () => {
-        expect(formatCalendarDate(gregoryDate)).toEqual(gregoryDateString)
-        expect(formatCalendarDate(nepaliDate)).toEqual(nepaliDateString)
-        // expect(formatCalendarDate(ethiopicDate)).toEqual(ethiopicDateString)
-    })
-
     it('it should convert calendar dates from different calendars to the standard (gregory) date', () => {
         // Define inputs and expected output locally — do not call other helpers
         const gregoryCalendarDate = '2024-08-06'
         const nepaliCalendarDate = '2081-04-22'
-        // const ethiopicCalendarDate = '2016-11-30'
+        const ethiopicCalendarDate = '2016-11-30'
         const expectedStandardDate = '2024-08-06'
 
         expect(toStandardDate(gregoryCalendarDate, 'gregory')).toEqual(
@@ -121,9 +114,9 @@ describe('time utils', () => {
         expect(toStandardDate(nepaliCalendarDate, 'nepali')).toEqual(
             expectedStandardDate
         )
-        // expect(toStandardDate(ethiopicCalendarDate, 'ethiopic')).toEqual(
-        //     expectedStandardDate
-        // )
+        expect(toStandardDate(ethiopicCalendarDate, 'ethiopic')).toEqual(
+            expectedStandardDate
+        )
     })
 
     it('it should get the gregory calendar date', () => {
@@ -146,7 +139,7 @@ describe('time utils', () => {
         )
     })
 
-    it.skip('it should get the ethiopic calendar date', () => {
+    it('it should get the ethiopic calendar date', () => {
         expect(getCalendarDate(ethiopicCalendar)).toEqual(
             fromStandardDate(today, ethiopicCalendar)
         )
@@ -169,13 +162,13 @@ describe('time utils', () => {
     it('it should convert a date string to a date object', () => {
         expect(toDateObject(gregoryDateString)).toEqual(gregoryDate)
         expect(toDateObject(nepaliDateString)).toEqual(nepaliDate)
-        // expect(toDateObject(ethiopicDateString)).toEqual(ethiopicDate)
+        expect(toDateObject(ethiopicDateString)).toEqual(ethiopicDate)
     })
 
     it('it should extract the year from a date string', () => {
         expect(extractYear(gregoryDateString)).toEqual(2024)
         expect(extractYear(nepaliDateString)).toEqual(2081)
-        // expect(extractYear(ethiopicDateString)).toEqual(2016)
+        expect(extractYear(ethiopicDateString)).toEqual(2016)
     })
 
     it('it should get the standard period from a calendar period', () => {
@@ -193,12 +186,12 @@ describe('time utils', () => {
             periodType: DAILY,
         })
 
-        // expect(getStandardPeriod(ethiopicPeriod)).toEqual({
-        //     startTime: toStandardDate(ethiopicStartDate, ethiopicCalendar),
-        //     endTime: toStandardDate(ethiopicEndDate, ethiopicCalendar),
-        //     calendar: ethiopicCalendar,
-        //     periodType: DAILY,
-        // })
+        expect(getStandardPeriod(ethiopicPeriod)).toEqual({
+            startTime: toStandardDate(ethiopicStartDate, ethiopicCalendar),
+            endTime: toStandardDate(ethiopicEndDate, ethiopicCalendar),
+            calendar: ethiopicCalendar,
+            periodType: DAILY,
+        })
     })
 
     it('it should get the previous month subtracting lag time', () => {
@@ -241,17 +234,17 @@ describe('time utils', () => {
         expect(mappedPeriods.get(gregoryEndDate)).toEqual('20810416')
     })
 
-    // it('it should create mapped ethiopic periods', () => {
-    //     const mappedPeriods = getMappedPeriods(
-    //         getPeriods({
-    //             ...gregoryPeriod,
-    //             calendar: ethiopicCalendar,
-    //         })
-    //     )
+    it('it should create mapped ethiopic periods', () => {
+        const mappedPeriods = getMappedPeriods(
+            getPeriods({
+                ...gregoryPeriod,
+                calendar: ethiopicCalendar,
+            })
+        )
 
-    //     expect(mappedPeriods.get(gregoryStartDate)).toEqual('20151125')
-    //     expect(mappedPeriods.get(gregoryEndDate)).toEqual('20161124')
-    // })
+        expect(mappedPeriods.get(gregoryStartDate)).toEqual('20151125')
+        expect(mappedPeriods.get(gregoryEndDate)).toEqual('20161124')
+    })
 
     it('it should validate a period object', () => {
         expect(isValidPeriod(gregoryPeriod)).toEqual(true)
@@ -309,9 +302,9 @@ describe('time utils', () => {
         expect(getDateStringFromIsoDate({ date: fallback })).toEqual(fallback)
     })
 
-    it.skip('it should format an Ethiopic full date', () => {
+    it('it should format an Ethiopic full date', () => {
         const date = '2016-11-30'
-        const expected = 'Hedar 21, 2009 ERA0'
+        const expected = 'Hedar 21, 2009'
         expect(
             getDateStringFromIsoDate({ date, calendar: 'ethiopic' })
         ).toEqual(expected)
@@ -325,7 +318,7 @@ describe('time utils', () => {
         ).toEqual(expected)
     })
 
-    it.skip('it should format an Ethiopic year-only', () => {
+    it('it should format an Ethiopic year-only', () => {
         const date = '2016'
         const expected = '2008'
         expect(
@@ -341,7 +334,7 @@ describe('time utils', () => {
         )
     })
 
-    it.skip('it should format an Ethiopic year-month', () => {
+    it('it should format an Ethiopic year-month', () => {
         const date = '2016-11'
         const expected = 'Tekemt 2009'
         expect(

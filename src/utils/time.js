@@ -1,7 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
 import {
+    addToCalendarDate,
     convertFromIso8601,
     convertToIso8601,
+    formatCalendarDate,
     generateFixedPeriods,
     getNowInCalendar,
 } from '@dhis2/multi-calendar-dates'
@@ -89,28 +91,22 @@ export const formatStandardDate = (date) => {
 }
 
 /**
- * Converts a calendar date object to a date string
- * @param {Object} date Calendar date object
- * @returns {String} Date string in the format YYYY-MM-DD
- */
-export const formatCalendarDate = (date) => {
-    const year = date.eraYear ?? date.year
-    const month = padWithZeroes(date.month)
-    const day = padWithZeroes(date.day)
-
-    return `${year}-${month}-${day}` // YYYY-MM-DD
-}
-
-/**
  * Returns calendar date by adding a period to the current date
  * @param {String} calendar Calendar used
- * @param {Object} period Period object
+ * @param {Object} period Period object with years, months and/or days
  * @returns {String} Date string in the format YYYY-MM-DD
  */
-export const getCalendarDate = (calendar, period = { days: 0 }) => {
-    const now = getNowInCalendar(calendar).add(period)
-    return formatCalendarDate(now)
-}
+export const getCalendarDate = (
+    calendar,
+    { years = 0, months = 0, days = 0 } = {}
+) =>
+    formatCalendarDate(
+        addToCalendarDate(
+            getNowInCalendar(calendar),
+            { years, months, days },
+            calendar
+        )
+    )
 
 /**
  * Returns the current year
@@ -309,14 +305,8 @@ export const extractYear = (dateString) =>
  * @param {String} calendar Calendar used
  * @returns {String} Standard date string
  */
-export const toStandardDate = (dateString, calendar) => {
-    const date = convertToIso8601(toDateObject(dateString), calendar)
-    const year = date.eraYear ?? date.year
-    const month = padWithZeroes(date.month)
-    const day = padWithZeroes(date.day)
-
-    return `${year}-${month}-${day}` // YYYY-MM-DD
-}
+export const toStandardDate = (dateString, calendar) =>
+    formatCalendarDate(convertToIso8601(toDateObject(dateString), calendar))
 
 /**
  * Translates a standard date to a calendar date string
@@ -324,14 +314,8 @@ export const toStandardDate = (dateString, calendar) => {
  * @param {String} calendar Calendar used
  * @returns {String} Calendar date string
  */
-export const fromStandardDate = (dateString, calendar) => {
-    const date = convertFromIso8601(toDateObject(dateString), calendar)
-    const year = date.eraYear ?? date.year
-    const month = padWithZeroes(date.month)
-    const day = padWithZeroes(date.day)
-
-    return `${year}-${month}-${day}`
-}
+export const fromStandardDate = (dateString, calendar) =>
+    formatCalendarDate(convertFromIso8601(toDateObject(dateString), calendar))
 
 /**
  * Returns a standard period object from a calendar period object
