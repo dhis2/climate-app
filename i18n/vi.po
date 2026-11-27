@@ -1,16 +1,17 @@
 # Translators:
 # Viktor Varland <viktor@dhis2.org>, 2026
 # Mai Nguyen <thanhmai.jica@gmail.com>, 2026
-# Em Le <em.hispvietnam@gmail.com>, 2026
-# Philip Larsen Donnelly, 2026
 # Thuy Nguyen <thuynguyen@hispvietnam.org>, 2026
+# Andres Miguel Rubio, 2026
+# Philip Larsen Donnelly, 2026
+# Em Le <em.hispvietnam@gmail.com>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-04-28T11:05:26.356Z\n"
+"POT-Creation-Date: 2026-06-24T09:50:06.895Z\n"
 "PO-Revision-Date: 2025-02-05 13:11+0000\n"
-"Last-Translator: Thuy Nguyen <thuynguyen@hispvietnam.org>, 2026\n"
+"Last-Translator: Em Le <em.hispvietnam@gmail.com>, 2026\n"
 "Language-Team: Vietnamese (https://app.transifex.com/hisp-uio/teams/100509/vi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -125,8 +126,8 @@ msgstr "Trang chủ"
 msgid "Explore data"
 msgstr "Khám phá dữ liệu"
 
-msgid "Import data"
-msgstr "Nhập dữ liệu"
+msgid "Imports"
+msgstr ""
 
 msgid "Setup guide"
 msgstr "Hướng dẫn cài đặt"
@@ -660,45 +661,119 @@ msgstr "Cần trợ giúp thiết lập các phần tử dữ liệu để nhậ
 msgid "setup guide"
 msgstr "hướng dẫn thiết lập"
 
-msgid "Loading org units"
-msgstr "Đang tải các đơn vị tổ chức"
+msgid "Start and end date are not within the valid range."
+msgstr "Ngày bắt đầu và ngày kết thúc không nằm trong phạm vi hợp lệ."
 
-msgid "Error loading org units: {{message}}"
-msgstr "Lỗi khi tải các đơn vị tổ chức: {{message}}"
+msgid "Start date is not within the valid range."
+msgstr "Ngày bắt đầu không nằm trong phạm vi hợp lệ."
 
-msgid "No org unit geometries found"
-msgstr "Không tìm thấy ranh giới địa lý của đơn vị tổ chức nào"
+msgid "End date is not within the valid range."
+msgstr "Ngày kết thúc không nằm trong phạm vi hợp lệ."
+
+msgid "Start date must be on or before the end date."
+msgstr ""
+
+msgid "Valid range: {{startDate}} – {{endDate}}"
+msgstr ""
+
+msgid "Valid range"
+msgstr "Phạm vi hợp lệ"
+
+msgid "Delete \"{{name}}\"?"
+msgstr ""
+
+msgid "Created by {{name}} on {{date}}."
+msgstr ""
 
 msgid ""
-"Extracting data for {{periodCount}} {{periodType}} periods and "
-"{{orgUnitsCount}} org units ({{valueCount}} values)"
+"Deleting will remove the saved import and its update history. Imported data "
+"values in DHIS2 will not be affected."
 msgstr ""
-"Đang trích xuất dữ liệu cho {{periodCount}} khoảng thời gian {{periodType}} "
-"và {{orgUnitsCount}} đơn vị tổ chức ({{valueCount}} giá trị)"
 
-msgid "Extracting data for {{orgUnitsCount}} org units"
-msgstr "Đang trích xuất dữ liệu cho {{orgUnitsCount}} đơn vị tổ chức"
+msgid "Cancel"
+msgstr "Hủy"
+
+msgid "Delete"
+msgstr "Xóa"
 
 msgid "Dataset provider not recognized"
 msgstr "Không nhận diện được nhà cung cấp tập dữ liệu"
 
-msgid "Importing data to DHIS2"
-msgstr "Đang nhập dữ liệu vào DHIS2"
+msgid ""
+"Importing data for {{periodCount}} {{periodType}} periods and "
+"{{orgUnitsCount}} org units ({{valueCount}} values)"
+msgstr ""
+
+msgid "Importing data for {{orgUnitsCount}} org units"
+msgstr ""
+
+msgid ""
+"An org unit in your selection has boundaries that are too detailed to "
+"process."
+msgstr ""
 
 msgid "Import failed"
 msgstr "Nhập thất bại"
 
-msgid "One or more conflicts encountered"
-msgstr "Đã gặp một hoặc nhiều xung đột"
+msgid ""
+"Extracting data from Google Earth Engine (batch {{current}} of {{total}})"
+msgstr ""
+
+msgid "Extracting data from Google Earth Engine"
+msgstr ""
+
+msgid "No data for the following org units: {{orgUnits}}"
+msgstr ""
+
+msgid "Importing data to DHIS2"
+msgstr "Đang nhập dữ liệu vào DHIS2"
+
+msgid "Unknown error"
+msgstr ""
+
+msgid "Importing climate data"
+msgstr ""
+
+msgid "Saved as \"{{name}}\""
+msgstr ""
+
+msgid "View in Imports →"
+msgstr ""
+
+msgid "Close"
+msgstr "Đóng"
+
+msgid "Importing..."
+msgstr ""
 
 msgid "Import weather and climate data"
 msgstr "Nhập dữ liệu thời tiết và khí hậu"
 
-msgid "Choose data source"
-msgstr "Chọn nguồn dữ liệu"
+msgid "Data source"
+msgstr "Nguồn dữ liệu"
 
 msgid "Choose destination data element"
 msgstr "Chọn phần tử dữ liệu đích"
+
+msgid "Save this import?"
+msgstr ""
+
+msgid "One-time import"
+msgstr ""
+
+msgid "Run this import once. Your selections are not saved."
+msgstr ""
+
+msgid "Save this import"
+msgstr ""
+
+msgid ""
+"Saved imports can be re-run by any user with data import access. Each run "
+"fetches new data since the last import."
+msgstr ""
+
+msgid "Import name"
+msgstr ""
 
 msgid "Review and import"
 msgstr "Xem lại và nhập"
@@ -713,8 +788,11 @@ msgstr ""
 "chức hơn hoặc khoảng thời gian ngắn hơn. Bạn có thể thực hiện các lần nhập "
 "bổ sung một cách riêng biệt."
 
-msgid "Start import"
-msgstr "Bắt đầu nhập"
+msgid "Save & import"
+msgstr ""
+
+msgid "Import once"
+msgstr ""
 
 msgid "For {{periodId}} ({{actualStartTime}} to {{actualEndTime}})"
 msgstr "Cho {{periodId}} ({{actualStartTime}} đến {{actualEndTime}})"
@@ -749,6 +827,9 @@ msgid "{{count}} data values will be imported"
 msgid_plural "{{count}} data values will be imported"
 msgstr[0] "{{count}} dữ liệu sẽ được tích hợp"
 
+msgid "Value '{{value}}' is not numeric"
+msgstr ""
+
 msgid "Data is imported"
 msgstr "Dữ liệu đã được nhập"
 
@@ -764,27 +845,42 @@ msgstr "Đã bỏ qua (đã tồn tại): {{ignored}}"
 msgid "Missing: {{missing}}"
 msgstr "Bị thiếu: {{missing}}"
 
-msgid "No data for the following org units"
-msgstr "Không có dữ liệu cho các đơn vị tổ chức sau"
+msgid ""
+"No data between {{startTime}} and {{endTime}} for the following org units: "
+"{{orgUnits}}"
+msgstr ""
+
+msgid "One or more conflicts encountered"
+msgstr "Đã gặp một hoặc nhiều xung đột"
+
+msgid "Import weather and climate data into DHIS2."
+msgstr ""
+
+msgid "New import"
+msgstr ""
+
+msgid "Import data once, or save it to re-run later."
+msgstr ""
+
+msgid "Import data"
+msgstr "Nhập dữ liệu"
+
+msgid "Saved imports"
+msgstr ""
+
+msgid "You haven't saved any imports yet."
+msgstr ""
 
 msgid ""
-"ERA5-Land has limited data for coastal areas. Values for other org units "
-"will be imported."
+"When you create a new import, choose \"Save this import\" to re-run it with "
+"one click as new climate data becomes available."
 msgstr ""
-"ERA5-Land có dữ liệu hạn chế cho các khu vực ven biển. Các giá trị cho các "
-"đơn vị tổ chức khác sẽ được nhập."
+
+msgid "No org unit geometries found"
+msgstr "Không tìm thấy ranh giới địa lý của đơn vị tổ chức nào"
 
 msgid "Select organisation units"
 msgstr "Chọn Đơn Vị"
-
-msgid "Start and end date are not within the valid range."
-msgstr "Ngày bắt đầu và ngày kết thúc không nằm trong phạm vi hợp lệ."
-
-msgid "Start date is not within the valid range."
-msgstr "Ngày bắt đầu không nằm trong phạm vi hợp lệ."
-
-msgid "End date is not within the valid range."
-msgstr "Ngày kết thúc không nằm trong phạm vi hợp lệ."
 
 msgid ""
 "{{periodTypeName}} data for full calendar {{periodTypeNoun}}s inclusive of "
@@ -819,6 +915,9 @@ msgstr ""
 "Dữ liệu giữa ngày bắt đầu và ngày kết thúc sẽ được nhập dưới dạng các giá "
 "trị hàng ngày."
 
+msgid "Import date range"
+msgstr ""
+
 msgid ""
 "The data will be assigned a yearly period type that matches the year it was "
 "collected: {{datasetPeriod}}"
@@ -826,14 +925,83 @@ msgstr ""
 "Dữ liệu sẽ được gán cho loại khoảng thời gian hàng năm tương ứng với năm nó "
 "được thu thập: {{datasetPeriod}}"
 
-msgid "Valid range: {{startDate}} - {{endDate}}"
-msgstr "Phạm vi hợp lệ: {{startDate}} - {{endDate}}"
-
-msgid "Valid range"
-msgstr "Phạm vi hợp lệ"
+msgid "Period type: {{periodType}}"
+msgstr ""
 
 msgid "Period type"
 msgstr "Kiểu thời điểm"
+
+msgid "{{count}} org units"
+msgid_plural "{{count}} org units"
+msgstr[0] "{{count}} đơn vị"
+
+msgid "Data imported through {{date}} · Last run {{relative}}"
+msgstr ""
+
+msgid "Last run {{relative}}"
+msgstr ""
+
+msgid "Never imported"
+msgstr ""
+
+msgid "{{date}} by {{user}}"
+msgstr ""
+
+msgid "Rename"
+msgstr "Đổi tên"
+
+msgid "Data source is not available"
+msgstr ""
+
+msgid "Import…"
+msgstr ""
+
+msgid "More actions"
+msgstr "Thêm hành động"
+
+msgid "Since last import ({{range}})"
+msgstr ""
+
+msgid "Import \"{{name}}\""
+msgstr ""
+
+msgid "DHIS2 data element"
+msgstr ""
+
+msgid "For {{count}} organisation units"
+msgid_plural "For {{count}} organisation units"
+msgstr[0] ""
+
+msgid "Time zone"
+msgstr "Múi giờ"
+
+msgid "For {{periodType}} date range"
+msgstr ""
+
+msgid "Done"
+msgstr "Hoàn thành"
+
+msgid "Use default range"
+msgstr ""
+
+msgid "Change"
+msgstr "Thay đổi"
+
+msgid "Failed to load org unit geometries"
+msgstr ""
+
+msgid ""
+"None of the selected organisation units have boundaries stored in DHIS2. "
+"Update the import configuration to include organisation units with geometry."
+msgstr ""
+
+msgid ""
+"Range exceeds the {{max}}-value limit. Split into multiple runs by importing"
+" a shorter date range from the form."
+msgstr ""
+
+msgid "Start import"
+msgstr "Bắt đầu nhập"
 
 msgid "Start year"
 msgstr "Năm bắt đầu"
@@ -939,9 +1107,6 @@ msgstr ""
 msgid "Example configuration:"
 msgstr ""
 
-msgid "Close"
-msgstr "Đóng"
-
 msgid "Calculate from data"
 msgstr "Tính toán từ dữ liệu"
 
@@ -997,9 +1162,6 @@ msgstr ""
 msgid "Description"
 msgstr "Mô tả"
 
-msgid "Data source"
-msgstr "Nguồn dữ liệu"
-
 msgid "Domain type"
 msgstr "Miền Dữ Liệu"
 
@@ -1033,12 +1195,9 @@ msgstr ""
 
 msgid ""
 "You should now be able to import data with this app. Please reach out to us "
-"on climate-app@dhis2.org if you have any questions or need help with the "
+"on climate-data@dhis2.org if you have any questions or need help with the "
 "setup."
 msgstr ""
-"Bây giờ bạn đã có thể nhập dữ liệu bằng ứng dụng này. Vui lòng liên hệ với "
-"chúng tôi tại climate-app@dhis2.org nếu bạn có bất kỳ câu hỏi nào hoặc cần "
-"trợ giúp thiết lập."
 
 msgid "4. Assign to a DHIS2 data element group"
 msgstr "4. Gán vào một nhóm phần tử dữ liệu DHIS2"
@@ -1190,9 +1349,6 @@ msgstr ""
 "Nếu hai đơn vị tổ chức ở gần nhau (trong cùng độ phân giải), chúng sẽ có "
 "cùng giá trị dữ liệu."
 
-msgid "Time zone"
-msgstr "Múi giờ"
-
 msgid "Data resolution is approximately {{resolution}}."
 msgstr "Độ phân giải dữ liệu xấp xỉ {{resolution}}."
 
@@ -1241,8 +1397,8 @@ msgstr "Nhiệt độ không khí tối đa tính bằng °C ở độ cao 2m so
 msgid "Max"
 msgstr "Lớn nhất"
 
-msgid "Min temperature (ERA5-Land)"
-msgstr "Nhiệt độ tối thiểu (ERA5-Land)"
+msgid "Min air temperature (ERA5-Land)"
+msgstr ""
 
 msgid "Min air temperature"
 msgstr "Nhiệt độ không khí tối thiểu"
@@ -1472,6 +1628,29 @@ msgstr "cấp độ {{allDynamicOuNames}}"
 
 msgid "{{allDynamicOuNames}} groups"
 msgstr "nhóm {{allDynamicOuNames}}"
+
+msgid "just now"
+msgstr ""
+
+msgid "{{count}} minutes ago"
+msgid_plural "{{count}} minutes ago"
+msgstr[0] ""
+
+msgid "{{count}} hours ago"
+msgid_plural "{{count}} hours ago"
+msgstr[0] ""
+
+msgid "{{count}} days ago"
+msgid_plural "{{count}} days ago"
+msgstr[0] ""
+
+msgid "{{count}} months ago"
+msgid_plural "{{count}} months ago"
+msgstr[0] ""
+
+msgid "{{count}} years ago"
+msgid_plural "{{count}} years ago"
+msgstr[0] ""
 
 msgid "day"
 msgstr "Ngày"

@@ -1,10 +1,11 @@
 # Translators:
+# Andres Miguel Rubio, 2026
 # Jiří Podhorecký <jirka.p@volny.cz>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2026-04-28T11:05:26.356Z\n"
+"POT-Creation-Date: 2026-06-24T09:50:06.895Z\n"
 "PO-Revision-Date: 2025-02-05 13:11+0000\n"
 "Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2026\n"
 "Language-Team: Czech (https://app.transifex.com/hisp-uio/teams/100509/cs/)\n"
@@ -118,8 +119,8 @@ msgstr "Domovská strana"
 msgid "Explore data"
 msgstr "Prozkoumat data"
 
-msgid "Import data"
-msgstr "Import dat"
+msgid "Imports"
+msgstr ""
 
 msgid "Setup guide"
 msgstr "Průvodce nastavením"
@@ -649,45 +650,119 @@ msgstr ""
 msgid "setup guide"
 msgstr "průvodce nastavením"
 
-msgid "Loading org units"
-msgstr "Načítání organizačních jednotek"
+msgid "Start and end date are not within the valid range."
+msgstr "Počáteční a koncové datum nejsou v platném rozsahu."
 
-msgid "Error loading org units: {{message}}"
-msgstr "Chyba při načítání org jednotek: {{message}}"
+msgid "Start date is not within the valid range."
+msgstr "Počáteční datum není v platném rozsahu."
 
-msgid "No org unit geometries found"
-msgstr "Nebyly nalezeny žádné geometrie org jednotek"
+msgid "End date is not within the valid range."
+msgstr "Datum ukončení není v platném rozsahu."
+
+msgid "Start date must be on or before the end date."
+msgstr ""
+
+msgid "Valid range: {{startDate}} – {{endDate}}"
+msgstr ""
+
+msgid "Valid range"
+msgstr "Platný rozsah"
+
+msgid "Delete \"{{name}}\"?"
+msgstr ""
+
+msgid "Created by {{name}} on {{date}}."
+msgstr ""
 
 msgid ""
-"Extracting data for {{periodCount}} {{periodType}} periods and "
-"{{orgUnitsCount}} org units ({{valueCount}} values)"
+"Deleting will remove the saved import and its update history. Imported data "
+"values in DHIS2 will not be affected."
 msgstr ""
-"Extrakce dat pro {{periodCount}} {{periodType}} období a {{orgUnitsCount}} "
-"organizační jednotky ({{valueCount}} hodnoty)"
 
-msgid "Extracting data for {{orgUnitsCount}} org units"
-msgstr "Extrakce dat pro jednotky {{orgUnitsCount}} org"
+msgid "Cancel"
+msgstr "Zrušit"
+
+msgid "Delete"
+msgstr "Vymazat"
 
 msgid "Dataset provider not recognized"
 msgstr "Poskytovatel datové sady nebyl rozpoznán"
 
-msgid "Importing data to DHIS2"
-msgstr "Import dat do DHIS2"
+msgid ""
+"Importing data for {{periodCount}} {{periodType}} periods and "
+"{{orgUnitsCount}} org units ({{valueCount}} values)"
+msgstr ""
+
+msgid "Importing data for {{orgUnitsCount}} org units"
+msgstr ""
+
+msgid ""
+"An org unit in your selection has boundaries that are too detailed to "
+"process."
+msgstr ""
 
 msgid "Import failed"
 msgstr "Import se nezdařil"
 
-msgid "One or more conflicts encountered"
-msgstr "Jeden nebo více konfliktů"
+msgid ""
+"Extracting data from Google Earth Engine (batch {{current}} of {{total}})"
+msgstr ""
+
+msgid "Extracting data from Google Earth Engine"
+msgstr ""
+
+msgid "No data for the following org units: {{orgUnits}}"
+msgstr ""
+
+msgid "Importing data to DHIS2"
+msgstr "Import dat do DHIS2"
+
+msgid "Unknown error"
+msgstr "Neznámá chyba"
+
+msgid "Importing climate data"
+msgstr ""
+
+msgid "Saved as \"{{name}}\""
+msgstr ""
+
+msgid "View in Imports →"
+msgstr ""
+
+msgid "Close"
+msgstr "Zavřít"
+
+msgid "Importing..."
+msgstr ""
 
 msgid "Import weather and climate data"
 msgstr "Import dat o počasí a klimatu"
 
-msgid "Choose data source"
-msgstr "Výběr zdroje dat"
+msgid "Data source"
+msgstr "Zdroj dat"
 
 msgid "Choose destination data element"
 msgstr "Výběr cílového datového prvku"
+
+msgid "Save this import?"
+msgstr ""
+
+msgid "One-time import"
+msgstr ""
+
+msgid "Run this import once. Your selections are not saved."
+msgstr ""
+
+msgid "Save this import"
+msgstr ""
+
+msgid ""
+"Saved imports can be re-run by any user with data import access. Each run "
+"fetches new data since the last import."
+msgstr ""
+
+msgid "Import name"
+msgstr ""
 
 msgid "Review and import"
 msgstr "Přezkoumání a import"
@@ -698,8 +773,11 @@ msgid ""
 "or a shorter time period. Additional imports can be performed separately."
 msgstr ""
 
-msgid "Start import"
-msgstr "Zahájit import"
+msgid "Save & import"
+msgstr ""
+
+msgid "Import once"
+msgstr ""
 
 msgid "For {{periodId}} ({{actualStartTime}} to {{actualEndTime}})"
 msgstr ""
@@ -738,6 +816,9 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
+msgid "Value '{{value}}' is not numeric"
+msgstr ""
+
 msgid "Data is imported"
 msgstr "Data jsou importována"
 
@@ -753,27 +834,42 @@ msgstr ""
 msgid "Missing: {{missing}}"
 msgstr "Chybí: {{missing}}"
 
-msgid "No data for the following org units"
-msgstr "Žádná data pro následující organizační jednotky"
+msgid ""
+"No data between {{startTime}} and {{endTime}} for the following org units: "
+"{{orgUnits}}"
+msgstr ""
+
+msgid "One or more conflicts encountered"
+msgstr "Jeden nebo více konfliktů"
+
+msgid "Import weather and climate data into DHIS2."
+msgstr ""
+
+msgid "New import"
+msgstr ""
+
+msgid "Import data once, or save it to re-run later."
+msgstr ""
+
+msgid "Import data"
+msgstr "Import dat"
+
+msgid "Saved imports"
+msgstr ""
+
+msgid "You haven't saved any imports yet."
+msgstr ""
 
 msgid ""
-"ERA5-Land has limited data for coastal areas. Values for other org units "
-"will be imported."
+"When you create a new import, choose \"Save this import\" to re-run it with "
+"one click as new climate data becomes available."
 msgstr ""
-"ERA5-Land má omezená data pro pobřežní oblasti. Hodnoty pro ostatní org "
-"jednotky budou importovány."
+
+msgid "No org unit geometries found"
+msgstr "Nebyly nalezeny žádné geometrie org jednotek"
 
 msgid "Select organisation units"
 msgstr "Vybrat organizační jednotky"
-
-msgid "Start and end date are not within the valid range."
-msgstr "Počáteční a koncové datum nejsou v platném rozsahu."
-
-msgid "Start date is not within the valid range."
-msgstr "Počáteční datum není v platném rozsahu."
-
-msgid "End date is not within the valid range."
-msgstr "Datum ukončení není v platném rozsahu."
 
 msgid ""
 "{{periodTypeName}} data for full calendar {{periodTypeNoun}}s inclusive of "
@@ -805,6 +901,9 @@ msgid "Data between start and end date will be imported as daily values."
 msgstr ""
 "Data mezi počátečním a koncovým datem budou importována jako denní hodnoty."
 
+msgid "Import date range"
+msgstr ""
+
 msgid ""
 "The data will be assigned a yearly period type that matches the year it was "
 "collected: {{datasetPeriod}}"
@@ -812,14 +911,89 @@ msgstr ""
 "Datům bude přiřazen typ ročního období, který odpovídá roku, kdy byla "
 "shromážděna: {{datasetPeriod}}"
 
-msgid "Valid range: {{startDate}} - {{endDate}}"
-msgstr "Platný rozsah: {{startDate}} - {{endDate}}"
-
-msgid "Valid range"
-msgstr "Platný rozsah"
+msgid "Period type: {{periodType}}"
+msgstr ""
 
 msgid "Period type"
 msgstr "Typ období"
+
+msgid "{{count}} org units"
+msgid_plural "{{count}} org units"
+msgstr[0] "{{count}} organizační jednotka"
+msgstr[1] "{{count}} organizační jednotky"
+msgstr[2] "{{count}} organizačních jednotek"
+msgstr[3] "{{count}} organizačních jednotek"
+
+msgid "Data imported through {{date}} · Last run {{relative}}"
+msgstr ""
+
+msgid "Last run {{relative}}"
+msgstr ""
+
+msgid "Never imported"
+msgstr ""
+
+msgid "{{date}} by {{user}}"
+msgstr ""
+
+msgid "Rename"
+msgstr "Přejmenovat"
+
+msgid "Data source is not available"
+msgstr ""
+
+msgid "Import…"
+msgstr ""
+
+msgid "More actions"
+msgstr "Více akcí"
+
+msgid "Since last import ({{range}})"
+msgstr ""
+
+msgid "Import \"{{name}}\""
+msgstr ""
+
+msgid "DHIS2 data element"
+msgstr ""
+
+msgid "For {{count}} organisation units"
+msgid_plural "For {{count}} organisation units"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+msgid "Time zone"
+msgstr "Časové pásmo"
+
+msgid "For {{periodType}} date range"
+msgstr ""
+
+msgid "Done"
+msgstr "Hotovo"
+
+msgid "Use default range"
+msgstr ""
+
+msgid "Change"
+msgstr "Změna"
+
+msgid "Failed to load org unit geometries"
+msgstr ""
+
+msgid ""
+"None of the selected organisation units have boundaries stored in DHIS2. "
+"Update the import configuration to include organisation units with geometry."
+msgstr ""
+
+msgid ""
+"Range exceeds the {{max}}-value limit. Split into multiple runs by importing"
+" a shorter date range from the form."
+msgstr ""
+
+msgid "Start import"
+msgstr "Zahájit import"
 
 msgid "Start year"
 msgstr "Počáteční rok"
@@ -864,7 +1038,7 @@ msgid "Heat stress lower category"
 msgstr "Tepelný stres nižší kategorie"
 
 msgid "Offline"
-msgstr ""
+msgstr "Offline"
 
 msgid "Not configured"
 msgstr ""
@@ -924,9 +1098,6 @@ msgstr ""
 msgid "Example configuration:"
 msgstr ""
 
-msgid "Close"
-msgstr "Zavřít"
-
 msgid "Calculate from data"
 msgstr "Výpočet z dat"
 
@@ -980,9 +1151,6 @@ msgstr ""
 msgid "Description"
 msgstr "Popis"
 
-msgid "Data source"
-msgstr "Zdroj dat"
-
 msgid "Domain type"
 msgstr "Typ domény"
 
@@ -1017,12 +1185,9 @@ msgstr ""
 
 msgid ""
 "You should now be able to import data with this app. Please reach out to us "
-"on climate-app@dhis2.org if you have any questions or need help with the "
+"on climate-data@dhis2.org if you have any questions or need help with the "
 "setup."
 msgstr ""
-"Nyní byste měli být schopni importovat data pomocí této aplikace. V případě "
-"jakýchkoli dotazů nebo potřeby pomoci s nastavením se na nás obraťte na "
-"adrese climate-app@dhis2.org."
 
 msgid "4. Assign to a DHIS2 data element group"
 msgstr "4. Přiřazení do skupiny datových prvků DHIS2"
@@ -1172,9 +1337,6 @@ msgstr ""
 "Pokud jsou dvě jednotky org blízko sebe (v rámci rozlišení), budou mít "
 "stejné hodnoty dat."
 
-msgid "Time zone"
-msgstr "Časové pásmo"
-
 msgid "Data resolution is approximately {{resolution}}."
 msgstr "Rozlišení dat je přibližně {{resolution}}."
 
@@ -1223,8 +1385,8 @@ msgstr "Maximální teplota vzduchu ve °C ve výšce 2 m nad povrchem."
 msgid "Max"
 msgstr "Max"
 
-msgid "Min temperature (ERA5-Land)"
-msgstr "Minimální teplota (ERA5-Land)"
+msgid "Min air temperature (ERA5-Land)"
+msgstr ""
 
 msgid "Min air temperature"
 msgstr "Minimální teplota vzduchu"
@@ -1456,6 +1618,44 @@ msgstr "úrovně {{allDynamicOuNames}}"
 
 msgid "{{allDynamicOuNames}} groups"
 msgstr "skupiny {{allDynamicOuNames}}"
+
+msgid "just now"
+msgstr ""
+
+msgid "{{count}} minutes ago"
+msgid_plural "{{count}} minutes ago"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+msgid "{{count}} hours ago"
+msgid_plural "{{count}} hours ago"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+msgid "{{count}} days ago"
+msgid_plural "{{count}} days ago"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+msgid "{{count}} months ago"
+msgid_plural "{{count}} months ago"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+msgid "{{count}} years ago"
+msgid_plural "{{count}} years ago"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 msgid "day"
 msgstr "den"
